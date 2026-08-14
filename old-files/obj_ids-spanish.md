@@ -1,13 +1,13 @@
 # RtG Build Format
 
-> **hecho por:** @JuanCrakYT
+> **Hecho por:** @JuanCrakYT
 > **Documento:** Especificación Técnica de Formato de Guardado (Ingeniería Inversa)  
 > **Juego Objetivo:** Road To Gramby's (Roblox)  
 > **Versión de la Especificación:** v1.01
 > **Estado:** Documento Experimental / No Oficial  
 
 # Catálogo de IDs de Puntos de Conexión
-> **hecho por:** @JuanCrakYT
+> **Hecho por:** @JuanCrakYT
 Este documento cataloga el significado del **IDdelPunto** de las conexiones de cada objeto.
 
 Formato de una conexión:
@@ -41,7 +41,7 @@ Esto permitirá:
 ---
 
 ## Convenciones
-> **hecho por:** @JuanCrakYT
+> **Hecho por:** @JuanCrakYT
 Cada objeto tendrá su propia sección.
 
 Cada punto deberá documentarse con:
@@ -111,7 +111,7 @@ Ejemplo:
 ---
 
 ## Metodología
-> **hecho por:** @JuanCrakYT
+> **Hecho por:** @JuanCrakYT
 Para identificar un ID:
 
 1. Pintar el objeto con un color único.
@@ -126,7 +126,7 @@ Cuando existan objetos simétricos (ruedas, luces, asientos, etc.), utilizar col
 ---
 
 ## Lista de todos los objetos:
-> **hecho por:** @JuanCrakYT
+> **Hecho por:** @JuanCrakYT
 1. AltitudeSensor
 2. Anchor
 3. Arm
@@ -249,7 +249,7 @@ Cuando existan objetos simétricos (ruedas, luces, asientos, etc.), utilizar col
 
 ## Objetos con puntos de conexión propios
 > Aquí encontraras el "IDdelPunto" de cada objeto
-> **hecho por:** @JuanCrakYT
+> **Hecho por:** @JuanCrakYT
 
 ### 1. Chassis
 
@@ -772,7 +772,7 @@ Cantidad de IDs encontrados: 2
 
 
 ## Objetos sin puntos de conexión propios
-> **hecho por:** @JuanCrakYT
+> **Hecho por:** @JuanCrakYT
 Los siguientes objetos no poseen IDs de puntos de conexión propios.
 Estos objetos utilizan puntos de conexión definidos por otros objetos.
 

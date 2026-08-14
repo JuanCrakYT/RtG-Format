@@ -1,16 +1,12 @@
 # structure
 
-```text
+```tree
 rtg-save-format/
 │
 ├── README.md
-│
 ├── SPECIFICATION.md
-│
 ├── CHANGELOG.md
-│
 ├── CONTRIBUTING.md
-│
 ├── LICENSE
 │
 ├── blocks/
