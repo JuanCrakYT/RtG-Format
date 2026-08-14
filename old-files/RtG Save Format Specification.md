@@ -1,6 +1,6 @@
 # RtG Save Format Specification v0.406
 
-> **made by:** @JuanCrakYT
+> **hecho por:** @JuanCrakYT
 > **Documento:** Especificación Técnica de Formato de Guardado (Ingeniería Inversa)  
 > **Juego Objetivo:** Road To Gramby's (Roblox)  
 > **Versión de la Especificación:** v0.406  
@@ -33,7 +33,7 @@ El propósito principal de esta especificación es documentar exhaustivamente el
 ---
 
 ## 2. Filosofía del formato
-> **made by:** @JuanCrakYT
+> **hecho por:** @JuanCrakYT
 El sistema de guardado de Road To Gramby's no almacena las construcciones como una colección estática de coordenadas absolutas en el espacio tridimensional. En su lugar, almacena una **descripción estructural reconstruible**.
 
 $$\text{Objetos} + \text{Referencias} + \text{Attachments} + \text{Propiedades} = \text{Construcción Final}$$
@@ -45,7 +45,7 @@ $$\text{Objetos} + \text{Referencias} + \text{Attachments} + \text{Propiedades} 
 ---
 
 ## 3. Estructura general del JSON
-> **made by:** @JuanCrakYT
+> **hecho por:** @JuanCrakYT
 Una construcción (*build*) de RtG se almacena como un arreglo JSON de nivel superior (`Array`). Cada elemento dentro de este arreglo representa de forma unívoca un bloque u objeto dentro de la creación.
 
 ```json
@@ -76,7 +76,7 @@ Cada elemento del arreglo se define como una tupla con un tamaño fijo de tres e
 * **Regla:** El orden de los 3 elementos dentro de la tupla `[TipoDelBloque, Conexiones, Propiedades]` es inmutable y validado por el parser universal.
 
 ### 3.11 Tabla del Tipo De Bloque
-> **made by:** @JuanCrakYT
+> **hecho por:** @JuanCrakYT
 |   ID | Nombre            | TipoDelBloque | Descripción                                                  |
 | ---: | ----------------- | :-----------: | ------------------------------------------------------------ |
 |    1 | GoldPotatoEngine  |       1       | Motor de alta potencia. Variante mejorada del Potato Engine. |
@@ -201,7 +201,7 @@ Cada elemento del arreglo se define como una tupla con un tamaño fijo de tres e
 ---
 
 ## 4. Modelo de datos de objetos
-> **made by:** @JuanCrakYT
+> **hecho por:** @JuanCrakYT
 Todos los objetos dentro del formato de guardado de RtG comparten exactamente la misma estructura base JSON:
 
 $$\text{Objeto RtG} = [\text{TipoDelBloque}, \text{Conexiones}, \text{Propiedades}]$$
@@ -225,7 +225,7 @@ La diferencia entre distintos bloques no radica en el formato de la sintaxis JSO
 ---
 
 ## 5. Tipos de objetos
-> **made by:** @JuanCrakYT
+> **hecho por:** @JuanCrakYT
 El primer valor de la tupla es una cadena de texto identificadora (`String`) que indica la plantilla lógica del bloque.
 
 ### 5.1 Identificadores Conocidos
@@ -251,7 +251,7 @@ Ejemplos de identificadores de bloques observados en las pruebas:
 ---
 
 ## 6. Sistema de conexiones
-> **made by:** @JuanCrakYT
+> **hecho por:** @JuanCrakYT
 El segundo elemento de la tupla de objeto es una lista de conexiones (`Conexiones`). Define las dependencias mecánicas, lógicas y jerárquicas del bloque con respecto a otros objetos.
 
 ```json
@@ -271,7 +271,7 @@ Un bloque puede incluir cero conexiones (como un bloque raíz `"Base"` con `[]`)
 ```
 
 ### 6.1 Formato de la Tupla de Conexión
-> **made by:** @JuanCrakYT
+> **hecho por:** @JuanCrakYT
 Cada entrada en la lista de conexiones consta exactamente de un arreglo de 3 elementos:
 
 ```text
@@ -293,7 +293,7 @@ Cada entrada en la lista de conexiones consta exactamente de un arreglo de 3 ele
 ## 7. Índices y referencias
 
 ### 7.1 Definición de ÍndicePadre (✅ Confirmado)
-> **made by:** @JuanCrakYT
+> **hecho por:** @JuanCrakYT
 El tercer elemento de cada tupla de conexión es un número entero (`Integer`) que referencia el **índice de posición** del bloque padre dentro del arreglo principal del archivo JSON.
 
 Ejemplo:
@@ -312,13 +312,13 @@ Base (Índice 0)
 ```
 
 ### 7.2 Importancia del Orden del Arreglo (✅ Confirmado)
-> **made by:** @JuanCrakYT
+> **hecho por:** @JuanCrakYT
 Dado que las referencias jerárquicas se resuelven mediante índices numéricos del arreglo, **el orden relativo de los elementos dentro del JSON principal es crítico**:
 * Reordenar elementos arbitrariamente provoca la ruptura de los punteros jerárquicos.
 * Un orden inconsistente con el grafo de dependencias o con referencias fuera de rango provoca un fallo de carga con el mensaje `"Build inválida"`.
 
 ### 7.3 Ausencia de Coordenadas Absolutas Directas (✅ Confirmado)
-> **made by:** @JuanCrakYT
+> **hecho por:** @JuanCrakYT
 El formato de guardado de RtG **no almacena coordenadas 3D absolutas para los bloques estándar**:
 * Toda la posición física en el espacio tridimensional se reconstruye recursivamente evaluando la cadena de referencias a partir del objeto raíz (`Base`).
 * Cada bloque hijo calcula su offset espacial automáticamente a partir del punto de anclaje de su padre (`PuntoPadre`).
@@ -559,7 +559,7 @@ En objetos de tipo `Sprite`, se observó un comportamiento diferenciado:
 ---
 
 ## 14. Comportamiento del cargador
-> **made by:** @JuanCrakYT
+> **hecho por:** @JuanCrakYT
 Existe una marcada asimetría entre el **Constructor Visual del Juego (UI Editor)** y el **Cargador de Archivos (Save Loader)**:
 * El editor del juego impone restricciones estrictas de colisión, adyacencia y colocación.
 * El cargador de archivos es un motor interpretativo que procesa estructuras avanzadas no construibles manualmente, permitiendo inyección espacial y desvinculación geométrica.
@@ -673,7 +673,7 @@ A diferencia de las propiedades adicionales, **RtG NO intenta autorreparar o cre
 ---
 
 ## 17. Descubrimientos confirmados (✅)
-> **made by:** @JuanCrakYT
+> **hecho por:** @JuanCrakYT
 1. ✅ **Estructura Raíz:** El archivo de guardado es un arreglo JSON donde cada bloque es una tupla de 3 elementos: `[TipoDelBloque, Conexiones, Propiedades]`.
 2. ✅ **Diccionario Abierto de Propiedades:** El objeto `Propiedades` acepta cualquier número de claves adicionadas sin generar errores sintácticos de carga.
 3. ✅ **Significado del Tercer Dato de Conexión:** El tercer valor en cada tupla de conexión representa estrictamente el índice del bloque padre en el arreglo principal.
@@ -715,7 +715,7 @@ Esta sección queda estructurada como espacio reservado para albergar las tablas
 ---
 
 ## 20. Investigación pendiente y trabajo futuro (❓)
-> **made by:** @JuanCrakYT
+> **hecho por:** @JuanCrakYT
 Las siguientes líneas de investigación han sido identificadas para guiar el desarrollo de las próximas versiones de esta especificación técnica:
 
 * ❓ **Mapa completo de puntos de conexión:** Cartografiar y documentar la totalidad de nodos de conexión (`PuntoPadre`) para los 120 objetos del juego.
@@ -727,7 +727,7 @@ Las siguientes líneas de investigación han sido identificadas para guiar el de
 
 
 ## Catalogo de Propiedades
-> **made by:** @JuanCrakYT
+> **hecho por:** @JuanCrakYT
 | Propiedad              | Tipo de dato         | Primer objeto observado                                                  |
 | ---------------------- | -------------------- | ------------------------------------------------------------------------ |
 | `RGB`                  | `Color3` (`[R,G,B]`) | `Rope` (en tu último experimento; anteriormente también en muchos otros) |
@@ -826,4 +826,4 @@ Las siguientes líneas de investigación han sido identificadas para guiar el de
 
 # RtG Build Format
 > **Documento:** El archivo no se encuentra aquí, entre a "obj_ids" para verlo.
-> **made by:** @JuanCrakYT
+> **hecho por:** @JuanCrakYT
