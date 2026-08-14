@@ -1,9 +1,114 @@
-| ID  | Name | Category | Status | Notes |
-| --- | ---- | -------- | ------ | ----- |
+| ID  | Name | Category | Status | Source / Evidence | Notes |
+| --- | ---- | -------- | ------ | ----------------- | ----- |
 
-Notes
-- This file is a reference index for confirmed and observed part IDs.
-- Do NOT fill with invented IDs. Use `old-files/obj_ids-spanish.md` for historical observations; mark each entry's `Status` as `CONFIRMED` or `UNCONFIRMED`.
+<!-- Entries extracted from old-files/obj_ids-spanish.md. Classification is based ONLY on the evidence present in that historical document. -->
 
-Example (historic entry, DO NOT treat as fully confirmed):
-| 81 | Part | building | UNCONFIRMED | Observed in old-files/ specification; needs verification. |
+| 1-26 | Chassis (multiple IDs) | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Chassis" (table lists 26 IDs and names) | "Cantidad de IDs encontrados: 26" and table of ID→Name (preserved original names and sides). |
+| 1 | Wheel | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Wheel" (table) | "Cantidad de IDs encontrados: 1" — ChassisMount. |
+| 1 | Tire | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Tire" (table) | "Cantidad de IDs encontrados: 1" — WheelMount. |
+| 1 | Bumper | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Bumper" (table) | "Cantidad de IDs encontrados: 1" — ChassisMount. |
+| 1 | Hood | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Hood" (table) | "Cantidad de IDs encontrados: 1" — ChassisMount. |
+| 1 | Trunk | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Trunk" (table) | "Cantidad de IDs encontrados: 1" — ChassisMount. |
+| 1 | Cannon | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Cannon" (table) | "Cantidad de IDs encontrados: 1" — MountPoint. |
+| 1 | Propeller | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Propeller" (table) | "Cantidad de IDs encontrados: 1" — MountPoint. |
+| 1 | Bearing | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Bearing" (table) | "Cantidad de IDs encontrados: 1" — RotationAxis. |
+| 1 | Wing | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Wing" (table) | "Cantidad de IDs encontrados: 1" — MountPoint. |
+| 1 | ShortStick | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "ShortStick" (table) | "Cantidad de IDs encontrados: 1" — MountPoint. |
+| 1 | Stick | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Stick" (table) | "Cantidad de IDs encontrados: 1" — MountPoint. |
+| 1 | LongStick | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "LongStick" (table) | "Cantidad de IDs encontrados: 1" — MountPoint. |
+| 1 | Spoiler | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Spoiler" (table) | "Cantidad de IDs encontrados: 1" — MountPoint. |
+| 1 | Leg | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Leg" (table) | "Cantidad de IDs encontrados: 1" — MountPoint. |
+| 1 | Button | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Button" (table) | "Cantidad de IDs encontrados: 1" — Output. |
+| 1 | InputSensor | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "InputSensor" (table) | "Cantidad de IDs encontrados: 1" — Output. |
+| 1 | AltitudeSensor | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "AltitudeSensor" (table) | "Cantidad de IDs encontrados: 1" — Output. |
+| 1 | VelocitySensor | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "VelocitySensor" (table) | "Cantidad de IDs encontrados: 1" — Output. |
+| 1 | Switch | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Switch" (table) | "Cantidad de IDs encontrados: 1" — Output. |
+| 1 | TripWire | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "TripWire" (table) | "Cantidad de IDs encontrados: 1" — MountPoint. |
+| 1 | RemoteButton | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "RemoteButton" (table) | "Cantidad de IDs encontrados: 1" — Output. |
+| 1 | PressurePlate | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "PressurePlate" (table) | "Cantidad de IDs encontrados: 1" — Output. |
+| 1 | Detacher | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Detacher" (table) | "Cantidad de IDs encontrados: 1" — MountPoint. |
+| 1 | RPG | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "RPG" (table) | "Cantidad de IDs encontrados: 1" — MountPoint. |
+| 2-3 | StaringGyro | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "StaringGyro" (table) | IDs 2 (Front) and 3 (Back) listed. |
+| 1,3,4 | Piston | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Piston" (table) | "Cantidad de IDs encontrados: 3" — PushEnd (1), Side_Red (3), Side_Blue (4). |
+| 2,3,4 | Servo | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Servo" (table) | IDs 2 (RotationAxis), 3 (Side_Red), 4 (Side_Blue) listed. |
+| 2,3,4 | Servo_Physics | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Servo_Physics" (table) | Same distribution as `Servo` (RotationAxis, Side_Red, Side_Blue). |
+| 2,3,4,5 | Anchor | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Anchor" (table) | "Cantidad de IDs encontrados: 4" — TopLeft/TopRight/BottomLeft/BottomRight. |
+| 1 | BallSocket | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "BallSocket" (table) | "Cantidad de IDs encontrados: 1" — MountPoint. |
+| 1,4,5,6,7,8 | MatchingGyro | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "MatchingGyro" (table) | Multiple IDs listed (HandleMount, Right, Top, Left, Back, Front). |
+| 1 | Uzi | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Uzi" (table) | "Cantidad de IDs encontrados: 1" — MagInput. |
+| 1-4 | Briefcase | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Briefcase" (table) | "Cantidad de IDs encontrados: 4" — Front, Center, Left, Right. |
+| 1 | FuelTank | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "FuelTank" (table) | "Cantidad de IDs encontrados: 1" — MountPoint. |
+| 1-6 | EntitySensor | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "EntitySensor" (table) | "Cantidad de IDs encontrados: 6" with descriptive names. |
+| 2-5 | Looper | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Looper" (table) | "Cantidad de IDs encontrados: 4" — Top, Right, Left, Front. |
+| 1-3 | Gate-AND | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Gate-AND" (table) | IDs: Output(1), InputA(2), InputB(3). |
+| 1-3 | Gate-OR | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Gate-OR" (table) | IDs: Output(1), InputA(2), InputB(3). |
+| 1-2 | Gate-NOT | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Gate-NOT" (table) | IDs: Output(1), Input(2). |
+| 2,4 | Wire | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Wire" (table) | "Cantidad de IDs encontrados: 2" — Left(2), Right(4). |
+
+## Objects reported without their own connection points (historical list)
+These objects are listed in `old-files/obj_ids-spanish.md` under "Objetos sin puntos de conexión propios". The classification below reflects the historical note that no IDs were observed for these types in that document; further verification required.
+
+| Name             | Category   | Status              | Source / Evidence                                                               | Notes                                                                                  |
+| ---------------- | ---------- | ------------------- | ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Seat             | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Objetos sin puntos de conexión propios" | Listed as not having own connection points in historical document.                     |
+| PotatoEngine     | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | Historical note: uses points defined by other objects.                                 |
+| GoldPotatoEngine | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Radio            | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| BrakeLight       | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Light            | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| SteeringWheel    | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Gyro             | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| GasCap           | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| FishBowl         | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| SpringJuice      | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Balloon          | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Pie              | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Joint            | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Thruster         | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| RockingChair     | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Rope             | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| RubberBand       | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Sledge           | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| SteeringGyro     | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Siren            | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Note             | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Sprite           | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | Note: Sprite referenced elsewhere as using UUID attachments.                           |
+| HulaDoll         | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Toilet           | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Tooth            | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Jug              | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Lock             | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Poop             | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| wad              | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Recorder         | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Canister         | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| CannonBall       | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Gramby           | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| DoorA            | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| DoorB            | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| DoorC            | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| DoorD            | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| TV               | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | Historical note: TV loads but may not save normally; behavior dependent on game state. |
+| Camera           | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Carrot           | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Guitar           | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | Historical note: may load but not save normally.                                       |
+| MountedGun       | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Plunger          | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Joust            | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| SprayPaint       | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | Historical: SprayPaint used in early experiments.                                      |
+| Trowl            | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Trumpet          | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Banjo            | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Drums            | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Grenade          | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Mag              | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| Leafblower       | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+| RiotShield       | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | Historical note: may not save normally.                                                |
+| Keyboard         | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | Historical note: may not save normally.                                                |
+| ToolGun          | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — same section                                     | ""                                                                                     |
+
+## Notes on classification
+- Entries marked `PARTIALLY CONFIRMED` indicate that the historical document contains explicit experimental observations or tables for the item (e.g. "Cantidad de IDs encontrados" with an accompanying table). These are treated as historical observations but NOT upgraded to `CONFIRMED` because independent verification (raw save provenance or reproducible experiment) is not present in this repository yet.
+- Entries not present as tables but listed historically are also marked `PARTIALLY CONFIRMED` when the document explicitly states their absence of connection points.
+- No entries in this extraction were marked `CONFIRMED` because the historical file itself does not provide raw save artifacts or explicit wording of definitive confirmation; instead it reports experimental findings. To mark an item `CONFIRMED` we require raw save evidence or a reproducible experiment logged under `research/experiments.md`.
+
