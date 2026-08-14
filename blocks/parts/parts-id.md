@@ -1,8 +1,7 @@
-| ID          | Name                   | Category   | Status              | Source / Evidence                                                               | Notes                                                                                        |
-| ----------- | ---------------------- | ---------- | ------------------- | ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-
 <!-- Entries extracted from old-files/obj_ids-spanish.md. Classification is based ONLY on the evidence present in that historical document. -->
 
+| ID          | Name                   | Category   | Status              | Source / Evidence                                                               | Notes                                                                                        |
+| ----------- | ---------------------- | ---------- | ------------------- | ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | 1-26        | Chassis (multiple IDs) | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Chassis" (table lists 26 IDs and names) | "Cantidad de IDs encontrados: 26" and table of ID→Name (preserved original names and sides). |
 | 1           | Wheel                  | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Wheel" (table)                          | "Cantidad de IDs encontrados: 1" — ChassisMount.                                             |
 | 1           | Tire                   | unassigned | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — section "Tire" (table)                           | "Cantidad de IDs encontrados: 1" — WheelMount.                                               |
