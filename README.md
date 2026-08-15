@@ -10,3 +10,10 @@ Getting started
 
 Status
 - Spec version: Unreleased (history includes v0.406 in old-files)
+
+Credits
+- **JuanCrakYT** — Reverse engineering, research, documentation, and maintenance.
+- **Road To Gramby's Wiki** — Reference for game objects, terminology, and categorization.
+- **Road To Gramby's** — Original game and save/build system documented by this project.
+
+This is an independent reverse-engineering project and is not affiliated with or endorsed by the creators of Road To Gramby's or the Road To Gramby's Wiki.

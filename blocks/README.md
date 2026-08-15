@@ -2,14 +2,31 @@
 
 This folder contains per-part documentation and ID reference material.
 
-Current categories
-- parts/
-  - physics/
-  - building/
-  - wiring/
-  - tools/
-  - misc/
-  - other/
+## Current categories
 
-Notes
-- Do not assign a part to a category without explicit evidence. Use `old-files/obj_ids-spanish.md` as historical reference.
+- `parts/`
+  - `physics/`
+  - `building/`
+  - `wiring/`
+  - `tools/`
+  - `miscellaneous/`
+  - `other/`
+  - `uncategorized/`
+  - `gramby-test/`
+  - `unused/`
+
+## Classification
+
+Categories are based on the Road to Gramby's Wiki where applicable.
+
+The category itself does **not** constitute evidence for the internal save format. IDs, connection points, and other reverse-engineered information must be supported by the project's research.
+
+Use: `old-files/obj_ids-spanish.md` as the historical reference for object IDs and connection-point data.
+
+Do not invent or silently modify historical information.
+
+## Language
+
+The historical reverse-engineering documentation in `old-files/` is written in Spanish because the project's original author, `JuanCrakYT`, documented the research in Spanish.
+
+The historical files are preserved in their original language and should not be translated or modified merely for consistency.

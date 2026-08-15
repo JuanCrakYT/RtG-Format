@@ -9,7 +9,7 @@ Confirmed observations
 - `Properties`: Open dictionary of key -> value pairs; unknown keys are tolerated (CONFIRMED).
 
 Example (historic observation):
-```
+```json
 [
   ["Base", [], {}],
   ["Part", [["1","5",1]], {"RGB":[255,0,0]}]

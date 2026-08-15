@@ -1,0 +1,162 @@
+{
+  "counts": {
+    "old_total_rows": 99,
+    "new_total_rows": 64,
+    "old_sections": 47,
+    "new_files": 5
+  },
+  "missing_in_new": [
+    {
+      "section": "MatchingGyro",
+      "id": 1,
+      "name": "HandleMount",
+      "side": "Center"
+    },
+    {
+      "section": "MatchingGyro",
+      "id": 5,
+      "name": "Top",
+      "side": "Top"
+    },
+    {
+      "section": "MatchingGyro",
+      "id": 6,
+      "name": "Left",
+      "side": "Left"
+    },
+    {
+      "section": "MatchingGyro",
+      "id": 7,
+      "name": "Back",
+      "side": "Back"
+    },
+    {
+      "section": "MatchingGyro",
+      "id": 8,
+      "name": "Front",
+      "side": "Front"
+    },
+    {
+      "section": "EntitySensor",
+      "id": 1,
+      "name": "BackLeft",
+      "side": "Back Left"
+    },
+    {
+      "section": "EntitySensor",
+      "id": 2,
+      "name": "BackRight",
+      "side": "Back Right"
+    },
+    {
+      "section": "EntitySensor",
+      "id": 3,
+      "name": "BackCenter",
+      "side": "Back"
+    },
+    {
+      "section": "EntitySensor",
+      "id": 4,
+      "name": "FrontCenter",
+      "side": "Front"
+    },
+    {
+      "section": "EntitySensor",
+      "id": 5,
+      "name": "FrontRight",
+      "side": "Front Right"
+    },
+    {
+      "section": "EntitySensor",
+      "id": 6,
+      "name": "FrontLeft",
+      "side": "Front Left"
+    }
+  ],
+  "extra_in_new": [
+    {
+      "file": "blocks\\parts\\miscellaneous\\parts-id.md",
+      "id": null,
+      "name": "Tooth",
+      "side": "Unknown"
+    },
+    {
+      "file": "blocks\\parts\\miscellaneous\\parts-id.md",
+      "id": null,
+      "name": "Camera",
+      "side": "Unknown"
+    }
+  ],
+  "duplicates_old": [
+    {
+      "name": "chassismount",
+      "count": 4
+    },
+    {
+      "name": "wheelmount",
+      "count": 2
+    },
+    {
+      "name": "mountpoint",
+      "count": 13
+    },
+    {
+      "name": "output",
+      "count": 10
+    },
+    {
+      "name": "side_red",
+      "count": 3
+    },
+    {
+      "name": "side_blue",
+      "count": 3
+    },
+    {
+      "name": "rotationaxis",
+      "count": 2
+    },
+    {
+      "name": "right",
+      "count": 3
+    },
+    {
+      "name": "inputa",
+      "count": 2
+    },
+    {
+      "name": "inputb",
+      "count": 2
+    }
+  ],
+  "duplicates_new": [
+    {
+      "name": "mountpoint",
+      "count": 2
+    },
+    {
+      "name": "side_red",
+      "count": 2
+    },
+    {
+      "name": "side_blue",
+      "count": 2
+    },
+    {
+      "name": "right",
+      "count": 2
+    },
+    {
+      "name": "output",
+      "count": 3
+    },
+    {
+      "name": "inputa",
+      "count": 2
+    },
+    {
+      "name": "inputb",
+      "count": 2
+    }
+  ]
+}

@@ -246,6 +246,7 @@ Cuando existan objetos simétricos (ruedas, luces, asientos, etc.), utilizar col
 117. Wire
 118. WoodenChair
 119. Wad
+120. Head
 
 ## Objetos con puntos de conexión propios
 > Aquí encontraras el "IDdelPunto" de cada objeto
@@ -854,3 +855,9 @@ Estos objetos utilizan puntos de conexión definidos por otros objetos.
 - No posee IDs de puntos de conexión propios conocidos.
 - Su aparición en el formato puede depender de estados internos del juego.
 56.   ToolGun
+57.   Head
+> El objeto `Head` presenta un comportamiento diferente.
+- Puede cargarse mediante una build.
+- No aparece en el panel normal de spawn.
+- Debe cargarse internamente mediante el formato de build.
+- No posee IDs de puntos de conexión propios.
