@@ -1,6 +1,6 @@
 # RtG Save Format Specification v0.406
 
-> **Hecho por:** @JuanCrakYT
+> **Hecho po:** @JuanCrakYT
 > **Documento:** Especificación Técnica de Formato de Guardado (Ingeniería Inversa)  
 > **Juego Objetivo:** Road To Gramby's (Roblox)  
 > **Versión de la Especificación:** v0.406  
@@ -46,13 +46,13 @@ $$\text{Objetos} + \text{Referencias} + \text{Attachments} + \text{Propiedades} 
 
 ## 3. Estructura general del JSON
 > **Hecho por:** @JuanCrakYT
-Una construcción (*build*) de RtG se almacena como un arreglo JSON de nivel superior (`Array`). Cada elemento dentro de este arreglo representa de forma unívoca un bloque u objeto dentro de la creación.
+Una construcción (*build*) de RtG se almacena como un arreglo JSON de nivel superior (`Array` 1-based). Cada elemento dentro de este arreglo representa de forma unívoca un bloque u objeto dentro de la creación.
 
 ```json
 [
     ["Base", [], {}],
-    ["Part", [["1", "5", 0]], {"RGB": [255, 0, 0]}],
-    ["Part", [["1", "5", 1]], {"RGB": [0, 255, 0]}]
+    ["Part", [["1", "5", 1]], {"RGB": [255, 0, 0]}],
+    ["Part", [["1", "5", 2]], {"RGB": [0, 255, 0]}]
 ]
 ```
 
@@ -728,40 +728,40 @@ Las siguientes líneas de investigación han sido identificadas para guiar el de
 
 ## Catalogo de Propiedades
 > **Hecho por:** @JuanCrakYT
-| Propiedad              | Tipo de dato         | Primer objeto observado                                                  |
-| ---------------------- | -------------------- | ------------------------------------------------------------------------ |
-| `RGB`                  | `Color3` (`[R,G,B]`) | `Rope` (en tu último experimento; anteriormente también en muchos otros) |
-| `EphemeralAttachments` | `Object` / `Array`   | `Base`                                                                   |
-| `Mode`                 | `String`             | `ToolGun`                                                                |
-| `Rotation`             | `Number`             | `Servo`                                                                  |
-| `LimitAngle`           | `Number`             | `Servo`                                                                  |
-| `Speed`                | `Number`             | `Servo`                                                                  |
-| `Backwards`            | `Boolean`            | `Servo`                                                                  |
-| `Rest`                 | `Boolean`            | `Servo`                                                                  |
-| `LimitEnabled`         | `Boolean`            | `Servo`                                                                  |
-| `Visible`              | `Boolean`            | `TripWire`                                                               |
-| `Length`               | `Number`             | `TripWire`                                                               |
-| `Activated`            | `Boolean`            | `TripWire`                                                               |
-| `Forwards`             | `Boolean`            | `Servo_Physics`                                                          |
-| `Text`                 | `String`             | `Note`                                                                   |
-| `Quantity`             | `Integer`            | `Balloon`                                                                |
-| `Bullets`              | `Integer`            | `Mag`                                                                    |
-| `Shooting`             | `Boolean`            | `MountedGun`                                                             |
-| `IgnoreAttached`       | `Boolean`            | `StaringGyro`                                                            |
-| `MaxDistance`          | `Number`             | `StaringGyro`                                                            |
-| `CanTargetAttached`    | `Boolean`            | `EntitySensor`                                                           |
-| `ImageId`              | `Integer`            | `Sprite`                                                                 |
-| `Delay`                | `Number`             | `Looper`                                                                 |
-| `DelayDeactivation`    | `Boolean`            | `Delayer`                                                                |
-| `MinLength`            | `Number`             | `Piston`                                                                 |
-| `MaxLength`            | `Number`             | `Piston`                                                                 |
-| `MaxForce`             | `Number`             | `Piston`                                                                 |
-| `ActivationSpeed`      | `Number`             | `VelocitySensor`                                                         |
-| `ActivationHeight`     | `Number`             | `AltitudeSensor`                                                         |
-| `Volume`               | `Number`             | `Radio`                                                                  |
-| `Channel`              | `Number`             | `Radio`                                                                  |
-| `CustomTrack`          | `String`             | `Radio`                                                                  |
-| `On`                   | `Boolean`            | `Radio`                                                                  |
+| Propiedad              | Tipo de dato         | Primer objeto observado |
+| ---------------------- | -------------------- | ----------------------- |
+| `RGB`                  | `Color3` (`[R,G,B]`) | `Rope`                  |
+| `EphemeralAttachments` | `Object` / `Array`   | `Base`                  |
+| `Mode`                 | `String`             | `ToolGun`               |
+| `Rotation`             | `Number`             | `Servo`                 |
+| `LimitAngle`           | `Number`             | `Servo`                 |
+| `Speed`                | `Number`             | `Servo`                 |
+| `Backwards`            | `Boolean`            | `Servo`                 |
+| `Rest`                 | `Boolean`            | `Servo`                 |
+| `LimitEnabled`         | `Boolean`            | `Servo`                 |
+| `Visible`              | `Boolean`            | `TripWire`              |
+| `Length`               | `Number`             | `TripWire`              |
+| `Activated`            | `Boolean`            | `TripWire`              |
+| `Forwards`             | `Boolean`            | `Servo_Physics`         |
+| `Text`                 | `String`             | `Note`                  |
+| `Quantity`             | `Integer`            | `Balloon`               |
+| `Bullets`              | `Integer`            | `Mag`                   |
+| `Shooting`             | `Boolean`            | `MountedGun`            |
+| `IgnoreAttached`       | `Boolean`            | `StaringGyro`           |
+| `MaxDistance`          | `Number`             | `StaringGyro`           |
+| `CanTargetAttached`    | `Boolean`            | `EntitySensor`          |
+| `ImageId`              | `Integer`            | `Sprite`                |
+| `Delay`                | `Number`             | `Looper`                |
+| `DelayDeactivation`    | `Boolean`            | `Delayer`               |
+| `MinLength`            | `Number`             | `Piston`                |
+| `MaxLength`            | `Number`             | `Piston`                |
+| `MaxForce`             | `Number`             | `Piston`                |
+| `ActivationSpeed`      | `Number`             | `VelocitySensor`        |
+| `ActivationHeight`     | `Number`             | `AltitudeSensor`        |
+| `Volume`               | `Number`             | `Radio`                 |
+| `Channel`              | `Number`             | `Radio`                 |
+| `CustomTrack`          | `String`             | `Radio`                 |
+| `On`                   | `Boolean`            | `Radio`                 |
 
 ## Total
 

@@ -1,7 +1,7 @@
 # Save anatomy (conceptual)
 
 Concept
-```
+```json
 Save (JSON Array)
  ├─ Element 0: [Type, Connections, Properties]
  ├─ Element 1: [Type, Connections, Properties]

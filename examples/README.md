@@ -4,4 +4,15 @@ This folder is intended to hold real save examples and curated minimal builds us
 
 Rules
 - Do NOT create or add fabricated saves. Only include JSON files with provenance and evidence.
-- If no real example is available, leave placeholders or a README explaining how to contribute one.
+- If an example doesn't work (load error), on the `README.md` explain why (that `README.md` contains the results after load with an error) or delete that example folder.
+- All the examples need a folder with this structure:
+```tree
+name/
+│
+├── README.md
+├── objetive.md
+├── example.json
+└── other/
+    ├── README.md
+    └── ...
+```
