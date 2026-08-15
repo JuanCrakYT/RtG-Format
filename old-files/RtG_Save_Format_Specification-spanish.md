@@ -5,6 +5,7 @@
 > **Juego Objetivo:** Road To Gramby's (Roblox)  
 > **Versión de la Especificación:** v1.101  
 > **Estado:** Documento Experimental / No Oficial  
+> **Fecha de actualizacion:** 15/08/2026
 
 ---
 

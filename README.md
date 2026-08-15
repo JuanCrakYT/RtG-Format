@@ -13,7 +13,8 @@ Status
 
 Credits
 - **JuanCrakYT** — Reverse engineering, research, documentation, and maintenance.
-- **Road To Gramby's Wiki** — Reference for game objects, terminology, and categorization.
+- **Road To Gramby's Wiki** — Reference for game objects, terminology, and categorization. 
+> https://road-to-grambys.fandom.com/wiki/Road_to_Gramby%27s_%F0%9F%91%B5_Wiki
 - **Road To Gramby's** — Original game and save/build system documented by this project.
 
 This is an independent reverse-engineering project and is not affiliated with or endorsed by the creators of Road To Gramby's or the Road To Gramby's Wiki.
