@@ -212,12 +212,11 @@ Cuando existan objetos simétricos (ruedas, luces, asientos, etc.), utilizar col
 83. Roof
 84. Rope
 85. RubberBand
-86. RPG
-87. Seat
-88. Servo
-89. Servo_Physics
-90. ShortStick
-91. ShoppingCart
+86. Seat
+87. Servo
+88. Servo_Physics
+89. ShortStick
+90. ShoppingCart
 92. Shotgun
 93. Sledge
 94. SprayPaint

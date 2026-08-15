@@ -200,10 +200,10 @@ Cada elemento del arreglo se define como una tupla con un tamaño fijo de tres e
 |  119 | PolaroidCamera    |       1       | Cámara Polaroid.                                             |
 |  120 | PolaroidPhoto     |       1       | Fotografía Polaroid.                                         |
 |  121 | Successor         |       2       | A Worthy Successor.                                          |
-|  122 | Body              |       -       | Cuerpo.                                                      |
-|  123 | Fricklet          |       -       | Fricklet.                                                    |
-|  124 | SuperPowerClock   |       -       | Super Power Clock.                                           |
-|  125 | YibYib            |       -       | YibYib.                                                      |
+|  122 | Body              |       —       | Cuerpo.                                                      |
+|  123 | Fricklet          |       —       | Fricklet.                                                    |
+|  124 | SuperPowerClock   |       —       | Super Power Clock.                                           |
+|  125 | YibYib            |       —       | YibYib.                                                      |
 
 ---
 
@@ -770,6 +770,7 @@ Las siguientes líneas de investigación han sido identificadas para guiar el de
 | `Channel`              | `Number`             | `Radio`                 |
 | `CustomTrack`          | `String`             | `Radio`                 |
 | `On`                   | `Boolean`            | `Radio`                 |
+| `Phrase`               | `String`             | `PolaroidPhoto`         |
 
 ## Total
 
