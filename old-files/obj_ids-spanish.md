@@ -247,6 +247,9 @@ Cuando existan objetos simétricos (ruedas, luces, asientos, etc.), utilizar col
 118. WoodenChair
 119. Wad
 120. Head
+121. Body
+122. Fricklet
+123. SuperPowerClock
 
 ## Objetos con puntos de conexión propios
 > Aquí encontraras el "IDdelPunto" de cada objeto
@@ -771,6 +774,24 @@ Cantidad de IDs encontrados: 2
 >> `Wire` posee dos puntos de conexión, uno en cada extremo del bloque.
 >> El ID 2 corresponde al extremo izquierdo y el ID 4 al extremo derecho.
 
+### 42. Body
+
+Cantidad de IDs encontrados: 5
+
+| ID | Nombre   | Lado  | Descripción                                       |
+| -- | -------- | ----- | ------------------------------------------------- |
+| 1  | RightArm | Right | Punto de conexión ubicado en el brazo derecho.    |
+| 2  | LeftArm  | Left  | Punto de conexión ubicado en el brazo izquierdo.  |
+| 3  | Head     | Top   | Punto de conexión ubicado en la cabeza.           |
+| 4  | RightLeg | Right | Punto de conexión ubicado en la pierna derecha.   |
+| 5  | LeftLeg  | Left  | Punto de conexión ubicado en la pierna izquierda. |
+
+> Notas:
+
+>> `Body` posee cinco puntos de conexión: dos brazos, dos piernas y la cabeza.
+>> Los IDs 1 y 2 corresponden a los brazos derecho e izquierdo respectivamente.
+>> Los IDs 4 y 5 corresponden a las piernas derecha e izquierda respectivamente.
+>> El ID 3 corresponde al punto de conexión de la cabeza.
 
 ## Objetos sin puntos de conexión propios
 > **Hecho por:** @JuanCrakYT
@@ -857,6 +878,30 @@ Estos objetos utilizan puntos de conexión definidos por otros objetos.
 56.   ToolGun
 57.   Head
 > El objeto `Head` presenta un comportamiento diferente.
+- Puede cargarse mediante una build. 
+- No aparece en el panel normal de spawn.
+- Debe cargarse internamente mediante el formato de build.
+- No posee IDs de puntos de conexión propios.
+58.   PolaroidCamera
+> El objeto `PolaroidCamera` presenta un comportamiento diferente.
+- Puede cargarse mediante una build.
+- No aparece en el panel normal de spawn.
+- Debe cargarse internamente mediante el formato de build.
+- No posee IDs de puntos de conexión propios.
+59.   PolaroidPhoto
+> El objeto `PolaroidPhoto` presenta un comportamiento diferente.
+- Puede cargarse mediante una build.
+- No aparece en el panel normal de spawn.
+- Debe cargarse internamente mediante el formato de build.
+- No posee IDs de puntos de conexión propios.
+60.   Fricklet
+> El objeto `Fricklet` presenta un comportamiento diferente.
+- Puede cargarse mediante una build.
+- No aparece en el panel normal de spawn.
+- Debe cargarse internamente mediante el formato de build.
+- No posee IDs de puntos de conexión propios.
+61.   SuperPowerClock
+> El objeto `SuperPowerClock` presenta un comportamiento diferente.
 - Puede cargarse mediante una build.
 - No aparece en el panel normal de spawn.
 - Debe cargarse internamente mediante el formato de build.
