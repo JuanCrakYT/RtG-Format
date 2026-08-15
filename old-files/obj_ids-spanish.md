@@ -250,6 +250,7 @@ Cuando existan objetos simétricos (ruedas, luces, asientos, etc.), utilizar col
 121. Body
 122. Fricklet
 123. SuperPowerClock
+124. YibYib
 
 ## Objetos con puntos de conexión propios
 > Aquí encontraras el "IDdelPunto" de cada objeto
@@ -778,13 +779,13 @@ Cantidad de IDs encontrados: 2
 
 Cantidad de IDs encontrados: 5
 
-| ID  | Nombre          | Lado         | Descripción                                  |
-| --- | --------------- | ------------ | -------------------------------------------- |
-| 1   | Arm_Right       | Right        | Punto de conexión del brazo derecho.         |
-| 2   | Arm_Left        | Left         | Punto de conexión del brazo izquierdo.       |
-| 3   | Head            | Top          | Punto de conexión de la cabeza.              |
-| 4   | Leg_Right       | Bottom Right | Punto de conexión de la pierna derecha.      |
-| 5   | Leg_Left        | Bottom Left  | Punto de conexión de la pierna izquierda.    |
+| ID  | Nombre    | Lado         | Descripción                               |
+| --- | --------- | ------------ | ----------------------------------------- |
+| 1   | Arm_Right | Right        | Punto de conexión del brazo derecho.      |
+| 2   | Arm_Left  | Left         | Punto de conexión del brazo izquierdo.    |
+| 3   | Head      | Top          | Punto de conexión de la cabeza.           |
+| 4   | Leg_Right | Bottom Right | Punto de conexión de la pierna derecha.   |
+| 5   | Leg_Left  | Bottom Left  | Punto de conexión de la pierna izquierda. |
 
 > Notas:
 
@@ -792,6 +793,20 @@ Cantidad de IDs encontrados: 5
 >> Los IDs 1 y 2 corresponden a los brazos derecho e izquierdo respectivamente.
 >> El ID 3 corresponde a la cabeza.
 >> Los IDs 4 y 5 corresponden a las piernas derecha e izquierda respectivamente.
+>> `Body` NO se puede cargar mediante el menu de Spawn, solo internamente con:
+```json
+[["Body", [], []]]
+```
+>>> o formato Base64:
+`W1siQm9keSIsIFtdLCBbXV1d`
+
+### 43. YibYib
+
+Cantidad de IDs encontrados: 1
+
+| ID  | Nombre | Lado | Descripción                                       |
+| --- | ------ | ---- | ------------------------------------------------- |
+| 2   | Steal  | Top  | Punto de conexión donde el YibYib agarra objetos. |
 
 ## Objetos sin puntos de conexión propios
 > **Hecho por:** @JuanCrakYT
@@ -864,18 +879,18 @@ Estos objetos utilizan puntos de conexión definidos por otros objetos.
 52.   Mag
 53.   Leafblower
 54.   RiotShield
+55.   ToolGun
 > El objeto `RiotShield` presenta un comportamiento diferente.
 - Puede cargarse correctamente en una build.
 - No puede guardarse mediante el sistema normal de guardado.
 - No posee IDs de puntos de conexión propios conocidos.
 - Su aparición en el formato puede depender de estados internos del juego.
-55.   Keyboard
+56.   Keyboard
 > El objeto `Keyboard` presenta un comportamiento diferente.
 - Puede cargarse correctamente en una build.
 - No puede guardarse mediante el sistema normal de guardado.
 - No posee IDs de puntos de conexión propios conocidos.
 - Su aparición en el formato puede depender de estados internos del juego.
-56.   ToolGun
 57.   Head
 > El objeto `Head` presenta un comportamiento diferente.
 - Puede cargarse mediante una build. 
@@ -902,6 +917,13 @@ Estos objetos utilizan puntos de conexión definidos por otros objetos.
 - No posee IDs de puntos de conexión propios.
 61.   SuperPowerClock
 > El objeto `SuperPowerClock` presenta un comportamiento diferente.
+- Puede cargarse mediante una build.
+- No puede guardarse mediante el sistema normal de guardado.
+- No aparece en el panel normal de spawn.
+- Debe cargarse internamente mediante el formato de build.
+- No posee IDs de puntos de conexión propios.
+61.   Successor
+> El objeto `Successor` presenta un comportamiento diferente.
 - Puede cargarse mediante una build.
 - No aparece en el panel normal de spawn.
 - Debe cargarse internamente mediante el formato de build.

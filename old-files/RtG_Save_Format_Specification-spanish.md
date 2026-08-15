@@ -196,7 +196,14 @@ Cada elemento del arreglo se define como una tupla con un tamaño fijo de tres e
 |  115 | AltitudeSensor    |       2       | Sensor de altitud.                                           |
 |  116 | RockingChair      |       1       | Silla mecedora.                                              |
 |  117 | MatchingGyro      |       2       | Giroscopio de coincidencia.                                  |
-
+|  118 | Head              |       ?       | Cabeza.                                                      |
+|  119 | PolaroidCamera    |       ?       | Cámara Polaroid.                                             |
+|  120 | PolaroidPhoto     |       ?       | Fotografía Polaroid.                                         |
+|  121 | Successor         |       2       | A Worthy Successor.                                          |
+|  122 | Body              |       ?       | Cuerpo.                                                      |
+|  123 | Fricklet          |       ?       | Fricklet.                                                    |
+|  124 | SuperPowerClock   |       ?       | Super Power Clock.                                           |
+|  125 | YibYib            |       ?       | YibYib.                                                      |
 
 ---
 
@@ -228,7 +235,7 @@ La diferencia entre distintos bloques no radica en el formato de la sintaxis JSO
 > **Hecho por:** @JuanCrakYT
 El primer valor de la tupla es una cadena de texto identificadora (`String`) que indica la plantilla lógica del bloque.
 
-### 5.1 Identificadores Conocidos
+### 5.1 Ejemplos Identificadores Conocidos
 Ejemplos de identificadores de bloques observados en las pruebas:
 * `"Base"`
 * `"Part"`
@@ -240,6 +247,7 @@ Ejemplos de identificadores de bloques observados en las pruebas:
 * `"Chassis"`
 * `"Sprite"`
 * `"Rope"`, `"Wire"`, `"Balloon"`, `"Joint"`, `"RiotShield"`
+> Para ver más, vaya a: `obj_ids.md`
 
 ### 5.2 Homogeneidad y Ausencia de Bloques Especiales
 * **Clarificación de Ingeniería Inversa:** Pruebas experimentales extensas demuestran que el motor trata a todos los objetos con la misma especificación técnica. Objetos como `"Chassis"` no cuentan con un estatus privilegiado; fueron utilizados inicialmente en pruebas experimentales debido a que permitían visualizar de manera limpia el uso de `EphemeralAttachments`.
