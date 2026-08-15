@@ -3,7 +3,7 @@
 > **Hecho por:** @JuanCrakYT
 > **Documento:** Especificación Técnica de Formato de Guardado (Ingeniería Inversa)  
 > **Juego Objetivo:** Road To Gramby's (Roblox)  
-> **Versión de la Especificación:** v1.01
+> **Versión de la Especificación:** v1.02
 > **Estado:** Documento Experimental / No Oficial  
 
 # Catálogo de IDs de Puntos de Conexión
@@ -921,7 +921,7 @@ Estos objetos utilizan puntos de conexión definidos por otros objetos.
 - No aparece en el panel normal de spawn.
 - Debe cargarse internamente mediante el formato de build.
 - No posee IDs de puntos de conexión propios.
-61.   Successor
+62.   Successor
 > El objeto `Successor` presenta un comportamiento diferente.
 - Puede cargarse mediante una build.
 - No aparece en el panel normal de spawn.
