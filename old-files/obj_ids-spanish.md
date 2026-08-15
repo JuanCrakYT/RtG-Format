@@ -778,20 +778,20 @@ Cantidad de IDs encontrados: 2
 
 Cantidad de IDs encontrados: 5
 
-| ID | Nombre   | Lado  | Descripción                                       |
-| -- | -------- | ----- | ------------------------------------------------- |
-| 1  | RightArm | Right | Punto de conexión ubicado en el brazo derecho.    |
-| 2  | LeftArm  | Left  | Punto de conexión ubicado en el brazo izquierdo.  |
-| 3  | Head     | Top   | Punto de conexión ubicado en la cabeza.           |
-| 4  | RightLeg | Right | Punto de conexión ubicado en la pierna derecha.   |
-| 5  | LeftLeg  | Left  | Punto de conexión ubicado en la pierna izquierda. |
+| ID  | Nombre          | Lado         | Descripción                                  |
+| --- | --------------- | ------------ | -------------------------------------------- |
+| 1   | Arm_Right       | Right        | Punto de conexión del brazo derecho.         |
+| 2   | Arm_Left        | Left         | Punto de conexión del brazo izquierdo.       |
+| 3   | Head            | Top          | Punto de conexión de la cabeza.              |
+| 4   | Leg_Right       | Bottom Right | Punto de conexión de la pierna derecha.      |
+| 5   | Leg_Left        | Bottom Left  | Punto de conexión de la pierna izquierda.    |
 
 > Notas:
 
->> `Body` posee cinco puntos de conexión: dos brazos, dos piernas y la cabeza.
+>> `Body` posee cinco puntos de conexión correspondientes a las extremidades y la cabeza.
 >> Los IDs 1 y 2 corresponden a los brazos derecho e izquierdo respectivamente.
+>> El ID 3 corresponde a la cabeza.
 >> Los IDs 4 y 5 corresponden a las piernas derecha e izquierda respectivamente.
->> El ID 3 corresponde al punto de conexión de la cabeza.
 
 ## Objetos sin puntos de conexión propios
 > **Hecho por:** @JuanCrakYT
