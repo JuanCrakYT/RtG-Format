@@ -11,3 +11,29 @@ The wiki lists the following as unused parts. These are noted here but not assum
 | Super Power Clock | Base64 sharecode shown on wiki | UNCONFIRMED (wiki) | Source: Road to Gramby's Wiki.                                                             |
 
 Source evidence: Road to Gramby's Wiki; treat as wiki-only unless `old-files/obj_ids-spanish.md` contains explicit IDs.
+
+# Data
+The wiki contains the Base64 sharecode:
+```text
+WyJCb2R5IiwgW10sIFtdXQ==
+WyJGcmlja2xldCIsIFtdLCBbXV0=
+WyJTdXBlclBvd2VyQ2xvY2siLCBbXSwgW11d
+```
+Or as individual entries:
+```json
+["Body", [], []]
+["Fricklet", [], []]
+["SuperPowerClock", [], []]
+```
+Joined:
+```json
+[
+  ["Body", [], []],
+  ["Fricklet", [], []],
+  ["SuperPowerClock", [], []]
+]
+```
+> **Warning:** When encoding as `Base64`, do not include spaces; use a single line instead. Example:
+```json
+[["Body", [], []],["Fricklet", [], []],["SuperPowerClock", [], []]]
+```

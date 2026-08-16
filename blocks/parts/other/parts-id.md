@@ -6,8 +6,8 @@
 
 These items are listed on the wiki as "Other Parts"; preserve historical evidence if present.
 
-| Name               | Status                     | Source / Evidence     | Notes                                                    |
-| ------------------ | -------------------------- | --------------------- | -------------------------------------------------------- |
-| A Worthy Successor | PARTIALLY CONFIRMED (wiki) | Road to Gramby's Wiki | Listed on wiki; not present with IDs in historical file. |
-| Polaroid Camera    | PARTIALLY CONFIRMED (wiki) | Road to Gramby's Wiki | Listed on wiki; not present with IDs in historical file. |
-| Snart Burger       | PARTIALLY CONFIRMED (wiki) | Road to Gramby's Wiki | Listed on wiki; not present with IDs in historical file. |
+| Name               | Status             | Source / Evidence     | Notes                                                    |
+| ------------------ | ------------------ | --------------------- | -------------------------------------------------------- |
+| A Worthy Successor | CONFIRMED (wiki)   | Road to Gramby's Wiki | Listed on wiki; not present with IDs in historical file. |
+| Polaroid Camera    | CONFIRMED (wiki)   | Road to Gramby's Wiki | Listed on wiki; not present with IDs in historical file. |
+| Snart Burger       | UNCONFIRMED (wiki) | Road to Gramby's Wiki | Listed on wiki; not present with IDs in historical file. |

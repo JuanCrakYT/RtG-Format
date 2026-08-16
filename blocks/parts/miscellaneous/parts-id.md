@@ -20,15 +20,15 @@ Miscellaneous parts as per the wiki and historical file. Many of these are liste
 
 | Name                             | Historical detail                | Status              | Source / Evidence                           |
 | -------------------------------- | -------------------------------- | ------------------- | ------------------------------------------- |
-| Wad                              | Listed historically              | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — objects list |
-| Back Left Door / Back Right Door | Listed historically (doors)      | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — objects list |
-| BrakeLight                       | Listed historically (no own IDs) | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — objects list |
-| Camera                           | Listed historically (no own IDs) | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — objects list |
-| Tooth                            | Listed historically (no own IDs) | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — objects list |
-| Radio                            | Listed historically (no own IDs) | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — objects list |
-| Light                            | Listed historically (no own IDs) | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — objects list |
-| Seat                             | Listed historically (no own IDs) | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — objects list |
-| Poop                             | Listed historically (no own IDs) | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — objects list |
-| Toilet                           | Listed historically (no own IDs) | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — objects list |
-| Recorder                         | Listed historically (no own IDs) | PARTIALLY CONFIRMED | old-files/obj_ids-spanish.md — objects list |
+| Wad                              | Listed historically              | CONFIRMED | old-files/obj_ids-spanish.md — objects list |
+| Back Left Door / Back Right Door | Listed historically (doors)      | CONFIRMED | old-files/obj_ids-spanish.md — objects list |
+| BrakeLight                       | Listed historically (no own IDs) | CONFIRMED | old-files/obj_ids-spanish.md — objects list |
+| Camera                           | Listed historically (no own IDs) | CONFIRMED | old-files/obj_ids-spanish.md — objects list |
+| Tooth                            | Listed historically (no own IDs) | CONFIRMED | old-files/obj_ids-spanish.md — objects list |
+| Radio                            | Listed historically (no own IDs) | CONFIRMED | old-files/obj_ids-spanish.md — objects list |
+| Light                            | Listed historically (no own IDs) | CONFIRMED | old-files/obj_ids-spanish.md — objects list |
+| Seat                             | Listed historically (no own IDs) | CONFIRMED | old-files/obj_ids-spanish.md — objects list |
+| Poop                             | Listed historically (no own IDs) | CONFIRMED | old-files/obj_ids-spanish.md — objects list |
+| Toilet                           | Listed historically (no own IDs) | CONFIRMED | old-files/obj_ids-spanish.md — objects list |
+| Recorder                         | Listed historically (no own IDs) | CONFIRMED | old-files/obj_ids-spanish.md — objects list |
 
