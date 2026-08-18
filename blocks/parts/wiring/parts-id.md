@@ -1,68 +1,109 @@
 # Wiring Parts — Connection Point IDs
 
-> Source: `old-files/obj_ids-spanish.md`
-> Category classification: Road to Gramby's Wiki (used for organization only)
+> Fuente histórica: `old-files/obj_ids-spanish.md`
+> Estado: todos los datos migrados están confirmados según la actualización española.
+> La clasificación por categoría es organizativa; las tablas reproducen la evidencia histórica.
 
-## Gate-AND
+## Button (source section 17)
 
-| ID  | Name   | Side  | Description                                 | Status    | Source / Evidence                             |
-| --- | ------ | ----- | ------------------------------------------- | --------- | --------------------------------------------- |
-| 1   | Output | Front | Punto de salida de la compuerta lógica AND. | CONFIRMED | old-files/obj_ids-spanish.md — Gate-AND table |
-| 2   | InputA | Left  | Primera entrada de la compuerta lógica AND. | CONFIRMED | old-files/obj_ids-spanish.md — Gate-AND table |
-| 3   | InputB | Right | Segunda entrada de la compuerta lógica AND. | CONFIRMED | old-files/obj_ids-spanish.md — Gate-AND table |
+| ID | Name | Side | Description | Status | Source / Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Output | Unknown | Punto de conexión del botón con otro objeto. | CONFIRMED | old-files/obj_ids-spanish.md — Button table |
 
-## Gate-OR
+## InputSensor (source section 18)
 
-| ID  | Name   | Side  | Description                                | Status    | Source / Evidence                            |
-| --- | ------ | ----- | ------------------------------------------ | --------- | -------------------------------------------- |
-| 1   | Output | Front | Punto de salida de la compuerta lógica OR. | CONFIRMED | old-files/obj_ids-spanish.md — Gate-OR table |
-| 2   | InputA | Left  | Primera entrada de la compuerta lógica OR. | CONFIRMED | old-files/obj_ids-spanish.md — Gate-OR table |
-| 3   | InputB | Right | Segunda entrada de la compuerta lógica OR. | CONFIRMED | old-files/obj_ids-spanish.md — Gate-OR table |
+| ID | Name | Side | Description | Status | Source / Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Output | Unknown | Punto de conexión del sensor de entrada con otro objeto. | CONFIRMED | old-files/obj_ids-spanish.md — InputSensor table |
 
-## Gate-NOT
+## AltitudeSensor (source section 19)
 
-| ID  | Name   | Side  | Description                                  | Status    | Source / Evidence                             |
-| --- | ------ | ----- | -------------------------------------------- | --------- | --------------------------------------------- |
-| 1   | Output | Right | Punto de salida de la compuerta lógica NOT.  | CONFIRMED | old-files/obj_ids-spanish.md — Gate-NOT table |
-| 2   | Input  | Left  | Punto de entrada de la compuerta lógica NOT. | CONFIRMED | old-files/obj_ids-spanish.md — Gate-NOT table |
+| ID | Name | Side | Description | Status | Source / Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Output | Unknown | Punto de conexión del sensor de altura con otro objeto. | CONFIRMED | old-files/obj_ids-spanish.md — AltitudeSensor table |
 
-## Wire
+## VelocitySensor (source section 20)
 
-| ID  | Name  | Side  | Description                                     | Status    | Source / Evidence                         |
-| --- | ----- | ----- | ----------------------------------------------- | --------- | ----------------------------------------- |
-| 2   | Left  | Left  | Punto de conexión ubicado en el lado izquierdo. | CONFIRMED | old-files/obj_ids-spanish.md — Wire table |
-| 4   | Right | Right | Punto de conexión ubicado en el lado derecho.   | CONFIRMED | old-files/obj_ids-spanish.md — Wire table |
+| ID | Name | Side | Description | Status | Source / Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Output | Unknown | Punto de conexión del sensor de velocidad con otro objeto. | CONFIRMED | old-files/obj_ids-spanish.md — VelocitySensor table |
 
-## Looper
+## Switch (source section 21)
 
-| ID  | Name  | Side  | Description                                                | Status    | Source / Evidence                           |
-| --- | ----- | ----- | ---------------------------------------------------------- | --------- | ------------------------------------------- |
-| 2   | Top   | Top   | Punto de conexión ubicado en la parte superior del Looper. | CONFIRMED | old-files/obj_ids-spanish.md — Looper table |
-| 3   | Right | Right | Punto de conexión ubicado en el lado derecho del Looper.   | CONFIRMED | old-files/obj_ids-spanish.md — Looper table |
-| 4   | Left  | Left  | Punto de conexión ubicado en el lado izquierdo del Looper. | CONFIRMED | old-files/obj_ids-spanish.md — Looper table |
-| 5   | Front | Front | Punto de conexión ubicado en la parte frontal del Looper.  | CONFIRMED | old-files/obj_ids-spanish.md — Looper table |
+| ID | Name | Side | Description | Status | Source / Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Output | Unknown | Punto de conexión del interruptor con otro objeto. | CONFIRMED | old-files/obj_ids-spanish.md — Switch table |
 
-## Category index (Wiring)
+## TripWire (source section 22)
 
-Wiring-related items as classified by the wiki. Historical evidence marked where available.
+| ID | Name | Side | Description | Status | Source / Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 1 | MountPoint | Unknown | Punto de conexión del cable trampa con otro objeto. | CONFIRMED | old-files/obj_ids-spanish.md — TripWire table |
 
-| Name                | Historical detail                                           | Status    | Source / Evidence                                      |
-| ------------------- | ----------------------------------------------------------- | --------- | ------------------------------------------------------ |
-| And Gate / Gate-AND | Detailed table present                                      | CONFIRMED | old-files/obj_ids-spanish.md — Gate-AND table          |
-| AltitudeSensor      | Listed with an output in historical tables                  | CONFIRMED | old-files/obj_ids-spanish.md — AltitudeSensor table    |
-| Button              | Detailed table (ID 1 Output)                                | CONFIRMED | old-files/obj_ids-spanish.md — Button table            |
-| Delayer             | Mentioned in wiki; historical file contains references      | CONFIRMED | old-files/obj_ids-spanish.md — objects list / sections |
-| Detacher            | Detailed table (ID 1 MountPoint)                            | CONFIRMED | old-files/obj_ids-spanish.md — Detacher table          |
-| EntitySensor        | Detailed table (IDs 1–6)                                    | CONFIRMED | old-files/obj_ids-spanish.md — EntitySensor table      |
-| InputSensor         | Detailed table (ID 1 Output)                                | CONFIRMED | old-files/obj_ids-spanish.md — InputSensor table       |
-| Looper              | Detailed table (IDs 2–5)                                    | CONFIRMED | old-files/obj_ids-spanish.md — Looper table            |
-| Not Gate / Gate-NOT | Detailed table (IDs 1–2)                                    | CONFIRMED | old-files/obj_ids-spanish.md — Gate-NOT table          |
-| Or Gate / Gate-OR   | Detailed table (IDs 1–3)                                    | CONFIRMED | old-files/obj_ids-spanish.md — Gate-OR table           |
-| PressurePlate       | Detailed table (ID 1 Output)                                | CONFIRMED | old-files/obj_ids-spanish.md — PressurePlate table     |
-| RemoteButton        | Detailed table (ID 1 Output)                                | CONFIRMED | old-files/obj_ids-spanish.md — RemoteButton table      |
-| Splitter (1–4)      | Listed in historical file; wiki documents splitter variants | CONFIRMED | old-files/obj_ids-spanish.md — Splitter_1..4 entries   |
-| Switch              | Detailed table (ID 1 Output)                                | CONFIRMED | old-files/obj_ids-spanish.md — Switch table            |
-| Tripwire            | Detailed table (ID 1 MountPoint)                            | CONFIRMED | old-files/obj_ids-spanish.md — TripWire table          |
-| VelocitySensor      | Detailed table (ID 1 Output)                                | CONFIRMED | old-files/obj_ids-spanish.md — VelocitySensor table    |
-| Wire                | Detailed table (IDs 2,4)                                    | CONFIRMED | old-files/obj_ids-spanish.md — Wire table              |
+## RemoteButton (source section 23)
 
+| ID | Name | Side | Description | Status | Source / Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Output | Unknown | Punto de conexión del botón remoto con otro objeto. | CONFIRMED | old-files/obj_ids-spanish.md — RemoteButton table |
+
+## PressurePlate (source section 24)
+
+| ID | Name | Side | Description | Status | Source / Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Output | Unknown | Punto de conexión de la placa de presión con otro objeto. | CONFIRMED | old-files/obj_ids-spanish.md — PressurePlate table |
+
+## Detacher (source section 25)
+
+| ID | Name | Side | Description | Status | Source / Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 1 | MountPoint | Unknown | Punto de conexión del separador con otro objeto. | CONFIRMED | old-files/obj_ids-spanish.md — Detacher table |
+
+## EntitySensor (source section 36)
+
+| ID | Name | Side | Description | Status | Source / Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 1 | BackLeft | Back Left | Punto de conexión ubicado en la parte trasera izquierda del sensor. | CONFIRMED | old-files/obj_ids-spanish.md — EntitySensor table |
+| 2 | BackRight | Back Right | Punto de conexión ubicado en la parte trasera derecha del sensor. | CONFIRMED | old-files/obj_ids-spanish.md — EntitySensor table |
+| 3 | BackCenter | Back | Punto de conexión ubicado en la parte trasera central del sensor. | CONFIRMED | old-files/obj_ids-spanish.md — EntitySensor table |
+| 4 | FrontCenter | Front | Punto de conexión ubicado en la parte frontal central del sensor. | CONFIRMED | old-files/obj_ids-spanish.md — EntitySensor table |
+| 5 | FrontRight | Front Right | Punto de conexión ubicado en la parte frontal derecha del sensor. | CONFIRMED | old-files/obj_ids-spanish.md — EntitySensor table |
+| 6 | FrontLeft | Front Left | Punto de conexión ubicado en la parte frontal izquierda del sensor. | CONFIRMED | old-files/obj_ids-spanish.md — EntitySensor table |
+
+## Looper (source section 37)
+
+| ID | Name | Side | Description | Status | Source / Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 2 | Top | Top | Punto de conexión ubicado en la parte superior del Looper. | CONFIRMED | old-files/obj_ids-spanish.md — Looper table |
+| 3 | Right | Right | Punto de conexión ubicado en el lado derecho del Looper. | CONFIRMED | old-files/obj_ids-spanish.md — Looper table |
+| 4 | Left | Left | Punto de conexión ubicado en el lado izquierdo (ruedita). | CONFIRMED | old-files/obj_ids-spanish.md — Looper table |
+| 5 | Front | Front | Punto de conexión ubicado en la parte frontal del Looper. | CONFIRMED | old-files/obj_ids-spanish.md — Looper table |
+
+## Gate-AND (source section 38)
+
+| ID | Name | Side | Description | Status | Source / Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Output | Front | Punto de salida de la compuerta lógica AND. | CONFIRMED | old-files/obj_ids-spanish.md — Gate-AND table |
+| 2 | InputA | Left | Primera entrada de la compuerta lógica AND. | CONFIRMED | old-files/obj_ids-spanish.md — Gate-AND table |
+| 3 | InputB | Right | Segunda entrada de la compuerta lógica AND. | CONFIRMED | old-files/obj_ids-spanish.md — Gate-AND table |
+
+## Gate-OR (source section 39)
+
+| ID | Name | Side | Description | Status | Source / Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Output | Front | Punto de salida de la compuerta lógica OR. | CONFIRMED | old-files/obj_ids-spanish.md — Gate-OR table |
+| 2 | InputA | Left | Primera entrada de la compuerta lógica OR. | CONFIRMED | old-files/obj_ids-spanish.md — Gate-OR table |
+| 3 | InputB | Right | Segunda entrada de la compuerta lógica OR. | CONFIRMED | old-files/obj_ids-spanish.md — Gate-OR table |
+
+## Gate-NOT (source section 40)
+
+| ID | Name | Side | Description | Status | Source / Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Output | Right | Punto de salida de la compuerta lógica NOT. | CONFIRMED | old-files/obj_ids-spanish.md — Gate-NOT table |
+| 2 | Input | Left | Punto de entrada de la compuerta lógica NOT. | CONFIRMED | old-files/obj_ids-spanish.md — Gate-NOT table |
+
+## Wire (source section 41)
+
+| ID | Name | Side | Description | Status | Source / Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 2 | Left | Left | Punto de conexión ubicado en el lado izquierdo. | CONFIRMED | old-files/obj_ids-spanish.md — Wire table |
+| 4 | Right | Right | Punto de conexión ubicado en el lado derecho. | CONFIRMED | old-files/obj_ids-spanish.md — Wire table |

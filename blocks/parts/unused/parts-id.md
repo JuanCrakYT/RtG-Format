@@ -1,39 +1,7 @@
-# Unused Parts — Notes from Wiki
+# Unused Parts — Connection Point IDs
 
-> Source: Road to Gramby's Wiki (wiki-only notes). Historical file preserved in `old-files/obj_ids-spanish.md` — entries may be present there; check original.
+> Fuente histórica: `old-files/obj_ids-spanish.md`
+> Estado: todos los datos migrados están confirmados según la actualización española.
+> La clasificación por categoría es organizativa; las tablas reproducen la evidencia histórica.
 
-The wiki lists the following as unused parts. These are noted here but not assumed as part of the active format.
-
-| Name              | Wiki Data                      | Status             | Notes                                                                                      |
-| ----------------- | ------------------------------ | ------------------ | ------------------------------------------------------------------------------------------ |
-| Body              | Base64 sharecode shown on wiki | UNCONFIRMED (wiki) | Source: Road to Gramby's Wiki; see `old-files/obj_ids-spanish.md` for historical mentions. |
-| Fricklet          | Base64 sharecode shown on wiki | UNCONFIRMED (wiki) | Source: Road to Gramby's Wiki.                                                             |
-| Super Power Clock | Base64 sharecode shown on wiki | UNCONFIRMED (wiki) | Source: Road to Gramby's Wiki.                                                             |
-
-Source evidence: Road to Gramby's Wiki; treat as wiki-only unless `old-files/obj_ids-spanish.md` contains explicit IDs.
-
-# Data
-The wiki contains the Base64 sharecode:
-```text
-WyJCb2R5IiwgW10sIFtdXQ==
-WyJGcmlja2xldCIsIFtdLCBbXV0=
-WyJTdXBlclBvd2VyQ2xvY2siLCBbXSwgW11d
-```
-Or as individual entries:
-```json
-["Body", [], []]
-["Fricklet", [], []]
-["SuperPowerClock", [], []]
-```
-Joined:
-```json
-[
-  ["Body", [], []],
-  ["Fricklet", [], []],
-  ["SuperPowerClock", [], []]
-]
-```
-> **Warning:** When encoding as `Base64`, do not include spaces; use a single line instead. Example:
-```json
-[["Body", [], []],["Fricklet", [], []],["SuperPowerClock", [], []]]
-```
+No hay tablas de IDs propias asignadas a esta categoría en el archivo histórico.

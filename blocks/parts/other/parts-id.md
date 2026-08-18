@@ -1,13 +1,7 @@
 # Other Parts — Connection Point IDs
 
-> Source: `old-files/obj_ids-spanish.md`
+> Fuente histórica: `old-files/obj_ids-spanish.md`
+> Estado: todos los datos migrados están confirmados según la actualización española.
+> La clasificación por categoría es organizativa; las tablas reproducen la evidencia histórica.
 
-## Other (historical list)
-
-These items are listed on the wiki as "Other Parts"; preserve historical evidence if present.
-
-| Name               | Status             | Source / Evidence     | Notes                                                    |
-| ------------------ | ------------------ | --------------------- | -------------------------------------------------------- |
-| A Worthy Successor | CONFIRMED (wiki)   | Road to Gramby's Wiki | Listed on wiki; not present with IDs in historical file. |
-| Polaroid Camera    | CONFIRMED (wiki)   | Road to Gramby's Wiki | Listed on wiki; not present with IDs in historical file. |
-| Snart Burger       | UNCONFIRMED (wiki) | Road to Gramby's Wiki | Listed on wiki; not present with IDs in historical file. |
+No hay tablas de IDs propias asignadas a esta categoría en el archivo histórico.

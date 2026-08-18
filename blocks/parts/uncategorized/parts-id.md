@@ -1,20 +1,21 @@
-# Uncategorized Parts — Historical Extract
+# Uncategorized Parts — Connection Point IDs
 
-> Source: `old-files/obj_ids-spanish.md`
+> Fuente histórica: `old-files/obj_ids-spanish.md`
+> Estado: todos los datos migrados están confirmados según la actualización española.
+> La clasificación por categoría es organizativa; las tablas reproducen la evidencia histórica.
 
-This directory contains items that appear in the historical file but could not be confidently assigned to a wiki category, or that are present in the historical file but absent from the wiki listing.
+## Body (source section 42)
 
-| Name             | Historical detail                                                   | Status              | Source / Evidence                                                  | Notes                                                                       |
-| ---------------- | ------------------------------------------------------------------- | ------------------- | ------------------------------------------------------------------ | --------------------------------------------------------------------------- |
-| Arm              | Listed in wiki as Uncategorized; present in historical objects list | CONFIRMED | old-files/obj_ids-spanish.md — objects list; Road to Gramby's Wiki | Uncategorized per wiki; no detailed table in historical file                |
-| Carrot           | Listed historically (no own IDs)                                    | CONFIRMED | old-files/obj_ids-spanish.md — objects list                        | Preserved historical listing                                                |
-| Clipboard        | Listed historically                                                 | CONFIRMED | old-files/obj_ids-spanish.md — objects list                        | No detailed table present in historical file                                |
-| GlassBase        | Listed historically                                                 | CONFIRMED | old-files/obj_ids-spanish.md — objects list                        | Unclear category; placed in Uncategorized to preserve evidence              |
-| GoldPotatoEngine | Listed historically (no own IDs)                                    | CONFIRMED | old-files/obj_ids-spanish.md — objects list                        | Preserved historical note                                                   |
-| Googie           | Listed historically                                                 | CONFIRMED | old-files/obj_ids-spanish.md — objects list                        | Uncategorized — no table present                                            |
-| HulaDoll         | Listed historically (no own IDs)                                    | CONFIRMED | old-files/obj_ids-spanish.md — objects list                        | Preserved historical note                                                   |
-| Jug              | Listed historically (no own IDs)                                    | CONFIRMED | old-files/obj_ids-spanish.md — objects list                        | Preserved historical note                                                   |
-| Sprite           | Listed historically (no own IDs)                                    | CONFIRMED | old-files/obj_ids-spanish.md — objects list                        | Preserved historical note; referenced elsewhere as using UUID attachments   |
-| TV               | Listed historically with special behavior note                      | CONFIRMED | old-files/obj_ids-spanish.md — objects list                        | Historical note: loads but may not save normally; preserve as Uncategorized |
-| WoodenChair      | Listed historically                                                 | CONFIRMED | old-files/obj_ids-spanish.md — objects list                        | Uncategorized — no detailed table present                                   |
+| ID | Name | Side | Description | Status | Source / Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Arm_Right | Right | Punto de conexión del brazo derecho. | CONFIRMED | old-files/obj_ids-spanish.md — Body table |
+| 2 | Arm_Left | Left | Punto de conexión del brazo izquierdo. | CONFIRMED | old-files/obj_ids-spanish.md — Body table |
+| 3 | Head | Top | Punto de conexión de la cabeza. | CONFIRMED | old-files/obj_ids-spanish.md — Body table |
+| 4 | Leg_Right | Bottom Right | Punto de conexión de la pierna derecha. | CONFIRMED | old-files/obj_ids-spanish.md — Body table |
+| 5 | Leg_Left | Bottom Left | Punto de conexión de la pierna izquierda. | CONFIRMED | old-files/obj_ids-spanish.md — Body table |
 
+## YibYib (source section 43)
+
+| ID | Name | Side | Description | Status | Source / Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 2 | Steal | Top | Punto de conexión donde el YibYib agarra objetos. | CONFIRMED | old-files/obj_ids-spanish.md — YibYib table |

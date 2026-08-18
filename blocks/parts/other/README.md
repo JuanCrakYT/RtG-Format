@@ -1,6 +1,6 @@
 # Other Parts
 
-Contains items classified as "Other" on the wiki. Many of these are wiki-only and lack detailed connection-point tables in the historical file.
+Contains items classified as "Other" on the wiki. The category is organizational; the updated Spanish historical file remains the source of truth for connection-point data.
 
 Notes
 - This directory preserves wiki classification while pointing to `old-files/obj_ids-spanish.md` for any historical evidence.

@@ -60,7 +60,7 @@ Una construcción (*build*) de RtG se almacena como un arreglo JSON de nivel sup
 ### 3.1 Tupla de Objeto Base
 Cada elemento del arreglo se define como una tupla con un tamaño fijo de tres elementos con el siguiente formato secuencial:
 
-```text
+```json
 [
     TipoDelBloque,
     Conexiones,
@@ -283,7 +283,7 @@ Un bloque puede incluir cero conexiones (como un bloque raíz `"Base"` con `[]`)
 > **Hecho por:** @JuanCrakYT
 Cada entrada en la lista de conexiones consta exactamente de un arreglo de 3 elementos:
 
-```text
+```json
 [
     TipoLocal,
     PuntoPadre,
@@ -314,7 +314,7 @@ Ejemplo:
 ]
 ```
 En la estructura anterior, el segundo `Part` apunta al índice `1` (el primer `Part`), generando la siguiente topología de árbol:
-```text
+```tree
 Base (Índice 0)
  └── Part (Índice 1)
       └── Part (Índice 2)
@@ -571,7 +571,7 @@ Ejemplo JSON de objeto enlazado (`Sprite`):
 
 El arreglo `cframe` almacenado dentro de cada `EphemeralAttachment` consta de **12 valores numéricos de precisión flotante**, los cuales representan un marco de coordenadas estándar de Roblox (*Coordinate Frame*).
 
-```text
+```json
 [
     X,  Y,  Z,    <-- Vectores de Posición Espacial (3 valores)
    R1, R2, R3,    <-- Matriz de Rotación / Transformación (9 valores)
@@ -671,10 +671,9 @@ A diferencia de las propiedades adicionales, **RtG NO intenta autorreparar o cre
 ### Objeto especial.
 
 > **Primer archivo analizado durante la ingeniería inversa del formato de Road To Gramby's.**
-* 
-* ```text
-* W1siU3ByYXlQYWludCIsW10seyJSR0IiOlsyMTEsMjcsMTldfV1d
-* ```
+```text
+W1siU3ByYXlQYWludCIsW10seyJSR0IiOlsyMTEsMjcsMTldfV1d
+```
 >> De este archivo surgió toda la investigación que permitió documentar el sistema de guardado del juego.
 
 > No porque sea técnicamente especial, sino porque históricamente fue el punto donde empezó todo.
