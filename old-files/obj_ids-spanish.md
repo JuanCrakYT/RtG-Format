@@ -11,13 +11,13 @@
 Este documento cataloga el significado del **IDdelPunto** de las conexiones de cada objeto.
 
 Formato de una conexión:
-
+```json
 ["TipoDelBloque", "IDdelPunto", ÍndicePadre]
-
+```
 Ejemplo:
-
+```json
 ["1", "24", 15]
-
+```
 donde:
 
 - TipoDelBloque = Categoría de conexión.
@@ -792,7 +792,7 @@ Cantidad de IDs encontrados: 5
 >> Los IDs 1 y 2 corresponden a los brazos derecho e izquierdo respectivamente.
 >> El ID 3 corresponde a la cabeza.
 >> Los IDs 4 y 5 corresponden a las piernas derecha e izquierda respectivamente.
->> `Body` NO se puede cargar mediante el menu de Spawn, solo internamente con:
+>> `Body` NO se puede cargar mediante el menu de Spawn, puede ser internamente con:
 ```json
 [["Body", [], []]]
 ```
@@ -805,7 +805,7 @@ Cantidad de IDs encontrados: 1
 
 | ID  | Nombre | Lado | Descripción                                       |
 | --- | ------ | ---- | ------------------------------------------------- |
-| 2   | Steal  | Top  | Punto de conexión donde el YibYib agarra objetos. |
+| 2   | Hands  | Top  | Punto de conexión donde el YibYib agarra objetos. |
 
 ## Objetos sin puntos de conexión propios
 > **Hecho por:** @JuanCrakYT
@@ -841,7 +841,13 @@ Estos objetos utilizan puntos de conexión definidos por otros objetos.
 27. Jug
 28. Lock
 29. Poop
-30. wad
+30. Wad
+> El objeto `Wad` presenta un comportamiento diferente.
+- Puede cargarse correctamente en una build.
+- No puede guardarse mediante el sistema normal de guardado.
+- No posee IDs de puntos de conexión propios conocidos.
+- No puede colocarse en puntos de conexion definidos por otros objetos
+- Su aparición en el formato puede depender de estados internos del juego.
 31. Recorder
 32. Canister
 33. CannonBall
@@ -855,6 +861,7 @@ Estos objetos utilizan puntos de conexión definidos por otros objetos.
 - Puede cargarse correctamente en una build.
 - No puede guardarse mediante el sistema normal de guardado.
 - No posee IDs de puntos de conexión propios conocidos.
+- No puede colocarse en puntos de conexion definidos por otros objetos
 - Su aparición en el formato puede depender de estados internos del juego.
 
 40.   Camera
@@ -864,6 +871,7 @@ Estos objetos utilizan puntos de conexión definidos por otros objetos.
 - Puede cargarse correctamente en una build.
 - No puede guardarse mediante el sistema normal de guardado.
 - No posee IDs de puntos de conexión propios conocidos.
+- No puede colocarse en puntos de conexion definidos por otros objetos
 - Su aparición en el formato puede depender de estados internos del juego.
   
 43.   MountedGun
@@ -882,46 +890,49 @@ Estos objetos utilizan puntos de conexión definidos por otros objetos.
 > El objeto `RiotShield` presenta un comportamiento diferente.
 - Puede cargarse correctamente en una build.
 - No puede guardarse mediante el sistema normal de guardado.
+- No puede colocarse en puntos de conexion definidos por otros objetos
 - No posee IDs de puntos de conexión propios conocidos.
 - Su aparición en el formato puede depender de estados internos del juego.
-56.   Keyboard
+56.    Keyboard
 > El objeto `Keyboard` presenta un comportamiento diferente.
 - Puede cargarse correctamente en una build.
 - No puede guardarse mediante el sistema normal de guardado.
+- No puede colocarse en puntos de conexion definidos por otros objetos
 - No posee IDs de puntos de conexión propios conocidos.
 - Su aparición en el formato puede depender de estados internos del juego.
-57.   Head
+57.    Head
 > El objeto `Head` presenta un comportamiento diferente.
 - Puede cargarse mediante una build. 
 - No aparece en el panel normal de spawn.
 - Debe cargarse internamente mediante el formato de build.
 - No posee IDs de puntos de conexión propios.
-58.   PolaroidCamera
+58.    PolaroidCamera
 > El objeto `PolaroidCamera` presenta un comportamiento diferente.
 - Puede cargarse mediante una build.
 - No aparece en el panel normal de spawn.
 - Debe cargarse internamente mediante el formato de build.
 - No posee IDs de puntos de conexión propios.
-59.   PolaroidPhoto
+59.    PolaroidPhoto
 > El objeto `PolaroidPhoto` presenta un comportamiento diferente.
 - Puede cargarse mediante una build.
 - No aparece en el panel normal de spawn.
 - Debe cargarse internamente mediante el formato de build.
 - No posee IDs de puntos de conexión propios.
-60.   Fricklet
+60.    Fricklet
 > El objeto `Fricklet` presenta un comportamiento diferente.
 - Puede cargarse mediante una build.
 - No aparece en el panel normal de spawn.
+- No puede colocarse en puntos de conexion definidos por otros objetos
 - Debe cargarse internamente mediante el formato de build.
 - No posee IDs de puntos de conexión propios.
-61.   SuperPowerClock
+61.    SuperPowerClock
 > El objeto `SuperPowerClock` presenta un comportamiento diferente.
 - Puede cargarse mediante una build.
 - No puede guardarse mediante el sistema normal de guardado.
 - No aparece en el panel normal de spawn.
 - Debe cargarse internamente mediante el formato de build.
 - No posee IDs de puntos de conexión propios.
-62.   Successor
+62.    Successor
 > El objeto `Successor` presenta un comportamiento diferente.
 - Puede cargarse mediante una build.
 - No aparece en el panel normal de spawn.

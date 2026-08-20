@@ -197,11 +197,11 @@ Cada elemento del arreglo se define como una tupla con un tamaño fijo de tres e
 |  115 | AltitudeSensor    |       2       | Sensor de altitud.                                           |
 |  116 | RockingChair      |       1       | Silla mecedora.                                              |
 |  117 | MatchingGyro      |       2       | Giroscopio de coincidencia.                                  |
-|  118 | Head              |       1       | Cabeza.                                                      |
+|  118 | Head              |       1       | Cabeza de Fricklet.                                          |
 |  119 | PolaroidCamera    |       1       | Cámara Polaroid.                                             |
 |  120 | PolaroidPhoto     |       1       | Fotografía Polaroid.                                         |
 |  121 | Successor         |       2       | A Worthy Successor.                                          |
-|  122 | Body              |       —       | Cuerpo.                                                      |
+|  122 | Body              |       —       | Cuerpo de Fricklet.                                          |
 |  123 | Fricklet          |       —       | Fricklet.                                                    |
 |  124 | SuperPowerClock   |       —       | Super Power Clock.                                           |
 |  125 | YibYib            |       —       | YibYib.                                                      |
