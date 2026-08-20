@@ -404,13 +404,9 @@ Cantidad de IDs encontrados: 1
 
 ---
 
-### 14. Tire
+### ???
 
-Cantidad de IDs encontrados: 1
-
-| ID  | Nombre     | Lado   | Descripción                                                       |
-| --- | ---------- | ------ | ----------------------------------------------------------------- |
-| 1   | WheelMount | Center | Punto de conexión de la llanta con una rueda u objeto compatible. |
+Cantidad de IDs encontrados: ???
 
 ---
 
@@ -571,7 +567,7 @@ Cantidad de IDs encontrados: 3
 >> El ID 2 parece ser el punto funcional principal, ya que está asociado al eje que gira.
 >> Los IDs 3 y 4 parecen ser puntos de montaje opuestos, similares a los del `Piston`.
 
-### 29. Servo_Physics
+### 30. Servo_Physics
 
 Cantidad de IDs encontrados: 3
 
@@ -588,7 +584,7 @@ Cantidad de IDs encontrados: 3
 >>El ID 2 corresponde al elemento que gira/mueve.
 >>>Los IDs 3 y 4 son los puntos de montaje laterales.
 
-### 30. Anchor
+### 31. Anchor
 
 Cantidad de IDs encontrados: 4
 
@@ -604,7 +600,7 @@ Cantidad de IDs encontrados: 4
 >> El `Anchor` utiliza una distribución de 4 puntos formando una matriz de esquinas.
 >>> No tiene un punto central.
 
-### 31. BallSocket
+### 32. BallSocket
 
 Cantidad de IDs encontrados: 1
 
@@ -617,7 +613,7 @@ Cantidad de IDs encontrados: 1
 >> `BallSocket` solo tiene un punto propio confirmado.
 >> El punto parece funcionar como el punto principal donde se conecta la articulación, similar a `Joint`, pero con movimiento esférico.
 
-### 32. MatchingGyro
+### 33. MatchingGyro
 
 Cantidad de IDs encontrados: 5
 
@@ -636,7 +632,7 @@ Cantidad de IDs encontrados: 5
 >> Los nombres técnicos utilizados son: `HandleMount`, `Right`, `Top`, `Back` y `Front`.
 >> El ID 1 corresponde al mango donde se monta el MatchingGyro.
 
-### 33. Uzi
+### 34. Uzi
 
 Cantidad de IDs encontrados: 1
 
@@ -650,7 +646,7 @@ Cantidad de IDs encontrados: 1
 >> El objeto `Mag` se conecta al ID 1 de la `Uzi`.
 >> No se han identificado otros puntos de conexión propios.
 
-### 34. Briefcase
+### 35. Briefcase
 
 Cantidad de IDs encontrados: 4
 
@@ -666,7 +662,7 @@ Cantidad de IDs encontrados: 4
 >> `Briefcase` posee cuatro puntos de conexión distribuidos alrededor del objeto.
 >> El ID 2 corresponde al punto central, mientras que los demás representan las caras frontal, izquierda y derecha.
 
-### 35. FuelTank
+### 36. FuelTank
 
 Cantidad de IDs encontrados: 1
 
@@ -679,7 +675,7 @@ Cantidad de IDs encontrados: 1
 >> `FuelTank` posee un único punto de conexión propio.
 >> Se utiliza para montar el tanque sobre otro objeto.
 
-### 36. EntitySensor
+### 37. EntitySensor
 
 Cantidad de IDs encontrados: 6
 
@@ -697,7 +693,7 @@ Cantidad de IDs encontrados: 6
 >> `EntitySensor` posee seis puntos de conexión distribuidos en dos filas (frontal y trasera).
 >> La disposición es simétrica: tres puntos al frente y tres en la parte trasera.
 
-### 37. Looper
+### 38. Looper
 
 Cantidad de IDs encontrados: 4
 
@@ -714,7 +710,7 @@ Cantidad de IDs encontrados: 4
 >> El lado izquierdo corresponde al lado donde se encuentra la rueda/perilla de ajuste.
 >> No hay un punto de conexión en la parte trasera ni en la parte inferior.
 
-### 38. Gate-AND
+### 39. Gate-AND
 
 Cantidad de IDs encontrados: 3
 
@@ -729,7 +725,7 @@ Cantidad de IDs encontrados: 3
 >> `Gate-AND` posee dos entradas (`InputA` e `InputB`) y una salida (`Output`).
 >> El punto de salida se encuentra en la parte frontal del bloque.
 
-### 39. Gate-OR
+### 40. Gate-OR
 
 Cantidad de IDs encontrados: 3
 
@@ -744,7 +740,7 @@ Cantidad de IDs encontrados: 3
 >> `Gate-OR` posee la misma distribución de puntos de conexión que `Gate-AND`.
 >> La única diferencia corresponde a la operación lógica implementada por el bloque.
 
-### 40. Gate-NOT
+### 41. Gate-NOT
 
 Cantidad de IDs encontrados: 2
 
@@ -760,7 +756,7 @@ Cantidad de IDs encontrados: 2
 >> `Wire` transmite señales lógicas entre ambos extremos, funcionando como un cable dentro de los circuitos.
 >> La señal puede entrar por cualquiera de los dos extremos y salir por el otro.
 
-### 41. Wire
+### 42. Wire
 
 Cantidad de IDs encontrados: 2
 
@@ -774,7 +770,7 @@ Cantidad de IDs encontrados: 2
 >> `Wire` posee dos puntos de conexión, uno en cada extremo del bloque.
 >> El ID 2 corresponde al extremo izquierdo y el ID 4 al extremo derecho.
 
-### 42. Body
+### 43. Body
 
 Cantidad de IDs encontrados: 5
 
@@ -799,7 +795,7 @@ Cantidad de IDs encontrados: 5
 >>> o formato Base64:
 `W1siQm9keSIsIFtdLCBbXV1d`
 
-### 43. YibYib
+### 44. YibYib
 
 Cantidad de IDs encontrados: 1
 
