@@ -10,7 +10,7 @@
 ---
 
 ## 1. Introducción
-El presente documento constituye la especificación técnica no oficial del formato de guardado (*save format*) utilizado por el videojuego **Road To Gramby's (RtG)** en la plataforma Roblox. Toda la información contenida en este documento ha sido obtenida mediante **ingeniería inversa empírica**, analizando y modificando archivos JSON de construcciones (*builds*) e inspeccionando el comportamiento del motor del juego al procesarlos.
+El presente documento constituye la especificación técnica no oficial del formato de guardado (*save format*) utilizado por el videojuego **Road To Gramby's (RtG)** en la plataforma Roblox. Toda la información contenida en este documento ha sido obtenida mediante **ingeniería inversa empírica**, analizando y modificando archivos JSON comprimidos en Base64 de construcciones (*builds*) e inspeccionando el comportamiento del motor del juego al procesarlos.
 
 El propósito principal de esta especificación es documentar exhaustivamente el funcionamiento interno del sistema de serialización de objetos, la red de conexiones y dependencias jerárquicas, la inyección espacial de transformaciones mediante attachments y las reglas del cargador del juego.
 
@@ -247,7 +247,11 @@ Ejemplos de identificadores de bloques observados en las pruebas:
 * `"Wheel"`
 * `"Chassis"`
 * `"Sprite"`
-* `"Rope"`, `"Wire"`, `"Balloon"`, `"Joint"`, `"RiotShield"`
+* `"Rope"`
+* `"Wire"`
+* `"Balloon"`
+* `"Joint"`
+* `"RiotShield"`
 > Para ver más, vaya a: `obj_ids.md`
 
 ### 5.2 Homogeneidad y Ausencia de Bloques Especiales
@@ -287,14 +291,14 @@ Cada entrada en la lista de conexiones consta exactamente de un arreglo de 3 ele
 [
     TipoLocal,
     PuntoPadre,
-    ÍndicePadre
+    ÍndicePadre    // 1-based
 ]
 ```
 
 | Posición |   Tipo de Dato    | Componente    | Descripción                                                  |    Estado    |
 | :------: | :---------------: | :------------ | :----------------------------------------------------------- | :----------: |
 |    1º    |     `String`      | `TipoLocal`   | Identificador de interfaz/puerto del bloque local.           | ✅ Confirmado |
-|    2º    | `String` / `UUID` | `PuntoPadre`  | Punto físico o UUID del attachment de enlace del padre.      |  🟢 Probable  |
+|    2º    | `String` / `UUID` | `PuntoPadre`  | Punto físico o UUID del attachment de enlace del padre.      | ✅ Confirmado |
 |    3º    |     `Integer`     | `ÍndicePadre` | Índice de posición del bloque padre en el arreglo principal. | ✅ Confirmado |
 
 ---
@@ -309,15 +313,15 @@ Ejemplo:
 ```json
 [
     ["Base", [], {}],
-    ["Part", [["1", "5", 0]], {}],
-    ["Part", [["1", "5", 1]], {}]
+    ["Part", [["1", "5", 1]], {}],
+    ["Part", [["1", "5", 2]], {}]
 ]
 ```
-En la estructura anterior, el segundo `Part` apunta al índice `1` (el primer `Part`), generando la siguiente topología de árbol:
+En la estructura anterior, el segundo `Part` apunta al índice `2` (el primer `Part`), generando la siguiente topología de árbol:
 ```tree
-Base (Índice 0)
- └── Part (Índice 1)
-      └── Part (Índice 2)
+Base (Índice 1)
+ └── Part (Índice 2)
+      └── Part (Índice 3)
 ```
 
 ### 7.2 Importancia del Orden del Arreglo (✅ Confirmado)
@@ -357,12 +361,12 @@ El primer valor dentro de la tupla de conexión (`TipoLocal`) define el tipo de 
 
 ---
 
-## 9. Puntos de conexión (🟢 Probable)
+## 9. Puntos de conexión (✅ Confirmado)
 
 El segundo elemento de la tupla de conexión (`PuntoPadre`) determina el punto físico exacto en el bloque padre donde el objeto hijo se acopla.
 
 ### 9.1 Mapeo de Nodos Físicos
-* `PuntoPadre` no contiene coordenadas cartesianas, sino identificadores numéricos en cadena (ej. `"1"`, `"2"`, `"5"`) o identificadores UUID cuando se vincula a un attachment.
+* `PuntoPadre` no contiene coordenadas cartesianas, sino identificadores numéricos en cadena 1-based (ej. `"1"`, `"2"`, `"5"`) o identificadores UUID cuando se vincula a un attachment.
 * Representa un nodo espacial prefijado en la malla/geometría del bloque padre.
 
 Diagrama esquemático conceptual de nodos en un bloque tipo `Base`:
@@ -396,6 +400,17 @@ A diferencia de esquemas rígidos o cerrados, el parser de RtG acepta cualquier 
 
 No existen restricciones sintácticas que impidan almacenar claves adicionales. Por ejemplo, se ha probado experimentalmente que incluir la clave `"RGB"` dentro de un objeto `Servo` no corrompe la lectura del archivo JSON ni genera un error de sintaxis en el cargador.
 
+> **Dato importante:** Al cargar un objeto con propiedades, estas propiedades, se mantienen en el objeto aunque no se usen.
+```json
+[["Gyro",[],{"DatoInventado":false,"Activated":true,"RGB":[73,26,112]}]]
+[["Gyro",[],{"Activated":true,"DatoInventado":false,"RGB":[73,26,112]}]]
+```
+>> Si faltan propiedades de un objeto, RtG las creara automáticamente si se requiere en un **valor vacio** o **predeterminado**.
+```json
+[["Gyro",[],[]]]
+[["Gyro",[],{"Activated":true,"RGB":[73,26,112]}]]
+```
+
 ### 10.2 Clasificación Tridimensional de Propiedades
 Para analizar con rigor el comportamiento del motor, la especificación distingue tres estados para cualquier propiedad incluida en el JSON:
 
@@ -415,14 +430,15 @@ Para analizar con rigor el comportamiento del motor, la especificación distingu
 
 ### 10.3 Ejemplos de Propiedades Observadas
 
-#### Coloración General (`RGB`)
+#### Universal
+##### Coloración General (`RGB`)
 ```json
 {
     "RGB": [255, 0, 0]
 }
 ```
 
-#### Transformación de Orientación (`Orientation`)
+##### Transformación de Orientación (`Orientation`)
 ```json
 {
     "OrientationX": 90,
@@ -431,7 +447,8 @@ Para analizar con rigor el comportamiento del motor, la especificación distingu
 }
 ```
 
-#### Parámetros de Servomotores (`Servo`)
+#### Objetos especificos
+##### Parámetros de Servomotores (`Servo`)
 ```json
 {
     "Rotation": 0,
@@ -444,7 +461,7 @@ Para analizar con rigor el comportamiento del motor, la especificación distingu
 }
 ```
 
-#### Sensores e Interruptores
+##### Sensores e Interruptores
 ```json
 {
     "ActivationKey": "W",
@@ -573,10 +590,10 @@ El arreglo `cframe` almacenado dentro de cada `EphemeralAttachment` consta de **
 
 ```json
 [
-    X,  Y,  Z,    <-- Vectores de Posición Espacial (3 valores)
-   R1, R2, R3,    <-- Matriz de Rotación / Transformación (9 valores)
-   R4, R5, R6,
-   R7, R8, R9
+    X, Y, Z,        // Posición: 3 valores
+    R1, R2, R3,     // Rotación: 3×3 = 9 valores
+    R4, R5, R6,
+    R7, R8, R9
 ]
 ```
 
@@ -710,31 +727,28 @@ W1siU3ByYXlQYWludCIsW10seyJSR0IiOlsyMTEsMjcsMTldfV1d
 ## 17. Descubrimientos confirmados (✅)
 > **Hecho por:** @JuanCrakYT
 1. ✅ **Estructura Raíz:** El archivo de guardado es un arreglo JSON donde cada bloque es una tupla de 3 elementos: `[TipoDelBloque, Conexiones, Propiedades]`.
+2. 🟢 **PuntoPadre como Nodo Físico Mapeado:** El segundo valor en la tupla de conexión (`PuntoPadre`) representa un identificador numérico de nodo de acoplamiento prefijado en el modelo geométrico del padre.
 2. ✅ **Diccionario Abierto de Propiedades:** El objeto `Propiedades` acepta cualquier número de claves adicionadas sin generar errores sintácticos de carga.
-3. ✅ **Significado del Tercer Dato de Conexión:** El tercer valor en cada tupla de conexión representa estrictamente el índice del bloque padre en el arreglo principal.
-4. ✅ **Validación Estricta de TipoLocal:** El primer valor de la conexión (`TipoLocal`) identifica el tipo de interfaz y es validado rigurosamente por el cargador. Un valor no compatible genera `"Build inválida"`.
-5. ✅ **Sensibilidad al Orden del Arreglo:** Cambiar el orden de los objetos en el arreglo rompe la indexación jerárquica y corrompe la construcción.
-6. ✅ **Inexistencia de Coordenadas Absolutas Estándar:** El formato no guarda coordenadas globales $X,Y,Z$ para bloques convencionales; la geometría final se calcula recursivamente a partir del bloque padre.
-7. ✅ **Universalidad Host de EphemeralAttachments:** Todos los objetos en el formato poseen la capacidad de actuar como host de un diccionario `EphemeralAttachments`.
-8. ✅ **Mecanismo de Enlace UUID:** Los UUIDs funcionan exclusivamente como identificadores/punteros de enlace interno entre objetos y sus attachments.
-9. ✅ **Compatibilidad con UUIDs Sintéticos:** El cargador procesa UUIDs personalizados creados arbitrariamente, siempre que mantengan un formato válido de GUID.
-10. ✅ **Requisito de Existencia de Referencias:** Las referencias jerárquicas y de UUID son obligatorias. Si una referencia no existe, la carga falla (no se autorrepara).
-11. ✅ **Comportamiento de Sprite Invisible:** Proporcionar un `ImageId` inválido o inexistente resulta en la creación de un `Sprite` invisible pero físicamente presente en el árbol.
-
+4. ✅ **Significado del Tercer Dato de Conexión:** El tercer valor en cada tupla de conexión representa estrictamente el índice del bloque padre en el arreglo principal.
+5. ✅ **Validación Estricta de TipoLocal:** El primer valor de la conexión (`TipoLocal`) identifica el tipo de interfaz y es validado rigurosamente por el cargador. Un valor no compatible genera `"Build inválida"`.
+6. ✅ **Sensibilidad al Orden del Arreglo:** Cambiar el orden de los objetos en el arreglo rompe la indexación jerárquica y corrompe la construcción.
+7. ✅ **Inexistencia de Coordenadas Absolutas Estándar:** El formato no guarda coordenadas globales $X,Y,Z$ para bloques convencionales; la geometría final se calcula recursivamente a partir del bloque padre.
+8. ✅ **Universalidad Host de EphemeralAttachments:** Todos los objetos en el formato poseen la capacidad de actuar como host de un diccionario `EphemeralAttachments`.
+9. ✅ **Mecanismo de Enlace UUID:** Los UUIDs funcionan exclusivamente como identificadores/punteros de enlace interno entre objetos y sus attachments.
+10. ✅ **Compatibilidad con UUIDs Sintéticos:** El cargador procesa UUIDs personalizados creados arbitrariamente, siempre que mantengan un formato válido de GUID.
+11. ✅ **Requisito de Existencia de Referencias:** Las referencias jerárquicas y de UUID son obligatorias. Si una referencia no existe, la carga falla (no se autorrepara).
+12. ✅ **Comportamiento de Sprite Invisible:** Proporcionar un `ImageId` inválido o inexistente resulta en la creación de un `Sprite` invisible pero físicamente presente en el árbol.
+13. ✅ **Secuencia de Fases del Cargador:** El cargador opera mediante un pipeline multietapa (Validación estructural $\to$ Instanciación $\to$ Enlace de Índices $\to$ Enlace UUID/Attachments $\to$ Propiedades $\to$ Reconstrucción Física).
 ---
 
 ## 18. Hipótesis actuales (🟢)
-
-1. 🟢 **PuntoPadre como Nodo Físico Mapeado:** El segundo valor en la tupla de conexión (`PuntoPadre`) representa un identificador numérico de nodo de acoplamiento prefijado en el modelo geométrico del padre.
-2. 🟢 **Transformación Plana en Sprites:** Los objetos tipo `Sprite` filtran la matriz de orientación de 9 elementos para aplicar únicamente transformaciones bidimensionales (escalado/rotación en el plano 2D) en lugar de inclinación tridimensional completa.
-3. 🟢 **Secuencia de Fases del Cargador:** El cargador opera mediante un pipeline multietapa (Validación estructural $\to$ Instanciación $\to$ Enlace de Índices $\to$ Enlace UUID/Attachments $\to$ Propiedades $\to$ Reconstrucción Física).
-
+1. 🟢 **Transformación Plana en Sprites:** Los objetos tipo `Sprite` filtran la matriz de orientación de 9 elementos para aplicar únicamente transformaciones bidimensionales (escalado/rotación en el plano 2D) en lugar de inclinación tridimensional completa.
 
 ---
 
 ## 19. Catálogo de objetos y propiedades (Espacio reservado)
 
-Esta sección queda estructurada como espacio reservado para albergar las tablas técnicas detalladas de los 120 objetos disponibles en Road To Gramby's en revisiones posteriores del documento.
+Esta sección queda estructurada como espacio reservado para albergar las tablas técnicas detalladas de los 125 objetos disponibles en Road To Gramby's en revisiones posteriores del documento.
 
 ### 19.1 Plantilla de Catálogo Técnico
 
@@ -745,7 +759,7 @@ Esta sección queda estructurada como espacio reservado para albergar las tablas
 | *Ej. Sprite*        | `"1"`               | `{UUID}`                                 | `ImageId`                                 | Compatible (Host/Referenciador) |
 | *[Objeto 004]*      |                     |                                          |                                           |                                 |
 | *[Objeto 005]*      |                     |                                          |                                           |                                 |
-| *[... 120 objetos]* |                     |                                          |                                           |                                 |
+| *[... 125 objetos]* |                     |                                          |                                           |                                 |
 
 ---
 
@@ -753,13 +767,9 @@ Esta sección queda estructurada como espacio reservado para albergar las tablas
 > **Hecho por:** @JuanCrakYT
 Las siguientes líneas de investigación han sido identificadas para guiar el desarrollo de las próximas versiones de esta especificación técnica:
 
-* ❓ **Mapa completo de puntos de conexión:** Cartografiar y documentar la totalidad de nodos de conexión (`PuntoPadre`) para los 120 objetos del juego.
-* ❓ **Catálogo de propiedades observadas por objeto:** Documentar formalmente qué propiedades son interpretadas activamente por cada uno de los 120 objetos.
-* ❓ **Matriz de compatibilidad de TipoLocal:** Determinar los códigos de `TipoLocal` aceptados por cada tipo de bloque.
-* ❓ **Múltiples EphemeralAttachments:** Investigar la estabilidad y comportamiento del motor cuando un solo objeto hospeda múltiples entradas de attachments o cuando múltiples objetos referencian un mismo attachment.
+* ❓ **Mapa completo de puntos de conexión:** Cartografiar y documentar la totalidad de nodos de conexión (`PuntoPadre`) para los 125 objetos del juego.
+* ❓ **Catálogo de propiedades observadas por objeto:** Documentar formalmente qué propiedades son interpretadas activamente por cada uno de los 125 objetos.
 * ❓ **Generación automática de builds:** Desarrollar algoritmos de serialización programática para construir archivos JSON válidos compatibles con el cargador de RtG.
-
-
 
 ## Catalogo de Propiedades
 > **Hecho por:** @JuanCrakYT
@@ -801,7 +811,7 @@ Las siguientes líneas de investigación han sido identificadas para guiar el de
 
 ## Total
 
-**32 propiedades únicas.**
+**33 propiedades únicas.**
 
 ### Se pueden agrupar así:
 
@@ -852,6 +862,7 @@ Las siguientes líneas de investigación han sido identificadas para guiar el de
 * Volume
 * CustomTrack
 * On
+* Phrase
 
 **Inventario / Otros**
 
