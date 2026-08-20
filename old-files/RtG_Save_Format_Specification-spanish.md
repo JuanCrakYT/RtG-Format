@@ -5,7 +5,7 @@
 > **Juego Objetivo:** Road To Gramby's (Roblox)  
 > **Versión de la Especificación:** v1.101  
 > **Estado:** Documento Experimental / No Oficial  
-> **Fecha de actualizacion:** 15/08/2026
+> **Fecha de actualización:** 15/08/2026
 
 ---
 
@@ -405,7 +405,7 @@ No existen restricciones sintácticas que impidan almacenar claves adicionales. 
 [["Gyro",[],{"DatoInventado":false,"Activated":true,"RGB":[73,26,112]}]]
 [["Gyro",[],{"Activated":true,"DatoInventado":false,"RGB":[73,26,112]}]]
 ```
->> Si faltan propiedades de un objeto, RtG las creara automáticamente si se requiere en un **valor vacio** o **predeterminado**.
+>> Si faltan propiedades de un objeto, RtG las creara automáticamente si se requiere en un **valor vacío** o **predeterminado**.
 ```json
 [["Gyro",[],[]]]
 [["Gyro",[],{"Activated":true,"RGB":[73,26,112]}]]
@@ -447,7 +447,7 @@ Para analizar con rigor el comportamiento del motor, la especificación distingu
 }
 ```
 
-#### Objetos especificos
+#### Objetos específicos
 ##### Parámetros de Servomotores (`Servo`)
 ```json
 {
@@ -481,7 +481,7 @@ Las pruebas de ingeniería inversa han confirmado que **todos los objetos dentro
 
 > **Definición:** `EphemeralAttachments` no es una propiedad exclusiva ni reservada para clases específicas de bloques. Cualquier objeto puede albergar un diccionario de attachments en su sección de propiedades.
 
-El objeto `"Chassis"` fue el primer caso utilizado durante las pruebas iniciales para aislar esta estructura, pero se ha comprobado que bloques estándar como `"Part"` pueden alojar exactamente los mismos diccionarios de attachments con identico comportamiento.
+El objeto `"Chassis"` fue el primer caso utilizado durante las pruebas iniciales para aislar esta estructura, pero se ha comprobado que bloques estándar como `"Part"` pueden alojar exactamente los mismos diccionarios de attachments con idéntico comportamiento.
 
 ### 11.2 Formato y Estructura
 `EphemeralAttachments` se almacena dentro del diccionario abierto de propiedades de un objeto:

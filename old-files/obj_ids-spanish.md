@@ -217,39 +217,39 @@ Cuando existan objetos simétricos (ruedas, luces, asientos, etc.), utilizar col
 88. Servo_Physics
 89. ShortStick
 90. ShoppingCart
-92. Shotgun
-93. Sledge
-94. SprayPaint
-95. Sprite
-96. Spoiler
-97. SpringJuice
-98. Splitter_1
-99.  Splitter_2
-100. Splitter_3
-101. Splitter_4
-102. StaringGyro
-103. SteeringGyro
-104. SteeringWheel
-105. Stick
-106. Switch
-107. Thruster
-108. Tire
-109. Toilet
-110. ToolGun
-111. Tooth
-112. TripWire
-113. Trunk
-114. Uzi
-115. VelocitySensor
-116. Wheel
-117. Wire
-118. WoodenChair
-119. Wad
-120. Head
-121. Body
-122. Fricklet
-123. SuperPowerClock
-124. YibYib
+91. Shotgun
+92. Sledge
+93. SprayPaint
+94. Sprite
+95. Spoiler
+96. SpringJuice
+97. Splitter_1
+98.  Splitter_2
+99.  Splitter_3
+100. Splitter_4
+101. StaringGyro
+102. SteeringGyro
+103. SteeringWheel
+104. Stick
+105. Switch
+106. Thruster
+107. Tire
+108. Toilet
+109. ToolGun
+110. Tooth
+111. TripWire
+112. Trunk
+113. Uzi
+114. VelocitySensor
+115. Wheel
+116. Wire
+117. WoodenChair
+118. Wad
+119. Head
+120. Body
+121. Fricklet
+122. SuperPowerClock
+123. YibYib
 
 ## Objetos con puntos de conexión propios
 > Aquí encontraras el "IDdelPunto" de cada objeto
@@ -302,9 +302,9 @@ Cantidad de IDs encontrados: 1
 
 Cantidad de IDs encontrados: 1
 
-| ID  | Nombre     | Lado   | Descripción                                  |
-| --- | ---------- | ------ | -------------------------------------------- |
-| 1   | WheelMount | Center | Punto de conexión de la llanta con la rueda. |
+| ID  | Nombre     | Lado   | Descripción                                                 |
+| --- | ---------- | ------ | ----------------------------------------------------------- |
+| 1   | WheelMount | Center | Punto de conexión de la llanta con una rueda u otro objeto. |
 
 ---
 
@@ -420,7 +420,7 @@ Cantidad de IDs encontrados: 1
 
 ---
 
-### 27. Leg
+### 16. Leg
 
 Cantidad de IDs encontrados: 1
 
@@ -749,13 +749,6 @@ Cantidad de IDs encontrados: 2
 | 1   | Output | Right | Punto de salida de la compuerta lógica NOT.  |
 | 2   | Input  | Left  | Punto de entrada de la compuerta lógica NOT. |
 
-> Notas:
-
->> `Wire` posee dos puntos de conexión, uno en cada extremo del bloque.
->> El ID 2 corresponde al extremo izquierdo y el ID 4 al extremo derecho.
->> `Wire` transmite señales lógicas entre ambos extremos, funcionando como un cable dentro de los circuitos.
->> La señal puede entrar por cualquiera de los dos extremos y salir por el otro.
-
 ### 42. Wire
 
 Cantidad de IDs encontrados: 2
@@ -842,7 +835,7 @@ Estos objetos utilizan puntos de conexión definidos por otros objetos.
 - Puede cargarse correctamente en una build.
 - No puede guardarse mediante el sistema normal de guardado.
 - No posee IDs de puntos de conexión propios conocidos.
-- No puede colocarse en puntos de conexion definidos por otros objetos
+- No puede colocarse en puntos de conexión definidos por otros objetos
 - Su aparición en el formato puede depender de estados internos del juego.
 31. Recorder
 32. Canister
@@ -857,7 +850,7 @@ Estos objetos utilizan puntos de conexión definidos por otros objetos.
 - Puede cargarse correctamente en una build.
 - No puede guardarse mediante el sistema normal de guardado.
 - No posee IDs de puntos de conexión propios conocidos.
-- No puede colocarse en puntos de conexion definidos por otros objetos
+- No puede colocarse en puntos de conexión definidos por otros objetos
 - Su aparición en el formato puede depender de estados internos del juego.
 
 40.   Camera
@@ -867,7 +860,7 @@ Estos objetos utilizan puntos de conexión definidos por otros objetos.
 - Puede cargarse correctamente en una build.
 - No puede guardarse mediante el sistema normal de guardado.
 - No posee IDs de puntos de conexión propios conocidos.
-- No puede colocarse en puntos de conexion definidos por otros objetos
+- No puede colocarse en puntos de conexión definidos por otros objetos
 - Su aparición en el formato puede depender de estados internos del juego.
   
 43.   MountedGun
@@ -886,14 +879,14 @@ Estos objetos utilizan puntos de conexión definidos por otros objetos.
 > El objeto `RiotShield` presenta un comportamiento diferente.
 - Puede cargarse correctamente en una build.
 - No puede guardarse mediante el sistema normal de guardado.
-- No puede colocarse en puntos de conexion definidos por otros objetos
+- No puede colocarse en puntos de conexión definidos por otros objetos
 - No posee IDs de puntos de conexión propios conocidos.
 - Su aparición en el formato puede depender de estados internos del juego.
 56.    Keyboard
 > El objeto `Keyboard` presenta un comportamiento diferente.
 - Puede cargarse correctamente en una build.
 - No puede guardarse mediante el sistema normal de guardado.
-- No puede colocarse en puntos de conexion definidos por otros objetos
+- No puede colocarse en puntos de conexión definidos por otros objetos
 - No posee IDs de puntos de conexión propios conocidos.
 - Su aparición en el formato puede depender de estados internos del juego.
 57.    Head
@@ -918,7 +911,7 @@ Estos objetos utilizan puntos de conexión definidos por otros objetos.
 > El objeto `Fricklet` presenta un comportamiento diferente.
 - Puede cargarse mediante una build.
 - No aparece en el panel normal de spawn.
-- No puede colocarse en puntos de conexion definidos por otros objetos
+- No puede colocarse en puntos de conexión definidos por otros objetos
 - Debe cargarse internamente mediante el formato de build.
 - No posee IDs de puntos de conexión propios.
 61.    SuperPowerClock
