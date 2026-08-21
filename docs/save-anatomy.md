@@ -1,10 +1,10 @@
 # Save anatomy (conceptual)
 
 Concept
-```json
+```tree
 Save (JSON Array)
- ├─ Element 0: [Type, Connections, Properties]
- ├─ Element 1: [Type, Connections, Properties]
+ ├─ Element 0: ``[Type, Connections, Properties]``
+ ├─ Element 1: ``[Type, Connections, Properties]``
  └─ ...
 ```
 

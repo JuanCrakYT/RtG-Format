@@ -727,7 +727,7 @@ W1siU3ByYXlQYWludCIsW10seyJSR0IiOlsyMTEsMjcsMTldfV1d
 ## 17. Descubrimientos confirmados (✅)
 > **Hecho por:** @JuanCrakYT
 1. ✅ **Estructura Raíz:** El archivo de guardado es un arreglo JSON donde cada bloque es una tupla de 3 elementos: `[TipoDelBloque, Conexiones, Propiedades]`.
-2. 🟢 **PuntoPadre como Nodo Físico Mapeado:** El segundo valor en la tupla de conexión (`PuntoPadre`) representa un identificador numérico de nodo de acoplamiento prefijado en el modelo geométrico del padre.
+2. ✅ **PuntoPadre como Nodo Físico Mapeado:** El segundo valor en la tupla de conexión (`PuntoPadre`) representa un identificador numérico de nodo de acoplamiento prefijado en el modelo geométrico del padre.
 2. ✅ **Diccionario Abierto de Propiedades:** El objeto `Propiedades` acepta cualquier número de claves adicionadas sin generar errores sintácticos de carga.
 4. ✅ **Significado del Tercer Dato de Conexión:** El tercer valor en cada tupla de conexión representa estrictamente el índice del bloque padre en el arreglo principal.
 5. ✅ **Validación Estricta de TipoLocal:** El primer valor de la conexión (`TipoLocal`) identifica el tipo de interfaz y es validado rigurosamente por el cargador. Un valor no compatible genera `"Build inválida"`.
