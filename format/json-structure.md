@@ -5,7 +5,7 @@ Status: Partially documented
 Confirmed observations
 - Top-level: JSON Array. Each element is a 3-element tuple: `[Type, Connections, Properties]` (CONFIRMED).
 - `Type`: String identifier of the object template (e.g. `"Part"`, `"Sprite"`, `"Chassis"`) (OBSERVED).
-- `Connections`: Array of 0..N connection tuples. Each connection tuple is `[TipoLocal, PuntoPadre, ÍndicePadre]` (CONFIRMED).
+- `Connections`: Array of 0..N connection tuples. Each connection tuple is `[LocalType, PrimaryID, PrimaryIndex]` (CONFIRMED).
 - `Properties`: Open dictionary of key -> value pairs; unknown keys are tolerated (CONFIRMED).
 
 Example (historic observation):
