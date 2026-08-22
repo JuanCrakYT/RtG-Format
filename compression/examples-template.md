@@ -10,7 +10,7 @@ Do **not** add hypothetical or unverified encoding experiment as factual results
 
 ## Experiment structure
 
-Each documented experiment need have its own directory:
+Each documented experiment must have its own directory:
 
 ```tree
 examples/
