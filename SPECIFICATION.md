@@ -26,7 +26,7 @@
 > **CONFIRMED:** The `Properties` element is an open dictionary; unknown keys are tolerated and ignored by the loader when unrecognized.
 
 ## Structure
-- See `format/json-structure.md` for the observed JSON layout and examples.
+- See `format/json-structure.md` for the observed JSON layout and examples on `examples/json-examples`.
 
 ### Identifiers and indexing
 - See `format/indexing.md` and `format/identifiers.md`.

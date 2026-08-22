@@ -427,7 +427,6 @@ After Base64 decoding:
 ```
 
 The historical specification explicitly notes that this simple `SprayPaint` build was **not technically special**.
-
 Its importance is historical: it was the starting point from which the rest of the save-format investigation developed.
 
 ---

@@ -250,6 +250,7 @@ Cuando existan objetos simétricos (ruedas, luces, asientos, etc.), utilizar col
 121. Fricklet
 122. SuperPowerClock
 123. YibYib
+---
 
 ## Objetos con puntos de conexión propios
 > Aquí encontraras el "IDdelPunto" de cada objeto
@@ -795,6 +796,7 @@ Cantidad de IDs encontrados: 1
 | ID  | Nombre | Lado | Descripción                                       |
 | --- | ------ | ---- | ------------------------------------------------- |
 | 2   | Hands  | Top  | Punto de conexión donde el YibYib agarra objetos. |
+---
 
 ## Objetos sin puntos de conexión propios
 > **Hecho por:** @JuanCrakYT

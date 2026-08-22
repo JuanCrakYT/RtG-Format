@@ -67,17 +67,18 @@ Cada elemento del arreglo se define como una tupla con un tamaño fijo de tres e
     Propiedades
 ]
 ```
-
+---
 | Índice Interno | Tipo de Dato | Nombre          | Descripción                                        |
 | :------------: | :----------: | :-------------- | :------------------------------------------------- |
 |      `0`       |   `String`   | `TipoDelBloque` | Identificador del tipo de objeto o entidad.        |
 |      `1`       |   `Array`    | `Conexiones`    | Arreglo de tuplas de conexión con el bloque padre. |
 |      `2`       |   `Object`   | `Propiedades`   | Diccionario JSON de atributos asociados al bloque. |
-
+---
 * **Regla:** El orden de los 3 elementos dentro de la tupla `[TipoDelBloque, Conexiones, Propiedades]` es inmutable y validado por el parser universal.
 
 ### 3.11 Tabla del Tipo De Bloque
 > **Hecho por:** @JuanCrakYT
+---
 |   ID | Nombre            | TipoDelBloque | Descripción                                                  |
 | ---: | ----------------- | :-----------: | ------------------------------------------------------------ |
 |    1 | GoldPotatoEngine  |       1       | Motor de alta potencia. Variante mejorada del Potato Engine. |
@@ -205,7 +206,6 @@ Cada elemento del arreglo se define como una tupla con un tamaño fijo de tres e
 |  123 | Fricklet          |       —       | Fricklet.                                                    |
 |  124 | SuperPowerClock   |       —       | Super Power Clock.                                           |
 |  125 | YibYib            |       —       | YibYib.                                                      |
-
 ---
 
 ## 4. Modelo de datos de objetos
@@ -773,6 +773,7 @@ Las siguientes líneas de investigación han sido identificadas para guiar el de
 
 ## Catalogo de Propiedades
 > **Hecho por:** @JuanCrakYT
+---
 | Propiedad              | Tipo de dato         | Primer objeto observado |
 | ---------------------- | -------------------- | ----------------------- |
 | `RGB`                  | `Color3` (`[R,G,B]`) | `Rope`                  |
@@ -808,6 +809,7 @@ Las siguientes líneas de investigación han sido identificadas para guiar el de
 | `CustomTrack`          | `String`             | `Radio`                 |
 | `On`                   | `Boolean`            | `Radio`                 |
 | `Phrase`               | `String`             | `PolaroidPhoto`         |
+---
 
 ## Total
 

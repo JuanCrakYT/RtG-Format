@@ -34,36 +34,36 @@ The documentation covers:
 ## Documentation
 ### Start here
 ```md
-- [`docs/getting-started.md`](docs/getting-started.md) — Recommended reading path
-- [`docs/save-anatomy.md`](docs/save-anatomy.md) — Anatomy of an RtG save
-- [`docs/building-system.md`](docs/building-system.md) — Building-system concepts
-- [`docs/faq.md`](docs/faq.md) — Frequently asked questions
+- `docs/getting-started.md` — Recommended reading path
+- `docs/save-anatomy.md` — Anatomy of an RtG save
+- `docs/building-system.md` — Building-system concepts
+- `docs/faq.md` — Frequently asked questions
 ```
 
 ### Format
 ```md
-- [`SPECIFICATION.md`](SPECIFICATION.md) — Main technical specification
-- [`format/json-structure.md`](format/json-structure.md) — JSON structure
-- [`format/indexing.md`](format/indexing.md) — Indexing and references
-- [`format/properties.md`](format/properties.md) — Object properties
-- [`format/identifiers.md`](format/identifiers.md) — Identifiers and UUIDs
-- [`format/unknown-fields.md`](format/unknown-fields.md) — Unknown or incompletely understood fields
+- `SPECIFICATION.md` — Main technical specification
+- `format/json-structure.md` — JSON structure
+- `format/indexing.md` — Indexing and references
+- `format/properties.md` — Object properties
+- `format/identifiers.md` — Identifiers and UUIDs
+- `format/unknown-fields.md` — Unknown or incompletely understood fields
 ```
 ### Blocks and Parts
-See [`blocks/`](blocks/) for the documented object/Part IDs and their categories.
+See `blocks/` for the documented object/Part IDs and their categories.
 The historical reverse-engineering ID research is preserved separately in [`old-files/`](old-files/).
 
 ### Compression and encoding
-See [`compression/`](compression/) for documentation of the encoding/compression layers.
+See `compression/` for documentation of the encoding/compression layers.
 
 ### Examples
-See [`examples/`](examples/) for real and reproducible save/build examples.
+See `examples/` for real and reproducible save/build examples.
 
 ### Research
-See [`research/`](research/) for methodology, discoveries, experiments, and unresolved questions.
+See `research/` for methodology, discoveries, experiments, and unresolved questions.
 
 ### Tools
-See [`tools/`](tools/) for utilities related to decoding, encoding, conversion, and inspection.
+See `tools/` for utilities related to decoding, encoding, conversion, and inspection.
 
 
 ## Status

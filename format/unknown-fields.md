@@ -11,7 +11,7 @@ Template
 
 Example placeholder
 - Field: `SomeField`
-- Observed in: `old-files/example.json` (placeholder)
+- Observed in: `old-files/` (placeholder)
 - Known behaviour: Appears in `Properties` objects
 - Unknown meaning: No observable effect in experiments
 - Confidence: UNCONFIRMED

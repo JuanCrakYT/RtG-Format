@@ -31,14 +31,17 @@ rtg-save-format/
 │   ├── README.md
 │   ├── overview.md
 │   ├── encoding.md
-│   └── examples.md
+│   └── examples-review.md
 │
 ├── examples/
 │   ├── README.md
-│   ├── simple-build.json
-│   ├── colored-grid.json
-│   ├── tv.json
-│   └── ...
+│   ├── experiments/
+│   │    ├── README.md
+│   │    └── ...
+│   ├── json-examples/
+│   │    ├── README.md
+│   │    └── ...
+│   └── trash/
 │
 ├── tools/
 │   ├── README.md
@@ -55,7 +58,7 @@ rtg-save-format/
 ├── old-files/
 │   ├── structure.md
 │   ├── obj_ids-spanish.md
-│   ├── RtG_Save_Format_Specification-spanish.md
+│   └── RtG_Save_Format_Specification-spanish.md
 │
 └── docs/
     ├── getting-started.md
