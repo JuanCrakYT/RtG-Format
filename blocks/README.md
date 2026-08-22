@@ -4,16 +4,17 @@ This folder contains per-part documentation and ID reference material.
 
 ## Current categories
 
-- `parts/`
-  - `physics/`
-  - `building/`
-  - `wiring/`
-  - `tools/`
-  - `miscellaneous/`
-  - `other/`
-  - `uncategorized/`
-  - `gramby-test/`
-  - `unused/`
+```tree
+parts/
+ ├── building/
+ ├── miscellaneous/
+ ├── other/
+ ├── physics/
+ ├── tools/
+ ├── uncategorized/
+ ├── unused/
+ └── wiring/
+```
 
 ## Classification
 

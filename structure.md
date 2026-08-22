@@ -12,13 +12,30 @@ rtg-save-format/
 ├── blocks/
 │   ├── README.md
 │   └── parts/
-│        ├── parts-id.md
-│        ├── physics/
 │        ├── building/
-│        ├── wiring/
+│        │    ├── parts-id.md
+│        │    └── README.md
+│        ├── miscellaneous/
+│        │    ├── parts-id.md
+│        │    └── README.md
+│        ├── other/
+│        │    ├── parts-id.md
+│        │    └── README.md
+│        ├── physics/
+│        │    ├── parts-id.md
+│        │    └── README.md
 │        ├── tools/
-│        ├── misc/
-│        └── other/
+│        │    ├── parts-id.md
+│        │    └── README.md
+│        ├── uncategorized/
+│        │    ├── parts-id.md
+│        │    └── README.md
+│        ├── unused/
+│        │    ├── parts-id.md
+│        │    └── README.md
+│        └── wiring/
+│             ├── parts-id.md
+│             └── README.md
 │
 ├── format/
 │   ├── json-structure.md
@@ -45,14 +62,13 @@ rtg-save-format/
 │
 ├── tools/
 │   ├── README.md
-│   ├── decoder/
-│   ├── encoder/
-│   └── converter/
+│   └── agent/
+│       ├── parts_diff.py
+│       └── regenerate_parts.py
 │
 ├── research/
 │   ├── methodology.md
 │   ├── discoveries.md
-│   ├── experiments.md
 │   └── unknowns.md
 │
 ├── old-files/

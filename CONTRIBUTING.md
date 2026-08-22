@@ -7,5 +7,5 @@ Rules
 
 How to contribute
 - Add new confirmed IDs/properties under `blocks/parts/parts-id.md` with a confidence column.
-- Add reproducible experiments to `research/experiments.md`.
+- Add reproducible experiments to `examples/experiments` (read first `examples/experiments/README.md`).
 - For format changes, update `SPECIFICATION.md` and `format/*` with sources and confidence.

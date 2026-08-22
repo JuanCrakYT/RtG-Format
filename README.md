@@ -57,10 +57,10 @@ The historical reverse-engineering ID research is preserved separately in [`old-
 See [`compression/`](compression/) for documentation of the encoding/compression layers.
 
 ### Examples
-See [`examples/`](examples/) for real and reproducible save/build examples.
+See [`examples/`](examples/) for real and reproducible save/build examples and experiments.
 
 ### Research
-See [`research/`](research/) for methodology, discoveries, experiments, and unresolved questions.
+See [`research/`](research/) for methodology, discoveries, and unresolved questions.
 
 ### Tools
 See [`tools/`](tools/) for utilities related to decoding, encoding, conversion, and inspection.
@@ -84,6 +84,12 @@ Historical observations are preserved rather than silently rewritten.
 `old-files/` contains historical research material preserved for reference.
 These files document the development of the research and should not be treated as the current consolidated specification.
 For the current reference, use [`SPECIFICATION.md`](SPECIFICATION.md).
+
+## Project files
+- CONTRIBUTING.md — Contribution rules
+- CHANGELOG.md — Project history and version changes
+- structure.md — Repository structure
+- LICENSE — License information
 
 ## Credits
 ```md
