@@ -21,5 +21,3 @@ Categories:
 - `unused/`
 
 Top-level consolidated extraction is preserved in `parts-id.md`.
-
-If you want me to rename categories or split further, tell me which ones.
