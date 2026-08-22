@@ -1,29 +1,61 @@
-# Examples and Experiments Folder
+# Examples and Experiments
 
-This folder is intended to hold real save experiments, examples and curated minimal builds used for tests and demonstrations.
+This directory contains real RtG save examples, experiments, and curated minimal builds used for testing, research, and demonstrations.
 
-Rules
-- Do NOT create or add fabricated saves. Only include JSON files with provenance and evidence.
-- If an experiment doesn't work (load error), on the `README.md` explain why (that `README.md` contains the results after load with an error) or delete that experiment folder.
-- All the experiments need a folder on `examples/experiments/` with this structure:
+## General Rules
+
+- Do NOT create or add fabricated saves or experiments.
+- Only include files with real provenance and supporting evidence.
+- Keep notes and explanations in `README.md` or the appropriate documentation files, not inside `example.json`.
+
+## Examples
+
+Real save/build examples are stored in `examples/json-examples/`.
+Examples are intended for demonstrations, testing, and reference.
+
+### Example structure
+
+Each example must have its own folder:
+
 ```tree
 <name>/
 │
 ├── README.md
-├── objetive.md
-├── example.json (no notes, add notes on `objetive.md` or `README.md`)
-└── other/
-    ├── README.md
-    └── ...
-```
-- All the examples need a folder on `examples/json-examples/` with this structure:
-```tree
-<name>/
-│
-├── README.md
-├── example.json (no notes, add notes on `README.md`)
+├── example.json
 └── images-videos/
     ├── presentation.png
     └── ...
 ```
-- The videos in the examples can't last more than 30 seconds
+
+* `example.json` must contain only the save/build data.
+* Put explanations, observations, and other notes in `README.md`.
+* Images and videos related to the example go in `images-videos/`.
+* Videos must not be longer than 30 seconds.
+* If an example cannot be loaded or is otherwise invalid, its folder may be deleted.
+
+## Experiments
+
+Experiments are stored in `examples/experiments/`.
+Experiments are research records and must be preserved, including failed or inconclusive experiments.
+
+### Experiment structure
+
+Each experiment must have its own folder:
+
+```tree
+<name>/
+│
+├── README.md
+├── objective.md
+├── example.json
+└── other/
+    ├── README.md
+    └── ...
+```
+
+* `example.json` must contain only the relevant save/build data.
+* Put the experiment objective in `objective.md`.
+* Put results, observations, reproduction notes, and conclusions in `README.md`.
+* Additional evidence or files can be placed in `other/`.
+* If an experiment cannot be loaded, fails, or produces unexpected results, document the problem in `README.md`.
+* Experiments must NOT be deleted. Move failed or unusable experiments to `examples/trash/` instead.

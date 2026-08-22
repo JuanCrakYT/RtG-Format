@@ -31,7 +31,7 @@ rtg-save-format/
 │   ├── README.md
 │   ├── overview.md
 │   ├── encoding.md
-│   └── examples-review.md
+│   └── examples-template.md
 │
 ├── examples/
 │   ├── README.md
