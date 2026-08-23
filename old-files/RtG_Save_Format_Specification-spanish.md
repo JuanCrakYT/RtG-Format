@@ -17,42 +17,46 @@ El propósito principal de esta especificación es documentar exhaustivamente el
 ### 1.1 Modelo conceptual del sistema
 #### Modelo en texto
 ```text
-                 BUILD
-                   │
-        ┌──────────┴──────────┐
-        │                     │
-     Objetos              Tabla UUID
-        │                     │
-        │                     │
-        ├── Tipo              │
-        ├── Conexiones        │
-        ├── Propiedades       │
-        └── Attachments ──────┘
-                  │
-               CFrame
+BUILD
+└── Objetos
+    ├── Tipo
+    ├── Conexiones
+    │   ├── TipoLocal
+    │   ├── PuntoPadre
+    │   │   └── PuntoPadre
+    │   └── ÍndicePadre
+    │       └── Array 1-based
+    │
+    └── Propiedades
+        └── Attachments
+            ├── CFrame
+            └── UUID
 ```
 
 #### Modelo en Formato Mermaid
 
 ```mermaid
 flowchart TD
+flowchart TD
     BUILD["BUILD"]
 
     BUILD --> OBJ["Objetos"]
-    BUILD --> UUID["Tabla UUID"]
 
     OBJ --> TYPE["Tipo"]
     OBJ --> CONNECTIONS["Conexiones"]
+    OBJ --> PROPERTIES["Propiedades"]
 
     CONNECTIONS --> LOCALTYPE["TipoLocal"]
     CONNECTIONS --> PRIMARYID["PuntoPadre"]
     CONNECTIONS --> PRIMARYINDEX["ÍndicePadre"]
 
-    OBJ --> PROPERTIES["Propiedades"]
-    PROPERTIES --> ATTACH["Attachments"]
+    PRIMARYINDEX --> PRIMARYINDEX1BASED["Array 1-based"]
+    PRIMARYID -. "Referencia a" .-> ATTACH["Attachment"]
+
+    PROPERTIES --> ATTACH
 
     ATTACH --> CFRAME["CFrame"]
-    ATTACH --> UUID
+    ATTACH --> UUID["UUID"]
 ```
 
 ---
