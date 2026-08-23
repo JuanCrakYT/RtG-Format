@@ -1,11 +1,65 @@
 # Indexing
 
-Confirmed
-- RtG uses positional indices within the top-level JSON array to reference parent objects (CONFIRMED).
-- The array order is significant; reordering elements breaks references (CONFIRMED).
+## Top-Level Object Indices
 
-Important note
-- Historical documents indicate usage of indices starting from `1` in some descriptions; however evidence within saved JSON examples uses zero-based numeric positions in the array samples. Treat indexing carefully during verification: mark any indexing convention as `CONFIRMED` only when derived from a raw save file.
+**Confirmed**
 
-References
-- See `old-files/RtG_Save_Format_Specification-spanish.md` and `research/discoveries.md` for contextual evidence.
+RtG uses **1-based logical indices** for objects in the top-level JSON array when resolving references such as `PrimaryIndex` / `ÍndicePadre`.
+
+For example:
+
+```json
+[
+    ["Base", [], {}],
+    ["Part", [["1", "5", 1]], {}],
+    ["Part", [["1", "5", 2]], {}]
+]
+````
+
+The logical object indices are:
+
+```text
+Base → 1
+Part → 2
+Part → 3
+```
+
+Therefore, the connection in the second element referencing `1` refers to the `Base`, and the connection in the third element referencing `2` refers to the first `Part`.
+
+## Internal Tuple Positions
+
+The three fields inside each object tuple have the following positions:
+
+```text
+0 → Type
+1 → Connections
+2 → Properties
+```
+
+These positions are zero-based.
+
+This is separate from the logical object indices used by RtG references.
+
+## Array Order
+
+The order of objects in the top-level array is significant because references use their logical indices.
+
+Reordering objects without updating their references can break the build.
+
+## Important Distinction
+
+There are two different indexing systems in the format:
+
+```text
+Top-level object references → 1-based
+Object tuple fields         → 0-based
+```
+
+Do not confuse the physical array position used by a programming language with the logical object index stored in RtG connection references.
+
+## References
+
+* [`../SPECIFICATION.md`](../SPECIFICATION.md)
+* [`json-structure.md`](json-structure.md)
+* [`identifiers.md`](identifiers.md)
+* [`../old-files/RtG_Save_Format_Specification-spanish.md`](../old-files/RtG_Save_Format_Specification-spanish.md)
