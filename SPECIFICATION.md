@@ -1,6 +1,6 @@
 # RtG Save Format Specification
 
-> **Status:** Partially documented
+> **Status:** Partially documented — Unreleased
 
 ## Summary
 - This document is the canonical, technical reference for the observed RtG save/build format. It contains only information that is present in repository evidence or explicitly marked as hypothesis/unknown.
