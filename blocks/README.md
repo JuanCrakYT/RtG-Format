@@ -24,6 +24,8 @@ The category itself does **not** constitute evidence for the internal save forma
 
 Use: `old-files/obj_ids-spanish.md` as the historical reference for object IDs and connection-point data.
 
+See [`parts/parts-id.md`](parts/parts-id.md) for the consolidated Part ID reference.
+
 Do not invent or silently modify historical information.
 
 ## Language

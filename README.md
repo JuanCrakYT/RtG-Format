@@ -65,7 +65,6 @@ See [`research/`](research/) for methodology, discoveries, and unresolved questi
 ### Tools
 See [`tools/`](tools/) for utilities related to decoding, encoding, conversion, and inspection.
 
-
 ## Status
 **Specification:** Unreleased
 The repository currently contains a consolidated specification derived from the project's reverse-engineering research.
@@ -86,10 +85,10 @@ These files document the development of the research and should not be treated a
 For the current reference, use [`SPECIFICATION.md`](SPECIFICATION.md).
 
 ## Project files
-- CONTRIBUTING.md — Contribution rules
-- CHANGELOG.md — Project history and version changes
-- structure.md — Repository structure
-- LICENSE — License information
+- [`CONTRIBUTING.md`](CONTRIBUTING.md) — Contribution rules
+- [`CHANGELOG.md`](CHANGELOG.md) — Project history and version changes
+- [`structure.md`](structure.md) — Repository structure
+- [`LICENSE`](LICENSE) — License information
 
 ## Credits
 ```md
