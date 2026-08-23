@@ -43,8 +43,13 @@ flowchart TD
 
     OBJ --> TYPE["Tipo"]
     OBJ --> CONNECTIONS["Conexiones"]
+
+    CONNECTIONS --> LOCALTYPE["TipoLocal"]
+    CONNECTIONS --> PRIMARYID["PuntoPadre"]
+    CONNECTIONS --> PRIMARYINDEX["ÍndicePadre"]
+
     OBJ --> PROPERTIES["Propiedades"]
-    OBJ --> ATTACH["Attachments"]
+    PROPERTIES --> ATTACH["Attachments"]
 
     ATTACH --> CFRAME["CFrame"]
     ATTACH --> UUID
