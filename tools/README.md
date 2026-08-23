@@ -1,6 +1,7 @@
 # Tools
 
-This folder should contain decoder/encoder utilities and converters. Do not add tools that assume unverified parts of the format.
+This folder contains utilities and automation related to the repository.
+Tools should not assume unverified parts of the format.
 
 ## Status
 

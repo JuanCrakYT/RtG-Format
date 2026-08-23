@@ -18,7 +18,7 @@ flowchart TD
     C --> C1["Type"]
     C --> C2["Connections"]
     C --> C3["Properties"]
-````
+```
 
 Each object follows the general structure:
 
@@ -132,10 +132,3 @@ The encoding research is documented under [`../compression/`](../compression/).
 * [`../format/identifiers.md`](../format/identifiers.md) — Identifiers and UUIDs.
 * [`../blocks/`](../blocks/) — Object and Part IDs.
 * [`../compression/`](../compression/) — Encoding and compression.
-
-
-
-
-
-
-
