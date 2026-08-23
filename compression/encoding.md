@@ -18,23 +18,13 @@ During the reverse-engineering process, the stored build data was observed as a 
 
 Conceptually, the data can be viewed as:
 
-```text
-RtG Build
-   │
-   ▼
-Structured build data
-   │
-   ▼
-JSON representation
-   │
-   ▼
-Compressed/encoded save representation
-   │
-   ▼
-Base64 text
-   │
-   ▼
-Final save output
+```mermaid
+flowchart TD
+    A["RtG Build"] --> B["Structured Build Data"]
+    B --> C["JSON Representation"]
+    C --> D["Compressed / Encoded Save Representation"]
+    D --> E["Base64 Text"]
+    E --> F["Final Save Output"]
 ```
 
 The historical specification explicitly states that the investigation was performed by analyzing and modifying **JSON data compressed in Base64**.
@@ -75,17 +65,11 @@ The decoded data therefore immediately revealed that the apparently opaque save 
 
 The historical investigation can be reproduced conceptually with the following transformation:
 
-```text
-Base64 string
-        │
-        ▼
-Base64 decode
-        │
-        ▼
-JSON text
-        │
-        ▼
-RtG build array
+```mermaid
+flowchart TD
+    A["Base64 String"] --> B["Base64 Decode"]
+    B --> C["JSON Text"]
+    C --> D["RtG Build Array"]
 ```
 
 For the initial example:
@@ -235,33 +219,21 @@ It determines how RtG represents:
 Encoding defines **how that serialized representation is transported or stored as text**.
 In the observed save representation:
 
-```text
-Readable JSON
-      │
-      ▼
-Encoded save representation
-      │
-      ▼
-Base64 text
+```mermaid
+flowchart TD
+    A["Readable JSON"] --> B["Encoded Save Representation"]
+    B --> C["Base64 Text"]
 ```
 
 This distinction is important when writing tools.
 A save decoder should therefore conceptually perform:
 
-```text
-Final save string
-       │
-       ▼
-Base64 decoding
-       │
-       ▼
-Recovered serialized data
-       │
-       ▼
-JSON parsing
-       │
-       ▼
-RtG object graph
+```mermaid
+flowchart TD
+    A["Final Save String"] --> B["Base64 Decoding"]
+    B --> C["Recovered Serialized Data"]
+    C --> D["JSON Parsing"]
+    D --> E["RtG Object Graph"]
 ```
 
 ---
@@ -290,12 +262,12 @@ The exact internal compression algorithm, if any additional compression layer is
 ### Important distinction
 
 These statements are not equivalent:
-```text
-JSON is represented using Base64.
+```md
+**JSON** is represented using **Base64**.
 ```
 and:
-```text
-JSON is compressed using algorithm X and then Base64-encoded.
+```md
+**JSON** is compressed using algorithm X and then **Base64-encoded**.
 ```
 
 The first is supported by the historical investigation.
@@ -381,23 +353,13 @@ The final save representation should therefore be understood as a transport/stor
 
 Conceptually:
 
-```text
-                   RTG BUILD
-                       │
-                       ▼
-             Object/Connection Graph
-                       │
-                       ▼
-                JSON serialization
-                       │
-                       ▼
-             Encoded save representation
-                       │
-                       ▼
-                 Base64 text
-                       │
-                       ▼
-                FINAL SAVE OUTPUT
+```mermaid
+flowchart TD
+    A["RTG BUILD"] --> B["Object / Connection Graph"]
+    B --> C["JSON Serialization"]
+    C --> D["Encoded Save Representation"]
+    D --> E["Base64 Text"]
+    E --> F["FINAL SAVE OUTPUT"]
 ```
 
 The exact implementation details between the JSON representation and the final textual value should not be inferred beyond the observed evidence.
@@ -468,16 +430,12 @@ A separate object can then reference that UUID:
 
 The loader resolves:
 
-```text
-connection UUID
-      ↓
-UUID lookup
-      ↓
-EphemeralAttachment
-      ↓
-cframe
-      ↓
-spatial transformation
+```mermaid
+flowchart TD
+    A["Connection UUID"] --> B["UUID Lookup"]
+    B --> C["EphemeralAttachment"]
+    C --> D["CFrame"]
+    D --> E["Spatial Transformation"]
 ```
 
 The encoding layer does not alter this relationship. It only represents the serialized structure as the final textual save data.
@@ -512,15 +470,16 @@ A decoded value should be considered structurally valid only after checking that
 
 At minimum, the recovered data should be compatible with the structure:
 
-```text
-Build
- └── Array
-      ├── Object
-      │    ├── Type
-      │    ├── Connections
-      │    └── Properties
-      ├── Object
-      └── ...
+```mermaid
+flowchart TD
+    A["Build"] --> B["Array"]
+    B --> C["Object"]
+    B --> D["Object"]
+    B --> E["..."]
+
+    C --> C1["Type"]
+    C --> C2["Connections"]
+    C --> C3["Properties"]
 ```
 
 Connection tuples should have:
@@ -545,32 +504,28 @@ These operations must not be treated as interchangeable.
 
 Converts a representation such as Base64 text back into its underlying byte/text representation.
 
-```text
-Base64
-  ↓
-decoded bytes/text
+```mermaid
+flowchart TD
+    A["Base64"] --> B["decoded bytes/text"]
 ```
 
 ### Decompression
 
 If a compressed binary representation is present, decompression reconstructs the original serialized data.
 
-```text
-compressed data
-  ↓
-decompressed data
+```mermaid
+flowchart TD
+    A["compressed data"] --> B["decompressed data"]
 ```
 
 ### JSON Parsing
 
 Once the serialized JSON text has been recovered:
 
-```text
-JSON text
-  ↓
-JSON parser
-  ↓
-RtG build structure
+```mermaid
+flowchart TD
+    A["JSON Text"] --> B["JSON Parser"]
+    B --> C["RtG Build Structure"]
 ```
 
 The historical investigation confirms the importance of the Base64 representation, but does not provide enough evidence in the preserved material to claim a specific compression algorithm here.
@@ -605,29 +560,18 @@ The following should not be asserted here without additional evidence:
 
 The observed encoding layer can be summarized as:
 
-```text
-┌──────────────────────────┐
-│      RtG BUILD DATA      │
-│                          │
-│ Objects                  │
-│ Connections              │
-│ Properties               │
-│ UUIDs                    │
-│ Attachments              │
-│ CFrames                  │
-└────────────┬─────────────┘
-             │
-             ▼
-      JSON representation
-             │
-             ▼
-   Encoded / stored payload
-             │
-             ▼
-        Base64 text
-             │
-             ▼
-      Final save value
+```mermaid
+flowchart TD
+    A["RTG BUILD DATA<br/><br/>Objects<br/>Connections<br/>Properties<br/>UUIDs<br/>Attachments<br/>CFrames"]
+    B["JSON Representation"]
+    C["Encoded / Stored Payload"]
+    D["Base64 Text"]
+    E["Final Save Value"]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
 ```
 
 The most important practical observation from the original research is simple:

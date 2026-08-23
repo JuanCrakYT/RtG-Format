@@ -14,20 +14,12 @@ The compression and encoding research focuses on the layers between the structur
 
 Conceptually, the process can be represented as:
 
-```text
-RtG Build
-    │
-    ▼
-Structured Build Data
-    │
-    ▼
-JSON Representation
-    │
-    ▼
-Encoding / Compression
-    │
-    ▼
-Final Save Representation
+```mermaid
+flowchart TD
+    A[RtG Build] --> B[Structured Build Data]
+    B --> C[JSON Representation]
+    C --> D[Encoding / Compression]
+    D --> E[Final Save Representation]
 ```
 
 The exact implementation of each stage should only be considered confirmed when supported by direct evidence or reproducible experiments.
@@ -112,13 +104,10 @@ The `format/` directory describes the **structure and meaning of the build data 
 
 In simple terms:
 
-```text
-format/
-    What the build data contains
-```
-```text
-compression/
-    How that data is represented or transformed
+```mermaid
+flowchart LR
+    A[format/] --> B[What the build data contains]
+    C[compression/] --> D[How that data is represented or transformed]
 ```
 
 Keeping these two areas separate helps prevent observations about encoding or compression from being confused with the actual structure of the RtG save format.

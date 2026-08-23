@@ -15,6 +15,7 @@ El presente documento constituye la especificación técnica no oficial del form
 El propósito principal de esta especificación es documentar exhaustivamente el funcionamiento interno del sistema de serialización de objetos, la red de conexiones y dependencias jerárquicas, la inyección espacial de transformaciones mediante attachments y las reglas del cargador del juego.
 
 ### 1.1 Modelo conceptual del sistema
+#### Modelo en texto
 ```text
                  BUILD
                    │
@@ -29,6 +30,24 @@ El propósito principal de esta especificación es documentar exhaustivamente el
         └── Attachments ──────┘
                   │
                CFrame
+```
+
+#### Modelo en Formato Mermaid
+
+```mermaid
+flowchart TD
+    BUILD["BUILD"]
+
+    BUILD --> OBJ["Objetos"]
+    BUILD --> UUID["Tabla UUID"]
+
+    OBJ --> TYPE["Tipo"]
+    OBJ --> CONNECTIONS["Conexiones"]
+    OBJ --> PROPERTIES["Propiedades"]
+    OBJ --> ATTACH["Attachments"]
+
+    ATTACH --> CFRAME["CFrame"]
+    ATTACH --> UUID
 ```
 
 ---
@@ -226,6 +245,15 @@ Sin embargo, cada tipo de objeto posee comportamientos internos y reglas de proc
 (Interpreta RGB)    (Interpreta Speed,   (Interpreta ImageId,
                       Rotation, Rest)       UUID Attachment)
 ```
+> Aquí se ve en formato **Mermaid:**
+```mermaid
+flowchart TD
+    PARSER["Parser Universal (JSON)"]
+
+    PARSER --> PART["Part<br/>(Interpreta RGB)"]
+    PARSER --> SERVO["Servo<br/>(Interpreta Speed, Rotation, Rest)"]
+    PARSER --> SPRITE["Sprite<br/>(Interpreta ImageId, UUID Attachment)"]
+```
 
 ### 4.1 Interpretación Homogénea vs. Procesamiento Específico
 La diferencia entre distintos bloques no radica en el formato de la sintaxis JSON, sino en **cómo cada objeto interpreta internamente el diccionario de propiedades y el grafo de conexiones**. Un objeto `Part` procesará claves relativas al aspecto visual (`RGB`), mientras que un `Servo` procesará parámetros cinemáticos (`Speed`, `LimitAngle`), compartiendo la misma estructura sintáctica subyacente.
@@ -322,6 +350,16 @@ En la estructura anterior, el segundo `Part` apunta al índice `2` (el primer `P
 Base (Índice 1)
  └── Part (Índice 2)
       └── Part (Índice 3)
+```
+> Aquí se ve en formato **Mermaid:**
+```mermaid
+flowchart TD
+    BASE["Base<br/>Índice 1"]
+    PART2["Part<br/>Índice 2"]
+    PART3["Part<br/>Índice 3"]
+
+    BASE --> PART2
+    PART2 --> PART3
 ```
 
 ### 7.2 Importancia del Orden del Arreglo (✅ Confirmado)
@@ -422,6 +460,16 @@ Para analizar con rigor el comportamiento del motor, la especificación distingu
    Almacenada       Interpretada       Ignorada
   (Existe en el    (Procesada por     (Ignorada por
  archivo JSON)    la lógica)        el motor)
+```
+> Aquí se ve en formato **Mermaid:**
+```mermaid
+flowchart TD
+    BASE["Base<br/>Índice 1"]
+    PART2["Part<br/>Índice 2"]
+    PART3["Part<br/>Índice 3"]
+
+    BASE --> PART2
+    PART2 --> PART3
 ```
 
 1. **Propiedad Almacenada:** Cualquier par clave-valor guardado explícitamente en el archivo JSON.
@@ -532,6 +580,18 @@ Grafo de vinculación observada:
          │  Lectura de arreglo cframe
          ▼
 [ Transformación Espacial (CFrame) ]
+```
+> Aquí se ve en formato **Mermaid:**
+```mermaid
+flowchart TD
+    OBJECT["Objeto Vinculado<br/>(ej. Sprite)"]
+    UUID["UUID Lookup Key"]
+    ATTACH["EphemeralAttachment<br/>en Objeto Host"]
+    CFRAME["Transformación Espacial<br/>(CFrame)"]
+
+    OBJECT -->|"Referencia de conexión:<br/>[&quot;1&quot;, &quot;{UUID}&quot;, 1]"| UUID
+    UUID -->|"Coincidencia de clave única"| ATTACH
+    ATTACH -->|"Lectura de arreglo cframe"| CFRAME
 ```
 
 Ejemplo JSON de objeto enlazado (`Sprite`):
@@ -646,7 +706,30 @@ Existe una marcada asimetría entre el **Constructor Visual del Juego (UI Editor
           Fase 6: Reconstrucción Física y Geométrica
         (Posicionamiento final e inicio del solver)
 ```
+> Aquí se ve en formato **Mermaid:**
+```mermaid
+flowchart TD
+    START["Inicio:<br/>Lectura del archivo JSON"]
 
+    P1["Fase 1: Validación Estructural<br/>Sintaxis JSON, Tuplas, Cadenas TipoLocal"]
+
+    P2["Fase 2: Instanciación de Entidades<br/>Creación en memoria de todos los objetos"]
+
+    P3["Fase 3: Resolución de Grafo de Índices<br/>Conexión de jerarquías padre-hijo"]
+
+    P4["Fase 4: Enlace UUID & Attachments<br/>Indexación de EphemeralAttachments y CFrame"]
+
+    P5["Fase 5: Aplicación de Propiedades<br/>Carga de claves reconocidas; ignora claves desconocidas"]
+
+    P6["Fase 6: Reconstrucción Física y Geométrica<br/>Posicionamiento final e inicio del solver"]
+
+    START --> P1
+    P1 --> P2
+    P2 --> P3
+    P3 --> P4
+    P4 --> P5
+    P5 --> P6
+```
 ---
 
 ## 15. Validación y errores

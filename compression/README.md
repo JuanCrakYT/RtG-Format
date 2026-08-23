@@ -41,20 +41,12 @@ The build format is the structured data contained within the encoded save repres
 
 Conceptually:
 
-```text
-RtG Build
-    │
-    ▼
-Structured Build Data
-    │
-    ▼
-JSON Representation
-    │
-    ▼
-Encoding / Compression
-    │
-    ▼
-Final Save Output
+```mermaid
+flowchart TD
+    A["RtG Build"] --> B["Structured Build Data"]
+    B --> C["JSON Representation"]
+    C --> D["Encoding / Compression"]
+    D --> E["Final Save Output"]
 ```
 
 The exact transformation between these stages should only be described as confirmed when supported by evidence.
