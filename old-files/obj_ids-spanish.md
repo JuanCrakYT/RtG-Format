@@ -8,11 +8,11 @@
 
 # Catálogo de IDs de Puntos de Conexión
 > **Hecho por:** @JuanCrakYT
-Este documento cataloga el significado del **IDdelPunto** de las conexiones de cada objeto.
+Este documento cataloga el significado del **PuntoPadre** de las conexiones de cada objeto.
 
 Formato de una conexión:
 ```json
-["TipoDelBloque", "IDdelPunto", ÍndicePadre]
+["TipoLocal", "PuntoPadre", ÍndicePadre]
 ```
 Ejemplo:
 ```json
@@ -20,8 +20,9 @@ Ejemplo:
 ```
 donde:
 
-- TipoDelBloque = Categoría de conexión.
-- IDdelPunto = ID del punto de conexión del objeto padre.
+- TipoLocal = Identificador único de cada objeto.
+> **Aviso:** La razón de este número aún no se ha descubierto.
+- PuntoPadre = ID del punto de conexión del objeto padre.
 - ÍndicePadre = Índice del objeto al que está conectado.
 
 ---
@@ -253,7 +254,7 @@ Cuando existan objetos simétricos (ruedas, luces, asientos, etc.), utilizar col
 ---
 
 ## Objetos con puntos de conexión propios
-> Aquí encontraras el "IDdelPunto" de cada objeto
+> Aquí encontraras el "PuntoPadre" de cada objeto
 > **Hecho por:** @JuanCrakYT
 
 ### 1. Chassis
