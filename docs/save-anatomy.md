@@ -1,6 +1,17 @@
 # Save anatomy (conceptual)
 
 Concept
+
+## Text representation
+
+```tree
+Save (JSON Array)
+ ├─ Element 0: [Type, Connections, Properties]
+ ├─ Element 1: [Type, Connections, Properties]
+ └─ ...
+
+```
+## Mermaid representation
 ```mermaid
 flowchart TD
     A["Save (JSON Array)"] --> B["Element 0"]

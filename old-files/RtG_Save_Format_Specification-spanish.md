@@ -464,12 +464,11 @@ Para analizar con rigor el comportamiento del motor, la especificación distingu
 > Aquí se ve en formato **Mermaid:**
 ```mermaid
 flowchart TD
-    BASE["Base<br/>Índice 1"]
-    PART2["Part<br/>Índice 2"]
-    PART3["Part<br/>Índice 3"]
+    PROP["Propiedad en el JSON"]
 
-    BASE --> PART2
-    PART2 --> PART3
+    PROP --> STORED["Almacenada<br/>(Existe en el archivo JSON)"]
+    PROP --> INTERPRETED["Interpretada<br/>(Procesada por la lógica)"]
+    PROP --> IGNORED["Ignorada<br/>(Ignorada por el motor)"]
 ```
 
 1. **Propiedad Almacenada:** Cualquier par clave-valor guardado explícitamente en el archivo JSON.
