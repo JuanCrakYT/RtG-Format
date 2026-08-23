@@ -1,6 +1,7 @@
 # Other Parts
 
 Contains items classified as "Other" on the wiki. The category is organizational; the updated Spanish historical file remains the source of truth for connection-point data.
+See [`parts/other/parts-id.md`](parts/other/parts-id.md) for the consolidated Part ID reference.
 
 Notes
 - This directory preserves wiki classification while pointing to `old-files/obj_ids-spanish.md` for any historical evidence.

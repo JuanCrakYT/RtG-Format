@@ -80,7 +80,7 @@ The documentation distinguishes between:
 Historical observations are preserved rather than silently rewritten.
 
 ## Historical documentation
-`old-files/` contains historical research material preserved for reference.
+[`old-files/`](old-files/) contains historical research material preserved for reference.
 These files document the development of the research and should not be treated as the current consolidated specification.
 For the current reference, use [`SPECIFICATION.md`](SPECIFICATION.md).
 

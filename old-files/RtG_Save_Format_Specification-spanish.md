@@ -23,7 +23,7 @@ BUILD
     ├── Conexiones
     │   ├── TipoLocal
     │   ├── PuntoPadre
-    │   │   └── PuntoPadre
+    │   │   └── Referencia A UUID
     │   └── ÍndicePadre
     │       └── Array 1-based
     │

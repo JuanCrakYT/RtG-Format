@@ -1,6 +1,7 @@
 # Wiring Parts
 
 This directory contains wiring parts (gates, sensors, wires, splitters, etc.) organized per the Road to Gramby's Wiki and cross-checked against `old-files/obj_ids-spanish.md`.
+See [`parts/wiring/parts-id.md`](parts/wiring/parts-id.md) for the consolidated Part ID reference.
 
 What this contains
 - Per-part tables for wiring parts that have documented connection IDs in the historical file.

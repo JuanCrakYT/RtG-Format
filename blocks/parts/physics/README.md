@@ -1,6 +1,7 @@
 # Physics Parts
 
 This directory contains parts classified as "Physics" by the Road to Gramby's Wiki and the historical extraction in `old-files/obj_ids-spanish.md`.
+See [`parts/physics/parts-id.md`](parts/physics/parts-id.md) for the consolidated Part ID reference.
 
 What this contains
 - Per-part connection-point tables extracted from `old-files/obj_ids-spanish.md` when present.

@@ -10,13 +10,13 @@ Important:
 
 Categories:
 
-- `uncategorized/`
-- `physics/`
-- `building/`
-- `wiring/`
-- `tools/`
-- `miscellaneous/`
-- `other/`
-- `unused/`
+- [`uncategorized/`](uncategorized/)
+- [`physics/`](physics/)
+- [`building/`](building/)
+- [`wiring/`](wiring/)
+- [`tools/`](tools/)
+- [`miscellaneous/`](miscellaneous/)
+- [`other/`](other/)
+- [`unused/`](unused/)
 
 Top-level consolidated extraction is preserved in `parts-id.md`.
