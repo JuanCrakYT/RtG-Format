@@ -95,8 +95,12 @@ Cada elemento del arreglo se define como una tupla con un tamaño fijo de tres e
 ---
 * **Regla:** El orden de los 3 elementos dentro de la tupla `[TipoLocal, Conexiones, Propiedades]` es inmutable y validado por el parser universal.
 
-### 3.11 Tabla del Tipo De Bloque
+### 3.11 Tabla de TipoLocal por objeto
 > **Hecho por:** @JuanCrakYT
+Esta tabla registra el `TipoLocal` observado para cada tipo de objeto.
+Se ha observado que cada tipo de objeto utiliza un número `TipoLocal` determinado. Estos números permiten al formato identificar el tipo de objeto asociado a una conexión.
+El mecanismo interno mediante el cual RtG utiliza estos valores y el significado específico de cada número no se ha determinado.
+Por lo tanto, `TipoLocal` debe tratarse como un identificador observado, no como una clasificación semántica confirmada.
 ---
 |   ID | Nombre            | TipoLocal | Descripción                                                  |
 | ---: | ----------------- | :-------: | ------------------------------------------------------------ |
@@ -227,6 +231,8 @@ Cada elemento del arreglo se define como una tupla con un tamaño fijo de tres e
 |  125 | YibYib            |     —     | YibYib.                                                      |
 ---
 
+> **Nota:** Conocer el `TipoLocal` de un objeto no implica conocer qué representa internamente ese número.
+
 ## 4. Modelo de datos de objetos
 > **Hecho por:** @JuanCrakYT
 Todos los objetos dentro del formato de guardado de RtG comparten exactamente la misma estructura base JSON:
@@ -331,6 +337,8 @@ Cada entrada en la lista de conexiones consta exactamente de un arreglo de 3 ele
 
 ---
 
+> **Nota sobre `TipoLocal`:** Cada tipo de objeto observado utiliza un `TipoLocal` propio. Se desconoce el significado interno de estos números y el mecanismo exacto mediante el cual RtG los utiliza. Por ahora, se tratan como identificadores observados asociados a tipos de objeto.
+
 ## 7. Índices y referencias
 
 ### 7.1 Definición de ÍndicePadre (✅ Confirmado)
@@ -376,13 +384,27 @@ El formato de guardado de RtG **no almacena coordenadas 3D absolutas para los bl
 
 ---
 
-## 8. TipoLocal (✅ Confirmado)
+## 8. TipoLocal (✅ Identificado / significado interno desconocido)
 
-El primer valor dentro de la tupla de conexión (`TipoLocal`) define el tipo de puerto o contrato de interfaz utilizado por el bloque local.
+El primer valor dentro de la tupla de conexión (`TipoLocal`) es un número utilizado por RtG para identificar el tipo de objeto local asociado a la conexión.
+Se ha observado que cada tipo de objeto utiliza un `TipoLocal` determinado.
+Por ejemplo, la tabla de tipos de objeto registra valores como:
 
-### 8.1 Comportamiento y Validación Estricta
-* **Naturaleza Lógica:** No representa un número de cara física del bloque. Es un identificador del canal o tipo de acoplamiento mecánico/lógico.
-* **Validación Crítica:** El cargador de RtG valida este campo de manera estricta durante la Fase de Validación Inicial. Modificar este valor por uno no compatible con el objeto produce un rechazo inmediato de la construcción (`"Build inválida"`), impidiendo el renderizado de cualquier bloque.
+- `Part` → `1`
+- `Servo` → `1`
+- `Connector` → `5`
+- `InputSensor` → `2`
+- `Gate-AND` → `4`
+
+El valor permite asociar la conexión con el tipo de objeto correspondiente.
+
+Sin embargo, el significado interno exacto de estos números y el mecanismo mediante el cual el juego los utiliza todavía no han sido determinados.
+
+### 8.1 Comportamiento observado
+
+El `TipoLocal` no debe interpretarse como el ID de un punto de conexión.
+Los puntos de conexión se identifican mediante `PuntoPadre`; `TipoLocal` identifica el tipo de objeto asociado a la conexión.
+El cagador parece utilizar este valor durante el procesamiento de las conexiones, pero su mecanismo interno exacto no ha sido determinado.
 
 ### 8.2 Tabla de TiposLocal Observados
 
