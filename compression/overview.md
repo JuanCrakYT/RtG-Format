@@ -51,7 +51,7 @@ The folder should not be used to redefine the structure of the decoded build dat
 
 ## Current Knowledge
 
-The historical reverse-engineering research established that RtG save data can be represented as Base64 text containing the encoded build representation.
+The historical reverse-engineering research established that RtG save data can appear as Base64-encoded text containing the build's JSON representation.
 
 The Base64 layer itself is **not** the RtG build format.
 
@@ -82,9 +82,7 @@ Experiments should include enough information to reproduce the observation and e
 
 Reproducible encoding and compression experiments are stored under:
 
-```text
-examples/experiments/
-```
+[`examples/experiments/`](examples/experiments)
 
 The experiment documentation should contain the relevant input, output, observations, reproduction steps, and evidence.
 
@@ -117,7 +115,8 @@ In simple terms:
 ```text
 format/
     What the build data contains
-
+```
+```text
 compression/
     How that data is represented or transformed
 ```
