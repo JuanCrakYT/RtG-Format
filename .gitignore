@@ -42,3 +42,4 @@ dist/
 
 # Local / experimental data
 *.local
+owner.todo
