@@ -25,6 +25,14 @@ flowchart TD
     C --> D["Compressed / Encoded Save Representation"]
     D --> E["Base64 Text"]
     E --> F["Final Save Output"]
+
+    classDef root fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
+    classDef branch fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef detail fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
+
+    class A root;
+    class B,C,D,E branch;
+    class F detail;
 ```
 
 The historical specification explicitly states that the investigation was performed by analyzing and modifying **JSON data compressed in Base64**.
@@ -70,6 +78,14 @@ flowchart TD
     A["Base64 String"] --> B["Base64 Decode"]
     B --> C["JSON Text"]
     C --> D["RtG Build Array"]
+
+    classDef root fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
+    classDef branch fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef detail fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
+
+    class A root;
+    class B,C branch;
+    class D detail;
 ```
 
 For the initial example:
@@ -223,6 +239,14 @@ In the observed save representation:
 flowchart TD
     A["Readable JSON"] --> B["Encoded Save Representation"]
     B --> C["Base64 Text"]
+
+    classDef root fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
+    classDef branch fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef detail fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
+
+    class A root;
+    class B branch;
+    class C detail;
 ```
 
 This distinction is important when writing tools.
@@ -234,6 +258,14 @@ flowchart TD
     B --> C["Recovered Serialized Data"]
     C --> D["JSON Parsing"]
     D --> E["RtG Object Graph"]
+
+    classDef root fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
+    classDef branch fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef detail fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
+
+    class A root;
+    class B,C,D branch;
+    class E detail;
 ```
 
 ---
@@ -360,6 +392,13 @@ flowchart TD
     C --> D["Encoded Save Representation"]
     D --> E["Base64 Text"]
     E --> F["FINAL SAVE OUTPUT"]
+
+    classDef root fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
+    classDef branch fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef detail fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
+
+    class A,F root;
+    class B,C,D,E branch;
 ```
 
 The exact implementation details between the JSON representation and the final textual value should not be inferred beyond the observed evidence.
@@ -436,6 +475,14 @@ flowchart TD
     B --> C["EphemeralAttachment"]
     C --> D["CFrame"]
     D --> E["Spatial Transformation"]
+
+    classDef root fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
+    classDef branch fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef detail fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
+
+    class A root;
+    class B,C,D branch;
+    class E detail;
 ```
 
 The encoding layer does not alter this relationship. It only represents the serialized structure as the final textual save data.
@@ -480,6 +527,14 @@ flowchart TD
     C --> C1["Type"]
     C --> C2["Connections"]
     C --> C3["Properties"]
+
+    classDef root fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
+    classDef branch fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef detail fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
+
+    class A root;
+    class B,C,D,E branch;
+    class C1,C2,C3 detail;
 ```
 
 Connection tuples should have:

@@ -25,14 +25,23 @@ The save format does not simply store the final global position of every object.
 
 Conceptually:
 
-```text
-Objects
-   │
-   ├── Connections
-   ├── Properties
-   └── Attachments
-          │
-          └── CFrame
+```mermaid
+flowchart TD
+    OBJECTS["Objects"]
+
+    OBJECTS --> CONNECTIONS["Connections"]
+    OBJECTS --> PROPERTIES["Properties"]
+    OBJECTS --> ATTACHMENTS["Attachments"]
+
+    ATTACHMENTS --> CFRAME["CFrame"]
+
+    classDef root fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
+    classDef branch fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef detail fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
+
+    class OBJECTS root;
+    class CONNECTIONS,PROPERTIES,ATTACHMENTS branch;
+    class CFRAME detail;
 ````
 
 The information documented here comes from empirical reverse engineering, controlled modifications of saves, and observation of the game's loading behavior.
@@ -42,7 +51,6 @@ The information documented here comes from empirical reverse engineering, contro
 ## 2. Root Structure
 
 An RtG build is stored as a top-level JSON array.
-
 Each element represents one object in the build.
 
 ```json
@@ -187,23 +195,42 @@ Unlike a predefined connection point, the attachment can represent an arbitrary 
 
 Therefore:
 
-```text
-PrimaryID
-├── Numeric ID
-│   └── Predefined connection point
-│
-└── UUID
-    └── EphemeralAttachment
-         └── CFrame
+```mermaid
+flowchart TD
+    PRIMARYID["PrimaryID"]
+
+    PRIMARYID --> NUMERIC["Numeric ID"]
+    NUMERIC --> CONNECTION["Predefined connection point"]
+
+    PRIMARYID --> UUID["UUID"]
+    UUID --> ATTACHMENT["EphemeralAttachment"]
+    ATTACHMENT --> CFRAME["CFrame"]
+
+    classDef root fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
+    classDef branch fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef detail fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
+
+    class PRIMARYID root;
+    class NUMERIC,UUID,ATTACHMENT branch;
+    class CONNECTION,CFRAME detail;
 ```
 Like:
 ```mermaid
 flowchart TD
-    A["PrimaryID"] --> Num
-        Num["Numeric"] --> PCP["Predefined connection point"]
-    A --> UUID
-        UUID --> Ephemeral["EphemeralAttachment"]
-        Ephemeral --> CFrame
+    A["PrimaryID"] --> Num["Numeric"]
+    Num --> PCP["Predefined connection point"]
+
+    A --> UUID["UUID"]
+    UUID --> Ephemeral["EphemeralAttachment"]
+    Ephemeral --> CFrame["CFrame"]
+
+    classDef root fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
+    classDef branch fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef detail fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
+
+    class A root;
+    class Num,UUID,Ephemeral branch;
+    class PCP,CFrame detail;
 ```
 
 ### 4.3 `PrimaryIndex`
@@ -226,25 +253,42 @@ Logical indices:
 
 ```mermaid
 flowchart TD
-    A["JSON"] --> A1
-    A --> A2
-    A --> A3
+    A["JSON"] --> A1["Base"]
+    A --> A2["Part"]
+    A --> A3["Part"]
 
-    A1["Base"] -.-> B1["Index 1"]
-    A2["Part"] -.-> B2["Index 2"]
-    A3["Part"] -.-> B3["Index 3"]
+    A1 -.-> B1["Index 1"]
+    A2 -.-> B2["Index 2"]
+    A3 -.-> B3["Index 3"]
+
+    classDef root fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
+    classDef branch fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef detail fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
+
+    class A root;
+    class A1,A2,A3 branch;
+    class B1,B2,B3 detail;
 ```
 
 Therefore:
 
-```text
-Part at index 2
-    → parent index 1
-    → Base
+```mermaid
+flowchart TD
+    PART2["Part at index 2"]
+    PART2 --> PARENT1["Parent index 1"]
+    PARENT1 --> BASE["Base"]
 
-Part at index 3
-    → parent index 2
-    → first Part
+    PART3["Part at index 3"]
+    PART3 --> PARENT2["Parent index 2"]
+    PARENT2 --> FIRST_PART["First Part"]
+
+    classDef part fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef index fill:#fefcbf,color:#744210,stroke:#d69e2e,stroke-width:2px;
+    classDef type fill:#edf2f7,color:#1a202c,stroke:#a0aec0,stroke-width:2px;
+
+    class PART2,PART3 part;
+    class PARENT1,PARENT2 index;
+    class BASE,FIRST_PART type;
 ```
 
 ---
@@ -278,6 +322,14 @@ For normal connections:
 flowchart TD
     A["Child"] --> B["PrimaryID"]
     B --> C["Parent connection point"]
+
+    classDef root fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
+    classDef branch fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef detail fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
+
+    class A root;
+    class B branch;
+    class C detail;
 ```
 
 For attachment-based connections:
@@ -285,10 +337,19 @@ For attachment-based connections:
 
 ```mermaid
 flowchart TD
+flowchart TD
     A["Child"] --> B["PrimaryID = UUID"]
     B --> C["EphemeralAttachment"]
     C --> D["CFrame"]
     D --> E["Child position/orientation"]
+
+    classDef root fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
+    classDef branch fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef detail fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
+
+    class A root;
+    class B,C,D branch;
+    class E detail;
 ```
 ---
 
@@ -345,6 +406,14 @@ flowchart TD
     C --> D["EphemeralAttachment"]
     D --> E["CFrame"]
     E --> F["Relative Spatial Transform"]
+
+    classDef root fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
+    classDef branch fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef detail fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
+
+    class A root;
+    class B,C,D,E branch;
+    class F detail;
 ```
 
 Example:
@@ -414,10 +483,10 @@ Example:
 
 The `cframe` field of an `EphemeralAttachment` contains 12 numeric values:
 
-```text
+```json
 [
-    X, Y, Z,
-    R1, R2, R3,
+    X, Y, Z,   // position
+    R1, R2, R3,   // 3 × 3 rotation matrix
     R4, R5, R6,
     R7, R8, R9
 ]
@@ -425,12 +494,24 @@ The `cframe` field of an `EphemeralAttachment` contains 12 numeric values:
 
 The values represent:
 
-```text
-cframe[0..2]
-    → position
+```mermaid
+flowchart TD
+    CFRAME["CFrame"]
 
-cframe[3..11]
-    → 3 × 3 rotation matrix
+    CFRAME --> POSITION["cframe[0..2]<br/>Position"]
+    CFRAME --> ROTATION["cframe[3..11]<br/>3 × 3 Rotation Matrix"]
+
+    ROTATION --> ROW1["3 values"]
+    ROTATION --> ROW2["3 values"]
+    ROTATION --> ROW3["3 values"]
+
+    classDef root fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
+    classDef component fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef detail fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
+
+    class CFRAME root;
+    class POSITION,ROTATION component;
+    class ROW1,ROW2,ROW3 detail;
 ```
 
 The position is relative to the coordinate system of the object hosting the attachment.
@@ -487,9 +568,20 @@ Examples:
 
 ```mermaid
 flowchart TD
-    OBJ1["Part"] -.-> RGB["RGB"]
-    OBJ2["Servo"] -.-> D["Speed"]
+    BUILD["Build"] --> OBJ1["Part"]
+    BUILD --> OBJ2["Servo"]
+
+    OBJ1 -.-> RGB["RGB"]
+    OBJ2 -.-> D["Speed"]
     OBJ2 -.-> F["Rotation"]
+
+    classDef root fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
+    classDef branch fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef detail fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
+
+    class BUILD root;
+    class OBJ1,OBJ2 branch;
+    class RGB,D,F detail;
 ```
 
 **Ignored**
@@ -564,6 +656,14 @@ flowchart TD
     D --> E["UUID / Attachment Linking"]
     E --> F["Property Application"]
     F --> G["Physical / Geometric Reconstruction"]
+
+    classDef root fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
+    classDef branch fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef detail fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
+
+    class A root;
+    class B,C,D,E,F branch;
+    class G detail;
 ```
 
 Observed conceptual stages:
@@ -604,13 +704,28 @@ A normal connection:
 ```mermaid
 flowchart TD
     A["Object"] --> B["Predefined connection point"]
+
+    classDef root fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
+    classDef branch fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef detail fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
+
+    class A root;
+    class B detail;
 ```
 An attachment-based connection:
 ```mermaid
 flowchart TD
     A["Object"] --> B["EphemeralAttachment"]
     B --> C["CFrame"]
-    C -.-> C["Relative to object"]
+    C -.-> D["Relative to object"]
+
+    classDef root fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
+    classDef branch fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef detail fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
+
+    class A root;
+    class B,C branch;
+    class D detail;
 ```
 This makes it possible to place an attachment at an arbitrary location/orientation on an object and use its UUID from another object's connection tuple.
 
