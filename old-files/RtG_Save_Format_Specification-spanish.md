@@ -580,11 +580,11 @@ El objeto `"Chassis"` fue el primer caso utilizado durante las pruebas iniciales
 }
 ```
 
-| Campo      | Tipo de Dato | Descripción                                                                   |
-| :--------- | :----------: | :---------------------------------------------------------------------------- |
-| `UUID`     |   `String`   | Clave UUID única (`{GUID}`) que identifica la entrada de attachment.          |
-| `partName` |   `String`   | Nombre de la pieza o entidad host del attachment (ej. `"Part"`, `"Chassis"`). |
-| `cframe`   | `Array[12]`  | Arreglo numérico de 12 elementos con la transformación tridimensional.        |
+| Campo      | Tipo de Dato | Descripción                                                                                                                                                                                                            |
+| :--------- | :----------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `UUID`     |   `String`   | Clave UUID única (`{GUID}`) que identifica la entrada de attachment.                                                                                                                                                   |
+| `partName` |   `String`   | Nombre de la pieza o entidad host del attachment (ej. `"Part"`, `"Chassis"`).                                                                                                                                          |
+| `cframe`   | `Array[12]`  | El `cframe` del `EphemeralAttachment` contiene la transformación relativa al sistema de coordenadas del objeto host, proporcionando la posición y orientación necesarias para reconstruir la ubicación de la conexión. |
 
 ---
 
@@ -840,10 +840,10 @@ W1siU3ByYXlQYWludCIsW10seyJSR0IiOlsyMTEsMjcsMTldfV1d
 ## 17. Descubrimientos confirmados (✅)
 > **Hecho por:** @JuanCrakYT
 1. ✅ **Estructura Raíz:** El archivo de guardado es un arreglo JSON donde cada bloque es una tupla de 3 elementos: `[TipoLocal, Conexiones, Propiedades]`.
-2. ✅ **PuntoPadre como Nodo Físico Mapeado:** El segundo valor en la tupla de conexión (`PuntoPadre`) representa un identificador numérico de nodo de acoplamiento prefijado en el modelo geométrico del padre.
+2. ✅ **PuntoPadre como Nodo Físico Mapeado:** El segundo valor de la tupla de conexión (`PuntoPadre`) puede representar un identificador numérico de un punto de conexión predefinido del objeto padre o un UUID que referencia un `EphemeralAttachment` del objeto padre.
 2. ✅ **Diccionario Abierto de Propiedades:** El objeto `Propiedades` acepta cualquier número de claves adicionadas sin generar errores sintácticos de carga.
 4. ✅ **Significado del Tercer Dato de Conexión:** El tercer valor en cada tupla de conexión representa estrictamente el índice del bloque padre en el arreglo principal.
-5. ✅ **Validación Estricta de TipoLocal:** El primer valor de la conexión (`TipoLocal`) identifica el tipo de interfaz y es validado rigurosamente por el cargador. Un valor no compatible genera `"Build inválida"`.
+5. ✅ **Validación Estricta de TipoLocal:** El primer valor de la conexión (`TipoLocal`) identifica el tipo de objeto local de la conexión. El juego utiliza este valor para identificar/buscar el tipo de objeto; el mecanismo interno exacto del lookup no ha sido determinado. Es validado rigurosamente por el cargador. Un valor no compatible genera `"Build inválida"`.
 6. ✅ **Sensibilidad al Orden del Arreglo:** Cambiar el orden de los objetos en el arreglo rompe la indexación jerárquica y corrompe la construcción.
 7. ✅ **Inexistencia de Coordenadas Absolutas Estándar:** El formato no guarda coordenadas globales $X,Y,Z$ para bloques convencionales; la geometría final se calcula recursivamente a partir del bloque padre.
 8. ✅ **Universalidad Host de EphemeralAttachments:** Todos los objetos en el formato poseen la capacidad de actuar como host de un diccionario `EphemeralAttachments`.
@@ -851,11 +851,11 @@ W1siU3ByYXlQYWludCIsW10seyJSR0IiOlsyMTEsMjcsMTldfV1d
 10. ✅ **Compatibilidad con UUIDs Sintéticos:** El cargador procesa UUIDs personalizados creados arbitrariamente, siempre que mantengan un formato válido de GUID.
 11. ✅ **Requisito de Existencia de Referencias:** Las referencias jerárquicas y de UUID son obligatorias. Si una referencia no existe, la carga falla (no se autorrepara).
 12. ✅ **Comportamiento de Sprite Invisible:** Proporcionar un `ImageId` inválido o inexistente resulta en la creación de un `Sprite` invisible pero físicamente presente en el árbol.
-13. ✅ **Secuencia de Fases del Cargador:** El cargador opera mediante un pipeline multietapa (Validación estructural $\to$ Instanciación $\to$ Enlace de Índices $\to$ Enlace UUID/Attachments $\to$ Propiedades $\to$ Reconstrucción Física).
 ---
 
 ## 18. Hipótesis actuales (🟢)
 1. 🟢 **Transformación Plana en Sprites:** Los objetos tipo `Sprite` filtran la matriz de orientación de 9 elementos para aplicar únicamente transformaciones bidimensionales (escalado/rotación en el plano 2D) en lugar de inclinación tridimensional completa.
+2. 🟢 **Secuencia de Fases del Cargador:** El cargador opera mediante un pipeline multietapa (Validación estructural $\to$ Instanciación $\to$ Enlace de Índices $\to$ Enlace UUID/Attachments $\to$ Propiedades $\to$ Reconstrucción Física).
 
 ---
 
