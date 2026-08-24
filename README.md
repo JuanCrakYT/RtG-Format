@@ -90,6 +90,21 @@ For the current reference, use [`SPECIFICATION.md`](SPECIFICATION.md).
 - [`structure.md`](structure.md) — Repository structure
 - [`LICENSE`](LICENSE) — License information
 
+## Attribution
+
+RtG-Format is the result of independent reverse-engineering
+and documentation of the Road To Gramby's build/save system
+by JuanCrakYT.
+
+If this documentation, its discoveries, examples, or derived
+knowledge are used in another project, please credit:
+
+- JuanCrakYT — RtG-Format
+- https://github.com/JuanCrakYT/RtG-Format
+
+This attribution is requested for research provenance and
+does not imply affiliation with Road To Gramby's.
+
 ## Credits
 ```md
 - **JuanCrakYT** — Reverse engineering, research, documentation, and maintenance.
@@ -102,4 +117,9 @@ This is an independent reverse-engineering project and is not affiliated with or
 **Road To Gramby's Wiki:**
 ```md
 https://road-to-grambys.fandom.com/wiki/Road_to_Gramby%27s_%F0%9F%91%B5_Wiki
+```
+
+**JuanCrakYT — RtG-Format:**
+```md
+https://github.com/JuanCrakYT/RtG-Format
 ```

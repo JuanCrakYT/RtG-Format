@@ -30,15 +30,16 @@ In general:
 
 ```mermaid
 flowchart TD
-    OLD["📁 old-files"] -->|"Historical evidence and research"| RESEARCH["📁 research"]
-    RESEARCH -->|"Confirmed discoveries and methodology"| FORMAT["📁 format"]
-    FORMAT -->|"Organized format documentation"| SPEC["📄 SPECIFICATION.md"]
+    OLD["📁 old-files"]
+    RESEARCH["📁 research"]
+    FORMAT["📁 format"]
+    SPEC["📄 SPECIFICATION.md"]
 
-    classDef folder fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
-    classDef file fill:#edf2f7,color:#1a202c,stroke:#a0aec0,stroke-width:2px;
+    OLD -->|"Historical evidence"| RESEARCH
+    RESEARCH -->|"Verified discoveries"| FORMAT
+    FORMAT -->|"Consolidated technical reference"| SPEC
 
-    class OLD,RESEARCH,FORMAT folder;
-    class SPEC file;
+    RESEARCH -.->|"Unresolved / uncertain"| RESEARCH
 ```
 
 This does not change the priority of historical evidence.
