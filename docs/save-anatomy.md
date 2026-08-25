@@ -7,8 +7,8 @@ At a high level, the decoded build is represented as a JSON array. Each element 
 
 ```mermaid
 flowchart TD
-    A["📦 Save (JSON Array)"] --> B["Element 0"]
-    A --> C["Element 1"]
+    A["📦 Save (JSON Array)"] --> B["Element 1"]
+    A --> C["Element 2"]
     A --> D["⋮"]
 
     B --> B1["Type"]

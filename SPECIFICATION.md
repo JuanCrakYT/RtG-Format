@@ -35,7 +35,7 @@ flowchart TD
     class OBJECTS root;
     class CONNECTIONS,PROPERTIES,ATTACHMENTS branch;
     class CFRAME detail;
-
+```
 
 The information documented here comes from empirical reverse engineering, controlled modifications of saves, and observation of the game's loading behavior.
 
@@ -68,10 +68,10 @@ A complete example:
 
 The three fields of an object tuple occupy fixed positions:
 
-```text
-0 → Type
-1 → Connections
-2 → Properties
+```js
+0 = Type
+1 = Connections
+2 = Properties
 ```
 
 These tuple positions are zero-based.
@@ -84,7 +84,7 @@ The first field identifies the type of object represented by the tuple.
 
 Examples:
 
-```text
+```md
 Base
 Part
 Servo
@@ -149,7 +149,6 @@ Gate-AND    = 4
 ```
 
 The game uses this value to identify/search for the corresponding object type when processing the connection.
-
 The exact internal lookup mechanism and the internal meaning of the numeric values are not currently known.
 
 Changing `LocalType` to an incompatible value has been observed to cause the loader to reject the build with `"Build inválida"`.
@@ -206,24 +205,6 @@ flowchart TD
     class PRIMARYID root;
     class NUMERIC,UUID,ATTACHMENT branch;
     class CONNECTION,CFRAME detail;
-```
-Like:
-```mermaid
-flowchart TD
-    A["PrimaryID"] --> Num["Numeric"]
-    Num --> PCP["Predefined connection point"]
-
-    A --> UUID["UUID"]
-    UUID --> Ephemeral["EphemeralAttachment"]
-    Ephemeral --> CFrame["CFrame"]
-
-    classDef root fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
-    classDef branch fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
-    classDef detail fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
-
-    class A root;
-    class Num,UUID,Ephemeral branch;
-    class PCP,CFrame detail;
 ```
 
 ### 4.3 `PrimaryIndex`

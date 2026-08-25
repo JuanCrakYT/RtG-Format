@@ -9,6 +9,7 @@ rtg-save-format/
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
 ├── LICENSE
+├── structure.md
 │
 ├── blocks/
 │   ├── README.md
@@ -69,12 +70,13 @@ rtg-save-format/
 │        └── regenerate_parts.py
 │
 ├── research/
+│   ├── README.md
 │   ├── methodology.md
 │   ├── discoveries.md
 │   └── unknowns.md
 │
 ├── old-files/
-│   ├── structure.md
+│   ├── README.md
 │   ├── obj_ids-spanish.md
 │   └── RtG_Save_Format_Specification-spanish.md
 │
@@ -97,6 +99,7 @@ flowchart TD
     ROOT --> CHANGELOG["📄 CHANGELOG.md"]
     ROOT --> CONTRIBUTING["📄 CONTRIBUTING.md"]
     ROOT --> LICENSE["📄 LICENSE"]
+    ROOT --> STRUCTURE["📄 structure"]
 
     ROOT --> BLOCKS["📁 blocks"]
     BLOCKS --> BLOCKS_README["📄 README.md"]
@@ -169,6 +172,7 @@ flowchart TD
     AGENT --> REGENERATE["🐍 regenerate_parts.py"]
 
     ROOT --> RESEARCH["📁 research"]
+    RESEARCH --> METHODOLOGY_README["📄 README.md"]
     RESEARCH --> METHODOLOGY["📄 methodology.md"]
     RESEARCH --> DISCOVERIES["📄 discoveries.md"]
     RESEARCH --> UNKNOWNS["📄 unknowns.md"]
@@ -197,7 +201,7 @@ flowchart TD
     class EXAMPLES,EXPERIMENTS,JSON_EXAMPLES,TRASH folder;
     class TOOLS,AGENT,RESEARCH,OLD,DOCS folder;
 
-    class ROOT_DOCS,SPEC,CHANGELOG,CONTRIBUTING,LICENSE file;
+    class ROOT_DOCS,SPEC,CHANGELOG,CONTRIBUTING,LICENSE,STRUCTURE file;
     class BLOCKS_README,BUILDING_ID,BUILDING_README file;
     class MISC_ID,MISC_README,OTHER_ID,OTHER_README file;
     class PHYSICS_ID,PHYSICS_README,TOOLS_PARTS_ID,TOOLS_PARTS_README file;
@@ -207,7 +211,7 @@ flowchart TD
     class COMP_README,OVERVIEW,ENCODING,EXAMPLES_TEMPLATE file;
     class EXAMPLES_README,EXP_README,EXP_OTHER file;
     class JSON_EXP_README,JSON_EXP_OTHER,TRASH_README file;
-    class TOOLS_README,METHODOLOGY,DISCOVERIES,UNKNOWNS file;
+    class TOOLS_README,METHODOLOGY,DISCOVERIES,UNKNOWNS,METHODOLOGY_README file;
     class OLD_STRUCTURE,SPANISH_IDS,SPANISH_SPEC file;
     class DOCS_README,GETTING_STARTED,SAVE_ANATOMY,BUILDING_SYSTEM,FAQ file;
 
