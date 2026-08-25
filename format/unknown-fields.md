@@ -20,7 +20,6 @@ A field belongs in this document when:
 This document should **not** be used for fields whose behavior is already sufficiently understood.
 
 Known properties belong in [`properties.md`](properties.md).
-
 Known identifier systems belong in [`identifiers.md`](identifiers.md).
 
 ---
@@ -32,7 +31,6 @@ Unknown fields should have an explicit evidence status.
 ### OBSERVED
 
 The field has been directly observed in one or more real saves.
-
 This confirms that the field exists, but does not establish what it means.
 
 ### PARTIALLY UNDERSTOOD
@@ -46,7 +44,6 @@ The field has been observed, but there is not enough evidence to establish its b
 ### HYPOTHESIS
 
 A possible interpretation exists, but it has not been experimentally confirmed.
-
 Hypotheses must be clearly marked as such.
 
 ---
@@ -54,7 +51,6 @@ Hypotheses must be clearly marked as such.
 ## 3. Unknown Does Not Mean Invalid
 
 An unknown field is not necessarily an invalid field.
-
 For example:
 
 ```json
@@ -70,18 +66,29 @@ Historical experiments demonstrated that additional properties can exist without
 
 Therefore:
 
-```text
-Unknown field
-    ≠
-Invalid field
-```
+```mermaid
+flowchart TD
 
-and:
+    UNKNOWN1["❓ Unknown Field"] --> NE1["≠"]
+    INVALID["⚠️ Invalid Field"] --> NE1
 
-```text
-Unknown field
-    ≠
-Unused field
+    UNKNOWN2["❓ Unknown Field"] --> NE2["≠"]
+    UNUSED["🗑️ Unused Field"] --> NE2
+
+    UNKNOWN1 -.-> NOTE["🔬 Behavior has not yet been investigated"]
+    UNKNOWN2 -.-> NOTE
+
+    classDef unknown fill:#dd6b20,color:#fff,stroke:#9c4221,stroke-width:3px;
+    classDef invalid fill:#e53e3e,color:#fff,stroke:#9b2c2c,stroke-width:2px;
+    classDef unused fill:#718096,color:#fff,stroke:#4a5568,stroke-width:2px;
+    classDef symbol fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
+    classDef note fill:#edf2f7,color:#1a202c,stroke:#a0aec0,stroke-width:2px;
+
+    class UNKNOWN1,UNKNOWN2 unknown;
+    class INVALID invalid;
+    class UNUSED unused;
+    class NE1,NE2 symbol;
+    class NOTE note;
 ```
 
 A field may be unknown simply because its behavior has not yet been investigated.
@@ -91,7 +98,6 @@ A field may be unknown simply because its behavior has not yet been investigated
 ## 4. Unknown Properties
 
 Properties are stored inside the object's `Properties` dictionary.
-
 Example:
 
 ```json
@@ -109,10 +115,22 @@ If the effect of `UnknownField` has not been established, it belongs here rather
 
 The correct description is:
 
-```text
-UnknownField
-→ observed in Properties
-→ behavior not yet determined
+```mermaid
+flowchart TD
+
+    PROPERTIES["📦 Properties"] --> FIELD["🏷️ UnknownField"]
+    FIELD --> OBSERVED["👁️ Observed in Properties"]
+    FIELD --> UNKNOWN["❓ Behavior not yet determined"]
+
+    classDef properties fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
+    classDef field fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef observed fill:#38a169,color:#fff,stroke:#276749,stroke-width:2px;
+    classDef unknown fill:#dd6b20,color:#fff,stroke:#9c4221,stroke-width:2px;
+
+    class PROPERTIES properties;
+    class FIELD field;
+    class OBSERVED observed;
+    class UNKNOWN unknown;
 ```
 
 It should not be assigned a meaning based solely on its name.
@@ -163,10 +181,19 @@ We may know that `Mode` exists while not knowing what `3` means.
 
 This should be documented as:
 
-```text
-Known field
-    +
-Unknown value meaning
+```mermaid
+flowchart LR
+
+    FIELD["🏷️ Known Field"] --> PLUS["+"]
+    PLUS --> VALUE["❓ Unknown Value Meaning"]
+
+    classDef field fill:#38a169,color:#fff,stroke:#276749,stroke-width:3px;
+    classDef symbol fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
+    classDef unknown fill:#dd6b20,color:#fff,stroke:#9c4221,stroke-width:2px;
+
+    class FIELD field;
+    class PLUS symbol;
+    class VALUE unknown;
 ```
 
 rather than treating `Mode` itself as an unknown field.
@@ -176,23 +203,20 @@ rather than treating `Mode` itself as an unknown field.
 ## 7. Unknown Identifier Mappings
 
 Numeric identifiers require additional caution.
-
 For example:
 
-```text
+```js
 TipoLocal = 7
 ```
 
 does not automatically reveal the semantic meaning of `7`.
-
 Likewise, observing:
 
-```text
+```js
 PuntoPadre = "24"
 ```
 
 does not by itself establish every property of connection point `24`.
-
 Identifier mappings should therefore only be considered confirmed when supported by evidence.
 
 See:
@@ -210,12 +234,19 @@ However, some implementation details remain unknown.
 
 For example:
 
-```text
-UUID
-  ↓
-EphemeralAttachment
-  ↓
-cframe
+```mermaid
+flowchart TD
+
+    UUID["🆔 UUID"] --> ATTACHMENT["📎 EphemeralAttachment"]
+    ATTACHMENT --> CFRAME["📐 cframe"]
+
+    classDef uuid fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
+    classDef attachment fill:#dd6b20,color:#fff,stroke:#9c4221,stroke-width:2px;
+    classDef cframe fill:#38a169,color:#fff,stroke:#276749,stroke-width:2px;
+
+    class UUID uuid;
+    class ATTACHMENT attachment;
+    class CFRAME cframe;
 ```
 
 The observed behavior establishes the relationship, but does not necessarily reveal how the game's internal object system stores or resolves the UUID.
@@ -234,15 +265,29 @@ However, implementation details of the game's reconstruction process should not 
 
 For example:
 
-```text
-Known:
-    UUID references an attachment.
-    Attachment contains cframe.
-    cframe contains spatial transformation data.
+```mermaid
+flowchart TD
 
-Unknown:
-    Exact internal reconstruction algorithm.
-    Exact order of every transformation operation.
+    KNOWN["✅ Known"]
+
+    KNOWN --> UUID["🆔 UUID references an attachment"]
+    UUID --> ATTACHMENT["📎 Attachment contains cframe"]
+    ATTACHMENT --> CFRAME["📐 cframe contains spatial transformation data"]
+
+    UNKNOWN["❓ Unknown"]
+
+    UNKNOWN --> ALGORITHM["🧠 Exact internal reconstruction algorithm"]
+    UNKNOWN --> ORDER["🔄 Exact order of every transformation operation"]
+
+    classDef known fill:#38a169,color:#fff,stroke:#276749,stroke-width:3px;
+    classDef unknown fill:#dd6b20,color:#fff,stroke:#9c4221,stroke-width:3px;
+    classDef knownDetail fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef unknownDetail fill:#e53e3e,color:#9b2c2c,stroke:#9b2c2c,stroke-width:2px;
+
+    class KNOWN known;
+    class UNKNOWN unknown;
+    class UUID,ATTACHMENT,CFRAME knownDetail;
+    class ALGORITHM,ORDER unknownDetail;
 ```
 
 ---
@@ -393,26 +438,35 @@ Historical observations should be preserved even when their meaning remains unkn
 
 The following distinctions should be maintained:
 
-```text
-Unknown field
-    ≠
-Invalid field
+```mermaid
+flowchart TD
 
-Unknown field
-    ≠
-Unused field
+    UNKNOWN_FIELD["❓ Unknown Field"] --> NE1["≠"]
+    INVALID_FIELD["⚠️ Invalid Field"] --> NE1
 
-Unknown value
-    ≠
-Unknown field
+    UNKNOWN_FIELD2["❓ Unknown Field"] --> NE2["≠"]
+    UNUSED_FIELD["🗑️ Unused Field"] --> NE2
 
-Unknown identifier meaning
-    ≠
-Invalid identifier
+    UNKNOWN_VALUE["❓ Unknown Value"] --> NE3["≠"]
+    UNKNOWN_FIELD3["❓ Unknown Field"] --> NE3
 
-Missing property
-    ≠
-Unknown property
+    UNKNOWN_IDENTIFIER["❓ Unknown Identifier Meaning"] --> NE4["≠"]
+    INVALID_IDENTIFIER["⚠️ Invalid Identifier"] --> NE4
+
+    MISSING_PROPERTY["⚠️ Missing Property"] --> NE5["≠"]
+    UNKNOWN_PROPERTY["❓ Unknown Property"] --> NE5
+
+    classDef unknown fill:#dd6b20,color:#fff,stroke:#9c4221,stroke-width:2px;
+    classDef invalid fill:#e53e3e,color:#fff,stroke:#9b2c2c,stroke-width:2px;
+    classDef unused fill:#718096,color:#fff,stroke:#4a5568,stroke-width:2px;
+    classDef missing fill:#d69e2e,color:#744210,stroke:#975a16,stroke-width:2px;
+    classDef symbol fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
+
+    class UNKNOWN_FIELD,UNKNOWN_FIELD2,UNKNOWN_VALUE,UNKNOWN_FIELD3,UNKNOWN_IDENTIFIER,UNKNOWN_PROPERTY unknown;
+    class INVALID_FIELD,INVALID_IDENTIFIER invalid;
+    class UNUSED_FIELD unused;
+    class MISSING_PROPERTY missing;
+    class NE1,NE2,NE3,NE4,NE5 symbol;
 ```
 
 These distinctions are important because the loader may accept information whose meaning has not yet been reverse-engineered.
