@@ -1,10 +1,3 @@
-JAJA ahora sí 😭. Ya tenemos suficientemente claro el modelo como para dejar `SPECIFICATION.md` bien hecho de una vez.
-
-Y tomo tu aclaración: **`PrimaryID` es simplemente el nombre que le damos al segundo campo**, independientemente de si su contenido es un ID numérico o un UUID. No vamos a imponerle “Point ID” como significado cuando puede ser ambas cosas.
-
-Yo reemplazaría el `SPECIFICATION.md` actual por este:
-
-````md
 # RtG Save Format Specification
 
 > **Status:** Experimental / Unofficial  
@@ -42,7 +35,7 @@ flowchart TD
     class OBJECTS root;
     class CONNECTIONS,PROPERTIES,ATTACHMENTS branch;
     class CFRAME detail;
-````
+
 
 The information documented here comes from empirical reverse engineering, controlled modifications of saves, and observation of the game's loading behavior.
 
