@@ -62,28 +62,38 @@ The second object has logical index `2`.
 
 And so on.
 
-```text
-Root array
-│
-├── logical index 1 → Object 1
-├── logical index 2 → Object 2
-├── logical index 3 → Object 3
-└── ...
+```mermaid
+flowchart TD
+
+    ROOT["📦 Root Array"]
+
+    ROOT --> OBJ1["1️⃣ Logical index 1 → Object 1"]
+    ROOT --> OBJ2["2️⃣ Logical index 2 → Object 2"]
+    ROOT --> OBJ3["3️⃣ Logical index 3 → Object 3"]
+    ROOT --> MORE["⋮"]
+
+    classDef root fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
+    classDef object fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef more fill:#718096,color:#fff,stroke:#4a5568,stroke-width:2px;
+
+    class ROOT root;
+    class OBJ1,OBJ2,OBJ3 object;
+    class MORE more;
 ```
 
-This indexing is used by `ÍndicePadre`.
+This indexing is used by `PrimaryIndex`.
 
 ---
 
-## 3. ÍndicePadre
+## 3. PrimaryIndex
 
-The third value of a connection tuple is `ÍndicePadre`.
+The third value of a connection tuple is `PrimaryIndex`.
 
 ```json
 [
-    TipoLocal,
-    PuntoPadre,
-    ÍndicePadre
+    LocalType,
+    PrimaryID,
+    PrimaryIndex
 ]
 ```
 
@@ -96,7 +106,7 @@ Example:
 Here:
 
 ```js
-ÍndicePadre = 1
+PrimaryIndex = 1
 ```
 
 means:
@@ -116,7 +126,7 @@ The connection of the `Part` points to:
 
 ```mermaid
 flowchart TD
-    INDEX["ÍndicePadre = 1"]
+    INDEX["PrimaryIndex = 1"]
     INDEX --> OBJECT["Object 1"]
     OBJECT --> BASE["Base"]
 
@@ -135,15 +145,22 @@ flowchart TD
 
 A connection therefore establishes a relationship between an object and another object in the root array.
 
-```text
-Child
- │
- └── Connection
-      │
-      └── ÍndicePadre
-             │
-             ▼
-        Parent object
+```mermaid
+flowchart TD
+
+    CHILD["🧩 Child"] --> CONNECTION["🔗 Connection"]
+    CONNECTION --> INDEX["🔢 PrimaryIndex"]
+    INDEX --> PARENT["👤 Parent Object"]
+
+    classDef child fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
+    classDef connection fill:#dd6b20,color:#fff,stroke:#9c4221,stroke-width:2px;
+    classDef index fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef parent fill:#38a169,color:#fff,stroke:#276749,stroke-width:2px;
+
+    class CHILD child;
+    class CONNECTION connection;
+    class INDEX index;
+    class PARENT parent;
 ```
 
 Example:
@@ -158,18 +175,43 @@ Example:
 
 Logical relationships:
 
-```text
-Object 1 → Base
-Object 2 → parent 1 → Base
-Object 3 → parent 2 → Object 2
+```mermaid
+flowchart TD
+
+    OBJ1["🧩 Object 1"] --> BASE["🏠 Base"]
+
+    OBJ2["🧩 Object 2"] --> PARENT1["🔢 Parent 1"]
+    PARENT1 --> BASE
+
+    OBJ3["🧩 Object 3"] --> PARENT2["🔢 Parent 2"]
+    PARENT2 --> OBJ2
+
+    classDef object fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef parent fill:#dd6b20,color:#fff,stroke:#9c4221,stroke-width:2px;
+    classDef base fill:#38a169,color:#fff,stroke:#276749,stroke-width:3px;
+
+    class OBJ1,OBJ2,OBJ3 object;
+    class PARENT1,PARENT2 parent;
+    class BASE base;
 ```
 
 Therefore the structure is:
 
-```text
-Base
-└── Part
-    └── Part
+```mermaid
+flowchart TD
+
+    BASE["🏠 Base"]
+    PART1["🧩 Part"]
+    PART2["🧩 Part"]
+
+    BASE --> PART1
+    PART1 --> PART2
+
+    classDef base fill:#38a169,color:#fff,stroke:#276749,stroke-width:3px;
+    classDef part fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+
+    class BASE base;
+    class PART1,PART2 part;
 ```
 
 ---
@@ -189,8 +231,16 @@ Original:
 
 Relationship:
 
-```text
-Part → Base
+```mermaid
+flowchart LR
+
+    PART["🧩 Part"] --> BASE["🏠 Base"]
+
+    classDef part fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef base fill:#38a169,color:#fff,stroke:#276749,stroke-width:3px;
+
+    class PART part;
+    class BASE base;
 ```
 
 If the objects are reordered:
@@ -202,7 +252,7 @@ If the objects are reordered:
 ]
 ```
 
-the same `ÍndicePadre = 1` now refers to the `Part` itself rather than the `Base`.
+the same `PrimaryIndex = 1` now refers to the `Part` itself rather than the `Base`.
 The reference has therefore changed meaning.
 This is why the order of the root array must be preserved when modifying an existing save.
 
@@ -244,22 +294,22 @@ A connection is:
 
 ```json
 [
-    TipoLocal,
-    PuntoPadre,
-    ÍndicePadre
+    LocalType,
+    PrimaryID,
+    PrimaryIndex
 ]
 ```
 
 Its fields are:
 
 ```js
-connection[0] = TipoLocal
-connection[1] = PuntoPadre
-connection[2] = ÍndicePadre
+connection[0] = LocalType
+connection[1] = PrimaryID
+connection[2] = PrimaryIndex
 ```
 
 Again, these are zero-based JSON positions.
-Only the **value of `ÍndicePadre`** represents a 1-based logical object index.
+Only the **value of `PrimaryIndex`** represents a 1-based logical object index.
 
 ---
 
@@ -268,37 +318,37 @@ Only the **value of `ÍndicePadre`** represents a 1-based logical object index.
 When parsing an RtG save using a zero-based programming language, the logical index can be converted to an array position by subtracting `1`.
 
 ```js
-array_position = ÍndicePadre - 1
+array_position = PrimaryIndex - 1
 ```
 
 Example:
 
 ```js
-ÍndicePadre = 1
+PrimaryIndex = 1
 array position = 0
 ```
 
 ```js
-ÍndicePadre = 15
+PrimaryIndex = 15
 array position = 14
 ```
 
 When generating a reference from a zero-based array position:
 
 ```js
-ÍndicePadre = array_position + 1
+PrimaryIndex = array_position + 1
 ```
 
 Example:
 
 ```js
 array position = 0
-ÍndicePadre = 1
+PrimaryIndex = 1
 ```
 
 ```js
 array position = 14
-ÍndicePadre = 15
+PrimaryIndex = 15
 ```
 
 ---
@@ -327,34 +377,54 @@ Logical indices:
 
 Connections:
 
-```text
-Object 2
-└── ÍndicePadre = 1
-    └── Base
+```mermaid
+flowchart TD
 
-Object 3
-└── ÍndicePadre = 2
-    └── Part
+    OBJ2["🧩 Object 2"] --> INDEX1["🔢 PrimaryIndex = 1"]
+    INDEX1 --> BASE["🏠 Base"]
 
-Object 4
-└── ÍndicePadre = 3
-    └── Servo
+    OBJ3["🧩 Object 3"] --> INDEX2["🔢 PrimaryIndex = 2"]
+    INDEX2 --> PART["🧩 Part"]
+
+    OBJ4["🧩 Object 4"] --> INDEX3["🔢 PrimaryIndex = 3"]
+    INDEX3 --> SERVO["⚙️ Servo"]
+
+    classDef object fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
+    classDef index fill:#dd6b20,color:#fff,stroke:#9c4221,stroke-width:2px;
+    classDef base fill:#38a169,color:#fff,stroke:#276749,stroke-width:2px;
+    classDef part fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef servo fill:#e53e3e,color:#fff,stroke:#9b2c2c,stroke-width:2px;
+
+    class OBJ2,OBJ3,OBJ4 object;
+    class INDEX1,INDEX2,INDEX3 index;
+    class BASE base;
+    class PART part;
+    class SERVO servo;
 ```
 
 The resulting hierarchy is:
 
-```text
-Base
-└── Part
-    └── Servo
-        └── Part
+```mermaid
+flowchart TD
+
+    BASE["🏠 Base"] --> PART1["🧩 Part"]
+    PART1 --> SERVO["⚙️ Servo"]
+    SERVO --> PART2["🧩 Part"]
+
+    classDef base fill:#38a169,color:#fff,stroke:#276749,stroke-width:3px;
+    classDef part fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef servo fill:#e53e3e,color:#fff,stroke:#9b2c2c,stroke-width:2px;
+
+    class BASE base;
+    class PART1,PART2 part;
+    class SERVO servo;
 ```
 
 ---
 
 ## 10. Indexing and UUIDs
 
-`ÍndicePadre` and UUID references solve different parts of a connection.
+`PrimaryIndex` and UUID references solve different parts of a connection.
 
 A connection such as:
 
@@ -365,12 +435,12 @@ A connection such as:
 uses:
 
 ```js
-PuntoPadre  = "5"
-ÍndicePadre = 2
+PrimaryID  = "5"
+PrimaryIndex = 2
 ```
 
-The `ÍndicePadre` identifies **which object is the parent**.
-The `PuntoPadre` identifies **where on that parent the connection is made**.
+The `PrimaryIndex` identifies **which object is the parent**.
+The `PrimaryID` identifies **where on that parent the connection is made**.
 
 For a UUID-based connection:
 
@@ -386,8 +456,8 @@ the roles remain separate:
 
 ```mermaid
 flowchart TD
-    INDEX["ÍndicePadre"] --> PARENT["👤 Parent Object"]
-    POINT["PuntoPadre"] --> EPHEMERAL["📎 EphemeralAttachment<br/>belonging to that parent"]
+    INDEX["PrimaryIndex"] --> PARENT["👤 Parent Object"]
+    POINT["PrimaryID"] --> EPHEMERAL["📎 EphemeralAttachment<br/>belonging to that parent"]
 
     classDef index fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
     classDef point fill:#dd6b20,color:#fff,stroke:#9c4221,stroke-width:2px;
@@ -400,7 +470,7 @@ flowchart TD
     class EPHEMERAL attachment;
 ```
 
-The UUID does not replace `ÍndicePadre`.
+The UUID does not replace `PrimaryIndex`.
 
 ---
 
@@ -431,7 +501,7 @@ flowchart TD
 
     TITLE --> RTG["RtG logical references"]
     RTG --> OBJECT_INDEX["Logical object index<br/>1-based"]
-    RTG --> PARENT_INDEX["ÍndicePadre<br/>1-based"]
+    RTG --> PARENT_INDEX["PrimaryIndex<br/>1-based"]
 
     classDef title fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
     classDef category fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
@@ -444,7 +514,7 @@ flowchart TD
 
 The most important rule is:
 
-> **`ÍndicePadre` uses a 1-based logical object index, even though the JSON array itself is accessed using zero-based positions by normal programming languages.**
+> **`PrimaryIndex` uses a 1-based logical object index, even though the JSON array itself is accessed using zero-based positions by normal programming languages.**
 
 ---
 

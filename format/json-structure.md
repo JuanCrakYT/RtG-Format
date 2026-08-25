@@ -150,7 +150,7 @@ is a valid empty connection list.
 Each connection is represented by three values:
 
 ```text
-[TipoLocal, PuntoPadre, ÍndicePadre]
+[LocalType, PrimaryID, PrimaryIndex]
 ```
 
 Example:
@@ -166,18 +166,18 @@ Example:
 The positions are:
 
 ```js
-0 = TipoLocal
-1 = PuntoPadre
-2 = ÍndicePadre
+0 = LocalType
+1 = PrimaryID
+2 = PrimaryIndex
 ```
 
 These positions are zero-based.
 
 ---
 
-## 6. TipoLocal
+## 6. LocalType
 
-`TipoLocal` is the first value of a connection tuple.
+`LocalType` is the first value of a connection tuple.
 
 Example:
 
@@ -188,19 +188,19 @@ Example:
 Here:
 
 ```js
-TipoLocal = "1"
+LocalType = "1"
 ```
 
 It identifies the local object type involved in the connection.
 The game uses this value when identifying/searching for the corresponding object type.
 The exact internal lookup mechanism is unknown.
-`TipoLocal` should therefore not be interpreted as a coordinate, connection-point position, or spatial direction.
+`LocalType` should therefore not be interpreted as a coordinate, connection-point position, or spatial direction.
 
 ---
 
-## 7. PuntoPadre
+## 7. PrimaryID
 
-`PuntoPadre` is the second value of a connection tuple.
+`PrimaryID` is the second value of a connection tuple.
 
 It is the name used by this project for this field because the field identifies the location/reference on the parent involved in the connection.
 
@@ -217,7 +217,7 @@ A normal connection can use a numeric identifier:
 Here:
 
 ```js
-PuntoPadre = "24"
+PrimaryID = "24"
 ```
 
 The value identifies a predefined connection point on the parent object.
@@ -276,9 +276,9 @@ flowchart TD
 ```
 ---
 
-## 8. ÍndicePadre
+## 8. PrimaryIndex
 
-`ÍndicePadre` is the third value of a connection tuple.
+`PrimaryIndex` is the third value of a connection tuple.
 
 It identifies the parent object in the top-level array.
 
@@ -322,11 +322,11 @@ Therefore:
 
 ```text
 first Part
-    ÍndicePadre = 1
+    PrimaryIndex = 1
     → Base
 
 second Part
-    ÍndicePadre = 2
+    PrimaryIndex = 2
     → first Part
 ```
 
@@ -426,9 +426,9 @@ Save
     │   ├── Type
     │   ├── Connections
     │   │   ├── Connection
-    │   │   │   ├── TipoLocal
-    │   │   │   ├── PuntoPadre
-    │   │   │   └── ÍndicePadre
+    │   │   │   ├── LocalType
+    │   │   │   ├── PrimaryID
+    │   │   │   └── PrimaryIndex
     │   │   └── ...
     │   │
     │   └── Properties
@@ -449,9 +449,9 @@ flowchart TD
 
     CONNECTIONS --> CONNECTION["🔌 Connection"]
 
-    CONNECTION --> LOCALTYPE["TipoLocal"]
-    CONNECTION --> PARENTPOINT["PuntoPadre"]
-    CONNECTION --> PARENTINDEX["ÍndicePadre"]
+    CONNECTION --> LOCALTYPE["LocalType"]
+    CONNECTION --> PARENTPOINT["PrimaryID"]
+    CONNECTION --> PARENTINDEX["PrimaryIndex"]
 
     CONNECTIONS --> MORE["⋮"]
 
@@ -478,9 +478,9 @@ Equivalent JSON shape:
         Type,
         [
             [
-                TipoLocal,
-                PuntoPadre,
-                ÍndicePadre
+                LocalType,
+                PrimaryID,
+                PrimaryIndex
             ]
         ],
         {
@@ -540,17 +540,17 @@ Object 1
 Object 2
 └── Part
     └── connection
-        ├── TipoLocal = "1"
-        ├── PuntoPadre = "5"
-        └── ÍndicePadre = 1
+        ├── LocalType = "1"
+        ├── PrimaryID = "5"
+        └── PrimaryIndex = 1
             └── parent = Object 1
 
 Object 3
 └── Sprite
     └── connection
-        ├── TipoLocal = "1"
-        ├── PuntoPadre = UUID
-        └── ÍndicePadre = 1
+        ├── LocalType = "1"
+        ├── PrimaryID = UUID
+        └── PrimaryIndex = 1
             └── parent = Object 1
 ```
 
@@ -567,11 +567,11 @@ The following rules describe the observed JSON structure:
 4. Object tuple positions are zero-based.
 5. `Connections` is an array.
 6. Each connection contains three fields:
-   `[TipoLocal, PuntoPadre, ÍndicePadre]`.
+   `[LocalType, PrimaryID, PrimaryIndex]`.
 7. Connection tuple positions are zero-based.
-8. `ÍndicePadre` uses a 1-based logical object index.
+8. `PrimaryIndex` uses a 1-based logical object index.
 9. `Properties` is a JSON object/dictionary.
-10. `PuntoPadre` can contain a numeric connection-point identifier or a UUID referencing an `EphemeralAttachment`.
+10. `PrimaryID` can contain a numeric connection-point identifier or a UUID referencing an `EphemeralAttachment`.
 11. Object ordering affects logical references.
 12. Structural references must resolve correctly for the build to load.
 
@@ -582,7 +582,7 @@ The following rules describe the observed JSON structure:
 This document intentionally does not fully describe:
 
 * the complete object/type catalog;
-* the meaning of every `TipoLocal`;
+* the meaning of every `LocalType`;
 * every connection-point ID;
 * the complete property catalog;
 * `EphemeralAttachment` behavior;
@@ -598,7 +598,7 @@ Those topics are documented separately.
 
 * [`../SPECIFICATION.md`](../SPECIFICATION.md) — Complete format specification.
 * [`indexing.md`](indexing.md) — Detailed indexing rules.
-* [`identifiers.md`](identifiers.md) — IDs, `TipoLocal`, `PuntoPadre`, and UUIDs.
+* [`identifiers.md`](identifiers.md) — IDs, `LocalType`, `PrimaryID`, and UUIDs.
 * [`properties.md`](properties.md) — Property behavior.
 * [`../blocks/`](../blocks/) — Object and block documentation.
 * [`../examples/experiments/`](../examples/experiments/) — Experimental saves and evidence.
