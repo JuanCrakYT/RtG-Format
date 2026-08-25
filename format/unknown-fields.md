@@ -213,7 +213,7 @@ does not automatically reveal the semantic meaning of `7`.
 Likewise, observing:
 
 ```js
-PuntoPadre = "24"
+PrimaryID = "24"
 ```
 
 does not by itself establish every property of connection point `24`.
