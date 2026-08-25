@@ -311,7 +311,6 @@ For attachment-based connections:
 
 ```mermaid
 flowchart TD
-flowchart TD
     A["Child"] --> B["PrimaryID = UUID"]
     B --> C["EphemeralAttachment"]
     C --> D["CFrame"]
