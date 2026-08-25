@@ -375,8 +375,8 @@ Historical testing demonstrated that additional unknown properties can be insert
 
 This differs from structural fields such as:
 
-* `TipoLocal`
-* `ÍndicePadre`
+* `LocalType`
+* `PrimaryIndex`
 * UUID references
 
 which can cause loading failures when invalid.

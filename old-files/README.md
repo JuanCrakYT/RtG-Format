@@ -9,19 +9,12 @@ When there is a discrepancy between `old-files/` and the current documentation, 
 Current documentation may reorganize, summarize, clarify, or expand upon information from these files, but it must not silently override historical evidence.
 If current documentation disagrees with an `old-files/` document, the discrepancy should be investigated and documented rather than assuming that the current documentation is correct.
 
-## Historical Status
+## Historical Documentation
 
-Files in this directory may contain:
-
-- Earlier versions of the format specification.
-- Original reverse-engineering observations.
-- Object and Part ID research.
-- Historical terminology.
-- Experiments and discoveries that were later incorporated into the current documentation.
-- Information that is no longer fully understood or has not yet been migrated to the current documentation.
-
-Historical wording and terminology should be interpreted in the context of the document in which they appear.
-Differences between historical files do not automatically mean that one file is incorrect. They may represent different stages of the reverse-engineering process.
+[`old-files/`](old-files/) contains historical reverse-engineering material preserved for research provenance.
+`SPECIFICATION.md` and `format/` provide the current consolidated presentation of the format.
+When a discrepancy exists between current documentation and historical material, the historical material in `old-files/` has priority as evidence and must be investigated before changing the current interpretation.
+Historical files may contain earlier terminology, incomplete investigations, or hypotheses that were later refined. Their priority applies to the historical evidence they contain, not to assumptions that are no longer supported by the evidence.
 
 ## Relationship With Current Documentation
 
@@ -35,11 +28,21 @@ flowchart TD
     FORMAT["📁 format"]
     SPEC["📄 SPECIFICATION.md"]
 
-    OLD -->|"Historical evidence"| RESEARCH
-    RESEARCH -->|"Verified discoveries"| FORMAT
-    FORMAT -->|"Consolidated technical reference"| SPEC
+    OLD -->|"📜 Historical Evidence"| RESEARCH
+    RESEARCH -->|"✅ Verified Discoveries"| FORMAT
+    FORMAT -->|"📘 Consolidated Technical Reference"| SPEC
 
-    RESEARCH -.->|"Unresolved / uncertain"| RESEARCH
+    RESEARCH -.->|"❓ Unresolved / Uncertain"| RESEARCH
+
+    classDef old fill:#718096,color:#fff,stroke:#4a5568,stroke-width:2px;
+    classDef research fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
+    classDef format fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef spec fill:#38a169,color:#fff,stroke:#276749,stroke-width:3px;
+
+    class OLD old;
+    class RESEARCH research;
+    class FORMAT format;
+    class SPEC spec;
 ```
 
 This does not change the priority of historical evidence.
@@ -90,3 +93,33 @@ This document contains detailed historical information about:
 Do not treat historical information as obsolete simply because it is stored in `old-files/`.
 `old-files/` is part of the evidence base of this project.
 When uncertain, preserve the historical information and investigate the discrepancy instead of silently replacing it with a newer interpretation.
+
+## Terminology Note
+
+Historical files may use Spanish names for some format fields, such as:
+
+* `TipoLocal`
+* `PuntoPadre`
+* `ÍndicePadre`
+
+Current documentation uses generalized English names for these same fields:
+
+```js
+"TipoLocal"    = "LocalType"
+"PuntoPadre"  = "PrimaryID"
+"ÍndicePadre" = "PrimaryIndex"
+```
+
+These are **terminology equivalents**, not different fields or different versions of the format.
+The Spanish names are preserved in historical files to maintain the original research record.
+The English names are used in the current documentation to keep terminology consistent across the repository.
+
+### Terminology Migration
+
+| Historical Name | Current Name   | Description                                                                  | Tag         | Spanish Tag | Migrated by |
+| --------------- | -------------- | ---------------------------------------------------------------------------- | ----------- | ----------- | ----------- |
+| `TipoLocal`     | `LocalType`    | Local object-type identifier used by a connection                            | Connections | Connexiones | JuanCrakYT  |
+| `PuntoPadre`    | `PrimaryID`    | Connection reference on the parent; may contain a numeric point ID or a UUID | Connections | Connexiones | JuanCrakYT  |
+| `ÍndicePadre`   | `PrimaryIndex` | 1-based logical index of the parent object                                   | Connections | Connexiones | JuanCrakYT  |
+
+> **Important:** The terminology migration does not change the underlying format or reinterpret historical evidence. It only standardizes the names used by the current documentation.

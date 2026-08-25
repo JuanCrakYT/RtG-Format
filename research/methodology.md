@@ -406,7 +406,7 @@ These are separate claims.
 ## 13. Test References Independently
 
 References should be tested separately from properties.
-For example, when investigating `ÍndicePadre`:
+For example, when investigating `PrimaryIndex`:
 
 ```mermaid
 flowchart TD
@@ -453,7 +453,7 @@ flowchart LR
 
 ## 14. Test Numeric Connection Points
 
-When investigating a numeric `PuntoPadre`, use a controlled object whose geometry is understood.
+When investigating a numeric `PrimaryID`, use a controlled object whose geometry is understood.
 
 Connection-point experiments can use visual markers to identify where each point is located.
 The historical object-ID research uses this type of approach.
@@ -466,7 +466,7 @@ flowchart TD
     OBJECT["🧩 Controlled Object<br/>Known Geometry"] --> MARKERS["📍 Visual Connection-Point Markers"]
     MARKERS --> TEST["🧪 Numeric Connection-Point Experiment"]
 
-    TEST --> OBSERVED["👁️ Observed:<br/>PuntoPadre = 5"]
+    TEST --> OBSERVED["👁️ Observed:<br/>PrimaryID = 5"]
     OBSERVED --> USED["🔗 Connection Point 5 is Used"]
 
     USED --> EVIDENCE["📋 Evidence Established"]
@@ -815,7 +815,7 @@ That may be a useful hypothesis, but the name itself is not evidence of its beha
 Likewise:
 
 ```js
-TipoLocal = 7
+LocalType = 7
 ```
 
 does not mean that `7` has a semantic meaning of its own.

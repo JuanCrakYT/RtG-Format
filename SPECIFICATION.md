@@ -137,7 +137,7 @@ These names are descriptive names used by this documentation.
 
 `LocalType` is a numeric identifier associated with the local object type of the connection.
 
-Each observed object type has an associated `LocalType`.
+Object types that use LocalType-based connections have a `LocalType`
 Examples:
 
 ```js

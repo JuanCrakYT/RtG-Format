@@ -8,11 +8,11 @@ An item should remain here until sufficient evidence exists to move it to the ap
 
 ---
 
-## 1. Exact Internal Lookup Mechanism of `TipoLocal`
+## 1. Exact Internal Lookup Mechanism of `LocalType`
 
 **Status:** `UNKNOWN`
 
-We know that `TipoLocal` is a numeric identifier associated with the local object type involved in a connection.
+We know that `LocalType` is a numeric identifier associated with the local object type involved in a connection.
 
 The game uses this value to identify/search for the corresponding object type.
 However, the exact internal lookup mechanism is unknown.
@@ -28,7 +28,7 @@ What is known:
 
 ```mermaid
 flowchart TD
-    LOCAL["🏷️ TipoLocal"] --> IDENTIFIES["🔎 Identifies / Locates"]
+    LOCAL["🏷️ LocalType"] --> IDENTIFIES["🔎 Identifies / Locates"]
     IDENTIFIES --> TYPE["🧩 Local Object Type"]
 
     classDef local fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
@@ -44,7 +44,7 @@ What is unknown:
 
 ```mermaid
 flowchart TD
-    LOCAL["🏷️ TipoLocal"] --> LOOKUP["❓ ??? Internal Lookup Mechanism ???"]
+    LOCAL["🏷️ LocalType"] --> LOOKUP["❓ ??? Internal Lookup Mechanism ???"]
     LOOKUP --> TYPE["🧩 Object Type"]
 
     classDef local fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
@@ -60,7 +60,7 @@ See [`../format/identifiers.md`](../format/identifiers.md).
 
 ---
 
-## 2. Semantic Meaning of Individual `TipoLocal` Values
+## 2. Semantic Meaning of Individual `LocalType` Values
 
 **Status:** `UNKNOWN / PARTIALLY UNDERSTOOD`
 
@@ -70,7 +70,7 @@ However, the numbers themselves do not currently have a known semantic interpret
 For example:
 
 ```js
-TipoLocal = 1
+LocalType = 1
 ```
 does not tell us what the number `1` means internally.
 
@@ -97,17 +97,17 @@ See [`../old-files/obj_ids-spanish.md`](../old-files/obj_ids-spanish.md).
 
 ---
 
-## 4. Exact Meaning of Every Numeric `PuntoPadre` ID
+## 4. Exact Meaning of Every Numeric `PrimaryID` ID
 
 **Status:** `PARTIALLY UNDERSTOOD`
 
-We know that a numeric `PuntoPadre` can identify a predefined connection point on the parent object.
+We know that a numeric `PrimaryID` can identify a predefined connection point on the parent object.
 What remains unknown is the exact semantic meaning of every numeric value.
 
 For example:
 
 ```js
-PuntoPadre = "5"
+PrimaryID = "5"
 ```
 
 is known to be a connection-point reference in the appropriate context.
@@ -208,7 +208,7 @@ The UUID relationship is known:
 
 ```mermaid
 flowchart TD
-    POINT["📍 PuntoPadre"] --> UUID["🆔 UUID"]
+    POINT["📍 PrimaryID"] --> UUID["🆔 UUID"]
     UUID --> ATTACHMENTS["📎 EphemeralAttachments[UUID]"]
     ATTACHMENTS --> ATTACHMENT["🔗 Attachment"]
 
@@ -428,7 +428,7 @@ Future experiments should distinguish between:
 
 * malformed JSON;
 * invalid object structure;
-* invalid `TipoLocal`;
+* invalid `LocalType`;
 * invalid parent index;
 * missing parent;
 * invalid UUID reference;

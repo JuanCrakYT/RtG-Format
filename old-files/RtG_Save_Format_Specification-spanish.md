@@ -240,6 +240,7 @@ Por lo tanto, `TipoLocal` debe tratarse como un identificador observado, no como
 |  125 | YibYib            |     —     | YibYib.                                                      |
 ---
 
+> **Importante:** Aquí aparecen algunos objetos con "—" en `TipoLocal`, y esas entradas se describen como *objetos que no pueden conectarse a otros.*
 > **Nota:** Conocer el `TipoLocal` de un objeto no implica conocer qué representa internamente ese número.
 
 ## 4. Modelo de datos de objetos
@@ -396,7 +397,13 @@ El formato de guardado de RtG **no almacena coordenadas 3D absolutas para los bl
 ## 8. TipoLocal (✅ Identificado / significado interno desconocido)
 
 El primer valor dentro de la tupla de conexión (`TipoLocal`) es un número utilizado por RtG para identificar el tipo de objeto local asociado a la conexión.
-Se ha observado que cada tipo de objeto utiliza un `TipoLocal` determinado.
+Se ha observado que cada tipo de objeto utiliza un `TipoLocal` determinado, a excepción de algunos que **NO tienen `TipoLocal`**.
+```md
+Chassis
+Ramp
+Tooth
+etc...
+```
 Por ejemplo, la tabla de tipos de objeto registra valores como:
 
 - `Part` → `1`

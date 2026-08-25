@@ -93,9 +93,9 @@ flowchart TD
 
 ```json
 [
-    TipoLocal,
-    PuntoPadre,
-    ÍndicePadre
+    LocalType,
+    PrimaryID,
+    PrimaryIndex
 ]
 ```
 
@@ -103,9 +103,9 @@ The fields have different roles:
 
 ```mermaid
 flowchart TD
-    CONNECTION["🔗 Connection"] --> LOCAL["🏷️ TipoLocal"]
-    CONNECTION --> POINT["📍 PuntoPadre"]
-    CONNECTION --> INDEX["🔢 ÍndicePadre"]
+    CONNECTION["🔗 Connection"] --> LOCAL["🏷️ LocalType"]
+    CONNECTION --> POINT["📍 PrimaryID"]
+    CONNECTION --> INDEX["🔢 PrimaryIndex"]
 
     LOCAL --> LOCALTYPE["🧩 Identifies the local object type<br/>involved in the connection"]
     POINT --> PARENTPOINT["📎 Identifies the connection point/reference<br/>on the parent"]
@@ -131,9 +131,9 @@ See [`../format/identifiers.md`](../format/identifiers.md).
 
 ---
 
-## 4. TipoLocal Is an Object-Type Identifier
+## 4. LocalType Is an Object-Type Identifier
 
-> **Discovery:** `TipoLocal` is a numeric identifier associated with an object's type.
+> **Discovery:** `LocalType` is a numeric identifier associated with an object's type.
 
 The game uses the value to identify/search for the corresponding local object type.
 The exact internal lookup mechanism has not been determined.
@@ -142,19 +142,19 @@ The numeric values should therefore be treated as observed identifiers rather th
 
 > **Evidence:** Observed mappings across many object types and connection experiments.
 > **Confidence:** `CONFIRMED` for the observed behavior; `UNKNOWN` for the internal lookup implementation.
-> **Notes:** Knowing a `TipoLocal` value does not reveal the internal meaning of the number itself.
+> **Notes:** Knowing a `LocalType` value does not reveal the internal meaning of the number itself.
 
 ---
 
-## 5. ÍndicePadre Is a 1-Based Logical Object Index
+## 5. PrimaryIndex Is a 1-Based Logical Object Index
 
-> **Discovery:** The third value of a connection tuple, `ÍndicePadre`, identifies the parent object using a 1-based logical index.
+> **Discovery:** The third value of a connection tuple, `PrimaryIndex`, identifies the parent object using a 1-based logical index.
 
 For example:
 
 ```mermaid
 flowchart TD
-    INDEX["🔢 ÍndicePadre = 1"] --> OBJECT["🧩 First Logical Object in the Save"]
+    INDEX["🔢 PrimaryIndex = 1"] --> OBJECT["🧩 First Logical Object in the Save"]
 
     classDef index fill:#d69e2e,color:#744210,stroke:#975a16,stroke-width:3px;
     classDef object fill:#38a169,color:#fff,stroke:#276749,stroke-width:2px;
@@ -200,13 +200,13 @@ Changing object order without updating references can cause a connection to reso
 
 ---
 
-## 7. PuntoPadre Is a Connection Reference
+## 7. PrimaryID Is a Connection Reference
 
-> **Discovery:** `PuntoPadre` identifies where the connection is made on the parent object.
+> **Discovery:** `PrimaryID` identifies where the connection is made on the parent object.
 
 It may contain a numeric connection-point identifier or a UUID.
 
-Therefore, `PuntoPadre` should not be interpreted as being exclusively a numeric point ID.
+Therefore, `PrimaryID` should not be interpreted as being exclusively a numeric point ID.
 
 > **Evidence:** Standard connection-point observations and UUID attachment experiments.
 > **Confidence:** `CONFIRMED`
@@ -271,13 +271,13 @@ See [`../format/identifiers.md`](../format/identifiers.md).
 
 ## 10. UUIDs Can Reference Attachments
 
-> **Discovery:** A connection can use a UUID in `PuntoPadre` to reference an `EphemeralAttachment`.
+> **Discovery:** A connection can use a UUID in `PrimaryID` to reference an `EphemeralAttachment`.
 
 Conceptually:
 
 ```mermaid
 flowchart TD
-    CONNECTION["🔗 Connection"] --> POINT["📍 PuntoPadre"]
+    CONNECTION["🔗 Connection"] --> POINT["📍 PrimaryID"]
     POINT --> UUID["🆔 UUID"]
     UUID --> ATTACHMENTS["📎 EphemeralAttachments"]
     ATTACHMENTS --> CFRAME["📐 cframe"]

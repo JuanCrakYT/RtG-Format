@@ -206,7 +206,7 @@ Numeric identifiers require additional caution.
 For example:
 
 ```js
-TipoLocal = 7
+LocalType = 7
 ```
 
 does not automatically reveal the semantic meaning of `7`.

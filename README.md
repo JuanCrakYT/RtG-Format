@@ -79,16 +79,16 @@ The documentation distinguishes between:
 ```
 Historical observations are preserved rather than silently rewritten.
 
-## Historical documentation
-[`old-files/`](old-files/) contains historical research material preserved for reference.
-These files document the development of the research and should not be treated as the current consolidated specification.
-For the current reference, use [`SPECIFICATION.md`](SPECIFICATION.md).
+## Historical Documentation
 
-## Project files
-- [`CONTRIBUTING.md`](CONTRIBUTING.md) — Contribution rules
-- [`CHANGELOG.md`](CHANGELOG.md) — Project history and version changes
-- [`structure.md`](structure.md) — Repository structure
-- [`LICENSE`](LICENSE) — License information
+[`old-files/`](old-files/) contains historical reverse-engineering material preserved for research provenance.
+`SPECIFICATION.md` and the documents under [`format/`](format/) provide the current consolidated presentation of the format.
+
+When a discrepancy exists between the current documentation and historical material, the information in `old-files/` has priority as historical evidence and must be investigated before changing or rejecting the current interpretation.
+Historical files may contain earlier terminology, incomplete investigations, or hypotheses that were later refined. Their historical evidence should be preserved rather than silently rewritten.
+
+For the terminology used by the current documentation, see [`old-files/README.md`](old-files/README.md).
+
 
 ## Attribution
 

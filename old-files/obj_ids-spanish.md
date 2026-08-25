@@ -23,7 +23,14 @@ donde:
 - TipoLocal = Número utilizado por RtG para identificar el tipo de objeto local de la conexión.
 - PuntoPadre = ID del punto de conexión del objeto padre.
 - ÍndicePadre = Índice del objeto al que está conectado.
-> **Nota:** Se ha observado que cada tipo de objeto utiliza un `TipoLocal` propio. Se desconoce el significado interno exacto de estos números y cómo los utiliza el juego.
+> **Nota:** Se ha observado que cada tipo de objeto utiliza un `TipoLocal` determinado, a excepción de algunos que **NO tienen `TipoLocal`**.
+```md
+Chassis
+Ramp
+Tooth
+etc...
+``` 
+> **Aviso:** Se desconoce el significado interno exacto de estos números y cómo los utiliza el juego.
 ---
 
 ## Objetivo
