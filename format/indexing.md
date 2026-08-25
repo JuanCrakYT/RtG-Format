@@ -386,8 +386,18 @@ the roles remain separate:
 
 ```mermaid
 flowchart TD
-    ÍndicePadre --> Parent["parent object"]
-    PuntoPadre --> Ephemeral["EphemeralAttachment belonging to that parent"]
+    INDEX["ÍndicePadre"] --> PARENT["👤 Parent Object"]
+    POINT["PuntoPadre"] --> EPHEMERAL["📎 EphemeralAttachment<br/>belonging to that parent"]
+
+    classDef index fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
+    classDef point fill:#dd6b20,color:#fff,stroke:#9c4221,stroke-width:2px;
+    classDef parent fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef attachment fill:#38a169,color:#fff,stroke:#276749,stroke-width:2px;
+
+    class INDEX index;
+    class POINT point;
+    class PARENT parent;
+    class EPHEMERAL attachment;
 ```
 
 The UUID does not replace `ÍndicePadre`.

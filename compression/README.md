@@ -47,6 +47,18 @@ flowchart TD
     B --> C["JSON Representation"]
     C --> D["Encoding / Compression"]
     D --> E["Final Save Output"]
+
+    classDef start fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
+    classDef structure fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef json fill:#38a169,color:#fff,stroke:#276749,stroke-width:2px;
+    classDef compression fill:#dd6b20,color:#fff,stroke:#9c4221,stroke-width:2px;
+    classDef output fill:#e53e3e,color:#fff,stroke:#9b2c2c,stroke-width:3px;
+
+    class A start;
+    class B structure;
+    class C json;
+    class D compression;
+    class E output;
 ```
 
 The exact transformation between these stages should only be described as confirmed when supported by evidence.

@@ -7,9 +7,9 @@ At a high level, the decoded build is represented as a JSON array. Each element 
 
 ```mermaid
 flowchart TD
-    A["Save (JSON Array)"] --> B["Element 0"]
+    A["📦 Save (JSON Array)"] --> B["Element 0"]
     A --> C["Element 1"]
-    A --> D["..."]
+    A --> D["⋮"]
 
     B --> B1["Type"]
     B --> B2["Connections"]
@@ -18,6 +18,16 @@ flowchart TD
     C --> C1["Type"]
     C --> C2["Connections"]
     C --> C3["Properties"]
+
+    classDef root fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
+    classDef element fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef field fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
+    classDef more fill:#718096,color:#fff,stroke:#4a5568,stroke-width:2px;
+
+    class A root;
+    class B,C element;
+    class D more;
+    class B1,B2,B3,C1,C2,C3 field;
 ```
 
 Each object follows the general structure:
@@ -94,9 +104,20 @@ Conceptually:
 
 ```mermaid
 flowchart TD
-    P["Parent Object"] --> C["Child Object"]
-    C --> C1["Connection"]
-    C1 --> R["Parent Reference"]
+
+    P["🟣 Parent Object"] --> C["🔵 Child Object"]
+    C --> C1["🔗 Connection"]
+    C1 --> R["📌 Parent Reference"]
+
+    classDef parent fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
+    classDef child fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef connection fill:#dd6b20,color:#fff,stroke:#9c4221,stroke-width:2px;
+    classDef reference fill:#38a169,color:#fff,stroke:#276749,stroke-width:2px;
+
+    class P parent;
+    class C child;
+    class C1 connection;
+    class R reference;
 ```
 
 The loader uses these references to reconstruct the build structure.
@@ -109,10 +130,23 @@ Conceptually:
 
 ```mermaid
 flowchart TD
-    A["Object Connection"] --> B["UUID"]
-    B --> C["EphemeralAttachment"]
-    C --> D["CFrame"]
-    D --> E["Spatial Transformation"]
+
+    A["🔗 Object Connection"] --> B["🆔 UUID"]
+    B --> C["📎 EphemeralAttachment"]
+    C --> D["📐 CFrame"]
+    D --> E["🌐 Spatial Transformation"]
+
+    classDef connection fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
+    classDef uuid fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef attachment fill:#dd6b20,color:#fff,stroke:#9c4221,stroke-width:2px;
+    classDef cframe fill:#38a169,color:#fff,stroke:#276749,stroke-width:2px;
+    classDef spatial fill:#e53e3e,color:#fff,stroke:#9b2c2c,stroke-width:3px;
+
+    class A connection;
+    class B uuid;
+    class C attachment;
+    class D cframe;
+    class E spatial;
 ```
 
 For the detailed behavior, see [`../format/identifiers.md`](../format/identifiers.md) and [`../research/discoveries.md`](../research/discoveries.md).

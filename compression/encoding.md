@@ -562,6 +562,13 @@ Converts a representation such as Base64 text back into its underlying byte/text
 ```mermaid
 flowchart TD
     A["Base64"] --> B["decoded bytes/text"]
+
+    classDef root fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
+    classDef branch fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef detail fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
+
+    class A root;
+    class B detail;
 ```
 
 ### Decompression
@@ -571,6 +578,13 @@ If a compressed binary representation is present, decompression reconstructs the
 ```mermaid
 flowchart TD
     A["compressed data"] --> B["decompressed data"]
+
+    classDef root fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
+    classDef branch fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef detail fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
+
+    class A root;
+    class B detail;
 ```
 
 ### JSON Parsing
@@ -581,6 +595,14 @@ Once the serialized JSON text has been recovered:
 flowchart TD
     A["JSON Text"] --> B["JSON Parser"]
     B --> C["RtG Build Structure"]
+
+    classDef root fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
+    classDef branch fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef detail fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
+
+    class A root;
+    class B branch;
+    class C detail;
 ```
 
 The historical investigation confirms the importance of the Base64 representation, but does not provide enough evidence in the preserved material to claim a specific compression algorithm here.

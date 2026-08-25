@@ -252,11 +252,27 @@ PrimaryID
 Like:
 ```mermaid
 flowchart TD
-    A["PrimaryID"] --> Num
-        Num["Numeric"] --> PCP["Predefined connection point"]
-    A --> UUID
-        UUID --> Ephemeral["EphemeralAttachment"]
-        Ephemeral --> CFrame
+
+    A["🔑 PrimaryID"] --> NUM["🔢 Numeric"]
+    NUM --> PCP["📍 Predefined Connection Point"]
+
+    A --> UUID["🆔 UUID"]
+    UUID --> EPHEMERAL["📎 EphemeralAttachment"]
+    EPHEMERAL --> CFRAME["📐 CFrame"]
+
+    classDef primary fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
+    classDef numeric fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef point fill:#38a169,color:#fff,stroke:#276749,stroke-width:2px;
+    classDef uuid fill:#dd6b20,color:#fff,stroke:#9c4221,stroke-width:2px;
+    classDef attachment fill:#e53e3e,color:#fff,stroke:#9b2c2c,stroke-width:2px;
+    classDef cframe fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:2px;
+
+    class A primary;
+    class NUM numeric;
+    class PCP point;
+    class UUID uuid;
+    class EPHEMERAL attachment;
+    class CFRAME cframe;
 ```
 ---
 
@@ -282,13 +298,24 @@ The objects have these logical indices:
 
 ```mermaid
 flowchart TD
-    A["JSON"] --> A1
-    A --> A2
-    A --> A3
 
-    A1["Base"] -.-> B1["Index 1"]
-    A2["Part"] -.-> B2["Index 2"]
-    A3["Part"] -.-> B3["Index 3"]
+    A["📦 JSON"] --> A1["🟦 Base"]
+    A --> A2["🟩 Part"]
+    A --> A3["🟩 Part"]
+
+    A1 -.-> B1["#️⃣ Index 1"]
+    A2 -.-> B2["#️⃣ Index 2"]
+    A3 -.-> B3["#️⃣ Index 3"]
+
+    classDef root fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
+    classDef base fill:#38a169,color:#fff,stroke:#276749,stroke-width:2px;
+    classDef part fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef index fill:#dd6b20,color:#fff,stroke:#9c4221,stroke-width:2px;
+
+    class A root;
+    class A1 base;
+    class A2,A3 part;
+    class B1,B2,B3 index;
 ```
 
 Therefore:
@@ -413,14 +440,34 @@ Save
 Like:
 ```mermaid
 flowchart TD
-    A["Save"] --> RootArray["Root Array"]
-        Obj["Object"] --> Type
-        Obj --> Connections
-          Connections --> Connection
-            Connection --> TipoLocal
-            Connection --> PuntoPadre
-            Connection --> IndicePadre
-          Connections --> ...
+
+    A["💾 Save"] --> ROOT["📦 Root Array"]
+    ROOT --> OBJ["🧩 Object"]
+
+    OBJ --> TYPE["🏷️ Type"]
+    OBJ --> CONNECTIONS["🔗 Connections"]
+
+    CONNECTIONS --> CONNECTION["🔌 Connection"]
+
+    CONNECTION --> LOCALTYPE["TipoLocal"]
+    CONNECTION --> PARENTPOINT["PuntoPadre"]
+    CONNECTION --> PARENTINDEX["ÍndicePadre"]
+
+    CONNECTIONS --> MORE["⋮"]
+
+    classDef save fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
+    classDef array fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef object fill:#38a169,color:#fff,stroke:#276749,stroke-width:2px;
+    classDef connections fill:#dd6b20,color:#fff,stroke:#9c4221,stroke-width:2px;
+    classDef field fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
+    classDef more fill:#718096,color:#fff,stroke:#4a5568,stroke-width:2px;
+
+    class A save;
+    class ROOT array;
+    class OBJ object;
+    class CONNECTIONS,CONNECTION connections;
+    class TYPE,LOCALTYPE,PARENTPOINT,PARENTINDEX field;
+    class MORE more;
 ```
 
 Equivalent JSON shape:

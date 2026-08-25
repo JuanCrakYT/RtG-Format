@@ -16,10 +16,22 @@ Conceptually, the process can be represented as:
 
 ```mermaid
 flowchart TD
-    A[RtG Build] --> B[Structured Build Data]
-    B --> C[JSON Representation]
-    C --> D[Encoding / Compression]
-    D --> E[Final Save Representation]
+    A["RtG Build"] --> B["Structured Build Data"]
+    B --> C["JSON Representation"]
+    C --> D["Encoding / Compression"]
+    D --> E["Final Save Representation"]
+
+    classDef start fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
+    classDef process fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef json fill:#38a169,color:#fff,stroke:#276749,stroke-width:2px;
+    classDef compression fill:#dd6b20,color:#fff,stroke:#9c4221,stroke-width:2px;
+    classDef final fill:#e53e3e,color:#fff,stroke:#9b2c2c,stroke-width:3px;
+
+    class A start;
+    class B process;
+    class C json;
+    class D compression;
+    class E final;
 ```
 
 The exact implementation of each stage should only be considered confirmed when supported by direct evidence or reproducible experiments.
@@ -106,8 +118,15 @@ In simple terms:
 
 ```mermaid
 flowchart LR
-    A[format/] --> B[What the build data contains]
-    C[compression/] --> D[How that data is represented or transformed]
+
+    A["📁 format/"] --> B["What the build data contains"]
+    C["📁 compression/"] --> D["How that data is represented or transformed"]
+
+    classDef folder fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef description fill:#edf2f7,color:#1a202c,stroke:#a0aec0,stroke-width:2px;
+
+    class A,C folder;
+    class B,D description;
 ```
 
 Keeping these two areas separate helps prevent observations about encoding or compression from being confused with the actual structure of the RtG save format.
