@@ -20,3 +20,4 @@ Categories:
 - [`unused/`](unused/)
 
 Top-level consolidated extraction is preserved in `parts-id.md`.
+Images on: `blocks/parts/.../imgs/<blockname>.png`.

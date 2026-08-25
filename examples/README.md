@@ -48,6 +48,9 @@ Each experiment must have its own folder:
 ├── README.md
 ├── objective.md
 ├── example.json
+├── images-videos/
+|   ├── presentation.png
+|   └── ...
 └── other/
     ├── README.md
     └── ...
@@ -59,3 +62,5 @@ Each experiment must have its own folder:
 * Additional evidence or files can be placed in `other/`.
 * If an experiment cannot be loaded, fails, or produces unexpected results, document the problem in `README.md`.
 * Experiments must NOT be deleted. Move failed or unusable experiments to `examples/trash/` instead.
+* Images and videos related to the example go in `images-videos/`.
+* Videos must not be longer than 30 seconds.

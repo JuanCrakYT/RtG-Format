@@ -108,7 +108,7 @@ does not imply affiliation with Road To Gramby's.
 ## Credits
 ```md
 - **JuanCrakYT** — Reverse engineering, research, documentation, and maintenance.
-- **Road To Gramby's Wiki** — Reference for game objects, terminology, and categorization.
+- **Road To Gramby's Wiki** — Reference for game objects, terminology, categorization and images.
 - **Road To Gramby's** — Original game and save/build system documented by this project.
 ```
 This is an independent reverse-engineering project and is not affiliated with or endorsed by the creators of Road To Gramby's or the Road To Gramby's Wiki.

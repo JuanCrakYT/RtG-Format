@@ -10,29 +10,58 @@ rtg-save-format/
 ├── CONTRIBUTING.md
 ├── LICENSE
 ├── structure.md
-│
+├── page/
+│   │
+│   ├── index.html
+│   │
+│   ├── css/
+│   │   ├── main.css
+│   │   ├── layout.css
+│   │   └── markdown.css
+│   │
+│   ├── js/
+│   │   ├── app.js
+│   │   ├── router.js
+│   │   ├── github.js
+│   │   ├── markdown.js
+│   │   ├── mermaid.js
+│   │   ├── base64.js
+│   │   ├── navigation.js
+│   │   └── utils.js
+│   │
+│   └── assets/
+│       ├── logo.png
+│       └── icons/
+│   
 ├── blocks/
 │   ├── README.md
 │   └── parts/
 │        ├── building/
+│        │    ├── imgs/
 │        │    ├── parts-id.md
 │        │    └── README.md
 │        ├── miscellaneous/
+│        │    ├── imgs/
 │        │    ├── parts-id.md
 │        │    └── README.md
 │        ├── other/
+│        │    ├── imgs/
 │        │    ├── parts-id.md
 │        │    └── README.md
 │        ├── physics/
+│        │    ├── imgs/
 │        │    ├── parts-id.md
 │        │    └── README.md
 │        ├── tools/
+│        │    ├── imgs/
 │        │    ├── parts-id.md
 │        │    └── README.md
 │        ├── uncategorized/
+│        │    ├── imgs/
 │        │    ├── parts-id.md
 │        │    └── README.md
 │        ├── unused/
+│        │    ├── imgs/
 │        │    ├── parts-id.md
 │        │    └── README.md
 │        └── wiring/
