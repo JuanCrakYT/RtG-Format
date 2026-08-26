@@ -1,0 +1,5 @@
+(function () { "use strict";
+  const entries = [["Overview", [["Home", "README.md"], ["Getting started", "docs/getting-started.md"], ["Save anatomy", "docs/save-anatomy.md"], ["Building system", "docs/building-system.md"], ["FAQ", "docs/faq.md"]]], ["Format", [["Specification", "SPECIFICATION.md"], ["JSON structure", "format/json-structure.md"], ["Indexing", "format/indexing.md"], ["Properties", "format/properties.md"], ["Identifiers", "format/identifiers.md"], ["Unknown fields", "format/unknown-fields.md"]]], ["Reference", [["Blocks & parts", "blocks/README.md"], ["Compression", "compression/README.md"], ["Examples", "examples/README.md"], ["Research", "research/README.md"], ["Historical files", "old-files/README.md"], ["Tools", "tools/README.md"]]]];
+  function render(activePath) { document.getElementById("navigation").innerHTML = entries.map(([title, links]) => `<section class="nav-section"><h2>${title}</h2>${links.map(([label, path]) => `<a href="#/${path}" class="${path === activePath ? "active" : ""}">${label}</a>`).join("")}</section>`).join(""); }
+  window.RtGNavigation = { render };
+}());
