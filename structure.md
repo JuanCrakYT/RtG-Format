@@ -13,10 +13,12 @@ rtg-save-format/
 ├── assets/
 │   ├─ images/
 │   │  ├─ initial-assets/
-│   │  │  ├─ RtG-Format-Shape.svg
-│   │  │  ├─ RtG-Format-v1.svg
-│   │  │  ├─ RtG-Format-v1.png
-│   │  │  └─ RtG-Format.svg
+│   │  │  └─ logo/
+│   │  │     ├─ v1/
+│   │  │     │  ├─ RtG-Format-v1.png
+│   │  │     │  └─ RtG-Format-v1.svg
+│   │  │     ├─ RtG-Format-Shape.svg
+│   │  │     └─ RtG-Format.svg
 │   │  └─ banner.svg
 │   └─ README.md
 │
