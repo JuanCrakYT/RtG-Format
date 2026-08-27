@@ -8,17 +8,16 @@ Independent technical documentation of the save/build format used by **Road To G
        width="800">
 </p>
 
-## Overview
+## What is RtG-Format?
 
-In simple terms, the RtG save system can be understood as a pipeline:
+**RtG-Format** is an independent reverse-engineering project that documents how **Road To Gramby's (RtG)** represents, builds, serializes, and saves its constructions.
 
-1. A build is represented internally as a collection of objects and their relationships.
-2. The building system converts those objects into structured save data.
-3. That data is represented as JSON containing the objects, connections, and properties.
-4. The resulting data is encoded/compressed into the final save output used by the game.
+The project covers the format from the building system and its internal object relationships through the structured data representation and finally to the encoded/compressed save output used by the game.
 
-This repository documents each stage of that process, from the building system to the final save output.
+### What can you find here?
+
 The documentation covers:
+
 ```md
 - Save/build data structure
 - JSON representation
@@ -36,95 +35,120 @@ The documentation covers:
 - Research methodology and experimental results
 ```
 
+## Quick Start
+
+If you are new to the RtG save/build format, **start with [`SPECIFICATION.md`](SPECIFICATION.md)** for the current interpretation of the format.
+
+For a guided introduction, see [`docs/getting-started.md`](docs/getting-started.md), which provides a recommended reading path through the documentation.
+
+Other introductory resources:
+
+* [`docs/save-anatomy.md`](docs/save-anatomy.md) — Anatomy of an RtG save
+* [`docs/building-system.md`](docs/building-system.md) — Building-system concepts
+* [`docs/faq.md`](docs/faq.md) — Frequently asked questions
+
+## How the RtG Save System Works
+
+In simple terms, the RtG save system can be understood as a pipeline:
+
+1. A build is represented internally as a collection of objects and their relationships.
+2. The building system converts those objects into structured save data.
+3. That data is represented as JSON containing the objects, connections, and properties.
+4. The resulting data is encoded/compressed into the final save output used by the game.
+
+This repository documents each stage of that process, from the building system to the final save output.
+
 ## Documentation
-### Start here
-
-- [`docs/getting-started.md`](docs/getting-started.md) — Recommended reading path
-- [`docs/save-anatomy.md`](docs/save-anatomy.md) — Anatomy of an RtG save
-- [`docs/building-system.md`](docs/building-system.md) — Building-system concepts
-- [`docs/faq.md`](docs/faq.md) — Frequently asked questions
-
 
 ### Format
 
-- [`SPECIFICATION.md`](SPECIFICATION.md) — Main technical specification
-- [`format/json-structure.md`](format/json-structure.md) — JSON structure
-- [`format/indexing.md`](format/indexing.md) — Indexing and references
-- [`format/properties.md`](format/properties.md) — Object properties
-- [`format/identifiers.md`](format/identifiers.md) — Identifiers and UUIDs
-- [`format/unknown-fields.md`](format/unknown-fields.md) — Unknown or incompletely understood fields
+[`SPECIFICATION.md`](SPECIFICATION.md) is the main technical specification and the primary reference for the current understanding of the format.
+
+Detailed documentation for specific parts of the format is available under [`format/`](format/):
+
+* [`format/json-structure.md`](format/json-structure.md) — JSON structure
+* [`format/indexing.md`](format/indexing.md) — Indexing and references
+* [`format/properties.md`](format/properties.md) — Object properties
+* [`format/identifiers.md`](format/identifiers.md) — Identifiers and UUIDs
+* [`format/unknown-fields.md`](format/unknown-fields.md) — Unknown or incompletely understood fields
 
 ### Blocks and Parts
+
 See [`blocks/`](blocks/) for the documented object/Part IDs and their categories.
+
 The historical reverse-engineering ID research is preserved separately in [`old-files/`](old-files/).
 
-### Compression and encoding
+### Compression and Encoding
+
 See [`compression/`](compression/) for documentation of the encoding/compression layers.
 
 ### Examples
+
 See [`examples/`](examples/) for real and reproducible save/build examples and experiments.
 
 ### Research
+
 See [`research/`](research/) for methodology, discoveries, and unresolved questions.
 
 ### Tools
+
 See [`tools/`](tools/) for utilities related to decoding, encoding, conversion, and inspection.
 
 ## Status
-**Specification:** Unreleased
-The repository currently contains a consolidated specification derived from the project's reverse-engineering research.
-Historical development records, including earlier specification versions such as **v0.406**, are preserved in [`old-files/`](old-files/).
 
-## Research status
+**Specification:** Unreleased / Work in progress
+
+[`SPECIFICATION.md`](SPECIFICATION.md) is the main reference for the current understanding of the RtG save/build format. It combines the project's current interpretation of the format with additional data and discoveries confirmed during development.
+
+The documentation under [`format/`](format/) provides more detailed information about specific parts of the format.
+
+Historical reverse-engineering material is preserved in [`old-files/`](old-files/) for research provenance. It is not required for understanding the current format and is primarily intended for investigating how previous findings were obtained or why historical observations may differ from the current interpretation.
+
+## Research Status
+
 The documentation distinguishes between:
+
 ```md
 - **Confirmed** — Supported by reproducible observations or direct evidence.
 - **Partially confirmed** — Supported by observations but not completely verified.
 - **Unconfirmed** — Reported or suspected but lacking sufficient evidence.
 ```
+
 Historical observations are preserved rather than silently rewritten.
 
 ## Historical Documentation
 
-[`old-files/`](old-files/) contains historical reverse-engineering material preserved for research provenance.
-`SPECIFICATION.md` and the documents under [`format/`](format/) provide the current consolidated presentation of the format.
+[`old-files/`](old-files/) contains historical reverse-engineering material, including earlier specification versions, investigations, and observations.
 
-When a discrepancy exists between the current documentation and historical material, the information in `old-files/` has priority as historical evidence and must be investigated before changing or rejecting the current interpretation.
-Historical files may contain earlier terminology, incomplete investigations, or hypotheses that were later refined. Their historical evidence should be preserved rather than silently rewritten.
+This material is preserved for research provenance and may be consulted when investigating discrepancies with the current documentation. When such a discrepancy exists, the historical material in `old-files/` has priority as evidence for investigating the discrepancy.
 
-For the terminology used by the current documentation, see [`old-files/README.md`](old-files/README.md).
-
+For the current interpretation of the format, start with [`SPECIFICATION.md`](SPECIFICATION.md).
 
 ## Attribution
 
-RtG-Format is the result of independent reverse-engineering
-and documentation of the Road To Gramby's build/save system
-by JuanCrakYT.
+RtG-Format is the result of independent reverse-engineering and documentation of the Road To Gramby's build/save system by JuanCrakYT.
 
-If this documentation, its discoveries, examples, or derived
-knowledge are used in another project, please credit:
+If this documentation, its discoveries, examples, or derived knowledge are used in another project, please credit:
 
-- JuanCrakYT — RtG-Format
-- https://github.com/JuanCrakYT/RtG-Format
+* JuanCrakYT — RtG-Format
+* https://github.com/JuanCrakYT/RtG-Format
 
-This attribution is requested for research provenance and
-does not imply affiliation with Road To Gramby's.
+This attribution is requested for research provenance and does not imply affiliation with Road To Gramby's.
 
 ## Credits
-```md
+
 - **JuanCrakYT** — Reverse engineering, research, documentation, and maintenance.
 - **Road To Gramby's Wiki** — Reference for game objects, terminology, categorization and images.
 - **Road To Gramby's** — Original game and save/build system documented by this project.
-```
+
 This is an independent reverse-engineering project and is not affiliated with or endorsed by the creators of Road To Gramby's or the Road To Gramby's Wiki.
 
 ## Link Reference
+
 **Road To Gramby's Wiki:**
-```md
-https://road-to-grambys.fandom.com/wiki/Road_to_Gramby%27s_%F0%9F%91%B5_Wiki
-```
+
+[https://road-to-grambys.fandom.com/wiki/Road_to_Gramby%27s_%F0%9F%91%B5_Wiki](https://road-to-grambys.fandom.com/wiki/Road_to_Gramby%27s_%F0%9F%91%B5_Wiki)
 
 **JuanCrakYT — RtG-Format:**
-```md
-https://github.com/JuanCrakYT/RtG-Format
-```
+
+[https://github.com/JuanCrakYT/RtG-Format](https://github.com/JuanCrakYT/RtG-Format)

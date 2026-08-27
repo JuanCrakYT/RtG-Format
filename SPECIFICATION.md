@@ -1,6 +1,6 @@
 # RtG Save Format Specification
 
-> **Status:** Experimental / Unofficial  
+> **Status:** Unreleased / Work in progress
 > **Author:** JuanCrakYT  
 > **Game:** Road To Gramby's (Roblox)
 >
