@@ -64,3 +64,17 @@ Each experiment must have its own folder:
 * Experiments must NOT be deleted. Move failed or unusable experiments to `examples/trash/` instead.
 * Images and videos related to the example go in `images-videos/`.
 * Videos must not be longer than 30 seconds.
+
+### Trash
+
+See [`trash/README.md`](trash/README.md) for the rules governing preserved failed experiments.
+
+# Chart Rules
+
+|          | `json-examples/`        | `experiments/`    |
+| -------- | ----------------------- | ----------------- |
+| Purpose  | Demonstration/reference | Research          |
+| Failed   | May be deleted          | Must be preserved |
+| Evidence | Required                | Required          |
+| Results  | Optional                | Required          |
+

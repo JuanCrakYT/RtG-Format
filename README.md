@@ -105,8 +105,7 @@ The historical reverse-engineering ID research is preserved separately in [`old-
 
 ### Compression and Encoding
 
-See [`compression/`](compression/) for documentation of the encoding/compression layers.
-
+- [`compression/encoding.md`](compression/encoding.md) — Observed encoding and final save representation
 ### Examples
 
 See [`examples/`](examples/) for real and reproducible save/build examples and experiments.
@@ -165,6 +164,11 @@ This attribution is requested for research provenance and does not imply affilia
 
 This is an independent reverse-engineering project and is not affiliated with or endorsed by the creators of Road To Gramby's or the Road To Gramby's Wiki.
 
+## Web Documentation
+
+A web-based documentation interface is available through the project's GitHub Pages deployment.
+See [`page/`](page/) for the source of the documentation website.
+
 ## Link Reference
 
 **Road To Gramby's Wiki:**
@@ -174,3 +178,10 @@ This is an independent reverse-engineering project and is not affiliated with or
 **JuanCrakYT — RtG-Format:**
 
 [https://github.com/JuanCrakYT/RtG-Format](https://github.com/JuanCrakYT/RtG-Format)
+
+## Repository
+
+- [`CHANGELOG.md`](CHANGELOG.md) — History of documented project changes.
+- [`CONTRIBUTING.md`](CONTRIBUTING.md) — Contribution and documentation guidelines.
+- [`LICENSE`](LICENSE) — Project license.
+- [`structure.md`](structure.md) — Proyect Tree and Mermaid (Note: Mermaid could be deprecated on updates, take of reference everytime the Tree)
