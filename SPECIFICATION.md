@@ -4,7 +4,7 @@
 > **Author:** JuanCrakYT  
 > **Game:** Road To Gramby's (Roblox)
 >
-> This document is the current consolidated specification of the observed RtG save format.
+> This document is the current consolidated specification of the observed RtG RtG save/build format.
 >
 > Historical reverse-engineering material is preserved in [`old-files/`](old-files/) and has priority when investigating discrepancies.
 
@@ -14,7 +14,7 @@
 
 RtG save data represents a build as a structured collection of objects and relationships.
 
-The save format does not simply store the final global position of every object. Instead, the loader reconstructs the build from object types, connections, properties, references, attachments, and spatial transformations.
+The RtG save/build format does not simply store the final global position of every object. Instead, the loader reconstructs the build from object types, connections, properties, references, attachments, and spatial transformations.
 
 Conceptually:
 

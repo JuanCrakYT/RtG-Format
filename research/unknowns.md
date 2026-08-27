@@ -1,6 +1,6 @@
 # Unknowns
 
-This document records questions about the RtG save format that remain unresolved or only partially understood.
+This document records questions about the RtG RtG save/build format that remain unresolved or only partially understood.
 
 Unlike [`discoveries.md`](discoveries.md), this document does not record confirmed discoveries.
 

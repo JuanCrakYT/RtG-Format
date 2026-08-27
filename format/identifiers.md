@@ -1,6 +1,6 @@
 # Identifiers
 
-This document describes the identifier systems observed in the RtG save format.
+This document describes the identifier systems observed in the RtG RtG save/build format.
 It focuses on what each identifier identifies and how the identifiers relate to each other.
 It does not define the complete object catalog or the complete list of connection-point IDs.
 Historical identifier research is preserved in [`../old-files/obj_ids-spanish.md`](../old-files/obj_ids-spanish.md).

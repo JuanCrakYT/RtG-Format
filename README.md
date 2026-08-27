@@ -1,13 +1,12 @@
+# RtG Save Format — Reverse-Engineered Documentation
+
+Independent technical documentation of the save/build format used by **Road To Gramby's (RtG)** on Roblox.
+
 <p align="center">
   <img src="assets/images/initial-assets/logo/RtG-Format.svg"
        alt="RtG Format Banner"
        width="800">
 </p>
-
-# RtG Save Format — Reverse-Engineered Documentation
-
-Independent technical documentation of the save/build format used by **Road To Gramby's (RtG)** on Roblox.
-
 
 ## Overview
 

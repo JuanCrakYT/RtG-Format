@@ -14,7 +14,7 @@ The most important distinction is between:
 
 RtG uses normal JSON arrays, which programming languages generally access using zero-based positions.
 
-However, object references inside the save format use **1-based logical indices**.
+However, object references inside the RtG save/build format use **1-based logical indices**.
 
 These are not the same thing.
 ---

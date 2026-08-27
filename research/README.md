@@ -1,6 +1,6 @@
 # Research
 
-This folder contains the research documentation produced during the reverse-engineering of the RtG save format.
+This folder contains the research documentation produced during the reverse-engineering of the RtG RtG save/build format.
 
 The documents here focus on **how the format was investigated, what has been discovered, and what is still unknown**.
 

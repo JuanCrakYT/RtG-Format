@@ -20,7 +20,7 @@ parts/
 
 Categories are based on the Road to Gramby's Wiki where applicable.
 
-The category itself does **not** constitute evidence for the internal save format. IDs, connection points, and other reverse-engineered information must be supported by the project's research.
+The category itself does **not** constitute evidence for the internal RtG save/build format. IDs, connection points, and other reverse-engineered information must be supported by the project's research.
 
 Use: `old-files/obj_ids-spanish.md` as the historical reference for object IDs and connection-point data.
 See: [`parts/parts-id.md`](parts/parts-id.md) for the consolidated Part ID reference.

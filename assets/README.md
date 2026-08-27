@@ -1,3 +1,3 @@
 # Assets
 
-This directory Contains some esencial assets.
+This directory contains some essential assets.

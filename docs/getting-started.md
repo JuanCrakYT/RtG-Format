@@ -39,7 +39,6 @@ Before changing the documentation or adding research:
 ## Important Distinction
 
 `docs/` is an introductory and navigational layer. It explains where information belongs and provides conceptual explanations.
-
 The technical format itself is documented under [`../format/`](../format/) and [`../SPECIFICATION.md`](../SPECIFICATION.md).
 
 Historical evidence is preserved under [`../old-files/`](../old-files/).

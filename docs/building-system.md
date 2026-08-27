@@ -1,6 +1,6 @@
 # Building System
 
-This document explains how the RtG building system relates to the serialized save format.
+This document explains how the RtG building system relates to the serialized RtG save/build format.
 
 The building system creates objects, connections, properties, and spatial relationships that are later represented in the save data.
 
@@ -56,6 +56,6 @@ See:
 
 The building system describes how objects are created and connected in the game.
 
-The save format describes how those objects and relationships are serialized.
+The RtG save/build format describes how those objects and relationships are serialized.
 
-Do not assume that a behavior visible in the building system is automatically part of the save format unless it is supported by evidence.
+Do not assume that a behavior visible in the building system is automatically part of the RtG save/build format unless it is supported by evidence.
