@@ -10,6 +10,10 @@ rtg-save-format/
 ├── CONTRIBUTING.md
 ├── LICENSE
 ├── structure.md
+├── assets/
+│   ├─ images/
+│   │  └─ initial-assets/
+│   └─ README.md
 ├── page/
 │   │
 │   ├── index.html
@@ -32,7 +36,7 @@ rtg-save-format/
 │   └── assets/
 │       ├── logo.png
 │       └── icons/
-│   
+│
 ├── blocks/
 │   ├── README.md
 │   └── parts/

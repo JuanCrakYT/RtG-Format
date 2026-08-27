@@ -1,3 +1,9 @@
+```html
+<p align="center">
+  <img src="assets/images/banner.svg" alt="RtG Format Banner" width="900">
+</p>
+```
+
 # RtG Save Format — Reverse-Engineered Documentation
 
 Independent technical documentation of the save/build format used by **Road To Gramby's (RtG)** on Roblox.
