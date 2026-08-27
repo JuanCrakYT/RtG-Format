@@ -1,8 +1,6 @@
-```html
 <p align="center">
-  <img src="assets/images/banner.svg" alt="RtG Format Banner" width="900">
+  <img src="assets/images/banner.svg" alt="RtG Format Banner" width="800">
 </p>
-```
 
 # RtG Save Format — Reverse-Engineered Documentation
 
