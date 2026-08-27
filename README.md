@@ -11,7 +11,6 @@ Independent technical documentation of the save/build format used by **Road To G
 ## What is RtG-Format?
 
 **RtG-Format** is an independent reverse-engineering project that documents how **Road To Gramby's (RtG)** represents, builds, serializes, and saves its constructions.
-
 The project covers the format from the building system and its internal object relationships through the structured data representation and finally to the encoded/compressed save output used by the game.
 
 ### What can you find here?
@@ -38,8 +37,7 @@ The documentation covers:
 ## Quick Start
 
 If you are new to the RtG save/build format, **start with [`SPECIFICATION.md`](SPECIFICATION.md)** for the current interpretation of the format.
-
-For a guided introduction, see [`docs/getting-started.md`](docs/getting-started.md), which provides a recommended reading path through the documentation.
+For introductory documentation, see [`docs/README.md`](docs/README.md), which provides a recommended reading path through the documentation.
 
 Other introductory resources:
 
@@ -53,10 +51,38 @@ In simple terms, the RtG save system can be understood as a pipeline:
 
 1. A build is represented internally as a collection of objects and their relationships.
 2. The building system converts those objects into structured save data.
-3. That data is represented as JSON containing the objects, connections, and properties.
-4. The resulting data is encoded/compressed into the final save output used by the game.
+3. That structured data has a JSON representation containing the objects, connections, and properties.
+4. The JSON representation is then encoded/compressed into the final save output used by the game.
 
+Conceptually:
+
+```mermaid
+flowchart TD
+    BUILD["🏗️ Build"]
+    SAVE["📦 Structured Save Data"]
+    JSON["📄 JSON Representation"]
+    ENCODING["🗜️ Encoding / Compression"]
+    OUTPUT["💾 Final Save Output"]
+
+    BUILD --> SAVE
+    SAVE --> JSON
+    JSON --> ENCODING
+    ENCODING --> OUTPUT
+
+    classDef build fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
+    classDef data fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef json fill:#319795,color:#fff,stroke:#285e61,stroke-width:2px;
+    classDef encoding fill:#dd6b20,color:#fff,stroke:#9c4221,stroke-width:2px;
+    classDef output fill:#38a169,color:#fff,stroke:#276749,stroke-width:3px;
+
+    class BUILD build;
+    class SAVE data;
+    class JSON json;
+    class ENCODING encoding;
+    class OUTPUT output;
+```
 This repository documents each stage of that process, from the building system to the final save output.
+The JSON documentation describes the structured representation of the save data before the final encoding/compression layer. The final save output is documented separately under [`compression/`](compression/).
 
 ## Documentation
 
@@ -74,8 +100,7 @@ Detailed documentation for specific parts of the format is available under [`for
 
 ### Blocks and Parts
 
-See [`blocks/`](blocks/) for the documented object/Part IDs and their categories.
-
+See [`blocks/`](blocks/parts/parts-id.md) for the documented object/Part IDs and their categories.
 The historical reverse-engineering ID research is preserved separately in [`old-files/`](old-files/).
 
 ### Compression and Encoding
@@ -101,7 +126,6 @@ See [`tools/`](tools/) for utilities related to decoding, encoding, conversion, 
 [`SPECIFICATION.md`](SPECIFICATION.md) is the main reference for the current understanding of the RtG save/build format. It combines the project's current interpretation of the format with additional data and discoveries confirmed during development.
 
 The documentation under [`format/`](format/) provides more detailed information about specific parts of the format.
-
 Historical reverse-engineering material is preserved in [`old-files/`](old-files/) for research provenance. It is not required for understanding the current format and is primarily intended for investigating how previous findings were obtained or why historical observations may differ from the current interpretation.
 
 ## Research Status
@@ -121,13 +145,11 @@ Historical observations are preserved rather than silently rewritten.
 [`old-files/`](old-files/) contains historical reverse-engineering material, including earlier specification versions, investigations, and observations.
 
 This material is preserved for research provenance and may be consulted when investigating discrepancies with the current documentation. When such a discrepancy exists, the historical material in `old-files/` has priority as evidence for investigating the discrepancy.
-
 For the current interpretation of the format, start with [`SPECIFICATION.md`](SPECIFICATION.md).
 
 ## Attribution
 
 RtG-Format is the result of independent reverse-engineering and documentation of the Road To Gramby's build/save system by JuanCrakYT.
-
 If this documentation, its discoveries, examples, or derived knowledge are used in another project, please credit:
 
 * JuanCrakYT — RtG-Format

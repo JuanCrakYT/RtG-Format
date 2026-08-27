@@ -81,6 +81,7 @@ rtg-save-format/
 │             └── README.md
 │
 ├── format/
+│   ├── README.md
 │   ├── json-structure.md
 │   ├── indexing.md
 │   ├── properties.md
