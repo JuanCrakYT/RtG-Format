@@ -139,6 +139,7 @@ The game uses the value to identify/search for the corresponding local object ty
 The exact internal lookup mechanism has not been determined.
 
 The numeric values should therefore be treated as observed identifiers rather than semantic classifications.
+See [`../format/identifiers.md`](../format/identifiers.md) for more details.
 
 > **Evidence:** Observed mappings across many object types and connection experiments.
 > **Confidence:** `CONFIRMED` for the observed behavior; `UNKNOWN` for the internal lookup implementation.
@@ -193,6 +194,7 @@ See [`../format/indexing.md`](../format/indexing.md).
 > **Discovery:** The order of objects in the root array is significant because parent references use logical object indices.
 
 Changing object order without updating references can cause a connection to resolve to a different object.
+See [`../format/indexing.md`](../format/indexing.md) for more details.
 
 > **Evidence:** Reordering experiments.
 > **Confidence:** `CONFIRMED`
@@ -205,8 +207,8 @@ Changing object order without updating references can cause a connection to reso
 > **Discovery:** `PrimaryID` identifies where the connection is made on the parent object.
 
 It may contain a numeric connection-point identifier or a UUID.
-
 Therefore, `PrimaryID` should not be interpreted as being exclusively a numeric point ID.
+See [`../format/json-structure.md`](../format/json-structure.md) for more details.
 
 > **Evidence:** Standard connection-point observations and UUID attachment experiments.
 > **Confidence:** `CONFIRMED`
@@ -355,6 +357,7 @@ The first three values represent position, while the remaining nine represent th
 > **Discovery:** The `cframe` of an `EphemeralAttachment` describes the attachment relative to the coordinate system of its host object rather than storing an independent global world position.
 
 This allows a connection to identify an arbitrary location on an object without requiring a predefined numeric connection point.
+See [`../format/properties.md`](../format/properties.md) for more details.
 
 > **Evidence:** Attachment placement experiments and reconstruction behavior.
 > **Confidence:** `CONFIRMED`
