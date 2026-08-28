@@ -1,6 +1,6 @@
 # Discoveries
 
-This document records the major discoveries made while reverse-engineering the RtG RtG save/build format.
+This document records the major discoveries made while reverse-engineering the RtG save/build format.
 
 It is a historical and evidential record, not a complete technical specification.
 

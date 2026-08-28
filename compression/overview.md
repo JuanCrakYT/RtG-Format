@@ -76,7 +76,7 @@ Encoding and compression findings should use the project's confidence terminolog
 * **UNCONFIRMED** — Observed or suspected, but insufficiently verified.
 * **HYPOTHESIS** — A proposed explanation that has not yet been demonstrated.
 
-Do not present a hypothesis or unverified algorithm as a confirmed part of the RtG RtG save/build format.
+Do not present a hypothesis or unverified algorithm as a confirmed part of the RtG save/build format.
 
 Experiments should include enough information to reproduce the observation and evaluate the evidence independently.
 
@@ -129,4 +129,4 @@ flowchart LR
     class B,D description;
 ```
 
-Keeping these two areas separate helps prevent observations about encoding or compression from being confused with the actual structure of the RtG RtG save/build format.
+Keeping these two areas separate helps prevent observations about encoding or compression from being confused with the actual structure of the RtG save/build format.

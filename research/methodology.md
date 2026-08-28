@@ -1,6 +1,6 @@
 # Methodology
 
-This document describes the methodology used to reverse-engineer the RtG RtG save/build format.
+This document describes the methodology used to reverse-engineer the RtG save/build format.
 
 The goal is not only to discover how the format works, but to produce observations that can be reproduced, compared, and distinguished from assumptions.
 
