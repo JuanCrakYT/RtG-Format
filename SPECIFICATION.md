@@ -1,10 +1,10 @@
 # RtG Save Format Specification
 
-> **Status:** Unreleased / Work in progress
+> **Status:** Current consolidated specification — Work in progress
 > **Author:** JuanCrakYT  
 > **Game:** Road To Gramby's (Roblox)
 >
-> This document is the current consolidated specification of the observed RtG RtG save/build format.
+> This document is the current consolidated specification of the observed RtG save/build format.
 >
 > Historical reverse-engineering material is preserved in [`old-files/`](old-files/) and has priority when investigating discrepancies.
 
@@ -43,8 +43,10 @@ The information documented here comes from empirical reverse engineering, contro
 
 ## 2. Root Structure
 
-An RtG build is stored as a top-level JSON array.
-Each element represents one object in the build.
+After decoding the save data to its structured representation,
+an RtG build is represented as a top-level JSON array.
+This JSON representation is an intermediate structured form of the save
+data, not necessarily the final encoded/compressed save output.
 
 ```json
 [
@@ -100,14 +102,11 @@ Splitter_3
 Splitter_4
 ```
 
-The historical object catalog is preserved in:
+The current organized Part reference is available at:
 
-* [`old-files/obj_ids-spanish.md`](old-files/obj_ids-spanish.md)
-* [`old-files/RtG_Save_Format_Specification-spanish.md`](old-files/RtG_Save_Format_Specification-spanish.md)
+- [`blocks/parts/parts-id.md`](blocks/parts/parts-id.md)
 
-The organized current Part reference is available at:
-
-* [`blocks/parts/parts-id.md`](blocks/parts/parts-id.md)
+Historical object catalogs are preserved in `old-files/` for research provenance.
 
 ---
 
@@ -490,6 +489,8 @@ flowchart TD
 The position is relative to the coordinate system of the object hosting the attachment.
 
 Changing these values changes the spatial placement of an object attached through the UUID.
+For a more detailed description of CFrame representation, see
+[`format/identifiers.md`](format/identifiers.md).
 
 ---
 
@@ -740,7 +741,7 @@ This remains a hypothesis until further evidence confirms the exact behavior.
 
 ---
 
-## 19. Historical First Save (Skippeable)
+## 19. Historical First Save (Optional)
 
 The first save analyzed during the reverse-engineering process was a minimal `SprayPaint` build:
 

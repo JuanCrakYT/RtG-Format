@@ -118,7 +118,7 @@ See [`tools/`](tools/) for utilities related to decoding, encoding, conversion, 
 
 ## Status
 
-**Specification:** Unreleased / Work in progress
+**Specification:** Current consolidated specification — Work in progress
 
 [`SPECIFICATION.md`](SPECIFICATION.md) is the main reference for the current understanding of the RtG save/build format. It combines the project's current interpretation of the format with additional data and discoveries confirmed during development.
 

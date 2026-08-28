@@ -183,7 +183,7 @@ READ STRUCTURE
 │   ├── ## 18. Hypotheses and Reconstructed Behavior
 │   │   ├── ### 18.1 Loader Pipeline
 │   │   └── ### 18.2 Sprite CFrame Behavior
-│   ├── ## 19. Historical First Save (Skippeable)
+│   ├── ## 19. Historical First Save (Optional)
 │   ├── ## 20. Evidence and Confidence
 │   │   ├── ### CONFIRMED
 │   │   ├── ### OBSERVED
