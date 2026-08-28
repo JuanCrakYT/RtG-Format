@@ -148,20 +148,26 @@ READ STRUCTURE
 │
 ├── README.md
 │   ├── # RtG Save Format — Reverse-Engineered Documentation
-│   ├── ## Overview
+│   ├── ## What is RtG-Format?
+│   │   └── ### What can you find here?
+│   ├── ## Quick Start
+│   ├── ## How the RtG Save System Works
 │   ├── ## Documentation
-│   │   ├── ### Start here
 │   │   ├── ### Format
 │   │   ├── ### Blocks and Parts
 │   │   ├── ### Compression and Encoding
 │   │   ├── ### Examples
 │   │   ├── ### Research
-│   │   └── ### Tools
-│   ├── ## Status
+│   │   ├── ### Tools
+│   │   └── ### Status
 │   ├── ## Research Status
+│   ├── ## Project Status
 │   ├── ## Historical Documentation
 │   ├── ## Attribution
-│   └── ## Credits
+│   ├── ## Credits
+│   ├── ## Web Documentation
+│   ├── ## Link Reference
+│   └── ## Repository
 │
 ├── SPECIFICATION.md
 │   ├── # RtG Save Format Specification
@@ -199,6 +205,7 @@ READ STRUCTURE
 │   │   ├── ### HYPOTHESIS
 │   │   └── ### UNKNOWN
 │   └── ## 21. Related Documentation
+│       └── ### Historical / Technical Reference
 │
 ├── CHANGELOG.md
 │   └── [headings]
@@ -208,7 +215,15 @@ READ STRUCTURE
 │
 ├── assets/
 │   └── README.md
-│       └── [pending...]
+│       └── # Assets
+│           ├── ## Directory Structure
+│           ├── ## Images
+│           │   ├── ### Banners
+│           │   ├── ### Current RtG-Format Logo
+│           │   ├── ### Official RtG Banners
+│           │   └── ### Historical Logo Versions
+│           ├── ## Asset Guidelines
+│           └── ## Related Documentation
 │
 ├── page/
 │   └── [no Markdown structure]
@@ -274,52 +289,52 @@ READ STRUCTURE
 │   │   ├── ## Related Documentation
 │   │   └── ## Scope
 │   ├── json-structure.md
-│   │   └── [headings]
+│   │   └── [pending...]
 │   ├── indexing.md
-│   │   └── [headings]
+│   │   └── [pending...]
 │   ├── properties.md
-│   │   └── [headings]
+│   │   └── [pending...]
 │   ├── identifiers.md
-│   │   └── [headings]
+│   │   └── [pending...]
 │   └── unknown-fields.md
-│       └── [headings]
+│       └── [pending...]
 │
 ├── compression/
 │   ├── README.md
-│   │   └── [headings]
+│   │   └── [pending...]
 │   ├── overview.md
-│   │   └── [headings]
+│   │   └── [pending...]
 │   ├── encoding.md
-│   │   └── [headings]
+│   │   └── [pending...]
 │   └── examples-template.md
-│       └── [headings]
+│       └── [pending...]
 │
 ├── examples/
 │   ├── README.md
-│   │   └── [headings]
+│   │   └── [pending...]
 │   ├── experiments/
 │   │   └── README.md
-│   │       └── [headings]
+│   │       └── [pending...]
 │   ├── json-examples/
 │   │   └── README.md
-│   │       └── [headings]
+│   │       └── [pending...]
 │   └── trash/
 │       └── README.md
-│           └── [headings]
+│           └── [pending...]
 │
 ├── tools/
 │   └── README.md
-│       └── [headings]
+│       └── [pending...]
 │
 ├── research/
 │   ├── README.md
-│   │   └── [headings]
+│   │   └── [pending...]
 │   ├── methodology.md
-│   │   └── [headings]
+│   │   └── [pending...]
 │   ├── discoveries.md
-│   │   └── [headings]
+│   │   └── [pending...]
 │   └── unknowns.md
-│       └── [headings]
+│       └── [pending...]
 │
 ├── old-files/
 │   ├── README.md

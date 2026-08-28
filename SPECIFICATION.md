@@ -796,5 +796,8 @@ Historical evidence is preserved in [`old-files/`](old-files/) and has priority 
 * [`research/discoveries.md`](research/discoveries.md) — Organized research discoveries.
 * [`research/unknowns.md`](research/unknowns.md) — Remaining unknowns and hypotheses.
 * [`examples/experiments/`](examples/experiments/) — Reproducible experiments.
+
+### Historical / Technical Reference
+
 * [`old-files/RtG_Save_Format_Specification-spanish.md`](old-files/RtG_Save_Format_Specification-spanish.md) — Historical specification.
 * [`old-files/obj_ids-spanish.md`](old-files/obj_ids-spanish.md) — Historical object and connection-point research.

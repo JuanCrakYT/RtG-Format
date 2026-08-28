@@ -32,7 +32,7 @@ The files inside each Experiment contain the detailed evidence. This document on
 > One or two sentences explaining what was tested and why the Experiment is relevant to the RtG save/encoding pipeline.
 
 **Experiment:**
-`examples/experiments/<experiment-name>/`
+[`../examples/experiments/<experiment-name>/`](../examples/experiments/)
 
 ### Details
 

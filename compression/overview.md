@@ -18,20 +18,17 @@ Conceptually, the process can be represented as:
 flowchart TD
     A["RtG Build"] --> B["Structured Build Data"]
     B --> C["JSON Representation"]
-    C --> D["Encoding / Compression"]
-    D --> E["Final Save Representation"]
+    C --> D["Compressed / Encoded Save Representation"]
+    D --> E["Base64 Text"]
+    E --> F["Final Save Output"]
 
-    classDef start fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
-    classDef process fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
-    classDef json fill:#38a169,color:#fff,stroke:#276749,stroke-width:2px;
-    classDef compression fill:#dd6b20,color:#fff,stroke:#9c4221,stroke-width:2px;
-    classDef final fill:#e53e3e,color:#fff,stroke:#9b2c2c,stroke-width:3px;
+    classDef root fill:#4a5568,color:#fff,stroke:#2d3748,stroke-width:3px;
+    classDef branch fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
+    classDef detail fill:#edf2f7,color:#1a202c,stroke:#a0aec0;
 
-    class A start;
-    class B process;
-    class C json;
-    class D compression;
-    class E final;
+    class A root;
+    class B,C,D,E branch;
+    class F detail;
 ```
 
 The exact implementation of each stage should only be considered confirmed when supported by direct evidence or reproducible experiments.

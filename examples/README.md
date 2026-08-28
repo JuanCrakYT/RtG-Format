@@ -10,71 +10,70 @@ This directory contains real RtG save examples, experiments, and curated minimal
 
 ## Examples
 
-Real save/build examples are stored in `examples/json-examples/`.
-Examples are intended for demonstrations, testing, and reference.
+This directory contains examples and experimental material related to the RtG save/build format.
 
-### Example structure
+The contents are separated by purpose:
 
-Each example must have its own folder:
-
-```tree
-<name>/
-│
-├── README.md
-├── example.json
-└── images-videos/
-    ├── presentation.png
-    └── ...
-```
-
-* `example.json` must contain only the save/build data.
-* Put explanations, observations, and other notes in `README.md`.
-* Images and videos related to the example go in `images-videos/`.
-* Videos must not be longer than 30 seconds.
-* If an example cannot be loaded or is otherwise invalid, its folder may be deleted.
+- `experiments/` — Reproducible experiments and controlled tests.
+- `json-examples/` — JSON examples used to demonstrate or inspect the format.
+- `trash/` — Discarded, invalid, obsolete, or otherwise non-authoritative material.
 
 ## Experiments
 
-Experiments are stored in `examples/experiments/`.
-Experiments are research records and must be preserved, including failed or inconclusive experiments.
+[`experiments/`](experiments/) contains reproducible experiments used to investigate specific behaviors of the RtG save/build format.
 
-### Experiment structure
+Experiments should document:
 
-Each experiment must have its own folder:
+- What was tested.
+- How it was tested.
+- What was changed or observed.
+- The resulting behavior.
+- Any relevant conclusions or limitations.
 
-```tree
-<name>/
-│
-├── README.md
-├── objective.md
-├── example.json
-├── images-videos/
-|   ├── presentation.png
-|   └── ...
-└── other/
-    ├── README.md
-    └── ...
-```
+This directory is intended for **reproducible research**, not for permanently discarded material.
 
-* `example.json` must contain only the relevant save/build data.
-* Put the experiment objective in `objective.md`.
-* Put results, observations, reproduction notes, and conclusions in `README.md`.
-* Additional evidence or files can be placed in `other/`.
-* If an experiment cannot be loaded, fails, or produces unexpected results, document the problem in `README.md`.
-* Experiments must NOT be deleted. Move failed or unusable experiments to `examples/trash/` instead.
-* Images and videos related to the example go in `images-videos/`.
-* Videos must not be longer than 30 seconds.
+### JSON Examples
+
+[`json-examples/`](json-examples/) contains JSON examples that help demonstrate the structure and behavior of RtG save/build data.
+
+These examples may be useful when studying:
+
+- Object structure.
+- Connections.
+- Properties.
+- References.
+- Attachments.
+- Other documented format behavior.
+
+Examples should not be treated as authoritative specifications by themselves. Confirmed format behavior belongs in the relevant documentation under `format/` or in `SPECIFICATION.md`.
 
 ### Trash
 
-See [`trash/README.md`](trash/README.md) for the rules governing preserved failed experiments.
+[`trash/`](trash/) contains material that is no longer considered useful as active documentation or examples.
+
+This may include:
+
+- Invalid experiments.
+- Failed tests.
+- Obsolete examples.
+- Superseded data.
+- Temporary research material.
+
+Files in `trash/` are preserved for historical or investigative purposes, but they should **not** be used as current evidence or technical references unless explicitly stated.
+
+### Related Documentation
+
+- [`../format/`](../format/) — Current technical documentation of the RtG save/build format.
+- [`../SPECIFICATION.md`](../SPECIFICATION.md) — Consolidated format specification.
+- [`../research/`](../research/) — Research, discoveries, methodology, and unknowns.
+- [`../blocks/`](../blocks/) — Object and part references.
 
 ## Examples vs. Experiments
-
+---
 |          | `json-examples/`        | `experiments/`   |
 | -------- | ----------------------- | ---------------- |
 | Purpose  | Demonstration/reference | Research         |
 | Failed   | May be deleted          | Move to `trash/` |
 | Evidence | Required                | Required         |
 | Results  | Optional                | Required         |
-
+---
