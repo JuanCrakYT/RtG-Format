@@ -46,7 +46,6 @@ Other introductory resources:
 * [`docs/save-anatomy.md`](docs/save-anatomy.md) — Anatomy of an RtG save
 * [`docs/building-system.md`](docs/building-system.md) — Building-system concepts
 * [`docs/faq.md`](docs/faq.md) — Frequently asked questions
-For introductory documentation, see [`docs/README.md`](docs/README.md).
 
 ## How the RtG Save System Works
 
