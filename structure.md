@@ -208,7 +208,7 @@ READ STRUCTURE
 │
 ├── assets/
 │   └── README.md
-│       └── [headings]
+│       └── [pending...]
 │
 ├── page/
 │   └── [no Markdown structure]

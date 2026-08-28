@@ -43,5 +43,6 @@ dist/
 # Local / experimental data
 *.local
 owner.todo
+owner-todo.md
 delete.*
 delete/
