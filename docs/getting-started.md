@@ -66,6 +66,7 @@ Use these sections according to what you are investigating:
 * [`../old-files/`](../old-files/) — Historical reverse-engineering material preserved for provenance.
 
 `old-files/` is not required for understanding the current format. It contains historical material that can be consulted when investigating previous findings or discrepancies with the current interpretation.
+For beginners: it's not recommended to go into [`../old-files/`](../old-files/) yet.
 
 ## Contributing
 

@@ -44,6 +44,7 @@ Other introductory resources:
 * [`docs/save-anatomy.md`](docs/save-anatomy.md) — Anatomy of an RtG save
 * [`docs/building-system.md`](docs/building-system.md) — Building-system concepts
 * [`docs/faq.md`](docs/faq.md) — Frequently asked questions
+For introductory documentation, see [`docs/README.md`](docs/README.md).
 
 ## How the RtG Save System Works
 
@@ -90,13 +91,9 @@ The JSON documentation describes the structured representation of the save data 
 
 [`SPECIFICATION.md`](SPECIFICATION.md) is the main technical specification and the primary reference for the current understanding of the format.
 
-Detailed documentation for specific parts of the format is available under [`format/`](format/):
-
-* [`format/json-structure.md`](format/json-structure.md) — JSON structure
-* [`format/indexing.md`](format/indexing.md) — Indexing and references
-* [`format/properties.md`](format/properties.md) — Object properties
-* [`format/identifiers.md`](format/identifiers.md) — Identifiers and UUIDs
-* [`format/unknown-fields.md`](format/unknown-fields.md) — Unknown or incompletely understood fields
+Detailed documentation for specific parts of the format is available under
+[`format/`](format/). See [`format/README.md`](format/README.md) for the
+complete format documentation index.
 
 ### Blocks and Parts
 

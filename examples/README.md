@@ -71,10 +71,10 @@ See [`trash/README.md`](trash/README.md) for the rules governing preserved faile
 
 ## Examples vs. Experiments
 
-|          | `json-examples/`        | `experiments/`    |
-| -------- | ----------------------- | ----------------- |
-| Purpose  | Demonstration/reference | Research          |
-| Failed   | May be deleted          | Must be preserved |
-| Evidence | Required                | Required          |
-| Results  | Optional                | Required          |
+|          | `json-examples/`        | `experiments/`   |
+| -------- | ----------------------- | ---------------- |
+| Purpose  | Demonstration/reference | Research         |
+| Failed   | May be deleted          | Move to `trash/` |
+| Evidence | Required                | Required         |
+| Results  | Optional                | Required         |
 
