@@ -54,7 +54,6 @@ Use the documents in this directory when you need more detailed information abou
 * [`../examples/`](../examples/) — Real examples and reproducible experiments.
 * [`../research/`](../research/) — Research methodology, discoveries, and unresolved questions.
 * [`../SPECIFICATION.md`](../SPECIFICATION.md) — Main consolidated technical reference.
-* [`../old-files/`](../old-files/) — Historical reverse-engineering material preserved for research provenance.
 
 ## Scope
 

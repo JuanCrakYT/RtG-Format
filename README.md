@@ -100,12 +100,13 @@ Detailed documentation for specific parts of the format is available under [`for
 
 ### Blocks and Parts
 
-See [`blocks/`](blocks/parts/parts-id.md) for the documented object/Part IDs and their categories.
+See [`blocks/parts/parts-id.md`](blocks/parts/parts-id.md) for the documented object/Part IDs and their categories.
 The historical reverse-engineering ID research is preserved separately in [`old-files/`](old-files/).
 
 ### Compression and Encoding
 
 - [`compression/encoding.md`](compression/encoding.md) — Observed encoding and final save representation
+
 ### Examples
 
 See [`examples/`](examples/) for real and reproducible save/build examples and experiments.

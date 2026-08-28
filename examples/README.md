@@ -69,7 +69,7 @@ Each experiment must have its own folder:
 
 See [`trash/README.md`](trash/README.md) for the rules governing preserved failed experiments.
 
-# Chart Rules
+## Examples vs. Experiments
 
 |          | `json-examples/`        | `experiments/`    |
 | -------- | ----------------------- | ----------------- |

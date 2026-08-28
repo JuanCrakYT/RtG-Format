@@ -1,8 +1,8 @@
-# Structure
+# Repository Structure
 
-## Text/Tree format:
+## Text/Tree Format
 ```tree
-rtg-save-format/
+RtG-Format/
 │
 ├── README.md
 ├── SPECIFICATION.md
@@ -14,10 +14,12 @@ rtg-save-format/
 │   ├─ images/
 │   │  ├─ initial-assets/
 │   │  │  └─ logo/
-│   │  │     ├─ v1/
-│   │  │     │  ├─ RtG-Format-v1.png
-│   │  │     │  └─ RtG-Format-v1.svg
+│   │  │     ├─ versions/
+│   │  │     │  └─ v1/
+│   │  │     │     ├─ RtG-Format-v1.png
+│   │  │     │     └─ RtG-Format-v1.svg
 │   │  │     ├─ RtG-Format-Shape.svg
+│   │  │     ├─ RtG-Format.png
 │   │  │     └─ RtG-Format.svg
 │   │  └─ banner.svg
 │   └─ README.md
@@ -103,7 +105,8 @@ rtg-save-format/
 │   │    ├── README.md
 │   │    └── ...
 │   └── trash/
-│        └── README.md
+│        ├── README.md
+│        └── ...
 │
 ├── tools/
 │   ├── README.md
