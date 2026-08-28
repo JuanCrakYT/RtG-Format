@@ -2,11 +2,13 @@
 
 Independent technical documentation of the save/build format used by **Road To Gramby's (RtG)** on Roblox.
 
-<p align="center">
-  <img src="assets/images/initial-assets/logo/RtG-Format.svg"
-       alt="RtG Format Banner"
-       width="800">
-</p>
+<div class="banner-container">
+  <img
+    id="rtg-banner"
+    src="assets/images/banner.svg"
+    alt="RtG-Format Banner"
+    class="banner">
+</div>
 
 ## What is RtG-Format?
 
