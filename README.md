@@ -163,6 +163,45 @@ This attribution is requested for research provenance and does not imply affilia
 
 This is an independent reverse-engineering project and is not affiliated with or endorsed by the creators of Road To Gramby's or the Road To Gramby's Wiki.
 
+<div style="text-align: center;">
+  <img
+    id="rtg-banner"
+    src="assets/images/logo/official-banners/RtG-1.webp"
+    alt="RtG"
+  >
+
+  <script>
+    (() => {
+      const images = [
+        "assets/images/logo/official-banners/RtG-1.webp",
+        "assets/images/logo/official-banners/RtG-2.webp",
+        "assets/images/logo/official-banners/RtG-3.webp",
+        "assets/images/logo/official-banners/RtG-4.webp",
+        "assets/images/logo/official-banners/RtG-5.webp"
+      ];
+
+      const banner = document.getElementById("rtg-banner");
+
+      if (!banner) return;
+
+      let index = 0;
+      let direction = 1;
+
+      setInterval(() => {
+        index += direction;
+
+        if (index === images.length - 1) {
+          direction = -1;
+        } else if (index === 0) {
+          direction = 1;
+        }
+
+        banner.src = images[index];
+      }, 150);
+    })();
+  </script>
+</div>
+
 ## Web Documentation
 
 A web-based documentation interface is available through the project's GitHub Pages deployment.

@@ -6,6 +6,7 @@ on:
     paths:
       - "page/**"
       - ".github/workflows/deploy-pages.yml"
+      - "assets/images/banner.svg"
   workflow_dispatch:
 
 permissions:
