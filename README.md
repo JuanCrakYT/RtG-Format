@@ -166,74 +166,85 @@ This is an independent reverse-engineering project and is not affiliated with or
 <div
   id="rtg-banner-scripted-container"
   style="
+    position: relative;
+    width: 100%;
     text-align: center;
-    display: block;
   "
 >
-  <div
+  <img
     id="rtg-banner-scripted"
+    src="assets/images/logo/official-banners/RtG-1.webp"
+    alt="RtG"
     style="
       display: inline-block;
-      background-image: url('assets/images/logo/official-banners/RtG-1.webp');
-      background-size: contain;
-      background-position: center;
-      background-repeat: no-repeat;
-      transition: opacity 0.35s ease;
+      opacity: 1;
     "
   >
-    <img
-      src="assets/images/logo/official-banners/RtG-1.webp"
-      alt="RtG"
-      style="
-        display: block;
-        visibility: hidden;
-      "
-    >
-  </div>
+</div>
 
-  <script>
-    (() => {
-      const banner = document.getElementById("rtg-banner-scripted");
+<script>
+(() => {
+  const banner = document.getElementById("rtg-banner-scripted");
 
-      if (!banner) return;
+  if (!banner) return;
 
-      const images = [
-        "assets/images/logo/official-banners/RtG-1.webp",
-        "assets/images/logo/official-banners/RtG-2.webp",
-        "assets/images/logo/official-banners/RtG-3.webp",
-        "assets/images/logo/official-banners/RtG-4.webp",
-        "assets/images/logo/official-banners/RtG-5.webp"
-      ];
+  const images = [
+    "assets/images/logo/official-banners/RtG-1.webp",
+    "assets/images/logo/official-banners/RtG-2.webp",
+    "assets/images/logo/official-banners/RtG-3.webp",
+    "assets/images/logo/official-banners/RtG-4.webp",
+    "assets/images/logo/official-banners/RtG-5.webp"
+  ];
 
-      images.forEach((src) => {
-        const image = new Image();
-        image.src = src;
+  images.forEach((src) => {
+    const image = new Image();
+    image.src = src;
+  });
+
+  let index = 0;
+  let direction = 1;
+
+  setInterval(() => {
+    index += direction;
+
+    if (index >= images.length - 1) {
+      index = images.length - 1;
+      direction = -1;
+    } else if (index <= 0) {
+      index = 0;
+      direction = 1;
+    }
+
+    const nextImage = new Image();
+    nextImage.src = images[index];
+
+    nextImage.onload = () => {
+      const clone = banner.cloneNode();
+      clone.src = images[index];
+
+      clone.style.position = "absolute";
+      clone.style.top = "0";
+      clone.style.left = "50%";
+      clone.style.transform = "translateX(-50%)";
+      clone.style.opacity = "0";
+      clone.style.transition = "opacity 0.35s ease";
+
+      banner.parentElement.appendChild(clone);
+
+      requestAnimationFrame(() => {
+        clone.style.opacity = "1";
+        banner.style.opacity = "0";
       });
 
-      let index = 0;
-      let direction = 1;
-
-      setInterval(() => {
-        index += direction;
-
-        if (index >= images.length - 1) {
-          index = images.length - 1;
-          direction = -1;
-        } else if (index <= 0) {
-          index = 0;
-          direction = 1;
-        }
-
-        banner.style.opacity = "0.25";
-
-        setTimeout(() => {
-          banner.style.backgroundImage = `url("${images[index]}")`;
-          banner.style.opacity = "1";
-        }, 175);
-      }, 1800);
-    })();
-  </script>
-</div>
+      setTimeout(() => {
+        banner.src = images[index];
+        banner.style.opacity = "1";
+        clone.remove();
+      }, 350);
+    };
+  }, 1800);
+})();
+</script>
 
 ## Web Documentation
 
