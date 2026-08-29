@@ -63,7 +63,9 @@
         return text;
       }
 
-      return false;
+      return `<pre><code${
+        lang ? ` class="language-${lang}"` : ""
+      }>${window.RtG.escapeHtml(text)}</code></pre>`;
     };
 
     marked.setOptions({
