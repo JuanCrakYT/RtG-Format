@@ -163,88 +163,59 @@ This attribution is requested for research provenance and does not imply affilia
 
 This is an independent reverse-engineering project and is not affiliated with or endorsed by the creators of Road To Gramby's or the Road To Gramby's Wiki.
 
-<div
-  id="rtg-banner-scripted-container"
-  style="
-    position: relative;
-    width: 100%;
-    text-align: center;
-  "
->
+<div style="text-align: center;">
   <img
     id="rtg-banner-scripted"
     src="assets/images/logo/official-banners/RtG-1.webp"
     alt="RtG"
     style="
-      display: inline-block;
       opacity: 1;
+      transition: opacity 0.25s ease;
     "
   >
-</div>
 
-<script>
-(() => {
-  const banner = document.getElementById("rtg-banner-scripted");
+  <script>
+    (() => {
+      const images = [
+        "assets/images/logo/official-banners/RtG-1.webp",
+        "assets/images/logo/official-banners/RtG-2.webp",
+        "assets/images/logo/official-banners/RtG-3.webp",
+        "assets/images/logo/official-banners/RtG-4.webp",
+        "assets/images/logo/official-banners/RtG-5.webp"
+      ];
 
-  if (!banner) return;
+      const banner = document.getElementById("rtg-banner-scripted");
 
-  const images = [
-    "assets/images/logo/official-banners/RtG-1.webp",
-    "assets/images/logo/official-banners/RtG-2.webp",
-    "assets/images/logo/official-banners/RtG-3.webp",
-    "assets/images/logo/official-banners/RtG-4.webp",
-    "assets/images/logo/official-banners/RtG-5.webp"
-  ];
+      if (!banner) return;
 
-  images.forEach((src) => {
-    const image = new Image();
-    image.src = src;
-  });
-
-  let index = 0;
-  let direction = 1;
-
-  setInterval(() => {
-    index += direction;
-
-    if (index >= images.length - 1) {
-      index = images.length - 1;
-      direction = -1;
-    } else if (index <= 0) {
-      index = 0;
-      direction = 1;
-    }
-
-    const nextImage = new Image();
-    nextImage.src = images[index];
-
-    nextImage.onload = () => {
-      const clone = banner.cloneNode();
-      clone.src = images[index];
-
-      clone.style.position = "absolute";
-      clone.style.top = "0";
-      clone.style.left = "50%";
-      clone.style.transform = "translateX(-50%)";
-      clone.style.opacity = "0";
-      clone.style.transition = "opacity 0.35s ease";
-
-      banner.parentElement.appendChild(clone);
-
-      requestAnimationFrame(() => {
-        clone.style.opacity = "1";
-        banner.style.opacity = "0";
+      // Preload images
+      images.forEach((src) => {
+        const image = new Image();
+        image.src = src;
       });
 
-      setTimeout(() => {
-        banner.src = images[index];
-        banner.style.opacity = "1";
-        clone.remove();
-      }, 350);
-    };
-  }, 1800);
-})();
-</script>
+      let index = 0;
+      let direction = 1;
+
+      setInterval(() => {
+        index += direction;
+
+        if (index === images.length - 1) {
+          direction = -1;
+        } else if (index === 0) {
+          direction = 1;
+        }
+
+        banner.style.opacity = "0";
+
+        setTimeout(() => {
+          banner.src = images[index];
+          banner.style.opacity = "1";
+        }, 250);
+      }, 1500);
+    })();
+  </script>
+</div>
 
 ## Web Documentation
 
