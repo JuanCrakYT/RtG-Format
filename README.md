@@ -173,48 +173,6 @@ This is an independent reverse-engineering project and is not affiliated with or
       transition: opacity 0.25s ease;
     "
   >
-
-  <script>
-    (() => {
-      const images = [
-        "assets/images/logo/official-banners/RtG-1.webp",
-        "assets/images/logo/official-banners/RtG-2.webp",
-        "assets/images/logo/official-banners/RtG-3.webp",
-        "assets/images/logo/official-banners/RtG-4.webp",
-        "assets/images/logo/official-banners/RtG-5.webp"
-      ];
-
-      const banner = document.getElementById("rtg-banner-scripted");
-
-      if (!banner) return;
-
-      // Preload images
-      images.forEach((src) => {
-        const image = new Image();
-        image.src = src;
-      });
-
-      let index = 0;
-      let direction = 1;
-
-      setInterval(() => {
-        index += direction;
-
-        if (index === images.length - 1) {
-          direction = -1;
-        } else if (index === 0) {
-          direction = 1;
-        }
-
-        banner.style.opacity = "0";
-
-        setTimeout(() => {
-          banner.src = images[index];
-          banner.style.opacity = "1";
-        }, 250);
-      }, 1500);
-    })();
-  </script>
 </div>
 
 ## Web Documentation
@@ -237,3 +195,41 @@ See [`page/`](page/) for the source of the documentation website.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — Contribution and documentation guidelines.
 - [`LICENSE`](LICENSE) — Project license.
 - [`structure.md`](structure.md) — Proyect Tree // Recommended for file search
+
+---
+
+```html
+<script>
+  (() => {
+    const images = [
+      "assets/images/logo/official-banners/RtG-1.webp",
+      "assets/images/logo/official-banners/RtG-2.webp",
+      "assets/images/logo/official-banners/RtG-3.webp",
+      "assets/images/logo/official-banners/RtG-4.webp",
+      "assets/images/logo/official-banners/RtG-5.webp"
+    ];
+    const banner = document.getElementById("rtg-banner-scripted");
+    if (!banner) return;
+    // Preload images
+    images.forEach((src) => {
+      const image = new Image();
+      image.src = src;
+    });
+    let index = 0;
+    let direction = 1;
+    setInterval(() => {
+      index += direction;
+      if (index === images.length - 1) {
+        direction = -1;
+      } else if (index === 0) {
+        direction = 1;
+      }
+      banner.style.opacity = "0";
+      setTimeout(() => {
+        banner.src = images[index];
+        banner.style.opacity = "1";
+      }, 250);
+    }, 1500);
+  })();
+</script>
+```
