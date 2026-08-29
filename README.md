@@ -163,38 +163,30 @@ This attribution is requested for research provenance and does not imply affilia
 
 This is an independent reverse-engineering project and is not affiliated with or endorsed by the creators of Road To Gramby's or the Road To Gramby's Wiki.
 
-<div style="text-align: center;">
+<div
+  id="rtg-banner-scripted-container"
+  style="
+    text-align: center;
+    display: block;
+  "
+>
   <div
-    id="rtg-banner-scripted-container"
+    id="rtg-banner-scripted"
     style="
-      position: relative;
       display: inline-block;
-      line-height: 0;
+      background-image: url('assets/images/logo/official-banners/RtG-1.webp');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: opacity 0.35s ease;
     "
   >
     <img
-      id="rtg-banner-scripted"
       src="assets/images/logo/official-banners/RtG-1.webp"
       alt="RtG"
       style="
         display: block;
-        opacity: 1;
-      "
-    >
-
-    <img
-      id="rtg-banner-scripted-next"
-      src="assets/images/logo/official-banners/RtG-1.webp"
-      alt=""
-      aria-hidden="true"
-      style="
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        opacity: 0;
-        transition: opacity 0.35s ease;
+        visibility: hidden;
       "
     >
   </div>
@@ -202,9 +194,8 @@ This is an independent reverse-engineering project and is not affiliated with or
   <script>
     (() => {
       const banner = document.getElementById("rtg-banner-scripted");
-      const nextBanner = document.getElementById("rtg-banner-scripted-next");
 
-      if (!banner || !nextBanner) return;
+      if (!banner) return;
 
       const images = [
         "assets/images/logo/official-banners/RtG-1.webp",
@@ -214,7 +205,6 @@ This is an independent reverse-engineering project and is not affiliated with or
         "assets/images/logo/official-banners/RtG-5.webp"
       ];
 
-      // Preload all frames.
       images.forEach((src) => {
         const image = new Image();
         image.src = src;
@@ -222,7 +212,6 @@ This is an independent reverse-engineering project and is not affiliated with or
 
       let index = 0;
       let direction = 1;
-      let showingNext = false;
 
       setInterval(() => {
         index += direction;
@@ -235,17 +224,12 @@ This is an independent reverse-engineering project and is not affiliated with or
           direction = 1;
         }
 
-        nextBanner.src = images[index];
-
-        requestAnimationFrame(() => {
-          nextBanner.style.opacity = "1";
-        });
+        banner.style.opacity = "0.25";
 
         setTimeout(() => {
-          banner.src = images[index];
-          nextBanner.style.opacity = "0";
-        }, 350);
-
+          banner.style.backgroundImage = `url("${images[index]}")`;
+          banner.style.opacity = "1";
+        }, 175);
       }, 1800);
     })();
   </script>
