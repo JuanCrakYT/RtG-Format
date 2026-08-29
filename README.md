@@ -171,12 +171,11 @@ See [`page/`](page/) for the source of the documentation website.
 ## Link Reference
 
 **Road To Gramby's Wiki:**
-
 [https://road-to-grambys.fandom.com/wiki/Road_to_Gramby%27s_%F0%9F%91%B5_Wiki](https://road-to-grambys.fandom.com/wiki/Road_to_Gramby%27s_%F0%9F%91%B5_Wiki)
 
 **JuanCrakYT — RtG-Format:**
-
 [https://github.com/JuanCrakYT/RtG-Format](https://github.com/JuanCrakYT/RtG-Format)
+[JuanCrakYT.github.io/RtG-Format](https://juancrakyt.github.io/RtG-Format/)
 
 ## Repository
 
