@@ -166,7 +166,7 @@ This is an independent reverse-engineering project and is not affiliated with or
 <div style="text-align: center;">
   <img
     id="rtg-banner"
-    src="assets/images/logo/official-banners/RtG-1.webp"
+    src="https://raw.githubusercontent.com/JuanCrakYT/RtG-Format/main/assets/images/logo/official-banners/RtG-1.webp"
     alt="RtG"
     style="
       opacity: 1;
@@ -177,18 +177,18 @@ This is an independent reverse-engineering project and is not affiliated with or
   <script>
     (() => {
       const images = [
-        "assets/images/logo/official-banners/RtG-1.webp",
-        "assets/images/logo/official-banners/RtG-2.webp",
-        "assets/images/logo/official-banners/RtG-3.webp",
-        "assets/images/logo/official-banners/RtG-4.webp",
-        "assets/images/logo/official-banners/RtG-5.webp"
+        "https://raw.githubusercontent.com/JuanCrakYT/RtG-Format/main/assets/images/logo/official-banners/RtG-1.webp",
+        "https://raw.githubusercontent.com/JuanCrakYT/RtG-Format/main/assets/images/logo/official-banners/RtG-2.webp",
+        "https://raw.githubusercontent.com/JuanCrakYT/RtG-Format/main/assets/images/logo/official-banners/RtG-3.webp",
+        "https://raw.githubusercontent.com/JuanCrakYT/RtG-Format/main/assets/images/logo/official-banners/RtG-4.webp",
+        "https://raw.githubusercontent.com/JuanCrakYT/RtG-Format/main/assets/images/logo/official-banners/RtG-5.webp"
       ];
 
       const banner = document.getElementById("rtg-banner");
 
       if (!banner) return;
 
-      // Preload images
+      // Preload every frame.
       images.forEach((src) => {
         const image = new Image();
         image.src = src;
@@ -200,9 +200,9 @@ This is an independent reverse-engineering project and is not affiliated with or
       setInterval(() => {
         index += direction;
 
-        if (index === images.length - 1) {
+        if (index >= images.length - 1) {
           direction = -1;
-        } else if (index === 0) {
+        } else if (index <= 0) {
           direction = 1;
         }
 
