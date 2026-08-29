@@ -11,7 +11,7 @@ If current documentation disagrees with an `old-files/` document, the discrepanc
 
 ## Historical Documentation
 
-[`old-files/`](old-files/) contains historical reverse-engineering material preserved for research provenance.
+[`old-files/`](./) contains historical reverse-engineering material preserved for research provenance.
 `SPECIFICATION.md` and `format/` provide the current consolidated presentation of the format.
 When a discrepancy exists between current documentation and historical material, the historical material in `old-files/` has priority as evidence and must be investigated before changing the current interpretation.
 Historical files may contain earlier terminology, incomplete investigations, or hypotheses that were later refined. Their priority applies to the historical evidence they contain, not to assumptions that are no longer supported by the evidence.

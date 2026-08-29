@@ -1,4 +1,7 @@
 # Repository Structure
+This document describes the current structure of the RtG-Format repository.
+
+The tree below reflects the repository's current organization and is intended to help contributors and readers understand where documentation, research, assets, examples, tools, and website files are located.
 
 ## Text/Tree Format
 ```tree
@@ -87,6 +90,7 @@ RtG-Format/
 │        │    ├── parts-id.md
 │        │    └── README.md
 │        └── wiring/
+│             ├── imgs/
 │             ├── parts-id.md
 │             └── README.md
 │
