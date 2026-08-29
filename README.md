@@ -182,4 +182,4 @@ See [`page/`](page/) for the source of the documentation website.
 - [`CHANGELOG.md`](CHANGELOG.md) — History of documented project changes.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — Contribution and documentation guidelines.
 - [`LICENSE`](LICENSE) — Project license.
-- [`structure.md`](structure.md) — Proyect Tree
+- [`structure.md`](structure.md) — Proyect Tree // Recommended for file search
