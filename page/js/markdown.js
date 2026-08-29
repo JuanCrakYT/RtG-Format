@@ -62,7 +62,8 @@
 
     const cleanHtml = DOMPurify.sanitize(marked.parse(markdown), {
       ADD_TAGS: ["script"],
-      ADD_ATTR: ["target"]
+      ADD_ATTR: ["target"],
+      FORBID_CONTENTS: []
     });
 
     const container = document.createElement("div");
