@@ -163,51 +163,68 @@ This attribution is requested for research provenance and does not imply affilia
 
 This is an independent reverse-engineering project and is not affiliated with or endorsed by the creators of Road To Gramby's or the Road To Gramby's Wiki.
 
-<div class="rtg-banner-animation" style="
-  position: relative;
-  display: inline-block;
-  line-height: 0;
-  overflow: hidden;
-">
-  <img
-    src="https://raw.githubusercontent.com/JuanCrakYT/RtG-Format/main/assets/images/logo/official-banners/RtG-1.webp"
-    alt="RtG"
+<div style="text-align: center;">
+  <div
+    id="rtg-banner-scripted-container"
     style="
-      display: block;
-      width: 100%;
-      height: auto;
+      position: relative;
+      display: inline-block;
+      line-height: 0;
     "
   >
+    <img
+      id="rtg-banner-scripted"
+      src="assets/images/logo/official-banners/RtG-1.webp"
+      alt="RtG"
+      style="
+        display: block;
+        opacity: 1;
+      "
+    >
+
+    <img
+      id="rtg-banner-scripted-next"
+      src="assets/images/logo/official-banners/RtG-1.webp"
+      alt=""
+      aria-hidden="true"
+      style="
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        opacity: 0;
+        transition: opacity 0.35s ease;
+      "
+    >
+  </div>
 
   <script>
     (() => {
-      const container = document.currentScript.parentElement;
-      const current = container.querySelector("img");
+      const banner = document.getElementById("rtg-banner-scripted");
+      const nextBanner = document.getElementById("rtg-banner-scripted-next");
 
-      if (!container || !current) return;
+      if (!banner || !nextBanner) return;
 
       const images = [
-        "https://raw.githubusercontent.com/JuanCrakYT/RtG-Format/main/assets/images/logo/official-banners/RtG-1.webp",
-        "https://raw.githubusercontent.com/JuanCrakYT/RtG-Format/main/assets/images/logo/official-banners/RtG-2.webp",
-        "https://raw.githubusercontent.com/JuanCrakYT/RtG-Format/main/assets/images/logo/official-banners/RtG-3.webp",
-        "https://raw.githubusercontent.com/JuanCrakYT/RtG-Format/main/assets/images/logo/official-banners/RtG-4.webp",
-        "https://raw.githubusercontent.com/JuanCrakYT/RtG-Format/main/assets/images/logo/official-banners/RtG-5.webp"
+        "assets/images/logo/official-banners/RtG-1.webp",
+        "assets/images/logo/official-banners/RtG-2.webp",
+        "assets/images/logo/official-banners/RtG-3.webp",
+        "assets/images/logo/official-banners/RtG-4.webp",
+        "assets/images/logo/official-banners/RtG-5.webp"
       ];
-
-      let index = 0;
-      let direction = 1;
-      let transitioning = false;
 
       // Preload all frames.
       images.forEach((src) => {
-        const img = new Image();
-        img.src = src;
+        const image = new Image();
+        image.src = src;
       });
 
-      function changeFrame() {
-        if (transitioning) return;
-        transitioning = true;
+      let index = 0;
+      let direction = 1;
+      let showingNext = false;
 
+      setInterval(() => {
         index += direction;
 
         if (index >= images.length - 1) {
@@ -218,35 +235,18 @@ This is an independent reverse-engineering project and is not affiliated with or
           direction = 1;
         }
 
-        const next = document.createElement("img");
-
-        next.src = images[index];
-        next.alt = current.alt;
-
-        next.style.position = "absolute";
-        next.style.inset = "0";
-        next.style.width = "100%";
-        next.style.height = "100%";
-        next.style.objectFit = "contain";
-        next.style.opacity = "0";
-        next.style.transition = "opacity 0.35s ease";
-
-        container.appendChild(next);
+        nextBanner.src = images[index];
 
         requestAnimationFrame(() => {
-          next.style.opacity = "1";
-          current.style.opacity = "0";
+          nextBanner.style.opacity = "1";
         });
 
         setTimeout(() => {
-          current.src = images[index];
-          current.style.opacity = "1";
-          next.remove();
-          transitioning = false;
+          banner.src = images[index];
+          nextBanner.style.opacity = "0";
         }, 350);
-      }
 
-      setInterval(changeFrame, 1800);
+      }, 1800);
     })();
   </script>
 </div>
