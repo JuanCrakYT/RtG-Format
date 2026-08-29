@@ -163,19 +163,29 @@ This attribution is requested for research provenance and does not imply affilia
 
 This is an independent reverse-engineering project and is not affiliated with or endorsed by the creators of Road To Gramby's or the Road To Gramby's Wiki.
 
-<div style="text-align: center;">
+<div class="rtg-banner-animation" style="
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+  overflow: hidden;
+">
   <img
-    id="rtg-banner"
     src="https://raw.githubusercontent.com/JuanCrakYT/RtG-Format/main/assets/images/logo/official-banners/RtG-1.webp"
     alt="RtG"
     style="
-      opacity: 1;
-      transition: opacity 0.25s ease;
+      display: block;
+      width: 100%;
+      height: auto;
     "
   >
 
   <script>
     (() => {
+      const container = document.currentScript.parentElement;
+      const current = container.querySelector("img");
+
+      if (!container || !current) return;
+
       const images = [
         "https://raw.githubusercontent.com/JuanCrakYT/RtG-Format/main/assets/images/logo/official-banners/RtG-1.webp",
         "https://raw.githubusercontent.com/JuanCrakYT/RtG-Format/main/assets/images/logo/official-banners/RtG-2.webp",
@@ -184,35 +194,59 @@ This is an independent reverse-engineering project and is not affiliated with or
         "https://raw.githubusercontent.com/JuanCrakYT/RtG-Format/main/assets/images/logo/official-banners/RtG-5.webp"
       ];
 
-      const banner = document.getElementById("rtg-banner");
-
-      if (!banner) return;
-
-      // Preload every frame.
-      images.forEach((src) => {
-        const image = new Image();
-        image.src = src;
-      });
-
       let index = 0;
       let direction = 1;
+      let transitioning = false;
 
-      setInterval(() => {
+      // Preload all frames.
+      images.forEach((src) => {
+        const img = new Image();
+        img.src = src;
+      });
+
+      function changeFrame() {
+        if (transitioning) return;
+        transitioning = true;
+
         index += direction;
 
         if (index >= images.length - 1) {
+          index = images.length - 1;
           direction = -1;
         } else if (index <= 0) {
+          index = 0;
           direction = 1;
         }
 
-        banner.style.opacity = "0";
+        const next = document.createElement("img");
+
+        next.src = images[index];
+        next.alt = current.alt;
+
+        next.style.position = "absolute";
+        next.style.inset = "0";
+        next.style.width = "100%";
+        next.style.height = "100%";
+        next.style.objectFit = "contain";
+        next.style.opacity = "0";
+        next.style.transition = "opacity 0.35s ease";
+
+        container.appendChild(next);
+
+        requestAnimationFrame(() => {
+          next.style.opacity = "1";
+          current.style.opacity = "0";
+        });
 
         setTimeout(() => {
-          banner.src = images[index];
-          banner.style.opacity = "1";
-        }, 250);
-      }, 1500);
+          current.src = images[index];
+          current.style.opacity = "1";
+          next.remove();
+          transitioning = false;
+        }, 350);
+      }
+
+      setInterval(changeFrame, 1800);
     })();
   </script>
 </div>
