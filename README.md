@@ -163,17 +163,57 @@ This attribution is requested for research provenance and does not imply affilia
 
 This is an independent reverse-engineering project and is not affiliated with or endorsed by the creators of Road To Gramby's or the Road To Gramby's Wiki.
 
-<div>
-  <img id="rtg-test" src="https://raw.githubusercontent.com/JuanCrakYT/RtG-Format/main/assets/images/logo/official-banners/RtG-1.webp">
+<div style="text-align: center;">
+  <img
+    id="rtg-banner"
+    src="assets/images/logo/official-banners/RtG-1.webp"
+    alt="RtG"
+    style="
+      opacity: 1;
+      transition: opacity 0.25s ease;
+    "
+  >
 
   <script>
-    console.log("SCRIPT DEL README EJECUTADO");
+    (() => {
+      const images = [
+        "assets/images/logo/official-banners/RtG-1.webp",
+        "assets/images/logo/official-banners/RtG-2.webp",
+        "assets/images/logo/official-banners/RtG-3.webp",
+        "assets/images/logo/official-banners/RtG-4.webp",
+        "assets/images/logo/official-banners/RtG-5.webp"
+      ];
 
-    const img = document.getElementById("rtg-test");
+      const banner = document.getElementById("rtg-banner");
 
-    setTimeout(() => {
-      img.src = "https://raw.githubusercontent.com/JuanCrakYT/RtG-Format/main/assets/images/logo/official-banners/RtG-2.webp";
-    }, 1000);
+      if (!banner) return;
+
+      // Preload images
+      images.forEach((src) => {
+        const image = new Image();
+        image.src = src;
+      });
+
+      let index = 0;
+      let direction = 1;
+
+      setInterval(() => {
+        index += direction;
+
+        if (index === images.length - 1) {
+          direction = -1;
+        } else if (index === 0) {
+          direction = 1;
+        }
+
+        banner.style.opacity = "0";
+
+        setTimeout(() => {
+          banner.src = images[index];
+          banner.style.opacity = "1";
+        }, 250);
+      }, 1500);
+    })();
   </script>
 </div>
 
