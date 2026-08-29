@@ -60,9 +60,26 @@
       renderer
     });
 
-    return DOMPurify.sanitize(marked.parse(markdown), {
+    const cleanHtml = DOMPurify.sanitize(marked.parse(markdown), {
+      ADD_TAGS: ["script"],
       ADD_ATTR: ["target"]
     });
+
+    const container = document.createElement("div");
+    container.innerHTML = cleanHtml;
+
+    container.querySelectorAll("script").forEach((oldScript) => {
+      const newScript = document.createElement("script");
+
+      for (const attribute of oldScript.attributes) {
+        newScript.setAttribute(attribute.name, attribute.value);
+      }
+
+      newScript.textContent = oldScript.textContent;
+      oldScript.replaceWith(newScript);
+    });
+
+    return container.innerHTML;
   }
 
   window.RtGMarkdown = { render };
