@@ -1,0 +1,3 @@
+[submodule "tools/RtG Image"]
+	path = tools/RtG Image
+	url = https://github.com/JuanCrakYT/RtG-Image.git
