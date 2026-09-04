@@ -1,0 +1,88 @@
+RtG Image/
+├─ .vscode/
+│  └─ settings.json
+├─ assets/
+│  ├─ canvas/
+│  │  ├─ __init__.py
+│  │  ├─ canvas_base64.txt
+│  │  ├─ canvas_index.txt
+│  │  ├─ canvas.json
+│  │  └─ canvas.py
+│  ├─ default/
+│  │  ├─ output_asset.txt
+│  │  └─ output_converted_asset.txt
+│  ├─ __init__.py
+│  └─ index.txt
+├─ convert/
+│  ├─ converter.py
+│  └─ inspect_asset.py
+├─ Design/
+│  ├─ create_icon_and_shortcut.py
+│  ├─ desktop.ini
+│  ├─ logotipe.ico
+│  └─ logotipe.png
+├─ load_img/
+│  └─ image_loader.py
+├─ output/
+├─ tests/
+│  ├─ test_canvas_generation.py
+│  └─ test_converter.py
+├─ tmp_test_output/
+│  ├─ canvas_base64.txt
+│  ├─ canvas_index.txt
+│  └─ canvas.json
+├─ tmp_test_output_rect/
+│  ├─ canvas_base64.txt
+│  ├─ canvas_index.txt
+│  └─ canvas.json
+├─ tmp_validate/
+│  ├─ 128x128/
+│  │  ├─ canvas_base64.txt
+│  │  ├─ canvas_index.txt
+│  │  └─ canvas.json
+│  ├─ 12x18/
+│  │  ├─ canvas_base64.txt
+│  │  ├─ canvas_index.txt
+│  │  └─ canvas.json
+│  ├─ 32x32/
+│  │  ├─ canvas_base64.txt
+│  │  ├─ canvas_index.txt
+│  │  └─ canvas.json
+│  ├─ 5x5/
+│  │  ├─ canvas_base64.txt
+│  │  ├─ canvas_index.txt
+│  │  └─ canvas.json
+│  └─ 64x32/
+│     ├─ canvas_base64.txt
+│     ├─ canvas_index.txt
+│     └─ canvas.json
+├─ tmp_validate2/
+│  ├─ 128x128/
+│  │  ├─ canvas_base64.txt
+│  │  ├─ canvas_index.txt
+│  │  └─ canvas.json
+│  ├─ 12x18/
+│  │  ├─ canvas_base64.txt
+│  │  ├─ canvas_index.txt
+│  │  └─ canvas.json
+│  ├─ 32x32/
+│  │  ├─ canvas_base64.txt
+│  │  ├─ canvas_index.txt
+│  │  └─ canvas.json
+│  ├─ 5x5/
+│  │  ├─ canvas_base64.txt
+│  │  ├─ canvas_index.txt
+│  │  └─ canvas.json
+│  └─ 64x32/
+│     ├─ canvas_base64.txt
+│     ├─ canvas_index.txt
+│     └─ canvas.json
+├─ ui/
+│  ├─ clipboard.py
+│  └─ ui.py
+├─ AGENTS.md
+├─ canvas.py
+├─ main.py
+├─ README.md
+├─ RtG Image.zip
+└─ tmp_run_tests.py

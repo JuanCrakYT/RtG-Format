@@ -32,7 +32,8 @@ RtG-Format/
 │   │  │  └─ RtG-Format.svg
 │   │  ├─ banner.jpeg
 │   │  ├─ banner.png
-│   │  └─ banner.svg
+│   │  ├─ banner.svg
+│   │  └─ RtG.png
 │   └─ README.md
 │
 ├── page/
@@ -122,7 +123,13 @@ RtG-Format/
 │
 ├── tools/
 │   ├── README.md
+│   ├── dedicated-structure/
+│   │    ├── README.md
+│   │    └── RtG-Image.tree
+│   ├── RtG-Image/
+│   │    └── ...
 │   └── agent/
+│        ├── README.md
 │        ├── parts_diff.py
 │        └── regenerate_parts.py
 │
