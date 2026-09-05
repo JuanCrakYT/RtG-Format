@@ -811,6 +811,28 @@ Cantidad de IDs encontrados: 1
 | ID  | Nombre | Lado | Descripción                                       |
 | --- | ------ | ---- | ------------------------------------------------- |
 | 2   | Hands  | Top  | Punto de conexión donde el YibYib agarra objetos. |
+
+### 45. Base
+
+Cantidad de IDs encontrados: 5
+
+| ID  | Nombre | Lado   | Descripción                                      |
+| --- | ------ | ------ | ------------------------------------------------ |
+| 4   | Front  | Front  | Punto de conexión ubicado en la parte frontal.  |
+| 5   | Top    | Top    | Punto de conexión ubicado en la parte superior. |
+| 6   | Bottom | Bottom | Punto de conexión ubicado en la parte inferior. |
+| 2   | Right  | Right  | Punto de conexión ubicado en el lado derecho.   |
+| 1   | Left   | Left   | Punto de conexión ubicado en el lado izquierdo. |
+
+> Notas:
+
+>> `Base` posee cinco puntos de conexión, distribuidos en sus cuatro lados y la parte frontal.
+>> El ID 4 corresponde al punto frontal y está asociado con el color rojo.
+>> El ID 5 corresponde al punto superior y está asociado con el color amarillo.
+>> El ID 6 corresponde al punto inferior y está asociado con el color verde.
+>> El ID 2 corresponde al punto derecho y está asociado con el color azul.
+>> El ID 1 corresponde al punto izquierdo y no presenta color asociado.
+
 ---
 
 ## Objetos sin puntos de conexión propios
