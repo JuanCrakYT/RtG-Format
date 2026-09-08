@@ -25,6 +25,9 @@ assets/
 │           └── v1/
 │               ├── RtG-Format-v1.svg
 │               └── RtG-Format-v1.png
+├── models/
+│   ├─ Fricklet.obj
+│   └─ teeth.obj
 ```
 
 ## Images
@@ -74,6 +77,8 @@ The current historical version is stored under [`images/logo/versions/v1/`](imag
 * [`RtG-Format-v1.png`](images/logo/versions/v1/RtG-Format-v1.png)
 
 These files are **obsolete** and should not be used for new project materials or branding.
+
+## Models
 
 ## Asset Guidelines
 
