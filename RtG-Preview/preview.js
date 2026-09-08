@@ -228,9 +228,9 @@
                     state.animationId = requestAnimationFrame(animate);
                     renderer.render(scene, camera);
                 }
-                animate();
 
                 state = { container: container, scene: scene, camera: camera, renderer: renderer, animationId: 0, resizeHandler: resizeHandler };
+                animate();
             }).catch(function(err) {
                 showError('Initialization failed: ' + err.message);
             });
