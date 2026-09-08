@@ -201,6 +201,7 @@
         var spherical = { theta: 0, phi: Math.PI / 3, radius: 5 };
         var targetPoint = target || new THREE.Vector3(0, 0, 0);
         var moveState = { forward: false, backward: false, left: false, right: false };
+        var pinchState = { active: false, lastDistance: 0 };
 
         function getForward() {
             var forward = new THREE.Vector3();
@@ -212,7 +213,7 @@
 
         function getRight() {
             var forward = getForward();
-            return new THREE.Vector3().crossVectors(new THREE.Vector3(0, 1, 0), forward).normalize();
+            return new THREE.Vector3().crossVectors(new THREE.Vector3(0, 1, 0), forward).normalize().multiplyScalar(-1);
         }
 
         function updateCameraPosition() {
@@ -240,13 +241,43 @@
             }
         }
 
+        function getTouchDistance(event) {
+            if (event.touches && event.touches.length === 2) {
+                var dx = event.touches[0].clientX - event.touches[1].clientX;
+                var dy = event.touches[0].clientY - event.touches[1].clientY;
+                return Math.sqrt(dx * dx + dy * dy);
+            }
+            return 0;
+        }
+
         container.addEventListener('pointerdown', function(event) {
+            if (event.pointerType === 'touch' && event.isPrimary === false) {
+                return;
+            }
+
+            if (event.pointerType === 'touch' && getTouchDistance(event) > 0) {
+                pinchState.active = true;
+                pinchState.lastDistance = getTouchDistance(event);
+                return;
+            }
+
             isDragging = true;
             previousPointerPosition = { x: event.clientX, y: event.clientY };
             container.setPointerCapture(event.pointerId);
         });
 
         container.addEventListener('pointermove', function(event) {
+            if (pinchState.active) {
+                var distance = getTouchDistance(event);
+                if (pinchState.lastDistance > 0 && distance > 0) {
+                    var scale = pinchState.lastDistance / distance;
+                    spherical.radius = Math.max(0.5, Math.min(50, spherical.radius * scale));
+                    updateCameraPosition();
+                }
+                pinchState.lastDistance = distance;
+                return;
+            }
+
             if (!isDragging) return;
 
             var deltaX = event.clientX - previousPointerPosition.x;
@@ -260,9 +291,22 @@
         });
 
         container.addEventListener('pointerup', function(event) {
+            if (pinchState.active) {
+                pinchState.active = false;
+                pinchState.lastDistance = 0;
+                return;
+            }
+
             isDragging = false;
             container.releasePointerCapture(event.pointerId);
         });
+
+        container.addEventListener('wheel', function(event) {
+            event.preventDefault();
+            var zoomSpeed = 0.0015;
+            spherical.radius = Math.max(0.5, Math.min(50, spherical.radius * (1 + event.deltaY * zoomSpeed)));
+            updateCameraPosition();
+        }, { passive: false });
 
         window.addEventListener('keydown', function(event) {
             var key = event.key.toLowerCase();
@@ -294,6 +338,8 @@
                 moveState.backward = false;
                 moveState.left = false;
                 moveState.right = false;
+                pinchState.active = false;
+                pinchState.lastDistance = 0;
                 if (state.keyboardRAF) {
                     cancelAnimationFrame(state.keyboardRAF);
                 }
