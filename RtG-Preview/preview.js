@@ -2,7 +2,8 @@
     'use strict';
 
     var THREE_CDN = 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/';
-    var previewScriptSrc = document.currentScript ? document.currentScript.src : '';
+    var resolveReady = null;
+    var rejectReady = null;
     var state = null;
 
     function loadScript(url) {
@@ -15,16 +16,29 @@
         });
     }
 
-    function loadDependencies() {
-        return loadScript(THREE_CDN + 'build/three.min.js')
-            .then(function() {
-                return loadScript(THREE_CDN + 'examples/js/loaders/OBJLoader.js');
-            });
+    function showError(message) {
+        var el = document.createElement('div');
+        el.style.cssText = 'position:fixed;top:0;left:0;width:100%;padding:12px;background:#b00020;color:white;font-family:Arial,sans-serif;font-size:14px;z-index:99999;';
+        el.textContent = 'RtG-Preview: ' + message;
+        document.body.appendChild(el);
+        console.error('RtG-Preview: ' + message);
     }
 
     function resolveAssetUrl(type, extension) {
-        if (previewScriptSrc) {
-            return previewScriptSrc.replace(/\/RtG-Preview\/preview\.js$/, '/') + 'assets/models/' + type + '.' + extension;
+        var src = '';
+        if (document.currentScript && document.currentScript.src) {
+            src = document.currentScript.src;
+        } else {
+            var scripts = document.getElementsByTagName('script');
+            for (var i = scripts.length - 1; i >= 0; i--) {
+                if (scripts[i].src && scripts[i].src.indexOf('RtG-Preview/preview.js') !== -1) {
+                    src = scripts[i].src;
+                    break;
+                }
+            }
+        }
+        if (src) {
+            return src.replace(/\/RtG-Preview\/preview\.js$/, '/') + 'assets/models/' + type + '.' + extension;
         }
         return 'assets/models/' + type + '.' + extension;
     }
@@ -150,6 +164,10 @@
                 }
             };
 
+            xhr.onerror = function() {
+                reject(new Error('Network error loading ' + url));
+            };
+
             xhr.send();
         });
     }
@@ -166,8 +184,9 @@
     }
 
     window.RtGPreview = {
-        ready: new Promise(function(resolve) {
-            window.RtGPreview._resolveReady = resolve;
+        ready: new Promise(function(resolve, reject) {
+            resolveReady = resolve;
+            rejectReady = reject;
         }),
 
         render: function(build) {
@@ -189,11 +208,13 @@
                 var objects = parseBuild(build);
 
                 var promises = objects.map(function(objData) {
-                    return loadModel(scene, objData.type);
+                    return loadModel(scene, objData.type).catch(function(err) {
+                        showError('Failed to load model "' + objData.type + '": ' + err.message);
+                        throw err;
+                    });
                 });
 
                 Promise.all(promises).catch(function(err) {
-                    console.error('Some models failed to load:', err);
                 });
 
                 var resizeHandler = function() {
@@ -210,6 +231,8 @@
                 animate();
 
                 state = { container: container, scene: scene, camera: camera, renderer: renderer, animationId: 0, resizeHandler: resizeHandler };
+            }).catch(function(err) {
+                showError('Initialization failed: ' + err.message);
             });
         }
     };
@@ -217,10 +240,19 @@
     function bootstrap() {
         loadDependencies()
             .then(function() {
-                window.RtGPreview._resolveReady();
+                resolveReady();
             })
             .catch(function(error) {
                 console.error('Failed to initialize RtG-Preview:', error);
+                showError('Initialization failed: ' + error.message);
+                rejectReady(error);
+            });
+    }
+
+    function loadDependencies() {
+        return loadScript(THREE_CDN + 'build/three.min.js')
+            .then(function() {
+                return loadScript(THREE_CDN + 'examples/js/loaders/OBJLoader.js');
             });
     }
 
