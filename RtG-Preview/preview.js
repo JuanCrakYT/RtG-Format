@@ -5,11 +5,6 @@
     var resolveReady = null;
     var rejectReady = null;
     var state = null;
-    var previewScriptSrc = '';
-
-    function log(msg) {
-        console.log('[RtGPreview] ' + msg);
-    }
 
     function fatal(message) {
         try {
@@ -23,17 +18,10 @@
 
     function loadScript(url) {
         return new Promise(function(resolve, reject) {
-            log('loadScript start ' + url);
             var script = document.createElement('script');
             script.src = url;
-            script.onload = function() {
-                log('loadScript ok ' + url);
-                resolve();
-            };
-            script.onerror = function() {
-                log('loadScript fail ' + url);
-                reject(new Error('Failed to load: ' + url));
-            };
+            script.onload = resolve;
+            script.onerror = function() { reject(new Error('Failed to load: ' + url)); };
             document.head.appendChild(script);
         });
     }
@@ -68,12 +56,8 @@
         var center = box.getCenter(new THREE.Vector3());
         var size = box.getSize(new THREE.Vector3());
         var maxDim = Math.max(size.x, size.y, size.z);
-        log('fitObjectToView size=' + size.x + ',' + size.y + ',' + size.z + ' max=' + maxDim);
 
-        if (!isFinite(maxDim) || maxDim === 0) {
-            log('fitObjectToView skipped');
-            return;
-        }
+        if (!isFinite(maxDim) || maxDim === 0) return;
 
         var targetSize = 3;
         var scale = targetSize / maxDim;
@@ -82,10 +66,33 @@
         object.scale.set(scale, scale, scale);
     }
 
+    function frameBuild(camera, objects) {
+        var box = new THREE.Box3();
+        for (var i = 0; i < objects.length; i++) {
+            box.expandByObject(objects[i]);
+        }
+        if (box.isEmpty()) return new THREE.Vector3(0, 0, 0);
+
+        var center = box.getCenter(new THREE.Vector3());
+        var size = box.getSize(new THREE.Vector3());
+        var maxDim = Math.max(size.x, size.y, size.z);
+
+        if (!isFinite(maxDim) || maxDim === 0) return center;
+
+        var fov = camera.fov * (Math.PI / 180);
+        var distance = maxDim / (2 * Math.tan(fov / 2));
+        distance *= 1.8;
+
+        var direction = new THREE.Vector3().copy(camera.position).normalize();
+        camera.position.copy(center).add(direction.multiplyScalar(distance));
+        camera.lookAt(center);
+
+        return center;
+    }
+
     function createScene(container) {
         var width = container.clientWidth || 1;
         var height = container.clientHeight || 1;
-        log('createScene container=' + width + 'x' + height);
 
         var scene = new THREE.Scene();
         scene.background = new THREE.Color(0x1a1a2e);
@@ -98,8 +105,6 @@
         renderer.setPixelRatio(window.devicePixelRatio || 1);
         container.appendChild(renderer.domElement);
 
-        log('WebGL canvas=' + renderer.domElement.width + 'x' + renderer.domElement.height);
-
         var ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
         scene.add(ambientLight);
 
@@ -110,17 +115,17 @@
         return { scene: scene, camera: camera, renderer: renderer };
     }
 
-    function setupInteraction(container, camera) {
+    function setupInteraction(container, camera, target) {
         var isDragging = false;
         var previousPointerPosition = { x: 0, y: 0 };
         var spherical = { theta: 0, phi: Math.PI / 3, radius: 5 };
+        var targetPoint = target || new THREE.Vector3(0, 0, 0);
 
         function updateCameraPosition() {
-            camera.position.x = spherical.radius * Math.sin(spherical.phi) * Math.sin(spherical.theta);
-            camera.position.y = spherical.radius * Math.cos(spherical.phi);
-            camera.position.z = spherical.radius * Math.sin(spherical.phi) * Math.cos(spherical.theta);
-            camera.lookAt(0, 0, 0);
-            log('Camera pos=' + camera.position.x.toFixed(3) + ',' + camera.position.y.toFixed(3) + ',' + camera.position.z.toFixed(3));
+            camera.position.x = targetPoint.x + spherical.radius * Math.sin(spherical.phi) * Math.sin(spherical.theta);
+            camera.position.y = targetPoint.y + spherical.radius * Math.cos(spherical.phi);
+            camera.position.z = targetPoint.z + spherical.radius * Math.sin(spherical.phi) * Math.cos(spherical.theta);
+            camera.lookAt(targetPoint);
         }
 
         container.addEventListener('pointerdown', function(event) {
@@ -151,7 +156,6 @@
     }
 
     function parseBuild(build) {
-        log('parseBuild input=' + JSON.stringify(build));
         if (!Array.isArray(build)) {
             throw new Error('Build must be an array');
         }
@@ -170,22 +174,17 @@
     function loadModel(scene, type) {
         return new Promise(function(resolve, reject) {
             var url = resolveAssetUrl(type, 'obj');
-            log('loadModel start type=' + type + ' url=' + url);
-
             var xhr = new XMLHttpRequest();
             xhr.open('GET', url, true);
 
             xhr.onreadystatechange = function() {
-                log('XHR ready=' + xhr.readyState + ' status=' + xhr.status + ' url=' + url);
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
                         try {
                             var loader = new THREE.OBJLoader();
                             var text = xhr.responseText;
-                            log('OBJ text length=' + text.length);
                             text = text.replace(/^mtllib\s+.*$/m, '');
                             var object = loader.parse(text);
-                            log('OBJ parsed class=' + object.type + ' children=' + object.children.length);
 
                             object.traverse(function(child) {
                                 if (child.isMesh) {
@@ -195,10 +194,8 @@
 
                             fitObjectToView(object);
                             scene.add(object);
-                            log('model added');
                             resolve(object);
                         } catch (err) {
-                            log('OBJ parse error=' + err.message);
                             reject(err);
                         }
                     } else {
@@ -208,7 +205,6 @@
             };
 
             xhr.onerror = function() {
-                log('XHR network error=' + url);
                 reject(new Error('Network error loading ' + url));
             };
 
@@ -224,7 +220,6 @@
                 state.container.removeChild(state.renderer.domElement);
                 state.renderer.dispose();
             }
-            log('previous cleared');
         }
     }
 
@@ -235,9 +230,7 @@
         }),
 
         render: function(build) {
-            log('render() called build=' + JSON.stringify(build));
             return window.RtGPreview.ready.then(function() {
-                log('ready resolved');
                 clearPrevious();
 
                 var container = document.createElement('div');
@@ -250,23 +243,30 @@
                 var camera = sceneData.camera;
                 var renderer = sceneData.renderer;
 
-                setupInteraction(container, camera);
-
                 var objects = parseBuild(build);
 
+                var loadedObjects = [];
                 var promises = objects.map(function(objData) {
-                    return loadModel(scene, objData.type).catch(function(err) {
+                    return loadModel(scene, objData.type).then(function(object) {
+                        loadedObjects.push(object);
+                        return object;
+                    }).catch(function(err) {
                         fatal('Failed to load model "' + objData.type + '": ' + err.message);
                         throw err;
                     });
                 });
 
-                Promise.all(promises).catch(function(err) {
-                    log('Promise.all failed=' + err.message);
+                Promise.all(promises).then(function() {
+                    var targetPoint = new THREE.Vector3(0, 0, 0);
+                    if (loadedObjects.length > 0) {
+                        targetPoint = frameBuild(camera, loadedObjects);
+                    }
+                    setupInteraction(container, camera, targetPoint);
+                }).catch(function(err) {
+                    setupInteraction(container, camera);
                 });
 
                 var resizeHandler = function() {
-                    log('resize=' + container.clientWidth + 'x' + container.clientHeight);
                     camera.aspect = container.clientWidth / container.clientHeight;
                     camera.updateProjectionMatrix();
                     renderer.setSize(container.clientWidth, container.clientHeight);
@@ -279,9 +279,7 @@
                 }
 
                 state = { container: container, scene: scene, camera: camera, renderer: renderer, animationId: 0, resizeHandler: resizeHandler };
-                log('state assigned');
                 animate();
-                log('animate started');
             }).catch(function(err) {
                 fatal('Initialization failed: ' + err.message);
             });
@@ -289,23 +287,15 @@
     };
 
     function bootstrap() {
-        try {
-            log('bootstrap start previewScriptSrc=' + previewScriptSrc);
-            loadDependencies()
-                .then(function() {
-                    log('dependencies loaded');
-                    resolveReady();
-                })
-                .catch(function(error) {
-                    log('bootstrap error=' + error.message);
-                    fatal('Initialization failed: ' + error.message);
-                    rejectReady(error);
-                });
-        } catch (error) {
-            log('bootstrap unexpected error=' + error.message);
-            fatal('Initialization failed: ' + error.message);
-            try { rejectReady(error); } catch (e) {}
-        }
+        loadDependencies()
+            .then(function() {
+                resolveReady();
+            })
+            .catch(function(error) {
+                console.error('Failed to initialize RtG-Preview:', error);
+                fatal('Initialization failed: ' + error.message);
+                rejectReady(error);
+            });
     }
 
     function loadDependencies() {
