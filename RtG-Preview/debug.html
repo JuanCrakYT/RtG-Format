@@ -6,36 +6,35 @@
     <title>RtG-Preview Debug</title>
     <style>
         body { margin: 0; overflow: hidden; background: #1a1a2e; }
-        #status { position: fixed; top: 0; left: 0; width: 100%; background: rgba(0,0,0,0.7); color: white; font-family: monospace; font-size: 12px; padding: 8px; z-index: 99999; }
+        #log { position: fixed; top: 0; left: 0; width: 100%; height: 40%; overflow: auto; background: rgba(0,0,0,0.75); color: #e0e0e0; font-family: monospace; font-size: 12px; padding: 8px; z-index: 99999; }
+        #log .error { color: #ff5252; }
     </style>
 </head>
 <body>
-    <div id="status">Initializing...</div>
-    <script src="RtG-Preview/preview.debug.js"></script>
+    <div id="log"></div>
+    <script src="preview.js"></script>
     <script>
-        var status = document.getElementById('status');
-        var start = Date.now();
-
-        function logStatus(msg) {
-            status.textContent = '[' + (Date.now() - start) + 'ms] ' + msg;
-            console.log('[TEST] ' + msg);
+        var logEl = document.getElementById('log');
+        function log(msg, isError) {
+            var d = document.createElement('div');
+            d.textContent = (isError ? '[ERR] ' : '[LOG] ') + msg;
+            if (isError) d.className = 'error';
+            logEl.appendChild(d);
+            console.log((isError ? '[ERR] ' : '[LOG] ') + msg);
         }
-
-        logStatus('preview.debug.js loaded');
-        logStatus('RtGPreview=' + typeof window.RtGPreview);
-        logStatus('ready=' + typeof window.RtGPreview.ready);
-
-        window.RtGPreview.ready.then(function() {
-            logStatus('ready resolved');
-            return window.RtGPreview.render([
-                ["Teeth", [], {}]
-            ]);
-        }).then(function() {
-            logStatus('render completed');
-        }).catch(function(err) {
-            logStatus('ERROR: ' + err.message);
-            console.error(err);
-        });
+        log('inline: RtGPreview=' + typeof window.RtGPreview);
+        if (window.RtGPreview) {
+            window.RtGPreview.ready.then(function() {
+                log('inline: ready resolved');
+                return window.RtGPreview.render([['Teeth', [], {}]]);
+            }).then(function() {
+                log('inline: render completed');
+            }).catch(function(err) {
+                log('inline: ERROR=' + err.message, true);
+            });
+        } else {
+            log('inline: RtGPreview is undefined', true);
+        }
     </script>
 </body>
 </html>
