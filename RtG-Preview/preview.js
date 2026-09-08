@@ -16,6 +16,86 @@
         console.error('RtG-Preview: ' + message);
     }
 
+    var alertContainer = null;
+    var alertAudioContext = null;
+
+    function resolveSoundUrl(name) {
+        var src = '';
+        if (document.currentScript && document.currentScript.src) {
+            src = document.currentScript.src;
+        } else {
+            var scripts = document.getElementsByTagName('script');
+            for (var i = scripts.length - 1; i >= 0; i--) {
+                if (scripts[i].src && scripts[i].src.indexOf('RtG-Preview/preview.js') !== -1) {
+                    src = scripts[i].src;
+                    break;
+                }
+            }
+        }
+        if (!src) {
+            return 'assets/sounds/' + name + '.mp3';
+        }
+        var base = src.replace(/\/RtG-Preview\/preview\.js$/, '/');
+        var relative = 'assets/sounds/' + name + '.mp3';
+        try {
+            return new URL(relative, base).href;
+        } catch (e) {
+            return relative;
+        }
+    }
+
+    function playAlertSound(type) {
+        try {
+            var url = resolveSoundUrl(type === 'error' ? 'error' : 'notification');
+            var audio = new Audio(url);
+            audio.volume = 0.6;
+            audio.play().catch(function() {});
+        } catch (e) {}
+    }
+
+    function showAlert(message, type) {
+        type = type || 'notification';
+        playAlertSound(type);
+
+        try {
+            if (!alertContainer) {
+                alertContainer = document.createElement('div');
+                alertContainer.id = 'rtg-preview-alerts';
+                alertContainer.style.cssText = 'position:fixed;bottom:0;left:0;max-width:100%;padding:8px;z-index:99999;display:flex;flex-direction:column;gap:6px;pointer-events:none;';
+                document.body.appendChild(alertContainer);
+            }
+
+            var item = document.createElement('div');
+            item.style.cssText = 'pointer-events:auto;padding:10px 12px;border-radius:6px;color:white;font-family:Arial,sans-serif;font-size:13px;opacity:0;transform:translateY(8px);transition:opacity .25s ease,transform .25s ease;';
+            item.textContent = message;
+
+            if (type === 'error') {
+                item.style.background = 'rgba(176,0,32,0.9)';
+            } else {
+                item.style.background = 'rgba(30,30,40,0.85)';
+            }
+
+            alertContainer.appendChild(item);
+
+            requestAnimationFrame(function() {
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+            });
+
+            setTimeout(function() {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(8px)';
+                setTimeout(function() {
+                    if (item.parentNode) {
+                        item.parentNode.removeChild(item);
+                    }
+                }, 260);
+            }, 4000);
+        } catch (e) {
+            console.error('RtG-Preview alert error:', e);
+        }
+    }
+
     function loadScript(url) {
         return new Promise(function(resolve, reject) {
             var script = document.createElement('script');
@@ -120,12 +200,44 @@
         var previousPointerPosition = { x: 0, y: 0 };
         var spherical = { theta: 0, phi: Math.PI / 3, radius: 5 };
         var targetPoint = target || new THREE.Vector3(0, 0, 0);
+        var moveState = { forward: false, backward: false, left: false, right: false };
+
+        function getForward() {
+            var forward = new THREE.Vector3();
+            camera.getWorldDirection(forward);
+            forward.y = 0;
+            forward.normalize();
+            return forward;
+        }
+
+        function getRight() {
+            var forward = getForward();
+            return new THREE.Vector3().crossVectors(new THREE.Vector3(0, 1, 0), forward).normalize();
+        }
 
         function updateCameraPosition() {
             camera.position.x = targetPoint.x + spherical.radius * Math.sin(spherical.phi) * Math.sin(spherical.theta);
             camera.position.y = targetPoint.y + spherical.radius * Math.cos(spherical.phi);
             camera.position.z = targetPoint.z + spherical.radius * Math.sin(spherical.phi) * Math.cos(spherical.theta);
             camera.lookAt(targetPoint);
+        }
+
+        function applyKeyboardMovement() {
+            var speed = 0.08;
+            var forward = getForward();
+            var right = getRight();
+            var delta = new THREE.Vector3();
+
+            if (moveState.forward) delta.add(forward);
+            if (moveState.backward) delta.sub(forward);
+            if (moveState.right) delta.add(right);
+            if (moveState.left) delta.sub(right);
+
+            if (delta.length() > 0) {
+                delta.normalize().multiplyScalar(speed);
+                targetPoint.add(delta);
+                updateCameraPosition();
+            }
         }
 
         container.addEventListener('pointerdown', function(event) {
@@ -152,7 +264,41 @@
             container.releasePointerCapture(event.pointerId);
         });
 
+        window.addEventListener('keydown', function(event) {
+            var key = event.key.toLowerCase();
+            if (key === 'w' || key === 'arrowup') moveState.forward = true;
+            if (key === 's' || key === 'arrowdown') moveState.backward = true;
+            if (key === 'a' || key === 'arrowleft') moveState.left = true;
+            if (key === 'd' || key === 'arrowright') moveState.right = true;
+        });
+
+        window.addEventListener('keyup', function(event) {
+            var key = event.key.toLowerCase();
+            if (key === 'w' || key === 'arrowup') moveState.forward = false;
+            if (key === 's' || key === 'arrowdown') moveState.backward = false;
+            if (key === 'a' || key === 'arrowleft') moveState.left = false;
+            if (key === 'd' || key === 'arrowright') moveState.right = false;
+        });
+
         updateCameraPosition();
+
+        function animateWithKeyboard() {
+            applyKeyboardMovement();
+            state.keyboardRAF = requestAnimationFrame(animateWithKeyboard);
+        }
+        animateWithKeyboard();
+
+        return {
+            stop: function() {
+                moveState.forward = false;
+                moveState.backward = false;
+                moveState.left = false;
+                moveState.right = false;
+                if (state.keyboardRAF) {
+                    cancelAnimationFrame(state.keyboardRAF);
+                }
+            }
+        };
     }
 
     function parseBuild(build) {
@@ -220,6 +366,9 @@
                 state.container.removeChild(state.renderer.domElement);
                 state.renderer.dispose();
             }
+            if (state.interaction && state.interaction.stop) {
+                state.interaction.stop();
+            }
         }
     }
 
@@ -261,10 +410,22 @@
                     if (loadedObjects.length > 0) {
                         targetPoint = frameBuild(camera, loadedObjects);
                     }
-                    setupInteraction(container, camera, targetPoint);
+                    state.interaction = setupInteraction(container, camera, targetPoint);
                 }).catch(function(err) {
-                    setupInteraction(container, camera);
+                    state.interaction = setupInteraction(container, camera);
                 });
+
+                var hasPhysicalKeyboard = false;
+                try {
+                    var mouseCoarse = window.matchMedia('(pointer: coarse)').matches;
+                    var hoverNone = window.matchMedia('(hover: none)').matches;
+                    var maxTouch = navigator.maxTouchPoints || 0;
+                    hasPhysicalKeyboard = !(mouseCoarse && hoverNone && maxTouch > 0);
+                } catch (e) {}
+
+                if (!hasPhysicalKeyboard) {
+                    showAlert('WASD controls are unavailable on this device. Use touch or mouse to control the camera.', 'notification');
+                }
 
                 var resizeHandler = function() {
                     camera.aspect = container.clientWidth / container.clientHeight;
@@ -278,7 +439,7 @@
                     renderer.render(scene, camera);
                 }
 
-                state = { container: container, scene: scene, camera: camera, renderer: renderer, animationId: 0, resizeHandler: resizeHandler };
+                state = { container: container, scene: scene, camera: camera, renderer: renderer, animationId: 0, resizeHandler: resizeHandler, interaction: null };
                 animate();
             }).catch(function(err) {
                 fatal('Initialization failed: ' + err.message);
