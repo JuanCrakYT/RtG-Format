@@ -268,16 +268,16 @@
             var key = event.key.toLowerCase();
             if (key === 'w' || key === 'arrowup') moveState.forward = true;
             if (key === 's' || key === 'arrowdown') moveState.backward = true;
-            if (key === 'a' || key === 'arrowleft') moveState.left = true;
-            if (key === 'd' || key === 'arrowright') moveState.right = true;
+            if (key === 'a' || key === 'arrowright') moveState.left = true;
+            if (key === 'd' || key === 'arrowleft') moveState.right = true;
         });
 
         window.addEventListener('keyup', function(event) {
             var key = event.key.toLowerCase();
             if (key === 'w' || key === 'arrowup') moveState.forward = false;
             if (key === 's' || key === 'arrowdown') moveState.backward = false;
-            if (key === 'a' || key === 'arrowleft') moveState.left = false;
-            if (key === 'd' || key === 'arrowright') moveState.right = false;
+            if (key === 'a' || key === 'arrowright') moveState.left = false;
+            if (key === 'd' || key === 'arrowleft') moveState.right = false;
         });
 
         updateCameraPosition();
