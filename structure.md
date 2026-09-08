@@ -13,29 +13,11 @@ RtG-Format/
 ├── CONTRIBUTING.md
 ├── LICENSE
 ├── structure.md
-├── assets/
-│   ├─ images/
-│   │  ├─ logo/
-│   │  │  ├─ official-banners/
-│   │  │  │  ├─ RtG-1.webp
-│   │  │  │  ├─ RtG-2.webp
-│   │  │  │  ├─ RtG-3.webp
-│   │  │  │  ├─ RtG-4.webp
-│   │  │  │  └─ RtG-5.webp
-│   │  │  ├─ versions/
-│   │  │  │  └─ v1/
-│   │  │  │     ├─ RtG-Format-v1.png
-│   │  │  │     └─ RtG-Format-v1.svg
-│   │  │  ├─ RtG-Format-Background.svg
-│   │  │  ├─ RtG-Format-Shape.svg
-│   │  │  ├─ RtG-Format.png
-│   │  │  └─ RtG-Format.svg
-│   │  ├─ banner.jpeg
-│   │  ├─ banner.png
-│   │  ├─ banner.svg
-│   │  └─ RtG.png
-│   └─ README.md
-│
+│   
+├── RtG-Preview/
+│   ├─ models/
+│   └─ preview.js
+│   
 ├── page/
 │   │
 │   ├── index.html
@@ -58,6 +40,29 @@ RtG-Format/
 │   └── assets/
 │       ├── logo.png
 │       └── icons/
+│
+├── assets/
+│   ├─ images/
+│   │  ├─ logo/
+│   │  │  ├─ official-banners/
+│   │  │  │  ├─ RtG-1.webp
+│   │  │  │  ├─ RtG-2.webp
+│   │  │  │  ├─ RtG-3.webp
+│   │  │  │  ├─ RtG-4.webp
+│   │  │  │  └─ RtG-5.webp
+│   │  │  ├─ versions/
+│   │  │  │  └─ v1/
+│   │  │  │     ├─ RtG-Format-v1.png
+│   │  │  │     └─ RtG-Format-v1.svg
+│   │  │  ├─ RtG-Format-Background.svg
+│   │  │  ├─ RtG-Format-Shape.svg
+│   │  │  ├─ RtG-Format.png
+│   │  │  └─ RtG-Format.svg
+│   │  ├─ banner.jpeg
+│   │  ├─ banner.png
+│   │  ├─ banner.svg
+│   │  └─ RtG.png
+│   └─ README.md
 │
 ├── blocks/
 │   ├── README.md
