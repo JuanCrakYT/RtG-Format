@@ -1,4 +1,5 @@
 // RtG-Format preview used for show RtG Builds on simple HTML Charts
+// v0.0.0
 
 document.body.innerHTML += `
     <div style="
