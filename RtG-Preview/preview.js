@@ -201,6 +201,7 @@
         var spherical = { theta: 0, phi: Math.PI / 3, radius: 5 };
         var targetPoint = target || new THREE.Vector3(0, 0, 0);
         var moveState = { forward: false, backward: false, left: false, right: false, up: false, down: false };
+        var gamepadMoveState = { forward: false, backward: false, left: false, right: false, up: false, down: false };
         var pinchState = { active: false, lastDistance: 0 };
         var gamepadDeadzone = 0.2;
 
@@ -231,22 +232,22 @@
             }
             if (!gp) return;
 
-            moveState.forward = false;
-            moveState.backward = false;
-            moveState.left = false;
-            moveState.right = false;
-            moveState.up = false;
-            moveState.down = false;
+            gamepadMoveState.forward = false;
+            gamepadMoveState.backward = false;
+            gamepadMoveState.left = false;
+            gamepadMoveState.right = false;
+            gamepadMoveState.up = false;
+            gamepadMoveState.down = false;
 
             var lx = applyAxis(gp.axes[0]);
             var ly = applyAxis(gp.axes[1]);
             var rx = applyAxis(gp.axes[2]);
             var ry = applyAxis(gp.axes[3]);
 
-            if (lx > 0.1) moveState.right = true;
-            if (lx < -0.1) moveState.left = true;
-            if (ly > 0.1) moveState.forward = true;
-            if (ly < -0.1) moveState.backward = true;
+            if (lx > 0.1) gamepadMoveState.right = true;
+            if (lx < -0.1) gamepadMoveState.left = true;
+            if (ly > 0.1) gamepadMoveState.backward = true;
+            if (ly < -0.1) gamepadMoveState.forward = true;
 
             if (Math.abs(rx) > gamepadDeadzone) {
                 spherical.theta -= rx * 0.03;
@@ -258,8 +259,8 @@
             var lt = gp.buttons[6] ? gp.buttons[6].value : 0;
             var rt = gp.buttons[7] ? gp.buttons[7].value : 0;
 
-            if (rt > 0.1) moveState.up = true;
-            if (lt > 0.1) moveState.down = true;
+            if (rt > 0.1) gamepadMoveState.up = true;
+            if (lt > 0.1) gamepadMoveState.down = true;
         }
 
         function updateCameraPosition() {
@@ -275,15 +276,24 @@
             var right = getRight();
             var delta = new THREE.Vector3();
 
-            if (moveState.forward) delta.add(forward);
-            if (moveState.backward) delta.sub(forward);
-            if (moveState.right) delta.add(right);
-            if (moveState.left) delta.sub(right);
+            var effectiveMoveState = {
+                forward: moveState.forward || gamepadMoveState.forward,
+                backward: moveState.backward || gamepadMoveState.backward,
+                left: moveState.left || gamepadMoveState.left,
+                right: moveState.right || gamepadMoveState.right,
+                up: moveState.up || gamepadMoveState.up,
+                down: moveState.down || gamepadMoveState.down
+            };
 
-            if (moveState.up || moveState.down) {
+            if (effectiveMoveState.forward) delta.add(forward);
+            if (effectiveMoveState.backward) delta.sub(forward);
+            if (effectiveMoveState.right) delta.add(right);
+            if (effectiveMoveState.left) delta.sub(right);
+
+            if (effectiveMoveState.up || effectiveMoveState.down) {
                 var up = new THREE.Vector3(0, 1, 0).applyQuaternion(camera.quaternion).normalize();
-                if (moveState.up) delta.add(up);
-                if (moveState.down) delta.sub(up);
+                if (effectiveMoveState.up) delta.add(up);
+                if (effectiveMoveState.down) delta.sub(up);
             }
 
             if (delta.length() > 0) {
@@ -397,6 +407,12 @@
                 moveState.right = false;
                 moveState.up = false;
                 moveState.down = false;
+                gamepadMoveState.forward = false;
+                gamepadMoveState.backward = false;
+                gamepadMoveState.left = false;
+                gamepadMoveState.right = false;
+                gamepadMoveState.up = false;
+                gamepadMoveState.down = false;
                 pinchState.active = false;
                 pinchState.lastDistance = 0;
                 if (state.keyboardRAF) {
