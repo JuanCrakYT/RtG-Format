@@ -5,6 +5,7 @@
     var resolveReady = null;
     var rejectReady = null;
     var state = null;
+    var panelState = { open: false };
 
     function fatal(message) {
         try {
@@ -17,7 +18,6 @@
     }
 
     var alertContainer = null;
-    var alertAudioContext = null;
 
     function resolveSoundUrl(name) {
         var src = '';
@@ -131,6 +131,31 @@
         }
     }
 
+    function resolvePreviewAssetUrl(path) {
+        var src = '';
+        if (document.currentScript && document.currentScript.src) {
+            src = document.currentScript.src;
+        } else {
+            var scripts = document.getElementsByTagName('script');
+            for (var i = scripts.length - 1; i >= 0; i--) {
+                if (scripts[i].src && scripts[i].src.indexOf('RtG-Preview/preview.js') !== -1) {
+                    src = scripts[i].src;
+                    break;
+                }
+            }
+        }
+        if (!src) {
+            return path;
+        }
+        var base = src.replace(/\/RtG-Preview\/preview\.js$/, '/');
+        var relative = path;
+        try {
+            return new URL(relative, base).href;
+        } catch (e) {
+            return relative;
+        }
+    }
+
     function fitObjectToView(object) {
         var box = new THREE.Box3().setFromObject(object);
         var center = box.getCenter(new THREE.Vector3());
@@ -195,6 +220,321 @@
         return { scene: scene, camera: camera, renderer: renderer };
     }
 
+    function computeBuildStats(build, loadedObjects) {
+        var stats = {
+            totalBlocks: 0,
+            uniqueTypes: 0,
+            blockTypes: {},
+            repeatedBlocks: {},
+            properties: {},
+            repeatedProperties: {},
+            propertyValues: {},
+            connectionsTotal: 0,
+            connectedBlocks: 0,
+            completelyUnconnected: [],
+            connectionPointsUsed: {},
+            uuidTotal: 0,
+            uuidUnique: 0,
+            uuidDuplicates: 0,
+            emptyNoConnections: 0,
+            emptyNoProperties: 0,
+            hierarchyMaxDepth: 0,
+            buildSize: null,
+            buildCenter: null,
+            warnings: []
+        };
+
+        if (!Array.isArray(build)) {
+            stats.warnings.push('Build is not an array');
+            return stats;
+        }
+
+        stats.totalBlocks = build.length;
+        var types = {};
+        var objectsWithConnections = 0;
+        var objectsWithoutConnections = 0;
+        var objectsWithoutProperties = 0;
+        var uuidSet = {};
+        var uuidList = [];
+        var parentMap = {};
+
+        for (var i = 0; i < build.length; i++) {
+            var obj = build[i];
+            if (!Array.isArray(obj) || obj.length < 1) continue;
+
+            var type = String(obj[0] || '');
+            var connections = Array.isArray(obj[1]) ? obj[1] : [];
+            var properties = obj[2] && typeof obj[2] === 'object' ? obj[2] : {};
+
+            types[type] = (types[type] || 0) + 1;
+
+            if (connections.length === 0) {
+                objectsWithoutConnections++;
+                stats.completelyUnconnected.push(type);
+            } else {
+                objectsWithConnections++;
+            }
+
+            if (Object.keys(properties).length === 0) {
+                objectsWithoutProperties++;
+            }
+
+            for (var prop in properties) {
+                if (!properties.hasOwnProperty(prop)) continue;
+                stats.properties[prop] = (stats.properties[prop] || 0) + 1;
+
+                if (!stats.propertyValues[prop]) {
+                    stats.propertyValues[prop] = {};
+                }
+                var val = JSON.stringify(properties[prop]);
+                stats.propertyValues[prop][val] = (stats.propertyValues[prop][val] || 0) + 1;
+            }
+
+            for (var c = 0; c < connections.length; c++) {
+                var conn = connections[c];
+                if (Array.isArray(conn) && conn.length >= 3) {
+                    var primaryId = String(conn[1] || '');
+                    if (primaryId.indexOf('{') !== -1 && primaryId.indexOf('}') !== -1) {
+                        stats.uuidTotal++;
+                        uuidList.push(primaryId);
+                        uuidSet[primaryId] = (uuidSet[primaryId] || 0) + 1;
+                        if (!stats.connectionPointsUsed[primaryId]) {
+                            stats.connectionPointsUsed[primaryId] = 0;
+                        }
+                        stats.connectionPointsUsed[primaryId]++;
+                    } else {
+                        var pointId = String(primaryId || 'numeric');
+                        if (!stats.connectionPointsUsed[pointId]) {
+                            stats.connectionPointsUsed[pointId] = 0;
+                        }
+                        stats.connectionPointsUsed[pointId]++;
+                    }
+                    stats.connectionsTotal++;
+
+                    var parentIndex = conn[2];
+                    if (typeof parentIndex === 'number') {
+                        parentMap[i + 1] = parentIndex;
+                    }
+                }
+            }
+        }
+
+        stats.uniqueTypes = Object.keys(types).length;
+        for (var t in types) {
+            if (!types.hasOwnProperty(t)) continue;
+            if (types[t] > 1) {
+                stats.repeatedBlocks[t] = types[t];
+            }
+        }
+
+        for (var p in stats.properties) {
+            if (!stats.properties.hasOwnProperty(p)) continue;
+            if (stats.properties[p] > 1) {
+                stats.repeatedProperties[p] = stats.properties[p];
+            }
+        }
+
+        stats.connectedBlocks = objectsWithConnections;
+        stats.completelyUnconnected = stats.completelyUnconnected.filter(function(v, i, self) {
+            return self.indexOf(v) === i;
+        });
+        stats.emptyNoConnections = objectsWithoutConnections;
+        stats.emptyNoProperties = objectsWithoutProperties;
+
+        var uniqueUuids = Object.keys(uuidSet);
+        stats.uuidUnique = uniqueUuids.length;
+        stats.uuidDuplicates = uuidList.length - uniqueUuids.length;
+        if (stats.uuidDuplicates > 0) {
+            stats.warnings.push('Duplicate UUIDs detected: ' + stats.uuidDuplicates);
+        }
+
+        var maxDepth = 0;
+        function getDepth(index, visited) {
+            if (visited && visited[index]) return 0;
+            if (!parentMap[index]) return 1;
+            var next = getDepth(parentMap[index], visited ? visited.concat([index]) : [index]);
+            return 1 + next;
+        }
+        for (var idx = 1; idx <= build.length; idx++) {
+            var depth = getDepth(idx, []);
+            if (depth > maxDepth) maxDepth = depth;
+        }
+        stats.hierarchyMaxDepth = maxDepth;
+
+        if (loadedObjects && loadedObjects.length > 0) {
+            var box = new THREE.Box3();
+            for (var o = 0; o < loadedObjects.length; o++) {
+                box.expandByObject(loadedObjects[o]);
+            }
+            if (!box.isEmpty()) {
+                var center = box.getCenter(new THREE.Vector3());
+                var size = box.getSize(new THREE.Vector3());
+                stats.buildCenter = { x: center.x, y: center.y, z: center.z };
+                stats.buildSize = { x: size.x, y: size.y, z: size.z };
+            }
+        }
+
+        return stats;
+    }
+
+    function createPanel(container) {
+        var panel = document.createElement('div');
+        panel.id = 'rtg-preview-panel';
+        panel.style.cssText = 'position:fixed;top:0;left:0;height:100%;width:280px;background:rgba(20,20,30,0.95);color:#e0e0e0;font-family:Arial,sans-serif;font-size:12px;z-index:99998;overflow-y:auto;pointer-events:auto;transform:translateX(-100%);transition:transform .2s ease;border-right:1px solid rgba(255,255,255,0.1);';
+
+        var toggle = document.createElement('button');
+        toggle.id = 'rtg-preview-panel-toggle';
+        toggle.style.cssText = 'position:fixed;top:8px;left:8px;z-index:99999;background:none;border:none;padding:4px;cursor:pointer;pointer-events:auto;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;background:rgba(20,20,30,0.8);';
+        toggle.setAttribute('aria-label', 'Toggle panel');
+
+        var toggleImg = document.createElement('img');
+        toggleImg.id = 'rtg-preview-panel-toggle-img';
+        toggleImg.style.cssText = 'width:20px;height:20px;pointer-events:none;';
+        toggleImg.src = resolvePreviewAssetUrl('assets/svg/menu-closed.svg');
+        toggle.appendChild(toggleImg);
+
+        toggle.addEventListener('click', function() {
+            togglePanel();
+        });
+
+        var content = document.createElement('div');
+        content.id = 'rtg-preview-panel-content';
+        content.style.cssText = 'padding:12px;';
+        content.innerHTML = '<div style="font-weight:bold;margin-bottom:8px;font-size:14px;">RTG PREVIEW</div>' +
+            '<div style="margin-bottom:12px;"><div style="opacity:0.8;margin-bottom:4px;">Background</div>' +
+            '<input type="color" id="rtg-preview-bg-color" value="#1a1a2e" style="width:100%;height:28px;border:none;background:none;cursor:pointer;" />' +
+            '<button id="rtg-preview-bg-reset" style="margin-top:4px;width:100%;padding:4px;background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);border-radius:4px;cursor:pointer;font-size:11px;">Reset</button></div>' +
+            '<div id="rtg-preview-stats" style="display:flex;flex-direction:column;gap:8px;"></div>';
+
+        panel.appendChild(content);
+        document.body.appendChild(panel);
+        document.body.appendChild(toggle);
+
+        var bgInput = content.querySelector('#rtg-preview-bg-color');
+        var bgReset = content.querySelector('#rtg-preview-bg-reset');
+
+        bgInput.addEventListener('input', function() {
+            if (state && state.scene) {
+                state.scene.background = new THREE.Color(bgInput.value);
+            }
+        });
+
+        bgReset.addEventListener('click', function() {
+            bgInput.value = '#1a1a2e';
+            if (state && state.scene) {
+                state.scene.background = new THREE.Color(0x1a1a2e);
+            }
+        });
+
+        return {
+            panel: panel,
+            toggle: toggle,
+            toggleImg: toggleImg,
+            content: content,
+            bgInput: bgInput,
+            setOpen: function(isOpen) {
+                panelState.open = isOpen;
+                if (isOpen) {
+                    panel.style.transform = 'translateX(0)';
+                    toggleImg.src = resolvePreviewAssetUrl('assets/svg/menu-closed.svg');
+                } else {
+                    panel.style.transform = 'translateX(-100%)';
+                    toggleImg.src = resolvePreviewAssetUrl('assets/svg/menu-opened.svg');
+                }
+            },
+            updateStats: function(stats) {
+                var statsEl = content.querySelector('#rtg-preview-stats');
+                if (!statsEl) return;
+                var html = '';
+
+                html += section('Build', 'Total: ' + stats.totalBlocks + ' | Unique types: ' + stats.uniqueTypes);
+
+                if (stats.totalBlocks > 0) {
+                    html += section('Block types', formatCounts(stats.blockTypes));
+                    html += section('Repeated blocks', formatCounts(stats.repeatedBlocks) || 'None');
+                }
+
+                html += section('Properties', Object.keys(stats.properties).join(', ') || 'None');
+                html += section('Repeated properties', formatCounts(stats.repeatedProperties) || 'None');
+
+                if (stats.propertyValues && Object.keys(stats.propertyValues).length > 0) {
+                    html += '<div style="opacity:0.8;font-size:11px;margin-top:2px;">Property values</div>';
+                    for (var p in stats.propertyValues) {
+                        if (!stats.propertyValues.hasOwnProperty(p)) continue;
+                        html += '<div style="padding-left:8px;margin-top:2px;">' + escapeHtml(p) + '</div>';
+                        for (var v in stats.propertyValues[p]) {
+                            if (!stats.propertyValues[p].hasOwnProperty(v)) continue;
+                            html += '<div style="padding-left:16px;opacity:0.7;">' + escapeHtml(v) + ' x' + stats.propertyValues[p][v] + '</div>';
+                        }
+                    }
+                }
+
+                html += section('Connections', 'Total: ' + stats.connectionsTotal + '<br/>Connected: ' + stats.connectedBlocks + '<br/>Completely unconnected: ' + stats.completelyUnconnected.length);
+                if (stats.completelyUnconnected.length > 0) {
+                    html += '<div style="padding-left:8px;opacity:0.7;">' + escapeHtml(stats.completelyUnconnected.join(', ')) + '</div>';
+                }
+
+                if (stats.connectionPointsUsed && Object.keys(stats.connectionPointsUsed).length > 0) {
+                    html += section('Connection points', formatCounts(stats.connectionPointsUsed));
+                }
+
+                if (stats.uuidTotal > 0) {
+                    html += section('UUIDs', 'Total: ' + stats.uuidTotal + '<br/>Unique: ' + stats.uuidUnique + '<br/>Duplicates: ' + stats.uuidDuplicates);
+                } else {
+                    html += section('UUIDs', 'None');
+                }
+
+                if (stats.buildSize) {
+                    html += section('Build', 'Size: ' + stats.buildSize.x.toFixed(2) + ' x ' + stats.buildSize.y.toFixed(2) + ' x ' + stats.buildSize.z.toFixed(2) + '<br/>Center: (' + stats.buildCenter.x.toFixed(2) + ', ' + stats.buildCenter.y.toFixed(2) + ', ' + stats.buildCenter.z.toFixed(2) + ')');
+                }
+
+                if (stats.hierarchyMaxDepth > 0) {
+                    html += section('Hierarchy', 'Max depth: ' + stats.hierarchyMaxDepth);
+                }
+
+                html += section('Empty data', 'No connections: ' + stats.emptyNoConnections + '<br/>No properties: ' + stats.emptyNoProperties);
+
+                if (stats.warnings.length > 0) {
+                    html += section('Warnings', stats.warnings.join('<br/>'));
+                } else {
+                    html += section('Warnings', '0');
+                }
+
+                statsEl.innerHTML = html;
+            }
+        };
+
+        function section(title, body) {
+            return '<div><div style="opacity:0.8;font-size:11px;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px;">' + escapeHtml(title) + '</div><div style="opacity:1;">' + body + '</div></div>';
+        }
+
+        function escapeHtml(text) {
+            return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        function formatCounts(obj) {
+            var keys = Object.keys(obj);
+            if (keys.length === 0) return '';
+            var parts = [];
+            for (var i = 0; i < keys.length; i++) {
+                parts.push(escapeHtml(keys[i]) + ' x' + obj[keys[i]]);
+            }
+            return parts.join('<br/>');
+        }
+    }
+
+    function togglePanel() {
+        if (!state || !state.panel) return;
+        panelState.open = !panelState.open;
+        state.panel.setOpen(panelState.open);
+    }
+
+    function setPanelOpen(isOpen) {
+        if (!state || !state.panel) return;
+        panelState.open = isOpen;
+        state.panel.setOpen(isOpen);
+    }
+
     function setupInteraction(container, camera, target) {
         var isDragging = false;
         var previousPointerPosition = { x: 0, y: 0 };
@@ -204,6 +544,7 @@
         var gamepadMoveState = { forward: false, backward: false, left: false, right: false, up: false, down: false };
         var pinchState = { active: false, lastDistance: 0 };
         var gamepadDeadzone = 0.2;
+        var selectWasPressed = false;
 
         function getForward() {
             var forward = new THREE.Vector3();
@@ -260,9 +601,15 @@
 
             var lt = gp.buttons[6] ? gp.buttons[6].value : 0;
             var rt = gp.buttons[7] ? gp.buttons[7].value : 0;
+            var selectPressed = gp.buttons[8] ? gp.buttons[8].pressed : false;
 
             if (rt > 0.1) gamepadMoveState.up = true;
             if (lt > 0.1) gamepadMoveState.down = true;
+
+            if (selectPressed && !selectWasPressed) {
+                togglePanel();
+            }
+            selectWasPressed = selectPressed;
         }
 
         function updateCameraPosition() {
@@ -380,6 +727,7 @@
             if (key === 'd' || key === 'arrowright') moveState.right = true;
             if (key === 'q') moveState.down = true;
             if (key === 'e') moveState.up = true;
+            if (key === 'f') togglePanel();
         });
 
         window.addEventListener('keyup', function(event) {
@@ -417,6 +765,7 @@
                 gamepadMoveState.down = false;
                 pinchState.active = false;
                 pinchState.lastDistance = 0;
+                selectWasPressed = false;
                 if (state.keyboardRAF) {
                     cancelAnimationFrame(state.keyboardRAF);
                 }
@@ -492,6 +841,10 @@
             if (state.interaction && state.interaction.stop) {
                 state.interaction.stop();
             }
+            if (state.panel) {
+                try { state.panel.panel.parentNode.removeChild(state.panel.panel); } catch (e) {}
+                try { state.panel.toggle.parentNode.removeChild(state.panel.toggle); } catch (e) {}
+            }
         }
     }
 
@@ -509,6 +862,9 @@
                 container.id = 'rtg-preview-container';
                 container.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;touch-action:none;';
                 document.body.appendChild(container);
+
+                var panel = createPanel(container);
+                setPanelOpen(false);
 
                 var sceneData = createScene(container);
                 var scene = sceneData.scene;
@@ -538,6 +894,9 @@
                     state.interaction = setupInteraction(container, camera);
                 });
 
+                var stats = computeBuildStats(build, loadedObjects);
+                panel.updateStats(stats);
+
                 var hasPhysicalKeyboard = false;
                 try {
                     var mouseCoarse = window.matchMedia('(pointer: coarse)').matches;
@@ -562,7 +921,7 @@
                     renderer.render(scene, camera);
                 }
 
-                state = { container: container, scene: scene, camera: camera, renderer: renderer, animationId: 0, resizeHandler: resizeHandler, interaction: null };
+                state = { container: container, scene: scene, camera: camera, renderer: renderer, animationId: 0, resizeHandler: resizeHandler, interaction: null, panel: panel };
                 animate();
             }).catch(function(err) {
                 fatal('Initialization failed: ' + err.message);
