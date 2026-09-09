@@ -200,15 +200,13 @@
         var previousPointerPosition = { x: 0, y: 0 };
         var spherical = { theta: 0, phi: Math.PI / 3, radius: 5 };
         var targetPoint = target || new THREE.Vector3(0, 0, 0);
-        var moveState = { forward: false, backward: false, left: false, right: false };
+        var moveState = { forward: false, backward: false, left: false, right: false, up: false, down: false };
         var pinchState = { active: false, lastDistance: 0 };
 
         function getForward() {
             var forward = new THREE.Vector3();
             camera.getWorldDirection(forward);
-            forward.y = 0;
-            forward.normalize();
-            return forward;
+            return forward.normalize();
         }
 
         function getRight() {
@@ -233,6 +231,8 @@
             if (moveState.backward) delta.sub(forward);
             if (moveState.right) delta.add(right);
             if (moveState.left) delta.sub(right);
+            if (moveState.up) delta.y += speed;
+            if (moveState.down) delta.y -= speed;
 
             if (delta.length() > 0) {
                 delta.normalize().multiplyScalar(speed);
@@ -314,6 +314,8 @@
             if (key === 's' || key === 'arrowdown') moveState.backward = true;
             if (key === 'a' || key === 'arrowleft') moveState.left = true;
             if (key === 'd' || key === 'arrowright') moveState.right = true;
+            if (key === 'q') moveState.down = true;
+            if (key === 'e') moveState.up = true;
         });
 
         window.addEventListener('keyup', function(event) {
@@ -322,6 +324,8 @@
             if (key === 's' || key === 'arrowdown') moveState.backward = false;
             if (key === 'a' || key === 'arrowleft') moveState.left = false;
             if (key === 'd' || key === 'arrowright') moveState.right = false;
+            if (key === 'q') moveState.down = false;
+            if (key === 'e') moveState.up = false;
         });
 
         updateCameraPosition();
@@ -338,6 +342,8 @@
                 moveState.backward = false;
                 moveState.left = false;
                 moveState.right = false;
+                moveState.up = false;
+                moveState.down = false;
                 pinchState.active = false;
                 pinchState.lastDistance = 0;
                 if (state.keyboardRAF) {
