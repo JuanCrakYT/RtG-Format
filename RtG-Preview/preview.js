@@ -461,7 +461,7 @@
 
         var toggle = document.createElement('button');
         toggle.id = 'rtg-preview-panel-toggle';
-        toggle.style.cssText = 'background:none;border:none;padding:4px;cursor:pointer;pointer-events:auto;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;background:rgba(20,20,30,0.8);position:relative;z-index:4;';
+        toggle.style.cssText = 'background:none;border:none;padding:4px;cursor:pointer;pointer-events:auto;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;background:rgba(20,20,30,0.8);position:fixed;top:8px;left:8px;z-index:100001;';
         toggle.setAttribute('aria-label', 'Toggle panel');
 
         var toggleImg = document.createElement('img');
@@ -469,15 +469,19 @@
         toggleImg.style.cssText = 'width:20px;height:20px;pointer-events:none;';
         toggleImg.src = resolvePreviewAssetUrl('assets/svg/menu-closed.svg');
         toggleImg.onerror = function() {
-            showAlert('Failed to load SVG icon asset', 'error');
+            if (!toggleImg.dataset.fallback) {
+                toggleImg.dataset.fallback = 'true';
+                showAlert('Failed to load SVG icon asset', 'error');
+                toggleImg.src = 'data:image/svg+xml;base64,' + btoa('<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="3" y1="5" x2="21" y2="5"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="19" x2="21" y2="19"/></svg>');
+            }
         };
         toggle.appendChild(toggleImg);
 
         toggle.addEventListener('click', function() {
             togglePanel();
         });
+        document.body.appendChild(toggle);
 
-        header.appendChild(toggle);
         panel.appendChild(header);
 
         var scrollContainer = document.createElement('div');
