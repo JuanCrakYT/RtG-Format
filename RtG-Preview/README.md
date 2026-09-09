@@ -65,15 +65,6 @@ RtGPreview.render(build);
 A minimal example:
 
 ```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RtG Preview Test</title>
-</head>
-<body>
-
 <script src="https://cdn.jsdelivr.net/gh/JuanCrakYT/RtG-Format@COMMIT/RtG-Preview/preview.js"></script>
 
 <script>
@@ -81,9 +72,6 @@ A minimal example:
     ["Teeth", [], {}]
   ]);
 </script>
-
-</body>
-</html>
 ```
 
 Replace `COMMIT` with the desired RtG-Format commit.

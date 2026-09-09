@@ -27,6 +27,9 @@ assets/
 │               └── RtG-Format-v1.png
 │
 ├── models/
+│   ├── Part.obj
+│   │   ├── Seat.obj
+│   ├── Anchor.obj
 │   ├── Fricklet.obj
 │   └── Teeth.obj
 │
@@ -35,7 +38,9 @@ assets/
 │   └── notification.mp3
 │
 └── svg/
+    ├── menu-closed_light.svg
     ├── menu-closed.svg
+    ├── menu-opened_light.svg
     └── menu-opened.svg
 ```
 

@@ -6,6 +6,21 @@
     var rejectReady = null;
     var state = null;
     var panelState = { open: false };
+    var uiActive = false;
+    var virtualCursor = null;
+    var cursorX = 0;
+    var cursorY = 0;
+    var cursorDrag = { active: false, startX: 0, startY: 0, threshold: 6 };
+    var uiActive = false;
+    var virtualCursor = null;
+    var cursorX = 0;
+    var cursorY = 0;
+    var cursorDrag = { active: false, startX: 0, startY: 0, threshold: 6 };
+    var uiActive = false;
+    var virtualCursor = null;
+    var cursorX = 0;
+    var cursorY = 0;
+    var cursorDrag = { active: false, startX: 0, startY: 0, threshold: 6 };
 
     function fatal(message) {
         try {
@@ -105,6 +120,16 @@
             document.head.appendChild(script);
         });
     }
+
+    function injectGlobalStyle(css) {
+        try {
+            var style = document.createElement('style');
+            style.textContent = css;
+            document.head.appendChild(style);
+        } catch (e) {}
+    }
+
+    injectGlobalStyle('#rtg-preview-panel-scroll::-webkit-scrollbar{display:none} #rtg-preview-panel-scroll{scrollbar-width:none;-ms-overflow-style:none;}');
 
     function resolveAssetUrl(type, extension) {
         var src = '';
@@ -435,11 +460,14 @@
     function createPanel() {
         var panel = document.createElement('div');
         panel.id = 'rtg-preview-panel';
-        panel.style.cssText = 'position:fixed;top:0;left:0;height:100%;width:280px;background:rgba(20,20,30,0.95);color:#e0e0e0;font-family:Arial,sans-serif;font-size:12px;z-index:99998;overflow-y:auto;pointer-events:auto;transform:translateX(-100%);transition:transform .2s ease;border-right:1px solid rgba(255,255,255,0.1);';
+        panel.style.cssText = 'position:fixed;top:0;left:0;height:100%;width:280px;background:rgba(20,20,30,0.95);color:#e0e0e0;font-family:Arial,sans-serif;font-size:12px;z-index:99998;overflow:hidden;pointer-events:auto;transform:translateX(-100%);transition:transform .2s ease;border-right:1px solid rgba(255,255,255,0.1);';
+
+        var header = document.createElement('div');
+        header.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:44px;display:flex;align-items:center;justify-content:flex-start;padding:4px 8px;box-sizing:border-box;z-index:2;';
 
         var toggle = document.createElement('button');
         toggle.id = 'rtg-preview-panel-toggle';
-        toggle.style.cssText = 'position:fixed;top:8px;left:8px;z-index:99999;background:none;border:none;padding:4px;cursor:pointer;pointer-events:auto;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;background:rgba(20,20,30,0.8);';
+        toggle.style.cssText = 'background:none;border:none;padding:4px;cursor:pointer;pointer-events:auto;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;background:rgba(20,20,30,0.8);';
         toggle.setAttribute('aria-label', 'Toggle panel');
 
         var toggleImg = document.createElement('img');
@@ -452,21 +480,35 @@
             togglePanel();
         });
 
-        var content = document.createElement('div');
-        content.id = 'rtg-preview-panel-content';
-        content.style.cssText = 'padding:12px;';
-        content.innerHTML = '<div style="font-weight:bold;margin-bottom:8px;font-size:14px;">RTG PREVIEW</div>' +
+        header.appendChild(toggle);
+        panel.appendChild(header);
+
+        var scrollContainer = document.createElement('div');
+        scrollContainer.id = 'rtg-preview-panel-scroll';
+        scrollContainer.style.cssText = 'position:absolute;top:44px;left:0;width:100%;bottom:0;overflow-y:auto;overflow-x:hidden;padding-right:14px;box-sizing:border-box;';
+        scrollContainer.innerHTML = '<div id="rtg-preview-stats" style="display:flex;flex-direction:column;gap:8px;"></div>' +
             '<div style="margin-bottom:12px;"><div style="opacity:0.8;margin-bottom:4px;">Background</div>' +
             '<input type="color" id="rtg-preview-bg-color" value="#1a1a2e" style="width:100%;height:28px;border:none;background:none;cursor:pointer;" />' +
-            '<button id="rtg-preview-bg-reset" style="margin-top:4px;width:100%;padding:4px;background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);border-radius:4px;cursor:pointer;font-size:11px;">Reset</button></div>' +
-            '<div id="rtg-preview-stats" style="display:flex;flex-direction:column;gap:8px;"></div>';
+            '<button id="rtg-preview-bg-reset" style="margin-top:4px;width:100%;padding:4px;background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);border-radius:4px;cursor:pointer;font-size:11px;">Reset</button></div>';
+        panel.appendChild(scrollContainer);
 
-        panel.appendChild(content);
+        var scrollbarTrack = document.createElement('div');
+        scrollbarTrack.id = 'rtg-preview-scrollbar-track';
+        scrollbarTrack.style.cssText = 'position:absolute;top:44px;right:4px;bottom:4px;width:6px;border-radius:3px;background:rgba(255,255,255,0.08);pointer-events:auto;z-index:3;';
+
+        var scrollbarThumb = document.createElement('div');
+        scrollbarThumb.id = 'rtg-preview-scrollbar-thumb';
+        scrollbarThumb.style.cssText = 'position:absolute;top:0;left:0;width:100%;min-height:18px;border-radius:3px;background:rgba(255,255,255,0.35);pointer-events:auto;';
+
+        scrollbarTrack.appendChild(scrollbarThumb);
+        panel.appendChild(scrollbarTrack);
+
         document.body.appendChild(panel);
-        document.body.appendChild(toggle);
 
-        var bgInput = content.querySelector('#rtg-preview-bg-color');
-        var bgReset = content.querySelector('#rtg-preview-bg-reset');
+        var statsEl = scrollContainer.querySelector('#rtg-preview-stats');
+
+        var bgInput = scrollContainer.querySelector('#rtg-preview-bg-color');
+        var bgReset = scrollContainer.querySelector('#rtg-preview-bg-reset');
 
         bgInput.addEventListener('input', function() {
             if (state && state.scene) {
@@ -481,11 +523,54 @@
             }
         });
 
+        scrollContainer.addEventListener('scroll', function() {
+            syncArtificialScrollbar();
+        });
+        scrollbarThumb.addEventListener('pointerdown', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            var startY = event.clientY;
+            var startTop = parseFloat(scrollbarThumb.style.top || '0');
+            function onMove(moveEvent) {
+                var dy = moveEvent.clientY - startY;
+                var trackHeight = scrollContainer.clientHeight;
+                var thumbHeight = scrollbarThumb.offsetHeight;
+                var maxTop = trackHeight - thumbHeight;
+                var newTop = Math.max(0, Math.min(maxTop, startTop + dy));
+                scrollbarThumb.style.top = newTop + 'px';
+                var maxScroll = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+                scrollContainer.scrollTop = maxScroll > 0 ? (newTop / maxTop) * maxScroll : 0;
+            }
+            function onUp() {
+                window.removeEventListener('pointermove', onMove);
+                window.removeEventListener('pointerup', onUp);
+            }
+            window.addEventListener('pointermove', onMove);
+            window.addEventListener('pointerup', onUp);
+        });
+        scrollbarTrack.addEventListener('pointerdown', function(event) {
+            event.preventDefault();
+            var rect = scrollbarTrack.getBoundingClientRect();
+            var y = event.clientY - rect.top;
+            var thumbHeight = scrollbarThumb.offsetHeight;
+            var targetTop = y - thumbHeight / 2;
+            var trackHeight = scrollContainer.clientHeight;
+            var maxTop = trackHeight - thumbHeight;
+            var newTop = Math.max(0, Math.min(maxTop, targetTop));
+            scrollbarThumb.style.top = newTop + 'px';
+            var maxScroll = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+            scrollContainer.scrollTop = maxScroll > 0 ? (newTop / maxTop) * maxScroll : 0;
+        });
+
+        syncArtificialScrollbar();
+
         return {
             panel: panel,
             toggle: toggle,
             toggleImg: toggleImg,
-            content: content,
+            scrollContainer: scrollContainer,
+            scrollbarTrack: scrollbarTrack,
+            scrollbarThumb: scrollbarThumb,
             bgInput: bgInput,
             setOpen: function(isOpen) {
                 panelState.open = isOpen;
@@ -496,9 +581,10 @@
                     panel.style.transform = 'translateX(-100%)';
                     toggleImg.src = resolvePreviewAssetUrl('assets/svg/menu-opened.svg');
                 }
+                updateVirtualCursor();
             },
             updateStats: function(stats) {
-                var statsEl = content.querySelector('#rtg-preview-stats');
+                var statsEl = scrollContainer.querySelector('#rtg-preview-stats');
                 if (!statsEl) return;
                 var html = '';
 
@@ -584,13 +670,64 @@
     function togglePanel() {
         if (!state || !state.panel) return;
         panelState.open = !panelState.open;
+        uiActive = panelState.open;
         state.panel.setOpen(panelState.open);
+        updateVirtualCursor();
     }
 
     function setPanelOpen(isOpen) {
         if (!state || !state.panel) return;
         panelState.open = isOpen;
+        uiActive = isOpen;
         state.panel.setOpen(isOpen);
+        updateVirtualCursor();
+    }
+
+    function updateVirtualCursor() {
+        if (!virtualCursor) return;
+        if (uiActive) {
+            virtualCursor.style.display = 'block';
+            var panelRect = state.panel.panel.getBoundingClientRect();
+            cursorX = Math.max(panelRect.left + 8, Math.min(panelRect.right - 8, cursorX));
+            cursorY = Math.max(panelRect.top + 8, Math.min(panelRect.bottom - 8, cursorY));
+            virtualCursor.style.left = cursorX + 'px';
+            virtualCursor.style.top = cursorY + 'px';
+        } else {
+            virtualCursor.style.display = 'none';
+        }
+    }
+
+    function syncArtificialScrollbar() {
+        if (!state || !state.panel) return;
+        var scrollContainer = state.panel.scrollContainer;
+        var thumb = state.panel.scrollbarThumb;
+        if (!scrollContainer || !thumb) return;
+
+        var scrollHeight = scrollContainer.scrollHeight;
+        var clientHeight = scrollContainer.clientHeight;
+        if (scrollHeight <= clientHeight) {
+            thumb.style.display = 'none';
+            return;
+        }
+        thumb.style.display = 'block';
+
+        var trackHeight = scrollContainer.clientHeight;
+        var thumbHeight = Math.max(18, (clientHeight / scrollHeight) * trackHeight);
+        thumb.style.height = thumbHeight + 'px';
+
+        var maxScroll = scrollHeight - clientHeight;
+        var maxTop = trackHeight - thumbHeight;
+        var top = maxScroll > 0 ? (scrollContainer.scrollTop / maxScroll) * maxTop : 0;
+        thumb.style.top = top + 'px';
+    }
+
+    function createVirtualCursor() {
+        var el = document.createElement('div');
+        el.id = 'rtg-preview-virtual-cursor';
+        el.style.cssText = 'position:fixed;width:16px;height:16px;border-radius:50%;border:2px solid white;box-shadow:0 0 4px rgba(0,0,0,0.8);pointer-events:none;z-index:100000;display:none;transform:translate(-50%,-50%);transition:opacity .15s ease;';
+        el.innerHTML = '<div style="position:absolute;top:50%;left:50%;width:4px;height:4px;background:white;border-radius:50%;transform:translate(-50%,-50%);"></div>';
+        document.body.appendChild(el);
+        return el;
     }
 
     function setupInteraction(container, camera, target) {
@@ -648,18 +785,10 @@
             if (ly > 0.1) gamepadMoveState.backward = true;
             if (ly < -0.1) gamepadMoveState.forward = true;
 
-            if (Math.abs(rx) > gamepadDeadzone) {
-                spherical.theta -= rx * 0.03;
-                updateCameraPosition();
-            }
-            if (Math.abs(ry) > gamepadDeadzone) {
-                spherical.phi = Math.max(0.1, Math.min(Math.PI - 0.1, spherical.phi - ry * 0.03));
-                updateCameraPosition();
-            }
-
             var lt = gp.buttons[6] ? gp.buttons[6].value : 0;
             var rt = gp.buttons[7] ? gp.buttons[7].value : 0;
             var selectPressed = gp.buttons[8] ? gp.buttons[8].pressed : false;
+            var aPressed = gp.buttons[0] ? gp.buttons[0].pressed : false;
 
             if (rt > 0.1) gamepadMoveState.up = true;
             if (lt > 0.1) gamepadMoveState.down = true;
@@ -668,6 +797,53 @@
                 togglePanel();
             }
             selectWasPressed = selectPressed;
+
+            if (!uiActive) {
+                if (Math.abs(rx) > gamepadDeadzone) {
+                    spherical.theta -= rx * 0.03;
+                    updateCameraPosition();
+                }
+                if (Math.abs(ry) > gamepadDeadzone) {
+                    spherical.phi = Math.max(0.1, Math.min(Math.PI - 0.1, spherical.phi - ry * 0.03));
+                    updateCameraPosition();
+                }
+            } else if (state && state.panel) {
+                var scrollContainer = state.panel.scrollContainer;
+                if (scrollContainer) {
+                    var scrollSpeed = 1.2;
+                    scrollContainer.scrollTop += ry * scrollSpeed;
+                    syncArtificialScrollbar();
+                }
+
+                var panelRect = state.panel.panel.getBoundingClientRect();
+                var moveSpeedX = 1.2;
+                var moveSpeedY = 1.2;
+                cursorX += lx * moveSpeedX;
+                cursorY += ly * moveSpeedY;
+                cursorX = Math.max(panelRect.left + 8, Math.min(panelRect.right - 8, cursorX));
+                cursorY = Math.max(panelRect.top + 8, Math.min(panelRect.bottom - 8, cursorY));
+                updateVirtualCursor();
+
+                if (aPressed && !cursorDrag.active) {
+                    cursorDrag.active = true;
+                    cursorDrag.startX = cursorX;
+                    cursorDrag.startY = cursorY;
+                }
+                if (!aPressed) {
+                    cursorDrag.active = false;
+                }
+                if (cursorDrag.active) {
+                    var dx = cursorX - cursorDrag.startX;
+                    var dy = cursorY - cursorDrag.startY;
+                    if (Math.abs(dx) > cursorDrag.threshold || Math.abs(dy) > cursorDrag.threshold) {
+                        var el = document.elementFromPoint(cursorX, cursorY);
+                        if (el && scrollContainer.contains(el)) {
+                            scrollContainer.scrollTop += dy * 1.5;
+                            syncArtificialScrollbar();
+                        }
+                    }
+                }
+            }
         }
 
         function updateCameraPosition() {
@@ -839,7 +1015,48 @@
             if (!Array.isArray(obj) || obj.length < 1) {
                 throw new Error('Invalid object tuple');
             }
-            return {
+        scrollContainer.addEventListener('scroll', function() {
+            syncArtificialScrollbar();
+        });
+        scrollbarThumb.addEventListener('pointerdown', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            var startY = event.clientY;
+            var startTop = parseFloat(scrollbarThumb.style.top || '0');
+            function onMove(moveEvent) {
+                var dy = moveEvent.clientY - startY;
+                var trackHeight = scrollContainer.clientHeight;
+                var thumbHeight = scrollbarThumb.offsetHeight;
+                var maxTop = trackHeight - thumbHeight;
+                var newTop = Math.max(0, Math.min(maxTop, startTop + dy));
+                scrollbarThumb.style.top = newTop + 'px';
+                var maxScroll = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+                scrollContainer.scrollTop = maxScroll > 0 ? (newTop / maxTop) * maxScroll : 0;
+            }
+            function onUp() {
+                window.removeEventListener('pointermove', onMove);
+                window.removeEventListener('pointerup', onUp);
+            }
+            window.addEventListener('pointermove', onMove);
+            window.addEventListener('pointerup', onUp);
+        });
+        scrollbarTrack.addEventListener('pointerdown', function(event) {
+            event.preventDefault();
+            var rect = scrollbarTrack.getBoundingClientRect();
+            var y = event.clientY - rect.top;
+            var thumbHeight = scrollbarThumb.offsetHeight;
+            var targetTop = y - thumbHeight / 2;
+            var trackHeight = scrollContainer.clientHeight;
+            var maxTop = trackHeight - thumbHeight;
+            var newTop = Math.max(0, Math.min(maxTop, targetTop));
+            scrollbarThumb.style.top = newTop + 'px';
+            var maxScroll = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+            scrollContainer.scrollTop = maxScroll > 0 ? (newTop / maxTop) * maxScroll : 0;
+        });
+
+        syncArtificialScrollbar();
+
+        return {
                 type: String(obj[0] || ''),
                 connections: Array.isArray(obj[1]) ? obj[1] : [],
                 properties: obj[2] && typeof obj[2] === 'object' ? obj[2] : {}
@@ -903,6 +1120,10 @@
                 try { state.panel.panel.parentNode.removeChild(state.panel.panel); } catch (e) {}
                 try { state.panel.toggle.parentNode.removeChild(state.panel.toggle); } catch (e) {}
             }
+            if (virtualCursor && virtualCursor.parentNode) {
+                virtualCursor.parentNode.removeChild(virtualCursor);
+            }
+            virtualCursor = null;
         }
     }
 
@@ -922,6 +1143,9 @@
                 document.body.appendChild(container);
 
                 var panel = createPanel();
+                if (!virtualCursor) {
+                    virtualCursor = createVirtualCursor();
+                }
 
                 var sceneData = createScene(container);
                 var scene = sceneData.scene;
