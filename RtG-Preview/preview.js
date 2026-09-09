@@ -232,6 +232,7 @@
             connectionsTotal: 0,
             connectedBlocks: 0,
             completelyUnconnected: [],
+            partiallyUnconnected: [],
             connectionPointsUsed: {},
             uuidTotal: 0,
             uuidUnique: 0,
@@ -254,6 +255,9 @@
         var objectsWithConnections = 0;
         var objectsWithoutConnections = 0;
         var objectsWithoutProperties = 0;
+        var objectsWithValidConnections = 0;
+        var objectsWithInvalidConnections = 0;
+        var partialConnectionTypes = {};
         var uuidSet = {};
         var uuidList = [];
         var parentMap = {};
@@ -268,11 +272,61 @@
 
             types[type] = (types[type] || 0) + 1;
 
+            var hasValidConnection = false;
+            var hasInvalidConnection = false;
+
             if (connections.length === 0) {
                 objectsWithoutConnections++;
                 stats.completelyUnconnected.push(type);
             } else {
                 objectsWithConnections++;
+                for (var c = 0; c < connections.length; c++) {
+                    var conn = connections[c];
+                    if (Array.isArray(conn) && conn.length >= 3) {
+                        var primaryIndex = conn[2];
+                        var indexValid = false;
+                        if (primaryIndex !== null && primaryIndex !== undefined) {
+                            var numIndex = Number(primaryIndex);
+                            if (Number.isInteger(numIndex) && numIndex >= 1 && numIndex <= build.length) {
+                                indexValid = true;
+                                parentMap[i + 1] = numIndex;
+                            }
+                        }
+
+                        if (indexValid) {
+                            hasValidConnection = true;
+                        } else {
+                            hasInvalidConnection = true;
+                        }
+
+                        var primaryId = String(conn[1] || '');
+                        var uuidRegex = /^\{[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\}$/;
+                        var isUuid = uuidRegex.test(primaryId);
+                        if (isUuid) {
+                            stats.uuidTotal++;
+                            uuidList.push(primaryId);
+                            uuidSet[primaryId] = (uuidSet[primaryId] || 0) + 1;
+                            if (!stats.connectionPointsUsed[primaryId]) {
+                                stats.connectionPointsUsed[primaryId] = 0;
+                            }
+                            stats.connectionPointsUsed[primaryId]++;
+                        } else {
+                            var pointId = String(primaryId || 'numeric');
+                            if (!stats.connectionPointsUsed[pointId]) {
+                                stats.connectionPointsUsed[pointId] = 0;
+                            }
+                            stats.connectionPointsUsed[pointId]++;
+                        }
+                        stats.connectionsTotal++;
+                    }
+                }
+            }
+
+            if (hasValidConnection) {
+                objectsWithValidConnections++;
+            }
+            if (hasInvalidConnection) {
+                objectsWithInvalidConnections++;
             }
 
             if (Object.keys(properties).length === 0) {
@@ -289,37 +343,10 @@
                 var val = JSON.stringify(properties[prop]);
                 stats.propertyValues[prop][val] = (stats.propertyValues[prop][val] || 0) + 1;
             }
-
-            for (var c = 0; c < connections.length; c++) {
-                var conn = connections[c];
-                if (Array.isArray(conn) && conn.length >= 3) {
-                    var primaryId = String(conn[1] || '');
-                    if (primaryId.indexOf('{') !== -1 && primaryId.indexOf('}') !== -1) {
-                        stats.uuidTotal++;
-                        uuidList.push(primaryId);
-                        uuidSet[primaryId] = (uuidSet[primaryId] || 0) + 1;
-                        if (!stats.connectionPointsUsed[primaryId]) {
-                            stats.connectionPointsUsed[primaryId] = 0;
-                        }
-                        stats.connectionPointsUsed[primaryId]++;
-                    } else {
-                        var pointId = String(primaryId || 'numeric');
-                        if (!stats.connectionPointsUsed[pointId]) {
-                            stats.connectionPointsUsed[pointId] = 0;
-                        }
-                        stats.connectionPointsUsed[pointId]++;
-                    }
-                    stats.connectionsTotal++;
-
-                    var parentIndex = conn[2];
-                    if (typeof parentIndex === 'number') {
-                        parentMap[i + 1] = parentIndex;
-                    }
-                }
-            }
         }
 
         stats.uniqueTypes = Object.keys(types).length;
+        stats.blockTypes = types;
         for (var t in types) {
             if (!types.hasOwnProperty(t)) continue;
             if (types[t] > 1) {
@@ -334,12 +361,40 @@
             }
         }
 
-        stats.connectedBlocks = objectsWithConnections;
+        stats.connectedBlocks = objectsWithValidConnections;
         stats.completelyUnconnected = stats.completelyUnconnected.filter(function(v, i, self) {
             return self.indexOf(v) === i;
         });
         stats.emptyNoConnections = objectsWithoutConnections;
         stats.emptyNoProperties = objectsWithoutProperties;
+
+        for (var i4 = 0; i4 < build.length; i4++) {
+            var obj4 = build[i4];
+            if (!Array.isArray(obj4) || obj4.length < 1) continue;
+            var connections4 = Array.isArray(obj4[1]) ? obj4[1] : [];
+            if (connections4.length > 0) {
+                var hasValid4 = false;
+                var hasInvalid4 = false;
+                for (var c4 = 0; c4 < connections4.length; c4++) {
+                    var conn4 = connections4[c4];
+                    if (Array.isArray(conn4) && conn4.length >= 3) {
+                        var pi = conn4[2];
+                        var num = Number(pi);
+                        if (Number.isInteger(num) && num >= 1 && num <= build.length) {
+                            hasValid4 = true;
+                        } else {
+                            hasInvalid4 = true;
+                        }
+                    }
+                }
+                if (hasValid4 && hasInvalid4) {
+                    stats.partiallyUnconnected.push(String(obj4[0] || ''));
+                }
+            }
+        }
+        stats.partiallyUnconnected = stats.partiallyUnconnected.filter(function(v, i, self) {
+            return self.indexOf(v) === i;
+        });
 
         var uniqueUuids = Object.keys(uuidSet);
         stats.uuidUnique = uniqueUuids.length;
@@ -377,7 +432,7 @@
         return stats;
     }
 
-    function createPanel(container) {
+    function createPanel() {
         var panel = document.createElement('div');
         panel.id = 'rtg-preview-panel';
         panel.style.cssText = 'position:fixed;top:0;left:0;height:100%;width:280px;background:rgba(20,20,30,0.95);color:#e0e0e0;font-family:Arial,sans-serif;font-size:12px;z-index:99998;overflow-y:auto;pointer-events:auto;transform:translateX(-100%);transition:transform .2s ease;border-right:1px solid rgba(255,255,255,0.1);';
@@ -469,9 +524,12 @@
                     }
                 }
 
-                html += section('Connections', 'Total: ' + stats.connectionsTotal + '<br/>Connected: ' + stats.connectedBlocks + '<br/>Completely unconnected: ' + stats.completelyUnconnected.length);
+                html += section('Connections', 'Total: ' + stats.connectionsTotal + '<br/>Connected: ' + stats.connectedBlocks + '<br/>Completely unconnected: ' + stats.completelyUnconnected.length + '<br/>Partially unconnected: ' + stats.partiallyUnconnected.length);
                 if (stats.completelyUnconnected.length > 0) {
                     html += '<div style="padding-left:8px;opacity:0.7;">' + escapeHtml(stats.completelyUnconnected.join(', ')) + '</div>';
+                }
+                if (stats.partiallyUnconnected.length > 0) {
+                    html += '<div style="padding-left:8px;opacity:0.7;">' + escapeHtml(stats.partiallyUnconnected.join(', ')) + '</div>';
                 }
 
                 if (stats.connectionPointsUsed && Object.keys(stats.connectionPointsUsed).length > 0) {
@@ -727,7 +785,7 @@
             if (key === 'd' || key === 'arrowright') moveState.right = true;
             if (key === 'q') moveState.down = true;
             if (key === 'e') moveState.up = true;
-            if (key === 'f') togglePanel();
+            if (key === 'f' && !event.repeat) togglePanel();
         });
 
         window.addEventListener('keyup', function(event) {
@@ -863,8 +921,7 @@
                 container.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;touch-action:none;';
                 document.body.appendChild(container);
 
-                var panel = createPanel(container);
-                setPanelOpen(false);
+                var panel = createPanel();
 
                 var sceneData = createScene(container);
                 var scene = sceneData.scene;

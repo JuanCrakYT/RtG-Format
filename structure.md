@@ -42,27 +42,37 @@ RtG-Format/
 │       └── icons/
 │
 ├── assets/
-│   ├─ images/
-│   │  ├─ logo/
-│   │  │  ├─ official-banners/
-│   │  │  │  ├─ RtG-1.webp
-│   │  │  │  ├─ RtG-2.webp
-│   │  │  │  ├─ RtG-3.webp
-│   │  │  │  ├─ RtG-4.webp
-│   │  │  │  └─ RtG-5.webp
-│   │  │  ├─ versions/
-│   │  │  │  └─ v1/
-│   │  │  │     ├─ RtG-Format-v1.png
-│   │  │  │     └─ RtG-Format-v1.svg
-│   │  │  ├─ RtG-Format-Background.svg
-│   │  │  ├─ RtG-Format-Shape.svg
-│   │  │  ├─ RtG-Format.png
-│   │  │  └─ RtG-Format.svg
-│   │  ├─ banner.jpeg
-│   │  ├─ banner.png
-│   │  ├─ banner.svg
-│   │  └─ RtG.png
-│   └─ README.md
+│   ├── images/
+│   │   ├── banner.jpeg
+│   │   ├── banner.png
+│   │   ├── banner.svg
+│   │   └── logo/
+│   │       ├── RtG-Format.svg
+│   │       ├── RtG-Format.png
+│   │       ├── RtG-Format-Shape.svg
+│   │       ├── RtG-Format-Background.svg
+│   │       ├── official-banners/
+│   │       │   ├── RtG-1.webp
+│   │       │   ├── RtG-2.webp
+│   │       │   ├── RtG-3.webp
+│   │       │   ├── RtG-4.webp
+│   │       │   └── RtG-5.webp
+│   │       └── versions/
+│   │           └── v1/
+│   │               ├── RtG-Format-v1.svg
+│   │               └── RtG-Format-v1.png
+│   │
+│   ├── models/
+│   │   ├── Fricklet.obj
+│   │   └── Teeth.obj
+│   │
+│   ├── sounds/
+│   │   ├── error.mp3
+│   │   └── notification.mp3
+│   │
+│   └── svg/
+│       ├── menu-closed.svg
+│       └── menu-opened.svg
 │
 ├── blocks/
 │   ├── README.md
