@@ -55,6 +55,9 @@
             var url = resolveSoundUrl(type === 'error' ? 'error' : 'notification');
             var audio = new Audio(url);
             audio.volume = 0.6;
+            audio.onerror = function() {
+                console.error('RtG-Preview: Failed to load sound: ' + url);
+            };
             audio.play().catch(function() {});
         } catch (e) {}
     }
@@ -458,13 +461,16 @@
 
         var toggle = document.createElement('button');
         toggle.id = 'rtg-preview-panel-toggle';
-        toggle.style.cssText = 'background:none;border:none;padding:4px;cursor:pointer;pointer-events:auto;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;background:rgba(20,20,30,0.8);';
+        toggle.style.cssText = 'background:none;border:none;padding:4px;cursor:pointer;pointer-events:auto;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;background:rgba(20,20,30,0.8);position:relative;z-index:4;';
         toggle.setAttribute('aria-label', 'Toggle panel');
 
         var toggleImg = document.createElement('img');
         toggleImg.id = 'rtg-preview-panel-toggle-img';
         toggleImg.style.cssText = 'width:20px;height:20px;pointer-events:none;';
         toggleImg.src = resolvePreviewAssetUrl('assets/svg/menu-closed.svg');
+        toggleImg.onerror = function() {
+            showAlert('Failed to load SVG icon asset', 'error');
+        };
         toggle.appendChild(toggleImg);
 
         toggle.addEventListener('click', function() {
@@ -1000,18 +1006,66 @@
 
     function parseBuild(build) {
         if (!Array.isArray(build)) {
-            throw new Error('Build must be an array');
+            showAlert('Error in build: the build must be an array.', 'error');
+            return [];
         }
-        return build.map(function(obj) {
-            if (!Array.isArray(obj) || obj.length < 1) {
-                throw new Error('Invalid object tuple');
+
+        var result = [];
+        for (var i = 0; i < build.length; i++) {
+            var obj = build[i];
+            var blockIndex = i + 1;
+
+            if (!Array.isArray(obj)) {
+                showAlert('Error in block ' + blockIndex + ': invalid structure, expected an array.', 'error');
+                continue;
             }
-            return {
-                type: String(obj[0] || ''),
-                connections: Array.isArray(obj[1]) ? obj[1] : [],
-                properties: obj[2] && typeof obj[2] === 'object' ? obj[2] : {}
-            };
-        });
+
+            var type = obj[0];
+            if (type === undefined || type === null || type === '') {
+                showAlert('Error in block ' + blockIndex + ': missing or empty type.', 'error');
+                continue;
+            }
+            type = String(type);
+
+            var connections = obj[1];
+            if (connections !== undefined && connections !== null) {
+                if (!Array.isArray(connections)) {
+                    showAlert('Error in block ' + blockIndex + ' (' + type + '): connections must be an array.', 'error');
+                    connections = [];
+                } else {
+                    var validConnections = [];
+                    for (var c = 0; c < connections.length; c++) {
+                        var conn = connections[c];
+                        if (!Array.isArray(conn) || conn.length < 3) {
+                            showAlert('Error in block ' + blockIndex + ' (' + type + '): connection ' + (c + 1) + ' has invalid format.', 'error');
+                        } else {
+                            validConnections.push(conn);
+                        }
+                    }
+                    connections = validConnections;
+                }
+            } else {
+                connections = [];
+            }
+
+            var properties = obj[2];
+            if (properties !== undefined && properties !== null) {
+                if (typeof properties !== 'object' || Array.isArray(properties)) {
+                    showAlert('Error in block ' + blockIndex + ' (' + type + '): properties must be an object.', 'error');
+                    properties = {};
+                }
+            } else {
+                properties = {};
+            }
+
+            result.push({
+                type: type,
+                connections: connections,
+                properties: properties
+            });
+        }
+
+        return result;
     }
 
     function loadModel(scene, type) {
@@ -1110,8 +1164,8 @@
                         loadedObjects.push(object);
                         return object;
                     }).catch(function(err) {
-                        fatal('Failed to load model "' + objData.type + '": ' + err.message);
-                        throw err;
+                        showAlert('Failed to load model: ' + objData.type + '.obj', 'error');
+                        return null;
                     });
                 });
 
@@ -1155,7 +1209,7 @@
                 state = { container: container, scene: scene, camera: camera, renderer: renderer, animationId: 0, resizeHandler: resizeHandler, interaction: null, panel: panel };
                 animate();
             }).catch(function(err) {
-                fatal('Initialization failed: ' + err.message);
+                showAlert('Preview initialization failed: ' + err.message, 'error');
             });
         }
     };
@@ -1167,8 +1221,8 @@
             })
             .catch(function(error) {
                 console.error('Failed to initialize RtG-Preview:', error);
-                fatal('Initialization failed: ' + error.message);
-                rejectReady(error);
+                showAlert('Failed to load required libraries: ' + error.message, 'error');
+                resolveReady();
             });
     }
 

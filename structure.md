@@ -253,6 +253,10 @@ READ STRUCTURE
 │           │   ├── ### Current RtG-Format Logo
 │           │   ├── ### Official RtG Banners
 │           │   └── ### Historical Logo Versions
+│           ├── ## RtG-Preview
+│           │   ├── ### Models
+│           │   ├── ### Sounds
+│           │   └── ### SVG
 │           ├── ## Asset Guidelines
 │           └── ## Related Documentation
 │
