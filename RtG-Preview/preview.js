@@ -11,16 +11,7 @@
     var cursorX = 0;
     var cursorY = 0;
     var cursorDrag = { active: false, startX: 0, startY: 0, threshold: 6 };
-    var uiActive = false;
-    var virtualCursor = null;
-    var cursorX = 0;
-    var cursorY = 0;
-    var cursorDrag = { active: false, startX: 0, startY: 0, threshold: 6 };
-    var uiActive = false;
-    var virtualCursor = null;
-    var cursorX = 0;
-    var cursorY = 0;
-    var cursorDrag = { active: false, startX: 0, startY: 0, threshold: 6 };
+
 
     function fatal(message) {
         try {
@@ -1015,48 +1006,7 @@
             if (!Array.isArray(obj) || obj.length < 1) {
                 throw new Error('Invalid object tuple');
             }
-        scrollContainer.addEventListener('scroll', function() {
-            syncArtificialScrollbar();
-        });
-        scrollbarThumb.addEventListener('pointerdown', function(event) {
-            event.preventDefault();
-            event.stopPropagation();
-            var startY = event.clientY;
-            var startTop = parseFloat(scrollbarThumb.style.top || '0');
-            function onMove(moveEvent) {
-                var dy = moveEvent.clientY - startY;
-                var trackHeight = scrollContainer.clientHeight;
-                var thumbHeight = scrollbarThumb.offsetHeight;
-                var maxTop = trackHeight - thumbHeight;
-                var newTop = Math.max(0, Math.min(maxTop, startTop + dy));
-                scrollbarThumb.style.top = newTop + 'px';
-                var maxScroll = scrollContainer.scrollHeight - scrollContainer.clientHeight;
-                scrollContainer.scrollTop = maxScroll > 0 ? (newTop / maxTop) * maxScroll : 0;
-            }
-            function onUp() {
-                window.removeEventListener('pointermove', onMove);
-                window.removeEventListener('pointerup', onUp);
-            }
-            window.addEventListener('pointermove', onMove);
-            window.addEventListener('pointerup', onUp);
-        });
-        scrollbarTrack.addEventListener('pointerdown', function(event) {
-            event.preventDefault();
-            var rect = scrollbarTrack.getBoundingClientRect();
-            var y = event.clientY - rect.top;
-            var thumbHeight = scrollbarThumb.offsetHeight;
-            var targetTop = y - thumbHeight / 2;
-            var trackHeight = scrollContainer.clientHeight;
-            var maxTop = trackHeight - thumbHeight;
-            var newTop = Math.max(0, Math.min(maxTop, targetTop));
-            scrollbarThumb.style.top = newTop + 'px';
-            var maxScroll = scrollContainer.scrollHeight - scrollContainer.clientHeight;
-            scrollContainer.scrollTop = maxScroll > 0 ? (newTop / maxTop) * maxScroll : 0;
-        });
-
-        syncArtificialScrollbar();
-
-        return {
+            return {
                 type: String(obj[0] || ''),
                 connections: Array.isArray(obj[1]) ? obj[1] : [],
                 properties: obj[2] && typeof obj[2] === 'object' ? obj[2] : {}
