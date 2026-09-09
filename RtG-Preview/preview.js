@@ -262,17 +262,6 @@
             if (lt > 0.1) moveState.down = true;
         }
 
-        function getForward() {
-            var forward = new THREE.Vector3();
-            camera.getWorldDirection(forward);
-            return forward.normalize();
-        }
-
-        function getRight() {
-            var forward = getForward();
-            return new THREE.Vector3().crossVectors(new THREE.Vector3(0, 1, 0), forward).normalize().multiplyScalar(-1);
-        }
-
         function updateCameraPosition() {
             camera.position.x = targetPoint.x + spherical.radius * Math.sin(spherical.phi) * Math.sin(spherical.theta);
             camera.position.y = targetPoint.y + spherical.radius * Math.cos(spherical.phi);
@@ -390,7 +379,6 @@
         updateCameraPosition();
 
         function animateWithKeyboard() {
-            applyKeyboardMovement();
             updateFromGamepad();
             applyKeyboardMovement();
             state.keyboardRAF = requestAnimationFrame(animateWithKeyboard);
