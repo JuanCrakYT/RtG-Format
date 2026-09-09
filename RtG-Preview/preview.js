@@ -251,9 +251,11 @@
 
             if (Math.abs(rx) > gamepadDeadzone) {
                 spherical.theta -= rx * 0.03;
+                updateCameraPosition();
             }
             if (Math.abs(ry) > gamepadDeadzone) {
                 spherical.phi = Math.max(0.1, Math.min(Math.PI - 0.1, spherical.phi - ry * 0.03));
+                updateCameraPosition();
             }
 
             var lt = gp.buttons[6] ? gp.buttons[6].value : 0;
