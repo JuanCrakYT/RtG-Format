@@ -202,6 +202,65 @@
         var targetPoint = target || new THREE.Vector3(0, 0, 0);
         var moveState = { forward: false, backward: false, left: false, right: false, up: false, down: false };
         var pinchState = { active: false, lastDistance: 0 };
+        var gamepadDeadzone = 0.2;
+
+        function getForward() {
+            var forward = new THREE.Vector3();
+            camera.getWorldDirection(forward);
+            return forward.normalize();
+        }
+
+        function getRight() {
+            var forward = getForward();
+            return new THREE.Vector3().crossVectors(new THREE.Vector3(0, 1, 0), forward).normalize().multiplyScalar(-1);
+        }
+
+        function applyAxis(value) {
+            if (Math.abs(value) < gamepadDeadzone) return 0;
+            return value;
+        }
+
+        function updateFromGamepad() {
+            var gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
+            var gp = null;
+            for (var i = 0; i < gamepads.length; i++) {
+                if (gamepads[i]) {
+                    gp = gamepads[i];
+                    break;
+                }
+            }
+            if (!gp) return;
+
+            moveState.forward = false;
+            moveState.backward = false;
+            moveState.left = false;
+            moveState.right = false;
+            moveState.up = false;
+            moveState.down = false;
+
+            var lx = applyAxis(gp.axes[0]);
+            var ly = applyAxis(gp.axes[1]);
+            var rx = applyAxis(gp.axes[2]);
+            var ry = applyAxis(gp.axes[3]);
+
+            if (lx > 0.1) moveState.right = true;
+            if (lx < -0.1) moveState.left = true;
+            if (ly > 0.1) moveState.forward = true;
+            if (ly < -0.1) moveState.backward = true;
+
+            if (Math.abs(rx) > gamepadDeadzone) {
+                spherical.theta -= rx * 0.03;
+            }
+            if (Math.abs(ry) > gamepadDeadzone) {
+                spherical.phi = Math.max(0.1, Math.min(Math.PI - 0.1, spherical.phi - ry * 0.03));
+            }
+
+            var lt = gp.buttons[6] ? gp.buttons[6].value : 0;
+            var rt = gp.buttons[7] ? gp.buttons[7].value : 0;
+
+            if (rt > 0.1) moveState.up = true;
+            if (lt > 0.1) moveState.down = true;
+        }
 
         function getForward() {
             var forward = new THREE.Vector3();
@@ -331,6 +390,8 @@
         updateCameraPosition();
 
         function animateWithKeyboard() {
+            applyKeyboardMovement();
+            updateFromGamepad();
             applyKeyboardMovement();
             state.keyboardRAF = requestAnimationFrame(animateWithKeyboard);
         }
