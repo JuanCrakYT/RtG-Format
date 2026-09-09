@@ -279,8 +279,12 @@
             if (moveState.backward) delta.sub(forward);
             if (moveState.right) delta.add(right);
             if (moveState.left) delta.sub(right);
-            if (moveState.up) delta.y += speed;
-            if (moveState.down) delta.y -= speed;
+
+            if (moveState.up || moveState.down) {
+                var up = new THREE.Vector3(0, 1, 0).applyQuaternion(camera.quaternion).normalize();
+                if (moveState.up) delta.add(up);
+                if (moveState.down) delta.sub(up);
+            }
 
             if (delta.length() > 0) {
                 delta.normalize().multiplyScalar(speed);
