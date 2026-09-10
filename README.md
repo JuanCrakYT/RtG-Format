@@ -36,10 +36,96 @@ The documentation covers:
 - Research methodology and experimental results
 ```
 
+## RtG-Preview
+
+**RtG-Preview** is the browser-based 3D previewer included in this repository.
+It allows RtG builds to be visualized as interactive 3D scenes directly in a web browser, without requiring a separate application.
+
+The previewer uses the existing **RtG-Format build structure** and the repository's 3D models to create the scene. It does **not** introduce a separate build format.
+
+### What can RtG-Preview do?
+
+```md
+- Render RtG builds as interactive 3D scenes
+- Load models from `assets/models/`
+- Display multiple objects at once
+- Interactive mouse and touch controls
+- Keyboard camera movement
+- Gamepad/controller support
+- Build statistics
+- Error and notification alerts
+- Loading screen with progress
+- RtG splash messages
+- Adaptive scene grid
+- 3D world axes and origin
+- SVG interface controls
+```
+
+### Quick Preview
+
+RtG-Preview can be loaded directly from a CDN such as jsDelivr.
+
+A minimal example:
+
+```html
+<script src="https://cdn.jsdelivr.net/gh/JuanCrakYT/RtG-Format/RtG-Preview/preview.js"></script>
+<script>
+  RtGPreview.render([
+    ["Part", [], {}],
+    ["Anchor", [], {}],
+    ["Tooth", [], {}]
+  ]);
+</script>
+```
+
+The renderer receives a normal RtG-Format build through:
+
+```js
+RtGPreview.render(build);
+```
+
+For more information, see [`RtG-Preview/README.md`](RtG-Preview/README.md).
+
+### RtG-Preview Assets
+
+The previewer uses assets stored in the main repository:
+
+```tree
+assets/
+├── models/
+├── sounds/
+├── svg/
+└── images/
+    └── logo/
+        └── official-banners/
+```
+
+3D models are stored as Wavefront OBJ files under [`assets/models/`](assets/models/).
+
+For example:
+
+```md
+assets/models/Part.obj
+assets/models/Anchor.obj
+assets/models/Tooth.obj
+assets/models/Fricklet.obj
+```
+
+Loading screens can use the official RtG banners stored under:
+
+```md
+assets/images/logo/official-banners/
+```
+
+RtG-Preview also uses [`RtG-Preview/splash.json`](RtG-Preview/splash.json) for its loading-screen splash messages.
+For the complete previewer documentation, see [`RtG-Preview/README.md`](RtG-Preview/README.md).
+
 ## Quick Start
 
 If you are new to the RtG save/build format, **start with [`SPECIFICATION.md`](SPECIFICATION.md)** for the current interpretation of the format.
+
 For introductory documentation, see [`docs/README.md`](docs/README.md), which provides a recommended reading path through the documentation.
+If you want to **visualize an RtG build**, see [`RtG-Preview/README.md`](RtG-Preview/README.md).
 
 Other introductory resources:
 
@@ -53,7 +139,7 @@ In simple terms, the RtG save system can be understood as a pipeline:
 
 1. A build is represented internally as a collection of objects and their relationships.
 2. The building system converts those objects into structured save data.
-3. That structured data has a JSON representation containing the objects, connections, and properties.
+3. The JSON representation contains the objects, connections, and properties.
 4. The JSON representation is then encoded/compressed into the final save output used by the game.
 
 Conceptually:
@@ -83,8 +169,23 @@ flowchart TD
     class ENCODING encoding;
     class OUTPUT output;
 ```
+
 This repository documents each stage of that process, from the building system to the final save output.
 The JSON documentation describes the structured representation of the save data before the final encoding/compression layer. The final save output is documented separately under [`compression/`](compression/).
+
+RtG-Preview operates on the structured build representation and provides a visual representation of that data:
+
+```mermaid
+flowchart LR
+    JSON["📄 RtG Build JSON"]
+    PREVIEW["🖥️ RtG-Preview"]
+    MODELS["🧊 3D Models"]
+    SCENE["🌐 Interactive 3D Scene"]
+
+    JSON --> PREVIEW
+    MODELS --> PREVIEW
+    PREVIEW --> SCENE
+```
 
 ## Documentation
 
@@ -92,18 +193,17 @@ The JSON documentation describes the structured representation of the save data 
 
 [`SPECIFICATION.md`](SPECIFICATION.md) is the main technical specification and the primary reference for the current understanding of the format.
 
-Detailed documentation for specific parts of the format is available under
-[`format/`](format/). See [`format/README.md`](format/README.md) for the
-complete format documentation index.
+Detailed documentation for specific parts of the format is available under [`format/`](format/). See [`format/README.md`](format/README.md) for the complete format documentation index.
 
 ### Blocks and Parts
 
 See [`blocks/parts/parts-id.md`](blocks/parts/parts-id.md) for the documented object/Part IDs and their categories.
+
 The historical reverse-engineering ID research is preserved separately in [`old-files/`](old-files/).
 
 ### Compression and Encoding
 
-- [`compression/encoding.md`](compression/encoding.md) — Observed encoding and final save representation
+* [`compression/encoding.md`](compression/encoding.md) — Observed encoding and final save representation
 
 ### Examples
 
@@ -116,6 +216,13 @@ See [`research/`](research/) for methodology, discoveries, and unresolved questi
 ### Tools
 
 See [`tools/`](tools/) for utilities related to decoding, encoding, conversion, and inspection.
+
+### RtG-Preview
+
+See [`RtG-Preview/`](RtG-Preview/) for the browser-based 3D previewer.
+
+* [`RtG-Preview/README.md`](RtG-Preview/README.md) — Previewer documentation
+* [`RtG-Preview/preview.js`](RtG-Preview/preview.js) — Main renderer
 
 ## Status
 
@@ -157,22 +264,25 @@ This attribution is requested for research provenance and does not imply affilia
 
 ## Credits
 
-- **JuanCrakYT** — Reverse engineering, research, documentation, and maintenance.
-- **Road To Gramby's Wiki** — Reference for game objects, terminology, categorization and images.
-- **Road To Gramby's** — Original game and save/build system documented by this project.
+* **JuanCrakYT** — Reverse engineering, research, documentation, and maintenance.
+* **Road To Gramby's Wiki** — Reference for game objects, terminology, categorization and images.
+* **Road To Gramby's** — Original game and save/build system documented by this project.
 
 This is an independent reverse-engineering project and is not affiliated with or endorsed by the creators of Road To Gramby's or the Road To Gramby's Wiki.
 
 <div style="text-align: center;">
-  <img
-    id="rtg-banner-scripted"
-    src="assets/images/logo/official-banners/RtG-1.webp"
-    alt="RtG"
-    style="
-      opacity: 1;
-      transition: opacity 0.25s ease;
-    "
-  >
+
+<img
+id="rtg-banner-scripted"
+src="assets/images/logo/official-banners/RtG-1.webp"
+alt="RtG"
+style="
+opacity: 1;
+transition: opacity 0.25s ease;
+"
+
+>
+
 </div>
 
 ## Web Documentation
@@ -183,18 +293,21 @@ See [`page/`](page/) for the source of the documentation website.
 ## Link Reference
 
 **Road To Gramby's Wiki:**
-[https://road-to-grambys.fandom.com/wiki/Road_to_Gramby%27s_%F0%9F%91%B5_Wiki](https://road-to-grambys.fandom.com/wiki/Road_to_Gramby%27s_%F0%9F%91%B5_Wiki)
+
+https://road-to-grambys.fandom.com/wiki/Road_to_Gramby%27s_%F0%9F%91%B5_Wiki
 
 **JuanCrakYT — RtG-Format:**
-[https://github.com/JuanCrakYT/RtG-Format](https://github.com/JuanCrakYT/RtG-Format)
+
+https://github.com/JuanCrakYT/RtG-Format
+
 [JuanCrakYT.github.io/RtG-Format](https://juancrakyt.github.io/RtG-Format/)
 
 ## Repository
 
-- [`CHANGELOG.md`](CHANGELOG.md) — History of documented project changes.
-- [`CONTRIBUTING.md`](CONTRIBUTING.md) — Contribution and documentation guidelines.
-- [`LICENSE`](LICENSE) — Project license.
-- [`structure.md`](structure.md) — Proyect Tree // Recommended for file search
+* [`CHANGELOG.md`](CHANGELOG.md) — History of documented project changes.
+* [`CONTRIBUTING.md`](CONTRIBUTING.md) — Contribution and documentation guidelines.
+* [`LICENSE`](LICENSE) — Project license.
+* [`structure.md`](structure.md) — Project Tree // Recommended for file search
 
 ---
 

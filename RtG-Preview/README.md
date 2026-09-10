@@ -2,7 +2,7 @@
 
 **RtG-Preview** is a lightweight browser-based 3D preview renderer for **RtG-Format** builds.
 
-It allows RtG build data to be rendered interactively in a web browser without requiring a separate application. The renderer is designed to work directly with the existing **RtG-Format** structure and does not introduce a separate build format.
+It allows RtG build data to be rendered interactively in a web browser without requiring a separate application. The renderer is designed to work directly with the existing **[RtG-Format](../README.md)** structure and does not introduce a separate build format.
 
 ## Features
 
@@ -25,7 +25,7 @@ RtG-Preview receives a normal **RtG-Format build** and creates a 3D representati
 
 The basic flow is:
 
-```text
+```ms
 RtG-Format build
        │
        ▼
@@ -45,7 +45,7 @@ The renderer uses the object's internal type name to determine which model shoul
 
 For example:
 
-```text
+```ms
 "Teeth"
    │
    ▼
@@ -75,6 +75,8 @@ A minimal example:
 ```
 
 Replace `COMMIT` with the desired RtG-Format commit.
+It is recommended not to add the `COMMIT` if the project hasn't had updates for a long time (like 3 or more days). 
+For a regular user, the `COMMIT` shouldn't be used.
 
 ## Using Multiple Objects
 
@@ -91,7 +93,7 @@ Each object is resolved using its RtG object type.
 
 For example:
 
-```text
+```md
 Teeth     → assets/models/Teeth.obj
 Fricklet  → assets/models/Fricklet.obj
 ```

@@ -12,6 +12,7 @@
     var cursorY = 0;
     var cursorDrag = { active: false, startX: 0, startY: 0, threshold: 6 };
     var lastInput = 'pointer';
+    var loadingScreen = null;
 
 
     function fatal(message) {
@@ -1073,6 +1074,7 @@
         }
 
         var currentX = 0;
+        var lastRightEdge = 0;
         for (var i = 0; i < objects.length; i++) {
             if (connected[i]) continue;
             if (objectMap[i] === undefined) continue;
@@ -1086,11 +1088,12 @@
             obj3d.position.y = 0;
             obj3d.position.z = 0;
 
-            currentX += size.x + 1;
+            lastRightEdge = currentX + size.x;
+            currentX = Math.ceil(currentX + size.x + 1);
         }
 
-        if (currentX > 0) {
-            var centerX = (currentX - 1) / 2;
+        if (lastRightEdge > 0) {
+            var centerX = lastRightEdge / 2;
             for (var i = 0; i < objects.length; i++) {
                 if (connected[i]) continue;
                 if (objectMap[i] === undefined) continue;
@@ -1105,6 +1108,7 @@
         group.name = 'rtg-axes-helper';
 
         var gridHelper = new THREE.GridHelper(20, 20, 0x888888, 0x444444);
+        gridHelper.name = 'rtg-grid-helper';
         gridHelper.position.y = 0;
         group.add(gridHelper);
 
@@ -1153,6 +1157,30 @@
         }
 
         scene.add(group);
+    }
+
+    function updateGridSize(loadedObjects) {
+        if (!loadedObjects || loadedObjects.length === 0) return;
+        if (!state || !state.scene) return;
+
+        var gridHelper = null;
+        var axesGroup = state.scene.getObjectByName('rtg-axes-helper');
+        if (axesGroup) {
+            gridHelper = axesGroup.getObjectByName('rtg-grid-helper');
+        }
+        if (!gridHelper) return;
+
+        var box = new THREE.Box3();
+        for (var i = 0; i < loadedObjects.length; i++) {
+            box.expandByObject(loadedObjects[i]);
+        }
+        if (box.isEmpty()) return;
+
+        var size = box.getSize(new THREE.Vector3());
+        var maxDim = Math.max(size.x, size.z);
+        var gridSize = Math.max(20, Math.ceil(maxDim / 10) * 10 + 10);
+
+        gridHelper.scale.set(gridSize / 20, 1, gridSize / 20);
     }
 
     function parseBuild(build) {
@@ -1282,7 +1310,151 @@
                 virtualCursor.parentNode.removeChild(virtualCursor);
             }
             virtualCursor = null;
+            if (loadingScreen) {
+                loadingScreen.hide();
+                loadingScreen = null;
+            }
         }
+    }
+
+    function createLoadingScreen() {
+        var screen = document.createElement('div');
+        screen.id = 'rtg-loading-screen';
+        screen.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(20,20,30,0.98);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999999;transition:opacity .3s ease;';
+
+        var bannerContainer = document.createElement('div');
+        bannerContainer.style.cssText = 'margin-bottom:24px;display:flex;align-items:center;justify-content:center;';
+
+        var bannerImg = document.createElement('img');
+        bannerImg.style.cssText = 'max-width:90%;max-height:40vh;opacity:0;transition:opacity .3s ease;';
+        bannerContainer.appendChild(bannerImg);
+        screen.appendChild(bannerContainer);
+
+        var splashText = document.createElement('div');
+        splashText.style.cssText = 'color:#e0e0e0;font-family:Arial,sans-serif;font-size:14px;margin-bottom:24px;text-align:center;max-width:80%;opacity:0;transition:opacity .3s ease;';
+        screen.appendChild(splashText);
+
+        var progressContainer = document.createElement('div');
+        progressContainer.style.cssText = 'width:200px;height:4px;background:rgba(255,255,255,0.15);border-radius:2px;overflow:hidden;';
+
+        var progressBar = document.createElement('div');
+        progressBar.style.cssText = 'width:1%;height:100%;background:#44ff44;border-radius:2px;transition:width .2s ease;';
+        progressContainer.appendChild(progressBar);
+        screen.appendChild(progressContainer);
+
+        document.body.appendChild(screen);
+
+        return {
+            screen: screen,
+            bannerImg: bannerImg,
+            splashText: splashText,
+            progressBar: progressBar,
+            setProgress: function(percent) {
+                progressBar.style.width = Math.min(100, Math.max(1, percent)) + '%';
+            },
+            setBanner: function(src) {
+                bannerImg.onload = function() {
+                    bannerImg.style.opacity = '1';
+                };
+                bannerImg.src = src;
+            },
+            setSplash: function(text) {
+                splashText.textContent = text;
+                splashText.style.opacity = '1';
+            },
+            hide: function() {
+                screen.style.opacity = '0';
+                setTimeout(function() {
+                    if (screen.parentNode) {
+                        screen.parentNode.removeChild(screen);
+                    }
+                }, 300);
+            }
+        };
+    }
+
+    function findBannerImages(basePath) {
+        return new Promise(function(resolve) {
+            var found = {};
+
+            function resolveResults() {
+                var sorted = Object.keys(found).map(function(k) {
+                    return { num: parseInt(k), url: found[k] };
+                }).sort(function(a, b) { return a.num - b.num; });
+                resolve(sorted);
+            }
+
+            function scanRange(start, end) {
+                var pending = end - start + 1;
+                if (pending <= 0) {
+                    resolveResults();
+                    return;
+                }
+                for (var i = start; i <= end; i++) {
+                    var url = basePath + 'RtG-' + i + '.webp';
+                    (function(imgUrl, imgNum) {
+                        var img = new Image();
+                        img.onload = function() {
+                            found[imgNum] = imgUrl;
+                            pending--;
+                            if (pending === 0) resolveResults();
+                        };
+                        img.onerror = function() {
+                            pending--;
+                            if (pending === 0) resolveResults();
+                        };
+                        img.src = imgUrl;
+                    })(url, i);
+                }
+            }
+
+            function probeExponential(n) {
+                if (n > 2000) {
+                    scanRange(1, 2000);
+                    return;
+                }
+                var img = new Image();
+                img.onload = function() {
+                    probeExponential(n * 2);
+                };
+                img.onerror = function() {
+                    var start = Math.max(1, Math.floor(n / 2));
+                    var end = n - 1;
+                    if (start > end) {
+                        resolve([]);
+                    } else {
+                        scanRange(start, end);
+                    }
+                };
+                img.src = basePath + 'RtG-' + n + '.webp';
+            }
+
+            probeExponential(1);
+        });
+    }
+
+    function loadSplashTexts() {
+        return new Promise(function(resolve) {
+            try {
+                var url = resolvePreviewAssetUrl('splash.json');
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', url, true);
+                xhr.responseType = 'json';
+                xhr.onload = function() {
+                    if (xhr.status >= 200 && xhr.status < 300 && Array.isArray(xhr.response)) {
+                        resolve(xhr.response);
+                    } else {
+                        resolve([]);
+                    }
+                };
+                xhr.onerror = function() {
+                    resolve([]);
+                };
+                xhr.send();
+            } catch (e) {
+                resolve([]);
+            }
+        });
     }
 
     window.RtGPreview = {
@@ -1314,58 +1486,108 @@
 
                 var loadedObjects = [];
                 var objectMap = new Array(objects.length);
+
+                var loadingStartTime = Date.now();
+                loadingScreen = createLoadingScreen();
+
+                findBannerImages(resolvePreviewAssetUrl('assets/images/logo/official-banners/')).then(function(banners) {
+                    if (banners.length > 0) {
+                        var randomBanner = banners[Math.floor(Math.random() * banners.length)];
+                        loadingScreen.setBanner(randomBanner.url);
+                    }
+                });
+
+                loadSplashTexts().then(function(texts) {
+                    if (texts.length > 0) {
+                        var randomText = texts[Math.floor(Math.random() * texts.length)];
+                        loadingScreen.setSplash(randomText);
+                    } else {
+                        loadingScreen.setSplash('Loading...');
+                    }
+                });
+
+                var loadedCount = 0;
                 var promises = objects.map(function(objData, index) {
                     return loadModel(scene, objData.type).then(function(object) {
                         objectMap[index] = loadedObjects.length;
                         loadedObjects.push(object);
+                        loadedCount++;
+                        if (objects.length > 0) {
+                            loadingScreen.setProgress(Math.ceil(loadedCount / objects.length * 100));
+                        }
                         return object;
                     }).catch(function(err) {
                         showAlert('Failed to load model: ' + objData.type + '.obj', 'error');
                         objectMap[index] = undefined;
+                        loadedCount++;
+                        if (objects.length > 0) {
+                            loadingScreen.setProgress(Math.ceil(loadedCount / objects.length * 100));
+                        }
                         return null;
                     });
                 });
 
-                Promise.all(promises).then(function() {
+                if (objects.length === 0) {
+                    loadingScreen.setProgress(100);
+                }
+
+                function finalizeRender() {
+                    loadingScreen.hide();
+                    loadingScreen = null;
+
                     arrangeDisconnectedObjects(objects, loadedObjects, objectMap);
+                    updateGridSize(loadedObjects);
+
                     var targetPoint = new THREE.Vector3(0, 0, 0);
                     if (loadedObjects.length > 0) {
                         targetPoint = frameBuild(camera, loadedObjects);
                     }
                     state.interaction = setupInteraction(container, camera, targetPoint);
-                }).catch(function(err) {
-                    state.interaction = setupInteraction(container, camera);
+
+                    var stats = computeBuildStats(build, loadedObjects);
+                    panel.updateStats(stats);
+
+                    var hasPhysicalKeyboard = false;
+                    try {
+                        var mouseCoarse = window.matchMedia('(pointer: coarse)').matches;
+                        var hoverNone = window.matchMedia('(hover: none)').matches;
+                        var maxTouch = navigator.maxTouchPoints || 0;
+                        hasPhysicalKeyboard = !(mouseCoarse && hoverNone && maxTouch > 0);
+                    } catch (e) {}
+
+                    if (!hasPhysicalKeyboard) {
+                        showAlert('WASD controls are unavailable on this device. Use touch or mouse to control the camera.', 'notification');
+                    }
+
+                    var resizeHandler = function() {
+                        camera.aspect = container.clientWidth / container.clientHeight;
+                        camera.updateProjectionMatrix();
+                        renderer.setSize(container.clientWidth, container.clientHeight);
+                    };
+                    window.addEventListener('resize', resizeHandler);
+
+                    function animate() {
+                        state.animationId = requestAnimationFrame(animate);
+                        renderer.render(scene, camera);
+                    }
+
+                    state = { container: container, scene: scene, camera: camera, renderer: renderer, animationId: 0, resizeHandler: resizeHandler, interaction: null, panel: panel, axesHelper: sceneData.axesHelper };
+                    animate();
+                }
+
+                Promise.all(promises).then(function() {
+                    var elapsed = Date.now() - loadingStartTime;
+                    var remaining = Math.max(0, 1000 - elapsed);
+                    setTimeout(function() {
+                        finalizeRender();
+                    }, remaining);
+                }).catch(function() {
+                    var elapsed = Date.now() - loadingStartTime;
+                    var remaining = Math.max(0, 1000 - elapsed);
+                    setTimeout(function() {
+                        finalizeRender();
+                    }, remaining);
                 });
-
-                var stats = computeBuildStats(build, loadedObjects);
-                panel.updateStats(stats);
-
-                var hasPhysicalKeyboard = false;
-                try {
-                    var mouseCoarse = window.matchMedia('(pointer: coarse)').matches;
-                    var hoverNone = window.matchMedia('(hover: none)').matches;
-                    var maxTouch = navigator.maxTouchPoints || 0;
-                    hasPhysicalKeyboard = !(mouseCoarse && hoverNone && maxTouch > 0);
-                } catch (e) {}
-
-                if (!hasPhysicalKeyboard) {
-                    showAlert('WASD controls are unavailable on this device. Use touch or mouse to control the camera.', 'notification');
-                }
-
-                var resizeHandler = function() {
-                    camera.aspect = container.clientWidth / container.clientHeight;
-                    camera.updateProjectionMatrix();
-                    renderer.setSize(container.clientWidth, container.clientHeight);
-                };
-                window.addEventListener('resize', resizeHandler);
-
-                function animate() {
-                    state.animationId = requestAnimationFrame(animate);
-                    renderer.render(scene, camera);
-                }
-
-                state = { container: container, scene: scene, camera: camera, renderer: renderer, animationId: 0, resizeHandler: resizeHandler, interaction: null, panel: panel, axesHelper: sceneData.axesHelper };
-                animate();
             }).catch(function(err) {
                 showAlert('Preview initialization failed: ' + err.message, 'error');
             });
