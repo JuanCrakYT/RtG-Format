@@ -11,6 +11,7 @@
     var cursorX = 0;
     var cursorY = 0;
     var cursorDrag = { active: false, startX: 0, startY: 0, threshold: 6 };
+    var lastInput = 'pointer';
 
 
     function fatal(message) {
@@ -236,7 +237,9 @@
         directionalLight.position.set(5, 10, 7);
         scene.add(directionalLight);
 
-        return { scene: scene, camera: camera, renderer: renderer };
+        createAxesHelper(scene);
+
+        return { scene: scene, camera: camera, renderer: renderer, axesHelper: scene.getObjectByName('rtg-axes-helper') };
     }
 
     function computeBuildStats(build, loadedObjects) {
@@ -673,6 +676,10 @@
         panelState.open = !panelState.open;
         uiActive = panelState.open;
         state.panel.setOpen(panelState.open);
+        if (panelState.open && lastInput === 'gamepad') {
+            cursorX = window.innerWidth / 2;
+            cursorY = window.innerHeight / 2;
+        }
         updateVirtualCursor();
     }
 
@@ -681,12 +688,16 @@
         panelState.open = isOpen;
         uiActive = isOpen;
         state.panel.setOpen(isOpen);
+        if (isOpen && lastInput === 'gamepad') {
+            cursorX = window.innerWidth / 2;
+            cursorY = window.innerHeight / 2;
+        }
         updateVirtualCursor();
     }
 
     function updateVirtualCursor() {
         if (!virtualCursor) return;
-        if (uiActive) {
+        if (uiActive && lastInput === 'gamepad') {
             virtualCursor.style.display = 'block';
             var panelRect = state.panel.panel.getBoundingClientRect();
             cursorX = Math.max(panelRect.left + 8, Math.min(panelRect.right - 8, cursorX));
@@ -741,6 +752,8 @@
         var pinchState = { active: false, lastDistance: 0 };
         var gamepadDeadzone = 0.2;
         var selectWasPressed = false;
+        var shiftPressed = false;
+        var yPressed = false;
 
         function getForward() {
             var forward = new THREE.Vector3();
@@ -776,23 +789,18 @@
             gamepadMoveState.up = false;
             gamepadMoveState.down = false;
 
+            lastInput = 'gamepad';
+
             var lx = applyAxis(gp.axes[0]);
             var ly = applyAxis(gp.axes[1]);
             var rx = applyAxis(gp.axes[2]);
             var ry = applyAxis(gp.axes[3]);
 
-            if (lx > 0.1) gamepadMoveState.right = true;
-            if (lx < -0.1) gamepadMoveState.left = true;
-            if (ly > 0.1) gamepadMoveState.backward = true;
-            if (ly < -0.1) gamepadMoveState.forward = true;
-
             var lt = gp.buttons[6] ? gp.buttons[6].value : 0;
             var rt = gp.buttons[7] ? gp.buttons[7].value : 0;
             var selectPressed = gp.buttons[8] ? gp.buttons[8].pressed : false;
             var aPressed = gp.buttons[0] ? gp.buttons[0].pressed : false;
-
-            if (rt > 0.1) gamepadMoveState.up = true;
-            if (lt > 0.1) gamepadMoveState.down = true;
+            yPressed = gp.buttons[3] ? gp.buttons[3].pressed : false;
 
             if (selectPressed && !selectWasPressed) {
                 togglePanel();
@@ -800,6 +808,13 @@
             selectWasPressed = selectPressed;
 
             if (!uiActive) {
+                if (lx > 0.1) gamepadMoveState.right = true;
+                if (lx < -0.1) gamepadMoveState.left = true;
+                if (ly > 0.1) gamepadMoveState.backward = true;
+                if (ly < -0.1) gamepadMoveState.forward = true;
+                if (rt > 0.1) gamepadMoveState.up = true;
+                if (lt > 0.1) gamepadMoveState.down = true;
+
                 if (Math.abs(rx) > gamepadDeadzone) {
                     spherical.theta -= rx * 0.03;
                     updateCameraPosition();
@@ -856,17 +871,20 @@
 
         function applyKeyboardMovement() {
             var speed = 0.08;
+            if (shiftPressed || yPressed) {
+                speed *= 3;
+            }
             var forward = getForward();
             var right = getRight();
             var delta = new THREE.Vector3();
 
             var effectiveMoveState = {
-                forward: moveState.forward || gamepadMoveState.forward,
-                backward: moveState.backward || gamepadMoveState.backward,
-                left: moveState.left || gamepadMoveState.left,
-                right: moveState.right || gamepadMoveState.right,
-                up: moveState.up || gamepadMoveState.up,
-                down: moveState.down || gamepadMoveState.down
+                forward: moveState.forward || (!uiActive && gamepadMoveState.forward),
+                backward: moveState.backward || (!uiActive && gamepadMoveState.backward),
+                left: moveState.left || (!uiActive && gamepadMoveState.left),
+                right: moveState.right || (!uiActive && gamepadMoveState.right),
+                up: moveState.up || (!uiActive && gamepadMoveState.up),
+                down: moveState.down || (!uiActive && gamepadMoveState.down)
             };
 
             if (effectiveMoveState.forward) delta.add(forward);
@@ -897,6 +915,9 @@
         }
 
         container.addEventListener('pointerdown', function(event) {
+            lastInput = 'pointer';
+            if (virtualCursor) virtualCursor.style.display = 'none';
+
             if (event.pointerType === 'touch' && event.isPrimary === false) {
                 return;
             }
@@ -913,6 +934,11 @@
         });
 
         container.addEventListener('pointermove', function(event) {
+            if (event.pointerType === 'touch' || isDragging) {
+                lastInput = 'pointer';
+                if (virtualCursor) virtualCursor.style.display = 'none';
+            }
+
             if (pinchState.active) {
                 var distance = getTouchDistance(event);
                 if (pinchState.lastDistance > 0 && distance > 0) {
@@ -937,6 +963,9 @@
         });
 
         container.addEventListener('pointerup', function(event) {
+            lastInput = 'pointer';
+            if (virtualCursor) virtualCursor.style.display = 'none';
+
             if (pinchState.active) {
                 pinchState.active = false;
                 pinchState.lastDistance = 0;
@@ -948,6 +977,8 @@
         });
 
         container.addEventListener('wheel', function(event) {
+            lastInput = 'pointer';
+            if (virtualCursor) virtualCursor.style.display = 'none';
             event.preventDefault();
             var zoomSpeed = 0.0015;
             spherical.radius = Math.max(0.5, Math.min(50, spherical.radius * (1 + event.deltaY * zoomSpeed)));
@@ -956,6 +987,10 @@
 
         window.addEventListener('keydown', function(event) {
             var key = event.key.toLowerCase();
+            if (key === 'shift') {
+                shiftPressed = true;
+                lastInput = 'pointer';
+            }
             if (key === 'w' || key === 'arrowup') moveState.forward = true;
             if (key === 's' || key === 'arrowdown') moveState.backward = true;
             if (key === 'a' || key === 'arrowleft') moveState.left = true;
@@ -967,6 +1002,10 @@
 
         window.addEventListener('keyup', function(event) {
             var key = event.key.toLowerCase();
+            if (key === 'shift') {
+                shiftPressed = false;
+                lastInput = 'pointer';
+            }
             if (key === 'w' || key === 'arrowup') moveState.forward = false;
             if (key === 's' || key === 'arrowdown') moveState.backward = false;
             if (key === 'a' || key === 'arrowleft') moveState.left = false;
@@ -998,6 +1037,8 @@
                 gamepadMoveState.right = false;
                 gamepadMoveState.up = false;
                 gamepadMoveState.down = false;
+                shiftPressed = false;
+                yPressed = false;
                 pinchState.active = false;
                 pinchState.lastDistance = 0;
                 selectWasPressed = false;
@@ -1006,6 +1047,105 @@
                 }
             }
         };
+    }
+
+    function arrangeDisconnectedObjects(objects, loadedObjects, objectMap) {
+        if (!loadedObjects || loadedObjects.length === 0) return;
+
+        var connected = {};
+        for (var i = 0; i < objects.length; i++) {
+            if (objectMap[i] === undefined) continue;
+            var obj = objects[i];
+            for (var c = 0; c < obj.connections.length; c++) {
+                var conn = obj.connections[c];
+                if (Array.isArray(conn) && conn.length >= 3) {
+                    var idx = Number(conn[2]);
+                    if (Number.isInteger(idx) && idx >= 1 && idx <= objects.length) {
+                        if (objectMap[idx - 1] !== undefined) {
+                            connected[i] = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        var currentX = 0;
+        for (var i = 0; i < objects.length; i++) {
+            if (connected[i]) continue;
+            if (objectMap[i] === undefined) continue;
+
+            var obj3d = loadedObjects[objectMap[i]];
+            var box = new THREE.Box3().setFromObject(obj3d);
+            var size = box.getSize(new THREE.Vector3());
+            var halfWidth = size.x / 2;
+
+            obj3d.position.x = currentX + halfWidth;
+            obj3d.position.y = 0;
+            obj3d.position.z = 0;
+
+            currentX += size.x + 1;
+        }
+
+        if (currentX > 0) {
+            var centerX = (currentX - 1) / 2;
+            for (var i = 0; i < objects.length; i++) {
+                if (connected[i]) continue;
+                if (objectMap[i] === undefined) continue;
+
+                loadedObjects[objectMap[i]].position.x -= centerX;
+            }
+        }
+    }
+
+    function createAxesHelper(scene) {
+        var group = new THREE.Group();
+        group.name = 'rtg-axes-helper';
+
+        var origin = new THREE.Mesh(
+            new THREE.SphereGeometry(0.1, 16, 16),
+            new THREE.MeshBasicMaterial({ color: 0xffffff })
+        );
+        group.add(origin);
+
+        var axisLength = 3;
+        var colors = { x: 0xff4444, y: 0x44ff44, z: 0x4444ff };
+        var dirs = {
+            x: new THREE.Vector3(1, 0, 0),
+            y: new THREE.Vector3(0, 1, 0),
+            z: new THREE.Vector3(0, 0, 1)
+        };
+
+        var letters = { x: 'X', y: 'Y', z: 'Z' };
+
+        for (var axis in dirs) {
+            var geometry = new THREE.BufferGeometry();
+            var vertices = new Float32Array([0, 0, 0, 0, 0, 0]);
+            if (axis === 'x') { vertices[3] = axisLength; vertices[4] = 0; vertices[5] = 0; }
+            if (axis === 'y') { vertices[3] = 0; vertices[4] = axisLength; vertices[5] = 0; }
+            if (axis === 'z') { vertices[3] = 0; vertices[4] = 0; vertices[5] = axisLength; }
+            geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
+            var material = new THREE.LineBasicMaterial({ color: colors[axis] });
+            var line = new THREE.Line(geometry, material);
+            group.add(line);
+
+            var canvas = document.createElement('canvas');
+            canvas.width = 64;
+            canvas.height = 32;
+            var ctx = canvas.getContext('2d');
+            ctx.fillStyle = colors[axis] === 0xff4444 ? '#ff4444' : colors[axis] === 0x44ff44 ? '#44ff44' : '#4444ff';
+            ctx.font = 'bold 16px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(letters[axis], 32, 16);
+            var texture = new THREE.CanvasTexture(canvas);
+            var spriteMaterial = new THREE.SpriteMaterial({ map: texture, transparent: true });
+            var sprite = new THREE.Sprite(spriteMaterial);
+            sprite.position.copy(dirs[axis]).multiplyScalar(axisLength + 0.3);
+            sprite.scale.set(0.6, 0.3, 1);
+            group.add(sprite);
+        }
+
+        scene.add(group);
     }
 
     function parseBuild(build) {
@@ -1121,6 +1261,9 @@
                 state.container.removeChild(state.renderer.domElement);
                 state.renderer.dispose();
             }
+            if (state.axesHelper && state.axesHelper.parent) {
+                state.axesHelper.parent.remove(state.axesHelper);
+            }
             if (state.interaction && state.interaction.stop) {
                 state.interaction.stop();
             }
@@ -1163,17 +1306,21 @@
                 var objects = parseBuild(build);
 
                 var loadedObjects = [];
-                var promises = objects.map(function(objData) {
+                var objectMap = new Array(objects.length);
+                var promises = objects.map(function(objData, index) {
                     return loadModel(scene, objData.type).then(function(object) {
+                        objectMap[index] = loadedObjects.length;
                         loadedObjects.push(object);
                         return object;
                     }).catch(function(err) {
                         showAlert('Failed to load model: ' + objData.type + '.obj', 'error');
+                        objectMap[index] = undefined;
                         return null;
                     });
                 });
 
                 Promise.all(promises).then(function() {
+                    arrangeDisconnectedObjects(objects, loadedObjects, objectMap);
                     var targetPoint = new THREE.Vector3(0, 0, 0);
                     if (loadedObjects.length > 0) {
                         targetPoint = frameBuild(camera, loadedObjects);
@@ -1210,7 +1357,7 @@
                     renderer.render(scene, camera);
                 }
 
-                state = { container: container, scene: scene, camera: camera, renderer: renderer, animationId: 0, resizeHandler: resizeHandler, interaction: null, panel: panel };
+                state = { container: container, scene: scene, camera: camera, renderer: renderer, animationId: 0, resizeHandler: resizeHandler, interaction: null, panel: panel, axesHelper: sceneData.axesHelper };
                 animate();
             }).catch(function(err) {
                 showAlert('Preview initialization failed: ' + err.message, 'error');
