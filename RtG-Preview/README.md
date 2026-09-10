@@ -241,7 +241,7 @@ Using a specific commit makes the loaded renderer deterministic and prevents a t
 For example:
 
 ```text
-@a3dc83cd163aba6a15096467c4349de74ec5d838
+@2972144e73a36bc43f125c28496c2d6adf802fc8
 ```
 
 A branch-based URL may be used when always loading the latest version is desired, but commit-pinned URLs are preferred when reproducibility matters.

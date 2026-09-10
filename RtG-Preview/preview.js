@@ -1104,6 +1104,10 @@
         var group = new THREE.Group();
         group.name = 'rtg-axes-helper';
 
+        var gridHelper = new THREE.GridHelper(20, 20, 0x888888, 0x444444);
+        gridHelper.position.y = 0;
+        group.add(gridHelper);
+
         var origin = new THREE.Mesh(
             new THREE.SphereGeometry(0.1, 16, 16),
             new THREE.MeshBasicMaterial({ color: 0xffffff })
