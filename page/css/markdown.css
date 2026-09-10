@@ -1,3 +1,127 @@
-#content > :first-child { margin-top: 0; } #content h1, #content h2, #content h3, #content h4 { color: #f4f8fb; line-height: 1.25; scroll-margin-top: 1rem; } #content h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); border-bottom: 1px solid var(--line); padding-bottom: .6rem; } #content h2 { margin-top: 2.2rem; font-size: 1.5rem; } #content h3 { margin-top: 1.7rem; font-size: 1.2rem; } #content p, #content li { max-width: 75ch; }
-#content code { padding: .12em .35em; border-radius: .25rem; background: #202d3a; color: #d9efff; font-family: "Cascadia Code", Consolas, monospace; font-size: .9em; } #content pre { overflow-x: auto; padding: 1rem; border: 1px solid var(--line); border-radius: .5rem; background: #0a1016; } #content pre code { padding: 0; background: none; } #content blockquote { margin: 1.25rem 0; padding: .15rem 1rem; border-left: 4px solid var(--accent); color: #c1ced9; background: #14212c; }
-#content table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; } #content th, #content td { padding: .5rem .7rem; border: 1px solid var(--line); text-align: left; } #content th { background: var(--surface-2); } #content img { display: block; max-width: 100%; height: auto; margin: 1.25rem 0; border-radius: .4rem; } .mermaid-diagram { overflow-x: auto; margin: 1.5rem 0; padding: 1rem; border: 1px solid var(--line); border-radius: .5rem; background: #fff; text-align: center; } .mermaid-diagram svg { max-width: 100%; height: auto; } .mermaid-error { color: var(--danger); background: #291a1b; text-align: left; white-space: pre-wrap; }
+#content > :first-child { margin-top: 0; }
+#content h1, #content h2, #content h3, #content h4 { color: #f4f8fb; line-height: 1.25; scroll-margin-top: 1rem; }
+#content h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); border-bottom: 1px solid var(--line); padding-bottom: .6rem; }
+#content h2 { margin-top: 2.2rem; font-size: 1.5rem; }
+#content h3 { margin-top: 1.7rem; font-size: 1.2rem; }
+#content p, #content li { max-width: 75ch; }
+#content code { padding: .12em .35em; border-radius: .25rem; background: #202d3a; color: #d9efff; font-family: "Cascadia Code", Consolas, monospace; font-size: .9em; }
+#content pre { overflow-x: auto; padding: 1rem; border: 1px solid var(--line); border-radius: .5rem; background: #0a1016; }
+#content pre code { padding: 0; background: none; }
+#content blockquote { margin: 1.25rem 0; padding: .15rem 1rem; border-left: 4px solid var(--accent); color: #c1ced9; background: #14212c; }
+#content table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; }
+#content th, #content td { padding: .5rem .7rem; border: 1px solid var(--line); text-align: left; }
+#content th { background: var(--surface-2); }
+#content img { display: block; max-width: 100%; height: auto; margin: 1.25rem 0; border-radius: .4rem; }
+.mermaid-diagram { overflow-x: auto; margin: 1.5rem 0; padding: 1rem; border: 1px solid var(--line); border-radius: .5rem; background: #fff; text-align: center; }
+.mermaid-diagram svg { max-width: 100%; height: auto; }
+.mermaid-error { color: var(--danger); background: #291a1b; text-align: left; white-space: pre-wrap; }
+
+.code-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+  padding: .5rem .75rem;
+  border: 1px solid var(--line);
+  border-bottom: none;
+  border-radius: .5rem .5rem 0 0;
+  background: var(--surface-2);
+  font-size: .75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--muted);
+  user-select: none;
+}
+.code-toolbar[data-rtg-preview="true"] {
+  border-color: var(--accent);
+}
+.code-lang {
+  opacity: .8;
+}
+.code-actions {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+}
+.code-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .3rem .55rem;
+  border: 1px solid var(--line);
+  border-radius: .3rem;
+  background: var(--surface);
+  color: var(--text);
+  font-size: .75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, color .15s ease;
+  white-space: nowrap;
+}
+.code-btn:hover {
+  background: var(--surface-2);
+  border-color: var(--accent);
+  color: var(--accent-strong);
+}
+.code-btn:active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #06111a;
+}
+.code-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.code-btn .icon {
+  flex-shrink: 0;
+}
+.code-btn.preview-btn {
+  border-color: var(--accent);
+  color: var(--accent-strong);
+}
+.code-btn.preview-btn:hover {
+  background: var(--accent);
+  color: #06111a;
+}
+.code-btn.copied {
+  border-color: #4ade80;
+  color: #4ade80;
+}
+.code-btn.copied:hover {
+  background: #4ade80;
+  color: #06111a;
+}
+
+.code-source {
+  position: absolute;
+  left: -9999px;
+}
+
+.rtg-preview-container {
+  margin-top: 0;
+  border: 1px solid var(--line);
+  border-radius: 0 0 .5rem .5rem;
+  background: #0a1016;
+  overflow: hidden;
+}
+.rtg-preview-container[data-rtg-preview="true"] {
+  border-color: var(--accent);
+}
+.rtg-preview-iframe {
+  display: block;
+  width: 100%;
+  min-height: 500px;
+  border: none;
+  background: #0a1016;
+}
+.rtg-preview-error {
+  padding: 1rem;
+  color: var(--danger);
+  background: #291a1b;
+  border-top: 1px solid #7d433c;
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: .85rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}

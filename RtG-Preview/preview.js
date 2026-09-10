@@ -1288,7 +1288,7 @@
         });
     }
 
-    function clearPrevious() {
+     function clearPrevious() {
         if (state) {
             cancelAnimationFrame(state.animationId);
             window.removeEventListener('resize', state.resizeHandler);
@@ -1310,10 +1310,14 @@
                 virtualCursor.parentNode.removeChild(virtualCursor);
             }
             virtualCursor = null;
-            if (loadingScreen) {
-                loadingScreen.hide();
-                loadingScreen = null;
-            }
+        }
+        if (loadingScreen) {
+            loadingScreen.hide();
+            loadingScreen = null;
+        }
+        var oldScreen = document.getElementById('rtg-loading-screen');
+        if (oldScreen && oldScreen.parentNode) {
+            oldScreen.parentNode.removeChild(oldScreen);
         }
     }
 
@@ -1363,12 +1367,9 @@
                 splashText.style.opacity = '1';
             },
             hide: function() {
-                screen.style.opacity = '0';
-                setTimeout(function() {
-                    if (screen.parentNode) {
-                        screen.parentNode.removeChild(screen);
-                    }
-                }, 300);
+                if (screen.parentNode) {
+                    screen.parentNode.removeChild(screen);
+                }
             }
         };
     }
@@ -1469,7 +1470,7 @@
 
                 var container = document.createElement('div');
                 container.id = 'rtg-preview-container';
-                container.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;touch-action:none;';
+                container.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;touch-action:none;z-index:1;';
                 document.body.appendChild(container);
 
                 var panel = createPanel();
@@ -1491,18 +1492,20 @@
                 loadingScreen = createLoadingScreen();
 
                 findBannerImages(resolvePreviewAssetUrl('assets/images/logo/official-banners/')).then(function(banners) {
-                    if (banners.length > 0) {
+                    if (loadingScreen && banners.length > 0) {
                         var randomBanner = banners[Math.floor(Math.random() * banners.length)];
                         loadingScreen.setBanner(randomBanner.url);
                     }
                 });
 
                 loadSplashTexts().then(function(texts) {
-                    if (texts.length > 0) {
-                        var randomText = texts[Math.floor(Math.random() * texts.length)];
-                        loadingScreen.setSplash(randomText);
-                    } else {
-                        loadingScreen.setSplash('Loading...');
+                    if (loadingScreen) {
+                        if (texts.length > 0) {
+                            var randomText = texts[Math.floor(Math.random() * texts.length)];
+                            loadingScreen.setSplash(randomText);
+                        } else {
+                            loadingScreen.setSplash('Loading...');
+                        }
                     }
                 });
 
@@ -1512,7 +1515,7 @@
                         objectMap[index] = loadedObjects.length;
                         loadedObjects.push(object);
                         loadedCount++;
-                        if (objects.length > 0) {
+                        if (loadingScreen && objects.length > 0) {
                             loadingScreen.setProgress(Math.ceil(loadedCount / objects.length * 100));
                         }
                         return object;
@@ -1520,7 +1523,7 @@
                         showAlert('Failed to load model: ' + objData.type + '.obj', 'error');
                         objectMap[index] = undefined;
                         loadedCount++;
-                        if (objects.length > 0) {
+                        if (loadingScreen && objects.length > 0) {
                             loadingScreen.setProgress(Math.ceil(loadedCount / objects.length * 100));
                         }
                         return null;

@@ -36,19 +36,9 @@
 
       content.innerHTML = window.RtGMarkdown.render(markdown, path);
 
-      // Execute scripts from rendered Markdown.
-      content.querySelectorAll("script").forEach((oldScript) => {
-        const newScript = document.createElement("script");
-
-        for (const attribute of oldScript.attributes) {
-          newScript.setAttribute(attribute.name, attribute.value);
-        }
-
-        newScript.textContent = oldScript.textContent;
-        oldScript.replaceWith(newScript);
-      });
-
       await window.RtGMermaid.render(content);
+
+      window.RtGCodeBlocks.initCodeBlocks(content);
 
       const fragment = decodeURIComponent(
         window.location.hash.split("#").slice(2).join("#")
