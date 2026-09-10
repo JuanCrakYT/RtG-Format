@@ -46,10 +46,10 @@ The renderer uses the object's internal type name to determine which model shoul
 For example:
 
 ```ms
-"Teeth"
+"Tooth"
    │
    ▼
-assets/models/Teeth.obj
+assets/models/Tooth.obj
 ```
 
 This means that the model filename should correspond to the object's type name.
@@ -69,7 +69,7 @@ A minimal example:
 
 <script>
   RtGPreview.render([
-    ["Teeth", [], {}]
+    ["Tooth", [], {}]
   ]);
 </script>
 ```
@@ -84,7 +84,7 @@ A build can contain multiple objects:
 
 ```js
 RtGPreview.render([
-  ["Teeth", [], {}],
+  ["Tooth", [], {}],
   ["Fricklet", [], {}]
 ]);
 ```
@@ -94,7 +94,7 @@ Each object is resolved using its RtG object type.
 For example:
 
 ```md
-Teeth     → assets/models/Teeth.obj
+Tooth     → assets/models/Tooth.obj
 Fricklet  → assets/models/Fricklet.obj
 ```
 
@@ -176,7 +176,7 @@ The renderer currently uses Wavefront OBJ models.
 Example:
 
 ```text
-assets/models/Teeth.obj
+assets/models/Tooth.obj
 assets/models/Fricklet.obj
 ```
 
@@ -224,7 +224,7 @@ The build data can then be passed directly to the renderer:
 
 ```js
 RtGPreview.render([
-  ["Teeth", [], {}]
+  ["Tooth", [], {}]
 ]);
 ```
 

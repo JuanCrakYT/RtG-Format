@@ -27,11 +27,127 @@ assets/
 │               └── RtG-Format-v1.png
 │
 ├── models/
-│   ├── Part.obj
-│   │   ├── Seat.obj
-│   ├── Anchor.obj
-│   ├── Fricklet.obj
-│   └── Teeth.obj
+│   ├─ ALL.blend
+│   ├─ AltitudeSensor.obj
+│   ├─ Anchor.obj
+│   ├─ Arm.obj
+│   ├─ Balloon.obj
+│   ├─ BallSocket.obj
+│   ├─ Banjo.obj
+│   ├─ Base.obj
+│   ├─ BeachBall.obj
+│   ├─ Bearing.obj
+│   ├─ Board.obj
+│   ├─ Body.obj
+│   ├─ BouncyBall.obj
+│   ├─ BowlingBall.obj
+│   ├─ BrakeLight.obj
+│   ├─ Briefcase.obj
+│   ├─ Bumper.obj
+│   ├─ Button.obj
+│   ├─ Camera.obj
+│   ├─ Canister.obj
+│   ├─ Cannon.obj
+│   ├─ CannonBall.obj
+│   ├─ Carrot.obj
+│   ├─ Chassis.obj
+│   ├─ Cinderblock.obj
+│   ├─ Connector.obj
+│   ├─ ConnectorBall.obj
+│   ├─ Delayer.obj
+│   ├─ Detacher.obj
+│   ├─ DoorA.obj
+│   ├─ DoorB.obj
+│   ├─ DoorC.obj
+│   ├─ DoorD.obj
+│   ├─ Drumkit.obj
+│   ├─ EntitySensor.obj
+│   ├─ FishBowl.obj
+│   ├─ Fricklet.obj
+│   ├─ FuelTank.obj
+│   ├─ GasCap.obj
+│   ├─ Gate-AND.obj
+│   ├─ Gate-NOT.obj
+│   ├─ Gate-OR.obj
+│   ├─ GoldPotatoEngine.obj
+│   ├─ Googie.obj
+│   ├─ Gramby.obj
+│   ├─ Grenade.obj
+│   ├─ Guitar.obj
+│   ├─ Gun.obj
+│   ├─ Gyro.obj
+│   ├─ HalfConnectorBall.obj
+│   ├─ Head.obj
+│   ├─ Hood.obj
+│   ├─ InputSensor.obj
+│   ├─ Joint.obj
+│   ├─ Joust.obj
+│   ├─ Jug.obj
+│   ├─ Keyboard.obj
+│   ├─ Leafblower.obj
+│   ├─ Leg.obj
+│   ├─ Light.obj
+│   ├─ Lock.obj
+│   ├─ LongStick.obj
+│   ├─ Looper.obj
+│   ├─ Mag.obj
+│   ├─ MatchingGyro.obj
+│   ├─ MountedGun.obj
+│   ├─ Part.obj
+│   ├─ Pie.obj
+│   ├─ Pipes.obj
+│   ├─ Piston.obj
+│   ├─ Plunger.obj
+│   ├─ Poop.obj
+│   ├─ PotatoEngine.obj
+│   ├─ PressurePlate.obj
+│   ├─ Propeller.obj
+│   ├─ Radio.obj
+│   ├─ Ramp.obj
+│   ├─ Recorder.obj
+│   ├─ RemoteButton.obj
+│   ├─ RiotShield.obj
+│   ├─ Rocket.obj
+│   ├─ RockingChair.obj
+│   ├─ Roof.obj
+│   ├─ Rope.obj
+│   ├─ RPG.obj
+│   ├─ RubberBand.obj
+│   ├─ Seat.obj
+│   ├─ Servo_Physics.obj
+│   ├─ Servo.obj
+│   ├─ ShoppingCart.obj
+│   ├─ ShortStick.obj
+│   ├─ Shotgun.obj
+│   ├─ Sledge.obj
+│   ├─ Splitter_1.obj
+│   ├─ Splitter_2.obj
+│   ├─ Splitter_3.obj
+│   ├─ Splitter_4.obj
+│   ├─ Splitter.obj
+│   ├─ SprayPaint.obj
+│   ├─ SpringJuice.obj
+│   ├─ StaringGyro.obj
+│   ├─ SteeringGyro.obj
+│   ├─ SteeringWheel.obj
+│   ├─ Stick.obj
+│   ├─ SuperPowerClock.obj
+│   ├─ Switch.obj
+│   ├─ Thruster.obj
+│   ├─ Tire.obj
+│   ├─ ToolGun.obj
+│   ├─ Tooth.obj
+│   ├─ TripWire.obj
+│   ├─ Trowel.obj
+│   ├─ Trumpet.obj
+│   ├─ Trunk.obj
+│   ├─ TV.obj
+│   ├─ Uzi.obj
+│   ├─ VelocitySensor.obj
+│   ├─ wad.obj
+│   ├─ Wheel.obj
+│   ├─ Wing.obj
+│   └─ Wire.obj
 │
 ├── sounds/
 │   ├── error.mp3
@@ -107,12 +223,12 @@ Models use the **Wavefront OBJ** format and are resolved from their internal RtG
 For example:
 
 * [`Fricklet.obj`](models/Fricklet.obj) — 3D model for the `Fricklet` object.
-* [`Teeth.obj`](models/Teeth.obj) — 3D model for the `Teeth` object.
+* [`Tooth.obj`](models/Tooth.obj) — 3D model for the `Tooth` object.
 
 RtG-Preview automatically maps an object's type name to the corresponding model file. For example:
 
 ```text
-"Teeth" → assets/models/Teeth.obj
+"Tooth" → assets/models/Tooth.obj
 "Fricklet" → assets/models/Fricklet.obj
 ```
 
