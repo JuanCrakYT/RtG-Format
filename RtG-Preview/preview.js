@@ -754,6 +754,7 @@
         var selectWasPressed = false;
         var shiftPressed = false;
         var yPressed = false;
+        var rbPressed = false;
 
         function getForward() {
             var forward = new THREE.Vector3();
@@ -801,6 +802,7 @@
             var selectPressed = gp.buttons[8] ? gp.buttons[8].pressed : false;
             var aPressed = gp.buttons[0] ? gp.buttons[0].pressed : false;
             yPressed = gp.buttons[3] ? gp.buttons[3].pressed : false;
+            rbPressed = gp.buttons[5] ? gp.buttons[5].pressed : false;
 
             if (selectPressed && !selectWasPressed) {
                 togglePanel();
@@ -871,7 +873,7 @@
 
         function applyKeyboardMovement() {
             var speed = 0.08;
-            if (shiftPressed || yPressed) {
+            if (shiftPressed || yPressed || rbPressed) {
                 speed *= 3;
             }
             var forward = getForward();
@@ -1039,6 +1041,7 @@
                 gamepadMoveState.down = false;
                 shiftPressed = false;
                 yPressed = false;
+                rbPressed = false;
                 pinchState.active = false;
                 pinchState.lastDistance = 0;
                 selectWasPressed = false;
