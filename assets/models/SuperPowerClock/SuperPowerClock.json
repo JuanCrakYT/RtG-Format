@@ -14,8 +14,8 @@
             },
             "Page": {}
         },
-        "Name": "Base",
-        "Description": "",
+        "Name": "SuperPowerClock",
+        "Description": "Change the time, and then activate it to lock the time!",
         "LocalPoints": {},
         "Branches": {}
     }

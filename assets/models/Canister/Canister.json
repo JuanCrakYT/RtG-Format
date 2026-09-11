@@ -14,8 +14,8 @@
             },
             "Page": {}
         },
-        "Name": "Base",
-        "Description": "",
+        "Name": "Canister",
+        "Description": "A small container for holding liquids",
         "LocalPoints": {},
         "Branches": {}
     }
