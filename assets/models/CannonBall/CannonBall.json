@@ -15,7 +15,7 @@
             "Page": {}
         },
         "Name": "CannonBall",
-        "Description": "",
+        "Tooltip": "",
         "LocalPoints": {},
         "Branches": {}
     }

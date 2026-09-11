@@ -15,7 +15,7 @@
             "Page": {}
         },
         "Name": "Gun",
-        "Description": "",
+        "Tooltip": "",
         "LocalPoints": {},
         "Branches": {}
     }

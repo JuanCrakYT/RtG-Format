@@ -15,7 +15,7 @@
             "Page": {}
         },
         "Name": "Arm",
-        "Description": "",
+        "Tooltip": "",
         "LocalPoints": {},
         "Branches": {}
     }

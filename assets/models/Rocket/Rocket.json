@@ -15,7 +15,7 @@
             "Page": {}
         },
         "Name": "Rocket",
-        "Description": "",
+        "Tooltip": "",
         "LocalPoints": {},
         "Branches": {}
     }

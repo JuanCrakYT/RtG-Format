@@ -15,9 +15,9 @@
             "Page": {}
         },
         "Name": "Base",
-        "Description": "",
+        "Tooltip": "",
         "LocalPoints": {},
         "Branches": {},
-        "Category":""
+        "Category": ""
     }
 ]

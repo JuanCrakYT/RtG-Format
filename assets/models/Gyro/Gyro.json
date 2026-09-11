@@ -15,7 +15,7 @@
             "Page": {}
         },
         "Name": "Gyro",
-        "Description": "",
+        "Tooltip": "",
         "LocalPoints": {},
         "Branches": {}
     }

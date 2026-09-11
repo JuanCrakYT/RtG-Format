@@ -15,7 +15,7 @@
             "Page": {}
         },
         "Name": "ConnectorBall",
-        "Description": "",
+        "Tooltip": "",
         "LocalPoints": {},
         "Branches": {}
     }

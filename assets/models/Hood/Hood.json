@@ -15,7 +15,7 @@
             "Page": {}
         },
         "Name": "Hood",
-        "Description": "",
+        "Tooltip": "",
         "LocalPoints": {},
         "Branches": {}
     }

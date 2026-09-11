@@ -15,7 +15,7 @@
             "Page": {}
         },
         "Name": "Chassis",
-        "Description": "The root of all cars",
+        "Tooltip": "The root of all cars",
         "LocalPoints": {},
         "Branches": {}
     }

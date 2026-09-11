@@ -15,7 +15,7 @@
             "Page": {}
         },
         "Name": "Gate-AND",
-        "Description": "",
+        "Tooltip": "",
         "LocalPoints": {},
         "Branches": {}
     }

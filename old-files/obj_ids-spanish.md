@@ -968,130 +968,130 @@ Estos objetos utilizan puntos de conexión definidos por otros objetos.
 # Tabla Final
 > **Hecho por:** @JuanCrakYT
 
-|   ID | Nombre interno    | Nombre en la wiki  | Nombre en el juego   | TipoLocal | Tooltip | Descripción                                                  |
-| ---: | ----------------- | ------------------ | -------------------- | :-------: | :-----: | ------------------------------------------------------------ |
-|    1 | GoldPotatoEngine  | Gold Potato Engine | Golden Potato Engine |     1     |         | Motor de alta potencia. Variante mejorada del Potato Engine. |
-|    2 | TripWire          | Tripwire           | Tripwire             |     1     |         | Sensor mediante cable que detecta interrupciones.            |
-|    3 | ToolGun           | Tool Gun           | Tool Gun             |     —     |         | Herramienta especial. No posee conexiones propias.           |
-|    4 | Servo             | Servo              |                      |     1     |         | Servo rotacional configurable.                               |
-|    5 | Toilet            | Toilet             |                      |     1     |         | Objeto decorativo/interactivo.                               |
-|    6 | Clipboard         | Clipboard          |                      |     1     |         | Portapapeles interactivo.                                    |
-|    7 | DoorB             | DoorB              |                      |     1     |         | Variante B de puerta.                                        |
-|    8 | Rope              | Rope               |                      |     1     |         | Cable o cuerda que une dos referencias.                      |
-|    9 | Poop              | Poop               |                      |     1     |         | Objeto decorativo.                                           |
-|   10 | BeachChair        | Beach Chair        |                      |     1     |         | Silla de playa.                                              |
-|   11 | Rocket            | Rocket             |                      |     1     |         | Cohete propulsor.                                            |
-|   12 | EntitySensor      | EntitySensor       |                      |     7     |         | Sensor de entidades cercanas.                                |
-|   13 | Board             | Board              |                      |    15     |         | Tabla de madera.                                             |
-|   14 | PotatoEngine      | Potato Engine      |                      |     1     |         | Motor básico del juego.                                      |
-|   15 | Joint             | Joint              |                      |     2     |         | Unión mecánica entre piezas.                                 |
-|   16 | RemoteButton      | Remote Button      |                      |     1     |         | Botón remoto.                                                |
-|   17 | Ramp              | Ramp               |                      |     —     |         | Rampa. Utiliza únicamente EphemeralAttachments.              |
-|   18 | Lock              | Lock               |                      |     1     |         | Bloque de bloqueo.                                           |
-|   19 | Connector         | Connector          |                      |     5     |         | Conector esférico.                                           |
-|   20 | Tooth             | Tooth              |                      |     —     |         | Diente. Solo utiliza EphemeralAttachments.                   |
-|   21 | Roof              | Roof               |                      |     1     |         | Techo.                                                       |
-|   22 | Switch            | Switch             |                      |     1     |         | Interruptor.                                                 |
-|   23 | Radio             | Radio              |                      |     1     |         | Radio configurable.                                          |
-|   24 | Leg               | Leg                |                      |     1     |         | Pierna mecánica.                                             |
-|   25 | Button            | Button             |                      |     1     |         | Botón físico.                                                |
-|   26 | Trunk             | Trunk              |                      |     1     |         | Baúl.                                                        |
-|   27 | Pie               | Pie                |                      |     1     |         | Pastel.                                                      |
-|   28 | CannonBall        | CannonBall         |                      |     1     |         | Munición de cañón.                                           |
-|   29 | Base              | Base               |                      |     3     |         | Base estructural principal.                                  |
-|   30 | Leafblower        | Leafblower         |                      |     1     |         | Sopladora.                                                   |
-|   31 | Wing              | Wing               |                      |     1     |         | Ala aerodinámica.                                            |
-|   32 | Anchor            | Anchor             |                      |     1     |         | Ancla.                                                       |
-|   33 | Grenade           | Grenade            |                      |     1     |         | Granada.                                                     |
-|   34 | StaringGyro       | Staring Gyro       |                      |     1     |         | Giroscopio que sigue un objetivo.                            |
-|   35 | Servo_Physics     | Servo_Physics      |                      |     1     |         | Servo físico con simulación.                                 |
-|   36 | Briefcase         | Briefcase          |                      |     —     |         | Maletín. Sin datos de conexión.                              |
-|   37 | HalfConnectorBall | HalfConnectorBall  |                      |     6     |         | Medio conector esférico.                                     |
-|   38 | Gramby            | Gramby             |                      |     1     |         | Personaje/NPC.                                               |
-|   39 | MountedGun        | MountedGun         |                      |     1     |         | Ametralladora montada.                                       |
-|   40 | Uzi               | Uzi                |                      |     2     |         | Arma automática.                                             |
-|   41 | ConnectorBall     | ConnectorBall      |                      |     6     |         | Conector esférico.                                           |
-|   42 | ShoppingCart      | ShoppingCart       |                      |     —     |         | Carrito de compras.                                          |
-|   43 | Note              | Note               |                      |     1     |         | Nota de texto.                                               |
-|   44 | Gate-AND          | And Gate           |                      |     4     |         | Compuerta lógica AND.                                        |
-|   45 | Thruster          | Thruster           |                      |     1     |         | Propulsor.                                                   |
-|   46 | BowlingBall       | BowlingBall        |                      |     6     |         | Bola de bolos.                                               |
-|   47 | Cinderblock       | Cinderblock        |                      |     1     |         | Bloque de concreto.                                          |
-|   48 | Joust             | Joust              |                      |     1     |         | Lanza/Joust.                                                 |
-|   49 | InputSensor       | InputSensor        |                      |     2     |         | Sensor de entrada.                                           |
-|   50 | Bumper            | Bumper             |                      |     1     |         | Parachoques.                                                 |
-|   51 | DoorA             | DoorA              |                      |     1     |         | Variante A de puerta.                                        |
-|   52 | Arm               | Arm                |                      |     1     |         | Brazo mecánico.                                              |
-|   53 | RPG               | RPG                |                      |     1     |         | Lanzacohetes.                                                |
-|   54 | Carrot            | Carrot             |                      |     1     |         | Zanahoria.                                                   |
-|   55 | Cone              | Cone               |                      |     3     |         | Cono.                                                        |
-|   56 | SteeringWheel     | SteeringWheel      |                      |     1     |         | Volante.                                                     |
-|   57 | SteeringGyro      | SteeringGyro       |                      |     1     |         | Giroscopio de dirección.                                     |
-|   58 | Tire              | Tire               |                      |     1     |         | Llanta.                                                      |
-|   59 | Balloon           | Balloon            |                      |     1     |         | Globo.                                                       |
-|   60 | Gyro              | Gyro               |                      |     1     |         | Giroscopio.                                                  |
-|   61 | DoorC             | DoorC              |                      |     1     |         | Variante C de puerta.                                        |
-|   62 | SpringJuice       | SpringJuice        |                      |     1     |         | Consumible.                                                  |
-|   63 | WoodenChair       | WoodenChair        |                      |     2     |         | Silla de madera.                                             |
-|   64 | Chassis           | Chassis            |                      |     —     |         | Chasis. Solo utiliza EphemeralAttachments.                   |
-|   65 | FuelTank          | FuelTank           |                      |     2     |         | Tanque de combustible.                                       |
-|   66 | Mag               | Mag                |                      |     1     |         | Cargador de munición.                                        |
-|   67 | Keyboard          | Keyboard           |                      |     —     |         | Teclado. Solo utiliza EphemeralAttachments.                  |
-|   68 | RiotShield        | RiotShield         |                      |     —     |         | Escudo antidisturbios.                                       |
-|   69 | Spoiler           | Spoiler            |                      |     2     |         | Alerón.                                                      |
-|   70 | Jug               | Jug                |                      |     —     |         | Jarra.                                                       |
-|   71 | Pipes             | Pipes              |                      |     1     |         | Tuberías.                                                    |
-|   72 | Trowel            | Trowel             |                      |     —     |         | Paleta.                                                      |
-|   73 | LongStick         | LongStick          |                      |     2     |         | Palo largo.                                                  |
-|   74 | ShortStick        | ShortStick         |                      |     2     |         | Palo corto.                                                  |
-|   75 | Stick             | Stick              |                      |     2     |         | Palo.                                                        |
-|   76 | Wire              | Wire               |                      |     3     |         | Cable eléctrico.                                             |
-|   77 | Gate-OR           | Gate-OR            |                      |     4     |         | Compuerta lógica OR.                                         |
-|   78 | Hood              | Hood               |                      |     1     |         | Capó.                                                        |
-|   79 | Splitter_1        | Splitter_1         |                      |     3     |         | Divisor de señal (1 salida principal).                       |
-|   80 | HulaDoll          | HulaDoll           |                      |     1     |         | Muñeca decorativa.                                           |
-|   81 | Part              | Part               |                      |     1     |         | Bloque estructural básico.                                   |
-|   82 | Camera            | Camera             |                      |     1     |         | Cámara.                                                      |
-|   83 | Light             | Light              |                      |     1     |         | Luz.                                                         |
-|   84 | GlassBase         | GlassBase          |                      |     3     |         | Base de vidrio.                                              |
-|   85 | Sprite            | Sprite             |                      |     1     |         | Imagen plana.                                                |
-|   86 | RubberBand        | RubberBand         |                      |     1     |         | Banda elástica.                                              |
-|   87 | Cannon            | Cannon             |                      |     1     |         | Cañón.                                                       |
-|   88 | Shotgun           | Shotgun            |                      |     2     |         | Escopeta.                                                    |
-|   89 | Splitter_4        | Splitter_4         |                      |     1     |         | Divisor de cuatro salidas.                                   |
-|   90 | Seat              | Seat               |                      |     1     |         | Asiento.                                                     |
-|   91 | Detacher          | Detacher           |                      |     1     |         | Desconector.                                                 |
-|   92 | Plunger           | Plunger            |                      |     1     |         | Destapador.                                                  |
-|   93 | Gate-NOT          | Gate-NOT           |                      |     4     |         | Compuerta lógica NOT.                                        |
-|   94 | FishBowl          | FishBowl           |                      |     1     |         | Pecera.                                                      |
-|   95 | Gun               | Gun                |                      |     2     |         | Pistola.                                                     |
-|   96 | BallSocket        | BallSocket         |                      |     1     |         | Articulación esférica.                                       |
-|   97 | Splitter_3        | Splitter_3         |                      |     3     |         | Divisor de tres salidas.                                     |
-|   98 | Splitter_2        | Splitter_2         |                      |     3     |         | Divisor de dos salidas.                                      |
-|   99 | Googie            | Googie             |                      |     1     |         | Objeto decorativo.                                           |
-|  100 | BeachBall         | BeachBall          |                      |     6     |         | Pelota de playa.                                             |
-|  101 | Canister          | Canister           |                      |     1     |         | Contenedor.                                                  |
-|  102 | Propeller         | Propeller          |                      |     2     |         | Hélice.                                                      |
-|  103 | Sledge            | Sledge             |                      |     1     |         | Mazo.                                                        |
-|  104 | Delayer           | Delayer            |                      |     2     |         | Retardo lógico.                                              |
-|  105 | Looper            | Looper             |                      |     1     |         | Repetidor temporal.                                          |
-|  106 | Wad               | Wad                |                      |     —     |         | Objeto auxiliar con EphemeralAttachments.                    |
-|  107 | BouncyBall        | BouncyBall         |                      |     6     |         | Pelota rebotadora.                                           |
-|  108 | Recorder          | Recorder           |                      |     1     |         | Grabadora.                                                   |
-|  109 | DoorD             | DoorD              |                      |     1     |         | Variante D de puerta.                                        |
-|  110 | Piston            | Piston             |                      |     2     |         | Pistón configurable.                                         |
-|  111 | Bearing           | Bearing            |                      |     1     |         | Rodamiento.                                                  |
-|  112 | VelocitySensor    | VelocitySensor     |                      |     2     |         | Sensor de velocidad.                                         |
-|  113 | SprayPaint        | SprayPaint         |                      |     1     |         | Pintura en aerosol.                                          |
-|  114 | BrakeLight        | BrakeLight         |                      |     1     |         | Luz de freno.                                                |
-|  115 | AltitudeSensor    | AltitudeSensor     |                      |     2     |         | Sensor de altitud.                                           |
-|  116 | RockingChair      | RockingChair       |                      |     1     |         | Silla mecedora.                                              |
-|  117 | MatchingGyro      | MatchingGyro       |                      |     2     |         | Giroscopio de coincidencia.                                  |
-|  118 | Head              | Head               |                      |     1     |         | Cabeza de Fricklet.                                          |
-|  119 | PolaroidCamera    | PolaroidCamera     | —                    |     1     |         | Cámara Polaroid.                                             |
-|  120 | PolaroidPhoto     | PolaroidPhoto      | —                    |     1     |         | Fotografía Polaroid.                                         |
-|  121 | Successor         | Successor          | —                    |     2     |         | A Worthy Successor.                                          |
-|  122 | Body              | Body               | —                    |     —     |         | Cuerpo de Fricklet.                                          |
-|  123 | Fricklet          | Fricklet           | —                    |     —     |         | Fricklet.                                                    |
-|  124 | SuperPowerClock   | SuperPowerClock    | —                    |     —     |         | Super Power Clock.                                           |
-|  125 | YibYib            | YibYib             |                      |     —     |         | YibYib.                                                      |
+|   ID | Nombre interno    | Nombre en la wiki   | Nombre en el juego   | TipoLocal |   Tooltip   | Descripción                                                  |
+| ---: | ----------------- | ------------------- | -------------------- | :-------: | :---------: | ------------------------------------------------------------ |
+|    1 | GoldPotatoEngine  | Gold Potato Engine  | Golden Potato Engine |     1     | Vroom vromm | Motor de alta potencia. Variante mejorada del Potato Engine. |
+|    2 | TripWire          | Tripwire            | Tripwire             |     1     |             | Sensor mediante cable que detecta interrupciones.            |
+|    3 | ToolGun           | Tool Gun            | Tool Gun             |     —     |             | Herramienta especial. No posee conexiones propias.           |
+|    4 | Servo             | Servo               | Servo                |     1     |             | Servo rotacional configurable.                               |
+|    5 | Toilet            | Toilet              | Toilet               |     1     |             | Objeto decorativo/interactivo.                               |
+|    6 | Clipboard         | Clipboard           | Clipboard            |     1     |             | Portapapeles interactivo.                                    |
+|    7 | DoorB             | Door B              | Door B               |     1     |             | Variante B de puerta.                                        |
+|    8 | Rope              | Rope                | Rope                 |     1     |             | Cable o cuerda que une dos referencias.                      |
+|    9 | Poop              | Poop                | Poop                 |     1     |             | Objeto decorativo.                                           |
+|   10 | BeachChair        | Beach Chair         | Beach Chair          |     1     |             | Silla de playa.                                              |
+|   11 | Rocket            | Rocket              | Rocket               |     1     |             | Cohete propulsor.                                            |
+|   12 | EntitySensor      | Entity Sensor       | Entity Sensor        |     7     |             | Sensor de entidades cercanas.                                |
+|   13 | Board             | Board               | Board                |    15     |             | Tabla de madera.                                             |
+|   14 | PotatoEngine      | Potato Engine       | Potato Engine        |     1     |             | Motor básico del juego.                                      |
+|   15 | Joint             | Joint               | Joint                |     2     |             | Unión mecánica entre piezas.                                 |
+|   16 | RemoteButton      | Remote Button       | Remote Button        |     1     |             | Botón remoto.                                                |
+|   17 | Ramp              | Ramp                | Ramp                 |     —     |             | Rampa. Utiliza únicamente EphemeralAttachments.              |
+|   18 | Lock              | Lock                | Lock                 |     1     |             | Bloque de bloqueo.                                           |
+|   19 | Connector         | Connector           | Connector            |     5     |             | Conector esférico.                                           |
+|   20 | Tooth             | Tooth               | Tooth                |     —     |             | Diente. Solo utiliza EphemeralAttachments.                   |
+|   21 | Roof              | Roof                | Roof                 |     1     |             | Techo.                                                       |
+|   22 | Switch            | Switch              | Switch               |     1     |             | Interruptor.                                                 |
+|   23 | Radio             | Radio               | Radio                |     1     |             | Radio configurable.                                          |
+|   24 | Leg               | Leg                 | Leg                  |     1     |             | Pierna mecánica.                                             |
+|   25 | Button            | Button              | Button               |     1     |             | Botón físico.                                                |
+|   26 | Trunk             | Trunk               | Trunk                |     1     |             | Baúl.                                                        |
+|   27 | Pie               | Homemade Pie        | Homemade Pie         |     1     |             | Pastel.                                                      |
+|   28 | CannonBall        | Cannon Ball         | Cannon Ball          |     1     |             | Munición de cañón.                                           |
+|   29 | Base              | Base Platform       | Base Platform        |     3     |             | Base estructural principal.                                  |
+|   30 | Leafblower        | Leafblower          | Leafblower           |     1     |             | Sopladora.                                                   |
+|   31 | Wing              | Wing                | Wing                 |     1     |             | Ala aerodinámica.                                            |
+|   32 | Anchor            | Anchor              | Anchor               |     1     |             | Ancla.                                                       |
+|   33 | Grenade           | Grenade             | Grenade              |     1     |             | Granada.                                                     |
+|   34 | StaringGyro       | Staring Gyro        | Staring Gyro         |     1     |             | Giroscopio que sigue un objetivo.                            |
+|   35 | Servo_Physics     | Simulated Servo     | Simulated Servo      |     1     |             | Servo físico con simulación.                                 |
+|   36 | Briefcase         | Briefcase           | Briefcase            |     —     |             | Maletín. Sin datos de conexión.                              |
+|   37 | HalfConnectorBall | Half Connector Ball | Half Connector Ball  |     6     |             | Medio conector esférico.                                     |
+|   38 | Gramby            | Gramby              | Gramby               |     1     |             | Personaje/NPC.                                               |
+|   39 | MountedGun        | Mounted Gun         | Mounted Gun          |     1     |             | Ametralladora montada.                                       |
+|   40 | Uzi               | Uzi                 | Uzi                  |     2     |             | Arma automática.                                             |
+|   41 | ConnectorBall     | Connector Ball      | Connector Ball       |     6     |             | Conector esférico.                                           |
+|   42 | ShoppingCart      | Shopping Cart       | Shopping Cart        |     —     |             | Carrito de compras.                                          |
+|   43 | Note              | Note                | Note                 |     1     |             | Nota de texto.                                               |
+|   44 | Gate-AND          | And Gate            | And Gate             |     4     |             | Compuerta lógica AND.                                        |
+|   45 | Thruster          | Thruster            | Thruster             |     1     |             | Propulsor.                                                   |
+|   46 | BowlingBall       | Bowling Ball        | Bowling Ball         |     6     |             | Bola de bolos.                                               |
+|   47 | Cinderblock       | Cinderblock         | Cinderblock          |     1     |             | Bloque de concreto.                                          |
+|   48 | Joust             | Joust               | Joust                |     1     |             | Lanza/Joust.                                                 |
+|   49 | InputSensor       | Input Sensor        | Input Sensor         |     2     |             | Sensor de entrada.                                           |
+|   50 | Bumper            | Bumper              | Bumper               |     1     |             | Parachoques.                                                 |
+|   51 | DoorA             | Door A              | Door A               |     1     |             | Variante A de puerta.                                        |
+|   52 | Arm               | Arm                 | Arm                  |     1     |             | Brazo mecánico.                                              |
+|   53 | RPG               | RPG                 | RPG                  |     1     |             | Lanzacohetes.                                                |
+|   54 | Carrot            | Carrot              | Carrot               |     1     |             | Zanahoria.                                                   |
+|   55 | Cone              | Cone                | Cone                 |     3     |             | Cono.                                                        |
+|   56 | SteeringWheel     | Steering Wheel      | Steering Wheel       |     1     |             | Volante.                                                     |
+|   57 | SteeringGyro      | Steering Gyro       | Steering Gyro        |     1     |             | Giroscopio de dirección.                                     |
+|   58 | Tire              | Tire                | Tire                 |     1     |             | Llanta.                                                      |
+|   59 | Balloon           | Balloons            | Balloons             |     1     |             | Globo.                                                       |
+|   60 | Gyro              | Gyro                | Gyro                 |     1     |             | Giroscopio.                                                  |
+|   61 | DoorC             | Door C              | Door C               |     1     |             | Variante C de puerta.                                        |
+|   62 | SpringJuice       | Spring Juice        | Spring Juice         |     1     |             | Consumible.                                                  |
+|   63 | WoodenChair       | Wooden Chair        | Wooden Chair         |     2     |             | Silla de madera.                                             |
+|   64 | Chassis           | Chassis             | Chassis              |     —     |             | Chasis. Solo utiliza EphemeralAttachments.                   |
+|   65 | FuelTank          | Fuel Tank           | Fuel Tank            |     2     |             | Tanque de combustible.                                       |
+|   66 | Mag               | Magazine            | Magazine             |     1     |             | Cargador de munición.                                        |
+|   67 | Keyboard          | Keyboard            | Keyboard             |     —     |             | Teclado. Solo utiliza EphemeralAttachments.                  |
+|   68 | RiotShield        | Riot Shield         | Riot Shield          |     —     |             | Escudo antidisturbios.                                       |
+|   69 | Spoiler           | Spoiler             | Spoiler              |     2     |             | Alerón.                                                      |
+|   70 | Jug               | Jug                 | Jug                  |     —     |             | Jarra.                                                       |
+|   71 | Pipes             | Pipes               | Pipes                |     1     |             | Tuberías.                                                    |
+|   72 | Trowel            | Trowel              | Trowel               |     —     |             | Paleta.                                                      |
+|   73 | LongStick         | Long Stick          | Long Stick           |     2     |             | Palo largo.                                                  |
+|   74 | ShortStick        | Short Stick         | Short Stick          |     2     |             | Palo corto.                                                  |
+|   75 | Stick             | Stick               | Stick                |     2     |             | Palo.                                                        |
+|   76 | Wire              | Wire                | Wire                 |     3     |             | Cable eléctrico.                                             |
+|   77 | Gate-OR           | Or Gate             | Or Gate              |     4     |             | Compuerta lógica OR.                                         |
+|   78 | Hood              | Hood                | Hood                 |     1     |             | Capó.                                                        |
+|   79 | Splitter_1        | Splitter            | Splitter             |     3     |             | Divisor de señal (1 salida principal).                       |
+|   80 | HulaDoll          | Hula Doll           | Hula Doll            |     1     |             | Muñeca decorativa.                                           |
+|   81 | Part              | Part                | Part                 |     1     |             | Bloque estructural básico.                                   |
+|   82 | Camera            | Camera              | Camera               |     1     |             | Cámara.                                                      |
+|   83 | Light             | Light               | Light                |     1     |             | Luz.                                                         |
+|   84 | GlassBase         | Glass Base          | Glass Base           |     3     |             | Base de vidrio.                                              |
+|   85 | Sprite            | Sprite              | Sprite               |     1     |             | Imagen plana.                                                |
+|   86 | RubberBand        | Rubber Band         | Rubber Band          |     1     |             | Banda elástica.                                              |
+|   87 | Cannon            | Cannon              | Cannon               |     1     |             | Cañón.                                                       |
+|   88 | Shotgun           | Shotgun             | Shotgun              |     2     |             | Escopeta.                                                    |
+|   89 | Splitter_4        | Splitter            | Splitter             |     1     |             | Divisor de cuatro salidas.                                   |
+|   90 | Seat              | Seat                | Seat                 |     1     |             | Asiento.                                                     |
+|   91 | Detacher          | Detacher            | Detacher             |     1     |             | Desconector.                                                 |
+|   92 | Plunger           | Plunger             | Plunger              |     1     |             | Destapador.                                                  |
+|   93 | Gate-NOT          | Not Gate            | Not Gate             |     4     |             | Compuerta lógica NOT.                                        |
+|   94 | FishBowl          | Fish Bowl           | Fish Bowl            |     1     |             | Pecera.                                                      |
+|   95 | Gun               | A Gun               | A Gun                |     2     |             | Pistola.                                                     |
+|   96 | BallSocket        | Ball Socket         | Ball Socket          |     1     |             | Articulación esférica.                                       |
+|   97 | Splitter_3        | Splitter            | Splitter             |     3     |             | Divisor de tres salidas.                                     |
+|   98 | Splitter_2        | Splitter            | Splitter             |     3     |             | Divisor de dos salidas.                                      |
+|   99 | Googie            | Googie              | Googie               |     1     |             | Objeto decorativo.                                           |
+|  100 | BeachBall         | Beach Ball          | Beach Ball           |     6     |             | Pelota de playa.                                             |
+|  101 | Canister          | Canister            | Canister             |     1     |             | Contenedor.                                                  |
+|  102 | Propeller         | Propeller           | Propeller            |     2     |             | Hélice.                                                      |
+|  103 | Sledge            | Sledge              | Sledge               |     1     |             | Mazo.                                                        |
+|  104 | Delayer           | Delayer             | Delayer              |     2     |             | Retardo lógico.                                              |
+|  105 | Looper            | Looper              | Looper               |     1     |             | Repetidor temporal.                                          |
+|  106 | Wad               | Wad                 | Wad                  |     —     |             | Objeto auxiliar con EphemeralAttachments.                    |
+|  107 | BouncyBall        | Bouncy Ball         | Bouncy Ball          |     6     |             | Pelota rebotadora.                                           |
+|  108 | Recorder          | Recorder            | Recorder             |     1     |             | Grabadora.                                                   |
+|  109 | DoorD             | Door D              | Door D               |     1     |             | Variante D de puerta.                                        |
+|  110 | Piston            | Piston              | Piston               |     2     |             | Pistón configurable.                                         |
+|  111 | Bearing           | Bearing             | Bearing              |     1     |             | Rodamiento.                                                  |
+|  112 | VelocitySensor    | Velocity Sensor     | Velocity Sensor      |     2     |             | Sensor de velocidad.                                         |
+|  113 | SprayPaint        | Spray Paint         | Spray Paint          |     1     |             | Pintura en aerosol.                                          |
+|  114 | BrakeLight        | Brake Light         | Brake Light          |     1     |             | Luz de freno.                                                |
+|  115 | AltitudeSensor    | Altitude Sensor     | Altitude Sensor      |     2     |             | Sensor de altitud.                                           |
+|  116 | RockingChair      | Rocking Chair       | Rocking Chair        |     1     |             | Silla mecedora.                                              |
+|  117 | MatchingGyro      | Matching Gyro       | Matching Gyro        |     2     |             | Giroscopio de coincidencia.                                  |
+|  118 | Head              | Head                | Head                 |     1     |             | Cabeza de Fricklet.                                          |
+|  119 | PolaroidCamera    | Polaroid Camera     | Polaroid Camera      |     1     |             | Cámara Polaroid.                                             |
+|  120 | PolaroidPhoto     | Polaroid Photo      | Polaroid Photo       |     1     |             | Fotografía Polaroid.                                         |
+|  121 | Successor         | A Worthy Successor  | A Worthy Successor   |     2     |             | A Worthy Successor.                                          |
+|  122 | Body              | Body                | Body                 |     —     |             | Cuerpo de Fricklet.                                          |
+|  123 | Fricklet          | Fricklet            | Fricklet             |     —     |             | Fricklet.                                                    |
+|  124 | SuperPowerClock   | Super Power Clock   | Super Power Clock    |     —     |             | Super Power Clock.                                           |
+|  125 | YibYib            | YibYib              | YibYib               |     —     |             | YibYib.                                                      |

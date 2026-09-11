@@ -15,7 +15,7 @@
             "Page": {}
         },
         "Name": "EntitySensor",
-        "Description": "",
+        "Tooltip",
         "LocalPoints": {},
         "Branches": {}
     }

@@ -15,7 +15,7 @@
             "Page": {}
         },
         "Name": "Body",
-        "Description": "let the these hit the FLOOOOOOOOOOOOOOOR",
+        "Tooltip": "let the these hit the FLOOOOOOOOOOOOOOOR",
         "LocalPoints": {},
         "Branches": {}
     }

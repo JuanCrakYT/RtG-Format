@@ -15,7 +15,7 @@
             "Page": {}
         },
         "Name": "SprayPaint",
-        "Description": "",
+        "Tooltip",
         "LocalPoints": {},
         "Branches": {}
     }

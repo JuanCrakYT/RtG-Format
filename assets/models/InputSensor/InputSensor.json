@@ -15,7 +15,7 @@
             "Page": {}
         },
         "Name": "InputSensor",
-        "Description": "Emits a signal when a player in an attached seat presses the input",
+        "Tooltip": "Emits a signal when a player in an attached seat presses the input",
         "LocalPoints": {},
         "Branches": {}
     }

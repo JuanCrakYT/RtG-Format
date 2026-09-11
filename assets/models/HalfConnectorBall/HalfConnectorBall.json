@@ -15,7 +15,7 @@
             "Page": {}
         },
         "Name": "HalfConnectorBall",
-        "Description": "",
+        "Tooltip": "",
         "LocalPoints": {},
         "Branches": {}
     }

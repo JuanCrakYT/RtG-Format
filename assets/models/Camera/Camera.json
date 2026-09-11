@@ -15,7 +15,7 @@
             "Page": {}
         },
         "Name": "Camera",
-        "Description": "",
+        "Tooltip": "",
         "LocalPoints": {},
         "Branches": {}
     }

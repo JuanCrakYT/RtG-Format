@@ -15,8 +15,7 @@
             "Page": {}
         },
         "Name": "wad",
-        "Description": "",
-        "LocalPoints": {},
+        "Tooltip"LocalPoints": {},
         "Branches": {}
     }
 ]

@@ -15,7 +15,7 @@
             "Page": {}
         },
         "Name": "ToolGun",
-        "Description": "Any creator's dream! Has several modes to aid in building.",
+        "TooltipAny creator's dream! Has several modes to aid in building.",
         "LocalPoints": {},
         "Branches": {}
     }

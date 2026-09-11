@@ -15,7 +15,7 @@
             "Page": {}
         },
         "Name": "Ramp",
-        "Description": "For all your sick tricks.",
+        "Tooltip": "For all your sick tricks.",
         "LocalPoints": {},
         "Branches": {}
     }

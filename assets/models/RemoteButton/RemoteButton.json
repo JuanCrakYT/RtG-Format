@@ -15,7 +15,7 @@
             "Page": {}
         },
         "Name": "RemoteButton",
-        "Description": "",
+        "Tooltip": "",
         "LocalPoints": {},
         "Branches": {}
     }

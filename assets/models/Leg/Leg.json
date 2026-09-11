@@ -15,7 +15,7 @@
             "Page": {}
         },
         "Name": "Leg",
-        "Description": "",
+        "Tooltip": "",
         "LocalPoints": {},
         "Branches": {}
     }

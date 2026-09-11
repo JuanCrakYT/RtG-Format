@@ -15,7 +15,7 @@
             "Page": {}
         },
         "Name": "GasCap",
-        "Description": "",
+        "Tooltip": "",
         "LocalPoints": {},
         "Branches": {}
     }

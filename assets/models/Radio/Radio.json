@@ -15,7 +15,7 @@
             "Page": {}
         },
         "Name": "Radio",
-        "Description": "",
+        "Tooltip": "",
         "LocalPoints": {},
         "Branches": {}
     }
