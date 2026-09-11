@@ -1048,6 +1048,7 @@
                 selectWasPressed = false;
                 if (state.keyboardRAF) {
                     cancelAnimationFrame(state.keyboardRAF);
+                    state.keyboardRAF = 0;
                 }
             }
         };
@@ -1545,6 +1546,16 @@
                     if (loadedObjects.length > 0) {
                         targetPoint = frameBuild(camera, loadedObjects);
                     }
+
+                    var resizeHandler = function() {
+                        camera.aspect = container.clientWidth / container.clientHeight;
+                        camera.updateProjectionMatrix();
+                        renderer.setSize(container.clientWidth, container.clientHeight);
+                    };
+                    window.addEventListener('resize', resizeHandler);
+
+                    state = { container: container, scene: scene, camera: camera, renderer: renderer, animationId: 0, resizeHandler: resizeHandler, interaction: null, panel: panel, axesHelper: sceneData.axesHelper };
+
                     state.interaction = setupInteraction(container, camera, targetPoint);
 
                     var stats = computeBuildStats(build, loadedObjects);
@@ -1562,19 +1573,11 @@
                         showAlert('WASD controls are unavailable on this device. Use touch or mouse to control the camera.', 'notification');
                     }
 
-                    var resizeHandler = function() {
-                        camera.aspect = container.clientWidth / container.clientHeight;
-                        camera.updateProjectionMatrix();
-                        renderer.setSize(container.clientWidth, container.clientHeight);
-                    };
-                    window.addEventListener('resize', resizeHandler);
-
                     function animate() {
                         state.animationId = requestAnimationFrame(animate);
                         renderer.render(scene, camera);
                     }
 
-                    state = { container: container, scene: scene, camera: camera, renderer: renderer, animationId: 0, resizeHandler: resizeHandler, interaction: null, panel: panel, axesHelper: sceneData.axesHelper };
                     animate();
                 }
 
