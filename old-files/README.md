@@ -118,8 +118,8 @@ The English names are used in the current documentation to keep terminology cons
 
 | Historical Name | Current Name   | Description                                                                  | Tag         | Spanish Tag | Migrated by |
 | --------------- | -------------- | ---------------------------------------------------------------------------- | ----------- | ----------- | ----------- |
-| `TipoLocal`     | `LocalType`    | Local object-type identifier used by a connection                            | Connections | Connexiones | JuanCrakYT  |
-| `PuntoPadre`    | `PrimaryID`    | Connection reference on the parent; may contain a numeric point ID or a UUID | Connections | Connexiones | JuanCrakYT  |
-| `ÍndicePadre`   | `PrimaryIndex` | 1-based logical index of the parent object                                   | Connections | Connexiones | JuanCrakYT  |
+| `TipoLocal`     | `LocalType`    | Local object-type identifier used by a connection                            | Connections | Conexiones  | JuanCrakYT  |
+| `PuntoPadre`    | `PrimaryID`    | Connection reference on the parent; may contain a numeric point ID or a UUID | Connections | Conexiones  | JuanCrakYT  |
+| `ÍndicePadre`   | `PrimaryIndex` | 1-based logical index of the parent object                                   | Connections | Conexiones  | JuanCrakYT  |
 
 > **Important:** The terminology migration does not change the underlying format or reinterpret historical evidence. It only standardizes the names used by the current documentation.
