@@ -153,7 +153,7 @@ Cuando existan objetos simétricos (ruedas, luces, asientos, etc.), utilizar col
 9. Bearing
 10. Board
 11. BouncyBall
-12. BowingBall
+12. BowlingBall
 13. BrakeLight
 14. Briefcase
 15. Bumper
@@ -1075,7 +1075,7 @@ Estos objetos utilizan puntos de conexión definidos por otros objetos.
 |  103 | Sledge            |                   |                    |     1     |         | Mazo.                                                        |
 |  104 | Delayer           |                   |                    |     2     |         | Retardo lógico.                                              |
 |  105 | Looper            |                   |                    |     1     |         | Repetidor temporal.                                          |
-|  106 | wad               |                   |                    |     —     |         | Objeto auxiliar con EphemeralAttachments.                    |
+|  106 | Wad               |                   |                    |     —     |         | Objeto auxiliar con EphemeralAttachments.                    |
 |  107 | BouncyBall        |                   |                    |     6     |         | Pelota rebotadora.                                           |
 |  108 | Recorder          |                   |                    |     1     |         | Grabadora.                                                   |
 |  109 | DoorD             |                   |                    |     1     |         | Variante D de puerta.                                        |
