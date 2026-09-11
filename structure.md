@@ -408,7 +408,7 @@ RtG-Format/
     └── faq.md
 ```
 
-# READ STRUCTURE
+## READ STRUCTURE
 
 ```tree
 READ STRUCTURE
