@@ -9,3 +9,4 @@ How to contribute
 - Add new confirmed IDs/properties under [`blocks/parts/parts-id.md`](blocks/parts/parts-id.md) with a confidence column.
 - Add reproducible experiments to [`examples/experiments`](examples/experiments) (read first [`examples/experiments/README.md`](examples/experiments/README.md)).
 - For format changes, update [`SPECIFICATION.md`](SPECIFICATION.md) and [`format/*`](format/) with sources and confidence.
+- Add connection points to [`assets/models/`](assets/models/)

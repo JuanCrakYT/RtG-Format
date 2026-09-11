@@ -1,0 +1,27 @@
+[
+    {
+        "RtG-Format":{
+            "RtG-Format Data": {
+                "Release Date":"",
+                "Creator":"JuanCrakYT",
+                "Notes":"",
+                "Extra Files":[
+                    "./README.md"
+                ]
+            },
+            "RtG-Preview": {
+                "Size":1
+            },
+            "Page": {
+                
+            }
+        },
+        "Name":"Base",
+        "Description":"...",
+        "LocalPoints": {
+            "1":["5","5",0],
+            "2":["5","0",2],
+            "3":["0","2",4]
+        }
+    }
+]
