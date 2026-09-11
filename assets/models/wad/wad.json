@@ -10,12 +10,14 @@
             "RtG-Preview": {
                 "Size": {
                     "default": 1
-                }
+                },
+                "Default Branch": "./wad.obj"
             },
             "Page": {}
         },
         "Name": "wad",
-        "Tooltip"LocalPoints": {},
+        "Tooltip": "",
+        "LocalPoints": {},
         "Branches": {}
     }
 ]

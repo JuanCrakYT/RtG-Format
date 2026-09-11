@@ -10,12 +10,13 @@
             "RtG-Preview": {
                 "Size": {
                     "default": 1
-                }
+                },
+                "Default Branch": "./VelocitySensor.obj"
             },
             "Page": {}
         },
         "Name": "VelocitySensor",
-        "Tooltip",
+        "Tooltip": "",
         "LocalPoints": {},
         "Branches": {}
     }

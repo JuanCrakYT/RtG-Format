@@ -10,7 +10,8 @@
             "RtG-Preview": {
                 "Size": {
                     "default": 1
-                }
+                },
+                "Default Branch": "./Body.obj"
             },
             "Page": {}
         },

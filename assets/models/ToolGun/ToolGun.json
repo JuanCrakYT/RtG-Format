@@ -10,12 +10,13 @@
             "RtG-Preview": {
                 "Size": {
                     "default": 1
-                }
+                },
+                "Default Branch": "./ToolGun.obj"
             },
             "Page": {}
         },
         "Name": "ToolGun",
-        "TooltipAny creator's dream! Has several modes to aid in building.",
+        "Tooltip": "Any creator's dream! Has several modes to aid in building.",
         "LocalPoints": {},
         "Branches": {}
     }

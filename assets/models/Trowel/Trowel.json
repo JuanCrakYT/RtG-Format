@@ -10,13 +10,14 @@
             "RtG-Preview": {
                 "Size": {
                     "default": 1
-                }
+                },
+                "Default Branch": "./Trowel.obj"
             },
             "Page": {}
         },
         "Name": "Trowel",
-        "Tooltip",
-        "LocalPoints": {},
+        "Tooltip": "",
+        """""LocalPoints": {},
         "Branches": {}
     }
 ]

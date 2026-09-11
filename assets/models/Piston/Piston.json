@@ -10,12 +10,13 @@
             "RtG-Preview": {
                 "Size": {
                     "default": 1
-                }
+                },
+                "Default Branch": "./Piston.obj"
             },
             "Page": {}
         },
         "Name": "Piston",
-        "Tooltip",
+        "Tooltip": "",
         "LocalPoints": {},
         "Branches": {}
     }

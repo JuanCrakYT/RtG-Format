@@ -10,13 +10,21 @@
             "RtG-Preview": {
                 "Size": {
                     "default": 1
-                }
+                },
+                "Default Branch": "./split/button.obj"
             },
             "Page": {}
         },
         "Name": "Switch",
         "Tooltip": "",
-        "LocalPoints": {},
-        "Branches": {}
+        "LocalPoints": {
+            "2":[
+                [0,0.5,0],
+                [0,0,0]
+            ]
+        },
+        "Branches": {
+            "2":"./split/output.obj"
+        }
     }
 ]

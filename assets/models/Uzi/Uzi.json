@@ -10,13 +10,14 @@
             "RtG-Preview": {
                 "Size": {
                     "default": 1
-                }
+                },
+                "Default Branch": "./Uzi.obj"
             },
             "Page": {}
         },
         "Name": "Uzi",
-        "Tooltip",
-        "LocalPoints": {},
+        "Tooltip": "",
+        """LocalPoints": {},
         "Branches": {}
     }
 ]

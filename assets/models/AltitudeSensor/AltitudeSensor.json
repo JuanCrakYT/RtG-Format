@@ -10,13 +10,19 @@
             "RtG-Preview": {
                 "Size": {
                     "default": 1
-                }
+                },
+                "Default Branch": "./AltitudeSensor.obj"
             },
             "Page": {}
         },
         "Name": "AltitudeSensor",
         "Tooltip": "",
-        "LocalPoints": {},
+        "LocalPoints": {
+            "1":[
+                [0,2,0],
+                [0,0,0]
+            ]
+        },
         "Branches": {}
     }
 ]

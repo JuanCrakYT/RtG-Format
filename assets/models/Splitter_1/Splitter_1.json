@@ -10,12 +10,13 @@
             "RtG-Preview": {
                 "Size": {
                     "default": 1
-                }
+                },
+                "Default Branch": "./Splitter_1.obj"
             },
             "Page": {}
         },
         "Name": "Splitter_1",
-        "Tooltip",
+        "Tooltip": "",
         "LocalPoints": {},
         "Branches": {}
     }
