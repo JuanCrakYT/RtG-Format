@@ -10,17 +10,16 @@ ESTRUCTURA DE BLENDER
 Modelo sin ramas:
 
     Model
-    └── Model
-        └── start.Model
+    └── start.Model
 
 Modelo con ramas:
 
     Model
-    ├── Model
     ├── branch
     │   └── start.Model.branch
     └── branch
-        └── start.Model.branch
+        ├── start.Model.branch
+        └── Point_X
 
 
 REGLAS
@@ -29,16 +28,31 @@ REGLAS
 ROOT
 ----
 
-El objeto raíz representa el modelo.
+El objeto raíz representa el modelo y es un MESH.
 
-El MESH cuyo nombre coincide con el nombre del root es el modelo
-completo.
+El propio ROOT es el MESH principal.
+
+No existe un segundo MESH llamado Model dentro del ROOT.
 
 
 BRANCHES
 --------
 
-Todo MESH descendiente distinto del MESH principal es una rama.
+Las ramas son MESH hijos directos del ROOT.
+
+Un MESH hijo directo solamente se considera rama si posee
+exactamente un Empty start con el nombre:
+
+    start.Model.branch
+
+
+Los MESH hijos que no tengan un start correspondiente se ignoran.
+
+Esto permite tener copias temporales como:
+
+    Model-clone
+
+sin que sean exportadas como ramas.
 
 
 START
@@ -54,8 +68,6 @@ Modelo con ramas:
 
     start.Model.branch
 
-El nombre evita conflictos entre objetos de Blender.
-
 Los start de las ramas representan el origen local de cada rama.
 
 
@@ -68,6 +80,9 @@ Los puntos son Empty llamados:
     Point_2
     Point_3
     ...
+
+
+Los puntos pertenecen a la rama dentro de cuya jerarquía aparecen.
 
 
 CENTRADO
@@ -221,39 +236,53 @@ def get_descendant_points(root):
 # MODELO PRINCIPAL
 # ============================================================
 
-def find_main_mesh(model_root, meshes):
+def find_main_mesh(model_root):
 
-    matches = [
-        mesh
-        for mesh in meshes
-        if mesh.name == model_root.name
-    ]
-
-    if len(matches) == 0:
+    if model_root.type != "MESH":
         raise RuntimeError(
-            f"No existe un MESH principal llamado "
-            f"'{model_root.name}'."
+            f"El root '{model_root.name}' "
+            f"no es un MESH."
         )
 
-    if len(matches) > 1:
-        raise RuntimeError(
-            f"Existen múltiples MESH llamados "
-            f"'{model_root.name}'."
-        )
-
-    return matches[0]
+    return model_root
 
 
 # ============================================================
 # RAMAS
 # ============================================================
 
-def find_branches(main_mesh, meshes):
-    return [
-        mesh
-        for mesh in meshes
-        if mesh != main_mesh
-    ]
+def find_branches(model_root):
+
+    branches = []
+
+    for obj in bpy.context.scene.objects:
+
+        if obj.type != "MESH":
+            continue
+
+        # Las ramas deben ser hijos directos del ROOT.
+        if obj.parent != model_root:
+            continue
+
+        expected_start = (
+            f"start.{model_root.name}.{obj.name}"
+        )
+
+        starts = [
+            candidate
+            for candidate in bpy.context.scene.objects
+            if (
+                candidate.type == "EMPTY"
+                and candidate.name == expected_start
+                and is_descendant(candidate, obj)
+            )
+        ]
+
+        # Exactamente un start = rama válida.
+        if len(starts) == 1:
+            branches.append(obj)
+
+    return branches
 
 
 # ============================================================
@@ -837,18 +866,12 @@ def process_model(model_root):
     # Buscar MESH.
     # --------------------------------------------------------
 
-    meshes = get_descendant_meshes(
+    main_mesh = find_main_mesh(
         model_root
     )
-
-    main_mesh = find_main_mesh(
-        model_root,
-        meshes
-    )
-
+    
     branches = find_branches(
-        main_mesh,
-        meshes
+        model_root
     )
 
     print(
@@ -1090,22 +1113,14 @@ def process_model(model_root):
 # ============================================================
 
 def find_model_roots():
-
     roots = []
 
     for obj in bpy.context.scene.objects:
 
-        # El root debe ser un objeto que tenga
-        # al menos un MESH descendiente.
-
-        if obj.parent is not None:
+        if obj.type != "MESH":
             continue
 
-        meshes = get_descendant_meshes(
-            obj
-        )
-
-        if not meshes:
+        if obj.parent is not None:
             continue
 
         roots.append(obj)
