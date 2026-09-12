@@ -110,12 +110,9 @@ from mathutils import Vector
 # CONFIGURACIÓN
 # ============================================================
 
-OUTPUT_ROOT = Path(
-    r"C:\Users\User\Desktop\Created programs\Mine\Reverse Engineering\Roblox\RtG Format\assets\models"
-)
-
+SCRIPT_DIR = Path(__file__).resolve().parent
+OUTPUT_ROOT = SCRIPT_DIR
 POINT_PREFIX = "Point_"
-
 
 # ============================================================
 # UTILIDADES
