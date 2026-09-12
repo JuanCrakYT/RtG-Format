@@ -1,6 +1,7 @@
 [
     {
         "rules": {
+            "en": "./en/rules.en.md",
             "es": "./es/rules.es.md"
         },
         "version": "RtG-CLI v1.1.62",
@@ -13,6 +14,7 @@
             "es": "Uso: rtg [-v | --version] [-language <idioma>] [-h | --help] [-l | --lang] [-r | --rules] <comando> [-l | --lang] [<args>]\n\nLos comandos de rtg más utilizados son:\n  image       | Convertidor de imágenes impulsado por: \"RtG-Image\".\n  preview     | Abre un HTML para ver la construcción JSON de Road to Gramby's\n  --commands  | Muestra una lista de los comandos de rtg\n\nUsa 'rtg help <comando> -<idioma>' para más información sobre un comando específico en tu idioma.\nUsa 'rtg help <comando> -lang' para ver los idiomas de ese complemento\nUsa 'rtg --commands' para ver los comandos internos actuales"
         },
         "help": {
+            "en": "./en/help.en.md",
             "es": "./es/help.es.md"
         },
         "addons": {
