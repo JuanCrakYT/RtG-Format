@@ -181,7 +181,28 @@ Ejemplos:
 
 ---
 
-## 9. 
+## 9. Interfaz de comandos de los addons
+
+Los comandos específicos de un addon son definidos por el propio programa del addon.
+
+RtG-CLI utiliza la configuración del addon para localizar su interfaz de comandos mediante la propiedad `program commands`.
+
+Esta propiedad contiene las rutas de los archivos que proporcionan la interfaz de comandos del programa.
+
+Ejemplo:
+
+```json
+"program commands": [
+    "../tools/RtG Image/commands.py"
+]
+```
+
+RtG-CLI puede utilizar esta interfaz para conocer o ejecutar los comandos disponibles del addon, pero no debe asumir ni modificar el significado de sus comandos internos.
+
+El addon puede definir comandos adicionales que no estén registrados directamente como comandos propios de RtG-CLI.
+
+La implementación interna del programa puede ser diferente entre addons, siempre que proporcione una interfaz compatible con las reglas de RtG-CLI.
+
 
 ---
 
