@@ -1,8 +1,7 @@
 # RtG Models
 
-Esta carpeta contiene los modelos de Road To Gramby's utilizados por RtG-Format.
-
-Cada modelo tiene su propia carpeta:
+This folder contains the Road To Gramby's models used by RtG-Format.
+Each model has its own folder:
 
 ```text
 assets/models/
@@ -11,7 +10,7 @@ assets/models/
     └── Model.json
 ```
 
-Los modelos con ramas utilizan una carpeta `split`:
+Models with branches use a `split` folder:
 
 ```text
 assets/models/
@@ -25,52 +24,50 @@ assets/models/
 
 ---
 
-## Estructura en Blender
+## Blender Structure
 
-Los modelos deben organizarse dentro de Blender de acuerdo con si tienen o no ramas.
+Models must be organized in Blender according to whether they have branches.
 
-### Sin ramas
+### No Branches
 
-Un modelo sin ramas debe tener un MESH principal con un Empty `start.Model`:
+A model without branches uses the root MESH itself as the main MESH:
 
 ```text
 Model
-└── Model
-    └── start.Model
+└── start.Model
 ```
 
-* `Model` superior: objeto raíz/contenedor.
-* `Model` inferior: MESH principal.
-* `start.Model`: Empty que define el origen del modelo.
-* El Empty debe ser hijo del MESH principal.
-* El nombre `start.Model` evita conflictos con otros objetos `start` dentro de Blender.
+* `Model`: root object and main MESH of the model.
+* `start.Model`: Empty that defines the model's origin.
+* The Empty must be inside the main MESH hierarchy.
+* There must not be a second MESH named `Model`.
+* The root MESH represents the entire model geometry.
 
 ---
 
-### Con ramas
+### With Branches
 
-Un modelo con ramas utiliza un MESH principal y un MESH independiente para cada rama:
+A model with branches uses the root MESH as the main model and direct MESH children as branches:
 
 ```text
 Model
-├── Model
 ├── branch
 │   └── start.Model.branch
 └── branch
-    └── start.Model.branch
+    ├── start.Model.branch
+    └── Point_X
 ```
 
-* `Model` superior: objeto raíz/contenedor.
-* `Model` inferior: MESH completo del modelo.
-* Cada `branch`: MESH correspondiente a una rama.
-* Cada rama debe tener exactamente un Empty `start.Model.branch`.
-* El nombre identifica tanto al modelo como a la rama.
+* `Model`: root MESH and main MESH of the model.
+* Each `branch`: direct child MESH corresponding to a branch.
+* Each branch must have exactly one `start.Model.branch` Empty.
+* `Point_X` objects belong to the branch within whose hierarchy they are located.
+* Child MESH objects without a corresponding `start` are not considered branches.
 
-Por ejemplo:
+For example:
 
 ```text
 Switch
-├── Switch
 ├── input
 │   └── start.Switch.input
 └── output
@@ -78,44 +75,49 @@ Switch
     └── Point_2
 ```
 
+In this example:
+
+* `Switch` is the main MESH.
+* `input` is a branch.
+* `output` is another branch.
+* `Point_2` belongs to `output`.
+
 ---
 
 ## `start`
 
-Los objetos `start.*` son **Empty** utilizados como puntos de origen para exportar los modelos.
+`start.*` objects are **Empty** objects used to define the local origin of models and branches.
 
-No son parte de la geometría y nunca deben aparecer en los archivos `.obj`.
+They are not part of the geometry and must never appear in `.obj` files.
 
-### Modelo sin ramas
+### Model Without Branches
 
 ```text
 Model
-└── Model
-    └── start.Model
+└── start.Model
 ```
 
-`start.Model` define el origen del modelo principal.
+`start.Model` defines the origin of the main model.
 
-### Modelo con ramas
+### Model With Branches
 
 ```text
 Model
-├── Model
 ├── branch
 │   └── start.Model.branch
 └── branch
     └── start.Model.branch
 ```
 
-Cada `start.Model.branch` define el origen de su respectiva rama.
+Each `start.Model.branch` defines the local origin of its respective branch.
 
-La geometría de una rama se exporta relativa a su propio `start`.
+The geometry of a branch is exported relative to its own `start`.
 
 ---
 
 ## `Point_X`
 
-Los puntos de conexión utilizan Empty con nombres:
+Connection points use Empty objects with names such as:
 
 ```text
 Point_1
@@ -124,13 +126,12 @@ Point_3
 ...
 ```
 
-El `Point_X` pertenece a la rama dentro de cuya jerarquía se encuentre.
+A `Point_X` belongs to the branch within whose hierarchy it is located.
 
-Por ejemplo:
+For example:
 
 ```text
 Switch
-├── Switch
 ├── input
 │   └── start.Switch.input
 └── output
@@ -138,9 +139,9 @@ Switch
     └── Point_2
 ```
 
-Esto significa que `Point_2` pertenece a `output`.
+This means that `Point_2` belongs to `output`.
 
-Por lo tanto, la rama `output` se registra en el JSON como:
+Therefore, the `output` branch is registered in the JSON as:
 
 ```json
 "Branches": {
@@ -148,19 +149,19 @@ Por lo tanto, la rama `output` se registra en el JSON como:
 }
 ```
 
-Un `Point_X` debe pertenecer a una única rama.
+A `Point_X` must belong to exactly one branch.
 
 ---
 
-## Ramas sin `Point_X`
+## Branches Without `Point_X`
 
-Una rama que no contiene ningún `Point_X` utiliza:
+A branch that does not contain any `Point_X` uses:
 
 ```json
 "NaN": "./split/branch.obj"
 ```
 
-Por ejemplo:
+For example:
 
 ```json
 "Branches": {
@@ -169,42 +170,59 @@ Por ejemplo:
 }
 ```
 
-`NaN` significa que esa rama no está asociada a ningún punto `Point_X`.
+`NaN` means that the branch is not associated with any `Point_X`.
 
 ---
 
-## Archivos OBJ
+## OBJ Files
 
-El MESH principal siempre se exporta como:
+The main MESH is always exported as:
 
 ```text
 ./Model.obj
 ```
 
-Las ramas se exportan dentro de `split/`:
+Branches are exported inside `split/`:
 
 ```text
 ./split/branch.obj
 ./split/branch2.obj
 ```
 
-El archivo principal contiene el modelo completo.
+The main file contains **only the geometry of the main MESH**.
 
-Los archivos de `split/` contienen las geometrías individuales de las ramas.
+Each file inside `split/` contains **only the geometry of its respective branch**.
 
-Los Empty (`start.*` y `Point_X`) nunca se exportan como geometría.
+For example:
+
+```text
+Switch/
+├── Switch.obj
+├── Switch.json
+└── split/
+    ├── input.obj
+    └── output.obj
+```
+
+`Switch.obj` contains only the geometry of the `Switch` MESH.
+
+`input.obj` contains only the geometry of the `input` MESH.
+
+`output.obj` contains only the geometry of the `output` MESH.
+
+Empty objects (`start.*` and `Point_X`) are never exported as geometry.
 
 ---
 
 ## JSON
 
-Cada modelo tiene un archivo:
+Each model has a:
 
 ```text
 Model.json
 ```
 
-La información de las ramas utiliza:
+Branch information uses:
 
 ```json
 "Branches": {
@@ -213,7 +231,7 @@ La información de las ramas utiliza:
 }
 ```
 
-Las posiciones de los `start` de las ramas se almacenan en:
+The positions of branch `start` objects are stored in:
 
 ```json
 "Branches Start": {
@@ -228,7 +246,7 @@ Las posiciones de los `start` de las ramas se almacenan en:
 }
 ```
 
-El modelo principal utiliza:
+The main model uses:
 
 ```json
 "Default Branch": [
@@ -236,27 +254,25 @@ El modelo principal utiliza:
 ]
 ```
 
-`Default Branch` se encuentra al mismo nivel que `Name`, `Tooltip`, `LocalPoints` y `Branches`.
+`Default Branch` is located at the same level as `Name`, `Tooltip`, `LocalPoints`, and `Branches`.
 
 ---
 
-## Reglas
+## Rules
 
-1. La carpeta del modelo debe tener el mismo nombre que el modelo.
-2. El MESH principal debe tener el mismo nombre que el modelo.
-3. Un modelo sin ramas debe tener exactamente un `start.Model`.
-4. Un modelo con ramas debe tener exactamente un `start.Model.branch` por cada rama.
-5. Los nombres `start.*` deben seguir la convención:
-   * Sin ramas: `start.Model`
-   * Con ramas: `start.Model.branch`
+1. The model folder must have the same name as the model.
+2. The root MESH must have the same name as the model.
+3. The root MESH itself is the main MESH.
+4. A model without branches must have exactly one `start.Model`.
+5. A model with branches must have exactly one `start.Model.branch` for each branch.
+6. Direct child MESH objects of the ROOT are considered branches only if they have exactly one corresponding `start`.
+7. Child MESH objects without a corresponding `start` must be ignored.
+8. `start.*` names must follow the convention:
 
-6. Los puntos de conexión deben llamarse `Point_X`.
-7. Un `Point_X` pertenece a la rama dentro de cuya jerarquía se encuentre.
-8. Una rama sin `Point_X` utiliza `"NaN"` en `Branches`.
-9. Los Empty no se exportan al OBJ.
-10. El `start` de una rama representa el origen local de esa rama.
-11. El MESH principal representa el modelo completo.
-12. Las ramas individuales se almacenan dentro de `split/`.
-13. `Default Branch` debe apuntar al OBJ principal.
-14. Los datos existentes del JSON que no sean generados por el exportador deben conservarse.
-15. Los nombres de los `start` deben ser únicos y descriptivos para evitar conflictos de nombres dentro de Blender.
+   * Without branches: `start.Model`
+   * With branches: `start.Model.branch`
+9. Connection points must be named `Point_X`.
+10. A `Point_X` belongs to the branch within whose hierarchy it is located.
+11. A branch without a `Point_X` uses `"NaN"` in `Branches`.
+12. Empty objects are never exported to OBJ.
+13. A branch's `start` represents the local origi
