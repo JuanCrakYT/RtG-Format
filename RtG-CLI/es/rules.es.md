@@ -222,7 +222,41 @@ Ejemplo:
 
 ---
 
-## 11. El idioma no cambia el comando
+## 11. Idioma predeterminado
+
+El primer idioma definido en el objeto `rules` de `assets.json` es el idioma predeterminado de las reglas.
+
+Cuando el usuario solicite las reglas sin especificar un idioma, RtG-CLI debe utilizar ese primer idioma.
+
+Por ejemplo:
+
+```json
+"rules": {
+    "es": "./rules.es.md",
+    "en": "./rules.en.md"
+}
+```
+
+En este caso:
+
+`rtg -r`
+y
+`rtg --rules`
+
+mostrarán las reglas en español, porque `es` es el primer idioma definido.
+Para solicitar otro idioma se debe utilizar su selector correspondiente:
+
+`rtg -r -en`
+
+El orden de los idiomas dentro de `rules` determina únicamente cuál será el idioma predeterminado. No cambia los idiomas disponibles.
+
+Esta regla también aplica para otros selectores de idioma como:
+
+`rtg help image -es`
+
+---
+
+## 12. El idioma no cambia el comando
 
 Cambiar el idioma solamente modifica el texto mostrado por RtG-CLI.
 
@@ -242,7 +276,7 @@ siguen haciendo referencia al mismo comando:
 
 ---
 
-## 12. Ayuda
+## 13. Ayuda
 
 La ayuda general se obtiene mediante:
 
