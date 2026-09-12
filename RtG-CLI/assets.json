@@ -1,7 +1,14 @@
 [
     {
-        "version": "RtG-CLI v1.0.3",
-        "void": "Usage: rtg [-v | --version] [-h | --help] <command> [<args>]\n\nThe most commonly used rtg commands are:\n  image      | Image converter powered by: \"RtG-Image\".\n  preview    | Opens an HTML to view Road to Gramby's build JSON\n\nUse 'rtg help <command>' for more information on a specific command.\n\n",
+        "rules": {
+            "es": "Ningún addon puede tener comandos que al inicio tengan '-', deben ser al final.\n Ejemplo:\n 'rtg help image -version' es correcto, 'rtg help -version image' es incorrecto.\n\nLos addons no deben tener un solo '-' en sus comandos, debe tener al menos 2 o directamente no contener un '-'.\n Ejemplo:\n'rtg help image -lang' es correcto como comando de el sistema, 'rtg help image -witdh' es incorrecto, solo los comandos de el sistema empiezan por un solo '-'.\n\nLos comandos de los addons no deben contener espacios, deben ser una sola palabra.\n Ejemplo:\n 'rtg help image -version' es correcto, 'rtg help image -version info' es incorrecto.\n"
+        },
+        "version": "RtG-CLI v1.0.4",
+        "version-date": "9/12/2026/3:31 pm",
+        "version-content": {
+            "es": ""
+        },
+        "void": "Usage: rtg [-v | --version] [-h | --help] <command> [<args>]\n\nThe most commonly used rtg commands are:\n  image      | Image converter powered by: \"RtG-Image\".\n  preview    | Opens an HTML to view Road to Gramby's build JSON\n\nUse 'rtg help <command> -<language>' for more information on a specific command on your language.\nUse 'rtg help <command> -lang' to see the languages of that addon\n",
         "addons": {
             "image": {
                 "name": "RtG Image",
@@ -9,17 +16,9 @@
                     "es"
                 ],
                 "version": "3.7.2",
-                "content": {
-                    "es":"# RtG Image\n\nAplicación de  escritorio para crear pixel art y    convertirlo a un asset compatible con  RtG.\n\nPermite dibujar desde cero,  importar una imagen y exportar el    resultado como texto RtG o como PNG.\n"
-                }
-            }
-        },
-        "text": {
-            "help": {
-                "image": "Creates an image\n",
-                "preview": "Opens a html for preview a JSON Road to gramby's build\n"
-            },
-            "image": {
+                "version-content": {
+                    "es":"# RtG Image\n\nAplicación de escritorio para crear pixel art y    convertirlo a un asset compatible con RtG.\n\nPermite dibujar desde cero, importar una imagen y exportar el resultado como texto RtG o como PNG.\n"
+                },
                 "program commands": ["../tools/RtG Image/commands.py"],
                 "creators": {
                     "JuanCrakYT": [
@@ -29,12 +28,30 @@
                 }
             },
             "preview": {
+                "name": "RtG Preview",
+                "lang": [
+                    "en"
+                ],
+                "version": "0.7.8",
+                "version-content": {
+                    "en": "# RtG-Preview\n**RtG-Preview** is a lightweight browser-based 3D preview renderer for **RtG-Format** builds.\nIt allows RtG build data to be rendered interactively in a web browser without requiring a separate application. The renderer is designed to work directly with the existing **[RtG-Format](../README.md)** structure and does not introduce a separate build format.\n"
+                },
                 "program commands": ["../RtG-Preview/commands.js"],
                 "creators": {
                     "JuanCrakYT": [
                         "Creator of the viewer",
                         "Main maintainer and creator of updates"
                     ]
+                }
+            }
+        },
+        "internal": {
+            "help": {
+                "image": {
+                    "-en": "Creates an image\n"
+                },
+                "preview": {
+                    "-en": "Opens a html to view a JSON Road to gramby's build\n"
                 }
             }
         }
