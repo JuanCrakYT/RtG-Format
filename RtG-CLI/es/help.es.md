@@ -59,7 +59,7 @@ rtg --rules
 
 ## Idiomas
 
-Los idiomas se indican mediante una sola raya (`-`).
+Los idiomas se indican mediante una sola guion (`-`).
 
 ```text
 rtg help image -es
@@ -74,12 +74,25 @@ Para consultar los idiomas disponibles de un addon:
 rtg help image -lang
 ```
 
+El significado de `-lang` depende de su posición.
+
+Antes del addon:
+`rtg --lang`
+`rtg -l`
+
+consulta los idiomas de RtG-CLI.
+
+Después del addon:
+`rtg image -lang`
+
+consulta los idiomas del addon.
+
 ## Argumentos de los addons
 
 Después de identificar un addon, los argumentos se separan según su prefijo:
 
 ```text
-sin raya       → addon
+sin guion       → addon
 --argumento    → addon
 -argumento     → RtG-CLI
 ```
