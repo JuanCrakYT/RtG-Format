@@ -1,10 +1,29 @@
 # RtG Models
 
 This folder contains the Road To Gramby's models used by RtG-Format.
+
+The current model files are stored in the `model` folder:
+
+```tree
+assets/models/
+├── model/
+│   └── Model/
+│       ├── Model.obj
+│       ├── Model.json
+│       └── split/
+│           ├── branch.obj
+│           └── branch2.obj
+└── deprecated/
+    └── [deprecated scripts]
+```
+
+* `model/` contains the current RtG model assets.
+* `deprecated/` contains deprecated scripts and older tools related to model generation.
+
 Each model has its own folder:
 
-```text
-assets/models/
+```tree
+assets/models/model/
 └── Model/
     ├── Model.obj
     └── Model.json
@@ -12,8 +31,8 @@ assets/models/
 
 Models with branches use a `split` folder:
 
-```text
-assets/models/
+```tree
+assets/models/model/
 └── Model/
     ├── Model.obj
     ├── Model.json
@@ -32,7 +51,7 @@ Models must be organized in Blender according to whether they have branches.
 
 A model without branches uses the root MESH itself as the main MESH:
 
-```text
+```tree
 Model
 └── start.Model
 ```
@@ -49,7 +68,7 @@ Model
 
 A model with branches uses the root MESH as the main model and direct MESH children as branches:
 
-```text
+```tree
 Model
 ├── branch
 │   └── start.Model.branch
@@ -66,7 +85,7 @@ Model
 
 For example:
 
-```text
+```tree
 Switch
 ├── input
 │   └── start.Switch.input
@@ -101,7 +120,7 @@ Model
 
 ### Model With Branches
 
-```text
+```tree
 Model
 ├── branch
 │   └── start.Model.branch
@@ -130,7 +149,7 @@ A `Point_X` belongs to the branch within whose hierarchy it is located.
 
 For example:
 
-```text
+```tree
 Switch
 ├── input
 │   └── start.Switch.input
@@ -195,8 +214,8 @@ Each file inside `split/` contains **only the geometry of its respective branch*
 
 For example:
 
-```text
-Switch/
+```tree
+assets/models/model/Switch/
 ├── Switch.obj
 ├── Switch.json
 └── split/
@@ -258,21 +277,36 @@ The main model uses:
 
 ---
 
+## Deprecated Scripts
+
+Deprecated model-generation scripts are stored separately in:
+
+```text
+assets/models/deprecated/
+```
+
+These scripts are kept for reference and historical purposes and are not part of the current model asset structure.
+
+Current model assets should be stored exclusively under:
+
+```text
+assets/models/model/
+```
+
+---
+
 ## Rules
 
-1. The model folder must have the same name as the model.
-2. The root MESH must have the same name as the model.
-3. The root MESH itself is the main MESH.
-4. A model without branches must have exactly one `start.Model`.
-5. A model with branches must have exactly one `start.Model.branch` for each branch.
-6. Direct child MESH objects of the ROOT are considered branches only if they have exactly one corresponding `start`.
-7. Child MESH objects without a corresponding `start` must be ignored.
-8. `start.*` names must follow the convention:
-
-   * Without branches: `start.Model`
-   * With branches: `start.Model.branch`
-9. Connection points must be named `Point_X`.
-10. A `Point_X` belongs to the branch within whose hierarchy it is located.
-11. A branch without a `Point_X` uses `"NaN"` in `Branches`.
-12. Empty objects are never exported to OBJ.
-13. A branch's `start` represents the local origi
+1. Current model assets must be stored under `assets/models/model/`.
+2. Each model must have its own folder inside `assets/models/model/`.
+3. The model folder must have the same name as the model.
+4. Deprecated scripts must be stored under `assets/models/deprecated/`.
+5. The root MESH must have the same name as the model.
+6. The root MESH itself is the main MESH.
+7. A model without branches must have exactly one `start.Model`.
+8. A model with branches must have exactly one `start.Model.branch` for each branch.
+9. Direct child MESH objects of the ROOT are considered branches only if they have exactly one corresponding `start`.
+10. Child MESH objects without a corresponding `start` must be ignored.
+11. `start.*` names must follow the convention:
+    * Without branches: `start.Model`
+    * With branches: `start.
