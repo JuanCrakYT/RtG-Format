@@ -281,9 +281,7 @@ alt="RtG"
 style="
 opacity: 1;
 transition: opacity 0.25s ease;
-"
-
->
+">
 
 </div>
 
@@ -300,9 +298,9 @@ https://road-to-grambys.fandom.com/wiki/Road_to_Gramby%27s_%F0%9F%91%B5_Wiki
 
 **JuanCrakYT — RtG-Format:**
 
-https://github.com/JuanCrakYT/RtG-Format
+> **Github Repository:** https://github.com/JuanCrakYT/RtG-Format
 
-[JuanCrakYT.github.io/RtG-Format](https://juancrakyt.github.io/RtG-Format/)
+> **Github Pages:** [JuanCrakYT.github.io/RtG-Format](https://juancrakyt.github.io/RtG-Format/)
 
 ## Repository
 
