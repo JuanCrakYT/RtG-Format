@@ -8,9 +8,9 @@
         "version-content": {
             "es": "El código actual esta obsoleto, despues de terminar la estructura de 'assets.json', actualizaremos el codigo\nAhora las reglas usaran archivos independientes en lugar de ser parte de 'assets.json'."
         },
-        "void": "Usage: rtg [-v | --version] [-h | --help] [-l | --lang] [-r | --rules] <command> [-l | --lang] [<args>]\n\nThe most commonly used rtg commands are:\n  image      | Image converter powered by: \"RtG-Image\".\n  preview    | Opens an HTML to view Road to Gramby's JSON build\n  --command  | Show a list of the rtg commands\n\nUse 'rtg help <command> -<language>' for more information on a specific command on your language.\nUse 'rtg help <command> -lang' to see the languages of that addon\nUse 'rtg --comands' to see the actual internal commands\n",
-        "void-lang": {
-            "es": "Uso: rtg [-v | --version] [-h | --help] [-l | --lang] [-r | --rules] <comando> [-l | --lang] [<args>]\n\nLos comandos de rtg más utilizados son:\n image | Convertidor de imágenes impulsado por: \"RtG-Image\".\n preview | Abre un HTML para ver la construcción JSON de Road to Gramby\n --command | Muestra una lista de los comandos de rtg\n\nUsa 'rtg help <comando> -<idioma>' para más información sobre un comando específico en tu idioma.\nUsa 'rtg help <comando> -lang' para ver los idiomas de ese complemento\nUsa 'rtg --comands' para ver los comandos internos actuales"
+        "void": "Usage: rtg [-v | --version] [-language] [-h | --help] [-l | --lang] [-r | --rules] <command> | <language> [-l | --lang] [<args>]\n\nThe most commonly used rtg commands are:\n  image      | Image converter powered by: \"RtG-Image\".\n  preview    | Opens an HTML to view Road to Gramby's JSON build\n  --commands  | Show a list of the rtg commands\n\nUse 'rtg help <command> -<language>' for more information on a specific command on your language.\nUse 'rtg help <command> -lang' to see the languages of that addon\nUse 'rtg --comamnds' to see the actual internal commands\n",
+        "void-language": {
+            "es": "Uso: rtg [-v | --version] [-language] [-h | --help] [-l | --lang] [-r | --rules] <comando> | <idioma> [-l | --lang] [<args>]\n\nLos comandos de rtg más utilizados son:\n  image       | Convertidor de imágenes impulsado por: \"RtG-Image\".\n  preview     | Abre un HTML para ver la construcción JSON de Road to Gramby's\n  --commands  | Muestra una lista de los comandos de rtg\n\nUsa 'rtg help <comando> -<idioma>' para más información sobre un comando específico en tu idioma.\nUsa 'rtg help <comando> -lang' para ver los idiomas de ese complemento\nUsa 'rtg --commands' para ver los comandos internos actuales"
         },
         "help": {
             "es": "./es/help.es.md"
@@ -24,7 +24,7 @@
                 "version": "3.7.2",
                 "version-date": "9/12/2026/~2:30 pm",
                 "version-content": {
-                    "es":"# RtG Image\n\nAplicación de escritorio para crear pixel art y convertirlo a un asset compatible con RtG.\n\nPermite dibujar desde cero, importar una imagen y exportar el resultado como texto RtG o como PNG.\n"
+                    "es": "Cambios no extraidos de 'RtG-Image'."
                 },
                 "program commands": ["../tools/RtG Image/commands.py"],
                 "creators": {
@@ -42,7 +42,7 @@
                 "version": "0.7.8",
                 "version-date": "",
                 "version-content": {
-                    "en": "# RtG-Preview\n**RtG-Preview** is a lightweight browser-based 3D preview renderer for **RtG-Format** builds.\nIt allows RtG build data to be rendered interactively in a web browser without requiring a separate application. The renderer is designed to work directly with the existing **[RtG-Format](../README.md)** structure and does not introduce a separate build format.\n"
+                    "en": "# CHANGELOG\nRtG-Preview uses the branch 'main' of RtG-Format, don't change it."
                 },
                 "program commands": ["../RtG-Preview/commands.js"],
                 "creators": {
@@ -56,11 +56,14 @@
         "internal": {
             "help": {
                 "image": {
-                    "-en": "Creates an image\n"
+                    "en": "Creates an image\n"
                 },
                 "preview": {
-                    "-en": "Opens a html to view a JSON Road to gramby's build\n"
+                    "en": "# RtG-Preview\n**RtG-Preview** is a lightweight browser-based 3D preview renderer for **RtG-Format** builds.\nIt allows RtG build data to be rendered interactively in a web browser without requiring a separate application. The renderer is designed to work directly with the existing **[RtG-Format](../README.md)** structure and does not introduce a separate build format.\n"
                 }
+            },
+            "language": {
+                
             }
         },
         "internal-list": [
@@ -73,6 +76,7 @@
             "--rules",
             "-l",
             "--lang",
+            "-language",
             "-c",
             "--commands"
         ]

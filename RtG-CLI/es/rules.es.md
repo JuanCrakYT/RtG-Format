@@ -82,13 +82,13 @@ Las opciones largas del sistema utilizan dos guiones:
 `rtg --version`
 `rtg --help`
 
-Las abreviaturas del sistema utilizan una guion:
+Las abreviaturas del sistema utilizan un guion:
 
 `rtg -v`
 `rtg -h`
 `rtg -l`
 
-Después de identificar un addon, una opción que comienza con una sola guion (`-`) pertenece a RtG-CLI.
+Después de identificar un addon, una opción que comienza con un solo guion (`-`) pertenece a RtG-CLI.
 
 Ejemplo:
 
@@ -163,7 +163,7 @@ Después de identificar un addon:
 
 - Los argumentos sin guion pertenecen al addon.
 - Los argumentos con dos guiones o más (`--`) pertenecen al addon.
-- Los argumentos con una sola guion (`-`) pertenecen a RtG-CLI.
+- Los argumentos con un solo guion (`-`) pertenecen a RtG-CLI.
 
 Ejemplos:
 
@@ -369,7 +369,7 @@ Después de identificar un addon, RtG-CLI debe determinar la propiedad de cada a
 
 - Un argumento sin guion pertenece al addon.
 - Un argumento con dos guiones o más (`--`) pertenece al addon.
-- Un argumento con una sola guion (`-`) pertenece a RtG-CLI.
+- Un argumento con un solo guion (`-`) pertenece a RtG-CLI.
 
 Si RtG-CLI recibe un argumento propio del sistema que no reconoce, debe informar que la opción no existe.
 
@@ -395,8 +395,8 @@ Un addon puede tener una implementación interna completamente diferente, pero s
 
 ## 21. Regla de prioridad
 
-Después de identificar un addon, una sola guion (`-`) está reservada para RtG-CLI.
-Un addon no puede utilizar argumentos que comiencen con una sola guion.
+Después de identificar un addon, un solo guion (`-`) está reservada para RtG-CLI.
+Un addon no puede utilizar argumentos que comiencen con un solo guion.
 
 Los argumentos que comiencen con dos o más guiones (`--`) o que no comiencen con guion pertenecen al addon.
 
@@ -483,3 +483,21 @@ En este ejemplo:
 * `--output` es una opción del addon.
 * `archivo.json` es el valor de esa opción.
 * Ninguno de esos argumentos debe ser interpretado como una opción del sistema.
+
+## 26. Idioma del texto de inicio
+
+`rtg -language <idioma>` selecciona el idioma del texto de inicio mostrado por RtG-CLI.
+
+El idioma debe existir dentro de `void-language`.
+
+Ejemplo:
+
+`rtg -language es`
+
+muestra el texto definido en:
+
+`void-language.es`
+
+Si no se especifica `-language`, RtG-CLI utiliza `void`.
+
+Si el idioma solicitado no está disponible, RtG-CLI debe informar que ese idioma no está disponible.

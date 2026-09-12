@@ -59,7 +59,7 @@ rtg --rules
 
 ## Idiomas
 
-Los idiomas se indican mediante una sola guion (`-`).
+Los idiomas se indican mediante un solo guion (`-`).
 
 ```text
 rtg help image -es
