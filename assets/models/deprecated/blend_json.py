@@ -45,7 +45,6 @@ exactamente un Empty start con el nombre:
 
     start.Model.branch
 
-
 Los MESH hijos que no tengan un start correspondiente se ignoran.
 
 Esto permite tener copias temporales como:
@@ -101,6 +100,7 @@ Se conserva la información existente del JSON.
 
 El script actualiza:
 
+    Name
     LocalPoints
     Branches
     Branches Start
@@ -117,7 +117,6 @@ import bpy
 import json
 
 from pathlib import Path
-
 from mathutils import Vector
 
 
@@ -128,6 +127,7 @@ from mathutils import Vector
 SCRIPT_DIR = Path(__file__).resolve().parent
 OUTPUT_ROOT = SCRIPT_DIR
 POINT_PREFIX = "Point_"
+
 
 # ============================================================
 # UTILIDADES
@@ -168,6 +168,7 @@ def rotation_to_list(euler):
 # ============================================================
 
 def is_point(obj):
+
     if obj.type != "EMPTY":
         return False
 
@@ -188,6 +189,7 @@ def get_point_id(obj):
 # ============================================================
 
 def is_descendant(obj, root):
+
     current = obj.parent
 
     while current is not None:
@@ -201,6 +203,7 @@ def is_descendant(obj, root):
 
 
 def get_descendant_meshes(root):
+
     meshes = []
 
     for obj in bpy.context.scene.objects:
@@ -215,6 +218,7 @@ def get_descendant_meshes(root):
 
 
 def get_descendant_points(root):
+
     points = []
 
     for obj in bpy.context.scene.objects:
@@ -239,6 +243,7 @@ def get_descendant_points(root):
 def find_main_mesh(model_root):
 
     if model_root.type != "MESH":
+
         raise RuntimeError(
             f"El root '{model_root.name}' "
             f"no es un MESH."
@@ -269,8 +274,11 @@ def find_branches(model_root):
         )
 
         starts = [
+
             candidate
+
             for candidate in bpy.context.scene.objects
+
             if (
                 candidate.type == "EMPTY"
                 and candidate.name == expected_start
@@ -309,12 +317,14 @@ def find_start(empty_name, parent):
             starts.append(obj)
 
     if len(starts) == 0:
+
         raise RuntimeError(
             f"No se encontró '{empty_name}' "
             f"dentro de '{parent.name}'."
         )
 
     if len(starts) > 1:
+
         raise RuntimeError(
             f"Se encontraron múltiples objetos "
             f"'{empty_name}' dentro de '{parent.name}'."
@@ -324,13 +334,6 @@ def find_start(empty_name, parent):
 
 
 def find_main_start(model_root, main_mesh):
-    """
-    Modelo sin ramas:
-
-        Model
-        └── Model
-            └── start.Model
-    """
 
     expected_name = f"start.{model_root.name}"
 
@@ -341,13 +344,6 @@ def find_main_start(model_root, main_mesh):
 
 
 def find_branch_start(model_root, branch):
-    """
-    Modelo con ramas:
-
-        Model
-        └── branch
-            └── start.Model.branch
-    """
 
     expected_name = (
         f"start.{model_root.name}.{branch.name}"
@@ -452,6 +448,7 @@ def calculate_main_center(main_mesh):
         evaluated.to_mesh_clear()
 
     if not vertices:
+
         raise RuntimeError(
             f"El MESH '{main_mesh.name}' "
             f"no contiene vértices."
@@ -723,8 +720,7 @@ def export_temp_obj(
             export_normals=True,
             export_smooth_groups=False,
             export_object_groups=False,
-            export_material_groups=False,
-            export_triangulated=False
+            export_material_groups=False
         )
 
     finally:
@@ -785,11 +781,17 @@ def load_existing_json(json_path):
                 },
                 "Page": {}
             },
+
             "Name": json_path.stem,
+
             "Tooltip": "",
+
             "LocalPoints": {},
+
             "Branches": {},
+
             "Branches Start": {},
+
             "Default Branch": [
                 f"./{json_path.stem}.obj"
             ]
@@ -808,9 +810,7 @@ def update_json(
 
     entry = data[0]
 
-    # --------------------------------------------------------
     # No tocar metadata existente.
-    # --------------------------------------------------------
 
     entry["Name"] = model_name
 
@@ -863,13 +863,13 @@ def process_model(model_root):
     print("=" * 60)
 
     # --------------------------------------------------------
-    # Buscar MESH.
+    # Buscar MESH principal y ramas.
     # --------------------------------------------------------
 
     main_mesh = find_main_mesh(
         model_root
     )
-    
+
     branches = find_branches(
         model_root
     )
@@ -900,6 +900,7 @@ def process_model(model_root):
     )
 
     if branches:
+
         split_dir.mkdir(
             parents=True,
             exist_ok=True
@@ -941,7 +942,7 @@ def process_model(model_root):
             "Modelo sin ramas."
         )
 
-        # Exigir start.Model
+        # Exigir start.Model.
         main_start = find_main_start(
             model_root,
             main_mesh
@@ -1113,6 +1114,7 @@ def process_model(model_root):
 # ============================================================
 
 def find_model_roots():
+
     roots = []
 
     for obj in bpy.context.scene.objects:
