@@ -1,0 +1,19 @@
+[
+    {
+        "void": "usage: rtg [-v | --version] [-h | --help] <command> [<args>]\n\nThe most commonly used rtg commands are:\n   image        Create a image (supported by: \"RtG-Image\"\n   preview       Preview of a JSON project/build\n\nUse 'rtg help <command>' for more information on a specific command.\n",
+        "text": {
+            "help": {
+                "image": "Create a image (supported by: \"RtG-Image\"\n",
+                "preview": "Opens a html for preview a JSON project/build\n"
+            },
+            "image": {
+                "-v": ["../tools/RtG Image/version.py"],
+                "program commands": ["../tools/RtG Image/commands.py"]
+            },
+            "preview": {
+                "-v": ["../RtG-Preview/preview.js"],
+                "program commands": ["../RtG-Preview/commands.js"]
+            }
+        }
+    }
+]
