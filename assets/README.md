@@ -227,7 +227,7 @@ These assets are separated by their purpose so that models, interface graphics, 
 
 The [`models/`](models/) directory contains the 3D models and their metadata used by **RtG-Preview**.
 
-Additional details about model creation, Blender hierarchy, branches, `start` objects, `Point_X` objects, and JSON mdata are documented in [`models/README.md`](models/README.md).
+Additional details about model creation, Blender hierarchy, branches, `start` objects, `Point_#` objects, and JSON mdata are documented in [`models/README.md`](models/README.md).
 
 ### Sounds
 

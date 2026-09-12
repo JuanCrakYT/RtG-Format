@@ -74,13 +74,13 @@ Model
 │   └── start.Model.branch
 └── branch
     ├── start.Model.branch
-    └── Point_X
+    └── Point_#
 ```
 
 * `Model`: root MESH and main MESH of the model.
 * Each `branch`: direct child MESH corresponding to a branch.
 * Each branch must have exactly one `start.Model.branch` Empty.
-* `Point_X` objects belong to the branch within whose hierarchy they are located.
+* `Point_#` objects belong to the branch within whose hierarchy they are located.
 * Child MESH objects without a corresponding `start` are not considered branches.
 
 For example:
@@ -134,7 +134,7 @@ The geometry of a branch is exported relative to its own `start`.
 
 ---
 
-## `Point_X`
+## `Point_#`
 
 Connection points use Empty objects with names such as:
 
@@ -145,7 +145,7 @@ Point_3
 ...
 ```
 
-A `Point_X` belongs to the branch within whose hierarchy it is located.
+A `Point_#` belongs to the branch within whose hierarchy it is located.
 
 For example:
 
@@ -168,13 +168,13 @@ Therefore, the `output` branch is registered in the JSON as:
 }
 ```
 
-A `Point_X` must belong to exactly one branch.
+A `Point_#` must belong to exactly one branch.
 
 ---
 
-## Branches Without `Point_X`
+## Branches Without `Point_#`
 
-A branch that does not contain any `Point_X` uses:
+A branch that does not contain any `Point_#` uses:
 
 ```json
 "NaN": "./split/branch.obj"
@@ -189,7 +189,7 @@ For example:
 }
 ```
 
-`NaN` means that the branch is not associated with any `Point_X`.
+`NaN` means that the branch is not associated with any `Point_#`.
 
 ---
 
@@ -229,7 +229,7 @@ assets/models/model/Switch/
 
 `output.obj` contains only the geometry of the `output` MESH.
 
-Empty objects (`start.*` and `Point_X`) are never exported as geometry.
+Empty objects (`start.*` and `Point_#`) are never exported as geometry.
 
 ---
 

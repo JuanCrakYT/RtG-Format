@@ -19,7 +19,7 @@ Modelo con ramas:
     │   └── start.Model.branch
     └── branch
         ├── start.Model.branch
-        └── Point_X
+        └── Point_#
 
 
 REGLAS
@@ -363,9 +363,9 @@ def find_branch_point(branch):
     """
     Una rama puede tener:
 
-        0 Point_X -> NaN
-        1 Point_X -> ID
-        >1 Point_X -> ERROR
+        0 Point_# -> NaN
+        1 Point_# -> ID
+        >1 Point_# -> ERROR
     """
 
     points = []
