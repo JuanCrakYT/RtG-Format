@@ -43,6 +43,8 @@ It allows RtG builds to be visualized as interactive 3D scenes directly in a web
 
 The previewer uses the existing **RtG-Format build structure** and the repository's 3D models to create the scene. It does **not** introduce a separate build format.
 
+⚠️ RtG-Preview is currently on hold while the RtG save/build format is being extensively documented. The previewer currently **targets an older version of the format** specification and may not reflect the latest research.
+
 ### What can RtG-Preview do?
 
 ```md
