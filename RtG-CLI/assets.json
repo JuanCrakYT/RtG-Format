@@ -1,5 +1,6 @@
 [
     {
+        "version": "RtG-CLI v1.0.0",
         "void": "usage: rtg [-v | --version] [-h | --help] <command> [<args>]\n\nThe most commonly used rtg commands are:\n   image        Create a image (supported by: \"RtG-Image\"\n   preview       Preview of a JSON project/build\n\nUse 'rtg help <command>' for more information on a specific command.\n",
         "text": {
             "help": {

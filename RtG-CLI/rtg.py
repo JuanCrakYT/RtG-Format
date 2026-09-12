@@ -13,10 +13,9 @@ import json
 import os
 import sys
 
-VERSION = "RtG-CLI 1.0.0"
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ASSETS_PATH = os.path.join(BASE_DIR, "assets.json")
+VERSION = json.load(open(ASSETS_PATH, encoding="utf-8"))[0]["version"]
 
 
 def load_assets():
