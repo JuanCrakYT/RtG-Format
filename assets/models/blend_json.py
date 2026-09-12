@@ -17,103 +17,177 @@ Modelo con ramas:
     Switch
     ├── Switch
     ├── input
+    │   └── start
     └── output
+        ├── start
         └── Point_2
 
 REGLAS
 ------
 
-1. El objeto raíz representa el modelo.
-2. El MESH descendiente cuyo nombre coincide con el nombre del
-   modelo raíz es el MESH completo.
-3. Cualquier otro MESH descendiente directo/indirecto es una rama.
-4. Los Empty llamados Point_X representan LocalPoints.
-5. Un Point_X perteneciente a una rama debe estar dentro de esa
-   rama en la jerarquía de Blender.
-6. Una rama sin Point_X recibe "NaN".
-7. Una rama con más de un Point_X provoca un error.
-8. Los Empty nunca se exportan a OBJ.
+ROOT
+----
 
-CENTRADO
---------
+El objeto raíz representa el modelo.
 
-El centro del modelo se calcula utilizando EXCLUSIVAMENTE la
-geometría del MESH completo.
-
-Esto es importante porque las ramas (input/output/etc.) son
-copias/separaciones de partes del modelo completo y no deben
-cambiar el centro por sí mismas.
-
-La geometría se exporta centrada en:
-
-    0, 0, 0
-
-La escena original de Blender NO se modifica.
-
-PUNTOS
-------
-
-Las posiciones de los puntos se calculan respecto al centro
-geométrico del modelo completo.
+El MESH cuyo nombre coincide con el nombre del root es el modelo
+completo.
 
 Ejemplo:
 
-    Point_2 world = (105, 20, -8)
-    Center        = (100, 20, -10)
+    Switch
+    └── Switch
 
-Resultado:
+BRANCHES
+--------
 
-    Point_2 = (5, 0, 2)
+Todo MESH descendiente distinto del MESH principal es una rama.
 
-RAMAS
+Ejemplo:
+
+    Switch
+    ├── Switch
+    ├── input
+    └── output
+
+El resultado será:
+
+    Switch.obj
+    split/input.obj
+    split/output.obj
+
+START
 -----
 
-La asociación de una rama con un punto NO se realiza por distancia.
+Cada rama debe tener un Empty llamado exactamente:
 
-Se utiliza la jerarquía de Blender:
+    start
+
+Ese Empty representa el origen de montaje de la rama.
+
+Ejemplo:
 
     output
+    ├── start
+    └── Point_2
+
+La posición y rotación de "start" se guardan en:
+
+    "Branches Start"
+
+POINTS
+------
+
+Los puntos son Empty llamados:
+
+    Point_1
+    Point_2
+    Point_3
+    ...
+
+Un Point_X pertenece a la rama dentro de cuya jerarquía se encuentre.
+
+Ejemplo:
+
+    output
+    ├── start
     └── Point_2
 
 significa:
 
     "2": "./split/output.obj"
 
-Mientras:
-
-    input
-
-sin Point_X significa:
+Si una rama no tiene Point_X:
 
     "NaN": "./split/input.obj"
+
+Si una rama tiene más de un Point_X:
+
+    ERROR
+
+CENTRADO
+--------
+
+El modelo completo se centra usando únicamente la geometría del
+MESH principal.
+
+El centro del modelo completo pasa a ser:
+
+    0,0,0
+
+La escena original de Blender NO se modifica.
+
+MODELO PRINCIPAL
+----------------
+
+Switch.obj se exporta en coordenadas centradas respecto al centro
+geométrico del modelo completo.
+
+RAMAS
+------
+
+Las ramas NO utilizan el centro global como origen.
+
+Cada rama se exporta tomando su Empty "start" como origen.
+
+Es decir:
+
+    rama/start = 0,0,0
+
+y su geometría se expresa relativa a ese start.
+
+Esto permite colocar posteriormente la rama usando:
+
+    "Branches Start"
 
 JSON
 ----
 
-Si ya existe un JSON, el script lo conserva y únicamente actualiza
-los campos que genera automáticamente:
+Se conserva la información existente del JSON.
 
-    RtG-Preview.Default Branch
+El script actualiza:
+
     LocalPoints
     Branches
+    Branches Start
+    Default Branch
 
-De esta manera no se pierden Tooltip, Page, metadatos, etc.
+La estructura final es:
 
-SALIDA
-------
+    "LocalPoints": {
+        "2": [
+            [x,y,z],
+            [rx,ry,rz]
+        ]
+    },
 
-Modelo completo:
+    "Branches": {
+        "NaN": "./split/input.obj",
+        "2": "./split/output.obj"
+    },
 
-    assets/models/Switch/Switch.obj
+    "Branches Start": {
+        "./split/input.obj": [
+            [x,y,z],
+            [rx,ry,rz]
+        ],
+        "./split/output.obj": [
+            [x,y,z],
+            [rx,ry,rz]
+        ]
+    },
 
-Ramas:
+    "Default Branch": [
+        "./Switch.obj"
+    ]
 
-    assets/models/Switch/split/input.obj
-    assets/models/Switch/split/output.obj
+IMPORTANTE
+----------
 
-JSON:
+Los Empty nunca se exportan.
 
-    assets/models/Switch/Switch.json
+El script no modifica la posición, rotación ni escala de los
+objetos originales de Blender.
 """
 
 
@@ -126,7 +200,7 @@ import json
 
 from pathlib import Path
 
-from mathutils import Vector
+from mathutils import Vector, Matrix
 
 
 # ============================================================
@@ -134,9 +208,7 @@ from mathutils import Vector
 # ============================================================
 
 # ------------------------------------------------------------
-# Carpeta raíz donde están los modelos de RtG-Format.
-#
-# Cambia esta ruta si tu repositorio está en otra ubicación.
+# Carpeta donde se encuentran los modelos de RtG-Format.
 # ------------------------------------------------------------
 
 OUTPUT_ROOT = Path(
@@ -145,44 +217,38 @@ OUTPUT_ROOT = Path(
 
 
 # ------------------------------------------------------------
-# Prefijo utilizado para los Empty de puntos.
-#
-# Point_1
-# Point_2
-# Point_3
-# ...
+# Nombre utilizado para los Empty de puntos.
 # ------------------------------------------------------------
 
 POINT_PREFIX = "Point_"
 
 
 # ------------------------------------------------------------
-# Nombre del objeto principal.
-#
-# No se fuerza un nombre concreto:
-# el script toma el nombre del objeto raíz.
+# Nombre exacto del Empty de montaje de una rama.
 # ------------------------------------------------------------
+
+START_NAME = "start"
 
 
 # ============================================================
-# UTILIDADES NUMÉRICAS
+# UTILIDADES
 # ============================================================
 
 def clean_number(value):
     """
-    Limpia números provenientes de Blender para evitar valores
-    innecesariamente largos en el JSON.
+    Limpia valores flotantes provenientes de Blender.
 
-    Ejemplos:
+    Evita cosas como:
 
-        1.000000000001 -> 1
-        0.000000000001 -> 0
-        2.500000000001 -> 2.5
+        0.000000000001
+
+    y produce:
+
+        0
     """
 
     value = float(value)
 
-    # Evita ruido numérico cercano a cero.
     if abs(value) < 1e-10:
         return 0
 
@@ -194,9 +260,9 @@ def clean_number(value):
     return value
 
 
-def vector_to_json(vector):
+def vector_to_list(vector):
     """
-    Convierte un Vector de Blender en una lista JSON limpia.
+    Convierte un Vector de Blender a una lista JSON.
     """
 
     return [
@@ -206,25 +272,38 @@ def vector_to_json(vector):
     ]
 
 
+def rotation_to_list(euler):
+    """
+    Convierte una rotación Euler de Blender a una lista JSON.
+
+    La salida es:
+
+        [x, y, z]
+    """
+
+    return [
+        clean_number(euler.x),
+        clean_number(euler.y),
+        clean_number(euler.z)
+    ]
+
+
 # ============================================================
-# OBJETOS Y JERARQUÍA
+# IDENTIFICAR POINT_X
 # ============================================================
 
 def is_point(obj):
     """
-    Devuelve True si el objeto es un Empty con nombre Point_X.
+    Comprueba si un objeto es un Empty Point_X.
 
-    Válidos:
+    Ejemplos:
 
-        Point_1
-        Point_2
-        Point_10
+        Point_1 -> True
+        Point_2 -> True
+        Point_25 -> True
 
-    Inválidos:
-
-        Point
-        Point_A
-        point_2
+        Point -> False
+        Point_A -> False
     """
 
     if obj.type != "EMPTY":
@@ -240,27 +319,21 @@ def is_point(obj):
 
 def get_point_id(obj):
     """
-    Extrae el ID numérico del nombre del punto.
+    Obtiene el ID del Point_X.
 
-        Point_2 -> "2"
-        Point_10 -> "10"
+    Point_2 -> "2"
     """
 
     return obj.name[len(POINT_PREFIX):]
 
 
+# ============================================================
+# JERARQUÍA
+# ============================================================
+
 def is_descendant(obj, root):
     """
-    Comprueba si 'obj' está dentro de la jerarquía de 'root'.
-
-    Ejemplo:
-
-        Switch
-        └── output
-            └── Point_2
-
-    Point_2 es descendiente de Switch.
-    Point_2 también es descendiente de output.
+    Devuelve True si obj pertenece a la jerarquía de root.
     """
 
     current = obj.parent
@@ -275,9 +348,51 @@ def is_descendant(obj, root):
     return False
 
 
+def get_descendant_meshes(root):
+    """
+    Obtiene todos los MESH descendientes del modelo.
+    """
+
+    meshes = []
+
+    for obj in bpy.context.scene.objects:
+
+        if obj.type != "MESH":
+            continue
+
+        if is_descendant(obj, root):
+
+            meshes.append(obj)
+
+    return meshes
+
+
+def get_descendant_points(root):
+    """
+    Obtiene todos los Point_X descendientes del modelo.
+    """
+
+    points = []
+
+    for obj in bpy.context.scene.objects:
+
+        if not is_point(obj):
+            continue
+
+        if is_descendant(obj, root):
+
+            points.append(obj)
+
+    points.sort(
+        key=lambda obj: int(get_point_id(obj))
+    )
+
+    return points
+
+
 def get_direct_children(root):
     """
-    Devuelve únicamente los hijos directos del objeto raíz.
+    Devuelve únicamente hijos directos.
     """
 
     return [
@@ -288,34 +403,12 @@ def get_direct_children(root):
 
 
 # ============================================================
-# DESCUBRIMIENTO DEL MODELO
+# MODELO PRINCIPAL
 # ============================================================
-
-def find_meshes(model_root):
-    """
-    Encuentra todos los MESH descendientes del modelo.
-    """
-
-    meshes = []
-
-    for obj in bpy.context.scene.objects:
-
-        if obj.type != "MESH":
-            continue
-
-        if is_descendant(obj, model_root):
-
-            meshes.append(obj)
-
-    return meshes
-
 
 def find_main_mesh(model_root, meshes):
     """
-    Encuentra el MESH completo.
-
-    El MESH completo debe tener exactamente el mismo nombre
-    que el objeto raíz.
+    Encuentra el MESH cuyo nombre coincide con el modelo raíz.
 
     Ejemplo:
 
@@ -340,7 +433,7 @@ def find_main_mesh(model_root, meshes):
     if len(matches) > 1:
 
         raise RuntimeError(
-            f"Hay múltiples MESH llamados "
+            f"Existen múltiples MESH llamados "
             f"'{model_root.name}'."
         )
 
@@ -348,53 +441,85 @@ def find_main_mesh(model_root, meshes):
 
 
 # ============================================================
-# PUNTOS
+# RAMAS
 # ============================================================
 
-def find_model_points(model_root):
+def find_branches(main_mesh, meshes):
     """
-    Encuentra todos los Point_X pertenecientes al modelo.
-
-    Un punto puede estar:
-
-        directamente bajo una rama,
-        bajo un objeto intermedio,
-        etc.
-
-    Siempre que sea descendiente del modelo raíz.
+    Todo MESH distinto del principal es una rama.
     """
 
-    points = []
-
-    for obj in bpy.context.scene.objects:
-
-        if not is_point(obj):
-            continue
-
-        if is_descendant(obj, model_root):
-
-            points.append(obj)
-
-    points.sort(
-        key=lambda obj: int(get_point_id(obj))
-    )
-
-    return points
+    return [
+        mesh
+        for mesh in meshes
+        if mesh != main_mesh
+    ]
 
 
-def find_branch_points(branch):
+# ============================================================
+# START DE RAMA
+# ============================================================
+
+def find_branch_start(branch):
     """
-    Encuentra los Point_X pertenecientes específicamente a una rama.
+    Busca el Empty llamado exactamente "start" dentro de una rama.
 
     Ejemplo:
 
         output
+        ├── start
         └── Point_2
 
-    devuelve:
+    Devuelve:
 
-        [Point_2]
+        start
 
+    """
+
+    starts = []
+
+    for obj in bpy.context.scene.objects:
+
+        if obj.type != "EMPTY":
+            continue
+
+        if obj.name != START_NAME:
+            continue
+
+        if is_descendant(obj, branch):
+
+            starts.append(obj)
+
+    if len(starts) == 0:
+
+        raise RuntimeError(
+            f"La rama '{branch.name}' "
+            f"no tiene un Empty llamado 'start'."
+        )
+
+    if len(starts) > 1:
+
+        raise RuntimeError(
+            f"La rama '{branch.name}' "
+            f"tiene múltiples Empty llamados 'start'."
+        )
+
+    return starts[0]
+
+
+# ============================================================
+# POINT DE RAMA
+# ============================================================
+
+def find_branch_point(branch):
+    """
+    Busca el Point_X perteneciente a la rama.
+
+    Una rama puede tener:
+
+        0 Point_X -> NaN
+        1 Point_X -> ID
+        >1 Point_X -> ERROR
     """
 
     points = []
@@ -412,50 +537,6 @@ def find_branch_points(branch):
         key=lambda obj: int(get_point_id(obj))
     )
 
-    return points
-
-
-# ============================================================
-# RAMAS
-# ============================================================
-
-def find_branches(model_root, main_mesh, meshes):
-    """
-    Todo MESH distinto del MESH completo se considera una rama.
-
-    Ejemplo:
-
-        Switch
-        ├── Switch  <- principal
-        ├── input   <- rama
-        └── output  <- rama
-
-    """
-
-    return [
-        mesh
-        for mesh in meshes
-        if mesh != main_mesh
-    ]
-
-
-def get_branch_point(branch):
-    """
-    Determina qué Point_X pertenece a una rama.
-
-    Reglas:
-
-    - 0 puntos -> "NaN"
-    - 1 punto  -> usar ese ID
-    - >1 puntos -> error
-
-    No se utiliza distancia.
-
-    La jerarquía de Blender determina la asociación.
-    """
-
-    points = find_branch_points(branch)
-
     if len(points) == 0:
 
         return "NaN"
@@ -468,104 +549,67 @@ def get_branch_point(branch):
         )
 
         raise RuntimeError(
-            f"La rama '{branch.name}' tiene múltiples "
-            f"Point_X: {point_names}. "
-            f"Una rama debe tener como máximo un punto."
+            f"La rama '{branch.name}' "
+            f"tiene varios puntos: {point_names}"
         )
 
     return get_point_id(points[0])
 
 
 # ============================================================
-# GEOMETRÍA Y CENTRADO
+# GEOMETRÍA EVALUADA
 # ============================================================
 
-def get_evaluated_mesh_data(obj):
+def evaluated_mesh(obj):
     """
-    Obtiene la versión evaluada de la malla.
+    Obtiene una copia evaluada de la malla.
 
-    Esto permite que los modificadores de Blender sean incluidos
-    en la geometría utilizada para calcular el centro y exportar.
-
-    Devuelve:
-
-        evaluated_object
-        mesh
-        world_matrix
+    Esto incluye la geometría resultante de los modificadores.
     """
 
     depsgraph = bpy.context.evaluated_depsgraph_get()
 
-    evaluated_object = obj.evaluated_get(
+    evaluated = obj.evaluated_get(
         depsgraph
     )
 
-    mesh = evaluated_object.to_mesh(
+    mesh = evaluated.to_mesh(
         preserve_all_data_layers=True,
         depsgraph=depsgraph
     )
 
-    world_matrix = (
-        evaluated_object.matrix_world.copy()
-    )
-
-    return (
-        evaluated_object,
-        mesh,
-        world_matrix
-    )
+    return evaluated, mesh
 
 
-def get_evaluated_world_vertices(obj):
+# ============================================================
+# CENTRO DEL MODELO COMPLETO
+# ============================================================
+
+def calculate_main_center(main_mesh):
     """
-    Devuelve todos los vértices de un objeto evaluado en
-    coordenadas mundiales.
+    Calcula el centro del bounding box del MESH completo.
+
+    Se utilizan los vértices reales del modelo principal.
     """
 
-    (
-        evaluated_object,
-        mesh,
-        world_matrix
-    ) = get_evaluated_mesh_data(obj)
+    evaluated, mesh = evaluated_mesh(
+        main_mesh
+    )
 
     try:
 
-        for vertex in mesh.vertices:
+        world_matrix = (
+            evaluated.matrix_world.copy()
+        )
 
-            yield (
-                world_matrix @ vertex.co
-            )
+        vertices = [
+            world_matrix @ vertex.co
+            for vertex in mesh.vertices
+        ]
 
     finally:
 
-        evaluated_object.to_mesh_clear()
-
-
-def calculate_main_mesh_center(main_mesh):
-    """
-    Calcula el centro del bounding box de TODO el MESH principal.
-
-    IMPORTANTE:
-
-    El centro se calcula solamente con el modelo completo.
-
-    No utilizamos:
-
-        object.location
-
-    ni:
-
-        ramas
-
-    porque las ramas son representaciones separadas de partes
-    del mismo modelo.
-    """
-
-    vertices = list(
-        get_evaluated_world_vertices(
-            main_mesh
-        )
-    )
+        evaluated.to_mesh_clear()
 
     if not vertices:
 
@@ -617,20 +661,10 @@ def calculate_main_mesh_center(main_mesh):
 
 def build_local_points(points, model_center):
     """
-    Genera LocalPoints usando la posición de cada Empty respecto
-    al centro del modelo.
-
-    La rotación se obtiene de la matriz mundial del Empty.
-
-    Estructura:
-
-        "2": [
-            [x, y, z],
-            [rx, ry, rz]
-        ]
+    Genera LocalPoints respecto al centro del modelo completo.
     """
 
-    local_points = {}
+    result = {}
 
     for point in points:
 
@@ -648,165 +682,273 @@ def build_local_points(points, model_center):
 
         point_id = get_point_id(point)
 
-        if point_id in local_points:
-
-            raise RuntimeError(
-                f"El ID de punto '{point_id}' "
-                f"aparece más de una vez."
-            )
-
-        local_points[point_id] = [
-
-            vector_to_json(
-                local_position
-            ),
-
-            vector_to_json(
-                rotation
-            )
+        result[point_id] = [
+            vector_to_list(local_position),
+            rotation_to_list(rotation)
         ]
 
-    return local_points
+    return result
 
 
 # ============================================================
-# OBJ TEMPORAL
+# BRANCHES START
 # ============================================================
 
-def create_export_object(source_obj, model_center):
+def build_branches_start(branches, model_center):
     """
-    Crea una copia temporal de la geometría para exportación.
+    Genera "Branches Start".
 
-    El objeto original NO se modifica.
+    Cada rama se coloca mediante su Empty "start".
 
-    Flujo:
+    La posición queda expresada respecto al centro del modelo.
 
-        Blender mesh
-            ↓
-        aplicar evaluación/modificadores
-            ↓
-        convertir vértices a world space
-            ↓
-        restar model_center
-            ↓
-        objeto temporal con:
-            Location = 0,0,0
-            Rotation = 0,0,0
-            Scale    = 1,1,1
+    Ejemplo:
 
-    Así el OBJ final no tiene offset.
+        output/start
+            World = (100, 20, 50)
+
+        Model Center
+            = (100, 19.25, 50)
+
+        Resultado:
+
+            [0, 0.75, 0]
     """
 
-    (
-        evaluated_object,
-        source_mesh,
-        world_matrix
-    ) = get_evaluated_mesh_data(
-        source_obj
+    result = {}
+
+    for branch in branches:
+
+        start = find_branch_start(
+            branch
+        )
+
+        world_position = (
+            start.matrix_world.translation.copy()
+        )
+
+        local_position = (
+            world_position - model_center
+        )
+
+        rotation = (
+            start.matrix_world.to_euler().copy()
+        )
+
+        branch_path = (
+            f"./split/{branch.name}.obj"
+        )
+
+        result[branch_path] = [
+            vector_to_list(local_position),
+            rotation_to_list(rotation)
+        ]
+
+    return result
+
+
+# ============================================================
+# PREPARAR MALLA PRINCIPAL
+# ============================================================
+
+def create_main_export_mesh(main_mesh, model_center):
+    """
+    Crea una malla temporal del modelo principal.
+
+    Toda la transformación mundial se hornea en los vértices.
+
+    Después se resta model_center.
+
+    Resultado:
+
+        centro geométrico = 0,0,0
+    """
+
+    evaluated, source_mesh = evaluated_mesh(
+        main_mesh
     )
 
     try:
 
-        export_mesh = bpy.data.meshes.new(
-            f"__RtGExportMesh_{source_obj.name}"
+        world_matrix = (
+            evaluated.matrix_world.copy()
         )
 
-        export_object = bpy.data.objects.new(
-            f"__RtGExport_{source_obj.name}",
-            export_mesh
+        vertices = [
+            world_matrix @ vertex.co
+            - model_center
+            for vertex in source_mesh.vertices
+        ]
+
+        faces = [
+            tuple(polygon.vertices)
+            for polygon in source_mesh.polygons
+        ]
+
+        mesh = bpy.data.meshes.new(
+            f"__RtGMain_{main_mesh.name}"
+        )
+
+        mesh.from_pydata(
+            [
+                tuple(vertex)
+                for vertex in vertices
+            ],
+            [],
+            faces
+        )
+
+        mesh.update()
+
+        obj = bpy.data.objects.new(
+            f"__RtGMain_{main_mesh.name}",
+            mesh
         )
 
         bpy.context.scene.collection.objects.link(
-            export_object
+            obj
+        )
+
+        return obj
+
+    finally:
+
+        evaluated.to_mesh_clear()
+
+
+# ============================================================
+# PREPARAR MALLA DE RAMA
+# ============================================================
+
+def create_branch_export_mesh(branch, start):
+    """
+    Crea una malla temporal de una rama.
+
+    La diferencia importante respecto al modelo principal:
+
+    La rama utiliza "start" como su origen.
+
+    Por lo tanto:
+
+        start = 0,0,0
+
+    dentro del OBJ exportado.
+
+    Se utiliza la inversa de la matriz mundial de start para
+    convertir la geometría mundial al espacio local del start.
+    """
+
+    evaluated, source_mesh = evaluated_mesh(
+        branch
+    )
+
+    try:
+
+        branch_world = (
+            evaluated.matrix_world.copy()
+        )
+
+        start_world = (
+            start.matrix_world.copy()
         )
 
         # ----------------------------------------------------
-        # Copiar geometría.
+        # Transformación que convierte world-space a
+        # start-space.
         # ----------------------------------------------------
 
-        export_mesh.from_pydata(
-            [
-                (
-                    world_matrix @ vertex.co
-                    - model_center
-                )
-                for vertex in source_mesh.vertices
-            ],
-            [
-                tuple(
-                    polygon.vertices
-                )
-                for polygon in source_mesh.polygons
-            ],
-            [
-                [
-                    loop.vertex_index
-                    for loop in polygon.loop_indices
-                ]
-                for polygon in source_mesh.polygons
-            ]
+        world_to_start = (
+            start_world.inverted()
         )
 
-        export_mesh.update()
+        vertices = []
+
+        for vertex in source_mesh.vertices:
+
+            world_position = (
+                branch_world @ vertex.co
+            )
+
+            local_position = (
+                world_to_start @ world_position
+            )
+
+            vertices.append(
+                local_position
+            )
+
+        faces = [
+            tuple(polygon.vertices)
+            for polygon in source_mesh.polygons
+        ]
+
+        mesh = bpy.data.meshes.new(
+            f"__RtGBranch_{branch.name}"
+        )
+
+        mesh.from_pydata(
+            [
+                tuple(vertex)
+                for vertex in vertices
+            ],
+            [],
+            faces
+        )
+
+        mesh.update()
+
+        obj = bpy.data.objects.new(
+            f"__RtGBranch_{branch.name}",
+            mesh
+        )
+
+        bpy.context.scene.collection.objects.link(
+            obj
+        )
 
         # ----------------------------------------------------
-        # Resetear completamente la transformación.
-        #
-        # La transformación ya está horneada en los vértices.
+        # El objeto temporal ya está en el sistema de
+        # coordenadas del start.
         # ----------------------------------------------------
 
-        export_object.location = (
+        obj.location = (
             0.0,
             0.0,
             0.0
         )
 
-        export_object.rotation_euler = (
+        obj.rotation_euler = (
             0.0,
             0.0,
             0.0
         )
 
-        export_object.scale = (
+        obj.scale = (
             1.0,
             1.0,
             1.0
         )
 
-        return export_object
+        return obj
 
     finally:
 
-        evaluated_object.to_mesh_clear()
+        evaluated.to_mesh_clear()
 
 
 # ============================================================
 # EXPORTAR OBJ
 # ============================================================
 
-def export_obj(source_obj, output_path, model_center):
+def export_temp_obj(temp_obj, output_path):
     """
-    Exporta un objeto MESH como OBJ sin modificar su versión
-    original de Blender.
+    Exporta un objeto temporal como OBJ.
     """
-
-    export_object = create_export_object(
-        source_obj,
-        model_center
-    )
-
-    # --------------------------------------------------------
-    # Crear carpeta de destino.
-    # --------------------------------------------------------
 
     output_path.parent.mkdir(
         parents=True,
         exist_ok=True
     )
-
-    # --------------------------------------------------------
-    # Guardar estado de selección.
-    # --------------------------------------------------------
 
     old_selection = list(
         bpy.context.selected_objects
@@ -822,17 +964,13 @@ def export_obj(source_obj, output_path, model_center):
             action="DESELECT"
         )
 
-        export_object.select_set(
+        temp_obj.select_set(
             True
         )
 
         bpy.context.view_layer.objects.active = (
-            export_object
+            temp_obj
         )
-
-        # ----------------------------------------------------
-        # Exportación OBJ.
-        # ----------------------------------------------------
 
         bpy.ops.wm.obj_export(
             filepath=str(output_path),
@@ -843,14 +981,10 @@ def export_obj(source_obj, output_path, model_center):
 
     finally:
 
-        # ----------------------------------------------------
-        # Eliminar temporal.
-        # ----------------------------------------------------
-
-        mesh = export_object.data
+        mesh = temp_obj.data
 
         bpy.data.objects.remove(
-            export_object,
+            temp_obj,
             do_unlink=True
         )
 
@@ -859,10 +993,6 @@ def export_obj(source_obj, output_path, model_center):
             bpy.data.meshes.remove(
                 mesh
             )
-
-        # ----------------------------------------------------
-        # Restaurar selección.
-        # ----------------------------------------------------
 
         bpy.ops.object.select_all(
             action="DESELECT"
@@ -893,15 +1023,7 @@ def load_existing_json(json_path, model_name):
     """
     Carga el JSON existente.
 
-    Si no existe, crea la estructura mínima.
-
-    De esta manera no destruimos información manual como:
-
-        Tooltip
-        Page
-        Description
-        RtG-Format Data
-        etc.
+    Si todavía no existe, crea una estructura compatible.
     """
 
     if not json_path.exists():
@@ -919,10 +1041,7 @@ def load_existing_json(json_path, model_name):
                     "RtG-Preview": {
                         "Size": {
                             "default": 1
-                        },
-
-                        "Default Branch":
-                            f"./{model_name}.obj"
+                        }
                     },
 
                     "Page": {}
@@ -930,11 +1049,17 @@ def load_existing_json(json_path, model_name):
 
                 "Name": model_name,
 
-                "Description": "",
+                "Tooltip": "",
 
                 "LocalPoints": {},
 
-                "Branches": {}
+                "Branches": {},
+
+                "Branches Start": {},
+
+                "Default Branch": [
+                    f"./{model_name}.obj"
+                ]
             }
         ]
 
@@ -950,7 +1075,7 @@ def load_existing_json(json_path, model_name):
 
         raise RuntimeError(
             f"El JSON '{json_path}' "
-            f"no contiene un array válido."
+            f"no contiene una lista válida."
         )
 
     if not isinstance(data[0], dict):
@@ -963,51 +1088,65 @@ def load_existing_json(json_path, model_name):
     return data
 
 
-def update_json(data, model_name, local_points, branches):
+# ============================================================
+# ACTUALIZAR JSON
+# ============================================================
+
+def update_json(
+    data,
+    model_name,
+    local_points,
+    branches,
+    branches_start
+):
     """
-    Actualiza únicamente los campos generados por Blender.
+    Actualiza exclusivamente los campos generados
+    automáticamente por Blender.
+
+    Se conserva información manual como:
+
+        Tooltip
+        Description
+        Page
+        RtG-Format Data
     """
 
     model_data = data[0]
 
     # --------------------------------------------------------
-    # Asegurar RtG-Format.
+    # LocalPoints
     # --------------------------------------------------------
 
-    rtg_format = model_data.setdefault(
-        "RtG-Format",
-        {}
+    model_data["LocalPoints"] = (
+        local_points
     )
 
     # --------------------------------------------------------
-    # Asegurar RtG-Preview.
+    # Branches
     # --------------------------------------------------------
 
-    preview = rtg_format.setdefault(
-        "RtG-Preview",
-        {}
+    model_data["Branches"] = (
+        branches
     )
 
-    size = preview.setdefault(
-        "Size",
-        {}
+    # --------------------------------------------------------
+    # Branches Start
+    # --------------------------------------------------------
+
+    model_data["Branches Start"] = (
+        branches_start
     )
 
-    # No cambiamos los tamaños existentes.
-    if "default" not in size:
-
-        size["default"] = 1
-
     # --------------------------------------------------------
-    # El modelo completo siempre es Default Branch.
+    # Default Branch
     # --------------------------------------------------------
 
-    preview["Default Branch"] = (
+    model_data["Default Branch"] = [
         f"./{model_name}.obj"
-    )
+    ]
 
     # --------------------------------------------------------
-    # Actualizar Name solo si falta.
+    # Nombre.
     # --------------------------------------------------------
 
     if not model_data.get("Name"):
@@ -1015,15 +1154,27 @@ def update_json(data, model_name, local_points, branches):
         model_data["Name"] = model_name
 
     # --------------------------------------------------------
-    # Estos sí son generados completamente por el script.
+    # Mantener RtG-Preview existente.
+    #
+    # OJO:
+    # Default Branch ya NO está aquí.
     # --------------------------------------------------------
 
-    model_data["LocalPoints"] = (
-        local_points
+    rtg_format = model_data.setdefault(
+        "RtG-Format",
+        {}
     )
 
-    model_data["Branches"] = (
-        branches
+    preview = rtg_format.setdefault(
+        "RtG-Preview",
+        {}
+    )
+
+    preview.setdefault(
+        "Size",
+        {
+            "default": 1
+        }
     )
 
     return data
@@ -1031,7 +1182,7 @@ def update_json(data, model_name, local_points, branches):
 
 def save_json(json_path, data):
     """
-    Guarda el JSON con indentación legible.
+    Guarda el JSON.
     """
 
     json_path.parent.mkdir(
@@ -1054,7 +1205,7 @@ def save_json(json_path, data):
 
 
 # ============================================================
-# PROCESAR UN MODELO
+# PROCESAR MODELO
 # ============================================================
 
 def process_model(model_root):
@@ -1066,7 +1217,9 @@ def process_model(model_root):
         Switch
         ├── Switch
         ├── input
+        │   └── start
         └── output
+            ├── start
             └── Point_2
     """
 
@@ -1080,10 +1233,10 @@ def process_model(model_root):
     print("=" * 70)
 
     # --------------------------------------------------------
-    # Buscar todos los MESH.
+    # Descubrir MESH.
     # --------------------------------------------------------
 
-    meshes = find_meshes(
+    meshes = get_descendant_meshes(
         model_root
     )
 
@@ -1091,11 +1244,11 @@ def process_model(model_root):
 
         raise RuntimeError(
             f"El modelo '{model_name}' "
-            f"no tiene ningún MESH descendiente."
+            f"no contiene MESH."
         )
 
     # --------------------------------------------------------
-    # Encontrar MESH completo.
+    # Principal.
     # --------------------------------------------------------
 
     main_mesh = find_main_mesh(
@@ -1104,20 +1257,19 @@ def process_model(model_root):
     )
 
     # --------------------------------------------------------
-    # Encontrar ramas.
+    # Ramas.
     # --------------------------------------------------------
 
     branches = find_branches(
-        model_root,
         main_mesh,
         meshes
     )
 
     # --------------------------------------------------------
-    # Encontrar todos los puntos del modelo.
+    # Puntos.
     # --------------------------------------------------------
 
-    points = find_model_points(
+    points = get_descendant_points(
         model_root
     )
 
@@ -1134,20 +1286,20 @@ def process_model(model_root):
     )
 
     # --------------------------------------------------------
-    # Calcular centro usando SOLAMENTE la geometría completa.
+    # Centro del modelo principal.
     # --------------------------------------------------------
 
-    model_center = calculate_main_mesh_center(
+    model_center = calculate_main_center(
         main_mesh
     )
 
     print(
-        "[RtG] Centro:"
-        f" {tuple(clean_number(v) for v in model_center)}"
+        "[RtG] Centro del modelo: "
+        f"{tuple(clean_number(v) for v in model_center)}"
     )
 
     # --------------------------------------------------------
-    # Crear carpetas.
+    # Directorios.
     # --------------------------------------------------------
 
     model_directory = (
@@ -1165,94 +1317,140 @@ def process_model(model_root):
         exist_ok=True
     )
 
+    # --------------------------------------------------------
+    # split/ se crea automáticamente.
+    # --------------------------------------------------------
+
     split_directory.mkdir(
         parents=True,
         exist_ok=True
     )
 
-    # --------------------------------------------------------
-    # Exportar modelo completo.
-    # --------------------------------------------------------
+    # ========================================================
+    # EXPORTAR MODELO PRINCIPAL
+    # ========================================================
+
+    main_temp = create_main_export_mesh(
+        main_mesh,
+        model_center
+    )
 
     main_output = (
         model_directory /
         f"{model_name}.obj"
     )
 
-    export_obj(
-        main_mesh,
-        main_output,
-        model_center
+    export_temp_obj(
+        main_temp,
+        main_output
     )
 
     print(
-        f"[RtG] Exportado: {main_output}"
+        f"[RtG] Principal -> {main_output}"
     )
 
-    # --------------------------------------------------------
-    # Construir Branches.
-    # --------------------------------------------------------
+    # ========================================================
+    # BRANCHES
+    # ========================================================
 
     branches_json = {}
 
     for branch in branches:
 
-        point_id = get_branch_point(
+        # ----------------------------------------------------
+        # Encontrar start.
+        # ----------------------------------------------------
+
+        start = find_branch_start(
             branch
         )
 
-        filename = (
+        # ----------------------------------------------------
+        # Encontrar Point_X.
+        # ----------------------------------------------------
+
+        point_id = find_branch_point(
+            branch
+        )
+
+        # ----------------------------------------------------
+        # Ruta.
+        # ----------------------------------------------------
+
+        branch_filename = (
             f"{branch.name}.obj"
+        )
+
+        branch_path = (
+            f"./split/{branch_filename}"
         )
 
         branch_output = (
             split_directory /
-            filename
+            branch_filename
         )
 
         # ----------------------------------------------------
-        # Exportar rama usando EL MISMO centro del modelo.
+        # Crear exportación temporal.
         # ----------------------------------------------------
 
-        export_obj(
-            branch,
-            branch_output,
-            model_center
+        branch_temp = (
+            create_branch_export_mesh(
+                branch,
+                start
+            )
         )
 
-        relative_path = (
-            f"./split/{filename}"
+        # ----------------------------------------------------
+        # Exportar.
+        # ----------------------------------------------------
+
+        export_temp_obj(
+            branch_temp,
+            branch_output
         )
+
+        # ----------------------------------------------------
+        # Registrar rama.
+        # ----------------------------------------------------
 
         if point_id in branches_json:
 
             raise RuntimeError(
                 f"El ID '{point_id}' "
-                f"ya está asignado a otra rama."
+                f"ya fue asignado a otra rama."
             )
 
         branches_json[
             point_id
-        ] = relative_path
+        ] = branch_path
 
         print(
             f"[RtG] Rama: "
-            f"{branch.name} -> "
-            f"{point_id}"
+            f"{branch.name} -> {point_id}"
         )
 
-    # --------------------------------------------------------
-    # Construir LocalPoints.
-    # --------------------------------------------------------
+    # ========================================================
+    # LOCALPOINTS
+    # ========================================================
 
     local_points = build_local_points(
         points,
         model_center
     )
 
-    # --------------------------------------------------------
-    # Cargar JSON existente.
-    # --------------------------------------------------------
+    # ========================================================
+    # BRANCHES START
+    # ========================================================
+
+    branches_start = build_branches_start(
+        branches,
+        model_center
+    )
+
+    # ========================================================
+    # JSON
+    # ========================================================
 
     json_path = (
         model_directory /
@@ -1264,20 +1462,13 @@ def process_model(model_root):
         model_name
     )
 
-    # --------------------------------------------------------
-    # Actualizar únicamente los datos automáticos.
-    # --------------------------------------------------------
-
     json_data = update_json(
         json_data,
         model_name,
         local_points,
-        branches_json
+        branches_json,
+        branches_start
     )
-
-    # --------------------------------------------------------
-    # Guardar.
-    # --------------------------------------------------------
 
     save_json(
         json_path,
@@ -1285,32 +1476,26 @@ def process_model(model_root):
     )
 
     print(
-        f"[RtG] JSON: {json_path}"
+        f"[RtG] JSON -> {json_path}"
     )
 
     print(
-        f"[RtG] Modelo '{model_name}' terminado."
+        f"[RtG] '{model_name}' terminado."
     )
 
 
 # ============================================================
-# DETECTAR MODELOS
+# ENCONTRAR MODELOS
 # ============================================================
 
 def find_model_roots():
     """
-    Busca objetos raíz que tengan MESH descendientes.
+    Busca modelos en la escena.
 
-    Un objeto raíz es simplemente un objeto sin parent.
+    Un objeto raíz que contenga al menos un MESH descendiente
+    se considera un modelo.
 
-    Esto permite trabajar con:
-
-        Switch
-        Tooth
-        Part
-        etc.
-
-    dentro de la misma escena.
+    No depende de una colección específica.
     """
 
     roots = []
@@ -1321,7 +1506,7 @@ def find_model_roots():
             continue
 
         # ----------------------------------------------------
-        # Si el propio objeto es MESH, puede ser un modelo.
+        # MESH raíz.
         # ----------------------------------------------------
 
         if obj.type == "MESH":
@@ -1331,7 +1516,7 @@ def find_model_roots():
             continue
 
         # ----------------------------------------------------
-        # Buscar descendientes MESH.
+        # Buscar MESH descendientes.
         # ----------------------------------------------------
 
         has_mesh = any(
@@ -1353,7 +1538,7 @@ def find_model_roots():
 
 def main():
     """
-    Ejecuta el exportador completo.
+    Ejecuta todo el exportador.
     """
 
     print("")
@@ -1361,26 +1546,17 @@ def main():
     print("RtG-Format Blender Exporter")
     print("=" * 70)
 
-    # --------------------------------------------------------
-    # Crear carpeta raíz si no existe.
-    # --------------------------------------------------------
-
     OUTPUT_ROOT.mkdir(
         parents=True,
         exist_ok=True
     )
-
-    # --------------------------------------------------------
-    # Encontrar modelos.
-    # --------------------------------------------------------
 
     models = find_model_roots()
 
     if not models:
 
         print(
-            "[RtG] ERROR: "
-            "No se encontraron modelos."
+            "[RtG] No se encontraron modelos."
         )
 
         return
@@ -1391,10 +1567,6 @@ def main():
     )
 
     successful = 0
-
-    # --------------------------------------------------------
-    # Procesar uno por uno.
-    # --------------------------------------------------------
 
     for model in models:
 
@@ -1410,17 +1582,12 @@ def main():
 
             print("")
             print(
-                f"[RtG] ERROR en "
-                f"'{model.name}':"
+                f"[RtG] ERROR en '{model.name}':"
             )
 
             print(
                 f"       {error}"
             )
-
-    # --------------------------------------------------------
-    # Resumen.
-    # --------------------------------------------------------
 
     print("")
     print("=" * 70)
@@ -1437,3 +1604,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

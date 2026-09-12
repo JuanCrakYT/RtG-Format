@@ -10,32 +10,58 @@
             "RtG-Preview": {
                 "Size": {
                     "default": 1
-                },
+                }
             },
             "Page": {}
         },
         "Name": "Switch",
-        "Tooltip": "",
+        "Tooltip": "Activates its output until switched off",
         "LocalPoints": {
-            "2":[
-                [0,0.5,0],
-                [0,0,130]
+            "2": [
+                [
+                    0,
+                    0.75,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    130
+                ]
             ]
         },
         "Branches": {
-            "NaN": [
-                "./split/input.obj"
+            "NaN": "./split/input.obj",
+            "2": "./split/output.obj"
+        },
+        "Branches Start": {
+            "./split/input.obj": [
+                [
+                    0,
+                    0.75,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    130
+                ]
             ],
-            "2": [
-                "./split/output.obj"
+            "./split/output.obj": [
+                [
+                    0,
+                    0.75,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    130
+                ]
             ]
         },
         "Default Branch": [
-            "./Switch.obj",
-            [
-                [0,0.5,0],
-                [0,0,130]
-            ]
+            "./Switch.obj"
         ]
     }
 ]
