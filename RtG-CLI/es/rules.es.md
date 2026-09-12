@@ -41,59 +41,87 @@ El nombre mostrado no debe utilizarse como identificador del comando.
 
 ## 3. Comandos de RtG-CLI y comandos de los addons
 
-RtG-CLI y sus addons pueden tener comandos o argumentos propios.
+RtG-CLI y los addons pueden tener sus propios comandos y argumentos.
 
-Los argumentos pertenecientes directamente a RtG-CLI utilizan una sola raya (`-`) al comienzo.
-Los argumentos pertenecientes a un addon no pueden utilizar una sola raya (`-`) al comienzo.
+Antes de identificar un addon, los comandos y argumentos pertenecen a RtG-CLI.
+Después de identificar un addon, el prefijo determina a quién pertenece cada argumento:
 
-Esto permite diferenciar los argumentos del sistema de los argumentos propios de un addon.
+- Sin raya (`-`) → pertenece al addon.
+- Dos rayas (`--`) → pertenece al addon.
+- Una raya (`-`) → pertenece a RtG-CLI.
 
-Ejemplo correcto:
+Ejemplo:
 
-`rtg help image -lang`
+`rtg image convert`
 
-`-lang` pertenece a RtG-CLI.
+- `image` → addon.
+- `convert` → comando del addon.
 
-Ejemplo incorrecto:
+Ejemplo:
 
-`rtg image -width`
+`rtg image --width 128`
 
-Si `-width` pertenece a RtG Image, no debe comenzar con una sola raya.
+- `image` → addon.
+- `--width` → argumento del addon.
+- `128` → valor del argumento del addon.
+
+Ejemplo:
+
+`rtg image -lang`
+
+- `image` → addon.
+- `-lang` → argumento de RtG-CLI.
 
 ---
 
 ## 4. Argumentos del sistema
 
-Los argumentos del sistema utilizan una sola raya (`-`) o la sintaxis correspondiente definida por RtG-CLI.
-Las palabras de el sistema utilizan 2 rayas después de `rtg`, como: `rtg --version` y las abreviaturas como: `rtg -v` usan una sola raya (`-`).
-A los idiomas no les afecta la regla de las 2 rayas despues de `rtg`, los idiomas siempre empezarán con una sola raya (`-`); esto incluye a el comando `-lang`, que busca los idiomas de RtG-CLI cuando va después de `rtg`.
+Antes de identificar un addon, RtG-CLI utiliza sus propias reglas de sintaxis.
+Las opciones largas del sistema utilizan dos rayas:
 
-Ejemplos:
+`rtg --version`
+`rtg --help`
+
+Las abreviaturas del sistema utilizan una raya:
 
 `rtg -v`
-`rtg --version`
 `rtg -h`
-`rtg --help`
 `rtg -l`
-`rtg -lang`
-`rtg -en`
 
-Los argumentos del sistema pueden aparecer después del comando al que afectan.
+Después de identificar un addon, una opción que comienza con una sola raya (`-`) pertenece a RtG-CLI.
 
 Ejemplo:
 
-`rtg help image -en`
-
-En este caso:
-
-* `help` es un comando de RtG-CLI.
-* `image` identifica el addon.
-* `-en` es un argumento de RtG-CLI.
-* `-en` no pertenece a RtG Image.
+`rtg image -lang`
+`rtg image -en`
 
 ---
 
-## 5. Posición de los argumentos del sistema
+## 5. Argumentos antes y después del addon
+
+Los argumentos de RtG-CLI pueden tener un significado diferente dependiendo de si se encuentran antes o después de identificar el addon.
+
+Antes de identificar un addon, los argumentos pertenecen a RtG-CLI.
+
+Por ejemplo:
+
+`rtg --lang`
+
+Muestra los idiomas disponibles para RtG-CLI.
+
+Después de identificar un addon, los argumentos se interpretan según las reglas de propiedad establecidas para los addons.
+
+Por ejemplo:
+
+`rtg image -lang`
+
+Consulta los idiomas disponibles para el addon `image`.
+
+De esta forma, la posición del argumento determina su contexto y evita confundir los argumentos globales de RtG-CLI con los argumentos utilizados después de identificar un addon.
+
+---
+
+## 6. Posición de los argumentos del sistema
 
 Los argumentos del sistema no deben aparecer antes del comando o addon al que afectan cuando dicho argumento depende de ese comando.
 
@@ -109,7 +137,7 @@ La posición debe permitir determinar claramente qué comando recibe el argument
 
 ---
 
-## 6. Comandos y argumentos de los addons
+## 7. Comandos y argumentos de los addons
 
 Los comandos se escriben como argumentos individuales de la terminal.
 
@@ -129,33 +157,28 @@ puede interpretarse como:
 
 ---
 
-## 7. Uso de guiones en comandos de addons
+## 8. Uso de guiones en comandos de addons
 
-Un comando o argumento propio de un addon no debe comenzar con una sola raya (`-`).
+Después de identificar un addon:
 
-Si un addon necesita utilizar una opción con guiones, debe utilizar una sintaxis diferente a la reservada por RtG-CLI.
+- Los argumentos sin raya pertenecen al addon.
+- Los argumentos con dos rayas o más (`--`) pertenecen al addon.
+- Los argumentos con una sola raya (`-`) pertenecen a RtG-CLI.
 
-Por ejemplo:
+Ejemplos:
 
-`--width`
+`rtg image convert`
+`convert` → addon.
 
-es válido como opción propia de un addon.
+`rtg image --width 128`
+`--width` → addon.
 
-Mientras que:
-
-`-width`
-
-está reservado para opciones del sistema.
-
-Los nombres que no necesiten guiones pueden utilizarse normalmente:
-
-`convert`
-`export`
-`preview`
+`rtg image -lang`
+`-lang` → RtG-CLI.
 
 ---
 
-## 8. Los comandos de addons no pueden utilizar espacios
+## 9. Los comandos de addons no pueden utilizar espacios
 
 Los comandos de addons deben representar una única unidad.
 
@@ -175,7 +198,7 @@ Los argumentos separados deben escribirse como argumentos independientes.
 
 ---
 
-## 9. Idiomas
+## 10. Idiomas
 
 Los idiomas disponibles de un addon se definen mediante su configuración.
 
@@ -199,7 +222,7 @@ Ejemplo:
 
 ---
 
-## 10. El idioma no cambia el comando
+## 11. El idioma no cambia el comando
 
 Cambiar el idioma solamente modifica el texto mostrado por RtG-CLI.
 
@@ -219,7 +242,7 @@ siguen haciendo referencia al mismo comando:
 
 ---
 
-## 11. Ayuda
+## 12. Ayuda
 
 La ayuda general se obtiene mediante:
 
@@ -239,7 +262,7 @@ Ejemplo:
 
 ---
 
-## 12. Consulta de idiomas
+## 13. Consulta de idiomas
 
 Los idiomas disponibles para un addon pueden consultarse mediante:
 
@@ -253,7 +276,7 @@ Esta opción pertenece a RtG-CLI y no al addon.
 
 ---
 
-## 13. Los addons no deben modificar las reglas del sistema
+## 14. Los addons no deben modificar las reglas del sistema
 
 Un addon puede definir sus propios comandos y argumentos, pero no puede redefinir el significado de los argumentos reservados por RtG-CLI.
 
@@ -266,7 +289,7 @@ Un addon no puede redefinir el comportamiento de una opción reservada.
 
 ---
 
-## 14. Separación entre identificación y nombre
+## 15. Separación entre identificación y nombre
 
 La clave interna del addon es utilizada para identificarlo.
 
@@ -282,7 +305,7 @@ No debe asumirse que el nombre mostrado puede utilizarse como comando.
 
 ---
 
-## 15. Los comandos deben ser deterministas
+## 16. Los comandos deben ser deterministas
 
 RtG-CLI debe poder determinar si un argumento pertenece al sistema o al addon sin depender del nombre descriptivo del programa.
 
@@ -304,17 +327,21 @@ debe interpretarse siempre de la misma manera:
 
 ---
 
-## 16. Argumentos desconocidos
+## 17. Argumentos desconocidos
 
-Si RtG-CLI recibe un argumento reservado para el sistema que no reconoce, debe informar que la opción no existe.
+Después de identificar un addon, RtG-CLI debe determinar la propiedad de cada argumento según su prefijo.
 
-Si un argumento pertenece al addon, RtG-CLI debe permitir que el addon lo procese según las reglas y comandos definidos por dicho addon.
+- Un argumento sin raya pertenece al addon.
+- Un argumento con dos rayas o más (`--`) pertenece al addon.
+- Un argumento con una sola raya (`-`) pertenece a RtG-CLI.
 
-RtG-CLI no debe inventar el significado de argumentos que no estén definidos.
+Si RtG-CLI recibe un argumento propio del sistema que no reconoce, debe informar que la opción no existe.
+
+Los argumentos del addon deben ser entregados al addon sin que RtG-CLI intente interpretar su significado.
 
 ---
 
-## 17. No asumir comandos que no estén registrados
+## 18. No asumir comandos que no estén registrados
 
 RtG-CLI no debe considerar válido un comando solamente porque exista una carpeta, archivo o programa relacionado.
 
@@ -322,7 +349,7 @@ El comando debe estar definido en la configuración correspondiente.
 
 ---
 
-## 18. Compatibilidad
+## 19. Compatibilidad
 
 Los addons deben respetar las reglas de sintaxis de RtG-CLI para poder integrarse correctamente.
 
@@ -330,15 +357,16 @@ Un addon puede tener una implementación interna completamente diferente, pero s
 
 ---
 
-## 19. Regla de prioridad
+## 20. Regla de prioridad
 
-Cuando exista una colisión entre una opción del sistema y una opción de un addon, la opción reservada por RtG-CLI tiene prioridad.
+Después de identificar un addon, una sola raya (`-`) está reservada para RtG-CLI.
+Un addon no puede utilizar argumentos que comiencen con una sola raya.
 
-Los addons no pueden apropiarse de comandos o argumentos reservados por el sistema.
+Los argumentos que comiencen con dos o más rayas (`--`) o que no comiencen con raya pertenecen al addon.
 
 ---
 
-## 20. Argumentos del addon
+## 21. Argumentos del addon
 
 Una vez identificado el addon, RtG-CLI no debe asumir el significado de los argumentos específicos del addon.
 
@@ -354,7 +382,7 @@ RtG-CLI identifica `image` como addon.
 
 ---
 
-## 21. Argumentos con espacios
+## 22. Argumentos con espacios
 
 Los argumentos que contengan espacios deben escribirse entre comillas para que la terminal los trate como un único argumento.
 
@@ -366,7 +394,7 @@ La ruta completa debe recibirse como un único argumento.
 
 ---
 
-## 22. Los argumentos del addon deben conservarse
+## 23. Los argumentos del addon deben conservarse
 
 RtG-CLI no debe modificar, eliminar ni reinterpretar argumentos destinados al addon, salvo cuando una regla explícita del sistema indique lo contrario.
 
@@ -374,7 +402,7 @@ Los argumentos deben entregarse al addon en el orden en que fueron proporcionado
 
 ---
 
-## 23. Ejemplos completos
+## 24. Ejemplos completos
 
 Comando de addon:
 
