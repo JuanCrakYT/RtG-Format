@@ -1,11 +1,23 @@
 [
     {
         "version": "RtG-CLI v1.0.3",
-        "void": "usage: rtg [-v | --version] [-h | --help] <command> [<args>]\n\nThe most commonly used rtg commands are:\n   image        Create a image (supported by: \"RtG-Image\"\n   preview       Preview of a JSON project/build\n\nUse 'rtg help <command>' for more information on a specific command.\n",
+        "void": "Usage: rtg [-v | --version] [-h | --help] <command> [<args>]\n\nThe most commonly used rtg commands are:\n  image      | Image converter powered by: \"RtG-Image\".\n  preview    | Opens an HTML to view Road to Gramby's build JSON\n\nUse 'rtg help <command>' for more information on a specific command.\n\n",
+        "addons": {
+            "image": {
+                "name": "RtG Image",
+                "lang": [
+                    "es"
+                ],
+                "version": "3.7.2",
+                "content": {
+                    "es":"# RtG Image\n\nAplicación de  escritorio para crear pixel art y    convertirlo a un asset compatible con  RtG.\n\nPermite dibujar desde cero,  importar una imagen y exportar el    resultado como texto RtG o como PNG.\n"
+                }
+            }
+        },
         "text": {
             "help": {
-                "image": "Create a image (supported by: \"RtG-Image\"\n",
-                "preview": "Opens a html for preview a JSON project/build\n"
+                "image": "Creates an image\n",
+                "preview": "Opens a html for preview a JSON Road to gramby's build\n"
             },
             "image": {
                 "program commands": ["../tools/RtG Image/commands.py"],
