@@ -8,11 +8,17 @@
             },
             "image": {
                 "-v": ["../tools/RtG Image/version.py"],
-                "program commands": ["../tools/RtG Image/commands.py"]
+                "program commands": ["../tools/RtG Image/commands.py"],
+                "creators": {
+                    "JuanCrakYT": ["Creator of the converter","Main maintainer and creator of updates"]
+                }
             },
             "preview": {
                 "-v": ["../RtG-Preview/preview.js"],
-                "program commands": ["../RtG-Preview/commands.js"]
+                "program commands": ["../RtG-Preview/commands.js"],
+                "creators": {
+                    "JuanCrakYT": ["Creator of the viewer","Main maintainer and creator of updates"]
+                }
             }
         }
     }
