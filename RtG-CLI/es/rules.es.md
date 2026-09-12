@@ -48,7 +48,7 @@ Después de identificar un addon, el prefijo determina a quién pertenece cada a
 
 - Sin guion (`-`) → pertenece al addon.
 - Dos guiones (`--`) → pertenece al addon.
-- Una guion (`-`) → pertenece a RtG-CLI.
+- Un guion (`-`) → pertenece a RtG-CLI.
 
 Ejemplo:
 
@@ -133,6 +133,9 @@ Ejemplo incorrecto:
 
 `rtg help -en image`
 
+En estos dos ejemplos, el comando del sistema `help`, usa esta estructura, y por eso el segundo esta incorrecto:
+`help <target> <options>`
+
 La posición debe permitir determinar claramente qué comando recibe el argumento.
 
 ---
@@ -178,23 +181,7 @@ Ejemplos:
 
 ---
 
-## 9. Los comandos de addons no pueden utilizar espacios
-
-Los comandos de addons deben representar una única unidad.
-
-Correcto:
-
-`rtg image convert`
-
-Incorrecto:
-
-`rtg image convert image`
-
-Incorrecto:
-
-`rtg image create new image`
-
-Los argumentos separados deben escribirse como argumentos independientes.
+## 9. 
 
 ---
 
