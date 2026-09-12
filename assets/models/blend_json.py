@@ -65,7 +65,7 @@ from mathutils import Vector, Matrix
 #
 # Cambia esta ruta por la ubicación real de tu carpeta models.
 OUTPUT_ROOT = Path(
-    r"C:\Ruta\A\Tu\RtG-Format\assets\models"
+    r"C:\Users\User\Desktop\Created programs\Mine\Reverse Engineering\Roblox\RtG Format\assets\models"
 )
 
 
@@ -93,7 +93,7 @@ MODELS_COLLECTION = "Models"
 # "NaN".
 #
 # Ajusta este valor según la escala de tus modelos.
-BRANCH_POINT_MAX_DISTANCE = 1.0
+BRANCH_POINT_MAX_DISTANCE = 250.0
 
 
 # Nombre de la colección de puntos.
