@@ -6,9 +6,9 @@
         "version": "RtG-CLI v1.1.6",
         "version-date": "9/12/2026/3:56 pm",
         "version-content": {
-            "es": "El código actual esta obsoleto, despues de actualizar la estructura de 'assets.json', actualizaremos el codigo\nAhora las reglas usaran archivos independientes en lugar de ser parte de 'assets.json'."
+            "es": "El código actual esta obsoleto, despues de terminar la estructura de 'assets.json', actualizaremos el codigo\nAhora las reglas usaran archivos independientes en lugar de ser parte de 'assets.json'."
         },
-        "void": "Usage: rtg [-v | --version] [-h | --help] <command> [<args>]\n\nThe most commonly used rtg commands are:\n  image      | Image converter powered by: \"RtG-Image\".\n  preview    | Opens an HTML to view Road to Gramby's build JSON\n\nUse 'rtg help <command> -<language>' for more information on a specific command on your language.\nUse 'rtg help <command> -lang' to see the languages of that addon\n",
+        "void": "Usage: rtg [-v | --version] [-h | --help] [-l | --lang] <command> [<args>]\n\nThe most commonly used rtg commands are:\n  image      | Image converter powered by: \"RtG-Image\".\n  preview    | Opens an HTML to view Road to Gramby's build JSON\n\nUse 'rtg help <command> -<language>' for more information on a specific command on your language.\nUse 'rtg help <command> -lang' to see the languages of that addon\n",
         "addons": {
             "image": {
                 "name": "RtG Image",

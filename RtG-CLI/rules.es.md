@@ -3,7 +3,6 @@
 ## 1. Estructura general
 
 Un comando de RtG-CLI está formado por un comando principal y, opcionalmente, argumentos.
-
 Formato general:
 
 `rtg <comando> [<argumentos>]`
@@ -23,7 +22,6 @@ Ejemplos:
 ## 2. Comandos registrados
 
 Los comandos principales deben estar registrados en la configuración de RtG-CLI.
-
 Un comando se identifica mediante su clave interna.
 
 Ejemplo:
@@ -31,7 +29,6 @@ Ejemplo:
 `image`
 
 La clave `image` identifica al addon correspondiente, independientemente del nombre mostrado al usuario.
-
 Ejemplo:
 
 `image` → `RtG Image`
@@ -47,7 +44,6 @@ El nombre mostrado no debe utilizarse como identificador del comando.
 RtG-CLI y sus addons pueden tener comandos o argumentos propios.
 
 Los argumentos pertenecientes directamente a RtG-CLI utilizan una sola raya (`-`) al comienzo.
-
 Los argumentos pertenecientes a un addon no pueden utilizar una sola raya (`-`) al comienzo.
 
 Esto permite diferenciar los argumentos del sistema de los argumentos propios de un addon.
@@ -69,20 +65,18 @@ Si `-width` pertenece a RtG Image, no debe comenzar con una sola raya.
 ## 4. Argumentos del sistema
 
 Los argumentos del sistema utilizan una sola raya (`-`) o la sintaxis correspondiente definida por RtG-CLI.
+Las palabras de el sistema utilizan 2 rayas después de `rtg`, como: `rtg --version` y las abreviaturas como: `rtg -v` usan una sola raya (`-`).
+A los idiomas no les afecta la regla de las 2 rayas despues de `rtg`, los idiomas siempre empezarán con una sola raya (`-`); esto incluye a el comando `-lang`, que busca los idiomas de RtG-CLI cuando va después de `rtg`.
 
 Ejemplos:
 
-`-v`
-
-`--version`
-
-`-h`
-
-`--help`
-
-`-lang`
-
-`-en`
+`rtg -v`
+`rtg --version`
+`rtg -h`
+`rtg --help`
+`rtg -l`
+`rtg -lang`
+`rtg -en`
 
 Los argumentos del sistema pueden aparecer después del comando al que afectan.
 
@@ -117,19 +111,21 @@ La posición debe permitir determinar claramente qué comando recibe el argument
 
 ## 6. Comandos y argumentos de los addons
 
-Los addons pueden definir sus propios comandos y argumentos.
+Los comandos se escriben como argumentos individuales de la terminal.
 
-Los comandos de un addon deben ser una sola palabra y no deben contener espacios.
+Un comando no debe contener espacios sin estar entre comillas.
 
-Ejemplo correcto:
+Los argumentos posteriores pueden ser utilizados por el addon según su propia interfaz.
 
-`rtg image convert`
-
-Ejemplo incorrecto:
+Por ejemplo:
 
 `rtg image convert image`
 
-Si un addon necesita representar una operación compuesta, debe utilizar argumentos separados en lugar de crear un comando que contenga espacios.
+puede interpretarse como:
+
+- `image` → addon
+- `convert` → comando del addon
+- `image` → argumento del comando
 
 ---
 
@@ -154,9 +150,7 @@ está reservado para opciones del sistema.
 Los nombres que no necesiten guiones pueden utilizarse normalmente:
 
 `convert`
-
 `export`
-
 `preview`
 
 ---
@@ -266,6 +260,9 @@ Un addon puede definir sus propios comandos y argumentos, pero no puede redefini
 Por ejemplo, un addon no debe utilizar `-h` para darle un significado diferente a la ayuda del sistema.
 
 Los nombres reservados por RtG-CLI tienen prioridad sobre los comandos de los addons.
+Los comandos y opciones reservados por RtG-CLI deben estar definidos explícitamente por la interfaz del CLI.
+
+Un addon no puede redefinir el comportamiento de una opción reservada.
 
 ---
 
@@ -341,7 +338,43 @@ Los addons no pueden apropiarse de comandos o argumentos reservados por el siste
 
 ---
 
-## 20. Ejemplos completos
+## 20. Argumentos del addon
+
+Una vez identificado el addon, RtG-CLI no debe asumir el significado de los argumentos específicos del addon.
+
+Los argumentos que pertenezcan al addon deben ser entregados al programa del addon para que este los procese.
+
+Ejemplo:
+
+`rtg image --width 128`
+
+RtG-CLI identifica `image` como addon.
+
+`--width 128` corresponde a la interfaz de RtG Image y debe ser procesado por dicho addon.
+
+---
+
+## 21. Argumentos con espacios
+
+Los argumentos que contengan espacios deben escribirse entre comillas para que la terminal los trate como un único argumento.
+
+Ejemplo:
+
+`rtg image "C:\Users\User\Downloads\mi imagen.png" "C:\Users\User\Downloads\salida.json"`
+
+La ruta completa debe recibirse como un único argumento.
+
+---
+
+## 22. Los argumentos del addon deben conservarse
+
+RtG-CLI no debe modificar, eliminar ni reinterpretar argumentos destinados al addon, salvo cuando una regla explícita del sistema indique lo contrario.
+
+Los argumentos deben entregarse al addon en el orden en que fueron proporcionados por el usuario.
+
+---
+
+## 23. Ejemplos completos
 
 Comando de addon:
 
@@ -379,7 +412,7 @@ Una combinación:
 
 `rtg image archivo.png --output archivo.json`
 
-En este último ejemplo:
+En este ejemplo:
 
 * `image` identifica el addon.
 * `archivo.png` es un argumento del addon.
