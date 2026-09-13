@@ -70,7 +70,7 @@ RtG-Preview can be loaded directly from a CDN such as jsDelivr.
 A minimal example:
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/JuanCrakYT/RtG-Format/RtG-Preview/preview.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/JuanCrakYT/RtG-Format@5688e46e99b25e5cc02e98bc040fef777949ca29/RtG-Preview/preview.js"></script>
 <script>
   RtGPreview.render([
     ["Part", [], {}],
