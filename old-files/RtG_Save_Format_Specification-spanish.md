@@ -910,7 +910,7 @@ Las siguientes líneas de investigación han sido identificadas para guiar el de
 | `Activated`            | `Boolean`            | `TripWire`              |
 | `Forwards`             | `Boolean`            | `Servo_Physics`         |
 | `Text`                 | `String`             | `Note`                  |
-| `Quantity`             | `Integer`            | `Balloon`               |
+| `Quantity`             | `Number`             | `Balloon`               |
 | `Bullets`              | `Integer`            | `Mag`                   |
 | `Shooting`             | `Boolean`            | `MountedGun`            |
 | `IgnoreAttached`       | `Boolean`            | `StaringGyro`           |
@@ -926,7 +926,7 @@ Las siguientes líneas de investigación han sido identificadas para guiar el de
 | `ActivationHeight`     | `Number`             | `AltitudeSensor`        |
 | `Volume`               | `Number`             | `Radio`                 |
 | `Channel`              | `Number`             | `Radio`                 |
-| `CustomTrack`          | `String`             | `Radio`                 |
+| `CustomTrack`          | `Integer`            | `Radio`                 |
 | `On`                   | `Boolean`            | `Radio`                 |
 | `Phrase`               | `String`             | `PolaroidPhoto`         |
 ---
