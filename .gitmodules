@@ -1,3 +1,6 @@
 [submodule "tools/RtG Image"]
 	path = tools/RtG Image
 	url = https://github.com/JuanCrakYT/RtG-Image.git
+[submodule "tools/RtG-AI"]
+	path = tools/RtG-AI
+	url = https://github.com/JuanCrakYT/RtG-AI.git
