@@ -187,14 +187,12 @@ def show_cli_langs(assets):
     for category, codes in all_categories:
         if codes:
             print(f"  [{category}]")
-            print()
             for line in fmt(codes):
                 print(line)
             print()
 
     for category, codes, addon_name in addon_categories:
         print(f"  [{category}] ({addon_name})")
-        print()
         for line in fmt(codes):
             print(line)
         print()
