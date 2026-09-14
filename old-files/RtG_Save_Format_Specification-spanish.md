@@ -926,7 +926,7 @@ Las siguientes líneas de investigación han sido identificadas para guiar el de
 | `ActivationHeight`     | `Number`             | `AltitudeSensor`        |
 | `Volume`               | `Number`             | `Radio`                 |
 | `Channel`              | `Number`             | `Radio`                 |
-| `CustomTrack`          | `String`             | `Radio`                 |
+| `CustomTrack`          | `Integer`            | `Radio`                 |
 | `On`                   | `Boolean`            | `Radio`                 |
 | `Phrase`               | `String`             | `PolaroidPhoto`         |
 ---
