@@ -143,13 +143,61 @@ def show_commands(assets):
         print(f"  {cmd}")
 
 
+def get_language_name(assets, lang_code):
+    """Return the human-readable name for a language code from assets.json."""
+    names = assets[0].get("language-names", {})
+    return names.get(lang_code, lang_code)
+
+
 def show_cli_langs(assets):
-    """Print the languages available for RtG-CLI itself."""
+    """Print the languages available for RtG-CLI itself, organized by category."""
+    lang_names = assets[0].get("language-names", {})
+    void_languages = sorted(assets[0].get("void-language", {}).keys())
+    help_langs = sorted(assets[0].get("help", {}).keys())
+    rules_langs = sorted(assets[0].get("rules", {}).keys())
+    version_content_langs = sorted(
+        assets[0].get("version-content", {}).keys()
+    )
+
+    def fmt(codes):
+        return [
+            f"  {lang_names.get(c, c)} | {c}" for c in codes
+        ]
+
+    all_categories = [
+        ("Version", version_content_langs),
+        ("Rules", rules_langs),
+        ("Help", help_langs),
+        ("General", ["en"] if "en" not in void_languages else []),
+    ]
+
+    if void_languages:
+        all_categories.append(("Void", void_languages))
+
+    addons = get_addons(assets)
+    addon_categories = []
+    for addon_key, addon in addons.items():
+        addon_langs = sorted(addon.get("lang", []))
+        if addon_langs:
+            addon_categories.append((f"Addons / {addon_key}", addon_langs, addon.get("name")))
+
     print("Available languages for RtG-CLI:")
     print()
-    print("  void")
-    for lang in sorted(assets[0].get("void-language", {}).keys()):
-        print(f"  {lang}")
+
+    for category, codes in all_categories:
+        if codes:
+            print(f"  [{category}]")
+            print()
+            for line in fmt(codes):
+                print(line)
+            print()
+
+    for category, codes, addon_name in addon_categories:
+        print(f"  [{category}] ({addon_name})")
+        print()
+        for line in fmt(codes):
+            print(line)
+        print()
 
 
 def show_addon_langs(addon):

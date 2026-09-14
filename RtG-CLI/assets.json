@@ -1,5 +1,9 @@
 [
     {
+        "language-names": {
+            "es": "Español",
+            "en": "English"
+        },
         "rules": {
             "en": "./en/rules.en.md",
             "es": "./es/rules.es.md"
