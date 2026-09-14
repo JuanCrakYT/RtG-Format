@@ -910,7 +910,7 @@ Las siguientes líneas de investigación han sido identificadas para guiar el de
 | `Activated`            | `Boolean`            | `TripWire`              |
 | `Forwards`             | `Boolean`            | `Servo_Physics`         |
 | `Text`                 | `String`             | `Note`                  |
-| `Quantity`             | `Number`             | `Balloon`               |
+| `Quantity`             | `Integer`            | `Balloon`               |
 | `Bullets`              | `Integer`            | `Mag`                   |
 | `Shooting`             | `Boolean`            | `MountedGun`            |
 | `IgnoreAttached`       | `Boolean`            | `StaringGyro`           |
