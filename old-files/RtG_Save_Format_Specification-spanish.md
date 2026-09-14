@@ -1,6 +1,6 @@
 # RtG Save Format Specification v0.406
 
-> **Hecho po:** @JuanCrakYT
+> **Hecho por:** @JuanCrakYT
 > **Documento:** Especificación Técnica de Formato de Guardado (Ingeniería Inversa)  
 > **Juego Objetivo:** Road To Gramby's (Roblox)  
 > **Versión de la Especificación:** v1.101  
