@@ -1,0 +1,241 @@
+RtG-AI/
+├─ .github/
+│  └─ workflows/
+│     └─ deploy-pages.yml
+├─ .kilo/
+│  ├─ worktrees/
+│  │  └─ loving-almanac/
+│  │     ├─ .github/
+│  │     │  └─ workflows/
+│  │     │     └─ deploy-pages.yml
+│  │     ├─ app/
+│  │     │  ├─ src/
+│  │     │  │  ├─ core/
+│  │     │  │  │  ├─ ai.js
+│  │     │  │  │  ├─ chatManager.js
+│  │     │  │  │  ├─ feedback.js
+│  │     │  │  │  ├─ modelManager.js
+│  │     │  │  │  └─ storage.js
+│  │     │  │  ├─ ui/
+│  │     │  │  │  ├─ chat.js
+│  │     │  │  │  ├─ feedback.js
+│  │     │  │  │  ├─ input.js
+│  │     │  │  │  ├─ lang.js
+│  │     │  │  │  ├─ message.js
+│  │     │  │  │  ├─ modelSelector.js
+│  │     │  │  │  ├─ preview.js
+│  │     │  │  │  ├─ preview.json
+│  │     │  │  │  ├─ sidebar.js
+│  │     │  │  │  ├─ suggested.js
+│  │     │  │  │  └─ suggested.json
+│  │     │  │  └─ main.js
+│  │     │  ├─ styles/
+│  │     │  │  └─ main.css
+│  │     │  ├─ index.html
+│  │     │  ├─ lang.json
+│  │     │  └─ package.json
+│  │     ├─ dev/
+│  │     │  ├─ extractor/
+│  │     │  │  └─ extractor.py
+│  │     │  ├─ json/
+│  │     │  │  ├─ 7-segment-display.json
+│  │     │  │  ├─ A-t4_A.B.I.M.json
+│  │     │  │  ├─ ai_tank.json
+│  │     │  │  ├─ Antis_9p.json
+│  │     │  │  ├─ AT-4_2p.json
+│  │     │  │  ├─ beetle.json
+│  │     │  │  ├─ C-RAM_Anti-Aircraft_Defense.json
+│  │     │  │  ├─ colour_pallete.json
+│  │     │  │  ├─ F-104.json
+│  │     │  │  ├─ F-22.json
+│  │     │  │  ├─ F-4_Phantom.json
+│  │     │  │  ├─ F4U_corsair.json
+│  │     │  │  ├─ fast_servo-remote.json
+│  │     │  │  ├─ fast_servo.json
+│  │     │  │  ├─ fcawp-elfv_competition-version.json
+│  │     │  │  ├─ fcawp-elfv_standard-version.json
+│  │     │  │  ├─ FFV-1030_8p.json
+│  │     │  │  ├─ Grumman_F4F-3-colored_canopy.json
+│  │     │  │  ├─ Grumman_F4F-3-gunsight.json
+│  │     │  │  ├─ Grumman_F4F-4.json
+│  │     │  │  ├─ Hammerlink_Motors_-_G1_Expandible_Transport_Bus_front-section.json
+│  │     │  │  ├─ Hammerlink_Motors_-_G1_Expandible_Transport_Bus_middle-section_(optional).json
+│  │     │  │  ├─ Hammerlink_Motors_-_G1_Expandible_Transport_Bus_rear-section.json
+│  │     │  │  ├─ homing-misile.json
+│  │     │  │  ├─ Humming_bird_5p.json
+│  │     │  │  ├─ hut.json
+│  │     │  │  ├─ Identification_color_for_Fricklet_Troubles.json
+│  │     │  │  ├─ Indian_tyre_diesel_engine_machine_air_defense.json
+│  │     │  │  ├─ is_vanguard_2.json
+│  │     │  │  ├─ Kabas_4p.json
+│  │     │  │  ├─ Krusha_(M.L.R.S.)_8p.json
+│  │     │  │  ├─ Krusha_ammo_2p.json
+│  │     │  │  ├─ lobotomy_mobile.json
+│  │     │  │  ├─ M2_Bradley_ammo.json
+│  │     │  │  ├─ M2_Bradley_IFV.json
+│  │     │  │  ├─ M88_enforcer.json
+│  │     │  │  ├─ m901_itv&bradley_aaws-h_hybrid.json
+│  │     │  │  ├─ macqueen_car.json
+│  │     │  │  ├─ marble_random_number_generator.json
+│  │     │  │  ├─ maus.json
+│  │     │  │  ├─ Med-Kabas_4p.json
+│  │     │  │  ├─ Mi-24_Rockets.json
+│  │     │  │  ├─ Mi-24.json
+│  │     │  │  ├─ Mil_mi-8.json
+│  │     │  │  ├─ mini_tiger.json
+│  │     │  │  ├─ Minotour_(M.B.T.)_8p.json
+│  │     │  │  ├─ Mosquito_6p.json
+│  │     │  │  ├─ Object_001_MBT-Newark_FTBT2026.json
+│  │     │  │  ├─ optical_sniper-rifle.json
+│  │     │  │  ├─ random_plane.json
+│  │     │  │  ├─ road_checkpoint.json
+│  │     │  │  ├─ S-58_(choctaw)_thruster-powered.json
+│  │     │  │  ├─ Sakalas_4p.json
+│  │     │  │  ├─ SBD_Dauntless.json
+│  │     │  │  ├─ shit-a-pult.json
+│  │     │  │  ├─ Sikorsky_S-55.json
+│  │     │  │  ├─ Stinger_manpad_4p.json
+│  │     │  │  ├─ Strv-103c.json
+│  │     │  │  ├─ Sturmwagen_38.json
+│  │     │  │  ├─ t.o.n.k.json
+│  │     │  │  ├─ termendo-(drone).json
+│  │     │  │  ├─ Ugsam-109.json
+│  │     │  │  ├─ Universal_infantry_ammo_pack_1p.json
+│  │     │  │  ├─ War_Coffin.json
+│  │     │  │  ├─ Washing_Machine.json
+│  │     │  │  ├─ working_AK_rubber-bands.json
+│  │     │  │  ├─ Working_Microwave.json
+│  │     │  │  ├─ working-ajustable-servo.json
+│  │     │  │  └─ yibyib-gun.json
+│  │     │  ├─ pipeline/
+│  │     │  │  ├─ orchestrator.py
+│  │     │  │  └─ stages.py
+│  │     │  ├─ JSON-list.tree
+│  │     │  ├─ main.py
+│  │     │  ├─ tokens.json
+│  │     │  └─ unknown-properties.json
+│  │     ├─ .gitattributes
+│  │     ├─ .gitignore
+│  │     ├─ LICENSE
+│  │     └─ README.md
+│  └─ .gitignore
+├─ app/
+│  ├─ icons/
+│  ├─ src/
+│  │  ├─ core/
+│  │  │  ├─ ai.js
+│  │  │  ├─ chatManager.js
+│  │  │  ├─ feedback.js
+│  │  │  ├─ modelManager.js
+│  │  │  └─ storage.js
+│  │  ├─ ui/
+│  │  │  ├─ chat.js
+│  │  │  ├─ feedback.js
+│  │  │  ├─ input.js
+│  │  │  ├─ lang.js
+│  │  │  ├─ message.js
+│  │  │  ├─ modelSelector.js
+│  │  │  ├─ preview.js
+│  │  │  ├─ preview.json
+│  │  │  ├─ sidebar.js
+│  │  │  ├─ suggested.js
+│  │  │  └─ suggested.json
+│  │  └─ main.js
+│  ├─ styles/
+│  │  └─ main.css
+│  ├─ index.html
+│  ├─ lang.json
+│  └─ package.json
+├─ config/
+├─ data/
+├─ dev/
+│  ├─ checkpoints/
+│  ├─ config/
+│  ├─ dataset/
+│  ├─ extractor/
+│  │  └─ extractor.py
+│  ├─ feedback/
+│  ├─ json/
+│  │  ├─ 7-segment-display.json
+│  │  ├─ A-t4_A.B.I.M.json
+│  │  ├─ ai_tank.json
+│  │  ├─ Antis_9p.json
+│  │  ├─ AT-4_2p.json
+│  │  ├─ beetle.json
+│  │  ├─ C-RAM_Anti-Aircraft_Defense.json
+│  │  ├─ colour_pallete.json
+│  │  ├─ F-104.json
+│  │  ├─ F-22.json
+│  │  ├─ F-4_Phantom.json
+│  │  ├─ F4U_corsair.json
+│  │  ├─ fast_servo-remote.json
+│  │  ├─ fast_servo.json
+│  │  ├─ fcawp-elfv_competition-version.json
+│  │  ├─ fcawp-elfv_standard-version.json
+│  │  ├─ FFV-1030_8p.json
+│  │  ├─ Grumman_F4F-3-colored_canopy.json
+│  │  ├─ Grumman_F4F-3-gunsight.json
+│  │  ├─ Grumman_F4F-4.json
+│  │  ├─ Hammerlink_Motors_-_G1_Expandible_Transport_Bus_front-section.json
+│  │  ├─ Hammerlink_Motors_-_G1_Expandible_Transport_Bus_middle-section_(optional).json
+│  │  ├─ Hammerlink_Motors_-_G1_Expandible_Transport_Bus_rear-section.json
+│  │  ├─ homing-misile.json
+│  │  ├─ Humming_bird_5p.json
+│  │  ├─ hut.json
+│  │  ├─ Identification_color_for_Fricklet_Troubles.json
+│  │  ├─ Indian_tyre_diesel_engine_machine_air_defense.json
+│  │  ├─ is_vanguard_2.json
+│  │  ├─ Kabas_4p.json
+│  │  ├─ Krusha_(M.L.R.S.)_8p.json
+│  │  ├─ Krusha_ammo_2p.json
+│  │  ├─ lobotomy_mobile.json
+│  │  ├─ M2_Bradley_ammo.json
+│  │  ├─ M2_Bradley_IFV.json
+│  │  ├─ M88_enforcer.json
+│  │  ├─ m901_itv&bradley_aaws-h_hybrid.json
+│  │  ├─ macqueen_car.json
+│  │  ├─ marble_random_number_generator.json
+│  │  ├─ maus.json
+│  │  ├─ Med-Kabas_4p.json
+│  │  ├─ Mi-24_Rockets.json
+│  │  ├─ Mi-24.json
+│  │  ├─ Mil_mi-8.json
+│  │  ├─ mini_tiger.json
+│  │  ├─ Minotour_(M.B.T.)_8p.json
+│  │  ├─ Mosquito_6p.json
+│  │  ├─ Object_001_MBT-Newark_FTBT2026.json
+│  │  ├─ optical_sniper-rifle.json
+│  │  ├─ random_plane.json
+│  │  ├─ road_checkpoint.json
+│  │  ├─ S-58_(choctaw)_thruster-powered.json
+│  │  ├─ Sakalas_4p.json
+│  │  ├─ SBD_Dauntless.json
+│  │  ├─ shit-a-pult.json
+│  │  ├─ Sikorsky_S-55.json
+│  │  ├─ Stinger_manpad_4p.json
+│  │  ├─ Strv-103c.json
+│  │  ├─ Sturmwagen_38.json
+│  │  ├─ t.o.n.k.json
+│  │  ├─ termendo-(drone).json
+│  │  ├─ Ugsam-109.json
+│  │  ├─ Universal_infantry_ammo_pack_1p.json
+│  │  ├─ War_Coffin.json
+│  │  ├─ Washing_Machine.json
+│  │  ├─ working_AK_rubber-bands.json
+│  │  ├─ Working_Microwave.json
+│  │  ├─ working-ajustable-servo.json
+│  │  └─ yibyib-gun.json
+│  ├─ logs/
+│  ├─ pipeline/
+│  │  ├─ orchestrator.py
+│  │  └─ stages.py
+│  ├─ tokens/
+│  ├─ JSON-list.tree
+│  ├─ main.py
+│  ├─ tokens.json
+│  └─ unknown-properties.json
+├─ model/
+├─ .gitattributes
+├─ .gitignore
+├─ LICENSE
+└─ README.md
