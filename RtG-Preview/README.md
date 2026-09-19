@@ -176,8 +176,8 @@ The renderer currently uses Wavefront OBJ models.
 Example:
 
 ```text
-assets/models/Tooth.obj
-assets/models/Fricklet.obj
+assets/models/model/Tooth/Tooth.obj
+assets/models/model/Fricklet/Fricklet.obj
 ```
 
 ### Sounds

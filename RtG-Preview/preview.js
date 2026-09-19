@@ -13,6 +13,7 @@
     var cursorDrag = { active: false, startX: 0, startY: 0, threshold: 6 };
     var lastInput = 'pointer';
     var loadingScreen = null;
+    var modelRegistry = null;
 
 
     function fatal(message) {
@@ -1249,44 +1250,219 @@
     }
 
     function loadModel(scene, type) {
-        return new Promise(function(resolve, reject) {
-            var url = resolveAssetUrl(type, 'obj');
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', url, true);
+        return modelRegistry.getModel(type).then(function(model) {
+            // Clone the model and add to scene
+            var instance = model.clone(true);
+            
+            // fitObjectToView is no longer needed as models are pre-scaled
+            // but we still need to center them if they have odd origins
+            var box = new THREE.Box3().setFromObject(instance);
+            var center = box.getCenter(new THREE.Vector3());
+            instance.position.sub(center);
+            
+            scene.add(instance);
+            return instance;
+        }).catch(function(err) {
+            showAlert('Failed to load model: ' + type, 'error');
+            throw err;
+        });
+    }
 
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        try {
-                            var loader = new THREE.OBJLoader();
-                            var text = xhr.responseText;
-                            text = text.replace(/^mtllib\s+.*$/m, '');
-                            var object = loader.parse(text);
-
-                            object.traverse(function(child) {
-                                if (child.isMesh) {
-                                    child.material = new THREE.MeshPhongMaterial({ color: 0xcccccc, flatShading: true });
-                                }
-                            });
-
-                            fitObjectToView(object);
-                            scene.add(object);
-                            resolve(object);
-                        } catch (err) {
-                            reject(err);
-                        }
-                    } else {
-                        reject(new Error('HTTP ' + xhr.status + ' for ' + url));
+    function positionByConnections(objects, loadedObjects, objectMap) {
+        // Build a map of block index to mesh
+        var blockToMesh = {};
+        for (var i = 0; i < objects.length; i++) {
+            var mapIdx = objectMap[i];
+            if (mapIdx !== undefined && mapIdx !== null && loadedObjects[mapIdx]) {
+                blockToMesh[i + 1] = loadedObjects[mapIdx]; // 1-based index
+            }
+        }
+        
+        // Track which blocks have been positioned
+        var positioned = new Set();
+        var rootBlocks = [];
+        
+        // Find root blocks (those with no incoming valid connections)
+        var hasParent = new Set();
+        for (var i = 0; i < objects.length; i++) {
+            var obj = objects[i];
+            var blockIndex = i + 1;
+            for (var c = 0; c < obj.connections.length; c++) {
+                var conn = obj.connections[c];
+                if (Array.isArray(conn) && conn.length >= 3) {
+                    var parentIndex = Number(conn[2]);
+                    if (Number.isInteger(parentIndex) && parentIndex >= 1 && parentIndex <= objects.length) {
+                        hasParent.add(blockIndex);
                     }
                 }
-            };
-
-            xhr.onerror = function() {
-                reject(new Error('Network error loading ' + url));
-            };
-
-            xhr.send();
+            }
+        }
+        
+        // Root blocks are those without parents
+        for (var i = 1; i <= objects.length; i++) {
+            if (!hasParent.has(i)) {
+                rootBlocks.push(i);
+            }
+        }
+        
+        // Position root blocks in a grid
+        var gridSize = Math.ceil(Math.sqrt(rootBlocks.length));
+        var spacing = 5;
+        rootBlocks.forEach(function(blockIndex, idx) {
+            var mesh = blockToMesh[blockIndex];
+            if (!mesh) return;
+            
+            var row = Math.floor(idx / gridSize);
+            var col = idx % gridSize;
+            mesh.position.set(
+                (col - (gridSize - 1) / 2) * spacing,
+                0,
+                (row - (gridSize - 1) / 2) * spacing
+            );
+            positioned.add(blockIndex);
         });
+        
+        // Now position children relative to their parents
+        var maxIterations = objects.length;
+        var iteration = 0;
+        var changed = true;
+        
+        while (changed && iteration < maxIterations) {
+            changed = false;
+            iteration++;
+            
+            for (var i = 0; i < objects.length; i++) {
+                var blockIndex = i + 1;
+                if (positioned.has(blockIndex)) continue;
+                
+                var obj = objects[i];
+                var mesh = blockToMesh[blockIndex];
+                if (!mesh) continue;
+                
+                // Find first valid connection to a positioned parent
+                for (var c = 0; c < obj.connections.length; c++) {
+                    var conn = obj.connections[c];
+                    if (!Array.isArray(conn) || conn.length < 3) continue;
+                    
+                    var parentIndex = Number(conn[2]);
+                    var pointId = String(conn[1] || '');
+                    
+                    if (!Number.isInteger(parentIndex) || parentIndex < 1 || parentIndex > objects.length) {
+                        continue;
+                    }
+                    
+                    var parentMesh = blockToMesh[parentIndex];
+                    if (!parentMesh || !positioned.has(parentIndex)) continue;
+                    
+                    // Get parent's connection point
+                    var parentData = parentMesh.userData;
+                    var connectionPoints = parentData.connectionPoints || {};
+                    var parentPoint = connectionPoints[pointId];
+                    
+                    if (!parentPoint) {
+                        // Try numeric pointId
+                        var numPointId = Number(pointId);
+                        if (!isNaN(numPointId)) {
+                            parentPoint = connectionPoints[numPointId];
+                        }
+                    }
+                    
+                    if (!parentPoint) continue;
+                    
+                    var pointPos = parentPoint[0] || [0, 0, 0];
+                    var pointRot = parentPoint[1] || [0, 0, 0];
+                    
+                    // Convert to world space
+                    var worldPos = new THREE.Vector3().fromArray(pointPos);
+                    worldPos.applyMatrix4(parentMesh.matrixWorld);
+                    
+                    var worldQuat = new THREE.Quaternion().setFromEuler(
+                        new THREE.Euler(
+                            THREE.MathUtils.degToRad(pointRot[0]),
+                            THREE.MathUtils.degToRad(pointRot[1]),
+                            THREE.MathUtils.degToRad(pointRot[2]),
+                            'XYZ'
+                        )
+                    );
+                    
+                    // Position child so its origin aligns with parent's connection point
+                    mesh.position.copy(worldPos);
+                    mesh.quaternion.copy(worldQuat);
+                    
+                    positioned.add(blockIndex);
+                    changed = true;
+                    break;
+                }
+            }
+        }
+        
+        // Any remaining unpositioned blocks (no valid connections or circular)
+        var remaining = [];
+        for (var i = 1; i <= objects.length; i++) {
+            if (!positioned.has(i) && blockToMesh[i]) {
+                remaining.push(i);
+            }
+        }
+        
+        if (remaining.length > 0) {
+            // Place them in a line to the side
+            var startX = spacing * (gridSize + 1);
+            remaining.forEach(function(blockIndex, idx) {
+                var mesh = blockToMesh[blockIndex];
+                mesh.position.set(startX + idx * spacing, 0, 0);
+            });
+        }
+    }
+
+    function arrangeDisconnectedObjects(objects, loadedObjects, objectMap) {
+        // Keep original function for backward compatibility but it's no longer used
+        if (!loadedObjects || loadedObjects.length === 0) return;
+
+        var connected = {};
+        for (var i = 0; i < objects.length; i++) {
+            if (objectMap[i] === undefined) continue;
+            var obj = objects[i];
+            for (var c = 0; c < obj.connections.length; c++) {
+                var conn = obj.connections[c];
+                if (Array.isArray(conn) && conn.length >= 3) {
+                    var idx = Number(conn[2]);
+                    if (Number.isInteger(idx) && idx >= 1 && idx <= objects.length) {
+                        if (objectMap[idx - 1] !== undefined) {
+                            connected[i] = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        var currentX = 0;
+        var lastRightEdge = 0;
+        for (var i = 0; i < objects.length; i++) {
+            if (connected[i]) continue;
+            if (objectMap[i] === undefined) continue;
+
+            var obj3d = loadedObjects[objectMap[i]];
+            var box = new THREE.Box3().setFromObject(obj3d);
+            var size = box.getSize(new THREE.Vector3());
+            var halfWidth = size.x / 2;
+
+            obj3d.position.x = currentX + halfWidth;
+            obj3d.position.y = 0;
+            obj3d.position.z = 0;
+
+            lastRightEdge = currentX + size.x;
+            currentX = Math.ceil(currentX + size.x + 1);
+        }
+
+        if (lastRightEdge > 0) {
+            var centerX = lastRightEdge / 2;
+            for (var i = 0; i < objects.length; i++) {
+                if (connected[i]) continue;
+                if (objectMap[i] === undefined) continue;
+
+                loadedObjects[objectMap[i]].position.x -= centerX;
+            }
+        }
     }
 
      function clearPrevious() {
@@ -1539,7 +1715,7 @@
                     loadingScreen.hide();
                     loadingScreen = null;
 
-                    arrangeDisconnectedObjects(objects, loadedObjects, objectMap);
+                    positionByConnections(objects, loadedObjects, objectMap);
                     updateGridSize(loadedObjects);
 
                     var targetPoint = new THREE.Vector3(0, 0, 0);
@@ -1602,6 +1778,12 @@
 
     function bootstrap() {
         loadDependencies()
+            .then(function() {
+                // Initialize model registry and load manifest
+                var modelsBaseUrl = resolvePreviewAssetUrl('assets/models/');
+                modelRegistry = new ModelRegistry(modelsBaseUrl);
+                return modelRegistry.loadManifest();
+            })
             .then(function() {
                 resolveReady();
             })

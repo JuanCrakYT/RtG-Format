@@ -17,15 +17,13 @@
         },
         "Name": "Uzi",
         "Tooltip": "",
-        """LocalPoints": {},
-        "Branches": {}
-    
-            "LocalPoints": {},
-            "Branches Start": {},
-            "AssetID": {
+        "LocalPoints": {},
+        "Branches": {},
+        "Branches Start": {},
+        "AssetID": {
             "ID": "",
             "CreatorLink": "",
             "RbxAssetID": ""
-            }
         }
+    }
 ]

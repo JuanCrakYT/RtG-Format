@@ -18,14 +18,12 @@
         "Name": "Tooth",
         "Tooltip": "",
         "LocalPoints": {},
-        "Branches": {}
-    
-            "LocalPoints": {},
-            "Branches Start": {},
-            "AssetID": {
+        "Branches": {},
+        "Branches Start": {},
+        "AssetID": {
             "ID": "",
             "CreatorLink": "",
             "RbxAssetID": ""
-            }
         }
+    }
 ]

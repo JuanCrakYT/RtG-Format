@@ -107,10 +107,10 @@ assets/
 For example:
 
 ```md
-assets/models/Part.obj
-assets/models/Anchor.obj
-assets/models/Tooth.obj
-assets/models/Fricklet.obj
+assets/models/model/Part/Part.obj
+assets/models/model/Anchor/Anchor.obj
+assets/models/model/Tooth/Tooth.obj
+assets/models/model/Fricklet/Fricklet.obj
 ```
 
 Loading screens can use the official RtG banners stored under:
