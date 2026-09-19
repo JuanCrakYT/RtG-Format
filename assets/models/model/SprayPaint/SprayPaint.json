@@ -1,0 +1,31 @@
+[
+    {
+        "RtG-Format": {
+            "RtG-Format Data": {
+                "Release Date": "",
+                "Creator": "JuanCrakYT",
+                "Notes": "",
+                "Extra Files": []
+            },
+            "RtG-Preview": {
+                "Size": {
+                    "default": 1
+                },
+                "Default Branch": "./SprayPaint.obj"
+            },
+            "Page": {}
+        },
+        "Name": "SprayPaint",
+        "Tooltip": "",
+        """LocalPoints": {},
+        "Branches": {}
+    
+            "LocalPoints": {},
+            "Branches Start": {},
+            "AssetID": {
+            "ID": "",
+            "CreatorLink": "",
+            "RbxAssetID": ""
+            }
+        }
+]

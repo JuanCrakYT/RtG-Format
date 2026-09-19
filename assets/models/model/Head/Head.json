@@ -1,0 +1,29 @@
+[
+    {
+        "RtG-Format": {
+            "RtG-Format Data": {
+                "Release Date": "",
+                "Creator": "JuanCrakYT",
+                "Notes": "",
+                "Extra Files": []
+            },
+            "RtG-Preview": {
+                "Size": {
+                    "default": [2.74, 1.08, 1.37]
+                },
+                "Default Branch": "./Head.obj"
+            },
+            "Page": {}
+        },
+        "Name": "Head",
+        "Tooltip": "",
+        "LocalPoints": {},
+        "Branches": {},
+        "Branches Start": {},
+        "AssetID": {
+            "ID": "",
+            "CreatorLink": "",
+            "RbxAssetID": ""
+        }
+    }
+]

@@ -23,7 +23,6 @@ RtG Image/
 │  └─ logotipe.png
 ├─ load_img/
 │  └─ image_loader.py
-├─ output/
 ├─ tests/
 │  ├─ test_canvas_generation.py
 │  └─ test_converter.py
@@ -80,9 +79,13 @@ RtG Image/
 ├─ ui/
 │  ├─ clipboard.py
 │  └─ ui.py
+├─ .gitattributes
+├─ .gitignore
 ├─ AGENTS.md
 ├─ canvas.py
+├─ LICENSE
 ├─ main.py
+├─ obj_ids-spanish.md
 ├─ README.md
-├─ RtG Image.zip
+├─ RtG_Save_Format_Specification-spanish.md
 └─ tmp_run_tests.py

@@ -4,160 +4,169 @@ This directory contains the visual and media assets used by **RtG-Format**, incl
 
 ## Directory Structure
 
-```text
+```tree
 assets/
-├── images/
-│   ├── banner.jpeg
-│   ├── banner.png
-│   ├── banner.svg
-│   └── logo/
-│       ├── RtG-Format.svg
-│       ├── RtG-Format.png
-│       ├── RtG-Format-Shape.svg
-│       ├── RtG-Format-Background.svg
-│       ├── official-banners/
-│       │   ├── RtG-1.webp
-│       │   ├── RtG-2.webp
-│       │   ├── RtG-3.webp
-│       │   ├── RtG-4.webp
-│       │   └── RtG-5.webp
-│       └── versions/
-│           └── v1/
-│               ├── RtG-Format-v1.svg
-│               └── RtG-Format-v1.png
-│
-├── models/
-│   ├─ ALL.blend
-│   ├─ AltitudeSensor.obj
-│   ├─ Anchor.obj
-│   ├─ Arm.obj
-│   ├─ Balloon.obj
-│   ├─ BallSocket.obj
-│   ├─ Banjo.obj
-│   ├─ Base.obj
-│   ├─ BeachBall.obj
-│   ├─ Bearing.obj
-│   ├─ Board.obj
-│   ├─ Body.obj
-│   ├─ BouncyBall.obj
-│   ├─ BowlingBall.obj
-│   ├─ BrakeLight.obj
-│   ├─ Briefcase.obj
-│   ├─ Bumper.obj
-│   ├─ Button.obj
-│   ├─ Camera.obj
-│   ├─ Canister.obj
-│   ├─ Cannon.obj
-│   ├─ CannonBall.obj
-│   ├─ Carrot.obj
-│   ├─ Chassis.obj
-│   ├─ Cinderblock.obj
-│   ├─ Connector.obj
-│   ├─ ConnectorBall.obj
-│   ├─ Delayer.obj
-│   ├─ Detacher.obj
-│   ├─ DoorA.obj
-│   ├─ DoorB.obj
-│   ├─ DoorC.obj
-│   ├─ DoorD.obj
-│   ├─ Drumkit.obj
-│   ├─ EntitySensor.obj
-│   ├─ FishBowl.obj
-│   ├─ Fricklet.obj
-│   ├─ FuelTank.obj
-│   ├─ GasCap.obj
-│   ├─ Gate-AND.obj
-│   ├─ Gate-NOT.obj
-│   ├─ Gate-OR.obj
-│   ├─ GoldPotatoEngine.obj
-│   ├─ Googie.obj
-│   ├─ Gramby.obj
-│   ├─ Grenade.obj
-│   ├─ Guitar.obj
-│   ├─ Gun.obj
-│   ├─ Gyro.obj
-│   ├─ HalfConnectorBall.obj
-│   ├─ Head.obj
-│   ├─ Hood.obj
-│   ├─ InputSensor.obj
-│   ├─ Joint.obj
-│   ├─ Joust.obj
-│   ├─ Jug.obj
-│   ├─ Keyboard.obj
-│   ├─ Leafblower.obj
-│   ├─ Leg.obj
-│   ├─ Light.obj
-│   ├─ Lock.obj
-│   ├─ LongStick.obj
-│   ├─ Looper.obj
-│   ├─ Mag.obj
-│   ├─ MatchingGyro.obj
-│   ├─ MountedGun.obj
-│   ├─ Part.obj
-│   ├─ Pie.obj
-│   ├─ Pipes.obj
-│   ├─ Piston.obj
-│   ├─ Plunger.obj
-│   ├─ Poop.obj
-│   ├─ PotatoEngine.obj
-│   ├─ PressurePlate.obj
-│   ├─ Propeller.obj
-│   ├─ Radio.obj
-│   ├─ Ramp.obj
-│   ├─ Recorder.obj
-│   ├─ RemoteButton.obj
-│   ├─ RiotShield.obj
-│   ├─ Rocket.obj
-│   ├─ RockingChair.obj
-│   ├─ Roof.obj
-│   ├─ Rope.obj
-│   ├─ RPG.obj
-│   ├─ RubberBand.obj
-│   ├─ Seat.obj
-│   ├─ Servo_Physics.obj
-│   ├─ Servo.obj
-│   ├─ ShoppingCart.obj
-│   ├─ ShortStick.obj
-│   ├─ Shotgun.obj
-│   ├─ Sledge.obj
-│   ├─ Splitter_1.obj
-│   ├─ Splitter_2.obj
-│   ├─ Splitter_3.obj
-│   ├─ Splitter_4.obj
-│   ├─ Splitter.obj
-│   ├─ SprayPaint.obj
-│   ├─ SpringJuice.obj
-│   ├─ StaringGyro.obj
-│   ├─ SteeringGyro.obj
-│   ├─ SteeringWheel.obj
-│   ├─ Stick.obj
-│   ├─ SuperPowerClock.obj
-│   ├─ Switch.obj
-│   ├─ Thruster.obj
-│   ├─ Tire.obj
-│   ├─ ToolGun.obj
-│   ├─ Tooth.obj
-│   ├─ TripWire.obj
-│   ├─ Trowel.obj
-│   ├─ Trumpet.obj
-│   ├─ Trunk.obj
-│   ├─ TV.obj
-│   ├─ Uzi.obj
-│   ├─ VelocitySensor.obj
-│   ├─ wad.obj
-│   ├─ Wheel.obj
-│   ├─ Wing.obj
-│   └─ Wire.obj
-│
-├── sounds/
-│   ├── error.mp3
-│   └── notification.mp3
-│
-└── svg/
-    ├── menu-closed_light.svg
-    ├── menu-closed.svg
-    ├── menu-opened_light.svg
-    └── menu-opened.svg
+├─ images/
+│  ├─ logo/
+│  │  ├─ official-banners/
+│  │  │  ├─ RtG-1.webp
+│  │  │  ├─ RtG-2.webp
+│  │  │  ├─ RtG-3.webp
+│  │  │  ├─ RtG-4.webp
+│  │  │  └─ RtG-5.webp
+│  │  ├─ versions/
+│  │  │  ├─ shape-v1/
+│  │  │  │  └─ RtG-Format-Shape-ToFInish.png
+│  │  │  └─ v1/
+│  │  │     ├─ RtG-Format-v1.png
+│  │  │     └─ RtG-Format-v1.svg
+│  │  ├─ RtG-Format-Background.svg
+│  │  ├─ RtG-Format-Shape-light.svg
+│  │  ├─ RtG-Format-Shape.svg
+│  │  ├─ RtG-Format.png
+│  │  └─ RtG-Format.svg
+│  ├─ banner.jpeg
+│  ├─ banner.png
+│  ├─ banner.svg
+│  └─ RtG.png
+├─ models/
+│  ├─ AltitudeSensor/
+│  ├─ Anchor/
+│  ├─ Arm/
+│  ├─ Balloon/
+│  ├─ BallSocket/
+│  ├─ Banjo/
+│  ├─ Base/
+│  ├─ BeachBall/
+│  ├─ Bearing/
+│  ├─ Board/
+│  ├─ Body/
+│  ├─ BouncyBall/
+│  ├─ BowlingBall/
+│  ├─ BrakeLight/
+│  ├─ Briefcase/
+│  ├─ Bumper/
+│  ├─ Button/
+│  ├─ Camera/
+│  ├─ Canister/
+│  ├─ Cannon/
+│  ├─ CannonBall/
+│  ├─ Carrot/
+│  ├─ Chassis/
+│  ├─ Cinderblock/
+│  ├─ Connector/
+│  ├─ ConnectorBall/
+│  ├─ Delayer/
+│  ├─ Detacher/
+│  ├─ DoorA/
+│  ├─ DoorB/
+│  ├─ DoorC/
+│  ├─ DoorD/
+│  ├─ Drumkit/
+│  ├─ EntitySensor/
+│  ├─ FishBowl/
+│  ├─ Fricklet/
+│  ├─ FuelTank/
+│  ├─ GasCap/
+│  ├─ Gate-AND/
+│  ├─ Gate-NOT/
+│  ├─ Gate-OR/
+│  ├─ GoldPotatoEngine/
+│  ├─ Googie/
+│  ├─ Gramby/
+│  ├─ Grenade/
+│  ├─ Guitar/
+│  ├─ Gun/
+│  ├─ Gyro/
+│  ├─ HalfConnectorBall/
+│  ├─ Head/
+│  ├─ Hood/
+│  ├─ InputSensor/
+│  ├─ Joint/
+│  ├─ Joust/
+│  ├─ Jug/
+│  ├─ Keyboard/
+│  ├─ Leafblower/
+│  ├─ Leg/
+│  ├─ Light/
+│  ├─ Lock/
+│  ├─ LongStick/
+│  ├─ Looper/
+│  ├─ Mag/
+│  ├─ MatchingGyro/
+│  ├─ MountedGun/
+│  ├─ Part/
+│  ├─ Pie/
+│  ├─ Pipes/
+│  ├─ Piston/
+│  ├─ Plunger/
+│  ├─ Poop/
+│  ├─ PotatoEngine/
+│  ├─ PressurePlate/
+│  ├─ Propeller/
+│  ├─ Radio/
+│  ├─ Ramp/
+│  ├─ Recorder/
+│  ├─ RemoteButton/
+│  ├─ RiotShield/
+│  ├─ Rocket/
+│  ├─ RockingChair/
+│  ├─ Roof/
+│  ├─ Rope/
+│  ├─ RPG/
+│  ├─ RubberBand/
+│  ├─ Seat/
+│  ├─ Servo/
+│  ├─ Servo_Physics/
+│  ├─ ShoppingCart/
+│  ├─ ShortStick/
+│  ├─ Shotgun/
+│  ├─ Sledge/
+│  ├─ Splitter/
+│  ├─ Splitter_1/
+│  ├─ Splitter_2/
+│  ├─ Splitter_3/
+│  ├─ Splitter_4/
+│  ├─ SprayPaint/
+│  ├─ SpringJuice/
+│  ├─ StaringGyro/
+│  ├─ SteeringGyro/
+│  ├─ SteeringWheel/
+│  ├─ Stick/
+│  ├─ SuperPowerClock/
+│  ├─ Switch/
+│  ├─ Thruster/
+│  ├─ Tire/
+│  ├─ ToolGun/
+│  ├─ Tooth/
+│  ├─ TripWire/
+│  ├─ Trowel/
+│  ├─ Trumpet/
+│  ├─ Trunk/
+│  ├─ TV/
+│  ├─ Uzi/
+│  ├─ VelocitySensor/
+│  ├─ wad/
+│  ├─ Wheel/
+│  ├─ Wing/
+│  ├─ Wire/
+│  │
+│  ├─ ALL.blend
+│  ├─ ALL.blend1
+│  ├─ blend_json.py
+│  ├─ blend.py
+│  └─ README.md
+├─ sounds/
+│  ├─ error.mp3
+│  ├─ notification.mp3
+│  ├─ slider.mp3
+│  └─ tap.mp3
+├─ svg/
+│  ├─ menu-closed_light.svg
+│  ├─ menu-closed.svg
+│  ├─ menu-opened_light.svg
+│  └─ menu-opened.svg
+└─ README.md
 ```
 
 ## Images
@@ -216,23 +225,9 @@ These assets are separated by their purpose so that models, interface graphics, 
 
 ### Models
 
-The [`models/`](models/) directory contains the 3D models used by RtG-Preview.
+The [`models/`](models/) directory contains the 3D models and their metadata used by **RtG-Preview**.
 
-Models use the **Wavefront OBJ** format and are resolved from their internal RtG object type name.
-
-For example:
-
-* [`Fricklet.obj`](models/Fricklet.obj) — 3D model for the `Fricklet` object.
-* [`Tooth.obj`](models/Tooth.obj) — 3D model for the `Tooth` object.
-
-RtG-Preview automatically maps an object's type name to the corresponding model file. For example:
-
-```text
-"Tooth" → assets/models/Tooth.obj
-"Fricklet" → assets/models/Fricklet.obj
-```
-
-The object type used by the renderer should therefore match the model filename.
+Additional details about model creation, Blender hierarchy, branches, `start` objects, `Point_#` objects, and JSON mdata are documented in [`models/README.md`](models/README.md).
 
 ### Sounds
 

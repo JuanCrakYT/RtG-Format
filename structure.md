@@ -384,6 +384,8 @@ RtG-Format/
 │   │    └── RtG-Image.tree
 │   ├── RtG-Image/
 │   │    └── ...
+│   ├── RtG-AI/
+│   │    └── ...
 │   └── agent/
 │        ├── README.md
 │        ├── parts_diff.py
