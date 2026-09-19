@@ -994,5 +994,5 @@ Las siguientes líneas de investigación han sido identificadas para guiar el de
 ---
 
 # RtG Build Format
-> **Documento:** El archivo no se encuentra aquí, entre a "obj_ids" para verlo.
+> **Documento:** El archivo no se encuentra aquí, entre a "[obj_ids](obj_ids-spanish.md)" para verlo.
 > **Hecho por:** @JuanCrakYT
