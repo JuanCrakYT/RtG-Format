@@ -944,6 +944,7 @@ Estos objetos utilizan puntos de conexión definidos por otros objetos.
     - No aparece en el panel normal de spawn.
     - Debe cargarse internamente mediante el formato de build.
     - No posee IDs de puntos de conexión propios.
+    - La fuente de la `PolaroidPhoto` se llama "Indie flower".
 60.    Fricklet
     > El objeto `Fricklet` presenta un comportamiento diferente.
     - Puede cargarse mediante una build.
