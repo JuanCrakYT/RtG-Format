@@ -18,6 +18,11 @@
         "Name": "Anchor",
         "Tooltip": "",
         "LocalPoints": {},
-        "Branches": {}
+        "Branches": {},
+        "AssetID": {
+            "ID": 5829281780,
+            "CreatorLink": "https://create.roblox.com/store/asset/5829281780",
+            "RbxAssetID": "rbxassetid://5829281780"
+        }
     }
 ]

@@ -1,4 +1,4 @@
-﻿[
+[
     {
         "RtG-Format": {
             "RtG-Format Data": {
@@ -17,7 +17,15 @@
         },
         "Name": "Splitter_3",
         "Tooltip": "",
-        """""""LocalPoints": {},
+        "LocalPoints": {},
         "Branches": {}
-    }
+    
+            "LocalPoints": {},
+            "Branches Start": {},
+            "AssetID": {
+            "ID": "",
+            "CreatorLink": "",
+            "RbxAssetID": ""
+            }
+        }
 ]

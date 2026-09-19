@@ -1,4 +1,4 @@
-﻿[
+[
     {
         "RtG-Format": {
             "RtG-Format Data": {
@@ -18,11 +18,25 @@
         "Name": "AltitudeSensor",
         "Tooltip": "",
         "LocalPoints": {
-            "1":[
-                [0,2,0],
-                [0,0,0]
+            "1": [
+                [
+                    0,
+                    2,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0
+                ]
             ]
         },
-        "Branches": {}
+        "Branches": {},
+        "Branches Start": {},
+        "AssetID": {
+            "ID": "",
+            "CreatorLink": "",
+            "RbxAssetID": ""
+        }
     }
 ]

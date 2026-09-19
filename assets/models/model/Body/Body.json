@@ -1,4 +1,4 @@
-﻿[
+[
     {
         "RtG-Format": {
             "RtG-Format Data": {
@@ -18,6 +18,12 @@
         "Name": "Body",
         "Tooltip": "let the these hit the FLOOOOOOOOOOOOOOOR",
         "LocalPoints": {},
-        "Branches": {}
+        "Branches": {},
+        "Branches Start": {},
+        "AssetID": {
+            "ID": "",
+            "CreatorLink": "",
+            "RbxAssetID": ""
+        }
     }
 ]

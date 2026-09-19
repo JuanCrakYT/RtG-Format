@@ -1,4 +1,4 @@
-﻿[
+[
     {
         "RtG-Format": {
             "RtG-Format Data": {
@@ -17,7 +17,13 @@
         },
         "Name": "Thruster",
         "Tooltip": "",
-        """""""""LocalPoints": {},
-        "Branches": {}
-    }
+        "LocalPoints": {},
+        "Branches": {},
+            "Branches Start": {},
+            "AssetID": {
+            "ID": "",
+            "CreatorLink": "",
+            "RbxAssetID": ""
+            }
+        }
 ]

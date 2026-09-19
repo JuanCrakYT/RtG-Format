@@ -1,4 +1,4 @@
-﻿[
+[
     {
         "RtG-Format": {
             "RtG-Format Data": {
@@ -18,6 +18,12 @@
         "Name": "RPG",
         "Tooltip": "",
         "LocalPoints": {},
-        "Branches": {}
+        "Branches": {},
+        "Branches Start": {},
+        "AssetID": {
+            "ID": "",
+            "CreatorLink": "",
+            "RbxAssetID": ""
+        }
     }
 ]

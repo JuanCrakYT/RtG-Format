@@ -1,4 +1,4 @@
-﻿[
+[
     {
         "RtG-Format": {
             "RtG-Format Data": {
@@ -16,7 +16,14 @@
             "Page": {}
         },
         "Name": "TV",
-        "Tooltip"LocalPoints": {},
-        "Branches": {}
+        "Tooltip": "", 
+        "LocalPoints": {},
+        "Branches": {},
+        "Branches Start": {},
+        "AssetID": {
+        "ID": "",
+        "CreatorLink": "",
+        "RbxAssetID": ""
+        }
     }
 ]

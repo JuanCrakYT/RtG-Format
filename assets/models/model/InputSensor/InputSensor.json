@@ -1,4 +1,4 @@
-﻿[
+[
     {
         "RtG-Format": {
             "RtG-Format Data": {
@@ -18,6 +18,11 @@
         "Name": "InputSensor",
         "Tooltip": "Emits a signal when a player in an attached seat presses the input",
         "LocalPoints": {},
-        "Branches": {}
+        "Branches": {},
+        "Branches Start": {},
+        "AssetID": {
+            "ID": "",
+            "CreatorLink": "",
+            "RbxAssetID": ""
+        }
     }
-]
