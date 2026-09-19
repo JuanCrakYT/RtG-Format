@@ -1,0 +1,1420 @@
+[
+    [
+        "PolaroidPhoto",
+        [],
+        {
+            "Phrase": "A scary idea with friends",
+            "PhotoData": {
+                "cameraCF": {
+                    "serializedType": "CFrame",
+                    "data": [
+                        547.1304931640625,
+                        55756.4921875,
+                        837.8487548828125,
+                        -0.9925944805145264,
+                        0.0063176993280649185,
+                        0.12131339311599731,
+                        0.009190383367240429,
+                        0.9996901154518127,
+                        0.023134957998991013,
+                        -0.12112963199615479,
+                        0.02407854050397873,
+                        -0.9923449754714966
+                    ]
+                },
+                "sceneCullObjects": [],
+                "sceneNewObjects": {
+                    "3158": {
+                        "objectId": "3158",
+                        "className": "Part",
+                        "props": {
+                            "Transparency": 0,
+                            "Name": "HandL",
+                            "CFrame": {
+                                "serializedType": "CFrame",
+                                "data": [
+                                    545.8668823242188,
+                                    55755.4609375,
+                                    833.9877319335938,
+                                    -0.4096716642379761,
+                                    0.7507827281951904,
+                                    -0.5181646347045898,
+                                    0.8782325983047485,
+                                    0.47823166847229004,
+                                    -0.0014260709285736084,
+                                    0.24673202633857727,
+                                    -0.45565325021743774,
+                                    -0.855279803276062
+                                ]
+                            },
+                            "Color": {
+                                "serializedType": "Color3",
+                                "data": [
+                                    1,
+                                    1,
+                                    1
+                                ]
+                            },
+                            "Material": {
+                                "serializedType": "Enum",
+                                "data": "Plastic"
+                            },
+                            "Shape": {
+                                "serializedType": "Enum",
+                                "data": "Block"
+                            },
+                            "Size": {
+                                "serializedType": "Vector3",
+                                "data": [
+                                    0.6819999814033508,
+                                    0.25699999928474426,
+                                    0.5019999742507935
+                                ]
+                            }
+                        },
+                        "children": [
+                            {
+                                "className": "SpecialMesh",
+                                "props": {
+                                    "Offset": {
+                                        "serializedType": "Vector3",
+                                        "data": [
+                                            0,
+                                            0,
+                                            -0.06300000101327896
+                                        ]
+                                    },
+                                    "MeshType": {
+                                        "serializedType": "Enum",
+                                        "data": "FileMesh"
+                                    },
+                                    "Scale": {
+                                        "serializedType": "Vector3",
+                                        "data": [
+                                            1,
+                                            1,
+                                            1
+                                        ]
+                                    },
+                                    "MeshId": "rbxassetid://5781547409",
+                                    "TextureId": "rbxassetid://5302791622"
+                                }
+                            }
+                        ]
+                    },
+                    "3171": {
+                        "objectId": "3171",
+                        "className": "Part",
+                        "props": {
+                            "Transparency": 0,
+                            "Name": "Body",
+                            "CFrame": {
+                                "serializedType": "CFrame",
+                                "data": [
+                                    545.0177001953125,
+                                    55756.15234375,
+                                    834.4885864257812,
+                                    -0.8577028512954712,
+                                    0.0018124672351405025,
+                                    -0.5141427516937256,
+                                    0.00218086875975132,
+                                    0.999997615814209,
+                                    -0.00011295359581708908,
+                                    0.514141321182251,
+                                    -0.0012181585188955069,
+                                    -0.857704758644104
+                                ]
+                            },
+                            "Color": {
+                                "serializedType": "Color3",
+                                "data": [
+                                    1,
+                                    1,
+                                    1
+                                ]
+                            },
+                            "Material": {
+                                "serializedType": "Enum",
+                                "data": "Plastic"
+                            },
+                            "Shape": {
+                                "serializedType": "Enum",
+                                "data": "Block"
+                            },
+                            "Size": {
+                                "serializedType": "Vector3",
+                                "data": [
+                                    0.75,
+                                    1.3799999952316284,
+                                    0.75
+                                ]
+                            }
+                        },
+                        "children": [
+                            {
+                                "className": "SpecialMesh",
+                                "props": {
+                                    "Offset": {
+                                        "serializedType": "Vector3",
+                                        "data": [
+                                            0,
+                                            0,
+                                            0
+                                        ]
+                                    },
+                                    "MeshType": {
+                                        "serializedType": "Enum",
+                                        "data": "FileMesh"
+                                    },
+                                    "Scale": {
+                                        "serializedType": "Vector3",
+                                        "data": [
+                                            1,
+                                            1,
+                                            1
+                                        ]
+                                    },
+                                    "MeshId": "rbxassetid://5302772569",
+                                    "TextureId": "rbxassetid://5302791622"
+                                }
+                            }
+                        ]
+                    },
+                    "3148": {
+                        "objectId": "3148",
+                        "className": "Part",
+                        "props": {
+                            "Transparency": 0,
+                            "Name": "LegL",
+                            "CFrame": {
+                                "serializedType": "CFrame",
+                                "data": [
+                                    545.1882934570312,
+                                    55755.11328125,
+                                    834.26416015625,
+                                    -0.857684850692749,
+                                    0.157175213098526,
+                                    -0.48956382274627686,
+                                    0.0021660849452018738,
+                                    0.9532291293144226,
+                                    0.3022408187389374,
+                                    0.5141712427139282,
+                                    0.25816693902015686,
+                                    -0.8179106712341309
+                                ]
+                            },
+                            "Color": {
+                                "serializedType": "Color3",
+                                "data": [
+                                    1,
+                                    1,
+                                    1
+                                ]
+                            },
+                            "Material": {
+                                "serializedType": "Enum",
+                                "data": "Plastic"
+                            },
+                            "Shape": {
+                                "serializedType": "Enum",
+                                "data": "Block"
+                            },
+                            "Size": {
+                                "serializedType": "Vector3",
+                                "data": [
+                                    0.23999999463558197,
+                                    0.6800000071525574,
+                                    0.23999999463558197
+                                ]
+                            }
+                        },
+                        "children": [
+                            {
+                                "className": "SpecialMesh",
+                                "props": {
+                                    "Offset": {
+                                        "serializedType": "Vector3",
+                                        "data": [
+                                            0,
+                                            0,
+                                            -0.10000000149011612
+                                        ]
+                                    },
+                                    "MeshType": {
+                                        "serializedType": "Enum",
+                                        "data": "FileMesh"
+                                    },
+                                    "Scale": {
+                                        "serializedType": "Vector3",
+                                        "data": [
+                                            1,
+                                            1,
+                                            1
+                                        ]
+                                    },
+                                    "MeshId": "rbxassetid://5302772841",
+                                    "TextureId": "rbxassetid://5302791622"
+                                }
+                            }
+                        ]
+                    },
+                    "3160": {
+                        "objectId": "3160",
+                        "className": "MeshPart",
+                        "props": {
+                            "Transparency": 0,
+                            "TextureID": "",
+                            "Material": {
+                                "serializedType": "Enum",
+                                "data": "SmoothPlastic"
+                            },
+                            "Color": {
+                                "serializedType": "Color3",
+                                "data": [
+                                    0.6549019813537598,
+                                    0.5098039507865906,
+                                    1
+                                ]
+                            },
+                            "MeshId": "rbxassetid://5798774379",
+                            "CFrame": {
+                                "serializedType": "CFrame",
+                                "data": [
+                                    544.8762817382812,
+                                    55756.296875,
+                                    836.0288696289062,
+                                    0.18124008178710938,
+                                    0.08788703382015228,
+                                    -0.979503870010376,
+                                    -0.17785285413265228,
+                                    0.9825049638748169,
+                                    0.055247750133275986,
+                                    0.967223048210144,
+                                    0.16419446468353271,
+                                    0.19370025396347046
+                                ]
+                            },
+                            "Size": {
+                                "serializedType": "Vector3",
+                                "data": [
+                                    0.7167795896530151,
+                                    0.49174416065216064,
+                                    0.08527909219264984
+                                ]
+                            }
+                        },
+                        "children": []
+                    },
+                    "3166": {
+                        "objectId": "3166",
+                        "className": "Part",
+                        "props": {
+                            "Transparency": 0,
+                            "Name": "ArmL",
+                            "CFrame": {
+                                "serializedType": "CFrame",
+                                "data": [
+                                    545.6137084960938,
+                                    55756.1171875,
+                                    834.13623046875,
+                                    -0.40345871448516846,
+                                    0.7541301250457764,
+                                    -0.5181782841682434,
+                                    0.8821452856063843,
+                                    0.47097522020339966,
+                                    -0.001413792371749878,
+                                    0.24298293888568878,
+                                    -0.4576789438724518,
+                                    -0.8552714586257935
+                                ]
+                            },
+                            "Color": {
+                                "serializedType": "Color3",
+                                "data": [
+                                    1,
+                                    1,
+                                    1
+                                ]
+                            },
+                            "Material": {
+                                "serializedType": "Enum",
+                                "data": "Plastic"
+                            },
+                            "Shape": {
+                                "serializedType": "Enum",
+                                "data": "Block"
+                            },
+                            "Size": {
+                                "serializedType": "Vector3",
+                                "data": [
+                                    1.0470000505447388,
+                                    0.19200000166893005,
+                                    0.3269999921321869
+                                ]
+                            }
+                        },
+                        "children": [
+                            {
+                                "className": "SpecialMesh",
+                                "props": {
+                                    "Offset": {
+                                        "serializedType": "Vector3",
+                                        "data": [
+                                            0,
+                                            0,
+                                            0
+                                        ]
+                                    },
+                                    "MeshType": {
+                                        "serializedType": "Enum",
+                                        "data": "FileMesh"
+                                    },
+                                    "Scale": {
+                                        "serializedType": "Vector3",
+                                        "data": [
+                                            1.236127495765686,
+                                            1,
+                                            1
+                                        ]
+                                    },
+                                    "MeshId": "rbxassetid://5781546908",
+                                    "TextureId": "rbxassetid://5302791622"
+                                }
+                            }
+                        ]
+                    },
+                    "3163": {
+                        "objectId": "3163",
+                        "className": "MeshPart",
+                        "props": {
+                            "Transparency": 1,
+                            "TextureID": "",
+                            "Material": {
+                                "serializedType": "Enum",
+                                "data": "SmoothPlastic"
+                            },
+                            "Color": {
+                                "serializedType": "Color3",
+                                "data": [
+                                    0.8313725590705872,
+                                    0.8588235378265381,
+                                    0.9098039269447327
+                                ]
+                            },
+                            "MeshId": "rbxassetid://5805830512",
+                            "CFrame": {
+                                "serializedType": "CFrame",
+                                "data": [
+                                    545.4920043945312,
+                                    55757.09765625,
+                                    834.9697265625,
+                                    -0.8849363327026367,
+                                    0.05212677642703056,
+                                    -0.4627859592437744,
+                                    -0.13727967441082,
+                                    0.9203652143478394,
+                                    0.3661723732948303,
+                                    0.4450194835662842,
+                                    0.38757026195526123,
+                                    -0.8073086738586426
+                                ]
+                            },
+                            "Size": {
+                                "serializedType": "Vector3",
+                                "data": [
+                                    0.18801400065422058,
+                                    0.29462099075317383,
+                                    0.05000000074505806
+                                ]
+                            }
+                        },
+                        "children": []
+                    },
+                    "3149": {
+                        "objectId": "3149",
+                        "className": "MeshPart",
+                        "props": {
+                            "Transparency": 1,
+                            "TextureID": "",
+                            "Material": {
+                                "serializedType": "Enum",
+                                "data": "SmoothPlastic"
+                            },
+                            "Color": {
+                                "serializedType": "Color3",
+                                "data": [
+                                    0.8313725590705872,
+                                    0.8588235378265381,
+                                    0.9098039269447327
+                                ]
+                            },
+                            "MeshId": "rbxassetid://5805830512",
+                            "CFrame": {
+                                "serializedType": "CFrame",
+                                "data": [
+                                    545.7503051757812,
+                                    55757.40234375,
+                                    834.8973999023438,
+                                    0.8026202321052551,
+                                    -0.22094063460826874,
+                                    -0.5540632605552673,
+                                    -0.32359862327575684,
+                                    -0.9415836334228516,
+                                    -0.0932975560426712,
+                                    -0.5010835528373718,
+                                    0.25417661666870117,
+                                    -0.8272302150726318
+                                ]
+                            },
+                            "Size": {
+                                "serializedType": "Vector3",
+                                "data": [
+                                    0.18801400065422058,
+                                    0.29462099075317383,
+                                    0.05000000074505806
+                                ]
+                            }
+                        },
+                        "children": []
+                    },
+                    "3168": {
+                        "objectId": "3168",
+                        "className": "MeshPart",
+                        "props": {
+                            "Transparency": 0,
+                            "TextureID": "",
+                            "Material": {
+                                "serializedType": "Enum",
+                                "data": "Granite"
+                            },
+                            "Color": {
+                                "serializedType": "Color3",
+                                "data": [
+                                    0.23137255012989044,
+                                    0.2705882489681244,
+                                    0.38823530077934265
+                                ]
+                            },
+                            "MeshId": "rbxassetid://5829281780",
+                            "CFrame": {
+                                "serializedType": "CFrame",
+                                "data": [
+                                    547.1295776367188,
+                                    55756.07421875,
+                                    837.8397827148438,
+                                    0.9927695393562317,
+                                    -0.0023200528230518103,
+                                    -0.12001354992389679,
+                                    0.0002648276276886463,
+                                    0.9998530745506287,
+                                    -0.017138058319687843,
+                                    0.12003567814826965,
+                                    0.016982359811663628,
+                                    0.9926243424415588
+                                ]
+                            },
+                            "Size": {
+                                "serializedType": "Vector3",
+                                "data": [
+                                    1.5248103141784668,
+                                    0.2463783621788025,
+                                    1.2374529838562012
+                                ]
+                            }
+                        },
+                        "children": []
+                    },
+                    "3167": {
+                        "objectId": "3167",
+                        "className": "Part",
+                        "props": {
+                            "Transparency": 0.699999988079071,
+                            "Name": "Handle",
+                            "CFrame": {
+                                "serializedType": "CFrame",
+                                "data": [
+                                    547.1304931640625,
+                                    55756.4921875,
+                                    837.8487548828125,
+                                    0.9925941228866577,
+                                    0.0063176993280649185,
+                                    -0.12131339311599731,
+                                    -0.009190383367240429,
+                                    0.9996901154518127,
+                                    -0.023134957998991013,
+                                    0.12112963199615479,
+                                    0.02407854050397873,
+                                    0.9923446178436279
+                                ]
+                            },
+                            "Color": {
+                                "serializedType": "Color3",
+                                "data": [
+                                    0.572549045085907,
+                                    0.8156862854957581,
+                                    1
+                                ]
+                            },
+                            "Material": {
+                                "serializedType": "Enum",
+                                "data": "Neon"
+                            },
+                            "Shape": {
+                                "serializedType": "Enum",
+                                "data": "Block"
+                            },
+                            "Size": {
+                                "serializedType": "Vector3",
+                                "data": [
+                                    0.7889446020126343,
+                                    0.6759630441665649,
+                                    1.0444722175598145
+                                ]
+                            }
+                        },
+                        "children": []
+                    },
+                    "3156": {
+                        "objectId": "3156",
+                        "className": "MeshPart",
+                        "props": {
+                            "Transparency": 1,
+                            "TextureID": "",
+                            "Material": {
+                                "serializedType": "Enum",
+                                "data": "SmoothPlastic"
+                            },
+                            "Color": {
+                                "serializedType": "Color3",
+                                "data": [
+                                    0.8313725590705872,
+                                    0.8588235378265381,
+                                    0.9098039269447327
+                                ]
+                            },
+                            "MeshId": "rbxassetid://5805830512",
+                            "CFrame": {
+                                "serializedType": "CFrame",
+                                "data": [
+                                    545.7755126953125,
+                                    55757.1328125,
+                                    834.8250122070312,
+                                    -0.8849598169326782,
+                                    0.04957954213023186,
+                                    -0.4630206525325775,
+                                    -0.13724437355995178,
+                                    0.9223806262016296,
+                                    0.3610788583755493,
+                                    0.4449833929538727,
+                                    0.3830872178077698,
+                                    -0.8094652891159058
+                                ]
+                            },
+                            "Size": {
+                                "serializedType": "Vector3",
+                                "data": [
+                                    0.18801400065422058,
+                                    0.29462099075317383,
+                                    0.05000000074505806
+                                ]
+                            }
+                        },
+                        "children": []
+                    },
+                    "3164": {
+                        "objectId": "3164",
+                        "className": "Part",
+                        "props": {
+                            "Transparency": 0,
+                            "Name": "Display",
+                            "CFrame": {
+                                "serializedType": "CFrame",
+                                "data": [
+                                    544.8613891601562,
+                                    55756.6796875,
+                                    835.8438720703125,
+                                    0.18124008178710938,
+                                    0.08788703382015228,
+                                    -0.979503870010376,
+                                    -0.17785285413265228,
+                                    0.9825049638748169,
+                                    0.055247750133275986,
+                                    0.967223048210144,
+                                    0.16419446468353271,
+                                    0.19370025396347046
+                                ]
+                            },
+                            "Color": {
+                                "serializedType": "Color3",
+                                "data": [
+                                    0.6549019813537598,
+                                    0.5098039507865906,
+                                    1
+                                ]
+                            },
+                            "Material": {
+                                "serializedType": "Enum",
+                                "data": "SmoothPlastic"
+                            },
+                            "Shape": {
+                                "serializedType": "Enum",
+                                "data": "Block"
+                            },
+                            "Size": {
+                                "serializedType": "Vector3",
+                                "data": [
+                                    0.05999999865889549,
+                                    0.2800000011920929,
+                                    0.35999998450279236
+                                ]
+                            }
+                        },
+                        "children": []
+                    },
+                    "3151": {
+                        "objectId": "3151",
+                        "className": "MeshPart",
+                        "props": {
+                            "Transparency": 1,
+                            "TextureID": "",
+                            "Material": {
+                                "serializedType": "Enum",
+                                "data": "SmoothPlastic"
+                            },
+                            "Color": {
+                                "serializedType": "Color3",
+                                "data": [
+                                    0.8313725590705872,
+                                    0.8588235378265381,
+                                    0.9098039269447327
+                                ]
+                            },
+                            "MeshId": "rbxassetid://5805830512",
+                            "CFrame": {
+                                "serializedType": "CFrame",
+                                "data": [
+                                    545.081298828125,
+                                    55757.109375,
+                                    835.1919555664062,
+                                    -0.8593177795410156,
+                                    0.2704719007015228,
+                                    -0.4340713322162628,
+                                    0.14066076278686523,
+                                    0.9409751296043396,
+                                    0.307864248752594,
+                                    0.49171897768974304,
+                                    0.20349639654159546,
+                                    -0.8466414213180542
+                                ]
+                            },
+                            "Size": {
+                                "serializedType": "Vector3",
+                                "data": [
+                                    0.18801400065422058,
+                                    0.29462099075317383,
+                                    0.05000000074505806
+                                ]
+                            }
+                        },
+                        "children": []
+                    },
+                    "3155": {
+                        "objectId": "3155",
+                        "className": "Part",
+                        "props": {
+                            "Transparency": 0,
+                            "Name": "ArmR",
+                            "CFrame": {
+                                "serializedType": "CFrame",
+                                "data": [
+                                    544.641357421875,
+                                    55756.375,
+                                    835.11181640625,
+                                    0.18123233318328857,
+                                    -0.97950279712677,
+                                    -0.08791562914848328,
+                                    -0.177870512008667,
+                                    0.055274128913879395,
+                                    -0.9825003147125244,
+                                    0.9672212600708008,
+                                    0.19369840621948242,
+                                    -0.16420722007751465
+                                ]
+                            },
+                            "Color": {
+                                "serializedType": "Color3",
+                                "data": [
+                                    1,
+                                    1,
+                                    1
+                                ]
+                            },
+                            "Material": {
+                                "serializedType": "Enum",
+                                "data": "Plastic"
+                            },
+                            "Shape": {
+                                "serializedType": "Enum",
+                                "data": "Block"
+                            },
+                            "Size": {
+                                "serializedType": "Vector3",
+                                "data": [
+                                    1.0470000505447388,
+                                    0.19200000166893005,
+                                    0.3269999921321869
+                                ]
+                            }
+                        },
+                        "children": [
+                            {
+                                "className": "SpecialMesh",
+                                "props": {
+                                    "Offset": {
+                                        "serializedType": "Vector3",
+                                        "data": [
+                                            0,
+                                            0,
+                                            0
+                                        ]
+                                    },
+                                    "MeshType": {
+                                        "serializedType": "Enum",
+                                        "data": "FileMesh"
+                                    },
+                                    "Scale": {
+                                        "serializedType": "Vector3",
+                                        "data": [
+                                            1.236127495765686,
+                                            1,
+                                            1
+                                        ]
+                                    },
+                                    "MeshId": "rbxassetid://5781548019",
+                                    "TextureId": "rbxassetid://5302791622"
+                                }
+                            }
+                        ]
+                    },
+                    "3162": {
+                        "objectId": "3162",
+                        "className": "Part",
+                        "props": {
+                            "Transparency": 0,
+                            "Name": "LegR",
+                            "CFrame": {
+                                "serializedType": "CFrame",
+                                "data": [
+                                    544.8355712890625,
+                                    55755.109375,
+                                    834.7027587890625,
+                                    -0.8577026128768921,
+                                    -0.13159342110157013,
+                                    -0.4970214068889618,
+                                    0.002105042338371277,
+                                    0.9657844305038452,
+                                    -0.25933772325515747,
+                                    0.514142632484436,
+                                    -0.22348076105117798,
+                                    -0.8280787467956543
+                                ]
+                            },
+                            "Color": {
+                                "serializedType": "Color3",
+                                "data": [
+                                    1,
+                                    1,
+                                    1
+                                ]
+                            },
+                            "Material": {
+                                "serializedType": "Enum",
+                                "data": "Plastic"
+                            },
+                            "Shape": {
+                                "serializedType": "Enum",
+                                "data": "Block"
+                            },
+                            "Size": {
+                                "serializedType": "Vector3",
+                                "data": [
+                                    0.23999999463558197,
+                                    0.6800000071525574,
+                                    0.23999999463558197
+                                ]
+                            }
+                        },
+                        "children": [
+                            {
+                                "className": "SpecialMesh",
+                                "props": {
+                                    "Offset": {
+                                        "serializedType": "Vector3",
+                                        "data": [
+                                            0,
+                                            0,
+                                            -0.10000000149011612
+                                        ]
+                                    },
+                                    "MeshType": {
+                                        "serializedType": "Enum",
+                                        "data": "FileMesh"
+                                    },
+                                    "Scale": {
+                                        "serializedType": "Vector3",
+                                        "data": [
+                                            1,
+                                            1,
+                                            1
+                                        ]
+                                    },
+                                    "MeshId": "rbxassetid://5302772994",
+                                    "TextureId": "rbxassetid://5302791622"
+                                }
+                            }
+                        ]
+                    },
+                    "3157": {
+                        "objectId": "3157",
+                        "className": "MeshPart",
+                        "props": {
+                            "Transparency": 1,
+                            "TextureID": "",
+                            "Material": {
+                                "serializedType": "Enum",
+                                "data": "SmoothPlastic"
+                            },
+                            "Color": {
+                                "serializedType": "Color3",
+                                "data": [
+                                    0.8313725590705872,
+                                    0.8588235378265381,
+                                    0.9098039269447327
+                                ]
+                            },
+                            "MeshId": "rbxassetid://5805830512",
+                            "CFrame": {
+                                "serializedType": "CFrame",
+                                "data": [
+                                    545.0693969726562,
+                                    55757.44140625,
+                                    835.271240234375,
+                                    0.8855282068252563,
+                                    0.055466070771217346,
+                                    -0.46126285195350647,
+                                    0.11630789935588837,
+                                    -0.987699031829834,
+                                    0.10451779514551163,
+                                    -0.44979146122932434,
+                                    -0.146201953291893,
+                                    -0.8810864686965942
+                                ]
+                            },
+                            "Size": {
+                                "serializedType": "Vector3",
+                                "data": [
+                                    0.18801400065422058,
+                                    0.29462099075317383,
+                                    0.05000000074505806
+                                ]
+                            }
+                        },
+                        "children": []
+                    },
+                    "3154": {
+                        "objectId": "3154",
+                        "className": "MeshPart",
+                        "props": {
+                            "Transparency": 1,
+                            "TextureID": "",
+                            "Material": {
+                                "serializedType": "Enum",
+                                "data": "SmoothPlastic"
+                            },
+                            "Color": {
+                                "serializedType": "Color3",
+                                "data": [
+                                    0.8313725590705872,
+                                    0.8588235378265381,
+                                    0.9098039269447327
+                                ]
+                            },
+                            "MeshId": "rbxassetid://5805830512",
+                            "CFrame": {
+                                "serializedType": "CFrame",
+                                "data": [
+                                    544.845947265625,
+                                    55757.13671875,
+                                    835.3248901367188,
+                                    -0.8424335718154907,
+                                    0.37392115592956543,
+                                    -0.38792872428894043,
+                                    0.2076328992843628,
+                                    0.8896759152412415,
+                                    0.4066513478755951,
+                                    0.49718642234802246,
+                                    0.2620299756526947,
+                                    -0.8271312713623047
+                                ]
+                            },
+                            "Size": {
+                                "serializedType": "Vector3",
+                                "data": [
+                                    0.18801400065422058,
+                                    0.29462099075317383,
+                                    0.05000000074505806
+                                ]
+                            }
+                        },
+                        "children": []
+                    },
+                    "3161": {
+                        "objectId": "3161",
+                        "className": "MeshPart",
+                        "props": {
+                            "Transparency": 1,
+                            "TextureID": "",
+                            "Material": {
+                                "serializedType": "Enum",
+                                "data": "SmoothPlastic"
+                            },
+                            "Color": {
+                                "serializedType": "Color3",
+                                "data": [
+                                    0.8313725590705872,
+                                    0.8588235378265381,
+                                    0.9098039269447327
+                                ]
+                            },
+                            "MeshId": "rbxassetid://5805830512",
+                            "CFrame": {
+                                "serializedType": "CFrame",
+                                "data": [
+                                    545.5184326171875,
+                                    55757.48828125,
+                                    835.0400390625,
+                                    0.8595966100692749,
+                                    -0.1763145923614502,
+                                    -0.47959035634994507,
+                                    -0.13942506909370422,
+                                    -0.9838994741439819,
+                                    0.11181725561618805,
+                                    -0.49158358573913574,
+                                    -0.02925083041191101,
+                                    -0.8703393936157227
+                                ]
+                            },
+                            "Size": {
+                                "serializedType": "Vector3",
+                                "data": [
+                                    0.18801400065422058,
+                                    0.29462099075317383,
+                                    0.05000000074505806
+                                ]
+                            }
+                        },
+                        "children": []
+                    },
+                    "3165": {
+                        "objectId": "3165",
+                        "className": "Part",
+                        "props": {
+                            "Transparency": 0,
+                            "Name": "HandR",
+                            "CFrame": {
+                                "serializedType": "CFrame",
+                                "data": [
+                                    544.8236694335938,
+                                    55756.25,
+                                    835.796630859375,
+                                    0.18123233318328857,
+                                    -0.97950279712677,
+                                    -0.08791562914848328,
+                                    -0.177870512008667,
+                                    0.055274128913879395,
+                                    -0.9825003147125244,
+                                    0.9672212600708008,
+                                    0.19369840621948242,
+                                    -0.16420722007751465
+                                ]
+                            },
+                            "Color": {
+                                "serializedType": "Color3",
+                                "data": [
+                                    1,
+                                    1,
+                                    1
+                                ]
+                            },
+                            "Material": {
+                                "serializedType": "Enum",
+                                "data": "Plastic"
+                            },
+                            "Shape": {
+                                "serializedType": "Enum",
+                                "data": "Block"
+                            },
+                            "Size": {
+                                "serializedType": "Vector3",
+                                "data": [
+                                    0.6819999814033508,
+                                    0.25699999928474426,
+                                    0.5019999742507935
+                                ]
+                            }
+                        },
+                        "children": [
+                            {
+                                "className": "SpecialMesh",
+                                "props": {
+                                    "Offset": {
+                                        "serializedType": "Vector3",
+                                        "data": [
+                                            -0.0773005485534668,
+                                            -0.011584002524614334,
+                                            -0.022426128387451172
+                                        ]
+                                    },
+                                    "MeshType": {
+                                        "serializedType": "Enum",
+                                        "data": "FileMesh"
+                                    },
+                                    "Scale": {
+                                        "serializedType": "Vector3",
+                                        "data": [
+                                            1,
+                                            1,
+                                            1
+                                        ]
+                                    },
+                                    "MeshId": "rbxassetid://5781560294",
+                                    "TextureId": "rbxassetid://5302791622"
+                                }
+                            }
+                        ]
+                    },
+                    "3152": {
+                        "objectId": "3152",
+                        "className": "Part",
+                        "props": {
+                            "Transparency": 0,
+                            "Name": "Head",
+                            "CFrame": {
+                                "serializedType": "CFrame",
+                                "data": [
+                                    545.1051025390625,
+                                    55757.51171875,
+                                    834.64892578125,
+                                    -0.8811404705047607,
+                                    0.08894000202417374,
+                                    -0.46441489458084106,
+                                    -9.692460298538208e-05,
+                                    0.9821174740791321,
+                                    0.18826903402805328,
+                                    0.4728546142578125,
+                                    0.16593648493289948,
+                                    -0.8653749227523804
+                                ]
+                            },
+                            "Color": {
+                                "serializedType": "Color3",
+                                "data": [
+                                    1,
+                                    1,
+                                    1
+                                ]
+                            },
+                            "Material": {
+                                "serializedType": "Enum",
+                                "data": "Plastic"
+                            },
+                            "Shape": {
+                                "serializedType": "Enum",
+                                "data": "Block"
+                            },
+                            "Size": {
+                                "serializedType": "Vector3",
+                                "data": [
+                                    2.740000009536743,
+                                    1.0799999237060547,
+                                    1.3700000047683716
+                                ]
+                            }
+                        },
+                        "children": [
+                            {
+                                "className": "SpecialMesh",
+                                "props": {
+                                    "Offset": {
+                                        "serializedType": "Vector3",
+                                        "data": [
+                                            0,
+                                            -0.10000000149011612,
+                                            0
+                                        ]
+                                    },
+                                    "MeshType": {
+                                        "serializedType": "Enum",
+                                        "data": "FileMesh"
+                                    },
+                                    "Scale": {
+                                        "serializedType": "Vector3",
+                                        "data": [
+                                            1,
+                                            1,
+                                            1
+                                        ]
+                                    },
+                                    "MeshId": "rbxassetid://5302772725",
+                                    "TextureId": "rbxassetid://5302791622"
+                                }
+                            }
+                        ]
+                    },
+                    "3159": {
+                        "objectId": "3159",
+                        "className": "Part",
+                        "props": {
+                            "Transparency": 1,
+                            "Name": "HumanoidRootPart",
+                            "CFrame": {
+                                "serializedType": "CFrame",
+                                "data": [
+                                    545.0182495117188,
+                                    55756.453125,
+                                    834.4882202148438,
+                                    -0.860406756401062,
+                                    0.0018156784353777766,
+                                    -0.5096047520637512,
+                                    0.0021805630531162024,
+                                    0.999997615814209,
+                                    -0.00011871341848745942,
+                                    0.5096033215522766,
+                                    -0.0012133670970797539,
+                                    -0.8604086637496948
+                                ]
+                            },
+                            "Color": {
+                                "serializedType": "Color3",
+                                "data": [
+                                    1,
+                                    1,
+                                    1
+                                ]
+                            },
+                            "Material": {
+                                "serializedType": "Enum",
+                                "data": "Plastic"
+                            },
+                            "Shape": {
+                                "serializedType": "Enum",
+                                "data": "Block"
+                            },
+                            "Size": {
+                                "serializedType": "Vector3",
+                                "data": [
+                                    0.5,
+                                    0.5,
+                                    0.5
+                                ]
+                            }
+                        },
+                        "children": []
+                    },
+                    "3153": {
+                        "objectId": "3153",
+                        "className": "MeshPart",
+                        "props": {
+                            "Transparency": 1,
+                            "TextureID": "",
+                            "Material": {
+                                "serializedType": "Enum",
+                                "data": "SmoothPlastic"
+                            },
+                            "Color": {
+                                "serializedType": "Color3",
+                                "data": [
+                                    0.8313725590705872,
+                                    0.8588235378265381,
+                                    0.9098039269447327
+                                ]
+                            },
+                            "MeshId": "rbxassetid://5805830512",
+                            "CFrame": {
+                                "serializedType": "CFrame",
+                                "data": [
+                                    544.8350219726562,
+                                    55757.40234375,
+                                    835.354736328125,
+                                    0.8854774832725525,
+                                    0.1485198438167572,
+                                    -0.44030842185020447,
+                                    0.11632730811834335,
+                                    -0.9882247447967529,
+                                    -0.09939797222614288,
+                                    -0.4498862326145172,
+                                    0.03679477795958519,
+                                    -0.8923276662826538
+                                ]
+                            },
+                            "Size": {
+                                "serializedType": "Vector3",
+                                "data": [
+                                    0.18801400065422058,
+                                    0.29462099075317383,
+                                    0.05000000074505806
+                                ]
+                            }
+                        },
+                        "children": []
+                    },
+                    "3170": {
+                        "objectId": "3170",
+                        "className": "MeshPart",
+                        "props": {
+                            "Transparency": 1,
+                            "TextureID": "",
+                            "Material": {
+                                "serializedType": "Enum",
+                                "data": "SmoothPlastic"
+                            },
+                            "Color": {
+                                "serializedType": "Color3",
+                                "data": [
+                                    0.8313725590705872,
+                                    0.8588235378265381,
+                                    0.9098039269447327
+                                ]
+                            },
+                            "MeshId": "rbxassetid://5805830512",
+                            "CFrame": {
+                                "serializedType": "CFrame",
+                                "data": [
+                                    545.2559204101562,
+                                    55757.109375,
+                                    835.0989990234375,
+                                    -0.8757408857345581,
+                                    0.1320113241672516,
+                                    -0.4643823504447937,
+                                    0.048016272485256195,
+                                    0.9809363484382629,
+                                    0.18830369412899017,
+                                    0.48038774728775024,
+                                    0.14260734617710114,
+                                    -0.8653848171234131
+                                ]
+                            },
+                            "Size": {
+                                "serializedType": "Vector3",
+                                "data": [
+                                    0.18801400065422058,
+                                    0.29462099075317383,
+                                    0.05000000074505806
+                                ]
+                            }
+                        },
+                        "children": []
+                    },
+                    "3169": {
+                        "objectId": "3169",
+                        "className": "MeshPart",
+                        "props": {
+                            "Transparency": 1,
+                            "TextureID": "",
+                            "Material": {
+                                "serializedType": "Enum",
+                                "data": "SmoothPlastic"
+                            },
+                            "Color": {
+                                "serializedType": "Color3",
+                                "data": [
+                                    0.8313725590705872,
+                                    0.8588235378265381,
+                                    0.9098039269447327
+                                ]
+                            },
+                            "MeshId": "rbxassetid://5805830512",
+                            "CFrame": {
+                                "serializedType": "CFrame",
+                                "data": [
+                                    545.2850341796875,
+                                    55757.46484375,
+                                    835.1600952148438,
+                                    0.8839117884635925,
+                                    -0.05510161817073822,
+                                    -0.4643961191177368,
+                                    0.03776165097951889,
+                                    -0.9813823699951172,
+                                    0.18831709027290344,
+                                    -0.46612662076950073,
+                                    -0.18399205803871155,
+                                    -0.8653748035430908
+                                ]
+                            },
+                            "Size": {
+                                "serializedType": "Vector3",
+                                "data": [
+                                    0.18801400065422058,
+                                    0.29462099075317383,
+                                    0.05000000074505806
+                                ]
+                            }
+                        },
+                        "children": []
+                    },
+                    "3150": {
+                        "objectId": "3150",
+                        "className": "Part",
+                        "props": {
+                            "Transparency": 1,
+                            "Name": "HeadCollider",
+                            "CFrame": {
+                                "serializedType": "CFrame",
+                                "data": [
+                                    545.1051025390625,
+                                    55757.51171875,
+                                    834.64892578125,
+                                    -0.8811404705047607,
+                                    0.08894000202417374,
+                                    -0.46441489458084106,
+                                    -9.692460298538208e-05,
+                                    0.9821174740791321,
+                                    0.18826903402805328,
+                                    0.4728546142578125,
+                                    0.16593648493289948,
+                                    -0.8653749227523804
+                                ]
+                            },
+                            "Color": {
+                                "serializedType": "Color3",
+                                "data": [
+                                    1,
+                                    1,
+                                    1
+                                ]
+                            },
+                            "Material": {
+                                "serializedType": "Enum",
+                                "data": "Plastic"
+                            },
+                            "Shape": {
+                                "serializedType": "Enum",
+                                "data": "Block"
+                            },
+                            "Size": {
+                                "serializedType": "Vector3",
+                                "data": [
+                                    1.6399999856948853,
+                                    1.0799999237060547,
+                                    1.1699999570846558
+                                ]
+                            }
+                        },
+                        "children": []
+                    }
+                },
+                "sceneUpdateObjects": []
+            }
+        }
+    ]
+]
