@@ -63,247 +63,378 @@ RtG-Format/
 │   │               └── RtG-Format-v1.png
 │   │
 │   ├── models/
-│   │   ├─ AltitudeSensor/
-│   │   │  └─ AltitudeSensor.obj
-│   │   ├─ Anchor/
-│   │   │  └─ Anchor.obj
-│   │   ├─ Arm/
-│   │   │  └─ Arm.obj
-│   │   ├─ Balloon/
-│   │   │  └─ Balloon.obj
-│   │   ├─ BallSocket/
-│   │   │  └─ BallSocket.obj
-│   │   ├─ Banjo/
-│   │   │  └─ Banjo.obj
-│   │   ├─ Base/
-│   │   │  └─ Base.obj
-│   │   ├─ BeachBall/
-│   │   │  └─ BeachBall.obj
-│   │   ├─ Bearing/
-│   │   │  └─ Bearing.obj
-│   │   ├─ Board/
-│   │   │  └─ Board.obj
-│   │   ├─ Body/
-│   │   │  └─ Body.obj
-│   │   ├─ BouncyBall/
-│   │   │  └─ BouncyBall.obj
-│   │   ├─ BowlingBall/
-│   │   │  └─ BowlingBall.obj
-│   │   ├─ BrakeLight/
-│   │   │  └─ BrakeLight.obj
-│   │   ├─ Briefcase/
-│   │   │  └─ Briefcase.obj
-│   │   ├─ Bumper/
-│   │   │  └─ Bumper.obj
-│   │   ├─ Button/
-│   │   │  └─ Button.obj
-│   │   ├─ Camera/
-│   │   │  └─ Camera.obj
-│   │   ├─ Canister/
-│   │   │  └─ Canister.obj
-│   │   ├─ Cannon/
-│   │   │  └─ Cannon.obj
-│   │   ├─ CannonBall/
-│   │   │  └─ CannonBall.obj
-│   │   ├─ Carrot/
-│   │   │  └─ Carrot.obj
-│   │   ├─ Chassis/
-│   │   │  └─ Chassis.obj
-│   │   ├─ Cinderblock/
-│   │   │  └─ Cinderblock.obj
-│   │   ├─ Connector/
-│   │   │  └─ Connector.obj
-│   │   ├─ ConnectorBall/
-│   │   │  └─ ConnectorBall.obj
-│   │   ├─ Delayer/
-│   │   │  └─ Delayer.obj
-│   │   ├─ Detacher/
-│   │   │  └─ Detacher.obj
-│   │   ├─ DoorA/
-│   │   │  └─ DoorA.obj
-│   │   ├─ DoorB/
-│   │   │  └─ DoorB.obj
-│   │   ├─ DoorC/
-│   │   │  └─ DoorC.obj
-│   │   ├─ DoorD/
-│   │   │  └─ DoorD.obj
-│   │   ├─ Drumkit/
-│   │   │  └─ Drumkit.obj
-│   │   ├─ EntitySensor/
-│   │   │  └─ EntitySensor.obj
-│   │   ├─ FishBowl/
-│   │   │  └─ FishBowl.obj
-│   │   ├─ Fricklet/
-│   │   │  └─ Fricklet.obj
-│   │   ├─ FuelTank/
-│   │   │  └─ FuelTank.obj
-│   │   ├─ GasCap/
-│   │   │  └─ GasCap.obj
-│   │   ├─ Gate-AND/
-│   │   │  └─ Gate-AND.obj
-│   │   ├─ Gate-NOT/
-│   │   │  └─ Gate-NOT.obj
-│   │   ├─ Gate-OR/
-│   │   │  └─ Gate-OR.obj
-│   │   ├─ GoldPotatoEngine/
-│   │   │  └─ GoldPotatoEngine.obj
-│   │   ├─ Googie/
-│   │   │  └─ Googie.obj
-│   │   ├─ Gramby/
-│   │   │  └─ Gramby.obj
-│   │   ├─ Grenade/
-│   │   │  └─ Grenade.obj
-│   │   ├─ Guitar/
-│   │   │  └─ Guitar.obj
-│   │   ├─ Gun/
-│   │   │  └─ Gun.obj
-│   │   ├─ Gyro/
-│   │   │  └─ Gyro.obj
-│   │   ├─ HalfConnectorBall/
-│   │   │  └─ HalfConnectorBall.obj
-│   │   ├─ Head/
-│   │   │  └─ Head.obj
-│   │   ├─ Hood/
-│   │   │  └─ Hood.obj
-│   │   ├─ InputSensor/
-│   │   │  └─ InputSensor.obj
-│   │   ├─ Joint/
-│   │   │  └─ Joint.obj
-│   │   ├─ Joust/
-│   │   │  └─ Joust.obj
-│   │   ├─ Jug/
-│   │   │  └─ Jug.obj
-│   │   ├─ Keyboard/
-│   │   │  └─ Keyboard.obj
-│   │   ├─ Leafblower/
-│   │   │  └─ Leafblower.obj
-│   │   ├─ Leg/
-│   │   │  └─ Leg.obj
-│   │   ├─ Light/
-│   │   │  └─ Light.obj
-│   │   ├─ Lock/
-│   │   │  └─ Lock.obj
-│   │   ├─ LongStick/
-│   │   │  └─ LongStick.obj
-│   │   ├─ Looper/
-│   │   │  └─ Looper.obj
-│   │   ├─ Mag/
-│   │   │  └─ Mag.obj
-│   │   ├─ MatchingGyro/
-│   │   │  └─ MatchingGyro.obj
-│   │   ├─ MountedGun/
-│   │   │  └─ MountedGun.obj
-│   │   ├─ Part/
-│   │   │  └─ Part.obj
-│   │   ├─ Pie/
-│   │   │  └─ Pie.obj
-│   │   ├─ Pipes/
-│   │   │  └─ Pipes.obj
-│   │   ├─ Piston/
-│   │   │  └─ Piston.obj
-│   │   ├─ Plunger/
-│   │   │  └─ Plunger.obj
-│   │   ├─ Poop/
-│   │   │  └─ Poop.obj
-│   │   ├─ PotatoEngine/
-│   │   │  └─ PotatoEngine.obj
-│   │   ├─ PressurePlate/
-│   │   │  └─ PressurePlate.obj
-│   │   ├─ Propeller/
-│   │   │  └─ Propeller.obj
-│   │   ├─ Radio/
-│   │   │  └─ Radio.obj
-│   │   ├─ Ramp/
-│   │   │  └─ Ramp.obj
-│   │   ├─ Recorder/
-│   │   │  └─ Recorder.obj
-│   │   ├─ RemoteButton/
-│   │   │  └─ RemoteButton.obj
-│   │   ├─ RiotShield/
-│   │   │  └─ RiotShield.obj
-│   │   ├─ Rocket/
-│   │   │  └─ Rocket.obj
-│   │   ├─ RockingChair/
-│   │   │  └─ RockingChair.obj
-│   │   ├─ Roof/
-│   │   │  └─ Roof.obj
-│   │   ├─ Rope/
-│   │   │  └─ Rope.obj
-│   │   ├─ RPG/
-│   │   │  └─ RPG.obj
-│   │   ├─ RubberBand/
-│   │   │  └─ RubberBand.obj
-│   │   ├─ Seat/
-│   │   │  └─ Seat.obj
-│   │   ├─ Servo/
-│   │   │  └─ Servo.obj
-│   │   ├─ Servo_Physics/
-│   │   │  └─ Servo_Physics.obj
-│   │   ├─ ShoppingCart/
-│   │   │  └─ ShoppingCart.obj
-│   │   ├─ ShortStick/
-│   │   │  └─ ShortStick.obj
-│   │   ├─ Shotgun/
-│   │   │  └─ Shotgun.obj
-│   │   ├─ Sledge/
-│   │   │  └─ Sledge.obj
-│   │   ├─ Splitter/
-│   │   │  └─ Splitter.obj
-│   │   ├─ Splitter_1/
-│   │   │  └─ Splitter_1.obj
-│   │   ├─ Splitter_2/
-│   │   │  └─ Splitter_2.obj
-│   │   ├─ Splitter_3/
-│   │   │  └─ Splitter_3.obj
-│   │   ├─ Splitter_4/
-│   │   │  └─ Splitter_4.obj
-│   │   ├─ SprayPaint/
-│   │   │  └─ SprayPaint.obj
-│   │   ├─ SpringJuice/
-│   │   │  └─ SpringJuice.obj
-│   │   ├─ StaringGyro/
-│   │   │  └─ StaringGyro.obj
-│   │   ├─ SteeringGyro/
-│   │   │  └─ SteeringGyro.obj
-│   │   ├─ SteeringWheel/
-│   │   │  └─ SteeringWheel.obj
-│   │   ├─ Stick/
-│   │   │  └─ Stick.obj
-│   │   ├─ SuperPowerClock/
-│   │   │  └─ SuperPowerClock.obj
-│   │   ├─ Switch/
-│   │   │  └─ Switch.obj
-│   │   ├─ Thruster/
-│   │   │  └─ Thruster.obj
-│   │   ├─ Tire/
-│   │   │  └─ Tire.obj
-│   │   ├─ ToolGun/
-│   │   │  └─ ToolGun.obj
-│   │   ├─ Tooth/
-│   │   │  └─ Tooth.obj
-│   │   ├─ TripWire/
-│   │   │  └─ TripWire.obj
-│   │   ├─ Trowel/
-│   │   │  └─ Trowel.obj
-│   │   ├─ Trumpet/
-│   │   │  └─ Trumpet.obj
-│   │   ├─ Trunk/
-│   │   │  └─ Trunk.obj
-│   │   ├─ TV/
-│   │   │  └─ TV.obj
-│   │   ├─ Uzi/
-│   │   │  └─ Uzi.obj
-│   │   ├─ VelocitySensor/
-│   │   │  └─ VelocitySensor.obj
-│   │   ├─ wad/
-│   │   │  └─ wad.obj
-│   │   ├─ Wheel/
-│   │   │  └─ Wheel.obj
-│   │   ├─ Wing/
-│   │   │  └─ Wing.obj
-│   │   ├─ Wire/
-│   │   │  └─ Wire.obj
-│   │   └─ ALL.blend
+│   │   ├─ model/
+│   │   │  ├─ AltitudeSensor/
+│   │   │  │  ├─ AltitudeSensor.json
+│   │   │  │  └─ AltitudeSensor.obj
+│   │   │  ├─ Anchor/
+│   │   │  │  ├─ Anchor.json
+│   │   │  │  └─ Anchor.obj
+│   │   │  ├─ Arm/
+│   │   │  │  ├─ Arm.json
+│   │   │  │  └─ Arm.obj
+│   │   │  ├─ Balloon/
+│   │   │  │  ├─ Balloon.json
+│   │   │  │  └─ Balloon.obj
+│   │   │  ├─ BallSocket/
+│   │   │  │  ├─ BallSocket.json
+│   │   │  │  └─ BallSocket.obj
+│   │   │  ├─ Banjo/
+│   │   │  │  ├─ Banjo.json
+│   │   │  │  └─ Banjo.obj
+│   │   │  ├─ Base/
+│   │   │  │  ├─ Base.json
+│   │   │  │  ├─ Base.obj
+│   │   │  │  └─ README.md
+│   │   │  ├─ BeachBall/
+│   │   │  │  ├─ BeachBall.json
+│   │   │  │  └─ BeachBall.obj
+│   │   │  ├─ Bearing/
+│   │   │  │  ├─ Bearing.json
+│   │   │  │  └─ Bearing.obj
+│   │   │  ├─ Board/
+│   │   │  │  ├─ Board.json
+│   │   │  │  └─ Board.obj
+│   │   │  ├─ Body/
+│   │   │  │  ├─ Body.json
+│   │   │  │  └─ Body.obj
+│   │   │  ├─ BouncyBall/
+│   │   │  │  ├─ BouncyBall.json
+│   │   │  │  └─ BouncyBall.obj
+│   │   │  ├─ BowlingBall/
+│   │   │  │  ├─ BowlingBall.json
+│   │   │  │  └─ BowlingBall.obj
+│   │   │  ├─ BrakeLight/
+│   │   │  │  ├─ BrakeLight.json
+│   │   │  │  └─ BrakeLight.obj
+│   │   │  ├─ Briefcase/
+│   │   │  │  ├─ Briefcase.json
+│   │   │  │  └─ Briefcase.obj
+│   │   │  ├─ Bumper/
+│   │   │  │  ├─ Bumper.json
+│   │   │  │  └─ Bumper.obj
+│   │   │  ├─ Button/
+│   │   │  │  ├─ Button.json
+│   │   │  │  └─ Button.obj
+│   │   │  ├─ Camera/
+│   │   │  │  ├─ Camera.json
+│   │   │  │  └─ Camera.obj
+│   │   │  ├─ Canister/
+│   │   │  │  ├─ Canister.json
+│   │   │  │  └─ Canister.obj
+│   │   │  ├─ Cannon/
+│   │   │  │  ├─ Cannon.json
+│   │   │  │  └─ Cannon.obj
+│   │   │  ├─ CannonBall/
+│   │   │  │  ├─ CannonBall.json
+│   │   │  │  └─ CannonBall.obj
+│   │   │  ├─ Carrot/
+│   │   │  │  ├─ Carrot.json
+│   │   │  │  └─ Carrot.obj
+│   │   │  ├─ Chassis/
+│   │   │  │  ├─ Chassis.json
+│   │   │  │  └─ Chassis.obj
+│   │   │  ├─ Cinderblock/
+│   │   │  │  ├─ Cinderblock.json
+│   │   │  │  └─ Cinderblock.obj
+│   │   │  ├─ Connector/
+│   │   │  │  ├─ Connector.json
+│   │   │  │  └─ Connector.obj
+│   │   │  ├─ ConnectorBall/
+│   │   │  │  ├─ ConnectorBall.json
+│   │   │  │  └─ ConnectorBall.obj
+│   │   │  ├─ Delayer/
+│   │   │  │  ├─ Delayer.json
+│   │   │  │  └─ Delayer.obj
+│   │   │  ├─ Detacher/
+│   │   │  │  ├─ Detacher.json
+│   │   │  │  └─ Detacher.obj
+│   │   │  ├─ DoorA/
+│   │   │  │  ├─ DoorA.json
+│   │   │  │  └─ DoorA.obj
+│   │   │  ├─ DoorB/
+│   │   │  │  ├─ DoorB.json
+│   │   │  │  └─ DoorB.obj
+│   │   │  ├─ DoorC/
+│   │   │  │  ├─ DoorC.json
+│   │   │  │  └─ DoorC.obj
+│   │   │  ├─ DoorD/
+│   │   │  │  ├─ DoorD.json
+│   │   │  │  └─ DoorD.obj
+│   │   │  ├─ Drumkit/
+│   │   │  │  ├─ Drumkit.json
+│   │   │  │  └─ Drumkit.obj
+│   │   │  ├─ EntitySensor/
+│   │   │  │  ├─ EntitySensor.json
+│   │   │  │  └─ EntitySensor.obj
+│   │   │  ├─ FishBowl/
+│   │   │  │  ├─ FishBowl.json
+│   │   │  │  └─ FishBowl.obj
+│   │   │  ├─ Fricklet/
+│   │   │  │  ├─ Fricklet.json
+│   │   │  │  └─ Fricklet.obj
+│   │   │  ├─ FuelTank/
+│   │   │  │  ├─ FuelTank.json
+│   │   │  │  └─ FuelTank.obj
+│   │   │  ├─ GasCap/
+│   │   │  │  ├─ GasCap.json
+│   │   │  │  └─ GasCap.obj
+│   │   │  ├─ Gate-AND/
+│   │   │  │  ├─ Gate-AND.json
+│   │   │  │  └─ Gate-AND.obj
+│   │   │  ├─ Gate-NOT/
+│   │   │  │  ├─ Gate-NOT.json
+│   │   │  │  └─ Gate-NOT.obj
+│   │   │  ├─ Gate-OR/
+│   │   │  │  ├─ Gate-OR.json
+│   │   │  │  └─ Gate-OR.obj
+│   │   │  ├─ GoldPotatoEngine/
+│   │   │  │  ├─ GoldPotatoEngine.json
+│   │   │  │  └─ GoldPotatoEngine.obj
+│   │   │  ├─ Googie/
+│   │   │  │  ├─ Googie.json
+│   │   │  │  └─ Googie.obj
+│   │   │  ├─ Gramby/
+│   │   │  │  ├─ Gramby.json
+│   │   │  │  └─ Gramby.obj
+│   │   │  ├─ Grenade/
+│   │   │  │  ├─ Grenade.json
+│   │   │  │  └─ Grenade.obj
+│   │   │  ├─ Guitar/
+│   │   │  │  ├─ Guitar.json
+│   │   │  │  └─ Guitar.obj
+│   │   │  ├─ Gun/
+│   │   │  │  ├─ Gun.json
+│   │   │  │  └─ Gun.obj
+│   │   │  ├─ Gyro/
+│   │   │  │  ├─ Gyro.json
+│   │   │  │  └─ Gyro.obj
+│   │   │  ├─ HalfConnectorBall/
+│   │   │  │  ├─ HalfConnectorBall.json
+│   │   │  │  └─ HalfConnectorBall.obj
+│   │   │  ├─ Head/
+│   │   │  │  ├─ Head.json
+│   │   │  │  └─ Head.obj
+│   │   │  ├─ Hood/
+│   │   │  │  ├─ Hood.json
+│   │   │  │  └─ Hood.obj
+│   │   │  ├─ InputSensor/
+│   │   │  │  ├─ InputSensor.json
+│   │   │  │  └─ InputSensor.obj
+│   │   │  ├─ Joint/
+│   │   │  │  ├─ Joint.json
+│   │   │  │  └─ Joint.obj
+│   │   │  ├─ Joust/
+│   │   │  │  ├─ Joust.json
+│   │   │  │  └─ Joust.obj
+│   │   │  ├─ Jug/
+│   │   │  │  ├─ Jug.json
+│   │   │  │  └─ Jug.obj
+│   │   │  ├─ Keyboard/
+│   │   │  │  ├─ Keyboard.json
+│   │   │  │  └─ Keyboard.obj
+│   │   │  ├─ Leafblower/
+│   │   │  │  ├─ Leafblower.json
+│   │   │  │  └─ Leafblower.obj
+│   │   │  ├─ Leg/
+│   │   │  │  ├─ Leg.json
+│   │   │  │  └─ Leg.obj
+│   │   │  ├─ Light/
+│   │   │  │  ├─ Light.json
+│   │   │  │  └─ Light.obj
+│   │   │  ├─ Lock/
+│   │   │  │  ├─ Lock.json
+│   │   │  │  └─ Lock.obj
+│   │   │  ├─ LongStick/
+│   │   │  │  ├─ LongStick.json
+│   │   │  │  └─ LongStick.obj
+│   │   │  ├─ Looper/
+│   │   │  │  ├─ Looper.json
+│   │   │  │  └─ Looper.obj
+│   │   │  ├─ Mag/
+│   │   │  │  ├─ Mag.json
+│   │   │  │  └─ Mag.obj
+│   │   │  ├─ MatchingGyro/
+│   │   │  │  ├─ MatchingGyro.json
+│   │   │  │  └─ MatchingGyro.obj
+│   │   │  ├─ MountedGun/
+│   │   │  │  ├─ MountedGun.json
+│   │   │  │  └─ MountedGun.obj
+│   │   │  ├─ Part/
+│   │   │  │  ├─ Part.json
+│   │   │  │  └─ Part.obj
+│   │   │  ├─ Pie/
+│   │   │  │  ├─ Pie.json
+│   │   │  │  └─ Pie.obj
+│   │   │  ├─ Pipes/
+│   │   │  │  ├─ Pipes.json
+│   │   │  │  └─ Pipes.obj
+│   │   │  ├─ Piston/
+│   │   │  │  ├─ Piston.json
+│   │   │  │  └─ Piston.obj
+│   │   │  ├─ Plunger/
+│   │   │  │  ├─ Plunger.json
+│   │   │  │  └─ Plunger.obj
+│   │   │  ├─ Poop/
+│   │   │  │  ├─ Poop.json
+│   │   │  │  └─ Poop.obj
+│   │   │  ├─ PotatoEngine/
+│   │   │  │  ├─ PotatoEngine.json
+│   │   │  │  └─ PotatoEngine.obj
+│   │   │  ├─ PressurePlate/
+│   │   │  │  ├─ PressurePlate.json
+│   │   │  │  └─ PressurePlate.obj
+│   │   │  ├─ Propeller/
+│   │   │  │  ├─ Propeller.json
+│   │   │  │  └─ Propeller.obj
+│   │   │  ├─ Radio/
+│   │   │  │  ├─ Radio.json
+│   │   │  │  └─ Radio.obj
+│   │   │  ├─ Ramp/
+│   │   │  │  ├─ Ramp.json
+│   │   │  │  └─ Ramp.obj
+│   │   │  ├─ Recorder/
+│   │   │  │  ├─ Recorder.json
+│   │   │  │  └─ Recorder.obj
+│   │   │  ├─ RemoteButton/
+│   │   │  │  ├─ RemoteButton.json
+│   │   │  │  └─ RemoteButton.obj
+│   │   │  ├─ RiotShield/
+│   │   │  │  ├─ RiotShield.json
+│   │   │  │  └─ RiotShield.obj
+│   │   │  ├─ Rocket/
+│   │   │  │  ├─ Rocket.json
+│   │   │  │  └─ Rocket.obj
+│   │   │  ├─ RockingChair/
+│   │   │  │  ├─ RockingChair.json
+│   │   │  │  └─ RockingChair.obj
+│   │   │  ├─ Roof/
+│   │   │  │  ├─ Roof.json
+│   │   │  │  └─ Roof.obj
+│   │   │  ├─ Rope/
+│   │   │  │  ├─ Rope.json
+│   │   │  │  └─ Rope.obj
+│   │   │  ├─ RPG/
+│   │   │  │  ├─ RPG.json
+│   │   │  │  └─ RPG.obj
+│   │   │  ├─ RubberBand/
+│   │   │  │  ├─ RubberBand.json
+│   │   │  │  └─ RubberBand.obj
+│   │   │  ├─ Seat/
+│   │   │  │  ├─ Seat.json
+│   │   │  │  └─ Seat.obj
+│   │   │  ├─ Servo/
+│   │   │  │  ├─ Servo.json
+│   │   │  │  └─ Servo.obj
+│   │   │  ├─ Servo_Physics/
+│   │   │  │  ├─ Servo_Physics.json
+│   │   │  │  └─ Servo_Physics.obj
+│   │   │  ├─ ShoppingCart/
+│   │   │  │  ├─ ShoppingCart.json
+│   │   │  │  └─ ShoppingCart.obj
+│   │   │  ├─ ShortStick/
+│   │   │  │  ├─ ShortStick.json
+│   │   │  │  └─ ShortStick.obj
+│   │   │  ├─ Shotgun/
+│   │   │  │  ├─ Shotgun.json
+│   │   │  │  └─ Shotgun.obj
+│   │   │  ├─ Sledge/
+│   │   │  │  ├─ Sledge.json
+│   │   │  │  └─ Sledge.obj
+│   │   │  ├─ Splitter/
+│   │   │  │  ├─ Splitter.json
+│   │   │  │  └─ Splitter.obj
+│   │   │  ├─ Splitter_1/
+│   │   │  │  ├─ Splitter_1.json
+│   │   │  │  └─ Splitter_1.obj
+│   │   │  ├─ Splitter_2/
+│   │   │  │  ├─ Splitter_2.json
+│   │   │  │  └─ Splitter_2.obj
+│   │   │  ├─ Splitter_3/
+│   │   │  │  ├─ Splitter_3.json
+│   │   │  │  └─ Splitter_3.obj
+│   │   │  ├─ Splitter_4/
+│   │   │  │  ├─ Splitter_4.json
+│   │   │  │  └─ Splitter_4.obj
+│   │   │  ├─ SprayPaint/
+│   │   │  │  ├─ SprayPaint.json
+│   │   │  │  └─ SprayPaint.obj
+│   │   │  ├─ SpringJuice/
+│   │   │  │  ├─ SpringJuice.json
+│   │   │  │  └─ SpringJuice.obj
+│   │   │  ├─ StaringGyro/
+│   │   │  │  ├─ StaringGyro.json
+│   │   │  │  └─ StaringGyro.obj
+│   │   │  ├─ SteeringGyro/
+│   │   │  │  ├─ SteeringGyro.json
+│   │   │  │  └─ SteeringGyro.obj
+│   │   │  ├─ SteeringWheel/
+│   │   │  │  ├─ SteeringWheel.json
+│   │   │  │  └─ SteeringWheel.obj
+│   │   │  ├─ Stick/
+│   │   │  │  ├─ Stick.json
+│   │   │  │  └─ Stick.obj
+│   │   │  ├─ SuperPowerClock/
+│   │   │  │  ├─ SuperPowerClock.json
+│   │   │  │  └─ SuperPowerClock.obj
+│   │   │  ├─ Switch/
+│   │   │  │  ├─ split/
+│   │   │  │  │  ├─ input.obj
+│   │   │  │  │  └─ output.obj
+│   │   │  │  ├─ Switch.json
+│   │   │  │  └─ Switch.obj
+│   │   │  ├─ Teeth/
+│   │   │  ├─ Thruster/
+│   │   │  │  ├─ Thruster.json
+│   │   │  │  └─ Thruster.obj
+│   │   │  ├─ Tire/
+│   │   │  │  ├─ Tire.json
+│   │   │  │  └─ Tire.obj
+│   │   │  ├─ ToolGun/
+│   │   │  │  ├─ ToolGun.json
+│   │   │  │  └─ ToolGun.obj
+│   │   │  ├─ Tooth/
+│   │   │  │  ├─ Tooth.json
+│   │   │  │  └─ Tooth.obj
+│   │   │  ├─ TripWire/
+│   │   │  │  ├─ TripWire.json
+│   │   │  │  └─ TripWire.obj
+│   │   │  ├─ Trowel/
+│   │   │  │  ├─ Trowel.json
+│   │   │  │  └─ Trowel.obj
+│   │   │  ├─ Trumpet/
+│   │   │  │  ├─ Trumpet.json
+│   │   │  │  └─ Trumpet.obj
+│   │   │  ├─ Trunk/
+│   │   │  │  ├─ Trunk.json
+│   │   │  │  └─ Trunk.obj
+│   │   │  ├─ TV/
+│   │   │  │  ├─ TV.json
+│   │   │  │  └─ TV.obj
+│   │   │  ├─ Uzi/
+│   │   │  │  ├─ Uzi.json
+│   │   │  │  └─ Uzi.obj
+│   │   │  ├─ VelocitySensor/
+│   │   │  │  ├─ VelocitySensor.json
+│   │   │  │  └─ VelocitySensor.obj
+│   │   │  ├─ wad/
+│   │   │  │  ├─ wad.json
+│   │   │  │  └─ wad.obj
+│   │   │  ├─ Wheel/
+│   │   │  │  ├─ Wheel.json
+│   │   │  │  └─ Wheel.obj
+│   │   │  ├─ Wing/
+│   │   │  │  ├─ Wing.json
+│   │   │  │  └─ Wing.obj
+│   │   │  └─ Wire/
+│   │   │     ├─ Wire.json
+│   │   │     └─ Wire.obj
+│   │   ├─ textures/
+│   │   │  ├─ 5302791622.png
+│   │   │  └─ 5808635679.jpeg
+│   │   ├─ ALL.blend
+│   │   ├─ ALL.blend1
+│   │   └─ README.md
 │   │
 │   ├── sounds/
 │   │   ├── error.mp3
