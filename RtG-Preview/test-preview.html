@@ -5,18 +5,167 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>RtG-Preview Test</title>
   <style>
-    body { margin: 0; overflow: hidden; background: #1a1a2e; }
+    body { margin: 0; overflow: hidden; background: #1a1a2e; font-family: Arial, sans-serif; }
+    #error-panel {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      max-height: 40vh;
+      background: rgba(20, 20, 30, 0.95);
+      color: #e0e0e0;
+      padding: 12px;
+      overflow-y: auto;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      z-index: 10000;
+      display: none;
+      font-size: 12px;
+      font-family: monospace;
+    }
+    #error-panel.visible { display: block; }
+    #error-panel header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    #error-panel h3 { margin: 0; font-size: 14px; }
+    #error-panel button {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #e0e0e0;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    #error-panel button:hover { background: rgba(255,255,255,0.2); }
+    #error-panel button:disabled { opacity: 0.5; cursor: not-allowed; }
+    #error-list { white-space: pre-wrap; word-break: break-word; }
+    .error-entry { margin-bottom: 8px; padding: 8px; background: rgba(176,0,32,0.2); border-radius: 4px; }
+    .error-entry.warning { background: rgba(255,165,0,0.2); }
+    .error-entry.info { background: rgba(30,144,255,0.2); }
+    .error-time { color: #888; font-size: 11px; }
+    .error-message { margin-top: 4px; }
+    .error-stack { margin-top: 4px; color: #aaa; font-size: 11px; }
   </style>
 </head>
 <body>
+  <div id="error-panel">
+    <header>
+      <h3>Errors (<span id="error-count">0</span>)</h3>
+      <div>
+        <button id="copy-errors-btn" onclick="copyErrors()">Copy All Errors</button>
+        <button id="clear-errors-btn" onclick="clearErrors()">Clear</button>
+        <button id="toggle-errors-btn" onclick="toggleErrorPanel()">Hide</button>
+      </div>
+    </header>
+    <div id="error-list"></div>
+  </div>
+
   <script src="model-registry.js"></script>
   <script src="preview.js"></script>
   <script>
+    // Global error capture
+    window.errorLog = [];
+    
+    function captureError(message, source, lineno, colno, error) {
+      const entry = {
+        time: new Date().toISOString(),
+        message: message,
+        source: source,
+        lineno: lineno,
+        colno: colno,
+        stack: error?.stack || ''
+      };
+      window.errorLog.push(entry);
+      renderErrors();
+      return false; // Don't prevent default handling
+    }
+    
+    window.addEventListener('error', function(e) {
+      captureError(e.message, e.filename, e.lineno, e.colno, e.error);
+    });
+    
+    window.addEventListener('unhandledrejection', function(e) {
+      captureError(e.reason?.message || 'Unhandled rejection', '', 0, 0, e.reason);
+    });
+    
+    // Override console.error to capture
+    const originalConsoleError = console.error;
+    console.error = function(...args) {
+      const msg = args.map(a => (a && a.stack) ? a.stack : (a && a.message) ? a.message : String(a)).join(' ');
+      captureError(msg, '', 0, 0, { stack: msg });
+      originalConsoleError.apply(console, args);
+    };
+    
+    function renderErrors() {
+      const list = document.getElementById('error-list');
+      const count = document.getElementById('error-count');
+      count.textContent = window.errorLog.length;
+      if (window.errorLog.length > 0) {
+        document.getElementById('error-panel').classList.add('visible');
+      }
+      list.innerHTML = window.errorLog.map((e, i) => `
+        <div class="error-entry ${e.message.includes('warning') || e.message.includes('Warning') ? 'warning' : ''}">
+          <div class="error-time">[${e.time}] #${i+1}</div>
+          <div class="error-message">${escapeHtml(e.message)}</div>
+          ${e.source ? `<div class="error-stack">at ${e.source}:${e.lineno}:${e.colno}</div>` : ''}
+          ${e.stack ? `<div class="error-stack">${escapeHtml(e.stack)}</div>` : ''}
+        </div>
+      `).join('');
+    }
+    
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+    
+    function copyErrors() {
+      const btn = document.getElementById('copy-errors-btn');
+      const text = window.errorLog.map((e, i) => 
+        `=== Error #${i+1} [${e.time}] ===\n${e.message}\n${e.source ? `at ${e.source}:${e.lineno}:${e.colno}` : ''}\n${e.stack}\n`
+      ).join('\n');
+      
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy All Errors', 2000);
+      }).catch(() => {
+        // Fallback for older browsers
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy All Errors', 2000);
+      });
+    }
+    
+    function clearErrors() {
+      window.errorLog = [];
+      renderErrors();
+    }
+    
+    function toggleErrorPanel() {
+      const panel = document.getElementById('error-panel');
+      const btn = document.getElementById('toggle-errors-btn');
+      panel.classList.toggle('visible');
+      btn.textContent = panel.classList.contains('visible') ? 'Hide' : 'Show';
+    }
+    
+    // Test render
     RtGPreview.render([
       ["Part", [], {}],
       ["Anchor", [], {}],
       ["Tooth", [], {}]
-    ]);
+    ]).catch(err => {
+      captureError(err.message, '', 0, 0, err);
+    });
   </script>
 </body>
 </html>

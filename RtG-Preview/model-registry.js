@@ -4,10 +4,17 @@ class ModelRegistry {
         this.manifest = null;
         this.loaded = new Map();
         this.loading = new Map();
+        this.isFileProtocol = window.location.protocol === 'file:';
     }
 
     async loadManifest() {
         if (this.manifest) return this.manifest;
+        
+        if (this.isFileProtocol) {
+            const msg = 'Cannot load models via file:// protocol. Please serve the RtG-Preview folder via HTTP (e.g., `npx serve RtG-Preview` or `python -m http.server` from the RtG-Preview directory).';
+            console.error(msg);
+            throw new Error(msg);
+        }
         
         const manifestUrl = this.basePath.replace(/\/[^/]+$/, '') + '/models.json';
         
@@ -20,10 +27,10 @@ class ModelRegistry {
                     this.manifest = xhr.response;
                     resolve(this.manifest);
                 } else {
-                    reject(new Error('Failed to load manifest: ' + xhr.status));
+                    reject(new Error('Failed to load manifest: HTTP ' + xhr.status + ' (' + manifestUrl + ')'));
                 }
             };
-            xhr.onerror = () => reject(new Error('Network error loading manifest'));
+            xhr.onerror = () => reject(new Error('Network error loading manifest from ' + manifestUrl + '. Are you serving via HTTP?'));
             xhr.send();
         });
     }

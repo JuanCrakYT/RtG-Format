@@ -1,0 +1,16 @@
+Order "Bike" end
+Object("Bike")
+   global_properties
+      { "RGB":[0,255,0] }
+   end;;
+   track
+      object{ "Wheel":2 };;
+      UUID{ ["Wheel":1] by {["Wheel"x1]} }
+   end;;
+   note-names{ ["Wheel":1] --> "Rueda delantera" } // etiqueta
+   create{
+      ["Wheel":1]; // instancia suelta
+      ["Wheel":2] -2(5)-> ["Wheel":1]
+   };;
+   output{ cache("./cache2/"); "./bike.json" }
+end

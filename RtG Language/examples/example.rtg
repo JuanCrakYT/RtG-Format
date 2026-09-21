@@ -1,0 +1,49 @@
+Order
+   "Car"
+end
+Object("Car")
+   global_properties
+      {
+           "propiedad para anotar (no es real)":"esta parte es un JSON real de propiedades, en donde podrás crear metadatos para todos los objetos (de, en este caso: \"Car\") de forma fácil; o simplemente colocar propiedades reales",
+           "RGB":[255,0,0]
+      }
+   end;;
+
+
+   track
+      object
+         "Seat":2;
+         "Chassis":1
+      end;;
+      UUID
+         ["Chassis":1] by {["Seat"x1]}
+      end;;
+      properties
+         ["Chassis":1]
+            {
+               "RGB":[0,255,0]
+            }
+      end
+   end;;
+
+
+   note-names
+      ["Seat":1] --> "Piloto";
+      ["Seat":2] --> "Señor volador OMG"
+   end;;
+
+
+   create
+      ["Chassis":1];
+      ["Seat":1] -1(18)-> ["Chassis":1];
+      ["Seat":2] -1{[0,0,0],[0,0,0,0,0,0]}-> ["Chassis":1]
+   end;;
+
+  
+   output
+      cache("./CacheDelCarrito/");
+      clean("./carro-ordenado.json");
+      "./carro.json";
+      "./carrito.txt"
+   end
+end

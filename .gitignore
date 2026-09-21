@@ -20,6 +20,7 @@ htmlcov/
 .vscode/
 .idea/
 .hintrc
+.kilo/
 
 # OS files
 .DS_Store
