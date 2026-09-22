@@ -1,10 +1,5 @@
 # RtG-Format — Especificación completa
 
-Este documento completa las reglas que faltaban en tu README, basándome
-únicamente en el ejemplo real que diste. Cada regla está marcada como
-**[supuesto]** cuando la inferí del ejemplo (no estaba escrita) — revísalas
-y corrígeme donde no coincida con lo que tenías en mente.
-
 ## 1. Estructura general
 
 ```
@@ -30,7 +25,7 @@ end
   `output`, `visualize` (esta última solo para preview de editor, no se
   interpreta).
 
-## 2. Regla de cierre `end` / `end;;` **[supuesto]**
+## 2. Regla de cierre `end` / `end;;`
 
 No es necesario memorizar cuándo usar `end;;` vs `end`. La regla real es
 más simple: **`;` es terminador de sentencia/bloque, y puede repetirse
@@ -76,7 +71,7 @@ object
 end
 ```
 `"NombreParte":N` declara que existen `N` instancias de esa parte
-(instancias `1..N`, 1-indexadas). **[supuesto]**
+(instancias `1..N`, 1-indexadas).
 
 ### 5.2 `track/UUID`
 ```
@@ -85,7 +80,7 @@ UUID
 end
 ```
 - `[ref] by {patrón}` declara que la instancia `ref` es la **raíz de un
-  grupo UUID**: a esa instancia (y a las partes listadas en el patrón)
+  grupo UUID:** a esa instancia (y a las partes listadas en el patrón)
   se les asigna un identificador único compartido.
 - `"NombreParte"xN` dentro del patrón = "reclama N instancias de esa
   parte por cada raíz". `xN` es opcional; si se omite, `x1` es el valor
@@ -93,7 +88,7 @@ end
   cómo se reparten instancias cuando hay más de una raíz del mismo tipo
   de parte no quedó claro del ejemplo; confírmamelo]**
 
-### 5.3 `track/properties` **(confirmado por ti)**
+### 5.3 `track/properties`
 
 ```
 properties
@@ -101,9 +96,10 @@ properties
       {
           "RGB":[0,255,0]
       }
+   end
 end
 ```
-Cada entrada es `[ref] { JSON }` (uno o más, separados por `;`). Define
+Cada entrada es `[ref] { JSON }` (uno o más, separados por `;` y `end`). Define
 propiedades que sobrescriben, para esa instancia puntual, las de
 `global_properties`. Las propiedades finales de cada instancia se
 calculan como:
@@ -134,15 +130,14 @@ sentencia, separadas por `;`:
    ```
    ["Chassis":1];
    ```
-2. **Conectar — sintaxis real, confirmada por ti: `-a(b)->`**
+2. **Conectar — sintaxis real, `-a(b)->`**
    ```
    ["Seat":1] -1(18)-> ["Chassis":1];
    ```
    El `-` inicial es un delimitador literal, **no** un signo. La forma
    general es `-a(b)->`:
-   - `a` = **tipo local de la conexión**. Si el objeto de origen tiene
-     varios tipos posibles (p. ej. 1 y 3), aquí eliges cuál. Es
-     **opcional**: `-(b)->` (sin número) usa el tipo local por defecto.
+   - `a` = **tipo local de la conexión**. Si el objeto de origen tiene varios tipos posibles (p. ej. 1 y 3), aquí eliges cuál. 
+     Es **opcional:** `-(b)->` (sin número) usa el tipo local por defecto.
    - `b` = **ID del punto de conexión** del objeto destino.
 
    En el build final ambos se serializan como el arreglo
@@ -248,7 +243,7 @@ plugin). No afecta la generación — el intérprete lo ignora.
 
 ---
 
-## Cosas que quedan por confirmar contigo
+## Cosas que quedan por confirmar
 
 1. Semántica exacta de los números en `-1(18)->` y en el arreglo de 6
    posiciones `{[x,y,z],[a,b,c,d,e,f]}->`.

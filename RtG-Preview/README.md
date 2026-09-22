@@ -18,6 +18,8 @@ It allows RtG build data to be rendered interactively in a web browser without r
 * SVG-based interface controls.
 * Can be loaded directly from a CDN such as jsDelivr.
 * Can be embedded into external HTML pages.
+* **Works locally via `file://` protocol** (no local server required).
+* **Supports current RtG-Format structure**: connections with `LocalType`, `PrimaryID`, `PrimaryIndex`, UUIDs, `EphemeralAttachments`, CFrames.
 
 ## How It Works
 
@@ -33,7 +35,7 @@ RtG-Format build
        │
        ├── Object type → 3D model
        │
-       ├── Build data → Scene objects
+       ├── Build data → Scene objects (connections, properties, attachments)
        │
        └── Controls → Interactive camera
        │
@@ -49,10 +51,38 @@ For example:
 "Tooth"
    │
    ▼
-assets/models/Tooth.obj
+assets/models/model/Tooth/Tooth.obj
 ```
 
 This means that the model filename should correspond to the object's type name.
+
+### Supported Build Structure
+
+RtG-Preview works with the current RtG-Format JSON structure:
+
+```json
+[
+  ["Type", Connections, Properties],
+  ["Type", Connections, Properties]
+]
+```
+
+Where:
+- **Type**: Object type name (e.g., "Part", "Servo", "Connector")
+- **Connections**: Array of `[LocalType, PrimaryID, PrimaryIndex]` tuples
+  - `LocalType`: Numeric identifier for local connection type
+  - `PrimaryID`: Numeric connection point ID or UUID referencing an `EphemeralAttachment`
+  - `PrimaryIndex`: 1-based logical index of parent object in the array
+- **Properties**: Object properties dictionary, may include `EphemeralAttachments` with CFrames
+
+Example with attachment:
+
+```json
+[
+  ["Base", [], {"EphemeralAttachments": {"{uuid}": {"partName": "Base", "cframe": [...]}}}],
+  ["Sprite", [["1", "{uuid}", 1]], {"ImageId": 12345}]
+]
+```
 
 ## Usage
 
@@ -69,6 +99,8 @@ A minimal example:
 
 <script>
   RtGPreview.render([
+    ["Part", [], {}],
+    ["Anchor", [], {}],
     ["Tooth", [], {}]
   ]);
 </script>
@@ -78,7 +110,7 @@ Replace `COMMIT` with the desired RtG-Format commit.
 It is recommended not to add the `COMMIT` if the project hasn't had updates for a long time (like 3 or more days). 
 For a regular user, the `COMMIT` shouldn't be used.
 
-## Using Multiple Objects
+### Using Multiple Objects
 
 A build can contain multiple objects:
 
@@ -94,9 +126,56 @@ Each object is resolved using its RtG object type.
 For example:
 
 ```md
-Tooth     → assets/models/Tooth.obj
-Fricklet  → assets/models/Fricklet.obj
+Tooth     → assets/models/model/Tooth/Tooth.obj
+Fricklet  → assets/models/model/Fricklet/Fricklet.obj
 ```
+
+### With Connections and Attachments
+
+```js
+RtGPreview.render([
+  ["Base", [], {"EphemeralAttachments": {"{5a54f1d6-0357-4dae-9a1d-f7600d9c2094}": {"partName": "Base", "cframe": [0,0,0, 1,0,0, 0,1,0, 0,0,1]}}}],
+  ["Part", [["1", "5", 1]], {"RGB": [255, 0, 0]}],
+  ["Sprite", [["1", "{5a54f1d6-0357-4dae-9a1d-f7600d9c2094}", 1]], {"ImageId": 12345}]
+]);
+```
+
+## Local Usage (file:// protocol)
+
+RtG-Preview can be used directly from the local filesystem without running a web server.
+
+To use locally:
+
+1. Open `RtG-Preview/test-preview.html` directly in your browser, OR
+2. Create your own HTML file that includes the required scripts:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>RtG Preview</title>
+</head>
+<body>
+  <!-- Load embedded manifest first (enables file:// support) -->
+  <script src="models-manifest.js"></script>
+  <!-- Load model registry and preview -->
+  <script src="model-registry.js"></script>
+  <script src="preview.js"></script>
+  <script>
+    RtGPreview.render([
+      ["Part", [], {}],
+      ["Anchor", [], {}],
+      ["Tooth", [], {}]
+    ]);
+  </script>
+</body>
+</html>
+```
+
+**Note**: For local use, you must include `models-manifest.js` before `model-registry.js`. This file contains the embedded model manifest that allows loading models without HTTP requests.
+
+When served via HTTP/HTTPS (CDN, local server, etc.), the manifest is loaded automatically via XHR and `models-manifest.js` is not required.
 
 ## Controls
 
@@ -169,16 +248,20 @@ RtG-Preview uses assets stored outside the renderer itself.
 
 Models are stored in:
 
-[`../assets/models/`](../assets/models/)
+[`../assets/models/model/`](../assets/models/model/)
 
-The renderer currently uses Wavefront OBJ models.
+The renderer currently uses Wavefront OBJ models with accompanying JSON metadata.
 
 Example:
 
 ```text
 assets/models/model/Tooth/Tooth.obj
+assets/models/model/Tooth/Tooth.json
 assets/models/model/Fricklet/Fricklet.obj
+assets/models/model/Fricklet/Fricklet.json
 ```
+
+Models with branches (e.g., `Switch`, `Splitter_2`, `Gate-AND`, `DoorA-D`) include additional `.obj` files in a `split/` subdirectory.
 
 ### Sounds
 
@@ -230,6 +313,8 @@ RtGPreview.render([
 
 This makes it possible for other websites, tools, applications, or services to provide RtG previews without copying the renderer into their own project.
 
+For external CDN usage, the model manifest is loaded automatically via HTTP. No additional setup required.
+
 ## Versioning
 
 During development, commit-pinned CDN URLs are recommended:
@@ -274,7 +359,11 @@ The main renderer is located at:
 
 ```text
 RtG-Preview/
-└── preview.js
+├── preview.js
+├── model-registry.js
+├── models.json (HTTP manifest)
+├── models-manifest.js (embedded manifest for file://)
+└── test-preview.html
 ```
 
 Assets used by the renderer are stored under:
@@ -282,6 +371,7 @@ Assets used by the renderer are stored under:
 ```text
 assets/
 ├── models/
+│   └── model/
 ├── sounds/
 └── svg/
 ```
@@ -293,7 +383,18 @@ RtG-Preview/
 └── test-preview.html
 ```
 
-When testing changes, it is recommended to use a local HTTP server or an HTTPS/CDN URL rather than opening the HTML file directly with `file://`.
+**For local testing**: Open `test-preview.html` directly in your browser (file:// protocol supported).
+**For HTTP testing**: Serve the `RtG-Preview` directory and open the served URL.
+
+### Regenerating Model Manifest
+
+When adding or updating models, regenerate the manifest:
+
+```bash
+node ../scripts/generate-manifest.js
+```
+
+This updates both `models.json` (for HTTP) and `models-manifest.js` (for file://).
 
 ## Project Status
 
@@ -308,5 +409,6 @@ Features that are not yet implemented should not be assumed to be represented vi
 * [`../README.md`](../README.md) — Main RtG-Format documentation.
 * [`../assets/README.md`](../assets/README.md) — Documentation for repository assets.
 * [`../structure.md`](../structure.md) — Repository structure.
-* [`../src/`](../src/) — RtG-Format source code.
-* [`../tests/`](../tests/) — Tests for the project.
+* [`../SPECIFICATION.md`](../SPECIFICATION.md) — Current format specification.
+* [`../format/`](../format/) — Detailed format documentation.
+* [`../examples/`](../examples/) — Build examples.

@@ -382,13 +382,13 @@ flowchart TD
 
 ### 7.2 Importancia del Orden del Arreglo (✅ Confirmado)
 > **Hecho por:** @JuanCrakYT
-Dado que las referencias jerárquicas se resuelven mediante índices numéricos del arreglo, **el orden relativo de los elementos dentro del JSON principal es crítico**:
+Dado que las referencias jerárquicas se resuelven mediante índices numéricos del arreglo, **el orden relativo de los elementos dentro del JSON principal es crítico:**
 * Reordenar elementos arbitrariamente provoca la ruptura de los punteros jerárquicos.
 * Un orden inconsistente con el grafo de dependencias o con referencias fuera de rango provoca un fallo de carga con el mensaje `"Build inválida"`.
 
 ### 7.3 Ausencia de Coordenadas Absolutas Directas (✅ Confirmado)
 > **Hecho por:** @JuanCrakYT
-El formato de guardado de RtG **no almacena coordenadas 3D absolutas para los bloques estándar**:
+El formato de guardado de RtG **no almacena coordenadas 3D absolutas para los bloques estándar:**
 * Toda la posición física en el espacio tridimensional se reconstruye recursivamente evaluando la cadena de referencias a partir del objeto raíz (`Base`).
 * Cada bloque hijo calcula su offset espacial automáticamente a partir del punto de anclaje de su padre (`PuntoPadre`).
 
@@ -710,7 +710,7 @@ En objetos de tipo `Sprite`, se observó un comportamiento diferenciado:
 
 ## 14. Comportamiento del cargador
 > **Hecho por:** @JuanCrakYT
-Existe una marcada asimetría entre el **Constructor Visual del Juego (UI Editor)** y el **Cargador de Archivos (Save Loader)**:
+Existe una marcada asimetría entre el **Constructor Visual del Juego (UI Editor)** y el **Cargador de Archivos (Save Loader):**
 * El editor del juego impone restricciones estrictas de colisión, adyacencia y colocación.
 * El cargador de archivos es un motor interpretativo que procesa estructuras avanzadas no construibles manualmente, permitiendo inyección espacial y desvinculación geométrica.
 
@@ -787,7 +787,7 @@ Ejemplo:
 * **Resultado:** El bloque carga correctamente con color rojo. Los campos extra son omitidos de forma segura.
 
 ### 15.2 Rigidez de Referencias Estructurales (✅ Confirmado)
-A diferencia de las propiedades adicionales, **RtG NO intenta autorreparar o crear referencias faltantes**:
+A diferencia de las propiedades adicionales, **RtG NO intenta autorreparar o crear referencias faltantes:**
 * Si un objeto referencia un `ÍndicePadre` fuera de rango o un `{UUID}` inexistente en la tabla de attachments, el cargador aborta la lectura o deja el objeto con un fallo de referencia.
 
 ### 15.3 Matriz de Modificaciones y Comportamientos de Carga

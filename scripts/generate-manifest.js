@@ -3,6 +3,7 @@ const path = require('path');
 
 const MODELS_DIR = path.join(__dirname, '..', 'assets', 'models', 'model');
 const OUTPUT = path.join(__dirname, '..', 'RtG-Preview', 'models.json');
+const EMBEDDED_OUTPUT = path.join(__dirname, '..', 'RtG-Preview', 'models-manifest.js');
 
 function generateManifest() {
   const models = {};
@@ -61,6 +62,21 @@ function generateManifest() {
   
   fs.writeFileSync(OUTPUT, JSON.stringify(manifest, null, 2));
   console.log(`Generated ${OUTPUT} with ${Object.keys(models).length} models`);
+  
+  // Generate embedded manifest for local file:// use
+  generateEmbeddedManifest(manifest);
+}
+
+function generateEmbeddedManifest(manifest) {
+  const jsContent = `// Embedded model manifest for RtG-Preview local (file://) use
+// Generated: ${manifest.generated}
+// This file should be loaded via <script> before preview.js
+
+window.RtGEmbeddedManifest = ${JSON.stringify(manifest, null, 2)};
+`;
+  
+  fs.writeFileSync(EMBEDDED_OUTPUT, jsContent);
+  console.log(`Generated ${EMBEDDED_OUTPUT} for local use`);
 }
 
 generateManifest();

@@ -12,6 +12,8 @@ no code changes are required.
 import json
 import os
 import sys
+import subprocess
+import importlib.util
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -64,12 +66,30 @@ def get_internal_list(assets):
 
 
 def get_available_langs(assets):
-    """Return the set of all recognised language codes."""
-    langs = set(assets[0].get("void-language", {}).keys())
-    langs.update(assets[0].get("help", {}).keys())
-    langs.update(assets[0].get("rules", {}).keys())
-    langs.add("en")
-    return langs
+    """Return the set of all recognised language codes from all resources."""
+    langs = set()
+    # Collect from all language-dependent resources
+    for key in ("void-language", "help", "rules", "version-content", "language-names"):
+        langs.update(assets[0].get(key, {}).keys())
+    # Also collect from addon lang arrays
+    for addon in get_addons(assets).values():
+        langs.update(addon.get("lang", []))
+    return sorted(langs)
+
+
+def get_addons_with_help(assets):
+    """Return addons that have usable documentation/help available."""
+    addons = get_addons(assets)
+    result = {}
+    for key, addon in addons.items():
+        # Check if addon has help available: either internal help or lang support
+        internal_help = assets[0].get("internal", {}).get("help", {})
+        has_internal_help = key in internal_help
+        has_lang = bool(addon.get("lang"))
+        # An addon has usable docs if it has internal help or declared languages
+        if has_internal_help or has_lang:
+            result[key] = addon
+    return result
 
 
 # ---------------------------------------------------------------------------
@@ -86,6 +106,102 @@ def is_lang_selector(arg, assets):
     if not is_single_hyphen(arg):
         return False
     return arg[1:] in get_available_langs(assets)
+
+
+# ---------------------------------------------------------------------------
+# Addon execution interface
+# ---------------------------------------------------------------------------
+
+def load_addon_command_interface(addon_config):
+    """Load the addon's command interface from 'program commands' paths.
+    
+    Returns a callable that can execute the addon's commands, or None if not available.
+    The interface is expected to provide:
+    - execute(args): process addon arguments and return exit code
+    - get_commands(): return list of addon's internal commands (optional)
+    - get_help(command, lang): return help text for a command (optional)
+    """
+    program_commands = addon_config.get("program commands", [])
+    if not program_commands:
+        return None
+    
+    for cmd_path in program_commands:
+        full_path = resolve_path(cmd_path)
+        if not os.path.exists(full_path):
+            continue
+        
+        # Try to load as Python module
+        if full_path.endswith(".py"):
+            try:
+                spec = importlib.util.spec_from_file_location("addon_cmd", full_path)
+                if spec and spec.loader:
+                    module = importlib.util.module_from_spec(spec)
+                    spec.loader.exec_module(module)
+                    if hasattr(module, "execute"):
+                        return module
+            except Exception as e:
+                print(f"Warning: Failed to load addon command interface from {cmd_path}: {e}", file=sys.stderr)
+                continue
+        
+        # Try to load as JavaScript (for Node.js)
+        elif full_path.endswith(".js"):
+            # Return a wrapper that can execute the JS file
+            return {
+                "type": "js",
+                "path": full_path,
+                "execute": lambda args: run_js_addon(full_path, args),
+                "get_commands": lambda: run_js_addon(full_path, ["--commands"]),
+                "get_help": lambda cmd, lang: run_js_addon(full_path, ["--help", cmd, "--lang", lang] if lang else ["--help", cmd]),
+            }
+    
+    return None
+
+
+def run_js_addon(js_path, args):
+    """Execute a JavaScript addon command via Node.js."""
+    try:
+        result = subprocess.run(["node", js_path] + args, capture_output=True, text=True, cwd=BASE_DIR)
+        if result.stdout:
+            print(result.stdout, end="")
+        if result.stderr:
+            print(result.stderr, end="", file=sys.stderr)
+        return result.returncode
+    except FileNotFoundError:
+        print("Error: Node.js not found. Required for JavaScript addons.", file=sys.stderr)
+        return 1
+    except Exception as e:
+        print(f"Error executing JavaScript addon: {e}", file=sys.stderr)
+        return 1
+
+
+def execute_addon(assets, addon_key, addon_args):
+    """Execute an addon with its own arguments via its command interface."""
+    addon = get_addon(assets, addon_key)
+    if not addon:
+        print(f"Unknown addon: {addon_key}")
+        return 1
+    
+    interface = load_addon_command_interface(addon)
+    
+    if interface is None:
+        # Fallback: just show addon info and arguments
+        show_addon_info(assets, addon_key)
+        if addon_args:
+            name = addon.get("name", addon_key)
+            print()
+            print(f"Arguments for {name}:")
+            for arg in addon_args:
+                print(f"  {arg}")
+        return 0
+    
+    # Delegate to addon's execute function
+    if hasattr(interface, "execute"):
+        return interface.execute(addon_args)
+    elif isinstance(interface, dict) and "execute" in interface:
+        return interface["execute"](addon_args)
+    else:
+        print(f"Error: Addon interface for '{addon_key}' does not provide execute function", file=sys.stderr)
+        return 1
 
 
 # ---------------------------------------------------------------------------
@@ -106,8 +222,18 @@ def show_void(assets, lang=None):
 
 
 def show_version(assets):
-    """Print the RtG-CLI version."""
-    print(assets[0]["version"])
+    """Print the RtG-CLI version with version-content for all available languages."""
+    version = assets[0]["version"]
+    print(f"{version}")
+    
+    version_content = assets[0].get("version-content", {})
+    if version_content:
+        print()
+        for lang, content in version_content.items():
+            lang_name = get_language_name(assets, lang)
+            print(f"--- {lang_name} ({lang}) ---")
+            print(content, end="")
+            print()
 
 
 def show_rules(assets, lang=None):
@@ -137,7 +263,7 @@ def show_rules(assets, lang=None):
 def show_commands(assets):
     """Print the list of recognised internal/system commands."""
     internal_list = get_internal_list(assets)
-    print("The most commonly used rtg commands are:")
+    print("RtG-CLI internal commands:")
     print()
     for cmd in internal_list:
         print(f"  {cmd}")
@@ -168,7 +294,6 @@ def show_cli_langs(assets):
         ("Version", version_content_langs),
         ("Rules", rules_langs),
         ("Help", help_langs),
-        ("General", ["en"] if "en" not in void_languages else []),
     ]
 
     if void_languages:
@@ -257,9 +382,20 @@ def show_help_for_command(assets, target, lang=None, list_langs=False):
             else:
                 _print_help_fallback(help_texts, target)
         else:
-            name = addon.get("name", target)
-            print(f"No internal help available for '{target}'.")
-            print(f"Addon: {name}")
+            # Try to get help from addon's own interface
+            interface = load_addon_command_interface(addon)
+            if interface and hasattr(interface, "get_help"):
+                help_text = interface.get_help(target, lang)
+                if help_text:
+                    print(help_text, end="")
+                else:
+                    name = addon.get("name", target)
+                    print(f"No internal help available for '{target}'.")
+                    print(f"Addon: {name}")
+            else:
+                name = addon.get("name", target)
+                print(f"No internal help available for '{target}'.")
+                print(f"Addon: {name}")
         return
 
     if target in internal_help:
@@ -344,6 +480,20 @@ def show_addon_info(assets, addon_key):
     print("|" + "-" * frame_width + "|")
 
 
+def show_addons(assets):
+    """List addons that have documentation/help available."""
+    addons_with_help = get_addons_with_help(assets)
+    if not addons_with_help:
+        print("No addons with documentation available.")
+        return
+    
+    print("Available addons (with documentation):")
+    print()
+    for key, addon in addons_with_help.items():
+        name = addon.get("name", key)
+        print(f"  {key}  |  {name}")
+
+
 # ---------------------------------------------------------------------------
 # Command dispatchers
 # ---------------------------------------------------------------------------
@@ -380,8 +530,8 @@ def dispatch_addon(assets, addon_key, args):
     """Handle a command after an addon has been identified.
 
     Applies the prefix rules:
-      * no hyphen or ``--``  → addon argument
-      * single ``-``          → RtG-CLI option
+      * no hyphen or ``--``  -> addon argument
+      * single ``-``          -> RtG-CLI option
     """
     addon = get_addon(assets, addon_key)
     if not addon:
@@ -404,20 +554,13 @@ def dispatch_addon(assets, addon_key, args):
             show_addon_langs(addon)
             return 0
         elif is_lang_selector(a, assets):
-            pass
+            # Language selector for addon - passed to addon
+            addon_args.append(a)
         else:
             print(f"Unknown system option after addon: {a}", file=sys.stderr)
 
-    show_addon_info(assets, addon_key)
-
-    if addon_args:
-        name = addon.get("name", addon_key)
-        print()
-        print(f"Arguments for {name}:")
-        for arg in addon_args:
-            print(f"  {arg}")
-
-    return 0
+    # Execute the addon with its arguments
+    return execute_addon(assets, addon_key, addon_args)
 
 
 # ---------------------------------------------------------------------------
@@ -476,6 +619,10 @@ def main(argv=None):
 
         elif arg in ("-c", "--commands"):
             show_commands(assets)
+            return 0
+
+        elif arg in ("-a", "--addons"):
+            show_addons(assets)
             return 0
 
         elif arg in addons:

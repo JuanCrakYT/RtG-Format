@@ -1,3 +1,6 @@
+// ModelRegistry - Works both locally (file://) and via HTTP
+// Embeds manifest and provides fallback loading for local use
+
 class ModelRegistry {
     constructor(basePath) {
         this.basePath = basePath;
@@ -5,17 +8,41 @@ class ModelRegistry {
         this.loaded = new Map();
         this.loading = new Map();
         this.isFileProtocol = window.location.protocol === 'file:';
+        this.embeddedManifest = null;
+        this.embeddedModels = new Map(); // type -> { json, obj, branchObjs }
     }
 
+    // Load manifest - tries HTTP first, falls back to embedded
     async loadManifest() {
         if (this.manifest) return this.manifest;
-        
-        if (this.isFileProtocol) {
-            const msg = 'Cannot load models via file:// protocol. Please serve the RtG-Preview folder via HTTP (e.g., `npx serve RtG-Preview` or `python -m http.server` from the RtG-Preview directory).';
-            console.error(msg);
-            throw new Error(msg);
+
+        // Try HTTP first
+        if (!this.isFileProtocol) {
+            try {
+                await this._loadManifestHTTP();
+                return this.manifest;
+            } catch (e) {
+                console.warn('HTTP manifest load failed, trying embedded:', e.message);
+            }
         }
-        
+
+        // Fall back to embedded manifest
+        if (this.embeddedManifest) {
+            this.manifest = this.embeddedManifest;
+            return this.manifest;
+        }
+
+        // Try to load embedded from global (set by inline script)
+        if (window.RtGEmbeddedManifest) {
+            this.embeddedManifest = window.RtGEmbeddedManifest;
+            this.manifest = this.embeddedManifest;
+            return this.manifest;
+        }
+
+        throw new Error('No model manifest available. For local use, include models-manifest.js before preview.js');
+    }
+
+    async _loadManifestHTTP() {
         const manifestUrl = this.basePath.replace(/\/[^/]+$/, '') + '/models.json';
         
         return new Promise((resolve, reject) => {
@@ -30,9 +57,20 @@ class ModelRegistry {
                     reject(new Error('Failed to load manifest: HTTP ' + xhr.status + ' (' + manifestUrl + ')'));
                 }
             };
-            xhr.onerror = () => reject(new Error('Network error loading manifest from ' + manifestUrl + '. Are you serving via HTTP?'));
+            xhr.onerror = () => reject(new Error('Network error loading manifest from ' + manifestUrl));
             xhr.send();
         });
+    }
+
+    // Set embedded manifest (called by models-manifest.js)
+    setEmbeddedManifest(manifest) {
+        this.embeddedManifest = manifest;
+        this.manifest = manifest;
+    }
+
+    // Set embedded model data (called by model data scripts)
+    setEmbeddedModel(type, modelData) {
+        this.embeddedModels.set(type, modelData);
     }
 
     getModelInfo(type) {
@@ -83,24 +121,44 @@ class ModelRegistry {
         
         const baseUrl = this.basePath + info.folder + '/';
         
-        // Load JSON metadata
-        const jsonUrl = baseUrl + info.json.replace('./', '');
-        const modelData = await this._loadJSON(jsonUrl);
+        // Load JSON metadata - try embedded first
+        let modelData;
+        const embedded = this.embeddedModels.get(type);
+        if (embedded && embedded.json) {
+            modelData = embedded.json;
+        } else {
+            const jsonUrl = baseUrl + info.json.replace('./', '');
+            modelData = await this._loadJSON(jsonUrl);
+        }
         
-        // Load main mesh - defaultBranch can be string or array
+        // Load main mesh - try embedded first
         var defaultBranch = info.defaultBranch;
         var mainObj = Array.isArray(defaultBranch) ? defaultBranch[0] : defaultBranch;
-        const mainObjUrl = baseUrl + mainObj.replace('./', '');
-        const mainMesh = await this._loadOBJ(mainObjUrl);
+        let mainMesh;
+        
+        if (embedded && embedded.obj) {
+            mainMesh = this._parseOBJ(embedded.obj);
+        } else {
+            const mainObjUrl = baseUrl + mainObj.replace('./', '');
+            mainMesh = await this._loadOBJ(mainObjUrl);
+        }
         
         // Apply default material
         this._applyDefaultMaterial(mainMesh);
         
-        // Load branches if any (use manifest info which has pre-parsed branch data)
+        // Load branches if any
         if (info.hasBranches && info.branches) {
             for (const branch of info.branches) {
-                const branchUrl = baseUrl + branch.obj.replace('./', '');
-                const branchMesh = await this._loadOBJ(branchUrl);
+                let branchMesh;
+                const branchKey = branch.obj.replace('./', '');
+                
+                if (embedded && embedded.branchObjs && embedded.branchObjs[branchKey]) {
+                    branchMesh = this._parseOBJ(embedded.branchObjs[branchKey]);
+                } else {
+                    const branchUrl = baseUrl + branchKey;
+                    branchMesh = await this._loadOBJ(branchUrl);
+                }
+                
                 this._applyDefaultMaterial(branchMesh);
                 
                 // Position branch using Branches Start transform
@@ -178,6 +236,12 @@ class ModelRegistry {
             xhr.onerror = () => reject(new Error('Network error loading ' + url));
             xhr.send();
         });
+    }
+
+    _parseOBJ(text) {
+        const loader = new THREE.OBJLoader();
+        const cleaned = text.replace(/^mtllib\s+.*$/m, '');
+        return loader.parse(cleaned);
     }
 
     _applyDefaultMaterial(object) {

@@ -137,12 +137,12 @@ It is important not to confuse the encoding layer with the actual save schema.
 
 For example:
 
-The **Base64**:
+The **Base64:**
 ```text
 W1siU3ByYXlQYWludCIsW10seyJSR0IiOlsyMTEsMjcsMTldfV1d
 ```
 
-becomes on a **JSON**:
+becomes on a **JSON:**
 ```json
 [
     [

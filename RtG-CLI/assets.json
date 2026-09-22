@@ -86,7 +86,9 @@
             "--lang",
             "-language",
             "-c",
-            "--commands"
+            "--commands",
+            "-a",
+            "--addons"
         ]
     }
 ]

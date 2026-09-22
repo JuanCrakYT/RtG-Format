@@ -23,6 +23,7 @@ Object("Car")
             {
                "RGB":[0,255,0]
             }
+         end
       end
    end;;
 

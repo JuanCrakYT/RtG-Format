@@ -1,0 +1,64 @@
+[
+  [
+    "Chassis",
+    [],
+    {
+      "propiedad para anotar (no es real)": "esta parte es un JSON real de propiedades, en donde podrás crear metadatos para todos los objetos (de, en este caso: \"Car\") de forma fácil; o simplemente colocar propiedades reales",
+      "RGB": [
+        0,
+        255,
+        0
+      ]
+    }
+  ],
+  [
+    "Seat",
+    [
+      [
+        "1",
+        "18",
+        1
+      ]
+    ],
+    {
+      "propiedad para anotar (no es real)": "esta parte es un JSON real de propiedades, en donde podrás crear metadatos para todos los objetos (de, en este caso: \"Car\") de forma fácil; o simplemente colocar propiedades reales",
+      "RGB": [
+        255,
+        0,
+        0
+      ]
+    }
+  ],
+  [
+    "Seat",
+    [
+      [
+        "1",
+        {
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "orientation": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        1
+      ]
+    ],
+    {
+      "propiedad para anotar (no es real)": "esta parte es un JSON real de propiedades, en donde podrás crear metadatos para todos los objetos (de, en este caso: \"Car\") de forma fácil; o simplemente colocar propiedades reales",
+      "RGB": [
+        255,
+        0,
+        0
+      ]
+    }
+  ]
+]
