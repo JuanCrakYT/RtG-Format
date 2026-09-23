@@ -1529,13 +1529,54 @@
                 resolve(sorted);
             }
 
-            function scanRange(start, end) {
-                var pending = end - start + 1;
-                if (pending <= 0) {
-                    resolveResults();
-                    return;
-                }
-                for (var i = start; i <= end; i++) {
+            function tryLoadBannerList() {
+                var manifestUrl = basePath + 'banners.json';
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', manifestUrl, true);
+                xhr.responseType = 'json';
+                xhr.onload = function() {
+                    if (xhr.status >= 200 && xhr.status < 300 && Array.isArray(xhr.response)) {
+                        var list = xhr.response;
+                        var pending = list.length;
+                        if (pending === 0) {
+                            resolveResults();
+                            return;
+                        }
+                        for (var i = 0; i < list.length; i++) {
+                            var item = list[i];
+                            var imgUrl = basePath + item;
+                            (function(url) {
+                                var img = new Image();
+                                img.onload = function() {
+                                    var num = parseInt(url.match(/RtG-(\d+)\.webp/)?.[1] || '0');
+                                    if (num) found[num] = url;
+                                    pending--;
+                                    if (pending === 0) resolveResults();
+                                };
+                                img.onerror = function() {
+                                    pending--;
+                                    if (pending === 0) resolveResults();
+                                };
+                                img.src = url;
+                            })(imgUrl);
+                        }
+                    } else {
+                        // Manifest not found or invalid, fall back to bounded range
+                        tryBoundedRange();
+                    }
+                };
+                xhr.onerror = function() {
+                    tryBoundedRange();
+                };
+                xhr.send();
+            }
+
+            function tryBoundedRange() {
+                // Only check a small bounded range based on known resources (RtG-1 to RtG-10)
+                // This avoids generating hundreds of 404s while allowing future banners
+                var maxBanner = 10;
+                var pending = maxBanner;
+                for (var i = 1; i <= maxBanner; i++) {
                     var url = basePath + 'RtG-' + i + '.webp';
                     (function(imgUrl, imgNum) {
                         var img = new Image();
@@ -1553,28 +1594,7 @@
                 }
             }
 
-            function probeExponential(n) {
-                if (n > 2000) {
-                    scanRange(1, 2000);
-                    return;
-                }
-                var img = new Image();
-                img.onload = function() {
-                    probeExponential(n * 2);
-                };
-                img.onerror = function() {
-                    var start = Math.max(1, Math.floor(n / 2));
-                    var end = n - 1;
-                    if (start > end) {
-                        resolve([]);
-                    } else {
-                        scanRange(start, end);
-                    }
-                };
-                img.src = basePath + 'RtG-' + n + '.webp';
-            }
-
-            probeExponential(1);
+            tryLoadBannerList();
         });
     }
 
