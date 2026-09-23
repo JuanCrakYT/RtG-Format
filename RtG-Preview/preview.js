@@ -169,7 +169,7 @@
         if (!src) {
             return path;
         }
-        var base = src.replace(/\/RtG-Preview\/preview\.js$/, '/');
+        var base = new URL('./', src).href;
         var relative = path;
         try {
             return new URL(relative, base).href;
@@ -1874,9 +1874,13 @@
     }
 
     function loadDependencies() {
+        var previewBaseUrl = resolvePreviewAssetUrl('');
         return loadScript(THREE_CDN + 'build/three.min.js')
             .then(function() {
                 return loadScript(THREE_CDN + 'examples/js/loaders/OBJLoader.js');
+            })
+            .then(function() {
+                return loadScript(previewBaseUrl + 'model-registry.js');
             });
     }
 
