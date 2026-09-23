@@ -1465,39 +1465,6 @@
         }
     }
 
-     function clearPrevious() {
-        if (state) {
-            cancelAnimationFrame(state.animationId);
-            window.removeEventListener('resize', state.resizeHandler);
-            if (state.container && state.renderer) {
-                state.container.removeChild(state.renderer.domElement);
-                state.renderer.dispose();
-            }
-            if (state.axesHelper && state.axesHelper.parent) {
-                state.axesHelper.parent.remove(state.axesHelper);
-            }
-            if (state.interaction && state.interaction.stop) {
-                state.interaction.stop();
-            }
-            if (state.panel) {
-                try { state.panel.panel.parentNode.removeChild(state.panel.panel); } catch (e) {}
-                try { state.panel.toggle.parentNode.removeChild(state.panel.toggle); } catch (e) {}
-            }
-            if (virtualCursor && virtualCursor.parentNode) {
-                virtualCursor.parentNode.removeChild(virtualCursor);
-            }
-            virtualCursor = null;
-        }
-        if (loadingScreen) {
-            loadingScreen.hide();
-            loadingScreen = null;
-        }
-        var oldScreen = document.getElementById('rtg-loading-screen');
-        if (oldScreen && oldScreen.parentNode) {
-            oldScreen.parentNode.removeChild(oldScreen);
-        }
-    }
-
     function createLoadingScreen() {
         var screen = document.createElement('div');
         screen.id = 'rtg-loading-screen';
@@ -1635,20 +1602,109 @@
         });
     }
 
+    function createResizeObserver(container, camera, renderer) {
+        var observer = new ResizeObserver(function(entries) {
+            for (var i = 0; i < entries.length; i++) {
+                var entry = entries[i];
+                var width = entry.contentRect.width;
+                var height = entry.contentRect.height;
+                if (width > 0 && height > 0) {
+                    camera.aspect = width / height;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(width, height);
+                }
+            }
+        });
+        observer.observe(container);
+        return observer;
+    }
+
+    function createWindowResizeHandler(container, camera, renderer) {
+        var handler = function() {
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        };
+        window.addEventListener('resize', handler);
+        return handler;
+    }
+
+    function disposeResize(observer, handler) {
+        if (observer) {
+            observer.disconnect();
+        }
+        if (handler) {
+            window.removeEventListener('resize', handler);
+        }
+    }
+
+    function disposeState(state) {
+        if (!state) return;
+
+        cancelAnimationFrame(state.animationId);
+
+        disposeResize(state.resizeObserver, state.resizeHandler);
+
+        if (state.renderer) {
+            state.renderer.dispose();
+        }
+        if (state.container && state.renderer && state.renderer.domElement) {
+            try { state.container.removeChild(state.renderer.domElement); } catch (e) {}
+        }
+        if (state.axesHelper && state.axesHelper.parent) {
+            state.axesHelper.parent.remove(state.axesHelper);
+        }
+        if (state.interaction && state.interaction.stop) {
+            state.interaction.stop();
+        }
+        if (state.panel) {
+            try { state.panel.panel.parentNode.removeChild(state.panel.panel); } catch (e) {}
+            try { state.panel.toggle.parentNode.removeChild(state.panel.toggle); } catch (e) {}
+        }
+        if (virtualCursor && virtualCursor.parentNode) {
+            virtualCursor.parentNode.removeChild(virtualCursor);
+            virtualCursor = null;
+        }
+        if (loadingScreen) {
+            loadingScreen.hide();
+            loadingScreen = null;
+        }
+        var oldScreen = document.getElementById('rtg-loading-screen');
+        if (oldScreen && oldScreen.parentNode) {
+            oldScreen.parentNode.removeChild(oldScreen);
+        }
+        if (state.container && state.isFullscreen) {
+            try { state.container.parentNode.removeChild(state.container); } catch (e) {}
+        } else if (state.container && !state.isFullscreen) {
+            while (state.container.firstChild) {
+                state.container.removeChild(state.container.firstChild);
+            }
+        }
+    }
+
     window.RtGPreview = {
         ready: new Promise(function(resolve, reject) {
             resolveReady = resolve;
             rejectReady = reject;
         }),
 
-        render: function(build) {
-            return window.RtGPreview.ready.then(function() {
-                clearPrevious();
+        render: function(build, options) {
+            options = options || {};
+            var customContainer = options.container || null;
+            var isFullscreen = !customContainer;
 
-                var container = document.createElement('div');
-                container.id = 'rtg-preview-container';
-                container.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;touch-action:none;z-index:1;';
-                document.body.appendChild(container);
+            return window.RtGPreview.ready.then(function() {
+                disposeState(state);
+
+                var container;
+                if (customContainer) {
+                    container = customContainer;
+                } else {
+                    container = document.createElement('div');
+                    container.id = 'rtg-preview-container';
+                    container.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;touch-action:none;z-index:1;';
+                    document.body.appendChild(container);
+                }
 
                 var panel = createPanel();
                 if (!virtualCursor) {
@@ -1723,14 +1779,27 @@
                         targetPoint = frameBuild(camera, loadedObjects);
                     }
 
-                    var resizeHandler = function() {
-                        camera.aspect = container.clientWidth / container.clientHeight;
-                        camera.updateProjectionMatrix();
-                        renderer.setSize(container.clientWidth, container.clientHeight);
-                    };
-                    window.addEventListener('resize', resizeHandler);
+                    var resizeObserver = null;
+                    var resizeHandler = null;
+                    if (customContainer) {
+                        resizeObserver = createResizeObserver(container, camera, renderer);
+                    } else {
+                        resizeHandler = createWindowResizeHandler(container, camera, renderer);
+                    }
 
-                    state = { container: container, scene: scene, camera: camera, renderer: renderer, animationId: 0, resizeHandler: resizeHandler, interaction: null, panel: panel, axesHelper: sceneData.axesHelper };
+                    state = { 
+                        container: container, 
+                        scene: scene, 
+                        camera: camera, 
+                        renderer: renderer, 
+                        animationId: 0, 
+                        resizeObserver: resizeObserver,
+                        resizeHandler: resizeHandler, 
+                        interaction: null, 
+                        panel: panel, 
+                        axesHelper: sceneData.axesHelper,
+                        isFullscreen: isFullscreen
+                    };
 
                     state.interaction = setupInteraction(container, camera, targetPoint);
 
@@ -1770,8 +1839,18 @@
                         finalizeRender();
                     }, remaining);
                 });
+
+                return {
+                    dispose: function() {
+                        disposeState(state);
+                        state = null;
+                    }
+                };
             }).catch(function(err) {
                 showAlert('Preview initialization failed: ' + err.message, 'error');
+                return {
+                    dispose: function() {}
+                };
             });
         }
     };

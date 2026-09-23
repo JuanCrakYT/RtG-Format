@@ -90,9 +90,12 @@ RtG-Preview exposes a simple global API:
 
 ```js
 RtGPreview.render(build);
+RtGPreview.render(build, { container: HTMLElement });
 ```
 
-A minimal example:
+### Fullscreen (default)
+
+The default behavior renders a fullscreen preview attached to `document.body`. This is unchanged from previous versions.
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/JuanCrakYT/RtG-Format@COMMIT/RtG-Preview/preview.js"></script>
@@ -106,8 +109,30 @@ A minimal example:
 </script>
 ```
 
+### Embedded (custom container)
+
+Pass a `container` option to mount the preview inside a specific element. The preview will size itself to the container and track its size changes via `ResizeObserver`. This is useful for side panels, drawers, or inline embeds.
+
+```html
+<div id="my-preview" style="width: 400px; height: 300px; border: 1px solid #444;"></div>
+
+<script src="https://cdn.jsdelivr.net/gh/JuanCrakYT/RtG-Format@COMMIT/RtG-Preview/preview.js"></script>
+
+<script>
+  var preview = RtGPreview.render([
+    ["Tooth", [], {}],
+    ["Fricklet", [], {}]
+  ], { container: document.getElementById('my-preview') });
+
+  // Later, when the panel/drawer closes:
+  preview.dispose();
+</script>
+```
+
+**Return value:** `render()` returns a Promise that resolves to an object with a `dispose()` method. Call `dispose()` to clean up the render loop, resize observers, Three.js renderer, and DOM elements. This is required when using a custom container to avoid memory leaks when opening/closing the preview repeatedly.
+
 Replace `COMMIT` with the desired RtG-Format commit.
-It is recommended not to add the `COMMIT` if the project hasn't had updates for a long time (like 3 or more days). 
+It is recommended not to add the `COMMIT` if the project hasn't had updates for a long time (like 3 or more days).
 For a regular user, the `COMMIT` shouldn't be used.
 
 ### Using Multiple Objects
