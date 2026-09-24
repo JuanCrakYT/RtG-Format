@@ -442,7 +442,7 @@
         return stats;
     }
 
-    function createPanel(mountRoot, onToggle, panelState) {
+function createPanel(mountRoot, onToggle, panelState, onBackgroundChange, onBackgroundReset, onScroll) {
         var isEmbedded = mountRoot !== document.body;
         var panel = document.createElement('div');
         panel.id = 'rtg-preview-panel';
@@ -453,7 +453,7 @@
 
         var toggle = document.createElement('button');
         toggle.id = 'rtg-preview-panel-toggle';
-        toggle.style.cssText = 'background:none;border:none;padding:4px;cursor:pointer;pointer-events:auto;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;background:rgba(20,20,30,0.8);' + (isEmbedded ? 'position:absolute;top:8px;left:8px;' : 'position:fixed;top:8px;left:8px;') + 'z-index:100001;';
+        toggle.style.cssText = 'background:none;border:none;padding:4px;cursor:pointer;pointer-events:auto;width:32px;height:32px;display:flex;align-items:center;justify_content:center;border-radius:6px;background:rgba(20,20,30,0.8);' + (isEmbedded ? 'position:absolute;top:8px;left:8px;' : 'position:fixed;top:8px;left:8px;') + 'z-index:100001;';
         toggle.setAttribute('aria-label', 'Toggle panel');
 
         var toggleImg = document.createElement('img');
@@ -504,16 +504,16 @@
         var bgReset = scrollContainer.querySelector('#rtg-preview-bg-reset');
 
         bgInput.addEventListener('input', function() {
-            // Background changes handled via state in render()
+            if (onBackgroundChange) onBackgroundChange(bgInput.value);
         });
 
         bgReset.addEventListener('click', function() {
             bgInput.value = '#1a1a2e';
-            // Background reset handled via state in render()
+            if (onBackgroundReset) onBackgroundReset();
         });
 
         scrollContainer.addEventListener('scroll', function() {
-            // syncArtificialScrollbar called with state in render()
+            if (onScroll) onScroll();
         });
         scrollbarThumb.addEventListener('pointerdown', function(event) {
             event.preventDefault();
@@ -1785,185 +1785,198 @@
                 var virtualCursor = null;
                 var loadingScreen = null;
                 var disposed = false;
+                var state = null;
 
                 function checkDisposed() {
                     return disposed;
                 }
 
-                var panel = createPanel(container, null, panelState);
-                // Toggle callback will be set after state is created
-                virtualCursor = createVirtualCursor(container);
-
-                var sceneData = createScene(container);
-                var scene = sceneData.scene;
-                var camera = sceneData.camera;
-                var renderer = sceneData.renderer;
-
-                var objects = parseBuild(build, container);
-
-                var loadedObjects = [];
-                var objectMap = new Array(objects.length);
-
-                var loadingStartTime = Date.now();
-                loadingScreen = createLoadingScreen(container);
-
-                findBannerImages(resolvePreviewAssetUrl('assets/images/logo/official-banners/')).then(function(banners) {
-                    if (checkDisposed()) return;
-                    if (loadingScreen && banners.length > 0) {
-                        var randomBanner = banners[Math.floor(Math.random() * banners.length)];
-                        loadingScreen.setBanner(randomBanner.url);
-                    }
-                });
-
-                loadSplashTexts().then(function(texts) {
-                    if (checkDisposed()) return;
-                    if (loadingScreen) {
-                        if (texts.length > 0) {
-                            var randomText = texts[Math.floor(Math.random() * texts.length)];
-                            loadingScreen.setSplash(randomText);
-                        } else {
-                            loadingScreen.setSplash('Loading...');
-                        }
-                    }
-                });
-
-                var loadedCount = 0;
-                var promises = objects.map(function(objData, index) {
-                    return loadModel(scene, objData.type, container).then(function(object) {
-                        if (checkDisposed()) return null;
-                        objectMap[index] = loadedObjects.length;
-                        loadedObjects.push(object);
-                        loadedCount++;
-                        if (loadingScreen && objects.length > 0) {
-                            loadingScreen.setProgress(Math.ceil(loadedCount / objects.length * 100));
-                        }
-                        return object;
-                    }).catch(function(err) {
-                        if (checkDisposed()) return null;
-                        showAlert('Failed to load model: ' + objData.type + '.obj', 'error', state);
-                        objectMap[index] = undefined;
-                        loadedCount++;
-                        if (loadingScreen && objects.length > 0) {
-                            loadingScreen.setProgress(Math.ceil(loadedCount / objects.length * 100));
-                        }
-                        return null;
-                    });
-                });
-
-                if (objects.length === 0) {
-                    if (!checkDisposed()) {
-                        loadingScreen.setProgress(100);
-                    }
-                }
-
-                function finalizeRender() {
-                    if (checkDisposed()) return;
-                    loadingScreen.hide();
-                    loadingScreen = null;
-
-                    positionByConnections(objects, loadedObjects, objectMap);
-                    updateGridSize(loadedObjects, scene);
-
-                    var targetPoint = new THREE.Vector3(0, 0, 0);
-                    if (loadedObjects.length > 0) {
-                        targetPoint = frameBuild(camera, loadedObjects);
-                    }
-
-                    var resizeObserver = null;
-                    var resizeHandler = null;
-                    if (customContainer) {
-                        resizeObserver = createResizeObserver(container, camera, renderer);
-                    } else {
-                        resizeHandler = createWindowResizeHandler(container, camera, renderer);
-                    }
-
-                    state.resizeObserver = resizeObserver;
-                    state.resizeHandler = resizeHandler;
-
-                    state.interaction = setupInteraction(container, camera, targetPoint, state);
-
-                    // Set up toggle button callback now that state exists
-                    panel.setToggleCallback(function() { togglePanel(state); });
-
-                    var stats = computeBuildStats(build, loadedObjects);
-                    panel.updateStats(stats);
-
-                    var hasPhysicalKeyboard = false;
-                    try {
-                        var mouseCoarse = window.matchMedia('(pointer: coarse)').matches;
-                        var hoverNone = window.matchMedia('(hover: none)').matches;
-                        var maxTouch = navigator.maxTouchPoints || 0;
-                        hasPhysicalKeyboard = !(mouseCoarse && hoverNone && maxTouch > 0);
-                    } catch (e) {}
-
-                    if (!hasPhysicalKeyboard) {
-                        showAlert('WASD controls are unavailable on this device. Use touch or mouse to control the camera.', 'notification', state);
-                    }
-
-                    function animate() {
-                        if (checkDisposed()) return;
-                        state.animationId = requestAnimationFrame(animate);
-                        renderer.render(scene, camera);
-                    }
-
-                    animate();
-                }
-
-                Promise.all(promises).then(function() {
-                    if (checkDisposed()) return;
-                    var elapsed = Date.now() - loadingStartTime;
-                    var remaining = Math.max(0, 1000 - elapsed);
-                    setTimeout(function() {
-                        finalizeRender();
-                    }, remaining);
-                }).catch(function() {
-                    if (checkDisposed()) return;
-                    var elapsed = Date.now() - loadingStartTime;
-                    var remaining = Math.max(0, 1000 - elapsed);
-                    setTimeout(function() {
-                        finalizeRender();
-                    }, remaining);
-                });
-
-                // Create state early so dispose() can clean up partial resources
-                var state = { 
-                    container: container, 
-                    scene: scene, 
-                    camera: camera, 
-                    renderer: renderer, 
-                    animationId: 0, 
-                    resizeObserver: null,
-                    resizeHandler: null, 
-                    interaction: null, 
-                    panel: panel, 
-                    axesHelper: sceneData.axesHelper,
-                    isFullscreen: isFullscreen,
-                    virtualCursor: virtualCursor,
-                    loadingScreen: loadingScreen,
-                    panelState: panelState,
-                    uiActive: uiActive,
-                    cursorX: cursorX,
-                    cursorY: cursorY,
-                    cursorDrag: cursorDrag,
-                    lastInput: lastInput,
-                    alertContainer: null
-                };
-
-                return {
-                    dispose: function() {
-                        if (disposed) return;
-                        disposed = true;
+                function cleanupAndReject(err) {
+                    if (!disposed && state) {
                         disposeState(state);
-                        state = null;
                     }
-                };
-            }).catch(function(err) {
-                // Clean up any state that was created before the error
-                if (!disposed) {
-                    disposeState(state);
+                    return Promise.reject(err);
                 }
-                // Reject the promise so caller sees the error
-                return Promise.reject(err);
+
+                try {
+                    var panel = createPanel(container, null, panelState, function(color) {
+                        if (checkDisposed()) return;
+                        if (scene) scene.background = new THREE.Color(color);
+                    }, function() {
+                        if (checkDisposed()) return;
+                        if (scene) scene.background = new THREE.Color(0x1a1a2e);
+                    }, function() {
+                        if (checkDisposed()) return;
+                        syncArtificialScrollbar(state);
+                    });
+                    virtualCursor = createVirtualCursor(container);
+
+                    var sceneData = createScene(container);
+                    var scene = sceneData.scene;
+                    var camera = sceneData.camera;
+                    var renderer = sceneData.renderer;
+
+                    var objects = parseBuild(build, container);
+
+                    var loadedObjects = [];
+                    var objectMap = new Array(objects.length);
+
+                    var loadingStartTime = Date.now();
+                    loadingScreen = createLoadingScreen(container);
+
+                    findBannerImages(resolvePreviewAssetUrl('assets/images/logo/official-banners/')).then(function(banners) {
+                        if (checkDisposed()) return;
+                        if (loadingScreen && banners.length > 0) {
+                            var randomBanner = banners[Math.floor(Math.random() * banners.length)];
+                            loadingScreen.setBanner(randomBanner.url);
+                        }
+                    });
+
+                    loadSplashTexts().then(function(texts) {
+                        if (checkDisposed()) return;
+                        if (loadingScreen) {
+                            if (texts.length > 0) {
+                                var randomText = texts[Math.floor(Math.random() * texts.length)];
+                                loadingScreen.setSplash(randomText);
+                            } else {
+                                loadingScreen.setSplash('Loading...');
+                            }
+                        }
+                    });
+
+                    var loadedCount = 0;
+                    var promises = objects.map(function(objData, index) {
+                        return loadModel(scene, objData.type, container).then(function(object) {
+                            if (checkDisposed()) return null;
+                            objectMap[index] = loadedObjects.length;
+                            loadedObjects.push(object);
+                            loadedCount++;
+                            if (loadingScreen && objects.length > 0) {
+                                loadingScreen.setProgress(Math.ceil(loadedCount / objects.length * 100));
+                            }
+                            return object;
+                        }).catch(function(err) {
+                            if (checkDisposed()) return null;
+                            showAlert('Failed to load model: ' + objData.type + '.obj', 'error', state);
+                            objectMap[index] = undefined;
+                            loadedCount++;
+                            if (loadingScreen && objects.length > 0) {
+                                loadingScreen.setProgress(Math.ceil(loadedCount / objects.length * 100));
+                            }
+                            return null;
+                        });
+                    });
+
+                    if (objects.length === 0) {
+                        if (!checkDisposed()) {
+                            loadingScreen.setProgress(100);
+                        }
+                    }
+
+                    function finalizeRender() {
+                        if (checkDisposed()) return;
+                        loadingScreen.hide();
+                        loadingScreen = null;
+
+                        positionByConnections(objects, loadedObjects, objectMap);
+                        updateGridSize(loadedObjects, scene);
+
+                        var targetPoint = new THREE.Vector3(0, 0, 0);
+                        if (loadedObjects.length > 0) {
+                            targetPoint = frameBuild(camera, loadedObjects);
+                        }
+
+                        var resizeObserver = null;
+                        var resizeHandler = null;
+                        if (customContainer) {
+                            resizeObserver = createResizeObserver(container, camera, renderer);
+                        } else {
+                            resizeHandler = createWindowResizeHandler(container, camera, renderer);
+                        }
+
+                        state.resizeObserver = resizeObserver;
+                        state.resizeHandler = resizeHandler;
+
+                        state.interaction = setupInteraction(container, camera, targetPoint, state);
+
+                        // Set up toggle button callback now that state exists
+                        panel.setToggleCallback(function() { togglePanel(state); });
+
+                        var stats = computeBuildStats(build, loadedObjects);
+                        panel.updateStats(stats);
+
+                        var hasPhysicalKeyboard = false;
+                        try {
+                            var mouseCoarse = window.matchMedia('(pointer: coarse)').matches;
+                            var hoverNone = window.matchMedia('(hover: none)').matches;
+                            var maxTouch = navigator.maxTouchPoints || 0;
+                            hasPhysicalKeyboard = !(mouseCoarse && hoverNone && maxTouch > 0);
+                        } catch (e) {}
+
+                        if (!hasPhysicalKeyboard) {
+                            showAlert('WASD controls are unavailable on this device. Use touch or mouse to control the camera.', 'notification', state);
+                        }
+
+                        function animate() {
+                            if (checkDisposed()) return;
+                            state.animationId = requestAnimationFrame(animate);
+                            renderer.render(scene, camera);
+                        }
+
+                        animate();
+                    }
+
+                    Promise.all(promises).then(function() {
+                        if (checkDisposed()) return;
+                        var elapsed = Date.now() - loadingStartTime;
+                        var remaining = Math.max(0, 1000 - elapsed);
+                        setTimeout(function() {
+                            finalizeRender();
+                        }, remaining);
+                    }).catch(function() {
+                        if (checkDisposed()) return;
+                        var elapsed = Date.now() - loadingStartTime;
+                        var remaining = Math.max(0, 1000 - elapsed);
+                        setTimeout(function() {
+                            finalizeRender();
+                        }, remaining);
+                    });
+
+                    // Create state early so dispose() can clean up partial resources
+                    state = { 
+                        container: container, 
+                        scene: scene, 
+                        camera: camera, 
+                        renderer: renderer, 
+                        animationId: 0, 
+                        resizeObserver: null,
+                        resizeHandler: null, 
+                        interaction: null, 
+                        panel: panel, 
+                        axesHelper: sceneData.axesHelper,
+                        isFullscreen: isFullscreen,
+                        virtualCursor: virtualCursor,
+                        loadingScreen: loadingScreen,
+                        panelState: panelState,
+                        uiActive: uiActive,
+                        cursorX: cursorX,
+                        cursorY: cursorY,
+                        cursorDrag: cursorDrag,
+                        lastInput: lastInput,
+                        alertContainer: null
+                    };
+
+                    return {
+                        dispose: function() {
+                            if (disposed) return;
+                            disposed = true;
+                            disposeState(state);
+                            state = null;
+                        }
+                    };
+                } catch (err) {
+                    return cleanupAndReject(err);
+                }
             });
         }
     };
