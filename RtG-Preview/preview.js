@@ -24,7 +24,7 @@
         if (!src) {
             return 'assets/sounds/' + name + '.mp3';
         }
-        var base = src.replace(/\/RtG-Preview\/preview\.js$/, '/');
+        var base = new URL('../', src).href;
         var relative = 'assets/sounds/' + name + '.mp3';
         try {
             return new URL(relative, base).href;
@@ -45,20 +45,21 @@
         } catch (e) {}
     }
 
-    function showAlert(message, type, mountRoot) {
+    function showAlert(message, type, state) {
         type = type || 'notification';
         playAlertSound(type);
 
-        var root = mountRoot || document.body;
+        var root = state.container;
         var isEmbedded = root !== document.body;
 
         try {
-            if (!alertContainer || alertContainer._mountRoot !== root) {
+            var alertContainer = state.alertContainer;
+            if (!alertContainer) {
                 alertContainer = document.createElement('div');
                 alertContainer.id = 'rtg-preview-alerts';
-                alertContainer._mountRoot = root;
                 alertContainer.style.cssText = (isEmbedded ? 'position:absolute;' : 'position:fixed;') + 'bottom:0;left:0;max-width:100%;padding:8px;z-index:99999;display:flex;flex-direction:column;gap:6px;pointer-events:none;';
                 root.appendChild(alertContainer);
+                state.alertContainer = alertContainer;
             }
 
             var item = document.createElement('div');
@@ -128,7 +129,7 @@
         if (!src) {
             return 'assets/models/' + type + '.' + extension;
         }
-        var base = src.replace(/\/RtG-Preview\/preview\.js$/, '/');
+        var base = new URL('../', src).href;
         var relative = 'assets/models/' + type + '.' + extension;
         try {
             return new URL(relative, base).href;
@@ -153,7 +154,8 @@
         if (!src) {
             return path;
         }
-        var base = new URL('./', src).href;
+        var isRepoAsset = path.indexOf('assets/') === 0;
+        var base = new URL(isRepoAsset ? '../' : './', src).href;
         var relative = path;
         try {
             return new URL(relative, base).href;
@@ -440,7 +442,7 @@
         return stats;
     }
 
-    function createPanel(mountRoot, onToggle) {
+    function createPanel(mountRoot, onToggle, panelState) {
         var isEmbedded = mountRoot !== document.body;
         var panel = document.createElement('div');
         panel.id = 'rtg-preview-panel';
@@ -461,7 +463,7 @@
         toggleImg.onerror = function() {
             if (!toggleImg.dataset.fallback) {
                 toggleImg.dataset.fallback = 'true';
-                showAlert('Failed to load SVG icon asset', 'error', mountRoot);
+                showAlert('Failed to load SVG icon asset', 'error', { container: mountRoot });
                 toggleImg.src = 'data:image/svg+xml;base64,' + btoa('<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="3" y1="5" x2="21" y2="5"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="19" x2="21" y2="19"/></svg>');
             }
         };
@@ -502,20 +504,16 @@
         var bgReset = scrollContainer.querySelector('#rtg-preview-bg-reset');
 
         bgInput.addEventListener('input', function() {
-            if (state && state.scene) {
-                state.scene.background = new THREE.Color(bgInput.value);
-            }
+            // Background changes handled via state in render()
         });
 
         bgReset.addEventListener('click', function() {
             bgInput.value = '#1a1a2e';
-            if (state && state.scene) {
-                state.scene.background = new THREE.Color(0x1a1a2e);
-            }
+            // Background reset handled via state in render()
         });
 
         scrollContainer.addEventListener('scroll', function() {
-            syncArtificialScrollbar();
+            // syncArtificialScrollbar called with state in render()
         });
         scrollbarThumb.addEventListener('pointerdown', function(event) {
             event.preventDefault();
@@ -552,8 +550,6 @@
             var maxScroll = scrollContainer.scrollHeight - scrollContainer.clientHeight;
             scrollContainer.scrollTop = maxScroll > 0 ? (newTop / maxTop) * maxScroll : 0;
         });
-
-        syncArtificialScrollbar();
 
         return {
             panel: panel,
@@ -907,6 +903,41 @@
             return 0;
         }
 
+        function isUIElement(target, state) {
+            if (!target) return false;
+            var el = target;
+            while (el && el !== document) {
+                if (el.id === 'rtg-preview-panel' ||
+                    el.id === 'rtg-preview-panel-toggle' ||
+                    el.id === 'rtg-preview-panel-toggle-img' ||
+                    el.id === 'rtg-preview-panel-scroll' ||
+                    el.id === 'rtg-preview-stats' ||
+                    el.id === 'rtg-preview-bg-color' ||
+                    el.id === 'rtg-preview-bg-reset' ||
+                    el.id === 'rtg-preview-scrollbar-track' ||
+                    el.id === 'rtg-preview-scrollbar-thumb' ||
+                    el.tagName === 'BUTTON' ||
+                    el.tagName === 'INPUT' ||
+                    el.tagName === 'SELECT' ||
+                    el.tagName === 'TEXTAREA' ||
+                    el.tagName === 'A') {
+                    return true;
+                }
+                if (state && state.panel) {
+                    if (el === state.panel.panel ||
+                        el === state.panel.toggle ||
+                        el === state.panel.scrollContainer ||
+                        el === state.panel.scrollbarTrack ||
+                        el === state.panel.scrollbarThumb ||
+                        el === state.panel.bgInput) {
+                        return true;
+                    }
+                }
+                el = el.parentElement;
+            }
+            return false;
+        }
+
         container.addEventListener('pointerdown', function(event) {
             state.lastInput = 'pointer';
             if (state.virtualCursor) state.virtualCursor.style.display = 'none';
@@ -918,6 +949,10 @@
             if (event.pointerType === 'touch' && getTouchDistance(event) > 0) {
                 pinchState.active = true;
                 pinchState.lastDistance = getTouchDistance(event);
+                return;
+            }
+
+            if (isUIElement(event.target, state)) {
                 return;
             }
 
@@ -970,6 +1005,9 @@
         });
 
         container.addEventListener('wheel', function(event) {
+            if (isUIElement(event.target, state)) {
+                return;
+            }
             state.lastInput = 'pointer';
             if (state.virtualCursor) state.virtualCursor.style.display = 'none';
             event.preventDefault();
@@ -978,7 +1016,7 @@
             updateCameraPosition();
         }, { passive: false });
 
-        window.addEventListener('keydown', function(event) {
+        window.addEventListener('keydown', function keydownHandler(event) {
             var key = event.key.toLowerCase();
             if (key === 'shift') {
                 shiftPressed = true;
@@ -993,7 +1031,7 @@
             if (key === 'f' && !event.repeat) togglePanel(state);
         });
 
-        window.addEventListener('keyup', function(event) {
+        window.addEventListener('keyup', function keyupHandler(event) {
             var key = event.key.toLowerCase();
             if (key === 'shift') {
                 shiftPressed = false;
@@ -1018,6 +1056,8 @@
 
         return {
             stop: function() {
+                window.removeEventListener('keydown', keydownHandler);
+                window.removeEventListener('keyup', keyupHandler);
                 moveState.forward = false;
                 moveState.backward = false;
                 moveState.left = false;
@@ -1150,12 +1190,12 @@
         scene.add(group);
     }
 
-    function updateGridSize(loadedObjects) {
+    function updateGridSize(loadedObjects, scene) {
         if (!loadedObjects || loadedObjects.length === 0) return;
-        if (!state || !state.scene) return;
+        if (!scene) return;
 
         var gridHelper = null;
-        var axesGroup = state.scene.getObjectByName('rtg-axes-helper');
+        var axesGroup = scene.getObjectByName('rtg-axes-helper');
         if (axesGroup) {
             gridHelper = axesGroup.getObjectByName('rtg-grid-helper');
         }
@@ -1174,9 +1214,9 @@
         gridHelper.scale.set(gridSize / 20, 1, gridSize / 20);
     }
 
-    function parseBuild(build) {
+    function parseBuild(build, container) {
         if (!Array.isArray(build)) {
-            showAlert('Error in build: the build must be an array.', 'error');
+            showAlert('Error in build: the build must be an array.', 'error', { container: container });
             return [];
         }
 
@@ -1186,13 +1226,13 @@
             var blockIndex = i + 1;
 
             if (!Array.isArray(obj)) {
-                showAlert('Error in block ' + blockIndex + ': invalid structure, expected an array.', 'error');
+                showAlert('Error in block ' + blockIndex + ': invalid structure, expected an array.', 'error', { container: container });
                 continue;
             }
 
             var type = obj[0];
             if (type === undefined || type === null || type === '') {
-                showAlert('Error in block ' + blockIndex + ': missing or empty type.', 'error');
+                showAlert('Error in block ' + blockIndex + ': missing or empty type.', 'error', { container: container });
                 continue;
             }
             type = String(type);
@@ -1200,14 +1240,14 @@
             var connections = obj[1];
             if (connections !== undefined && connections !== null) {
                 if (!Array.isArray(connections)) {
-                    showAlert('Error in block ' + blockIndex + ' (' + type + '): connections must be an array.', 'error');
+                    showAlert('Error in block ' + blockIndex + ' (' + type + '): connections must be an array.', 'error', { container: container });
                     connections = [];
                 } else {
                     var validConnections = [];
                     for (var c = 0; c < connections.length; c++) {
                         var conn = connections[c];
                         if (!Array.isArray(conn) || conn.length < 3) {
-                            showAlert('Error in block ' + blockIndex + ' (' + type + '): connection ' + (c + 1) + ' has invalid format.', 'error');
+                            showAlert('Error in block ' + blockIndex + ' (' + type + '): connection ' + (c + 1) + ' has invalid format.', 'error', { container: container });
                         } else {
                             validConnections.push(conn);
                         }
@@ -1221,7 +1261,7 @@
             var properties = obj[2];
             if (properties !== undefined && properties !== null) {
                 if (typeof properties !== 'object' || Array.isArray(properties)) {
-                    showAlert('Error in block ' + blockIndex + ' (' + type + '): properties must be an object.', 'error');
+                    showAlert('Error in block ' + blockIndex + ' (' + type + '): properties must be an object.', 'error', { container: container });
                     properties = {};
                 }
             } else {
@@ -1238,7 +1278,7 @@
         return result;
     }
 
-    function loadModel(scene, type) {
+    function loadModel(scene, type, container) {
         return modelRegistry.getModel(type).then(function(model) {
             // Clone the model and add to scene
             var instance = model.clone(true);
@@ -1252,7 +1292,7 @@
             scene.add(instance);
             return instance;
         }).catch(function(err) {
-            showAlert('Failed to load model: ' + type, 'error');
+            showAlert('Failed to load model: ' + type, 'error', { container: container });
             throw err;
         });
     }
@@ -1677,6 +1717,9 @@
         if (state.loadingScreen) {
             state.loadingScreen.hide();
         }
+        if (state.alertContainer && state.alertContainer.parentNode) {
+            try { state.alertContainer.parentNode.removeChild(state.alertContainer); } catch (e) {}
+        }
         var oldScreen = document.getElementById('rtg-loading-screen');
         if (oldScreen && oldScreen.parentNode) {
             oldScreen.parentNode.removeChild(oldScreen);
@@ -1684,8 +1727,21 @@
         if (state.container && state.isFullscreen) {
             try { state.container.parentNode.removeChild(state.container); } catch (e) {}
         } else if (state.container && !state.isFullscreen) {
-            while (state.container.firstChild) {
-                state.container.removeChild(state.container.firstChild);
+            // Only remove RtG-Preview created elements, not user content
+            var previewElements = [
+                state.renderer && state.renderer.domElement,
+                state.panel && state.panel.panel,
+                state.panel && state.panel.toggle,
+                state.virtualCursor,
+                state.loadingScreen && state.loadingScreen.screen,
+                state.alertContainer,
+                document.getElementById('rtg-loading-screen')
+            ].filter(Boolean);
+            for (var i = 0; i < previewElements.length; i++) {
+                var el = previewElements[i];
+                if (el && el.parentNode === state.container) {
+                    try { state.container.removeChild(el); } catch (e) {}
+                }
             }
         }
     }
@@ -1734,7 +1790,7 @@
                     return disposed;
                 }
 
-                var panel = createPanel(container);
+                var panel = createPanel(container, null, panelState);
                 // Toggle callback will be set after state is created
                 virtualCursor = createVirtualCursor(container);
 
@@ -1743,7 +1799,7 @@
                 var camera = sceneData.camera;
                 var renderer = sceneData.renderer;
 
-                var objects = parseBuild(build);
+                var objects = parseBuild(build, container);
 
                 var loadedObjects = [];
                 var objectMap = new Array(objects.length);
@@ -1773,7 +1829,7 @@
 
                 var loadedCount = 0;
                 var promises = objects.map(function(objData, index) {
-                    return loadModel(scene, objData.type).then(function(object) {
+                    return loadModel(scene, objData.type, container).then(function(object) {
                         if (checkDisposed()) return null;
                         objectMap[index] = loadedObjects.length;
                         loadedObjects.push(object);
@@ -1784,7 +1840,7 @@
                         return object;
                     }).catch(function(err) {
                         if (checkDisposed()) return null;
-                        showAlert('Failed to load model: ' + objData.type + '.obj', 'error', container);
+                        showAlert('Failed to load model: ' + objData.type + '.obj', 'error', state);
                         objectMap[index] = undefined;
                         loadedCount++;
                         if (loadingScreen && objects.length > 0) {
@@ -1806,7 +1862,7 @@
                     loadingScreen = null;
 
                     positionByConnections(objects, loadedObjects, objectMap);
-                    updateGridSize(loadedObjects);
+                    updateGridSize(loadedObjects, scene);
 
                     var targetPoint = new THREE.Vector3(0, 0, 0);
                     if (loadedObjects.length > 0) {
@@ -1841,7 +1897,7 @@
                     } catch (e) {}
 
                     if (!hasPhysicalKeyboard) {
-                        showAlert('WASD controls are unavailable on this device. Use touch or mouse to control the camera.', 'notification', container);
+                        showAlert('WASD controls are unavailable on this device. Use touch or mouse to control the camera.', 'notification', state);
                     }
 
                     function animate() {
@@ -1889,7 +1945,8 @@
                     cursorX: cursorX,
                     cursorY: cursorY,
                     cursorDrag: cursorDrag,
-                    lastInput: lastInput
+                    lastInput: lastInput,
+                    alertContainer: null
                 };
 
                 return {
@@ -1924,8 +1981,8 @@
             })
             .catch(function(error) {
                 console.error('Failed to initialize RtG-Preview:', error);
-                showAlert('Failed to load required libraries: ' + error.message, 'error');
-                resolveReady();
+                showAlert('Failed to load required libraries: ' + error.message, 'error', { container: document.body });
+                rejectReady(error);
             });
     }
 
@@ -1936,6 +1993,9 @@
                 return loadScript(THREE_CDN + 'examples/js/loaders/OBJLoader.js');
             })
             .then(function() {
+                if (typeof window.ModelRegistry !== 'undefined') {
+                    return Promise.resolve();
+                }
                 return loadScript(previewBaseUrl + 'model-registry.js');
             });
     }
