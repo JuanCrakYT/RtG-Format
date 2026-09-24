@@ -4,27 +4,7 @@
     var THREE_CDN = 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/';
     var resolveReady = null;
     var rejectReady = null;
-    var state = null;
-    var panelState = { open: false };
-    var uiActive = false;
-    var virtualCursor = null;
-    var cursorX = 0;
-    var cursorY = 0;
-    var cursorDrag = { active: false, startX: 0, startY: 0, threshold: 6 };
-    var lastInput = 'pointer';
-    var loadingScreen = null;
     var modelRegistry = null;
-
-
-    function fatal(message) {
-        try {
-            var el = document.createElement('div');
-            el.style.cssText = 'position:fixed;top:0;left:0;width:100%;padding:12px;background:#b00020;color:white;font-family:Arial,sans-serif;font-size:14px;z-index:99999;white-space:pre-wrap;';
-            el.textContent = 'RtG-Preview: ' + message;
-            document.body.appendChild(el);
-        } catch (e) {}
-        console.error('RtG-Preview: ' + message);
-    }
 
     var alertContainer = null;
 
@@ -65,16 +45,20 @@
         } catch (e) {}
     }
 
-    function showAlert(message, type) {
+    function showAlert(message, type, mountRoot) {
         type = type || 'notification';
         playAlertSound(type);
 
+        var root = mountRoot || document.body;
+        var isEmbedded = root !== document.body;
+
         try {
-            if (!alertContainer) {
+            if (!alertContainer || alertContainer._mountRoot !== root) {
                 alertContainer = document.createElement('div');
                 alertContainer.id = 'rtg-preview-alerts';
-                alertContainer.style.cssText = 'position:fixed;bottom:0;left:0;max-width:100%;padding:8px;z-index:99999;display:flex;flex-direction:column;gap:6px;pointer-events:none;';
-                document.body.appendChild(alertContainer);
+                alertContainer._mountRoot = root;
+                alertContainer.style.cssText = (isEmbedded ? 'position:absolute;' : 'position:fixed;') + 'bottom:0;left:0;max-width:100%;padding:8px;z-index:99999;display:flex;flex-direction:column;gap:6px;pointer-events:none;';
+                root.appendChild(alertContainer);
             }
 
             var item = document.createElement('div');
@@ -456,17 +440,18 @@
         return stats;
     }
 
-    function createPanel() {
+    function createPanel(mountRoot, onToggle) {
+        var isEmbedded = mountRoot !== document.body;
         var panel = document.createElement('div');
         panel.id = 'rtg-preview-panel';
-        panel.style.cssText = 'position:fixed;top:0;left:0;height:100%;width:280px;background:rgba(20,20,30,0.95);color:#e0e0e0;font-family:Arial,sans-serif;font-size:12px;z-index:99998;overflow:hidden;pointer-events:auto;transform:translateX(-100%);transition:transform .2s ease;border-right:1px solid rgba(255,255,255,0.1);';
+        panel.style.cssText = (isEmbedded ? 'position:absolute;' : 'position:fixed;') + 'top:0;left:0;height:100%;width:280px;background:rgba(20,20,30,0.95);color:#e0e0e0;font-family:Arial,sans-serif;font-size:12px;z-index:99998;overflow:hidden;pointer-events:auto;transform:translateX(-100%);transition:transform .2s ease;border-right:1px solid rgba(255,255,255,0.1);';
 
         var header = document.createElement('div');
         header.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:44px;display:flex;align-items:center;justify-content:flex-start;padding:4px 8px;box-sizing:border-box;z-index:2;';
 
         var toggle = document.createElement('button');
         toggle.id = 'rtg-preview-panel-toggle';
-        toggle.style.cssText = 'background:none;border:none;padding:4px;cursor:pointer;pointer-events:auto;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;background:rgba(20,20,30,0.8);position:fixed;top:8px;left:8px;z-index:100001;';
+        toggle.style.cssText = 'background:none;border:none;padding:4px;cursor:pointer;pointer-events:auto;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;background:rgba(20,20,30,0.8);' + (isEmbedded ? 'position:absolute;top:8px;left:8px;' : 'position:fixed;top:8px;left:8px;') + 'z-index:100001;';
         toggle.setAttribute('aria-label', 'Toggle panel');
 
         var toggleImg = document.createElement('img');
@@ -476,16 +461,16 @@
         toggleImg.onerror = function() {
             if (!toggleImg.dataset.fallback) {
                 toggleImg.dataset.fallback = 'true';
-                showAlert('Failed to load SVG icon asset', 'error');
+                showAlert('Failed to load SVG icon asset', 'error', mountRoot);
                 toggleImg.src = 'data:image/svg+xml;base64,' + btoa('<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="3" y1="5" x2="21" y2="5"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="19" x2="21" y2="19"/></svg>');
             }
         };
         toggle.appendChild(toggleImg);
 
         toggle.addEventListener('click', function() {
-            togglePanel();
+            if (onToggle) onToggle();
         });
-        document.body.appendChild(toggle);
+        mountRoot.appendChild(toggle);
 
         panel.appendChild(header);
 
@@ -509,7 +494,7 @@
         scrollbarTrack.appendChild(scrollbarThumb);
         panel.appendChild(scrollbarTrack);
 
-        document.body.appendChild(panel);
+        mountRoot.appendChild(panel);
 
         var statsEl = scrollContainer.querySelector('#rtg-preview-stats');
 
@@ -578,7 +563,7 @@
             scrollbarTrack: scrollbarTrack,
             scrollbarThumb: scrollbarThumb,
             bgInput: bgInput,
-            setOpen: function(isOpen) {
+            setOpen: function(isOpen, state) {
                 panelState.open = isOpen;
                 if (isOpen) {
                     panel.style.transform = 'translateX(0)';
@@ -587,7 +572,10 @@
                     panel.style.transform = 'translateX(-100%)';
                     toggleImg.src = resolvePreviewAssetUrl('assets/svg/menu-opened.svg');
                 }
-                updateVirtualCursor();
+                if (state) updateVirtualCursor(state);
+            },
+            setToggleCallback: function(callback) {
+                onToggle = callback;
             },
             updateStats: function(stats) {
                 var statsEl = scrollContainer.querySelector('#rtg-preview-stats');
@@ -673,45 +661,45 @@
         }
     }
 
-    function togglePanel() {
+    function togglePanel(state) {
         if (!state || !state.panel) return;
-        panelState.open = !panelState.open;
-        uiActive = panelState.open;
-        state.panel.setOpen(panelState.open);
-        if (panelState.open && lastInput === 'gamepad') {
-            cursorX = window.innerWidth / 2;
-            cursorY = window.innerHeight / 2;
+        state.panelState.open = !state.panelState.open;
+        state.uiActive = state.panelState.open;
+        state.panel.setOpen(state.panelState.open, state);
+        if (state.panelState.open && state.lastInput === 'gamepad') {
+            state.cursorX = window.innerWidth / 2;
+            state.cursorY = window.innerHeight / 2;
         }
-        updateVirtualCursor();
+        updateVirtualCursor(state);
     }
 
-    function setPanelOpen(isOpen) {
+    function setPanelOpen(state, isOpen) {
         if (!state || !state.panel) return;
-        panelState.open = isOpen;
-        uiActive = isOpen;
-        state.panel.setOpen(isOpen);
-        if (isOpen && lastInput === 'gamepad') {
-            cursorX = window.innerWidth / 2;
-            cursorY = window.innerHeight / 2;
+        state.panelState.open = isOpen;
+        state.uiActive = isOpen;
+        state.panel.setOpen(isOpen, state);
+        if (isOpen && state.lastInput === 'gamepad') {
+            state.cursorX = window.innerWidth / 2;
+            state.cursorY = window.innerHeight / 2;
         }
-        updateVirtualCursor();
+        updateVirtualCursor(state);
     }
 
-    function updateVirtualCursor() {
-        if (!virtualCursor) return;
-        if (uiActive && lastInput === 'gamepad') {
-            virtualCursor.style.display = 'block';
+    function updateVirtualCursor(state) {
+        if (!state.virtualCursor) return;
+        if (state.uiActive && state.lastInput === 'gamepad') {
+            state.virtualCursor.style.display = 'block';
             var panelRect = state.panel.panel.getBoundingClientRect();
-            cursorX = Math.max(panelRect.left + 8, Math.min(panelRect.right - 8, cursorX));
-            cursorY = Math.max(panelRect.top + 8, Math.min(panelRect.bottom - 8, cursorY));
-            virtualCursor.style.left = cursorX + 'px';
-            virtualCursor.style.top = cursorY + 'px';
+            state.cursorX = Math.max(panelRect.left + 8, Math.min(panelRect.right - 8, state.cursorX));
+            state.cursorY = Math.max(panelRect.top + 8, Math.min(panelRect.bottom - 8, state.cursorY));
+            state.virtualCursor.style.left = state.cursorX + 'px';
+            state.virtualCursor.style.top = state.cursorY + 'px';
         } else {
-            virtualCursor.style.display = 'none';
+            state.virtualCursor.style.display = 'none';
         }
     }
 
-    function syncArtificialScrollbar() {
+    function syncArtificialScrollbar(state) {
         if (!state || !state.panel) return;
         var scrollContainer = state.panel.scrollContainer;
         var thumb = state.panel.scrollbarThumb;
@@ -735,16 +723,17 @@
         thumb.style.top = top + 'px';
     }
 
-    function createVirtualCursor() {
+    function createVirtualCursor(mountRoot) {
+        var isEmbedded = mountRoot !== document.body;
         var el = document.createElement('div');
         el.id = 'rtg-preview-virtual-cursor';
-        el.style.cssText = 'position:fixed;width:16px;height:16px;border-radius:50%;border:2px solid white;box-shadow:0 0 4px rgba(0,0,0,0.8);pointer-events:none;z-index:100000;display:none;transform:translate(-50%,-50%);transition:opacity .15s ease;';
+        el.style.cssText = (isEmbedded ? 'position:absolute;' : 'position:fixed;') + 'width:16px;height:16px;border-radius:50%;border:2px solid white;box-shadow:0 0 4px rgba(0,0,0,0.8);pointer-events:none;z-index:100000;display:none;transform:translate(-50%,-50%);transition:opacity .15s ease;';
         el.innerHTML = '<div style="position:absolute;top:50%;left:50%;width:4px;height:4px;background:white;border-radius:50%;transform:translate(-50%,-50%);"></div>';
-        document.body.appendChild(el);
+        mountRoot.appendChild(el);
         return el;
     }
 
-    function setupInteraction(container, camera, target) {
+    function setupInteraction(container, camera, target, state) {
         var isDragging = false;
         var previousPointerPosition = { x: 0, y: 0 };
         var spherical = { theta: 0, phi: Math.PI / 3, radius: 5 };
@@ -792,7 +781,7 @@
             gamepadMoveState.up = false;
             gamepadMoveState.down = false;
 
-            lastInput = 'gamepad';
+            state.lastInput = 'gamepad';
 
             var lx = applyAxis(gp.axes[0]);
             var ly = applyAxis(gp.axes[1]);
@@ -807,11 +796,11 @@
             rbPressed = gp.buttons[5] ? gp.buttons[5].pressed : false;
 
             if (selectPressed && !selectWasPressed) {
-                togglePanel();
+                togglePanel(state);
             }
             selectWasPressed = selectPressed;
 
-            if (!uiActive) {
+            if (!state.uiActive) {
                 if (lx > 0.1) gamepadMoveState.right = true;
                 if (lx < -0.1) gamepadMoveState.left = true;
                 if (ly > 0.1) gamepadMoveState.backward = true;
@@ -832,34 +821,34 @@
                 if (scrollContainer) {
                     var scrollSpeed = 1.2;
                     scrollContainer.scrollTop += ry * scrollSpeed;
-                    syncArtificialScrollbar();
+                    syncArtificialScrollbar(state);
                 }
 
                 var panelRect = state.panel.panel.getBoundingClientRect();
                 var moveSpeedX = 1.2;
                 var moveSpeedY = 1.2;
-                cursorX += lx * moveSpeedX;
-                cursorY += ly * moveSpeedY;
-                cursorX = Math.max(panelRect.left + 8, Math.min(panelRect.right - 8, cursorX));
-                cursorY = Math.max(panelRect.top + 8, Math.min(panelRect.bottom - 8, cursorY));
-                updateVirtualCursor();
+                state.cursorX += lx * moveSpeedX;
+                state.cursorY += ly * moveSpeedY;
+                state.cursorX = Math.max(panelRect.left + 8, Math.min(panelRect.right - 8, state.cursorX));
+                state.cursorY = Math.max(panelRect.top + 8, Math.min(panelRect.bottom - 8, state.cursorY));
+                updateVirtualCursor(state);
 
-                if (aPressed && !cursorDrag.active) {
-                    cursorDrag.active = true;
-                    cursorDrag.startX = cursorX;
-                    cursorDrag.startY = cursorY;
+                if (aPressed && !state.cursorDrag.active) {
+                    state.cursorDrag.active = true;
+                    state.cursorDrag.startX = state.cursorX;
+                    state.cursorDrag.startY = state.cursorY;
                 }
                 if (!aPressed) {
-                    cursorDrag.active = false;
+                    state.cursorDrag.active = false;
                 }
-                if (cursorDrag.active) {
-                    var dx = cursorX - cursorDrag.startX;
-                    var dy = cursorY - cursorDrag.startY;
-                    if (Math.abs(dx) > cursorDrag.threshold || Math.abs(dy) > cursorDrag.threshold) {
-                        var el = document.elementFromPoint(cursorX, cursorY);
+                if (state.cursorDrag.active) {
+                    var dx = state.cursorX - state.cursorDrag.startX;
+                    var dy = state.cursorY - state.cursorDrag.startY;
+                    if (Math.abs(dx) > state.cursorDrag.threshold || Math.abs(dy) > state.cursorDrag.threshold) {
+                        var el = document.elementFromPoint(state.cursorX, state.cursorY);
                         if (el && scrollContainer.contains(el)) {
                             scrollContainer.scrollTop += dy * 1.5;
-                            syncArtificialScrollbar();
+                            syncArtificialScrollbar(state);
                         }
                     }
                 }
@@ -883,12 +872,12 @@
             var delta = new THREE.Vector3();
 
             var effectiveMoveState = {
-                forward: moveState.forward || (!uiActive && gamepadMoveState.forward),
-                backward: moveState.backward || (!uiActive && gamepadMoveState.backward),
-                left: moveState.left || (!uiActive && gamepadMoveState.left),
-                right: moveState.right || (!uiActive && gamepadMoveState.right),
-                up: moveState.up || (!uiActive && gamepadMoveState.up),
-                down: moveState.down || (!uiActive && gamepadMoveState.down)
+                forward: moveState.forward || (!state.uiActive && gamepadMoveState.forward),
+                backward: moveState.backward || (!state.uiActive && gamepadMoveState.backward),
+                left: moveState.left || (!state.uiActive && gamepadMoveState.left),
+                right: moveState.right || (!state.uiActive && gamepadMoveState.right),
+                up: moveState.up || (!state.uiActive && gamepadMoveState.up),
+                down: moveState.down || (!state.uiActive && gamepadMoveState.down)
             };
 
             if (effectiveMoveState.forward) delta.add(forward);
@@ -919,8 +908,8 @@
         }
 
         container.addEventListener('pointerdown', function(event) {
-            lastInput = 'pointer';
-            if (virtualCursor) virtualCursor.style.display = 'none';
+            state.lastInput = 'pointer';
+            if (state.virtualCursor) state.virtualCursor.style.display = 'none';
 
             if (event.pointerType === 'touch' && event.isPrimary === false) {
                 return;
@@ -939,8 +928,8 @@
 
         container.addEventListener('pointermove', function(event) {
             if (event.pointerType === 'touch' || isDragging) {
-                lastInput = 'pointer';
-                if (virtualCursor) virtualCursor.style.display = 'none';
+                state.lastInput = 'pointer';
+                if (state.virtualCursor) state.virtualCursor.style.display = 'none';
             }
 
             if (pinchState.active) {
@@ -967,8 +956,8 @@
         });
 
         container.addEventListener('pointerup', function(event) {
-            lastInput = 'pointer';
-            if (virtualCursor) virtualCursor.style.display = 'none';
+            state.lastInput = 'pointer';
+            if (state.virtualCursor) state.virtualCursor.style.display = 'none';
 
             if (pinchState.active) {
                 pinchState.active = false;
@@ -981,8 +970,8 @@
         });
 
         container.addEventListener('wheel', function(event) {
-            lastInput = 'pointer';
-            if (virtualCursor) virtualCursor.style.display = 'none';
+            state.lastInput = 'pointer';
+            if (state.virtualCursor) state.virtualCursor.style.display = 'none';
             event.preventDefault();
             var zoomSpeed = 0.0015;
             spherical.radius = Math.max(0.5, Math.min(50, spherical.radius * (1 + event.deltaY * zoomSpeed)));
@@ -993,7 +982,7 @@
             var key = event.key.toLowerCase();
             if (key === 'shift') {
                 shiftPressed = true;
-                lastInput = 'pointer';
+                state.lastInput = 'pointer';
             }
             if (key === 'w' || key === 'arrowup') moveState.forward = true;
             if (key === 's' || key === 'arrowdown') moveState.backward = true;
@@ -1001,14 +990,14 @@
             if (key === 'd' || key === 'arrowright') moveState.right = true;
             if (key === 'q') moveState.down = true;
             if (key === 'e') moveState.up = true;
-            if (key === 'f' && !event.repeat) togglePanel();
+            if (key === 'f' && !event.repeat) togglePanel(state);
         });
 
         window.addEventListener('keyup', function(event) {
             var key = event.key.toLowerCase();
             if (key === 'shift') {
                 shiftPressed = false;
-                lastInput = 'pointer';
+                state.lastInput = 'pointer';
             }
             if (key === 'w' || key === 'arrowup') moveState.forward = false;
             if (key === 's' || key === 'arrowdown') moveState.backward = false;
@@ -1465,10 +1454,11 @@
         }
     }
 
-    function createLoadingScreen() {
+    function createLoadingScreen(mountRoot) {
+        var isEmbedded = mountRoot !== document.body;
         var screen = document.createElement('div');
         screen.id = 'rtg-loading-screen';
-        screen.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(20,20,30,0.98);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999999;transition:opacity .3s ease;';
+        screen.style.cssText = (isEmbedded ? 'position:absolute;' : 'position:fixed;') + 'top:0;left:0;width:100%;height:100%;background:rgba(20,20,30,0.98);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999999;transition:opacity .3s ease;';
 
         var bannerContainer = document.createElement('div');
         bannerContainer.style.cssText = 'margin-bottom:24px;display:flex;align-items:center;justify-content:center;';
@@ -1490,7 +1480,7 @@
         progressContainer.appendChild(progressBar);
         screen.appendChild(progressContainer);
 
-        document.body.appendChild(screen);
+        mountRoot.appendChild(screen);
 
         return {
             screen: screen,
@@ -1681,13 +1671,11 @@
             try { state.panel.panel.parentNode.removeChild(state.panel.panel); } catch (e) {}
             try { state.panel.toggle.parentNode.removeChild(state.panel.toggle); } catch (e) {}
         }
-        if (virtualCursor && virtualCursor.parentNode) {
-            virtualCursor.parentNode.removeChild(virtualCursor);
-            virtualCursor = null;
+        if (state.virtualCursor && state.virtualCursor.parentNode) {
+            state.virtualCursor.parentNode.removeChild(state.virtualCursor);
         }
-        if (loadingScreen) {
-            loadingScreen.hide();
-            loadingScreen = null;
+        if (state.loadingScreen) {
+            state.loadingScreen.hide();
         }
         var oldScreen = document.getElementById('rtg-loading-screen');
         if (oldScreen && oldScreen.parentNode) {
@@ -1714,11 +1702,16 @@
             var isFullscreen = !customContainer;
 
             return window.RtGPreview.ready.then(function() {
-                disposeState(state);
+                // No global state to dispose - each instance manages its own
 
                 var container;
                 if (customContainer) {
                     container = customContainer;
+                    // Ensure container acts as positioning context for embedded elements
+                    var computedStyle = window.getComputedStyle(container);
+                    if (computedStyle.position === 'static') {
+                        container.style.position = 'relative';
+                    }
                 } else {
                     container = document.createElement('div');
                     container.id = 'rtg-preview-container';
@@ -1726,10 +1719,24 @@
                     document.body.appendChild(container);
                 }
 
-                var panel = createPanel();
-                if (!virtualCursor) {
-                    virtualCursor = createVirtualCursor();
+                // Per-instance state
+                var panelState = { open: false };
+                var uiActive = false;
+                var cursorX = 0;
+                var cursorY = 0;
+                var cursorDrag = { active: false, startX: 0, startY: 0, threshold: 6 };
+                var lastInput = 'pointer';
+                var virtualCursor = null;
+                var loadingScreen = null;
+                var disposed = false;
+
+                function checkDisposed() {
+                    return disposed;
                 }
+
+                var panel = createPanel(container);
+                // Toggle callback will be set after state is created
+                virtualCursor = createVirtualCursor(container);
 
                 var sceneData = createScene(container);
                 var scene = sceneData.scene;
@@ -1742,9 +1749,10 @@
                 var objectMap = new Array(objects.length);
 
                 var loadingStartTime = Date.now();
-                loadingScreen = createLoadingScreen();
+                loadingScreen = createLoadingScreen(container);
 
                 findBannerImages(resolvePreviewAssetUrl('assets/images/logo/official-banners/')).then(function(banners) {
+                    if (checkDisposed()) return;
                     if (loadingScreen && banners.length > 0) {
                         var randomBanner = banners[Math.floor(Math.random() * banners.length)];
                         loadingScreen.setBanner(randomBanner.url);
@@ -1752,6 +1760,7 @@
                 });
 
                 loadSplashTexts().then(function(texts) {
+                    if (checkDisposed()) return;
                     if (loadingScreen) {
                         if (texts.length > 0) {
                             var randomText = texts[Math.floor(Math.random() * texts.length)];
@@ -1765,6 +1774,7 @@
                 var loadedCount = 0;
                 var promises = objects.map(function(objData, index) {
                     return loadModel(scene, objData.type).then(function(object) {
+                        if (checkDisposed()) return null;
                         objectMap[index] = loadedObjects.length;
                         loadedObjects.push(object);
                         loadedCount++;
@@ -1773,7 +1783,8 @@
                         }
                         return object;
                     }).catch(function(err) {
-                        showAlert('Failed to load model: ' + objData.type + '.obj', 'error');
+                        if (checkDisposed()) return null;
+                        showAlert('Failed to load model: ' + objData.type + '.obj', 'error', container);
                         objectMap[index] = undefined;
                         loadedCount++;
                         if (loadingScreen && objects.length > 0) {
@@ -1784,10 +1795,13 @@
                 });
 
                 if (objects.length === 0) {
-                    loadingScreen.setProgress(100);
+                    if (!checkDisposed()) {
+                        loadingScreen.setProgress(100);
+                    }
                 }
 
                 function finalizeRender() {
+                    if (checkDisposed()) return;
                     loadingScreen.hide();
                     loadingScreen = null;
 
@@ -1807,21 +1821,13 @@
                         resizeHandler = createWindowResizeHandler(container, camera, renderer);
                     }
 
-                    state = { 
-                        container: container, 
-                        scene: scene, 
-                        camera: camera, 
-                        renderer: renderer, 
-                        animationId: 0, 
-                        resizeObserver: resizeObserver,
-                        resizeHandler: resizeHandler, 
-                        interaction: null, 
-                        panel: panel, 
-                        axesHelper: sceneData.axesHelper,
-                        isFullscreen: isFullscreen
-                    };
+                    state.resizeObserver = resizeObserver;
+                    state.resizeHandler = resizeHandler;
 
-                    state.interaction = setupInteraction(container, camera, targetPoint);
+                    state.interaction = setupInteraction(container, camera, targetPoint, state);
+
+                    // Set up toggle button callback now that state exists
+                    panel.setToggleCallback(function() { togglePanel(state); });
 
                     var stats = computeBuildStats(build, loadedObjects);
                     panel.updateStats(stats);
@@ -1835,10 +1841,11 @@
                     } catch (e) {}
 
                     if (!hasPhysicalKeyboard) {
-                        showAlert('WASD controls are unavailable on this device. Use touch or mouse to control the camera.', 'notification');
+                        showAlert('WASD controls are unavailable on this device. Use touch or mouse to control the camera.', 'notification', container);
                     }
 
                     function animate() {
+                        if (checkDisposed()) return;
                         state.animationId = requestAnimationFrame(animate);
                         renderer.render(scene, camera);
                     }
@@ -1847,12 +1854,14 @@
                 }
 
                 Promise.all(promises).then(function() {
+                    if (checkDisposed()) return;
                     var elapsed = Date.now() - loadingStartTime;
                     var remaining = Math.max(0, 1000 - elapsed);
                     setTimeout(function() {
                         finalizeRender();
                     }, remaining);
                 }).catch(function() {
+                    if (checkDisposed()) return;
                     var elapsed = Date.now() - loadingStartTime;
                     var remaining = Math.max(0, 1000 - elapsed);
                     setTimeout(function() {
@@ -1860,17 +1869,44 @@
                     }, remaining);
                 });
 
+                // Create state early so dispose() can clean up partial resources
+                var state = { 
+                    container: container, 
+                    scene: scene, 
+                    camera: camera, 
+                    renderer: renderer, 
+                    animationId: 0, 
+                    resizeObserver: null,
+                    resizeHandler: null, 
+                    interaction: null, 
+                    panel: panel, 
+                    axesHelper: sceneData.axesHelper,
+                    isFullscreen: isFullscreen,
+                    virtualCursor: virtualCursor,
+                    loadingScreen: loadingScreen,
+                    panelState: panelState,
+                    uiActive: uiActive,
+                    cursorX: cursorX,
+                    cursorY: cursorY,
+                    cursorDrag: cursorDrag,
+                    lastInput: lastInput
+                };
+
                 return {
                     dispose: function() {
+                        if (disposed) return;
+                        disposed = true;
                         disposeState(state);
                         state = null;
                     }
                 };
             }).catch(function(err) {
-                showAlert('Preview initialization failed: ' + err.message, 'error');
-                return {
-                    dispose: function() {}
-                };
+                // Clean up any state that was created before the error
+                if (!disposed) {
+                    disposeState(state);
+                }
+                // Reject the promise so caller sees the error
+                return Promise.reject(err);
             });
         }
     };
