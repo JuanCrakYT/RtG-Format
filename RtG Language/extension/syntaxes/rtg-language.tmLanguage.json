@@ -1,0 +1,15 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "RtG-Language",
+  "scopeName": "source.rtg",
+  "patterns": [
+    { "include": "#comments" }, { "include": "#strings" },
+    { "match": "\\b(rtg|schema|object|instance|as|connect|localType|point|uuid|properties|attachment|on|partName|cframe|output|source|file)\\b", "name": "keyword.control.rtg" },
+    { "match": "\\b(true|false|null)\\b", "name": "constant.language.rtg" },
+    { "match": "(?<![A-Za-z0-9_])-?\\b\\d+(?:\\.\\d+)?\\b", "name": "constant.numeric.rtg" }
+  ],
+  "repository": {
+    "comments": { "patterns": [{ "name": "comment.line.double-slash.rtg", "match": "//.*$" }, { "name": "comment.block.rtg", "begin": "/\\*", "end": "\\*/" }] },
+    "strings": { "name": "string.quoted.double.rtg", "begin": "\"", "end": "\"", "patterns": [{ "match": "\\\\.", "name": "constant.character.escape.rtg" }] }
+  }
+}

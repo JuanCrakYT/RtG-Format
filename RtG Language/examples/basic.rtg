@@ -1,0 +1,9 @@
+rtg 2.0;
+
+schema { source: "../schema/schema.json"; }
+
+object "Basic" {
+    instance "Chassis" as chassis;
+}
+
+output { file: "./basic.json"; }

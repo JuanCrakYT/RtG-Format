@@ -1,0 +1,15 @@
+rtg 2.0;
+
+schema { source: "../schema/schema.json"; }
+
+object "CarBody" { instance "Chassis" as chassis; }
+
+object "Wheels" {
+    instance "Wheel" as frontLeft;
+    connect frontLeft -> chassis {
+        localType: 1;
+        point: 1;
+    }
+}
+
+output { file: "./connections.json"; }

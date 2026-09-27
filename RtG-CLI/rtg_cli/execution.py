@@ -1,0 +1,424 @@
+"""Execution engine for addons and program commands."""
+
+from __future__ import annotations
+
+import sys
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
+
+from .addons import AddonRegistry, ProgramCommandInterface
+from .arguments import ArgumentParser, ParsedCommandLine
+from .configuration import CliConfig
+from .diagnostics import (
+    Diagnostic,
+    ExitCode,
+    err_addon_execution_failure,
+    err_addon_not_found,
+    err_addon_unavailable,
+    err_program_execution_failure,
+)
+from .languages import LanguageManager
+
+
+@dataclass(frozen=True)
+class ExecutionResult:
+    """Result of an execution."""
+
+    exit_code: int
+    stdout: str = ""
+    stderr: str = ""
+    diagnostic: Diagnostic | None = None
+
+
+class AddonExecutor:
+    """Executes addons via their program command interface."""
+
+    def __init__(self, registry: AddonRegistry, config: CliConfig, lang_manager: LanguageManager):
+        self.registry = registry
+        self.config = config
+        self.lang_manager = lang_manager
+
+    def execute(self, parsed: ParsedCommandLine) -> ExecutionResult:
+        """Execute an addon based on parsed command line."""
+        addon_id = parsed.addon_identifier
+        if not addon_id:
+            return ExecutionResult(
+                exit_code=ExitCode.USAGE_ERROR,
+                diagnostic=err_addon_not_found(""),
+            )
+
+        addon = self.registry.get(addon_id)
+        if not addon:
+            return ExecutionResult(
+                exit_code=ExitCode.ADDON_NOT_FOUND,
+                diagnostic=err_addon_not_found(addon_id),
+            )
+
+        if not addon.has_documentation:
+            return ExecutionResult(
+                exit_code=ExitCode.ADDON_UNAVAILABLE,
+                diagnostic=err_addon_unavailable(addon_id, "No documentation or languages available"),
+            )
+
+        interface = self.registry.get_interface(addon_id)
+        if not interface:
+            # Fallback: show addon info
+            return self._show_addon_info(addon_id, parsed.addon_args)
+
+        # Parse addon-specific CLI options (single hyphen = CLI, others = addon)
+        cli_opts, addon_args = self._parse_addon_args(addon_id, parsed.addon_args)
+
+        # Handle CLI options after addon
+        if cli_opts.get("lang"):
+            self._show_addon_languages(addon)
+            return ExecutionResult(exit_code=ExitCode.SUCCESS)
+
+        if cli_opts.get("unknown"):
+            from .diagnostics import err_unknown_option
+
+            return ExecutionResult(
+                exit_code=ExitCode.UNKNOWN_OPTION,
+                diagnostic=err_unknown_option(cli_opts["unknown"]),
+            )
+
+        # Execute the addon
+        try:
+            exit_code = interface.execute(addon_args)
+            return ExecutionResult(exit_code=exit_code)
+        except Exception as e:
+            return ExecutionResult(
+                exit_code=ExitCode.ADDON_EXECUTION_FAILURE,
+                diagnostic=err_addon_execution_failure(addon_id, str(e)),
+            )
+
+    def _parse_addon_args(self, addon_id: str, args: list[str]) -> tuple[dict[str, Any], list[str]]:
+        """Parse arguments after addon identification."""
+        cli_options: dict[str, Any] = {}
+        addon_args: list[str] = []
+
+        for arg in args:
+            if arg.startswith("-") and not arg.startswith("--"):
+                if len(arg) == 2:
+                    opt_char = arg[1]
+                    if opt_char in ("l", "h", "v", "r", "c", "a"):
+                        cli_options[opt_char] = True
+                        continue
+                    if self.lang_manager.is_language_available(opt_char, f"addon/{addon_id}"):
+                        cli_options["lang_selector"] = opt_char
+                        continue
+                cli_options["unknown"] = arg
+            else:
+                addon_args.append(arg)
+
+        return cli_options, addon_args
+
+    def _show_addon_info(self, addon_id: str, addon_args: list[str]) -> ExecutionResult:
+        """Fallback: show addon info when no program interface available."""
+        addon = self.registry.get(addon_id)
+        if not addon:
+            return ExecutionResult(exit_code=ExitCode.ADDON_NOT_FOUND, diagnostic=err_addon_not_found(addon_id))
+
+        lines = [f"\n{addon_id}\n", "-" * len(addon_id)]
+
+        if addon.creators:
+            lines.append("\nCreators:")
+            for creator, notes in addon.creators.items():
+                for note in notes:
+                    lines.append(f"    {note} ({creator})")
+
+        if addon.languages:
+            lines.append("\nLanguages:")
+            for lang in addon.languages:
+                name = self.lang_manager.get_language_name(lang)
+                lines.append(f"    {name} | {lang}")
+
+        lines.append("\nVersion:")
+        lines.append("    Content:")
+        if addon.version:
+            lines.append(f"        VERSION {addon.version}")
+        else:
+            lines.append("        [No version information]")
+
+        content_width = max(len(line) for line in lines)
+        lines.append("")
+        lines.append("|" + "-" * content_width + "|")
+        lines.append("|" + " Run Output".ljust(content_width) + "|")
+        lines.append("|" + "-" * content_width + "|")
+
+        output = "\n".join(lines)
+        print(output)
+
+        if addon_args:
+            name = addon.name
+            print()
+            print(f"Arguments for {name}:")
+            for arg in addon_args:
+                print(f"  {arg}")
+
+        return ExecutionResult(exit_code=ExitCode.SUCCESS)
+
+    def _show_addon_languages(self, addon) -> None:
+        """Show languages available for an addon."""
+        print("Available languages:")
+        print()
+        for lang in addon.languages:
+            name = self.lang_manager.get_language_name(lang)
+            print(f"  {name} | {lang}")
+
+
+class InternalCommandExecutor:
+    """Executes internal CLI commands."""
+
+    def __init__(self, config: CliConfig, lang_manager: LanguageManager, registry: AddonRegistry):
+        self.config = config
+        self.lang_manager = lang_manager
+        self.registry = registry
+
+    def execute(self, parsed: ParsedCommandLine) -> ExecutionResult:
+        """Execute an internal command."""
+        command = parsed.command
+
+        if command in ("version", "v"):
+            return self._execute_version(parsed)
+        elif command in ("help", "h"):
+            return self._execute_help(parsed)
+        elif command in ("rules", "r"):
+            return self._execute_rules(parsed)
+        elif command in ("lang", "l"):
+            return self._execute_lang(parsed)
+        elif command in ("commands", "c"):
+            return self._execute_commands(parsed)
+        elif command in ("addons", "a"):
+            return self._execute_addons(parsed)
+        elif command == "language":
+            return self._execute_language(parsed)
+        else:
+            from .diagnostics import err_unknown_command
+
+            return ExecutionResult(
+                exit_code=ExitCode.UNKNOWN_COMMAND,
+                diagnostic=err_unknown_command(command or ""),
+            )
+
+    def _execute_version(self, parsed: ParsedCommandLine) -> ExecutionResult:
+        print(self.config.version)
+        if self.config.version_content:
+            print()
+            for lang, content in self.config.version_content.items():
+                name = self.lang_manager.get_language_name(lang)
+                print(f"--- {name} ({lang}) ---")
+                print(content, end="")
+                print()
+        return ExecutionResult(exit_code=ExitCode.SUCCESS)
+
+    def _execute_help(self, parsed: ParsedCommandLine) -> ExecutionResult:
+        target = parsed.positional_args[0] if parsed.positional_args else None
+        lang = parsed.cli_options.get("lang_selector")
+        list_langs = parsed.cli_options.get("lang", False)
+
+        if target is None:
+            if list_langs:
+                self._show_cli_languages()
+            else:
+                self._show_help_file(lang)
+            return ExecutionResult(exit_code=ExitCode.SUCCESS)
+
+        # Check if target is an internal command
+        if target in self.config.internal.command_list:
+            internal_help = self.config.internal.help_texts.get(target, {})
+            if list_langs:
+                print("Available languages:")
+                print()
+                for l in internal_help:
+                    print(f"  {l}")
+            elif lang and lang in internal_help:
+                print(internal_help[lang], end="")
+            else:
+                if internal_help:
+                    first = next(iter(internal_help))
+                    print(internal_help[first], end="")
+                else:
+                    print(f"No help available for '{target}'.")
+            return ExecutionResult(exit_code=ExitCode.SUCCESS)
+
+        # Check if target is an addon
+        addon = self.registry.get(target)
+        if addon:
+            if list_langs:
+                self._show_addon_languages(addon)
+            elif target in self.config.internal.help_texts:
+                internal_help = self.config.internal.help_texts[target]
+                if lang and lang in internal_help:
+                    print(internal_help[lang], end="")
+                else:
+                    first = next(iter(internal_help))
+                    print(internal_help[first], end="")
+            else:
+                interface = self.registry.get_interface(target)
+                if interface:
+                    help_text = interface.get_help(target, lang)
+                    if help_text:
+                        print(help_text, end="")
+                    else:
+                        print(f"No internal help available for '{target}'.")
+                        print(f"Addon: {addon.name}")
+                else:
+                    print(f"No internal help available for '{target}'.")
+                    print(f"Addon: {addon.name}")
+            return ExecutionResult(exit_code=ExitCode.SUCCESS)
+
+        # Unknown command
+        print(f"Unknown command: {target}\n")
+        self._show_void(parsed.cli_options.get("language"))
+        return ExecutionResult(exit_code=ExitCode.SUCCESS)
+
+    def _execute_rules(self, parsed: ParsedCommandLine) -> ExecutionResult:
+        lang = parsed.cli_options.get("lang_selector")
+        rules = self.config.rules_paths
+
+        if not rules:
+            print("Rules not available.")
+            return ExecutionResult(exit_code=ExitCode.SUCCESS)
+
+        if lang and lang in rules:
+            path = self.config.asset_paths.resolve_rules(lang)
+            if path and path.exists():
+                print(path.read_text(encoding="utf-8"), end="")
+            else:
+                print(f"Could not read rules file: {rules[lang]}")
+        else:
+            default_lang = self.config.get_default_rules_language()
+            path = self.config.asset_paths.resolve_rules(default_lang)
+            if path and path.exists():
+                print(path.read_text(encoding="utf-8"), end="")
+            else:
+                print(f"Could not read rules file: {rules[default_lang]}")
+
+        return ExecutionResult(exit_code=ExitCode.SUCCESS)
+
+    def _execute_lang(self, parsed: ParsedCommandLine) -> ExecutionResult:
+        self._show_cli_languages()
+        return ExecutionResult(exit_code=ExitCode.SUCCESS)
+
+    def _execute_commands(self, parsed: ParsedCommandLine) -> ExecutionResult:
+        print("RtG-CLI internal commands:")
+        print()
+        for cmd in self.config.internal.command_list:
+            print(f"  {cmd}")
+        return ExecutionResult(exit_code=ExitCode.SUCCESS)
+
+    def _execute_addons(self, parsed: ParsedCommandLine) -> ExecutionResult:
+        documented = self.registry.get_documented()
+        if not documented:
+            print("No addons with documentation available.")
+            return ExecutionResult(exit_code=ExitCode.SUCCESS)
+
+        print("Available addons (with documentation):")
+        print()
+        for key, addon in documented.items():
+            print(f"  {key}  |  {addon.name}")
+        return ExecutionResult(exit_code=ExitCode.SUCCESS)
+
+    def _execute_language(self, parsed: ParsedCommandLine) -> ExecutionResult:
+        lang = parsed.cli_options.get("language")
+        self._show_void(lang)
+        return ExecutionResult(exit_code=ExitCode.SUCCESS)
+
+    def _show_cli_languages(self) -> None:
+        lang_names = self.config.language_names
+        void_langs = sorted(self.config.void_language_paths.keys())
+        help_langs = sorted(self.config.help_paths.keys())
+        rules_langs = sorted(self.config.rules_paths.keys())
+        version_langs = sorted(self.config.version_content.keys())
+
+        def fmt(codes):
+            return [f"  {lang_names.get(c, c)} | {c}" for c in codes]
+
+        categories = [
+            ("Version", version_langs),
+            ("Rules", rules_langs),
+            ("Help", help_langs),
+        ]
+
+        if void_langs:
+            categories.append(("Void", void_langs))
+
+        print("Available languages for RtG-CLI:")
+        print()
+
+        for category, codes in categories:
+            if codes:
+                print(f"  [{category}]")
+                for line in fmt(codes):
+                    print(line)
+                print()
+
+        addons = self.registry.get_all()
+        for addon_id, addon in addons.items():
+            addon_langs = sorted(addon.languages)
+            if addon_langs:
+                print(f"  [Addons / {addon_id}] ({addon.name})")
+                for line in fmt(addon_langs):
+                    print(line)
+                print()
+
+    def _show_help_file(self, lang: str | None) -> None:
+        help_paths = self.config.help_paths
+        if not help_paths:
+            print("Help not available.")
+            return
+
+        langs = list(help_paths.keys())
+        if lang and lang in help_paths:
+            path = self.config.asset_paths.resolve_help(lang)
+            if path and path.exists():
+                print(path.read_text(encoding="utf-8"), end="")
+            else:
+                print(f"Could not read help file: {help_paths[lang]}")
+        else:
+            path = self.config.asset_paths.resolve_help(langs[0])
+            if path and path.exists():
+                print(path.read_text(encoding="utf-8"), end="")
+            else:
+                print(f"Could not read help file: {help_paths[langs[0]]}")
+
+    def _show_void(self, lang: str | None) -> None:
+        if lang:
+            void_lang = self.config.void_language_paths
+            if lang in void_lang:
+                path = self.config.asset_paths.resolve_void(lang)
+                if path:
+                    print(path, end="")
+                else:
+                    print(f"Language not available: {lang}\n")
+                    print(self.config.void_text, end="")
+            else:
+                print(f"Language not available: {lang}\n")
+                print(self.config.void_text, end="")
+        else:
+            print(self.config.void_text, end="")
+
+    def _show_addon_languages(self, addon) -> None:
+        print("Available languages:")
+        print()
+        for lang in addon.languages:
+            name = self.lang_manager.get_language_name(lang)
+            print(f"  {name} | {lang}")
+
+
+def create_addon_executor(registry: AddonRegistry, config: CliConfig, lang_manager: LanguageManager) -> AddonExecutor:
+    return AddonExecutor(registry, config, lang_manager)
+
+
+def create_internal_executor(config: CliConfig, lang_manager: LanguageManager, registry: AddonRegistry) -> InternalCommandExecutor:
+    return InternalCommandExecutor(config, lang_manager, registry)
+
+
+__all__ = [
+    "ExecutionResult",
+    "AddonExecutor",
+    "InternalCommandExecutor",
+    "create_addon_executor",
+    "create_internal_executor",
+]

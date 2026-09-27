@@ -1,0 +1,23 @@
+rtg 2.0;
+
+schema { source: "../schema/schema.json"; }
+
+object "CarBody" {
+    instance "Chassis" as chassis;
+    attachment "{00000000-0000-0000-0000-000000000000}" on chassis {
+        partName: "Chassis";
+        cframe: [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1];
+    }
+}
+
+object "Seats" {
+    properties { "RGB": [255, 0, 0]; "Visible": true; }
+    instance "Seat" as driverSeat;
+    instance "Seat" as passengerSeat { properties { "RGB": [0, 0, 255]; } };
+    connect driverSeat -> chassis {
+        localType: 1;
+        point: uuid("{00000000-0000-0000-0000-000000000000}");
+    }
+}
+
+output { file: "./complete.json"; }

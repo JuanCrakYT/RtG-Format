@@ -1,0 +1,13 @@
+rtg 2.0;
+
+schema { source: "../schema/schema.json"; }
+
+object "Seats" {
+    properties { "RGB": [255, 0, 0]; "Visible": true; }
+    instance "Seat" as driverSeat;
+    instance "Seat" as passengerSeat {
+        properties { "RGB": [0, 0, 255]; }
+    };
+}
+
+output { file: "./properties.json"; }

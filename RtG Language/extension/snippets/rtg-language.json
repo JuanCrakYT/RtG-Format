@@ -1,0 +1,6 @@
+{
+  "RtG file": { "prefix": "rtg", "body": ["rtg 2.0;", "", "schema {", "    source: \"${1:./schema.json}\";", "}", "", "object \"${2:Object}\" {", "    $0", "}", "", "output {", "    file: \"${3:./build.json}\";", "}"], "description": "RtG-Language 2.0 file" },
+  "Instance": { "prefix": "instance", "body": ["instance \"${1:Type}\" as ${2:identifier};"], "description": "Declare an instance" },
+  "Connection": { "prefix": "connect", "body": ["connect ${1:child} -> ${2:parent} {", "    localType: ${3:1};", "    point: ${4:1};", "}"], "description": "Declare a connection" },
+  "Attachment": { "prefix": "attachment", "body": ["attachment \"${1:uuid}\" on ${2:parent} {", "    partName: \"${3:Part}\";", "    cframe: [${4:0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1}];", "}"], "description": "Declare an attachment" }
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/JuanCrakYT/RtG-Format/rtg-language-schema.schema.json",
+  "title": "RtG-Language schema contract",
+  "description": "Container contract only. It intentionally declares no RtG-Format types, properties, local types, or points.",
+  "type": "object",
+  "properties": {
+    "version": { "type": "string", "description": "Schema format version." },
+    "blocks": { "type": "object", "description": "Observed RtG-Format metadata, supplied by a project." }
+  },
+  "additionalProperties": true
+}

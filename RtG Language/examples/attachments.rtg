@@ -1,0 +1,13 @@
+rtg 2.0;
+
+schema { source: "../schema/schema.json"; }
+
+object "AttachmentExample" {
+    instance "Chassis" as chassis;
+    attachment "{00000000-0000-0000-0000-000000000000}" on chassis {
+        partName: "Chassis";
+        cframe: [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1];
+    }
+}
+
+output { file: "./attachments.json"; }

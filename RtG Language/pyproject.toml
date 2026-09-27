@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rtg-language"
+version = "0.1.0"
+description = "RtG-Language 2.0 compiler package"
+requires-python = ">=3.10"
+license = {text = "GPL-3.0-only"}
+
+[project.scripts]
+rtg-language = "cli.main:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
