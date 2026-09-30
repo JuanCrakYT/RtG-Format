@@ -28,9 +28,9 @@ class Application:
         self.lang_manager = get_language_manager(self.config)
         self.registry = create_addon_registry(self.config, self.lang_manager)
         self.parser = create_parser(self.config, self.lang_manager)
-        self.addon_executor = create_addon_executor(self.registry, self.config, self.lang_manager)
-        self.internal_executor = create_internal_executor(self.config, self.lang_manager, self.registry)
         self.help_system = create_help_system(self.config, self.lang_manager)
+        self.addon_executor = create_addon_executor(self.registry, self.config, self.lang_manager)
+        self.internal_executor = create_internal_executor(self.config, self.lang_manager, self.registry, self.help_system)
         self.version_manager = create_version_manager(self.config, self.lang_manager)
 
     def run(self, argv: list[str] | None = None) -> int:

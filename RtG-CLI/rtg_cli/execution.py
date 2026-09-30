@@ -177,10 +177,11 @@ class AddonExecutor:
 class InternalCommandExecutor:
     """Executes internal CLI commands."""
 
-    def __init__(self, config: CliConfig, lang_manager: LanguageManager, registry: AddonRegistry):
+    def __init__(self, config: CliConfig, lang_manager: LanguageManager, registry: AddonRegistry, help_system):
         self.config = config
         self.lang_manager = lang_manager
         self.registry = registry
+        self.help_system = help_system
 
     def execute(self, parsed: ParsedCommandLine) -> ExecutionResult:
         """Execute an internal command."""
@@ -242,8 +243,8 @@ class InternalCommandExecutor:
         lang = parsed.cli_options.get("lang_selector")
         list_langs = parsed.cli_options.get("lang", False)
 
-        # Handle help -usage
-        if target == "usage" or target == "-usage":
+        # Handle help --usage
+        if target == "usage" or target == "--usage":
             self.help_system.show_usage(lang)
             return ExecutionResult(exit_code=ExitCode.SUCCESS)
 
@@ -478,8 +479,8 @@ def create_addon_executor(registry: AddonRegistry, config: CliConfig, lang_manag
     return AddonExecutor(registry, config, lang_manager)
 
 
-def create_internal_executor(config: CliConfig, lang_manager: LanguageManager, registry: AddonRegistry) -> InternalCommandExecutor:
-    return InternalCommandExecutor(config, lang_manager, registry)
+def create_internal_executor(config: CliConfig, lang_manager: LanguageManager, registry: AddonRegistry, help_system) -> InternalCommandExecutor:
+    return InternalCommandExecutor(config, lang_manager, registry, help_system)
 
 
 __all__ = [

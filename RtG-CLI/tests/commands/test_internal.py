@@ -12,6 +12,7 @@ from rtg_cli.languages import get_language_manager
 from rtg_cli.arguments import create_parser
 from rtg_cli.execution import create_internal_executor
 from rtg_cli.addons import create_addon_registry
+from rtg_cli.help import create_help_system
 
 
 class TestInternalCommands(unittest.TestCase):
@@ -23,7 +24,8 @@ class TestInternalCommands(unittest.TestCase):
         cls.lang_manager = get_language_manager(cls.config)
         cls.parser = create_parser(cls.config, cls.lang_manager)
         cls.registry = create_addon_registry(cls.config, cls.lang_manager)
-        cls.executor = create_internal_executor(cls.config, cls.lang_manager, cls.registry)
+        cls.help_system = create_help_system(cls.config, cls.lang_manager)
+        cls.executor = create_internal_executor(cls.config, cls.lang_manager, cls.registry, cls.help_system)
 
     def _execute(self, argv: list[str]) -> int:
         """Parse and execute command."""

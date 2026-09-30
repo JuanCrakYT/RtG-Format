@@ -176,12 +176,10 @@ class HelpSystem:
 
     def show_usage(self, lang: str | None = None) -> None:
         """Show common usage patterns (from void text)."""
-        # Extract usage section from void text
+        # Get the void text for the requested language
         void_text = self.config.void_text
         if lang and lang in self.config.void_language_paths:
-            path = self.config.asset_paths.resolve_void(lang)
-            if path:
-                void_text = path
+            void_text = self.config.void_language_paths[lang]
 
         # Print the first part of void text which contains usage
         lines = void_text.split('\n')
@@ -192,10 +190,6 @@ class HelpSystem:
                 in_usage = True
             if in_usage:
                 print(line)
-            # Stop after the common commands list
-            if in_usage and line.strip() == '':
-                # Check if next lines are the commands list
-                continue
         # If we didn't print anything, just print the void text
         if not in_usage:
             print(void_text, end="")
