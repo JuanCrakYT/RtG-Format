@@ -8,7 +8,7 @@ from typing import Any
 
 from .arguments import ArgumentParser, ParsedCommandLine, create_parser
 from .configuration import CliConfig, get_config, load_config
-from .diagnostics import Diagnostic, DiagnosticHandler, ExitCode, err_internal
+from .diagnostics import Diagnostic, DiagnosticHandler, ExitCode, err_internal, err_unknown_command
 from .execution import AddonExecutor, InternalCommandExecutor, create_addon_executor, create_internal_executor
 from .addons import AddonRegistry, create_addon_registry
 from .languages import LanguageManager, get_language_manager
@@ -46,7 +46,38 @@ class Application:
         if parsed.has_errors():
             return self.diagnostic_handler.handle(parsed.get_first_error())
 
-        # Handle -language before anything else
+        # Handle system CLI options first (version, help, rules, lang, commands, addons, language)
+        if parsed.cli_options.get("version"):
+            self.version_manager.show_cli_version()
+            return ExitCode.SUCCESS
+
+        if parsed.cli_options.get("help"):
+            self.help_system.show_general_help(parsed.cli_options.get("lang_selector"))
+            return ExitCode.SUCCESS
+
+        if parsed.cli_options.get("rules"):
+            lang = parsed.cli_options.get("lang_selector")
+            self.help_system.show_rules(lang)
+            return ExitCode.SUCCESS
+
+        if parsed.cli_options.get("lang"):
+            self.help_system.show_cli_languages()
+            return ExitCode.SUCCESS
+
+        if parsed.cli_options.get("commands"):
+            self.help_system.show_commands_list()
+            return ExitCode.SUCCESS
+
+        if parsed.cli_options.get("addons"):
+            self.help_system.show_addons_list()
+            return ExitCode.SUCCESS
+
+        if "language" in parsed.cli_options:
+            lang = parsed.cli_options["language"]
+            self.help_system.show_void(lang)
+            return ExitCode.SUCCESS
+
+        # Handle -language before anything else (legacy)
         if parsed.language_selector and not parsed.addon_identifier and not parsed.command:
             self.help_system.show_void(parsed.language_selector)
             return ExitCode.SUCCESS
@@ -66,8 +97,6 @@ class Application:
 
         # Unknown command
         if argv:
-            from .diagnostics import err_unknown_command
-
             diag = err_unknown_command(argv[0])
             self.help_system.show_void(parsed.language_selector)
             return self.diagnostic_handler.handle(diag)
@@ -91,9 +120,3 @@ def main(argv: list[str] | None = None, debug: bool = False) -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-
-
-__all__ = [
-    "Application",
-    "main",
-]

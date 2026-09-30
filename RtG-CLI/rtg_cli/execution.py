@@ -99,16 +99,23 @@ class AddonExecutor:
 
         for arg in args:
             if arg.startswith("-") and not arg.startswith("--"):
-                if len(arg) == 2:
-                    opt_char = arg[1]
-                    if opt_char in ("l", "h", "v", "r", "c", "a"):
-                        cli_options[opt_char] = True
-                        continue
-                    if self.lang_manager.is_language_available(opt_char, f"addon/{addon_id}"):
-                        cli_options["lang_selector"] = opt_char
-                        continue
+                opt_char = arg[1:]
+                # Check if it's a single-char system option
+                if len(opt_char) == 1 and opt_char in ("l", "h", "v", "r", "c", "a"):
+                    cli_options[opt_char] = True
+                    continue
+                # Check if it's a multi-char option like -lang
+                elif opt_char == "lang":
+                    cli_options["lang"] = True
+                    continue
+                # Check if it's a language selector
+                elif self.lang_manager.is_language_available(opt_char, f"addon/{addon_id}"):
+                    cli_options["lang_selector"] = opt_char
+                    continue
+                # Unknown single-hyphen option
                 cli_options["unknown"] = arg
             else:
+                # No hyphen or double hyphen - belongs to addon
                 addon_args.append(arg)
 
         return cli_options, addon_args
@@ -119,7 +126,7 @@ class AddonExecutor:
         if not addon:
             return ExecutionResult(exit_code=ExitCode.ADDON_NOT_FOUND, diagnostic=err_addon_not_found(addon_id))
 
-        lines = [f"\n{addon_id}\n", "-" * len(addon_id)]
+        lines = [f"\n{addon.name}\n", "-" * len(addon.name)]
 
         if addon.creators:
             lines.append("\nCreators:")
@@ -179,6 +186,27 @@ class InternalCommandExecutor:
         """Execute an internal command."""
         command = parsed.command
 
+        # Handle system CLI options first (these come from cli_options, not command)
+        if parsed.cli_options.get("version"):
+            return self._execute_version(parsed)
+        if parsed.cli_options.get("help"):
+            return self._execute_help(parsed)
+        if parsed.cli_options.get("rules"):
+            return self._execute_rules(parsed)
+        if parsed.cli_options.get("lang"):
+            return self._execute_lang(parsed)
+        if parsed.cli_options.get("commands"):
+            return self._execute_commands(parsed)
+        if parsed.cli_options.get("addons"):
+            return self._execute_addons(parsed)
+        if "language" in parsed.cli_options:
+            return self._execute_language(parsed)
+
+        # No command - show void (legacy behavior)
+        if not command:
+            self._show_void(parsed.cli_options.get("language"))
+            return ExecutionResult(exit_code=ExitCode.SUCCESS)
+
         if command in ("version", "v"):
             return self._execute_version(parsed)
         elif command in ("help", "h"):
@@ -194,12 +222,9 @@ class InternalCommandExecutor:
         elif command == "language":
             return self._execute_language(parsed)
         else:
-            from .diagnostics import err_unknown_command
-
-            return ExecutionResult(
-                exit_code=ExitCode.UNKNOWN_COMMAND,
-                diagnostic=err_unknown_command(command or ""),
-            )
+            # Unknown command - show void (legacy behavior)
+            self._show_void(parsed.cli_options.get("language"))
+            return ExecutionResult(exit_code=ExitCode.SUCCESS)
 
     def _execute_version(self, parsed: ParsedCommandLine) -> ExecutionResult:
         print(self.config.version)
@@ -216,6 +241,11 @@ class InternalCommandExecutor:
         target = parsed.positional_args[0] if parsed.positional_args else None
         lang = parsed.cli_options.get("lang_selector")
         list_langs = parsed.cli_options.get("lang", False)
+
+        # Handle help -usage
+        if target == "usage" or target == "-usage":
+            self.help_system.show_usage(lang)
+            return ExecutionResult(exit_code=ExitCode.SUCCESS)
 
         if target is None:
             if list_langs:
@@ -261,17 +291,54 @@ class InternalCommandExecutor:
                     if help_text:
                         print(help_text, end="")
                     else:
-                        print(f"No internal help available for '{target}'.")
-                        print(f"Addon: {addon.name}")
+                        self.show_addon_info(target)
                 else:
-                    print(f"No internal help available for '{target}'.")
-                    print(f"Addon: {addon.name}")
+                    self.show_addon_info(target)
             return ExecutionResult(exit_code=ExitCode.SUCCESS)
 
         # Unknown command
         print(f"Unknown command: {target}\n")
         self._show_void(parsed.cli_options.get("language"))
         return ExecutionResult(exit_code=ExitCode.SUCCESS)
+
+    def show_addon_info(self, addon_id: str) -> None:
+        """Show addon metadata and info frame (fallback when no interface)."""
+        addon = self.registry.get(addon_id)
+        if not addon:
+            print(f"Unknown command: {addon_id}")
+            print()
+            self._show_void()
+            return
+
+        print(f"\n{addon.name}\n")
+        print("-" * len(addon.name))
+
+        if addon.creators:
+            print("\nCreators:")
+            print()
+            for creator, notes in addon.creators.items():
+                for note in notes:
+                    print(f"    {note} ({creator})")
+
+        if addon.languages:
+            print("\nLanguages:")
+            print()
+            for lang in addon.languages:
+                name = self.lang_manager.get_language_name(lang)
+                print(f"    {name} | {lang}")
+
+        print("\nVersion:")
+        print()
+        print("    Content:")
+        if addon.version:
+            print(f"        VERSION {addon.version}")
+        else:
+            print("        [No version information]")
+
+        print()
+        print("|" + "-" * 40 + "|")
+        print("|" + " Run Output".ljust(40) + "|")
+        print("|" + "-" * 40 + "|")
 
     def _execute_rules(self, parsed: ParsedCommandLine) -> ExecutionResult:
         lang = parsed.cli_options.get("lang_selector")

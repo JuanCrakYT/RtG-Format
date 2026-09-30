@@ -1,0 +1,202 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://rtg-format.org/schemas/assets.schema.json",
+  "title": "RtG-CLI Assets Configuration",
+  "description": "Schema for RtG-CLI assets.json configuration file",
+  "type": "array",
+  "minItems": 1,
+  "maxItems": 1,
+  "items": {
+    "type": "object",
+    "required": [
+      "language-names",
+      "rules",
+      "version",
+      "void",
+      "help",
+      "addons",
+      "internal",
+      "internal-list"
+    ],
+    "properties": {
+      "language-names": {
+        "type": "object",
+        "description": "Human-readable names for language codes",
+        "patternProperties": {
+          "^[a-z]{2}(-[A-Z]{2})?$": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": false,
+        "minProperties": 1
+      },
+      "rules": {
+        "type": "object",
+        "description": "Paths to rules files by language",
+        "patternProperties": {
+          "^[a-z]{2}(-[A-Z]{2})?$": {
+            "type": "string",
+            "pattern": "^\\./.*\\.md$"
+          }
+        },
+        "additionalProperties": false,
+        "minProperties": 1
+      },
+      "version": {
+        "type": "string",
+        "description": "RtG-CLI version string",
+        "pattern": "^RtG-CLI v\\d+\\.\\d+\\.\\d+$"
+      },
+      "version-date": {
+        "type": "string",
+        "description": "Version date in ISO format or human readable"
+      },
+      "version-content": {
+        "type": "object",
+        "description": "Version content/changelog by language",
+        "patternProperties": {
+          "^[a-z]{2}(-[A-Z]{2})?$": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "void": {
+        "type": "string",
+        "description": "Default startup/usage text"
+      },
+      "void-language": {
+        "type": "object",
+        "description": "Startup text translations by language",
+        "patternProperties": {
+          "^[a-z]{2}(-[A-Z]{2})?$": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "help": {
+        "type": "object",
+        "description": "Paths to help files by language",
+        "patternProperties": {
+          "^[a-z]{2}(-[A-Z]{2})?$": {
+            "type": "string",
+            "pattern": "^\\./.*\\.md$"
+          }
+        },
+        "additionalProperties": false,
+        "minProperties": 1
+      },
+      "addons": {
+        "type": "object",
+        "description": "Registered addons configuration",
+        "patternProperties": {
+          "^[a-z][a-z0-9-]*$": {
+            "type": "object",
+            "required": ["name", "lang", "program commands", "creators"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Display name for the addon"
+              },
+              "lang": {
+                "type": "array",
+                "description": "Language codes supported by this addon",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[a-z]{2}(-[A-Z]{2})?$"
+                },
+                "minItems": 1,
+                "uniqueItems": true
+              },
+              "version": {
+                "type": "string",
+                "description": "Addon version"
+              },
+              "version-date": {
+                "type": "string",
+                "description": "Addon version date"
+              },
+              "version-content": {
+                "type": "object",
+                "description": "Addon version content by language",
+                "patternProperties": {
+                  "^[a-z]{2}(-[A-Z]{2})?$": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "program commands": {
+                "type": "array",
+                "description": "Paths to program command interfaces",
+                "items": {
+                  "type": "string",
+                  "pattern": "^\\.\\./.*\\.(py|js)$"
+                },
+                "minItems": 1
+              },
+              "creators": {
+                "type": "object",
+                "description": "Creators and their contributions",
+                "patternProperties": {
+                  "^[^\\s]+$": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "internal": {
+        "type": "object",
+        "required": ["help", "language"],
+        "properties": {
+          "help": {
+            "type": "object",
+            "description": "Internal help texts for commands by language",
+            "patternProperties": {
+              "^[a-z][a-z0-9-]*$": {
+                "type": "object",
+                "patternProperties": {
+                  "^[a-z]{2}(-[A-Z]{2})?$": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false,
+                "minProperties": 1
+              }
+            },
+            "additionalProperties": false
+          },
+          "language": {
+            "type": "object",
+            "description": "Reserved for future language command configuration",
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "internal-list": {
+        "type": "array",
+        "description": "List of recognized internal/system commands",
+        "items": {
+          "type": "string",
+          "pattern": "^(-{1,2})?[a-z][a-z0-9-]*$"
+        },
+        "uniqueItems": true,
+        "minItems": 1
+      }
+    },
+    "additionalProperties": false
+  }
+}

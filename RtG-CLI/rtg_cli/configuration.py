@@ -8,7 +8,12 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-from .diagnostics import Diagnostic, err_invalid_configuration, err_file
+from .diagnostics import (
+    Diagnostic,
+    err_invalid_configuration,
+    exc_invalid_configuration,
+    exc_file,
+)
 
 
 @dataclass(frozen=True)
@@ -18,7 +23,7 @@ class AssetPaths:
     base_dir: Path
     help: dict[str, Path] = field(default_factory=dict)
     rules: dict[str, Path] = field(default_factory=dict)
-    void_language: dict[str, Path] = field(default_factory=dict)
+    void_language: dict[str, str] = field(default_factory=dict)
     version_content: dict[str, str] = field(default_factory=dict)
     addon_program_commands: dict[str, list[Path]] = field(default_factory=dict)
 
@@ -109,11 +114,11 @@ def load_assets_json(path: str | Path) -> dict[str, Any]:
         with path.open(encoding="utf-8") as f:
             data = json.load(f)
     except OSError as e:
-        raise err_file(f"Cannot read {path}: {e}")
+        raise exc_file(f"Cannot read {path}: {e}")
     except json.JSONDecodeError as e:
-        raise err_invalid_configuration(f"Invalid JSON in {path}: {e}")
+        raise exc_invalid_configuration(f"Invalid JSON in {path}: {e}")
     if not isinstance(data, list) or not data:
-        raise err_invalid_configuration("assets.json must be a non-empty array")
+        raise exc_invalid_configuration("assets.json must be a non-empty array")
     return data[0]
 
 
@@ -159,7 +164,7 @@ def build_asset_paths(base_dir: Path, raw: dict[str, Any]) -> AssetPaths:
         base_dir=base_dir,
         help=resolve_relative_paths(base_dir, raw.get("help", {})),
         rules=resolve_relative_paths(base_dir, raw.get("rules", {})),
-        void_language=resolve_relative_paths(base_dir, raw.get("void-language", {})),
+        void_language=raw.get("void-language", {}),
         version_content=raw.get("version-content", {}),
         addon_program_commands={
             addon_id: [(base_dir / cmd).resolve() for cmd in addon.get("program commands", [])]
@@ -177,11 +182,11 @@ def load_config(assets_path: str | Path) -> CliConfig:
     required = ["version", "language-names", "help", "rules", "void"]
     for field_name in required:
         if field_name not in raw:
-            raise err_invalid_configuration(f"Missing required field: {field_name}")
+            raise exc_invalid_configuration(f"Missing required field: {field_name}")
 
     language_names = raw["language-names"]
     if not language_names:
-        raise err_invalid_configuration("language-names cannot be empty")
+        raise exc_invalid_configuration("language-names cannot be empty")
 
     default_language = next(iter(language_names))
 
@@ -211,7 +216,7 @@ def load_config(assets_path: str | Path) -> CliConfig:
 
 def get_config() -> CliConfig:
     """Load configuration from default location."""
-    base_dir = Path(__file__).parent.parent.parent.resolve()
+    base_dir = Path(__file__).parent.parent.resolve()
     assets_path = base_dir / "assets.json"
     return load_config(assets_path)
 

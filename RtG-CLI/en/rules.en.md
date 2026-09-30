@@ -1,6 +1,6 @@
 # RtG-CLI Command Rules
 
-## 1. General structure
+## 1. General Structure
 
 An RtG-CLI command consists of a main command and, optionally, arguments.
 General format:
@@ -8,15 +8,18 @@ General format:
 `rtg <command> [<arguments>]`
 
 The first argument after `rtg` determines which command or addon will be executed.
+
 Examples:
 
 `rtg image`
+
 `rtg preview`
+
 `rtg help image`
 
 ---
 
-## 2. Registered commands
+## 2. Registered Commands
 
 Main commands must be registered in the RtG-CLI configuration.
 A command is identified by its internal key.
@@ -26,17 +29,17 @@ Example:
 `image`
 
 The `image` key identifies the corresponding addon, regardless of the name displayed to the user.
-
 Example:
 
 `image` → `RtG Image`
+
 `preview` → `RtG Preview`
 
 The displayed name must not be used as the command identifier.
 
 ---
 
-## 3. RtG-CLI commands and addon commands
+## 3. RtG-CLI Commands and Addon Commands
 
 RtG-CLI and addons may have their own commands and arguments.
 
@@ -71,7 +74,7 @@ Example:
 
 ---
 
-## 4. System arguments
+## 4. System Arguments
 
 Before an addon is identified, RtG-CLI uses its own syntax rules.
 Long system options use two hyphens:
@@ -94,9 +97,9 @@ Example:
 
 ---
 
-## 5. Arguments before and after the addon
+## 5. Arguments Before and After the Addon
 
-RtG-CLI arguments may have a different meaning depending on whether they appear before or after an addon has been identified.
+RtG-CLI arguments may have a different meaning depending on whether they appear before or after identifying the addon.
 
 Before an addon is identified, arguments belong to RtG-CLI.
 
@@ -105,6 +108,7 @@ For example:
 `rtg --lang`
 
 Displays the languages available for RtG-CLI.
+
 After an addon is identified, arguments are interpreted according to the ownership rules established for addons.
 
 For example:
@@ -117,7 +121,7 @@ In this way, the position of the argument determines its context and prevents gl
 
 ---
 
-## 6. Position of system arguments
+## 6. Position of System Arguments
 
 System arguments must not appear before the command or addon they affect when the argument depends on that command.
 
@@ -130,17 +134,16 @@ Incorrect example:
 `rtg help -en image`
 
 In these two examples, the system command `help` uses this structure, which is why the second example is incorrect:
-
 `help <target> <options>`
 
 The position must clearly determine which command receives the argument.
 
 ---
 
-## 7. Addon commands and arguments
+## 7. Addon Commands and Arguments
 
 Commands are written as individual terminal arguments.
-A command must not contain spaces unless it is enclosed in quotes.
+A command must not contain spaces unless enclosed in quotes.
 
 The following arguments may be used by the addon according to its own interface.
 
@@ -156,7 +159,7 @@ can be interpreted as:
 
 ---
 
-## 8. Use of hyphens in addon commands
+## 8. Use of Hyphens in Addon Commands
 
 After an addon has been identified:
 
@@ -177,7 +180,7 @@ Examples:
 
 ---
 
-## 9. Addon command interface
+## 9. Addon Command Interface
 
 The commands specific to an addon are defined by the addon program itself.
 RtG-CLI uses the addon configuration to locate its command interface through the `program commands` property.
@@ -223,7 +226,7 @@ Example:
 
 ---
 
-## 11. Default language
+## 11. Default Language
 
 If `-<language>` is not specified, RtG-CLI will use the first language defined in `rules`.
 If `-<language>` is specified, RtG-CLI will use that language if it is available.
@@ -244,13 +247,10 @@ For example:
 In this case:
 
 `rtg -r`
-
 and
-
 `rtg --rules`
 
 will display the rules in Spanish because `es` is the first language defined.
-
 To request another language, its corresponding selector must be used:
 
 `rtg -r -en`
@@ -263,7 +263,7 @@ This rule also applies to other language selectors such as:
 
 ---
 
-## 12. Language does not change the command
+## 12. Language Does Not Change the Command
 
 Changing the language only modifies the text displayed by RtG-CLI.
 It does not change the internal command name.
@@ -302,7 +302,7 @@ Example:
 
 ---
 
-## 14. Language query
+## 14. Language Query
 
 The languages available for an addon can be queried with:
 
@@ -316,7 +316,7 @@ This option belongs to RtG-CLI and not to the addon.
 
 ---
 
-## 15. Addons must not modify system rules
+## 15. Addons Must Not Modify System Rules
 
 An addon may define its own commands and arguments, but it cannot redefine the meaning of arguments reserved by RtG-CLI.
 
@@ -327,7 +327,7 @@ An addon cannot redefine the behavior of a reserved option.
 
 ---
 
-## 16. Separation between identifier and name
+## 16. Separation Between Identifier and Name
 
 The internal key of an addon is used to identify it.
 The addon name is only used as descriptive information or to display it to the user.
@@ -342,7 +342,7 @@ It must not be assumed that the displayed name can be used as a command.
 
 ---
 
-## 17. Commands must be deterministic
+## 17. Commands Must Be Deterministic
 
 RtG-CLI must be able to determine whether an argument belongs to the system or to the addon without depending on the descriptive name of the program.
 
@@ -364,7 +364,7 @@ must always be interpreted in the same way:
 
 ---
 
-## 18. Unknown arguments
+## 18. Unknown Arguments
 
 After identifying an addon, RtG-CLI must determine the ownership of each argument according to its prefix.
 
@@ -378,7 +378,7 @@ Addon arguments must be passed to the addon without RtG-CLI attempting to interp
 
 ---
 
-## 19. Do not assume unregistered commands
+## 19. Do Not Assume Unregistered Commands
 
 RtG-CLI must not consider a command valid merely because a related folder, file, or program exists.
 
@@ -393,7 +393,7 @@ An addon may have a completely different internal implementation, but its comman
 
 ---
 
-## 21. Priority rule
+## 21. Priority Rule
 
 After an addon has been identified, a single hyphen (`-`) is reserved for RtG-CLI.
 An addon cannot use arguments that begin with a single hyphen.
@@ -401,7 +401,7 @@ Arguments that begin with two or more hyphens (`--`) or that do not begin with a
 
 ---
 
-## 22. Addon arguments
+## 22. Addon Arguments
 
 Once the addon has been identified, RtG-CLI must not assume the meaning of addon-specific arguments.
 
@@ -417,7 +417,7 @@ RtG-CLI identifies `image` as addon.
 
 ---
 
-## 23. Arguments with spaces
+## 23. Arguments with Spaces
 
 Arguments that contain spaces must be written between quotes so that the terminal treats them as a single argument.
 
@@ -429,7 +429,7 @@ The complete path must be received as a single argument.
 
 ---
 
-## 24. Addon arguments must be preserved
+## 24. Addon Arguments Must Be Preserved
 
 RtG-CLI must not modify, remove, or reinterpret arguments destined for the addon, unless an explicit system rule states otherwise.
 
@@ -437,7 +437,7 @@ Arguments must be delivered to the addon in the order in which they were provide
 
 ---
 
-## 25. Complete examples
+## 25. Complete Examples
 
 Addon command:
 
@@ -483,7 +483,9 @@ In this example:
 * `output.json` is the value of that option.
 * None of these arguments should be interpreted as a system option.
 
-## 26. Startup text language
+---
+
+## 26. Startup Text Language
 
 `rtg -language <language>` selects the language of the startup text displayed by RtG-CLI.
 

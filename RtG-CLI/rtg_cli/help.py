@@ -78,8 +78,8 @@ class HelpSystem:
                     first = next(iter(internal_help))
                     print(internal_help[first], end="")
             else:
-                print(f"No internal help available for '{command}'.")
-                print(f"Addon: {addon.name}")
+                # No internal help - show addon info with languages
+                self.show_addon_info(command)
             return
 
         print(f"Unknown command: {command}\n")
@@ -96,8 +96,8 @@ class HelpSystem:
 
         content_lines = []
 
-        print(f"\n{addon_id}\n")
-        print("-" * len(addon_id))
+        print(f"\n{addon.name}\n")
+        print("-" * len(addon.name))
 
         if addon.creators:
             print("\nCreators:")
@@ -173,6 +173,32 @@ class HelpSystem:
                 print(self.config.void_text, end="")
         else:
             print(self.config.void_text, end="")
+
+    def show_usage(self, lang: str | None = None) -> None:
+        """Show common usage patterns (from void text)."""
+        # Extract usage section from void text
+        void_text = self.config.void_text
+        if lang and lang in self.config.void_language_paths:
+            path = self.config.asset_paths.resolve_void(lang)
+            if path:
+                void_text = path
+
+        # Print the first part of void text which contains usage
+        lines = void_text.split('\n')
+        # Print until the first empty line after usage examples
+        in_usage = False
+        for line in lines:
+            if line.strip().startswith('Usage:') or line.strip().startswith('Uso:'):
+                in_usage = True
+            if in_usage:
+                print(line)
+            # Stop after the common commands list
+            if in_usage and line.strip() == '':
+                # Check if next lines are the commands list
+                continue
+        # If we didn't print anything, just print the void text
+        if not in_usage:
+            print(void_text, end="")
 
     def show_version(self) -> None:
         """Show version with multi-language content."""

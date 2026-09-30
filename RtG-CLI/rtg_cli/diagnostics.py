@@ -63,6 +63,30 @@ class Diagnostic:
         return f"[{self.category}] {self.message}"
 
 
+# Exception classes for internal error handling
+class CliError(Exception):
+    """Base exception for CLI errors."""
+
+    def __init__(self, diagnostic: Diagnostic):
+        self.diagnostic = diagnostic
+        super().__init__(diagnostic.message)
+
+
+class ConfigurationError(CliError):
+    """Configuration loading error."""
+    pass
+
+
+class FileError(CliError):
+    """File operation error."""
+    pass
+
+
+class LanguageError(CliError):
+    """Language validation error."""
+    pass
+
+
 def make_diagnostic(
     message: str,
     category: str,
@@ -195,6 +219,19 @@ def err_interrupted(debug_info: dict[str, Any] | None = None) -> Diagnostic:
     )
 
 
+# Exception factories
+def exc_invalid_configuration(reason: str, debug_info: dict[str, Any] | None = None) -> ConfigurationError:
+    return ConfigurationError(err_invalid_configuration(reason, debug_info))
+
+
+def exc_file(reason: str, debug_info: dict[str, Any] | None = None) -> FileError:
+    return FileError(err_file(reason, debug_info))
+
+
+def exc_invalid_language(lang: str, debug_info: dict[str, Any] | None = None) -> LanguageError:
+    return LanguageError(err_invalid_language(lang, debug_info))
+
+
 class DiagnosticHandler:
     """Handles diagnostic output and program termination."""
 
@@ -226,6 +263,10 @@ __all__ = [
     "ErrorCategory",
     "Diagnostic",
     "DiagnosticHandler",
+    "CliError",
+    "ConfigurationError",
+    "FileError",
+    "LanguageError",
     "make_diagnostic",
     "err_usage",
     "err_unknown_command",
@@ -241,4 +282,7 @@ __all__ = [
     "err_internal",
     "err_file",
     "err_interrupted",
+    "exc_invalid_configuration",
+    "exc_file",
+    "exc_invalid_language",
 ]

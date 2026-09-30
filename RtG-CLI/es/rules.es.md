@@ -133,7 +133,7 @@ Ejemplo incorrecto:
 
 `rtg help -en image`
 
-En estos dos ejemplos, el comando del sistema `help`, usa esta estructura, y por eso el segundo esta incorrecto:
+En estos dos ejemplos, el comando del sistema `help`, usa esta estructura, y por eso el segundo está incorrecto:
 `help <target> <options>`
 
 La posición debe permitir determinar claramente qué comando recibe el argumento.
@@ -203,7 +203,6 @@ El addon puede definir comandos adicionales que no estén registrados directamen
 
 La implementación interna del programa puede ser diferente entre addons, siempre que proporcione una interfaz compatible con las reglas de RtG-CLI.
 
-
 ---
 
 ## 10. Idiomas
@@ -231,6 +230,7 @@ Ejemplo:
 ---
 
 ## 11. Idioma predeterminado
+
 Si no se especifica `-<idioma>`, RtG-CLI utilizará el primer idioma definido en `rules`.
 Si se especifica `-<idioma>`, RtG-CLI utilizará ese idioma si está disponible.
 
@@ -403,7 +403,7 @@ Un addon puede tener una implementación interna completamente diferente, pero s
 
 ## 21. Regla de prioridad
 
-Después de identificar un addon, un solo guion (`-`) está reservada para RtG-CLI.
+Después de identificar un addon, un solo guion (`-`) está reservado para RtG-CLI.
 Un addon no puede utilizar argumentos que comiencen con un solo guion.
 
 Los argumentos que comiencen con dos o más guiones (`--`) o que no comiencen con guion pertenecen al addon.
@@ -491,6 +491,8 @@ En este ejemplo:
 * `--output` es una opción del addon.
 * `archivo.json` es el valor de esa opción.
 * Ninguno de esos argumentos debe ser interpretado como una opción del sistema.
+
+---
 
 ## 26. Idioma del texto de inicio
 

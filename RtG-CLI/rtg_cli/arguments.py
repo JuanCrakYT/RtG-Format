@@ -37,7 +37,7 @@ class ParsedArgument:
     is_addon_owned: bool = False
 
 
-@dataclass(frozen=True)
+@dataclass
 class ParsedCommandLine:
     """Complete parsed command line."""
 
@@ -140,19 +140,18 @@ class ArgumentParser:
                 continue
 
             # Check for system short options (-x) before addon
-            if arg.startswith("-") and not arg.startswith("--") and len(arg) == 2 and not addon_identified:
-                opt_char = arg[1]
-                if opt_char in self.SYSTEM_SHORT_OPTIONS:
+            if arg.startswith("-") and not arg.startswith("--") and not addon_identified:
+                opt_char = arg[1:]
+                # Check if it's a single-char system option
+                if len(opt_char) == 1 and opt_char in self.SYSTEM_SHORT_OPTIONS:
                     canonical = self.SYSTEM_SHORT_OPTIONS[opt_char]
                     result.cli_options[canonical] = True
+                # Check if it's a language selector (e.g., -en, -es)
+                elif self.lang_manager.is_language_available(opt_char):
+                    result.language_selector = opt_char
+                    result.cli_options["lang_selector"] = opt_char
                 else:
-                    # Check if it's a language selector (e.g., -en)
-                    lang_code = opt_char
-                    if self.lang_manager.is_language_available(lang_code):
-                        result.language_selector = lang_code
-                        result.cli_options["lang_selector"] = lang_code
-                    else:
-                        result.diagnostics.append(err_unknown_option(arg))
+                    result.diagnostics.append(err_unknown_option(arg))
                 i += 1
                 continue
 
@@ -161,8 +160,22 @@ class ArgumentParser:
                 if result.command is None:
                     result.command = "help"
                     i += 1
-                    # Remaining args are for help command
-                    result.positional_args = argv[i:]
+                    # Parse remaining args as help command args
+                    while i < len(argv):
+                        help_arg = argv[i]
+                        if help_arg == "-lang":
+                            result.cli_options["lang"] = True
+                        elif help_arg.startswith("-") and not help_arg.startswith("--"):
+                            # Language selector like -en, -es
+                            lang_code = help_arg[1:]
+                            if self.lang_manager.is_language_available(lang_code):
+                                result.language_selector = lang_code
+                                result.cli_options["lang_selector"] = lang_code
+                            else:
+                                result.positional_args.append(help_arg)
+                        else:
+                            result.positional_args.append(help_arg)
+                        i += 1
                     break
                 else:
                     # help after addon is an addon argument
@@ -229,17 +242,15 @@ class ArgumentParser:
         for arg in argv:
             if arg.startswith("-") and not arg.startswith("--"):
                 # Single hyphen - check if it's a CLI option
-                if len(arg) == 2:
-                    opt_char = arg[1]
-                    if opt_char in self.SYSTEM_SHORT_OPTIONS:
-                        canonical = self.SYSTEM_SHORT_OPTIONS[opt_char]
-                        cli_options[canonical] = True
-                        continue
-                    # Check if it's a language selector
-                    lang_code = opt_char
-                    if self.lang_manager.is_language_available(lang_code, f"addon/{addon_identifier}"):
-                        cli_options["lang_selector"] = lang_code
-                        continue
+                opt_char = arg[1:]
+                if len(opt_char) == 1 and opt_char in self.SYSTEM_SHORT_OPTIONS:
+                    canonical = self.SYSTEM_SHORT_OPTIONS[opt_char]
+                    cli_options[canonical] = True
+                    continue
+                # Check if it's a language selector
+                elif self.lang_manager.is_language_available(opt_char, f"addon/{addon_identifier}"):
+                    cli_options["lang_selector"] = opt_char
+                    continue
                 # Unknown single-hyphen option
                 cli_options["unknown"] = arg
             else:

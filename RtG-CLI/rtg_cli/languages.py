@@ -267,7 +267,7 @@ class LanguageManager:
             avail = self.get_availability().get(code)
             if not avail:
                 continue
-            if category and not avail.is_language_available(category):
+            if category and not self.is_language_available(code, category):
                 continue
             if not avail.any:
                 continue

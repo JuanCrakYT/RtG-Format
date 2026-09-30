@@ -24,12 +24,116 @@ RtG-Format/
 │   ├── rtg.py
 │   ├── rtg.cmd
 │   ├── assets.json
+│   ├── schemas/
+│   │   └── assets.schema.json
+│   ├── rtg_cli/
+│   │   ├── __init__.py
+│   │   ├── application.py
+│   │   ├── arguments.py
+│   │   ├── configuration.py
+│   │   ├── addons.py
+│   │   ├── execution.py
+│   │   ├── languages.py
+│   │   ├── diagnostics.py
+│   │   ├── help.py
+│   │   └── version.py
+│   ├── test_addon/
+│   │   └── commands.py
+│   ├── tests/
+│   │   ├── arguments/
+│   │   ├── commands/
+│   │   ├── addons/
+│   │   ├── execution/
+│   │   ├── languages/
+│   │   ├── configuration/
+│   │   ├── errors/
+│   │   └── integration/
+│   ├── docs/
+│   │   ├── ARCHITECTURE.md
+│   │   ├── COMMANDS.md
+│   │   ├── ADDONS.md
+│   │   ├── PROGRAM-COMMANDS.md
+│   │   ├── ARGUMENTS.md
+│   │   ├── LANGUAGES.md
+│   │   ├── CONFIGURATION.md
+│   │   ├── ERRORS.md
+│   │   └── INTEGRATION.md
 │   ├── en/
 │   │   ├── help.en.md
-│   │   └── rules.en.md
-│   └── es/
-│       ├── help.es.md
-│       └── rules.es.md
+│   │   ├── rules.en.md
+│   │   └── void.en.md
+│   ├── es/
+│   │   ├── help.es.md
+│   │   ├── rules.es.md
+│   │   └── void.es.md
+│   ├── pt/
+│   │   ├── help.pt.md
+│   │   ├── rules.pt.md
+│   │   └── void.pt.md
+│   ├── de/
+│   │   ├── help.de.md
+│   │   ├── rules.de.md
+│   │   └── void.de.md
+│   ├── fr/
+│   │   ├── help.fr.md
+│   │   ├── rules.fr.md
+│   │   └── void.fr.md
+│   ├── ru/
+│   │   ├── help.ru.md
+│   │   ├── rules.ru.md
+│   │   └── void.ru.md
+│   ├── zh/
+│   │   ├── help.zh.md
+│   │   ├── rules.zh.md
+│   │   └── void.zh.md
+│   ├── ja/
+│   │   ├── help.ja.md
+│   │   ├── rules.ja.md
+│   │   └── void.ja.md
+│   ├── ko/
+│   │   ├── help.ko.md
+│   │   ├── rules.ko.md
+│   │   └── void.ko.md
+│   ├── it/
+│   │   ├── help.it.md
+│   │   ├── rules.it.md
+│   │   └── void.it.md
+│   ├── tr/
+│   │   ├── help.tr.md
+│   │   ├── rules.tr.md
+│   │   └── void.tr.md
+│   ├── pl/
+│   │   ├── help.pl.md
+│   │   ├── rules.pl.md
+│   │   └── void.pl.md
+│   ├── zh-TW/
+│   │   ├── help.zh-TW.md
+│   │   ├── rules.zh-TW.md
+│   │   └── void.zh-TW.md
+│   ├── ar/
+│   │   ├── help.ar.md
+│   │   ├── rules.ar.md
+│   │   └── void.ar.md
+│   ├── hi/
+│   │   ├── help.hi.md
+│   │   ├── rules.hi.md
+│   │   └── void.hi.md
+│   ├── nl/
+│   │   ├── help.nl.md
+│   │   ├── rules.nl.md
+│   │   └── void.nl.md
+│   ├── sv/
+│   │   ├── help.sv.md
+│   │   ├── rules.sv.md
+│   │   └── void.sv.md
+│   ├── cs/
+│   │   ├── help.cs.md
+│   │   ├── rules.cs.md
+│   │   └── void.cs.md
+│   └── hu/
+│       ├── help.hu.md
+│       ├── rules.hu.md
+│       └── void.hu.md
 │
 ├── RtG-Preview/
 │   ├── preview.js
@@ -609,7 +713,14 @@ RtG-Format/
 
 | Component | Purpose | Type |
 |-----------|---------|------|
-| `RtG-CLI/` | Command-line interface for RtG tools | Python code |
+| `RtG-CLI/` | Command-line interface for RtG tools (modular architecture) | Python code |
+| `RtG-CLI/rtg_cli/` | Core modules: application, arguments, configuration, addons, execution, languages, diagnostics, help, version | Python modules |
+| `RtG-CLI/assets.json` | Configuration: version, languages, addons, help, rules, void, internal commands | JSON |
+| `RtG-CLI/schemas/assets.schema.json` | JSON Schema for assets.json validation | JSON Schema |
+| `RtG-CLI/test_addon/` | Test addon with real program command interface | Python |
+| `RtG-CLI/tests/` | Automated tests (arguments, commands, addons, execution, languages, configuration, errors, integration) | Python tests |
+| `RtG-CLI/docs/` | Technical documentation (architecture, commands, addons, program-commands, arguments, languages, configuration, errors, integration) | Markdown |
+| `RtG-CLI/<lang>/` | 19 language directories with help, rules, void files | Markdown |
 | `RtG-Preview/` | Browser-based 3D preview renderer | JavaScript code |
 | `RtG Language/` | Custom language for RtG builds | Python code + spec |
 | `assets/` | 3D models, images, sounds, SVGs | Binary assets |
@@ -628,8 +739,10 @@ RtG-Format/
 ## Key Relationships
 
 - `RtG-CLI` reads `RtG-CLI/assets.json` for configuration and delegates to addons via `program commands` paths
+- `RtG-CLI/rtg_cli/` modular core: configuration → arguments → languages → addons → execution → diagnostics
 - `RtG-Preview` loads models from `assets/models/model/` via `models.json` (HTTP) or `models-manifest.js` (file://)
 - `RtG-AI` uses `RtG-Preview` for build visualization and `RtG-Format` specification for build structure
+- `RtG-CLI/test_addon/` provides real program command interface for testing (Python)
 - `format/` documents provide detailed specification referenced by `SPECIFICATION.md`
 - `blocks/parts/` contains organized Part ID documentation by category
 - `old-files/` has priority as evidence when discrepancies exist with current docs

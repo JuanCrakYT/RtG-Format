@@ -1,166 +1,164 @@
-# Ayuda de RtG-CLI
+RtG-CLI — Ayuda
+================
 
-RtG-CLI es el intermediario entre el usuario y los addons de RtG.
+RtG-CLI es la interfaz de línea de comandos del ecosistema RtG-Format.
+Permite descubrir y ejecutar addons, consultar idiomas, ver reglas y versión.
 
-## Uso
+Uso
+-----
 
-```text
-rtg [opciones] <comando> [<argumentos>]
-```
+  rtg [OPCIONES] <COMANDO> [ARGUMENTOS]
 
-El primer argumento identifica el comando o addon que se utilizará.
+  El primer argumento identifica el comando o addon a ejecutar.
+
+  Ejemplos:
+    rtg image
+    rtg preview
+    rtg help image
+
+
+Comandos del sistema
+---------------------
+
+  -h, --help        Muestra esta ayuda general
+  -v, --version     Muestra la versión de RtG-CLI
+  -l, --lang        Lista los idiomas disponibles en RtG-CLI
+  -r, --rules       Muestra las reglas de RtG-CLI
+  -c, --commands    Lista los comandos internos de RtG-CLI
+  -a, --addons      Lista los addons con documentación disponible
+  -language <idioma>  Establece el idioma del texto de inicio (void)
+
+Comando: help
+--------------
+
+  rtg help                    # Ayuda general (esta pantalla)
+  rtg help <comando>          # Ayuda de un comando/addon específico
+  rtg help <comando> -<idioma>  # Ayuda en idioma específico (ej: -es, -en)
+  rtg help <comando> -lang      # Idiomas disponibles para ese comando
+
+  Ejemplos:
+    rtg help image
+    rtg help image -en
+    rtg help image -lang
+
+
+Comando: version
+-----------------
+
+  rtg -v
+  rtg --version
+
+  Muestra la versión y el contenido de versión en todos los idiomas disponibles.
+
+
+Comando: rules
+---------------
+
+  rtg -r
+  rtg --rules
+  rtg -r -<idioma>   # Reglas en idioma específico (ej: rtg -r -en)
+
+  Por defecto usa el primer idioma definido en 'rules' (español).
+
+
+Comando: lang
+--------------
+
+  rtg -l
+  rtg --lang
+
+  Lista todos los idiomas disponibles organizados por categoría:
+  Version, Rules, Help, Void, y por cada addon.
+
+
+Comando: commands
+------------------
+
+  rtg -c
+  rtg --commands
+
+  Lista exclusivamente los comandos internos de RtG-CLI.
+  No incluye comandos de addons.
+
+
+Comando: addons
+----------------
+
+  rtg -a
+  rtg --addons
+
+  Lista los addons que tienen documentación/ayuda visible para el usuario.
+  Un addon registrado pero sin documentación no aparece aquí.
+
+
+Comando: language
+------------------
+
+  rtg -language <idioma>
+
+  Selecciona el idioma del texto de inicio (void).
+  El idioma debe existir en 'void-language' de assets.json.
+
+  Ejemplo:
+    rtg -language en
+
+
+Addons disponibles
+-------------------
+
+  image      | RtG Image        - Convertidor de imágenes
+  preview    | RtG Preview      - Visor 3D de builds RtG-Format
+  test-addon | RtG Test Addon   - Addon de prueba para validación
+
+
+Idiomas
+--------
+
+Los idiomas se indican con un solo guion: -es, -en, -pt, etc.
+El idioma no cambia el nombre interno del comando.
+
+  rtg help image -es    # Ayuda en español
+  rtg help image -en    # Ayuda en inglés
+  rtg -r -en            # Reglas en inglés
+
+  Para ver idiomas de un addon:
+    rtg help image -lang
+
+  El significado de -lang depende de su posición:
+    rtg --lang          # Idiomas de RtG-CLI (antes del addon)
+    rtg image -lang     # Idiomas del addon (después del addon)
+
+
+Argumentos de addons
+---------------------
+
+Después de identificar un addon, los argumentos se clasifican por prefijo:
+
+  sin guion       -> addon        (ej: convert, archivo.png)
+  --opcion        -> addon        (ej: --width 128)
+  -opcion         -> RtG-CLI      (ej: -lang, -en)
 
 Ejemplos:
-
-```text
-rtg image
-rtg preview
-rtg help image
-```
-
-## Comandos principales
-
-```text
-rtg help <comando>
-```
-
-Muestra la ayuda de un comando o addon.
-
-```text
-rtg help <comando> -<idioma>
-```
-
-Muestra la ayuda del comando en un idioma específico.
-
-```text
-rtg help <comando> -lang
-```
-
-Muestra los idiomas disponibles para ese addon.
-
-## Opciones del sistema
-
-```text
--v, --version    Muestra la versión de RtG-CLI.
--h, --help       Muestra la ayuda.
--l, --lang       Consulta los idiomas de RtG-CLI.
--r, --rules      Muestra las reglas de RtG-CLI.
-```
+  rtg image convert archivo.png     # convert, archivo.png -> addon
+  rtg image --width 128             # --width 128 -> addon
+  rtg image -lang                   # -lang -> RtG-CLI (idiomas del addon)
+  rtg image -en                     # -en -> RtG-CLI (selector de idioma)
 
 
-Ejemplos:
+Argumentos con espacios
+------------------------
 
-```text
-rtg --version
-rtg -h
-rtg --lang
-rtg --rules
-```
+Los argumentos con espacios deben ir entre comillas:
 
-## Idiomas
+  rtg image "mi imagen.png" "salida.json"
 
-Los idiomas se indican mediante un solo guion (`-`).
+RtG-CLI conserva el orden y pasa los argumentos tal cual al addon.
 
-```text
-rtg help image -es
-rtg help image -en
-```
 
-El idioma utilizado no cambia el nombre del comando.
+Más información
+----------------
 
-Para consultar los idiomas disponibles de un addon:
-
-```text
-rtg help image -lang
-```
-
-El significado de `-lang` depende de su posición.
-
-Antes del addon:
-`rtg --lang`
-`rtg -l`
-
-consulta los idiomas de RtG-CLI.
-
-Después del addon:
-`rtg image -lang`
-
-consulta los idiomas del addon.
-
-## Argumentos de los addons
-
-Después de identificar un addon, los argumentos se separan según su prefijo:
-
-```text
-sin guion       → addon
---argumento    → addon
--argumento     → RtG-CLI
-```
-
-Ejemplos:
-
-```text
-rtg image convert
-rtg image --width 128
-rtg image -lang
-```
-
-En:
-
-```text
-rtg image --width 128
-```
-
-`image` identifica el addon y `--width 128` se entrega al addon para que lo procese.
-
-En:
-
-```text
-rtg image -lang
-```
-
-`-lang` pertenece a RtG-CLI y consulta los idiomas del addon.
-
-## Argumentos con espacios
-
-Los argumentos que contienen espacios deben escribirse entre comillas.
-
-Ejemplo:
-
-```text
-rtg image "mi imagen.png"
-```
-
-RtG-CLI conserva los argumentos del addon y los entrega en el mismo orden en que fueron escritos.
-
-## Reglas
-
-Para consultar las reglas completas:
-
-```text
-rtg -r
-rtg --rules
-```
-
-También puede especificarse un idioma:
-
-```text
-rtg -r -es
-rtg --rules -en
-```
-
-Si no se especifica un idioma, se utilizará el primer idioma definido en `assets.json`.
-
-## Más información
-
-Para obtener ayuda sobre un addon específico:
-
-```text
-rtg help <comando>
-```
-
-Para consultar sus idiomas:
-
-```text
-rtg help <comando> -lang
-```
+  rtg help <comando>      # Ayuda detallada de un addon
+  rtg help <comando> -lang  # Idiomas de ese addon
+  rtg --addons            # Ver todos los addons documentados
+  rtg --commands          # Ver comandos internos
