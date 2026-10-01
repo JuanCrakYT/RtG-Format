@@ -154,7 +154,9 @@ def parse_internal_config(raw: dict[str, Any]) -> InternalCommandConfig:
     """Parse internal commands configuration."""
     internal = raw.get("internal", {})
     help_texts = internal.get("help", {})
-    command_list = raw.get("internal-list", [])
+    command_list_raw = raw.get("internal-list", [])
+    # Extract command names from [command, description] pairs
+    command_list = [item[0] if isinstance(item, list) and item else item for item in command_list_raw]
     return InternalCommandConfig(help_texts=help_texts, command_list=command_list)
 
 

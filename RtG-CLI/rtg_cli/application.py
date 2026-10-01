@@ -77,6 +77,11 @@ class Application:
             self.help_system.show_void(lang)
             return ExitCode.SUCCESS
 
+        if parsed.cli_options.get("usage"):
+            lang = parsed.cli_options.get("usage_lang") or parsed.cli_options.get("lang_selector")
+            self.help_system.show_usage(lang)
+            return ExitCode.SUCCESS
+
         # Handle -language before anything else (legacy)
         if parsed.language_selector and not parsed.addon_identifier and not parsed.command:
             self.help_system.show_void(parsed.language_selector)

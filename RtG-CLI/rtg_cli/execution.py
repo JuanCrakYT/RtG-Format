@@ -242,10 +242,13 @@ class InternalCommandExecutor:
         target = parsed.positional_args[0] if parsed.positional_args else None
         lang = parsed.cli_options.get("lang_selector")
         list_langs = parsed.cli_options.get("lang", False)
+        
+        # Check for usage_lang option (from -u-es, --usage-es, etc.)
+        usage_lang = parsed.cli_options.get("usage_lang")
 
-        # Handle help --usage
-        if target == "usage" or target == "--usage":
-            self.help_system.show_usage(lang)
+        # Handle help --usage / -u / --usage-<lang> / -u-<lang>
+        if target in ("--usage", "-u", "usage"):
+            self.help_system.show_usage(usage_lang or lang)
             return ExecutionResult(exit_code=ExitCode.SUCCESS)
 
         if target is None:
@@ -370,10 +373,35 @@ class InternalCommandExecutor:
         return ExecutionResult(exit_code=ExitCode.SUCCESS)
 
     def _execute_commands(self, parsed: ParsedCommandLine) -> ExecutionResult:
+        internal = self.config.internal
+        command_list = internal.command_list
+        internal_list_raw = self.config.raw.get("internal-list", [])
+
+        if not command_list:
+            print("No internal commands available.")
+            return ExecutionResult(exit_code=ExitCode.SUCCESS)
+
+        # Build a map of command -> description
+        cmd_descriptions = {}
+        for item in internal_list_raw:
+            if isinstance(item, list) and len(item) >= 2:
+                cmd, desc = item[0], item[1]
+                cmd_descriptions[cmd] = desc
+
+        # Print header
         print("RtG-CLI internal commands:")
         print()
-        for cmd in self.config.internal.command_list:
-            print(f"  {cmd}")
+
+        # Calculate column widths
+        max_cmd_len = max(len(cmd) for cmd in command_list)
+        col1_width = max(max_cmd_len, len("Comando"))
+
+        # Print each command with description
+        for cmd in command_list:
+            desc = cmd_descriptions.get(cmd, "")
+            # Group aliases (e.g., -h / --help)
+            print(f"  {cmd.ljust(col1_width)}  | {desc}")
+
         return ExecutionResult(exit_code=ExitCode.SUCCESS)
 
     def _execute_addons(self, parsed: ParsedCommandLine) -> ExecutionResult:

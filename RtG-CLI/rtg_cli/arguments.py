@@ -80,11 +80,18 @@ class ArgumentParser:
         "commands": "commands",
         "addons": "addons",
         "language": "language",
+        "usage": "usage",
     }
 
     # Options that take a value
     OPTIONS_WITH_VALUE = {
         "language",
+    }
+
+    # Options that can have language suffix: -u-es, --usage-es, etc.
+    OPTIONS_WITH_LANG_SUFFIX = {
+        "u": "usage",
+        "usage": "usage",
     }
 
     def __init__(self, config, language_manager: LanguageManager):
@@ -124,6 +131,15 @@ class ArgumentParser:
             # Check for system long options (--option)
             if arg.startswith("--") and not addon_identified:
                 opt_name = arg[2:]
+                
+                # Check for language suffix on long options (e.g., --usage-es)
+                lang_suffix = None
+                for opt_base, canonical in self.OPTIONS_WITH_LANG_SUFFIX.items():
+                    if opt_name.startswith(opt_base + "-"):
+                        lang_suffix = opt_name[len(opt_base) + 1:]
+                        opt_name = opt_base
+                        break
+                
                 if opt_name in self.SYSTEM_LONG_OPTIONS:
                     canonical = self.SYSTEM_LONG_OPTIONS[opt_name]
                     if canonical in self.OPTIONS_WITH_VALUE:
@@ -134,6 +150,14 @@ class ArgumentParser:
                             result.diagnostics.append(err_invalid_argument(arg, "requires a value"))
                     else:
                         result.cli_options[canonical] = True
+                    
+                    # Handle language suffix
+                    if lang_suffix:
+                        diag = self.lang_manager.validate_language(lang_suffix, "void")
+                        if diag:
+                            result.diagnostics.append(diag)
+                        else:
+                            result.cli_options[f"{canonical}_lang"] = lang_suffix
                 else:
                     result.diagnostics.append(err_unknown_option(arg))
                 i += 1
@@ -142,10 +166,27 @@ class ArgumentParser:
             # Check for system short options (-x) before addon
             if arg.startswith("-") and not arg.startswith("--") and not addon_identified:
                 opt_char = arg[1:]
+                
+                # Check for language suffix on short options (e.g., -u-es)
+                lang_suffix = None
+                base_opt = opt_char
+                if "-" in opt_char:
+                    base_opt, lang_suffix = opt_char.split("-", 1)
+                
                 # Check if it's a single-char system option
-                if len(opt_char) == 1 and opt_char in self.SYSTEM_SHORT_OPTIONS:
-                    canonical = self.SYSTEM_SHORT_OPTIONS[opt_char]
+                if len(base_opt) == 1 and base_opt in self.SYSTEM_SHORT_OPTIONS:
+                    canonical = self.SYSTEM_SHORT_OPTIONS[base_opt]
                     result.cli_options[canonical] = True
+                # Check if it's a short option with language suffix (e.g., -u-es)
+                elif base_opt in self.OPTIONS_WITH_LANG_SUFFIX:
+                    canonical = self.OPTIONS_WITH_LANG_SUFFIX[base_opt]
+                    result.cli_options[canonical] = True
+                    if lang_suffix:
+                        diag = self.lang_manager.validate_language(lang_suffix, "void")
+                        if diag:
+                            result.diagnostics.append(diag)
+                        else:
+                            result.cli_options[f"{canonical}_lang"] = lang_suffix
                 # Check if it's a language selector (e.g., -en, -es)
                 elif self.lang_manager.is_language_available(opt_char):
                     result.language_selector = opt_char
@@ -165,6 +206,20 @@ class ArgumentParser:
                         help_arg = argv[i]
                         if help_arg == "-lang":
                             result.cli_options["lang"] = True
+                        elif help_arg in ("-u", "--usage", "-usage"):
+                            result.cli_options["usage"] = True
+                        elif help_arg.startswith("--usage-"):
+                            # Handle --usage-<lang>
+                            lang_code = help_arg[len("--usage-"):]
+                            result.cli_options["usage"] = True
+                            if self.lang_manager.is_language_available(lang_code):
+                                result.cli_options["usage_lang"] = lang_code
+                        elif help_arg.startswith("-u-"):
+                            # Handle -u-<lang>
+                            lang_code = help_arg[len("-u-"):]
+                            result.cli_options["usage"] = True
+                            if self.lang_manager.is_language_available(lang_code):
+                                result.cli_options["usage_lang"] = lang_code
                         elif help_arg.startswith("-") and not help_arg.startswith("--"):
                             # Language selector like -en, -es
                             lang_code = help_arg[1:]

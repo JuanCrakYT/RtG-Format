@@ -22,25 +22,25 @@
             "hu": "Magyar"
         },
         "rules": {
-            "es": "./es/rules.es.md",
-            "en": "./en/rules.en.md",
-            "pt": "./pt/rules.pt.md",
-            "de": "./de/rules.de.md",
-            "fr": "./fr/rules.fr.md",
-            "ru": "./ru/rules.ru.md",
-            "zh": "./zh/rules.zh.md",
-            "ja": "./ja/rules.ja.md",
-            "ko": "./ko/rules.ko.md",
-            "it": "./it/rules.it.md",
-            "tr": "./tr/rules.tr.md",
-            "pl": "./pl/rules.pl.md",
-            "zh-TW": "./zh-TW/rules.zh-TW.md",
-            "ar": "./ar/rules.ar.md",
-            "hi": "./hi/rules.hi.md",
-            "nl": "./nl/rules.nl.md",
-            "sv": "./sv/rules.sv.md",
-            "cs": "./cs/rules.cs.md",
-            "hu": "./hu/rules.hu.md"
+            "es": "./languages/es/rules.es.md",
+            "en": "./languages/en/rules.en.md",
+            "pt": "./languages/pt/rules.pt.md",
+            "de": "./languages/de/rules.de.md",
+            "fr": "./languages/fr/rules.fr.md",
+            "ru": "./languages/ru/rules.ru.md",
+            "zh": "./languages/zh/rules.zh.md",
+            "ja": "./languages/ja/rules.ja.md",
+            "ko": "./languages/ko/rules.ko.md",
+            "it": "./languages/it/rules.it.md",
+            "tr": "./languages/tr/rules.tr.md",
+            "pl": "./languages/pl/rules.pl.md",
+            "zh-TW": "./languages/zh-TW/rules.zh-TW.md",
+            "ar": "./languages/ar/rules.ar.md",
+            "hi": "./languages/hi/rules.hi.md",
+            "nl": "./languages/nl/rules.nl.md",
+            "sv": "./languages/sv/rules.sv.md",
+            "cs": "./languages/cs/rules.cs.md",
+            "hu": "./languages/hu/rules.hu.md"
         },
         "version": "RtG-CLI v1.2.0",
         "version-date": "2026-09-28",
@@ -88,25 +88,25 @@
             "hu": "Használat: rtg [-v | --version] [-language <nyelv>] [-h | --help] [-l | --lang] [-r | --rules] [-c | --commands] [-a | --addons] <parancs> [<args>]\n\nA leggyakrabban használt rtg parancsok:\n  image      | Képkonverter powered by: \"RtG Image\".\n  preview    | Megnyit egy HTML-t a Road to Gramby's JSON build megtekintéséhez\n  --commands | Megjeleníti a belső rtg parancsok listáját\n  --addons   | Megjeleníti a dokumentációval rendelkező elérhető kiegészítőket\n\nTovábbi információk egy adott parancshoz: 'rtg help <parancs> [<nyelv>]'.\nAz adott kiegészítő nyelvei: 'rtg help <parancs> -lang'.\nA jelenlegi belső parancsok: 'rtg --commands'.\nAz elérhető kiegészítők: 'rtg --addons'.\n"
         },
         "help": {
-            "es": "./es/help.es.md",
-            "en": "./en/help.en.md",
-            "pt": "./pt/help.pt.md",
-            "de": "./de/help.de.md",
-            "fr": "./fr/help.fr.md",
-            "ru": "./ru/help.ru.md",
-            "zh": "./zh/help.zh.md",
-            "ja": "./ja/help.ja.md",
-            "ko": "./ko/help.ko.md",
-            "it": "./it/help.it.md",
-            "tr": "./tr/help.tr.md",
-            "pl": "./pl/help.pl.md",
-            "zh-TW": "./zh-TW/help.zh-TW.md",
-            "ar": "./ar/help.ar.md",
-            "hi": "./hi/help.hi.md",
-            "nl": "./nl/help.nl.md",
-            "sv": "./sv/help.sv.md",
-            "cs": "./cs/help.cs.md",
-            "hu": "./hu/help.hu.md"
+            "es": "./languages/es/help.es.md",
+            "en": "./languages/en/help.en.md",
+            "pt": "./languages/pt/help.pt.md",
+            "de": "./languages/de/help.de.md",
+            "fr": "./languages/fr/help.fr.md",
+            "ru": "./languages/ru/help.ru.md",
+            "zh": "./languages/zh/help.zh.md",
+            "ja": "./languages/ja/help.ja.md",
+            "ko": "./languages/ko/help.ko.md",
+            "it": "./languages/it/help.it.md",
+            "tr": "./languages/tr/help.tr.md",
+            "pl": "./languages/pl/help.pl.md",
+            "zh-TW": "./languages/zh-TW/help.zh-TW.md",
+            "ar": "./languages/ar/help.ar.md",
+            "hi": "./languages/hi/help.hi.md",
+            "nl": "./languages/nl/help.nl.md",
+            "sv": "./languages/sv/help.sv.md",
+            "cs": "./languages/cs/help.cs.md",
+            "hu": "./languages/hu/help.hu.md"
         },
         "addons": {
             "image": {
@@ -163,7 +163,10 @@
                         "Creator of the converter",
                         "Main maintainer and creator of updates"
                     ]
-                }
+                },
+                "help": [
+                    ""
+                ]
             },
             "preview": {
                 "name": "RtG Preview",
@@ -443,67 +446,67 @@
         "internal-list": [
             [
                 "help",
-                ""
+                "Muestra la ayuda general o la ayuda de un comando específico."
             ],
             [
                 "-h",
-                ""
+                "Muestra la ayuda general (versión corta)."
             ],
             [
                 "--help",
-                ""
+                "Muestra la ayuda general (versión larga)."
             ],
             [
                 "-v",
-                ""
+                "Muestra la versión de RtG-CLI (versión corta)."
             ],
             [
                 "--version",
-                ""
+                "Muestra la versión de RtG-CLI con contenido multiidioma."
             ],
             [
                 "-r",
-                ""
+                "Muestra las reglas de RtG-CLI (versión corta)."
             ],
             [
                 "--rules",
-                ""
+                "Muestra las reglas de RtG-CLI."
             ],
             [
                 "-l",
-                ""
+                "Lista los idiomas disponibles en RtG-CLI (versión corta)."
             ],
             [
                 "--lang",
-                ""
+                "Lista los idiomas disponibles en RtG-CLI."
             ],
             [
                 "-language",
-                ""
+                "Selecciona el idioma del texto de inicio (void)."
             ],
             [
                 "-c",
-                ""
+                "Lista los comandos internos de RtG-CLI (versión corta)."
             ],
             [
                 "--commands",
-                ""
+                "Lista los comandos internos de RtG-CLI."
             ],
             [
                 "-a",
-                ""
+                "Lista los addons con documentación disponible (versión corta)."
             ],
             [
                 "--addons",
-                ""
+                "Lista los addons con documentación disponible."
+            ],
+            [
+                "-u",
+                "Muestra la información de uso común del sistema (versión corta)."
             ],
             [
                 "--usage",
-                ""
-            ],
-            [
-                "---usage",
-                ""
+                "Muestra la información de uso común del sistema."
             ]
         ]
     }
