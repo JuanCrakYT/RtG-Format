@@ -26,6 +26,9 @@ Systemkommandon
   -r, --rules       Visar RtG-CLI-regler
   -c, --commands    Visar RtG-CLI-interna kommandon
   -a, --addons      Visar tillägg med användarsynlig dokumentation
+  -u, --usage       Visar allmän användningsinformation (nytt)
+  -u-<språk>        Visar användning på specifikt språk (t.ex. -u-es, -u-en) (nytt)
+  --usage-<språk>   Visar användning på specifikt språk (t.ex. --usage-es, --usage-en) (nytt)
   -language <språk>   Ställer in språket för starttexten (void)
 
 Kommando: help
@@ -35,11 +38,19 @@ Kommando: help
   rtg help <kommando>         # Hjälp för ett specifikt kommando/tillägg
   rtg help <kommando> -<språk>  # Hjälp på specifikt språk (t.ex. -es, -en)
   rtg help <kommando> -lang     # Tillgängliga språk för det kommandot
+  rtg help -u                  # Allmän hjälp (nytt)
+  rtg help -u-<språk>          # Hjälp på specifikt språk (t.ex. -u-es) (nytt)
+  rtg help --usage             # Allmän hjälp (nytt)
+  rtg help --usage-<språk>      # Hjälp på specifikt språk (t.ex. --usage-es) (nytt)
+  rtg help usage               # Allmän hjälp (alternativ syntax, nytt)
 
   Exempel:
     rtg help image
     rtg help image -en
     rtg help image -lang
+    rtg help -u
+    rtg help -u-en
+    rtg help --usage-es
 
 
 Kommando: version
@@ -89,6 +100,18 @@ Kommando: addons
 
   Visar tillägg som har användarsynlig dokumentation/hjälp.
   Ett registrerat tillägg utan dokumentation visas inte här.
+
+
+Kommando: usage
+-----------------
+
+  rtg -u
+  rtg --usage
+  rtg -u-<språk>        # Användning på specifikt språk (t.ex. -u-es, -u-en) (nytt)
+  --usage-<språk>       Visar användning på specifikt språk (t.ex. --usage-es, --usage-en) (nytt)
+
+  Visar allmän användningsinformation (void) på det begärda språket.
+  Språket måste finnas i 'void-language' i assets.json.
 
 
 Kommando: language

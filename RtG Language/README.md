@@ -4,6 +4,7 @@ Lenguaje de alto nivel para describir estructuras y proyectos basados en **RtG-F
 
 > **Estado:** Diseño definido / implementación pendiente  
 > **Versión del lenguaje:** `2.0`
+> **Idioma:** Español (ES)
 
 ---
 
@@ -38,7 +39,6 @@ RtG-Format
 ```
 
 RtG-Language **no reemplaza RtG-Format**.
-
 RtG-Format continúa siendo el formato de salida y la especificación estructural fundamental.
 
 ---
@@ -91,13 +91,13 @@ El usuario **no controla directamente los índices internos del formato de salid
 
 El formato nativo de RtG-Format utiliza conceptualmente:
 
-```text
+```json
 [TipoDelBloque, Conexiones, Propiedades]
 ```
 
 Las conexiones utilizan:
 
-```text
+```json
 [TipoLocal, PuntoPadre/UUID, IndicePadre]
 ```
 
@@ -487,7 +487,7 @@ Los attachments corresponden a la información necesaria para generar la estruct
 
 Conceptualmente:
 
-```text
+```tree
 EphemeralAttachments
 └── UUID
     ├── partName
@@ -496,7 +496,7 @@ EphemeralAttachments
 
 El `cframe` debe contener exactamente los valores requeridos por RtG-Format:
 
-```text
+```json
 [x, y, z, r1, r2, r3, r4, r5, r6, r7, r8, r9]
 ```
 
@@ -1053,7 +1053,7 @@ MyProject/
 
 El cache es compartido por el proyecto.
 
-No debe existir un `.rtgcache` independiente por cada `.rtg` salvo que una futura especificación lo defina explícitamente.
+No debe existir un `.rtgcache` independiente por cada `.rtg`.
 
 ---
 

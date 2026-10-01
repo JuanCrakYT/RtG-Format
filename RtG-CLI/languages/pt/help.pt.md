@@ -26,6 +26,9 @@ Comandos do sistema
   -r, --rules       Mostra as regras do RtG-CLI
   -c, --commands    Lista os comandos internos do RtG-CLI
   -a, --addons      Lista os addons com documentação disponível
+  -u, --usage       Mostra a informação de uso comum do sistema (novo)
+  -u-<idioma>       Mostra o uso em um idioma específico (ex: -u-es, -u-en) (novo)
+  --usage-<idioma>  Mostra o uso em um idioma específico (ex: --usage-es, --usage-en) (novo)
   -language <idioma>  Define o idioma do texto de início (void)
 
 Comando: help
@@ -35,11 +38,19 @@ Comando: help
   rtg help <comando>          # Ajuda de um comando/addon específico
   rtg help <comando> -<idioma>  # Ajuda em idioma específico (ex: -es, -en)
   rtg help <comando> -lang      # Idiomas disponíveis para esse comando
+  rtg help -u                  # Uso comum (novo)
+  rtg help -u-<idioma>         # Uso em idioma específico (ex: -u-es) (novo)
+  rtg help --usage             # Uso comum (novo)
+  rtg help --usage-<idioma>    # Uso em idioma específico (ex: --usage-es) (novo)
+  rtg help usage               # Uso comum (sintaxe alternativa, novo)
 
   Exemplos:
     rtg help image
     rtg help image -en
     rtg help image -lang
+    rtg help -u
+    rtg help -u-en
+    rtg help --usage-es
 
 
 Comando: version
@@ -89,6 +100,18 @@ Comando: addons
 
   Lista os addons que têm documentação/ajuda visível para o usuário.
   Um addon registrado mas sem documentação não aparece aqui.
+
+
+Comando: usage
+-----------------
+
+  rtg -u
+  rtg --usage
+  rtg -u-<idioma>       # Uso em idioma específico (ex: -u-es, -u-en) (novo)
+  --usage-<idioma>      # Uso em idioma específico (ex: --usage-es, --usage-en) (novo)
+
+  Mostra a informação de uso comum do sistema (void) no idioma solicitado.
+  O idioma deve existir em 'void-language' de assets.json.
 
 
 Comando: language

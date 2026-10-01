@@ -26,6 +26,9 @@ RtG-CLI는 RtG-Format 생태계의 명령줄 인터페이스입니다.
   -r, --rules       RtG-CLI 규칙 표시
   -c, --commands    RtG-CLI 내부 명령어 나열
   -a, --addons      사용자에게 보이는 문서가 있는 애드온 나열
+  -u, --usage       일반 사용법 정보 표시 (신규)
+  -u-<언어>         특정 언어 사용법 표시 (예: -u-es, -u-en) (신규)
+  --usage-<언어>     특정 언어 사용법 표시 (예: --usage-es, --usage-en) (신규)
   -language <언어>    시작 텍스트 (void) 언어 설정
 
 명령어: help
@@ -35,11 +38,19 @@ RtG-CLI는 RtG-Format 생태계의 명령줄 인터페이스입니다.
   rtg help <명령어>           # 특정 명령어/애드온 도움말
   rtg help <명령어> -<언어>     # 특정 언어 도움말 (예: -es, -en)
   rtg help <명령어> -lang       # 해당 명령어의 사용 가능한 언어
+  rtg help -u                  # 일반 도움말 (신규)
+  rtg help -u-<언어>           # 특정 언어 도움말 (예: -u-es) (신규)
+  rtg help --usage             # 일반 도움말 (신규)
+  rtg help --usage-<언어>       # 특정 언어 도움말 (예: --usage-es) (신규)
+  rtg help usage               # 일반 도움말 (대체 구문, 신규)
 
   예시:
     rtg help image
     rtg help image -en
     rtg help image -lang
+    rtg help -u
+    rtg help -u-en
+    rtg help --usage-es
 
 
 명령어: version
@@ -82,13 +93,25 @@ RtG-CLI는 RtG-Format 생태계의 명령줄 인터페이스입니다.
 
 
 명령어: addons
------------------
+----------------
 
   rtg -a
   rtg --addons
 
   사용자에게 보이는 문서/도움말이 있는 애드온 나열.
   문서 없는 등록된 애드온은 여기에 표시되지 않음.
+
+
+명령어: usage
+-----------------
+
+  rtg -u
+  rtg --usage
+  rtg -u-<언어>         # 특정 언어 사용법 (예: -u-es, -u-en) (신규)
+  --usage-<언어>         특정 언어 사용법 표시 (예: --usage-es, --usage-en) (신규)
+
+  요청된 언어로 일반 사용법 정보 (void) 표시.
+  언어는 assets.json의 'void-language'에 존재해야 함.
 
 
 명령어: language

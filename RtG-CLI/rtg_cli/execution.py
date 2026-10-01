@@ -390,7 +390,6 @@ class InternalCommandExecutor:
 
         # Print header
         print("RtG-CLI internal commands:")
-        print()
 
         # Calculate column widths
         max_cmd_len = max(len(cmd) for cmd in command_list)

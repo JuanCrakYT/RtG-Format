@@ -26,6 +26,9 @@ Systémové příkazy
   -r, --rules       Zobrazí pravidla RtG-CLI
   -c, --commands    Zobrazí interní příkazy RtG-CLI
   -a, --addons      Zobrazí doplňky s pro uživatele viditelnou dokumentací
+  -u, --usage       Zobrazí obecné informace o použití (nové)
+  -u-<jazyk>        Zobrazí použití v konkrétním jazyce (např. -u-es, -u-en) (nové)
+  --usage-<jazyk>   Zobrazí použití v konkrétním jazyce (např. --usage-es, --usage-en) (nové)
   -language <jazyk>   Nastaví jazyk úvodního textu (void)
 
 Příkaz: help
@@ -35,11 +38,19 @@ Příkaz: help
   rtg help <příkaz>           # Nápověda pro konkrétní příkaz/doplněk
   rtg help <příkaz> -<jazyk>  # Nápověda v konkrétním jazyce (např. -es, -en)
   rtg help <příkaz> -lang     # Dostupné jazyky pro ten příkaz
+  rtg help -u                  # Obecná nápověda (nové)
+  rtg help -u-<jazyk>          # Nápověda v konkrétním jazyce (např. -u-es) (nové)
+  rtg help --usage             # Obecná nápověda (nové)
+  rtg help --usage-<jazyk>     # Nápověda v konkrétním jazyce (např. --usage-es) (nové)
+  rtg help usage               # Obecná nápověda (alternativní syntaxe, nové)
 
   Příklady:
     rtg help image
     rtg help image -en
     rtg help image -lang
+    rtg help -u
+    rtg help -u-en
+    rtg help --usage-es
 
 
 Příkaz: version
@@ -91,6 +102,18 @@ Příkaz: addons
   Zaregistrovaný doplněk bez dokumentace se zde nezobrazí.
 
 
+Příkaz: usage
+-----------------
+
+  rtg -u
+  rtg --usage
+  rtg -u-<jazyk>        # Použití v konkrétním jazyce (např. -u-es, -u-en) (nové)
+  --usage-<jazyk>       Zobrazí použití v konkrétním jazyce (např. --usage-es, --usage-en) (nové)
+
+  Zobrazí obecné informace o použití (void) v požadovaném jazyce.
+  Jazyk musí existovat v 'void-language' v assets.json.
+
+
 Příkaz: language
 -----------------
 
@@ -130,7 +153,7 @@ Jazyk nemění interní název příkazu.
 
 
 Argumenty doplňků
-------------------
+-------------------
 
 Po identifikaci doplňku jsou argumenty klasifikovány podle předpony:
 

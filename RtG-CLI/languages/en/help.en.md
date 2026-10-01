@@ -26,6 +26,9 @@ System Commands
   -r, --rules       Show RtG-CLI rules
   -c, --commands    List RtG-CLI internal commands
   -a, --addons      List addons with user-visible documentation
+  -u, --usage       Show common usage information (new)
+  -u-<lang>         Show usage in specific language (e.g. -u-es, -u-en) (new)
+  --usage-<lang>    Show usage in specific language (e.g. --usage-es, --usage-en) (new)
   -language <lang>  Set the startup (void) text language
 
 Command: help
@@ -35,11 +38,19 @@ Command: help
   rtg help <command>          # Help for a specific command/addon
   rtg help <command> -<lang>  # Help in specific language (e.g. -es, -en)
   rtg help <command> -lang      # Available languages for that command
+  rtg help -u                  # Common usage (new)
+  rtg help -u-<lang>           # Usage in specific language (e.g. -u-es) (new)
+  rtg help --usage             # Common usage (new)
+  rtg help --usage-<lang>      # Usage in specific language (e.g. --usage-es) (new)
+  rtg help usage               # Common usage (alternative syntax, new)
 
   Examples:
     rtg help image
     rtg help image -en
     rtg help image -lang
+    rtg help -u
+    rtg help -u-en
+    rtg help --usage-es
 
 
 Command: version
@@ -89,6 +100,18 @@ Command: addons
 
   Lists addons that have user-visible documentation/help.
   A registered addon without documentation does not appear here.
+
+
+Command: usage
+-----------------
+
+  rtg -u
+  rtg --usage
+  rtg -u-<lang>         # Usage in specific language (e.g. -u-es, -u-en) (new)
+  --usage-<lang>        # Usage in specific language (e.g. --usage-es, --usage-en) (new)
+
+  Shows common usage information (void) in the requested language.
+  The language must exist in 'void-language' in assets.json.
 
 
 Command: language

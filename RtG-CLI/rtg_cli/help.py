@@ -153,7 +153,6 @@ class HelpSystem:
     def show_commands_list(self) -> None:
         """List internal commands."""
         print("RtG-CLI internal commands:")
-        print()
         for cmd in self.config.internal.command_list:
             print(f"  {cmd}")
 

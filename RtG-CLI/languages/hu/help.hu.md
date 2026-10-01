@@ -26,6 +26,9 @@ Rendszerparancsok
   -r, --rules       Megjeleníti az RtG-CLI szabályait
   -c, --commands    Megjeleníti az RtG-CLI belső parancsait
   -a, --addons      Megjeleníti a felhasználó számára látható dokumentációval rendelkező kiegészítőket
+  -u, --usage       Megjeleníti az általános használati információkat (új)
+  -u-<nyelv>        Megjeleníti a használatot konkrét nyelven (pl. -u-es, -u-en) (új)
+  --usage-<nyelv>   Megjeleníti a használatot konkrét nyelven (pl. --usage-es, --usage-en) (új)
   -language <nyelv>   Beállítja a kezdőképernyő (void) nyelvét
 
 Parancs: help
@@ -35,11 +38,19 @@ Parancs: help
   rtg help <parancs>          # Egy adott parancs/kiegészítő súgója
   rtg help <parancs> -<nyelv>   # Súgó konkrét nyelven (pl. -es, -en)
   rtg help <parancs> -lang      # Az adott parancs elérhető nyelvei
+  rtg help -u                  # Általános súgó (új)
+  rtg help -u-<nyelv>          # Súgó konkrét nyelven (pl. -u-es) (új)
+  rtg help --usage             # Általános súgó (új)
+  rtg help --usage-<nyelv>      # Súgó konkrét nyelven (pl. --usage-es) (új)
+  rtg help usage               # Általános súgó (alternatív szintaxis, új)
 
   Példák:
     rtg help image
     rtg help image -en
     rtg help image -lang
+    rtg help -u
+    rtg help -u-en
+    rtg help --usage-es
 
 
 Parancs: version
@@ -89,6 +100,18 @@ Parancs: addons
 
   Felsorolja a felhasználó számára látható dokumentációval/súgóval rendelkező kiegészítőket.
   Dokumentáció nélküli regisztrált kiegészítő nem jelenik meg itt.
+
+
+Parancs: usage
+-----------------
+
+  rtg -u
+  rtg --usage
+  rtg -u-<nyelv>        # Használat konkrét nyelven (pl. -u-es, -u-en) (új)
+  --usage-<nyelv>       Megjeleníti a használatot konkrét nyelven (pl. --usage-es, --usage-en) (új)
+
+  Megjeleníti az általános használati információkat (void) a kért nyelven.
+  A nyelvnek léteznie kell a 'void-language'-ben az assets.json-ban.
 
 
 Parancs: language

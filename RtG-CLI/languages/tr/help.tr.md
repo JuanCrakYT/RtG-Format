@@ -26,6 +26,9 @@ Sistem Komutları
   -r, --rules       RtG-CLI kurallarını gösterir
   -c, --commands    RtG-CLI dahili komutlarını listeler
   -a, --addons      Kullanıcıdan görünür belgeye sahip eklentileri listeler
+  -u, --usage       Genel kullanım bilgisini gösterir (yeni)
+  -u-<dil>          Belirli dilde kullanım gösterir (örn: -u-es, -u-en) (yeni)
+  --usage-<dil>     Belirli dilde kullanım gösterir (örn: --usage-es, --usage-en) (yeni)
   -language <dil>     Başlangıç metni (void) dilini ayarlar
 
 Komut: help
@@ -35,11 +38,19 @@ Komut: help
   rtg help <komut>            # Belirli bir komut/eklenti için yardım
   rtg help <komut> -<dil>       # Belirli dilde yardım (örn: -es, -en)
   rtg help <komut> -lang        # O komut için kullanılabilir diller
+  rtg help -u                  # Genel kullanım (yeni)
+  rtg help -u-<dil>            # Belirli dilde kullanım (örn: -u-es) (yeni)
+  rtg help --usage             # Genel kullanım (yeni)
+  rtg help --usage-<dil>       # Belirli dilde kullanım (örn: --usage-es) (yeni)
+  rtg help usage               # Genel kullanım (alternatif sözdizimi, yeni)
 
   Örnekler:
     rtg help image
     rtg help image -en
     rtg help image -lang
+    rtg help -u
+    rtg help -u-es
+    rtg help --usage-es
 
 
 Komut: version
@@ -89,6 +100,18 @@ Komut: addons
 
   Kullanıcıdan görünür belge/yardımı olan eklentileri listeler.
   Belgesi olmayan kayıtlı eklenti burada görünmez.
+
+
+Komut: usage
+-----------------
+
+  rtg -u
+  rtg --usage
+  rtg -u-<dil>         # Belirli dilde kullanım (örn: -u-es, -u-en) (yeni)
+  --usage-<dil>         Belirli dilde kullanım gösterir (örn: --usage-es, --usage-en) (yeni)
+
+  İstenen dildeki genel kullanım bilgilerini (void) gösterir.
+  Dil, assets.json'daki 'void-language' içinde olmalıdır.
 
 
 Komut: language

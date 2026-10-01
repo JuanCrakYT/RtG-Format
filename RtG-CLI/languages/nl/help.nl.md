@@ -26,6 +26,9 @@ Systeemcommando's
   -r, --rules       Toont de RtG-CLI-regels
   -c, --commands    Toont de interne RtG-CLI-commando's
   -a, --addons      Toont addons met voor de gebruiker zichtbare documentatie
+  -u, --usage       Toont algemene gebruiksinformatie (nieuw)
+  -u-<taal>         Toont gebruik in specifieke taal (bijv. -u-es, -u-en) (nieuw)
+  --usage-<taal>    Toont gebruik in specifieke taal (bijv. --usage-es, --usage-en) (nieuw)
   -language <taal>   Stelt de taal van de opstarttekst (void) in
 
 Commando: help
@@ -35,11 +38,19 @@ Commando: help
   rtg help <commando>         # Hulp voor een specifiek commando/addon
   rtg help <commando> -<taal>  # Hulp in specifieke taal (bijv. -es, -en)
   rtg help <commando> -lang     # Beschikbare talen voor dat commando
+  rtg help -u                  # Algemene hulp (nieuw)
+  rtg help -u-<taal>           # Hulp in specifieke taal (bijv. -u-es) (nieuw)
+  rtg help --usage             # Algemene hulp (nieuw)
+  rtg help --usage-<taal>       # Hulp in specifieke taal (bijv. --usage-es) (nieuw)
+  rtg help usage               # Algemene hulp (alternatieve syntaxis, nieuw)
 
   Voorbeelden:
     rtg help image
     rtg help image -en
     rtg help image -lang
+    rtg help -u
+    rtg help -u-en
+    rtg help --usage-es
 
 
 Commando: version
@@ -89,6 +100,18 @@ Commando: addons
 
   Toont addons die gebruikerszichtbare documentatie/hulp hebben.
   Een geregistreerde addon zonder documentatie verschijnt hier niet.
+
+
+Commando: usage
+-----------------
+
+  rtg -u
+  rtg --usage
+  rtg -u-<taal>         # Gebruik in specifieke taal (bijv. -u-es, -u-en) (nieuw)
+  --usage-<taal>        Toont gebruik in specifieke taal (bijv. --usage-es, --usage-en) (nieuw)
+
+  Toont algemene gebruiksinformatie (void) in de aangevraagde taal.
+  De taal moet bestaan in 'void-language' in assets.json.
 
 
 Commando: language
@@ -146,7 +169,7 @@ Voorbeelden:
 
 
 Argumenten met spaties
------------------------
+------------------------
 
 Argumenten met spaties moeten tussen aanhalingstekens:
 

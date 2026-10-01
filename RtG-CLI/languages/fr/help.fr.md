@@ -26,6 +26,9 @@ Commandes système
   -r, --rules       Affiche les règles de RtG-CLI
   -c, --commands    Liste les commandes internes de RtG-CLI
   -a, --addons      Liste les addons avec documentation utilisateur
+  -u, --usage       Affiche les informations d'utilisation courantes (nouveau)
+  -u-<langue>       Affiche l'utilisation dans une langue spécifique (ex: -u-es, -u-en) (nouveau)
+  --usage-<langue>  Affiche l'utilisation dans une langue spécifique (ex: --usage-es, --usage-en) (nouveau)
   -language <langue>  Définit la langue du texte de démarrage (void)
 
 Commande: help
@@ -35,11 +38,19 @@ Commande: help
   rtg help <commande>         # Aide pour une commande/addon spécifique
   rtg help <commande> -<langue> # Aide en langue spécifique (ex: -es, -en)
   rtg help <commande> -lang     # Langues disponibles pour cette commande
+  rtg help -u                  # Aide courante (nouveau)
+  rtg help -u-<langue>         # Aide dans une langue spécifique (ex: -u-es) (nouveau)
+  rtg help --usage             # Aide courante (nouveau)
+  rtg help --usage-<langue>    # Aide dans une langue spécifique (ex: --usage-es) (nouveau)
+  rtg help usage               # Aide courante (syntaxe alternative, nouveau)
 
   Exemples:
     rtg help image
     rtg help image -en
     rtg help image -lang
+    rtg help -u
+    rtg help -u-en
+    rtg help --usage-es
 
 
 Commande: version
@@ -91,8 +102,20 @@ Commande: addons
   Un addon enregistré sans documentation n'apparaît pas ici.
 
 
+Commande: usage
+-----------------
+
+  rtg -u
+  rtg --usage
+  rtg -u-<langue>       # Utilisation dans une langue spécifique (ex: -u-es, -u-en) (nouveau)
+  --usage-<langue>      Affiche l'utilisation dans une langue spécifique (ex: --usage-es, --usage-en) (nouveau)
+
+  Affiche les informations d'utilisation courantes (void) dans la langue demandée.
+  La langue doit exister dans 'void-language' de assets.json.
+
+
 Commande: language
--------------------
+--------------------
 
   rtg -language <langue>
 
@@ -104,7 +127,7 @@ Commande: language
 
 
 Addons disponibles
--------------------
+--------------------
 
   image      | RtG Image        - Convertisseur d'images
   preview    | RtG Preview      - Visualiseur 3D pour builds RtG-Format
@@ -130,7 +153,7 @@ La langue ne change pas le nom interne de la commande.
 
 
 Arguments d'addons
--------------------
+--------------------
 
 Après l'identification d'un addon, les arguments sont classés par préfixe:
 
@@ -146,7 +169,7 @@ Exemples:
 
 
 Arguments avec espaces
------------------------
+------------------------
 
 Les arguments contenant des espaces doivent être entre guillemets:
 

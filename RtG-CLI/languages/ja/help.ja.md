@@ -26,6 +26,9 @@ RtG-CLI は RtG-Format エコシステムのコマンドラインインターフ
   -r, --rules       RtG-CLI のルールを表示
   -c, --commands    RtG-CLI の内部コマンドを一覧表示
   -a, --addons      ユーザーから見えるドキュメントを持つアドオンを一覧表示
+  -u, --usage       一般的な使用法情報を表示 (新規)
+  -u-<言語>         特定言語の使用法を表示 (例: -u-es, -u-en) (新規)
+  --usage-<言語>     特定言語の使用法を表示 (例: --usage-es, --usage-en) (新規)
   -language <言語>    起動テキスト (void) の言語を設定
 
 コマンド: help
@@ -35,11 +38,19 @@ RtG-CLI は RtG-Format エコシステムのコマンドラインインターフ
   rtg help <コマンド>         # 特定のコマンド/アドオンのヘルプ
   rtg help <コマンド> -<言語>   # 特定言語のヘルプ (例: -es, -en)
   rtg help <コマンド> -lang      # そのコマンドで利用可能な言語
+  rtg help -u                  # 一般的な使用法 (新規)
+  rtg help -u-<言語>           # 特定言語の使用法 (例: -u-es) (新規)
+  rtg help --usage             # 一般的な使用法 (新規)
+  rtg help --usage-<言語>       # 特定言語の使用法 (例: --usage-es) (新規)
+  rtg help usage               # 一般的な使用法 (代替構文, 新規)
 
   例:
     rtg help image
     rtg help image -en
     rtg help image -lang
+    rtg help -u
+    rtg help -u-en
+    rtg help --usage-es
 
 
 コマンド: version
@@ -89,6 +100,18 @@ RtG-CLI は RtG-Format エコシステムのコマンドラインインターフ
 
   ユーザーから見えるドキュメント/ヘルプを持つアドオンを一覧表示。
   ドキュメントのない登録済みアドオンはここに表示されない。
+
+
+コマンド: usage
+------------------
+
+  rtg -u
+  rtg --usage
+  rtg -u-<言語>         # 特定言語の使用法 (例: -u-es, -u-en) (新規)
+  --usage-<言語>         特定言語の使用法を表示 (例: --usage-es, --usage-en) (新規)
+
+  要求された言語での一般的な使用法情報 (void) を表示。
+  言語は assets.json の 'void-language' に存在する必要がある。
 
 
 コマンド: language

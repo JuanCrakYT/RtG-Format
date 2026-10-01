@@ -47,10 +47,14 @@ rtg -l                 # Idiomas disponibles
 rtg -r                 # Reglas (español por defecto)
 rtg -c                 # Comandos internos
 rtg -a                 # Addons documentados
+rtg -u                 # Uso común (nuevo)
+rtg --usage            # Uso común (nuevo)
 rtg help               # Ayuda general
 rtg help image         # Ayuda del addon image
 rtg help image -en     # Ayuda en inglés
 rtg help image -lang   # Idiomas del addon image
+rtg help -u            # Uso común (nuevo)
+rtg help -u-en         # Uso en inglés (nuevo)
 rtg image              # Info del addon image
 rtg image convert      # Ejecuta comando del addon
 rtg test-addon echo "hola"  # Addon de prueba
@@ -197,6 +201,9 @@ stdout/stderr propagados
 - `-r, --rules`
 - `-c, --commands`
 - `-a, --addons`
+- `-u, --usage`          (nuevo)
+- `-u-<idioma>`          (nuevo)
+- `--usage-<idioma>`     (nuevo)
 - `-language <idioma>`
 
 ### Selectores de idioma
@@ -217,7 +224,7 @@ python -m unittest discover -s tests -v
 
 ### Cobertura
 - ✅ `tests/arguments/` - Parser de argumentos
-- ✅ `tests/commands/` - Comandos internos (help, version, rules, lang, commands, addons, language)
+- ✅ `tests/commands/` - Comandos internos (help, version, rules, lang, commands, addons, language, usage)
 - ✅ `tests/addons/` - Registro y descubrimiento
 - ✅ `tests/execution/` - Ejecución addons (stdout, stderr, exit codes)
 - ✅ `tests/languages/` - 19 idiomas, fallback, validación
@@ -238,12 +245,19 @@ python rtg.py -l
 python rtg.py -r
 python rtg.py -c
 python rtg.py -a
+python rtg.py -u              # Nuevo
+python rtg.py --usage         # Nuevo
+python rtg.py -u-es           # Nuevo (español)
+python rtg.py --usage-en      # Nuevo (inglés)
 
 # Help
 python rtg.py help
 python rtg.py help image
 python rtg.py help image -en
 python rtg.py help image -lang
+python rtg.py help -u          # Nuevo
+python rtg.py help -u-en       # Nuevo
+python rtg.py help --usage-es  # Nuevo
 
 # Addons
 python rtg.py image
@@ -318,6 +332,7 @@ El addon `preview` usa **RtG-Preview legacy** (rama main de RtG-Format).
 - Tests automatizados (8 categorías)
 - Documentación técnica (9 archivos)
 - Validación manual exitosa
+- Nuevos comandos `usage` / `-u` / `--usage` con soporte de idiomas
 
 📋 **Pendiente menor:**
 - CI/CD pipeline (GitHub Actions)

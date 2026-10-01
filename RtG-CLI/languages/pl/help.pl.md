@@ -26,6 +26,9 @@ Polecenia systemowe
   -r, --rules       Wyświetla reguły RtG-CLI
   -c, --commands    Wyświetla wewnętrzne polecenia RtG-CLI
   -a, --addons      Wyświetla dodatki z dokumentacją widoczną dla użytkownika
+  -u, --usage       Wyświetla ogólne informacje o użyciu (nowe)
+  -u-<język>        Wyświetla użycie w konkretnym języku (np. -u-es, -u-en) (nowe)
+  --usage-<język>   Wyświetla użycie w konkretnym języku (np. --usage-es, --usage-en) (nowe)
   -language <język>   Ustawia język tekstu startowego (void)
 
 Polecenie: help
@@ -35,11 +38,19 @@ Polecenie: help
   rtg help <polecenie>        # Pomoc dla konkretnego polecenia/dodatku
   rtg help <polecenie> -<język> # Pomoc w konkretnym języku (np. -es, -en)
   rtg help <polecenie> -lang    # Dostępne języki dla tego polecenia
+  rtg help -u                  # Ogólne użycie (nowe)
+  rtg help -u-<język>           # Użycie w konkretnym języku (np. -u-es) (nowe)
+  rtg help --usage             # Ogólne użycie (nowe)
+  rtg help --usage-<język>      # Użycie w konkretnym języku (np. --usage-es) (nowe)
+  rtg help usage               # Ogólne użycie (składnia alternatywna, nowe)
 
   Przykłady:
     rtg help image
     rtg help image -en
     rtg help image -lang
+    rtg help -u
+    rtg help -u-en
+    rtg help --usage-es
 
 
 Polecenie: version
@@ -62,7 +73,7 @@ Polecenie: rules
 
 
 Polecenie: lang
-----------------
+-----------------
 
   rtg -l
   rtg --lang
@@ -72,7 +83,7 @@ Polecenie: lang
 
 
 Polecenie: commands
---------------------
+---------------------
 
   rtg -c
   rtg --commands
@@ -91,8 +102,20 @@ Polecenie: addons
   Zarejestrowany dodatek bez dokumentacji nie pojawia się tutaj.
 
 
+Polecenie: usage
+-----------------
+
+  rtg -u
+  rtg --usage
+  rtg -u-<język>         # Użycie w konkretnym języku (np. -u-es, -u-en) (nowe)
+  --usage-<język>        Wyświetla użycie w konkretnym języku (np. --usage-es, --usage-en) (nowe)
+
+  Wyświetla ogólne informacje o użyciu (void) w żądanym języku.
+  Język musi istnieć w 'void-language' w assets.json.
+
+
 Polecenie: language
---------------------
+---------------------
 
   rtg -language <język>
 
@@ -130,7 +153,7 @@ Język nie zmienia wewnętrznej nazwy polecenia.
 
 
 Argumenty dodatków
--------------------
+--------------------
 
 Po zidentyfikowaniu dodatku, argumenty klasyfikowane są według prefiksu:
 
@@ -146,7 +169,7 @@ Przykłady:
 
 
 Argumenty ze spacjami
-----------------------
+-----------------------
 
 Argumenty zawierające spacje muszą być w cudzysłowie:
 

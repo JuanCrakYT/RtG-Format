@@ -26,6 +26,9 @@ Systembefehle
   -r, --rules       Zeigt die RtG-CLI-Regeln
   -c, --commands    Listet die internen RtG-CLI-Befehle
   -a, --addons      Listet Addons mit verfügbarer Dokumentation
+  -u, --usage       Zeigt die allgemeinen Verwendungsinformationen (neu)
+  -u-<sprache>      Zeigt die Verwendung in einer bestimmten Sprache (z.B. -u-es, -u-en) (neu)
+  --usage-<sprache> Zeigt die Verwendung in einer bestimmten Sprache (z.B. --usage-es, --usage-en) (neu)
   -language <sprache>  Legt die Sprache des Starttexts (void) fest
 
 Befehl: help
@@ -35,11 +38,19 @@ Befehl: help
   rtg help <befehl>           # Hilfe für einen bestimmten Befehl/Addon
   rtg help <befehl> -<sprache>  # Hilfe in bestimmter Sprache (z.B. -es, -en)
   rtg help <befehl> -lang       # Verfügbare Sprachen für diesen Befehl
+  rtg help -u                  # Allgemeine Verwendung (neu)
+  rtg help -u-<sprache>         # Verwendung in bestimmter Sprache (z.B. -u-es) (neu)
+  rtg help --usage             # Allgemeine Verwendung (neu)
+  rtg help --usage-<sprache>    # Verwendung in bestimmter Sprache (z.B. --usage-es) (neu)
+  rtg help usage               # Allgemeine Verwendung (alternative Syntax, neu)
 
   Beispiele:
     rtg help image
     rtg help image -en
     rtg help image -lang
+    rtg help -u
+    rtg help -u-es
+    rtg help --usage-es
 
 
 Befehl: version
@@ -89,6 +100,18 @@ Befehl: addons
 
   Listet Addons mit für Benutzer sichtbarer Dokumentation/Hilfe.
   Ein registriertes Addon ohne Dokumentation erscheint hier nicht.
+
+
+Befehl: usage
+-----------------
+
+  rtg -u
+  rtg --usage
+  rtg -u-<sprache>       # Verwendung in bestimmter Sprache (z.B. -u-es, -u-en) (neu)
+  --usage-<sprache>      Zeigt die Verwendung in einer bestimmten Sprache (z.B. --usage-es, --usage-en) (neu)
+
+  Zeigt die allgemeinen Verwendungsinformationen (void) in der angeforderten Sprache.
+  Die Sprache muss in 'void-language' in assets.json existieren.
 
 
 Befehl: language

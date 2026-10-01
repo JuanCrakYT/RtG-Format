@@ -26,6 +26,9 @@ RtG-CLI 是 RtG-Format 生态系统的命令行界面。
   -r, --rules       显示 RtG-CLI 规则
   -c, --commands    列出 RtG-CLI 内部命令
   -a, --addons      列出具有用户可见文档的插件
+  -u, --usage       显示常用用法信息 (新增)
+  -u-<语言>         显示特定语言的用法 (例如: -u-es, -u-en) (新增)
+  --usage-<语言>     显示特定语言的用法 (例如: --usage-es, --usage-en) (新增)
   -language <语言>    设置启动文本 (void) 的语言
 
 命令: help
@@ -35,11 +38,19 @@ RtG-CLI 是 RtG-Format 生态系统的命令行界面。
   rtg help <命令>             # 特定命令/插件的帮助
   rtg help <命令> -<语言>      # 特定语言的帮助 (例如: -es, -en)
   rtg help <命令> -lang        # 该命令的可用语言
+  rtg help -u                  # 通用用法 (新增)
+  rtg help -u-<语言>           # 特定语言的用法 (例如: -u-es) (新增)
+  rtg help --usage             # 通用用法 (新增)
+  rtg help --usage-<语言>       # 特定语言的用法 (例如: --usage-es) (新增)
+  rtg help usage               # 通用用法 (替代语法, 新增)
 
   示例:
     rtg help image
     rtg help image -en
     rtg help image -lang
+    rtg help -u
+    rtg help -u-en
+    rtg help --usage-es
 
 
 命令: version
@@ -89,6 +100,18 @@ RtG-CLI 是 RtG-Format 生态系统的命令行界面。
 
   列出具有用户可见文档/帮助的插件。
   没有文档的已注册插件不会显示在这里。
+
+
+命令: usage
+-----------------
+
+  rtg -u
+  rtg --usage
+  rtg -u-<语言>         # 特定语言的用法 (例如: -u-es, -u-en) (新增)
+  --usage-<语言>         显示特定语言的用法 (例如: --usage-es, --usage-en) (新增)
+
+  显示常用用法信息 (void) 为请求的语言。
+  该语言必须存在于 assets.json 的 'void-language' 中。
 
 
 命令: language

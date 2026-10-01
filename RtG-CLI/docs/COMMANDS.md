@@ -66,7 +66,7 @@ Output categories:
 
 ### `commands` / `-c` / `--commands`
 
-Lists exclusively RtG-CLI internal commands.
+Lists exclusively RtG-CLI internal commands with descriptions.
 
 ```bash
 rtg -c
@@ -76,20 +76,22 @@ rtg --commands
 **Output:**
 ```
 RtG-CLI internal commands:
-  help
-  -h
-  --help
-  -v
-  --version
-  -r
-  --rules
-  -l
-  --lang
-  -language
-  -c
-  --commands
-  -a
-  --addons
+  help        | Muestra la ayuda general o la ayuda de un comando específico.
+  -h          | Muestra la ayuda general (versión corta).
+  --help      | Muestra la ayuda general (versión larga).
+  -v          | Muestra la versión de RtG-CLI (versión corta).
+  --version   | Muestra la versión de RtG-CLI con contenido multiidioma.
+  -r          | Muestra las reglas de RtG-CLI (versión corta).
+  --rules     | Muestra las reglas de RtG-CLI.
+  -l          | Lista los idiomas disponibles en RtG-CLI (versión corta).
+  --lang      | Lista los idiomas disponibles en RtG-CLI.
+  -language   | Selecciona el idioma del texto de inicio (void).
+  -c          | Lista los comandos internos de RtG-CLI (versión corta).
+  --commands  | Lista los comandos internos de RtG-CLI.
+  -a          | Lista los addons con documentación disponible (versión corta).
+  --addons    | Lista los addons con documentación disponible.
+  -u          | Muestra la información de uso común del sistema (versión corta).
+  --usage     | Muestra la información de uso común del sistema.
 ```
 
 ### `addons` / `-a` / `--addons`
@@ -108,6 +110,19 @@ Available addons (with documentation):
   preview    |  RtG Preview
   test-addon |  RtG Test Addon
 ```
+
+### `usage` / `-u` / `--usage`
+
+Shows common usage patterns and the most commonly used commands.
+
+```bash
+rtg -u
+rtg --usage
+rtg -u-<lang>   # Usage in specific language (e.g., -u-es, -u-en)
+rtg --usage-<lang>  # Usage in specific language (e.g., --usage-es, --usage-en)
+```
+
+The language must exist in `void-language` in assets.json.
 
 ### `language` / `-language <language>`
 
@@ -160,6 +175,18 @@ rtg test-addon help [command]           # Shows help
 rtg test-addon -lang                    # Shows addon languages
 ```
 
+## Help Command with Usage
+
+The `help` command now supports showing usage information:
+
+```bash
+rtg help -u                    # Shows usage (short)
+rtg help --usage               # Shows usage
+rtg help -u-<lang>             # Shows usage in specific language (e.g., -u-es)
+rtg help --usage-<lang>        # Shows usage in specific language (e.g., --usage-es)
+rtg help usage                 # Alternative syntax
+```
+
 ## Argument Ownership Rules
 
 After an addon is identified, argument ownership is determined by prefix:
@@ -203,10 +230,13 @@ System options (before command):
   -r, --rules         Show rules
   -c, --commands      List internal commands
   -a, --addons        List documented addons
+  -u, --usage         Show common usage
+  -u-<lang>           Show usage in specific language
+  --usage-<lang>      Show usage in specific language
   -language <lang>    Set void text language
 
 Commands:
-  help [target] [opts]    Help system
+  help [target] [opts]    Help system (supports -u, --usage, -u-<lang>, --usage-<lang>)
   version                 Show version
   rules [opts]            Show rules
   lang                    List languages

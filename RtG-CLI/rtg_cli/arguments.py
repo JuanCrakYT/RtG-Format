@@ -241,8 +241,8 @@ class ArgumentParser:
                     i += 1
                 continue
 
-            # Identify addon
-            if not addon_identified and arg in self.addon_identifiers:
+            # Identify addon (only if no command has been identified yet)
+            if not addon_identified and not result.command and arg in self.addon_identifiers:
                 result.addon_identifier = arg
                 addon_identified = True
                 i += 1

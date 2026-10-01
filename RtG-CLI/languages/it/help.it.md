@@ -1,5 +1,5 @@
 RtG-CLI — Aiuto
-================
+=================
 
 RtG-CLI è l'interfaccia a riga di comando dell'ecosistema RtG-Format.
 Permette di scoprire ed eseguire addon, interrogare le lingue, visualizzare regole e versione.
@@ -26,6 +26,9 @@ Comandi di sistema
   -r, --rules       Mostra le regole di RtG-CLI
   -c, --commands    Elenca i comandi interni di RtG-CLI
   -a, --addons      Elenca gli addon con documentazione visibile all'utente
+  -u, --usage       Mostra le informazioni di uso comune (nuovo)
+  -u-<lingua>       Mostra l'uso in una lingua specifica (es: -u-es, -u-en) (nuovo)
+  --usage-<lingua>   Mostra l'uso in una lingua specifica (es: --usage-es, --usage-en) (nuovo)
   -language <lingua>  Imposta la lingua del testo di avvio (void)
 
 Comando: help
@@ -35,11 +38,19 @@ Comando: help
   rtg help <comando>          # Guida per un comando/addon specifico
   rtg help <comando> -<lingua>  # Guida in lingua specifica (es: -es, -en)
   rtg help <comando> -lang      # Lingue disponibili per quel comando
+  rtg help -u                  # Aiuto generale (nuovo)
+  rtg help -u-<lingua>         # Aiuto in lingua specifica (es: -u-es) (nuovo)
+  rtg help --usage             # Aiuto generale (nuovo)
+  rtg help --usage-<lingua>     # Aiuto in lingua specifica (es: --usage-es) (nuovo)
+  rtg help usage               # Aiuto generale (sintassi alternativa, nuovo)
 
   Esempi:
     rtg help image
     rtg help image -en
     rtg help image -lang
+    rtg help -u
+    rtg help -u-en
+    rtg help --usage-es
 
 
 Comando: version
@@ -89,6 +100,18 @@ Comando: addons
 
   Elenca gli addon che hanno documentazione/aiuto visibile per l'utente.
   Un addon registrato ma senza documentazione non appare qui.
+
+
+Comando: usage
+-----------------
+
+  rtg -u
+  rtg --usage
+  rtg -u-<lingua>       # Uso in lingua specifica (es: -u-es, -u-en) (nuovo)
+  --usage-<lingua>       Mostra l'uso in una lingua specifica (es: --usage-es, --usage-en) (nuovo)
+
+  Mostra le informazioni di uso comune (void) nella lingua richiesta.
+  La lingua deve esistere in 'void-language' di assets.json.
 
 
 Comando: language
