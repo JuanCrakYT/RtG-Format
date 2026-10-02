@@ -1,0 +1,62 @@
+{
+  "name": "rtg-language",
+  "displayName": "RtG-Language",
+  "description": "Syntax highlighting, snippets, and language support for RtG-Language 2.0 (.rtg files)",
+  "version": "0.1.0",
+  "publisher": "JuanCrakYT",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets"
+  ],
+  "license": "GPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JuanCrakYT/RtG-Format"
+  },
+  "bugs": {
+    "url": "https://github.com/JuanCrakYT/RtG-Format/issues"
+  },
+  "homepage": "https://github.com/JuanCrakYT/RtG-Format/blob/main/RtG%20Language/extension/README.md",
+  "contributes": {
+    "languages": [
+      {
+        "id": "rtg",
+        "aliases": ["RtG-Language", "rtg"],
+        "extensions": [".rtg"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "rtg",
+        "scopeName": "source.rtg",
+        "path": "./syntaxes/rtg-language.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "rtg",
+        "path": "./snippets/rtg-language.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm install",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0",
+    "@types/node": "20.x",
+    "typescript": "^5.0.0",
+    "eslint": "^8.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0"
+  }
+}

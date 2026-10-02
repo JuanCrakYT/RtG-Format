@@ -166,14 +166,17 @@ def test_cache_atomic_write():
         cache_file = cache_dir / ".rtgcache"
         assert cache_file.exists()
         
-        # Verify it's valid JSON
+        # Verify it's valid JSON with new project cache format
         import json
         with cache_file.open('r', encoding='utf-8') as f:
             data = json.load(f)
         
-        assert "metadata" in data
-        assert "build" in data
-        assert data["metadata"]["format_version"] == 1
+        assert "format_version" in data
+        assert "version" in data
+        assert "compiler_version" in data
+        assert "entries" in data
+        assert data["format_version"] == 1
+        assert len(data["entries"]) == 1
 
 
 if __name__ == "__main__":

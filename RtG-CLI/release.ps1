@@ -177,6 +177,17 @@ if ($Status) {
     if ($Continue -ne "y" -and $Continue -ne "Y") {
         Fail "Release cancelado porque existen cambios sin commit."
     }
+
+    $Commit = Read-Host "¿Quieres crear un commit nuevo? (y/N)"
+
+    if ($Commit -ne "y" -and $Commit -ne "Y") {
+        git add .
+        git commit -m "Preparing to release $Tag"
+    }
+
+    if ($Commit -ne "n" -and $Commit -ne "N") {
+        Fail "Release cancelado porque existen cambios sin commit."
+    }
 }
 else {
     Write-Host "Working tree limpio." -ForegroundColor Green

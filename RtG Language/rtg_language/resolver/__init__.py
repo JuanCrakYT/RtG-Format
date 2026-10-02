@@ -104,6 +104,9 @@ class Resolver:
         for obj in ast.objects:
             self._resolve_attachments(obj, schema)
 
+        # Validate instance properties against schema
+        self._validate_instance_properties(schema)
+
         # Third pass: resolve connections
         resolved_objects = []
         for obj in ast.objects:
@@ -163,6 +166,34 @@ class Resolver:
             obj_instances.append(resolved)
 
         self._object_instances[obj.name] = obj_instances
+
+    def _validate_instance_properties(self, schema: Optional[Schema]) -> None:
+        """Validate instance properties against schema."""
+        if not schema:
+            return
+        
+        for inst in self._instance_map.values():
+            stype = schema.get_type(inst.type_name)
+            if not stype:
+                continue  # Unknown type, skip validation
+            
+            # Check required properties
+            merged_props = {**inst.global_properties, **inst.properties}
+            for req_prop in stype.required_properties:
+                if req_prop not in merged_props:
+                    self.diagnostics.add(make_diagnostic(
+                        Codes.RESOLVE_SCHEMA_VALIDATION,
+                        f"Missing required property '{req_prop}' for type {inst.type_name}",
+                        Severity.ERROR,
+                        inst.location,
+                    ))
+            
+            # Check property types (basic validation)
+            for prop_name, prop_value in merged_props.items():
+                expected_type = stype.properties.get(prop_name)
+                if expected_type:
+                    # Could add type validation here if needed
+                    pass
 
     def _resolve_attachments(self, obj: ObjectDecl, schema: Optional[Schema]) -> None:
         """Resolve attachment declarations."""
@@ -250,10 +281,17 @@ class Resolver:
             ))
             return None
 
-        # Validate localType against schema if available
+# Validate localType against schema if available
         if schema:
-            # Could validate localType against schema's known types
-            pass
+            if not schema.validate_local_type(child.type_name, conn.local_type):
+                self.diagnostics.add(make_diagnostic(
+                    Codes.RESOLVE_INVALID_LOCALTYPE,
+                    f"Invalid localType {conn.local_type} for type {child.type_name}",
+                    Severity.ERROR,
+                    conn.location,
+                    (f"Valid localTypes for {child.type_name}: {schema.get_type(child.type_name).local_types if schema.get_type(child.type_name) else 'unknown'}",)
+                ))
+                return None
 
         # Validate point reference
         if isinstance(conn.point, str):
@@ -267,7 +305,7 @@ class Resolver:
                 ))
                 return None
         else:
-            # Numeric point ID - could validate against schema
+            # Numeric point ID - validate against schema
             if conn.point <= 0:
                 self.diagnostics.add(make_diagnostic(
                     Codes.RESOLVE_INVALID_POINT,
@@ -276,6 +314,20 @@ class Resolver:
                     conn.location,
                 ))
                 return None
+            
+            # Validate against schema connection points
+            if schema and parent.type_name:
+                if not schema.validate_connection_point(parent.type_name, conn.point):
+                    stype = schema.get_type(parent.type_name)
+                    valid_points = list(stype.connection_points.keys()) if stype and stype.connection_points else []
+                    self.diagnostics.add(make_diagnostic(
+                        Codes.RESOLVE_INVALID_POINT,
+                        f"Invalid connection point {conn.point} for type {parent.type_name}",
+                        Severity.ERROR,
+                        conn.location,
+                        (f"Valid points: {valid_points}" if valid_points else "Type not found in schema",)
+                    ))
+                    return None
 
         return ResolvedConnection(
             child=child,

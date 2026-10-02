@@ -1,0 +1,75 @@
+# VS Code Extension - Files to ignore when packaging
+
+# Source control
+.git
+.gitignore
+.gitattributes
+
+# Node.js
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build artifacts
+*.vsix
+out/
+dist/
+*.tsbuildinfo
+
+# IDE
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Testing
+coverage/
+.nyc_output/
+
+# TypeScript
+*.ts
+!syntaxes/*.json
+!snippets/*.json
+!language-configuration.json
+!package.json
+!README.md
+!LICENSE
+!CHANGELOG.md
+!icon.png
+!icons/*.svg
+
+# Python (not needed for extension)
+*.py
+__pycache__/
+*.pyc
+.pytest_cache/
+.tox/
+.venv/
+venv/
+.env
+
+# Build tools
+Makefile
+CMakeLists.txt
+*.mk
+build/
+*.o
+*.so
+*.dll
+*.exe
+
+# Misc
+*.bak
+*.tmp
+*.temp
+*.orig
+*.rej

@@ -3,7 +3,7 @@
   "displayName": "RtG-Language",
   "description": "Language support for RtG-Language 2.0 source files.",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "license": "GPL-3.0-only",
   "engines": { "vscode": "^1.85.0" },
   "categories": ["Programming Languages"],

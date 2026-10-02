@@ -101,6 +101,25 @@ def compile_text(
                 Severity.ERROR,
                 ast.schema.location,
             ))
+    elif options.schema_dir:
+        # Try to load default schema from schema_dir
+        try:
+            schema_file = options.schema_dir / "schema.json"
+            if schema_file.exists():
+                schema = load_schema(schema_file)
+            else:
+                # Use built-in default schema
+                schema = create_default_schema()
+        except Exception as e:
+            all_diagnostics.add(make_diagnostic(
+                Codes.SCHEMA_MISSING,
+                f"Failed to load default schema: {e}",
+                Severity.WARNING,
+            ))
+            schema = create_default_schema()
+    else:
+        # Use built-in default schema if no schema_dir provided
+        schema = create_default_schema()
 
     # Phase 4: Cache check
     cache_used = False

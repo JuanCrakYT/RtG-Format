@@ -38,11 +38,14 @@ class Schema:
 
     def validate_connection_point(self, type_name: str, point: Union[int, str]) -> bool:
         if isinstance(point, str):
-            # UUID - always valid if it exists in attachments
+            # UUID - always valid if it exists in attachments (checked separately in resolver)
+            # We don't validate UUID format here, just that it's a string
             return True
         stype = self.get_type(type_name)
         if not stype or not stype.connection_points:
             return True  # No restrictions
+        # Convert string keys to int for comparison since JSON loads them as strings
+        # But our internal representation uses int keys
         return point in stype.connection_points
 
     def get_property_type(self, type_name: str, prop: str) -> Optional[str]:
@@ -59,6 +62,7 @@ def load_schema(path: Path) -> Schema:
 
     schema = Schema(version=data.get("version", "1.0"))
 
+    types_loaded = 0
     for type_data in data.get("types", []):
         stype = SchemaType(
             name=type_data["name"],
@@ -69,7 +73,12 @@ def load_schema(path: Path) -> Schema:
             can_host_attachments=type_data.get("canHostAttachments", True),
         )
         schema.types[stype.name] = stype
-
+        types_loaded += 1
+    
+    # If no types loaded, fall back to default schema
+    if types_loaded == 0:
+        return create_default_schema()
+    
     return schema
 
 
