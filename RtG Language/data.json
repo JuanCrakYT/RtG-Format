@@ -116,6 +116,338 @@
     "Source": "tools/RtG-AI/dev/extractor/extractor.py"
   },
   {
-    
+    "LocalIDs": {
+      "AltitudeSensor": [
+        2
+      ],
+      "Anchor": [
+        1
+      ],
+      "Arm": [
+        1
+      ],
+      "Balloon": [
+        1
+      ],
+      "BallSocket": [
+        1
+      ],
+      "Base": [
+        3
+      ],
+      "BeachBall": [
+        6
+      ],
+      "BeachChair": [
+        1
+      ],
+      "Bearing": [
+        1
+      ],
+      "Board": [
+        15
+      ],
+      "BouncyBall": [
+        6
+      ],
+      "BowlingBall": [
+        6
+      ],
+      "BrakeLight": [
+        1
+      ],
+      "Bumper": [
+        1
+      ],
+      "Button": [
+        1
+      ],
+      "Camera": [
+        1
+      ],
+      "Canister": [
+        1
+      ],
+      "Cannon": [
+        1
+      ],
+      "CannonBall": [
+        1
+      ],
+      "Carrot": [
+        1
+      ],
+      "Cinderblock": [
+        1
+      ],
+      "Clipboard": [
+        1
+      ],
+      "Cone": [
+        3
+      ],
+      "Connector": [
+        5
+      ],
+      "ConnectorBall": [
+        6
+      ],
+      "Delayer": [
+        2
+      ],
+      "Detacher": [
+        1
+      ],
+      "DoorA": [
+        1
+      ],
+      "DoorB": [
+        1
+      ],
+      "DoorC": [
+        1
+      ],
+      "DoorD": [
+        1
+      ],
+      "EntitySensor": [
+        7
+      ],
+      "FishBowl": [
+        1
+      ],
+      "FuelTank": [
+        2
+      ],
+      "Gate-AND": [
+        4
+      ],
+      "Gate-NOT": [
+        4
+      ],
+      "Gate-OR": [
+        4
+      ],
+      "GlassBase": [
+        3
+      ],
+      "GoldPotatoEngine": [
+        1
+      ],
+      "Googie": [
+        1
+      ],
+      "Gramby": [
+        1
+      ],
+      "Grenade": [
+        1
+      ],
+      "Gun": [
+        2
+      ],
+      "Gyro": [
+        1
+      ],
+      "HalfConnectorBall": [
+        6
+      ],
+      "Head": [
+        1
+      ],
+      "Hood": [
+        1
+      ],
+      "HulaDoll": [
+        1
+      ],
+      "InputSensor": [
+        2
+      ],
+      "Joint": [
+        2
+      ],
+      "Joust": [
+        1
+      ],
+      "Leafblower": [
+        1
+      ],
+      "Leg": [
+        1
+      ],
+      "Light": [
+        1
+      ],
+      "Lock": [
+        1
+      ],
+      "LongStick": [
+        2
+      ],
+      "Looper": [
+        1
+      ],
+      "Mag": [
+        1
+      ],
+      "MatchingGyro": [
+        2
+      ],
+      "MountedGun": [
+        1
+      ],
+      "Note": [
+        1
+      ],
+      "Part": [
+        1
+      ],
+      "Pie": [
+        1
+      ],
+      "Pipes": [
+        1
+      ],
+      "Piston": [
+        2
+      ],
+      "Plunger": [
+        1
+      ],
+      "PolaroidCamera": [
+        1
+      ],
+      "PolaroidPhoto": [
+        1
+      ],
+      "Poop": [
+        1
+      ],
+      "PotatoEngine": [
+        1
+      ],
+      "Propeller": [
+        2
+      ],
+      "Radio": [
+        1
+      ],
+      "Recorder": [
+        1
+      ],
+      "RemoteButton": [
+        1
+      ],
+      "Rocket": [
+        1
+      ],
+      "RockingChair": [
+        1
+      ],
+      "Roof": [
+        1
+      ],
+      "Rope": [
+        1
+      ],
+      "RPG": [
+        1
+      ],
+      "RubberBand": [
+        1
+      ],
+      "Seat": [
+        1
+      ],
+      "Servo": [
+        1
+      ],
+      "Servo_Physics": [
+        1
+      ],
+      "ShortStick": [
+        2
+      ],
+      "Shotgun": [
+        2
+      ],
+      "Sledge": [
+        1
+      ],
+      "Splitter_1": [
+        3
+      ],
+      "Splitter_2": [
+        3
+      ],
+      "Splitter_3": [
+        3
+      ],
+      "Splitter_4": [
+        1
+      ],
+      "Spoiler": [
+        2
+      ],
+      "SprayPaint": [
+        1
+      ],
+      "SpringJuice": [
+        1
+      ],
+      "Sprite": [
+        1
+      ],
+      "StaringGyro": [
+        1
+      ],
+      "SteeringGyro": [
+        1
+      ],
+      "SteeringWheel": [
+        1
+      ],
+      "Stick": [
+        2
+      ],
+      "Successor": [
+        2
+      ],
+      "Switch": [
+        1,
+        3
+      ],
+      "Thruster": [
+        1
+      ],
+      "Tire": [
+        1
+      ],
+      "Toilet": [
+        1
+      ],
+      "TripWire": [
+        1
+      ],
+      "Trunk": [
+        1
+      ],
+      "Uzi": [
+        2
+      ],
+      "VelocitySensor": [
+        2
+      ],
+      "Wing": [
+        1
+      ],
+      "Wire": [
+        3
+      ],
+      "WoodenChair": [
+        2
+      ]
+    }
   }
 ]

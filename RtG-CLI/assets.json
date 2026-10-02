@@ -441,6 +441,12 @@
             "test-addon": {
                 "es": "Addon de prueba para validación de RtG-CLI.\n",
                 "en": "Test addon for RtG-CLI validation.\n"
+            },
+            "build": {
+                "help": {
+                    "es": "Compila un archivo .rtg a RtG-Format JSON.\n\nUso:\n  rtg build <archivo.rtg> [--output <archivo.json>] [--schema-dir <dir>] [--no-cache]",
+                    "en": "Compile a .rtg file to RtG-Format JSON.\n\nUsage:\n  rtg build <file.rtg> [--output <file.json>] [--schema-dir <dir>] [--no-cache]"
+                }
             }
         },
         "internal-list": [
@@ -507,6 +513,10 @@
             [
                 "--usage",
                 "Muestra la información de uso común del sistema."
+            ],
+            [
+                "build",
+                "Compila un archivo .rtg a RtG-Format JSON."
             ]
         ]
     }

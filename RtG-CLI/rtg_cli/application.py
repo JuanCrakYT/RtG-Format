@@ -113,6 +113,12 @@ class Application:
 
 def main(argv: list[str] | None = None, debug: bool = False) -> int:
     """Main entry point."""
+    # Configure UTF-8 encoding for stdout/stderr on Windows
+    if hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(encoding='utf-8')
+    if hasattr(sys.stderr, 'reconfigure'):
+        sys.stderr.reconfigure(encoding='utf-8')
+
     try:
         config = get_config()
     except Exception as e:

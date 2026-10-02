@@ -222,6 +222,8 @@ class InternalCommandExecutor:
             return self._execute_addons(parsed)
         elif command == "language":
             return self._execute_language(parsed)
+        elif command == "build":
+            return self._execute_build(parsed)
         else:
             # Unknown command - show void (legacy behavior)
             self._show_void(parsed.cli_options.get("language"))
@@ -500,6 +502,104 @@ class InternalCommandExecutor:
         for lang in addon.languages:
             name = self.lang_manager.get_language_name(lang)
             print(f"  {name} | {lang}")
+
+    def _execute_build(self, parsed: ParsedCommandLine) -> ExecutionResult:
+        """Execute the build command to compile .rtg to RtG-Format JSON."""
+        import sys
+        from pathlib import Path
+        from .diagnostics import Diagnostic, err_internal
+
+        # Add RtG Language to path
+        rtg_lang_path = Path(__file__).resolve().parent.parent.parent / "RtG Language"
+        sys.path.insert(0, str(rtg_lang_path))
+
+        try:
+            from rtg_language import compile_file, CompileOptions, DiagnosticCollector
+        except ImportError as e:
+            return ExecutionResult(
+                exit_code=1,
+                diagnostic=err_internal(f"RtG Language not available: {e}"),
+            )
+
+        # Parse build-specific arguments from positional_args
+        # Expected: rtg build <input.rtg> [--output <file.json>] [--schema-dir <dir>] [--no-cache]
+        positional = parsed.positional_args
+        if not positional:
+            return ExecutionResult(
+                exit_code=1,
+                diagnostic=err_internal("build command requires input .rtg file"),
+            )
+
+        input_file = Path(positional[0])
+        if not input_file.exists():
+            return ExecutionResult(
+                exit_code=1,
+                diagnostic=err_internal(f"Input file not found: {input_file}"),
+            )
+
+        # Parse options
+        output_file = None
+        schema_dir = None
+        no_cache = False
+
+        i = 1
+        while i < len(positional):
+            arg = positional[i]
+            if arg == "--output" or arg == "-o":
+                i += 1
+                if i < len(positional):
+                    output_file = Path(positional[i])
+                else:
+                    return ExecutionResult(
+                        exit_code=1,
+                        diagnostic=err_internal("--output requires a value"),
+                    )
+            elif arg == "--schema-dir":
+                i += 1
+                if i < len(positional):
+                    schema_dir = Path(positional[i])
+                else:
+                    return ExecutionResult(
+                        exit_code=1,
+                        diagnostic=err_internal("--schema-dir requires a value"),
+                    )
+            elif arg == "--no-cache":
+                no_cache = True
+            elif arg == "--help" or arg == "-h":
+                # Show help
+                internal_help = self.config.internal.help_texts.get("build", {})
+                lang = parsed.cli_options.get("lang_selector")
+                if lang and lang in internal_help.get("help", {}):
+                    print(internal_help["help"][lang], end="")
+                else:
+                    first = next(iter(internal_help.get("help", {})))
+                    print(internal_help["help"][first], end="")
+                return ExecutionResult(exit_code=0)
+            i += 1
+
+        # Compile
+        options = CompileOptions(
+            schema_dir=schema_dir,
+            cache_dir=input_file.parent if not no_cache else None,
+            use_cache=not no_cache,
+            output_path=output_file,
+        )
+
+        result = compile_file(input_file, options)
+
+        # Print diagnostics to stderr
+        for diag in result.diagnostics:
+            print(diag, file=sys.stderr)
+
+        if not result.success:
+            return ExecutionResult(exit_code=1)
+
+        if result.build and not output_file:
+            # Print to stdout if no output file specified
+            import json
+            print(json.dumps(result.build, ensure_ascii=False, indent=2))
+
+        return ExecutionResult(exit_code=0)
 
 
 def create_addon_executor(registry: AddonRegistry, config: CliConfig, lang_manager: LanguageManager) -> AddonExecutor:

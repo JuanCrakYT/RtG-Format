@@ -129,7 +129,7 @@ class ArgumentParser:
                 continue
 
             # Check for system long options (--option)
-            if arg.startswith("--") and not addon_identified:
+            if arg.startswith("--") and not addon_identified and result.command is None:
                 opt_name = arg[2:]
                 
                 # Check for language suffix on long options (e.g., --usage-es)
@@ -164,7 +164,7 @@ class ArgumentParser:
                 continue
 
             # Check for system short options (-x) before addon
-            if arg.startswith("-") and not arg.startswith("--") and not addon_identified:
+            if arg.startswith("-") and not arg.startswith("--") and not addon_identified and result.command is None:
                 opt_char = arg[1:]
                 
                 # Check for language suffix on short options (e.g., -u-es)
@@ -265,15 +265,14 @@ class ArgumentParser:
             if not addon_identified and not arg.startswith("-"):
                 if result.command is None:
                     result.command = arg
-                elif result.subcommand is None:
-                    result.subcommand = arg
                 else:
+                    # Command already identified, this is a positional argument
                     result.positional_args.append(arg)
                 i += 1
                 continue
 
             # Unknown option before addon
-            if not addon_identified and arg.startswith("-"):
+            if not addon_identified and arg.startswith("-") and result.command is None:
                 result.diagnostics.append(err_unknown_option(arg))
                 i += 1
                 continue

@@ -129,10 +129,10 @@ Por lo tanto, `TipoLocal` debe tratarse como un identificador observado, no como
 |   14 | PotatoEngine      |     1     | Motor básico del juego.                                      |
 |   15 | Joint             |     2     | Unión mecánica entre piezas.                                 |
 |   16 | RemoteButton      |     1     | Botón remoto.                                                |
-|   17 | Ramp              |     —     | Rampa. Utiliza únicamente EphemeralAttachments.              |
+|   17 | Ramp              |     —     | Rampa.                                                       |
 |   18 | Lock              |     1     | Bloque de bloqueo.                                           |
 |   19 | Connector         |     5     | Conector esférico.                                           |
-|   20 | Tooth             |     —     | Diente. Solo utiliza EphemeralAttachments.                   |
+|   20 | Tooth             |     —     | Diente.                                                      |
 |   21 | Roof              |     1     | Techo.                                                       |
 |   22 | Switch            |     1     | Interruptor.                                                 |
 |   23 | Radio             |     1     | Radio configurable.                                          |
@@ -176,10 +176,10 @@ Por lo tanto, `TipoLocal` debe tratarse como un identificador observado, no como
 |   61 | DoorC             |     1     | Variante C de puerta.                                        |
 |   62 | SpringJuice       |     1     | Consumible.                                                  |
 |   63 | WoodenChair       |     2     | Silla de madera.                                             |
-|   64 | Chassis           |     —     | Chasis. Solo utiliza EphemeralAttachments.                   |
+|   64 | Chassis           |     —     | Chasis.                                                      |
 |   65 | FuelTank          |     2     | Tanque de combustible.                                       |
 |   66 | Mag               |     1     | Cargador de munición.                                        |
-|   67 | Keyboard          |     —     | Teclado. Solo utiliza EphemeralAttachments.                  |
+|   67 | Keyboard          |     —     | Teclado.                                                     |
 |   68 | RiotShield        |     —     | Escudo antidisturbios.                                       |
 |   69 | Spoiler           |     2     | Alerón.                                                      |
 |   70 | Jug               |     —     | Jarra.                                                       |
@@ -218,7 +218,7 @@ Por lo tanto, `TipoLocal` debe tratarse como un identificador observado, no como
 |  103 | Sledge            |     1     | Mazo.                                                        |
 |  104 | Delayer           |     2     | Retardo lógico.                                              |
 |  105 | Looper            |     1     | Repetidor temporal.                                          |
-|  106 | wad               |     —     | Objeto auxiliar con EphemeralAttachments.                    |
+|  106 | wad               |     —     | Objeto que te permite tener dinero en servidores públicos    |
 |  107 | BouncyBall        |     6     | Pelota rebotadora.                                           |
 |  108 | Recorder          |     1     | Grabadora.                                                   |
 |  109 | DoorD             |     1     | Variante D de puerta.                                        |
@@ -234,7 +234,7 @@ Por lo tanto, `TipoLocal` debe tratarse como un identificador observado, no como
 |  119 | PolaroidCamera    |     1     | Cámara Polaroid.                                             |
 |  120 | PolaroidPhoto     |     1     | Fotografía Polaroid.                                         |
 |  121 | Successor         |     2     | A Worthy Successor.                                          |
-|  122 | Body              |     —     | Cuerpo de Fricklet.                                          |
+|  122 | Body              |     —     | Cuerpo de Fricklet. Sin datos de conexión                    |
 |  123 | Fricklet          |     —     | Fricklet.                                                    |
 |  124 | SuperPowerClock   |     —     | Super Power Clock.                                           |
 |  125 | YibYib            |     —     | YibYib.                                                      |

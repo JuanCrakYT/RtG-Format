@@ -4,7 +4,7 @@ CLI oficial del ecosistema **RtG-Format**.
 
 > **Estado:** ✅ Reconstrucción completada  
 > **Versión:** 1.2.0  
-> **Fecha:** 2026-09-30
+> **Fecha de Actualización:** 01/10/2026 (dd/mm/yyyy)
 
 ---
 
