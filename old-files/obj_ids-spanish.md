@@ -259,7 +259,7 @@ Cuando existan objetos simétricos (ruedas, luces, asientos, etc.), utilizar col
 115. Wheel
 116. Wire
 117. WoodenChair
-118. Wad
+118. wad
 119. Head
 120. Body
 121. Fricklet
@@ -869,8 +869,8 @@ Estos objetos utilizan puntos de conexión definidos por otros objetos.
 27. Jug
 28. Lock
 29. Poop
-30. Wad
-    > El objeto `Wad` presenta un comportamiento diferente.
+30. wad
+    > El objeto `wad` presenta un comportamiento diferente.
     - Puede cargarse correctamente en una build.
     - No puede guardarse mediante el sistema normal de guardado.
     - No posee IDs de puntos de conexión propios conocidos.
@@ -1098,7 +1098,7 @@ Estos objetos utilizan puntos de conexión definidos por otros objetos.
 |  118  | Trunk             | Trunk               | Trunk                |     1     |                                                                         | Baúl.                                                        |
 |  119  | Uzi               | Uzi                 | Uzi                  |     2     |                                                                         | Arma automática.                                             |
 |  120  | VelocitySensor    | Velocity Sensor     | Velocity Sensor      |     2     |                                                                         | Sensor de velocidad.                                         |
-|  121  | Wad               | Wad                 | Wad                  |     —     |                                                                         | Objeto auxiliar con EphemeralAttachments.                    |
+|  121  | wad               | wad                 | wad                  |     —     |                                                                         | Objeto auxiliar con EphemeralAttachments.                    |
 |  122  | Wing              | Wing                | Wing                 |     1     |                                                                         | Ala aerodinámica.                                            |
 |  123  | Wire              | Wire                | Wire                 |     3     |                                                                         | Cable eléctrico.                                             |
 |  124  | WoodenChair       | Wooden Chair        | Wooden Chair         |     2     |                                                                         | Silla de madera.                                             |

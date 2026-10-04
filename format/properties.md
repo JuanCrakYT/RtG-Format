@@ -246,7 +246,49 @@ Detailed UUID and attachment behavior is documented in [`identifiers.md`](identi
 The historical specification records the following properties.
 This is an **observed catalog**, not a claim that these are the only properties used by RtG.
 
-### General
+Additional property type classifications from RtG-AI analysis (see `../old-files/rtg-ai-tokens.md`) are included below.
+
+### 7.1 Property Type Classification (RtG-AI Analysis)
+
+Properties observed across all analyzed saves, classified by their JSON value type:
+
+#### String Properties
+```
+ActivationKey, MeshId, Mode, Name, Phrase, Text, TextureID, TextureId,
+className, objectId, partName, serializedType
+```
+
+#### Number Properties
+```
+ActivationHeight, ActivationSpeed, Channel, Delay, ItemTurn, Length,
+LimitAngle, MaxDistance, MaxForce, MaxLength, MinLength, OrientationX,
+OrientationY, OrientationZ, Rotation, Speed, Transparency, Volume
+```
+
+#### Boolean Properties
+```
+Activated, Backwards, CanTargetAttached, Deactivated, DelayDeactivation,
+DisabledInput, Forwards, IgnoreAttached, LimitEnabled, On, Rest, Reverse,
+Shooting, Visible
+```
+
+#### Integer Properties
+```
+Bullets, CustomTrack, ImageId, Quantity
+```
+
+#### Array Properties
+```
+RGB, cframe, children, data, sceneCullObjects, sceneUpdateObjects
+```
+
+#### Object Properties
+```
+CFrame, Color, EphemeralAttachments, Material, MeshType, Offset, PhotoData,
+Scale, Shape, Size, cameraCF, props, sceneNewObjects
+```
+
+### 7.2 General
 
 | Property               | Observed type   | Example         |
 | ---------------------- | --------------- | --------------- |
@@ -255,7 +297,7 @@ This is an **observed catalog**, not a claim that these are the only properties 
 | `Mode`                 | String          | `"..."`         |
 | `Visible`              | Boolean         | `true`          |
 
-### Servo / Mechanical
+### 7.3 Servo / Mechanical
 
 | Property       | Observed type | Example |
 | -------------- | ------------- | ------- |
@@ -271,7 +313,7 @@ This is an **observed catalog**, not a claim that these are the only properties 
 | `MaxForce`     | Number        | `0`     |
 | `Length`       | Number        | `0`     |
 
-### Sensors
+### 7.4 Sensors
 
 | Property            | Observed type | Example |
 | ------------------- | ------------- | ------- |
@@ -282,14 +324,14 @@ This is an **observed catalog**, not a claim that these are the only properties 
 | `CanTargetAttached` | Boolean       | `true`  |
 | `IgnoreAttached`    | Boolean       | `true`  |
 
-### Logic / Timing
+### 7.5 Logic / Timing
 
 | Property            | Observed type | Example |
 | ------------------- | ------------- | ------- |
 | `Delay`             | Number        | `1`     |
 | `DelayDeactivation` | Boolean       | `true`  |
 
-### Weapons / Inventory
+### 7.6 Weapons / Inventory
 
 | Property   | Observed type | Example |
 | ---------- | ------------- | ------- |
@@ -297,7 +339,7 @@ This is an **observed catalog**, not a claim that these are the only properties 
 | `Bullets`  | Integer       | `10`    |
 | `Quantity` | Integer       | `1`     |
 
-### Text / Media / Radio
+### 7.7 Text / Media / Radio
 
 | Property      | Observed type | Example     |
 | ------------- | ------------- | ----------- |

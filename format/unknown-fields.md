@@ -473,6 +473,48 @@ These distinctions are important because the loader may accept information whose
 
 ---
 
+## 15. RtG-AI Tokenizer Vocabulary (SpecialTokens & Characters)
+
+The RtG-AI analysis pipeline uses a T5 tokenizer with a custom vocabulary. The following tokens and character sets were identified during pipeline development and are documented here for reference. Source: [`../old-files/rtg-ai-tokens.md`](../old-files/rtg-ai-tokens.md#5-special-tokens-t5-tokenizer) and [`../old-files/rtg-ai-tokens.md`](../old-files/rtg-ai-tokens.md#6-character-vocabulary).
+
+### 15.1 Special Tokens (T5 Sequence Tokens)
+
+These tokens are required by the T5 tokenizer architecture:
+
+| Token | Purpose |
+|-------|---------|
+| `<pad>` | Padding token for batch processing |
+| `</s>` | End of sequence marker |
+| `Ġ` | Unicode space character (G with dot above); covers any out-of-vocabulary character that slips through |
+
+**Note:** T5 requires these three tokens minimum. `</s>` marks end of sequence, `<pad>` pads batches, `Ġ` covers any out-of-vocabulary character that slips through.
+
+### 15.2 Character Vocabulary
+
+The tokenizer's character-level vocabulary includes:
+
+#### Hex Characters
+```
+a, b, c, d, e, f, A, B, C, D, E, F
+```
+
+#### Numbers
+```
+1, 2, 3, 4, 5, 6, 7, 8, 9, 0
+```
+
+#### Symbols
+```
+-, .
+```
+
+#### JSON Structural Characters
+```
+", {, }, [, ], :, ,
+```
+
+---
+
 ## Related Documentation
 
 * [`properties.md`](properties.md) — Known and observed properties.
@@ -482,3 +524,4 @@ These distinctions are important because the loader may accept information whose
 * [`../SPECIFICATION.md`](../SPECIFICATION.md) — Complete format specification.
 * [`../examples/experiments/`](../examples/experiments/) — Experimental evidence.
 * [`../old-files/`](../old-files/) — Historical reverse-engineering records.
+* [`../old-files/rtg-ai-tokens.md`](../old-files/rtg-ai-tokens.md) — Complete RtG-AI token analysis data.

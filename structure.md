@@ -705,8 +705,14 @@ RtG-Format/
     │   └── RtG Image.tree
     ├── RtG Image/
     │   └── ...
-    └── RtG-AI/
-        └── ...
+    ├── RtG-AI/
+    │   └── ...
+    └── GasCap/
+        ├── output/
+        │   ├── GasCap.txt
+        │   └── GasCap.json
+        ├── main.py
+        └── README.md
 ```
 
 ## Component Overview
