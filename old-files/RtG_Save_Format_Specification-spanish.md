@@ -238,6 +238,7 @@ Por lo tanto, `TipoLocal` debe tratarse como un identificador observado, no como
 |  123 | Fricklet          |     —     | Fricklet.                                                    |
 |  124 | SuperPowerClock   |     —     | Super Power Clock.                                           |
 |  125 | YibYib            |     —     | YibYib.                                                      |
+|  126 | GasCap            |     1     | Tapa el puerto de gasolina de un carro                       |
 ---
 
 > **Importante:** Aquí aparecen algunos objetos con "—" en `TipoLocal`, y esas entradas se describen como *objetos que no pueden conectarse a otros.*
