@@ -481,11 +481,11 @@ The RtG-AI analysis pipeline uses a T5 tokenizer with a custom vocabulary. The f
 
 These tokens are required by the T5 tokenizer architecture:
 
-| Token | Purpose |
-|-------|---------|
-| `<pad>` | Padding token for batch processing |
-| `</s>` | End of sequence marker |
-| `Ġ` | Unicode space character (G with dot above); covers any out-of-vocabulary character that slips through |
+| Token   | Purpose                                                                                               |
+| ------- | ----------------------------------------------------------------------------------------------------- |
+| `<pad>` | Padding token for batch processing                                                                    |
+| `</s>`  | End of sequence marker                                                                                |
+| `Ġ`     | Unicode space character (G with dot above); covers any out-of-vocabulary character that slips through |
 
 **Note:** T5 requires these three tokens minimum. `</s>` marks end of sequence, `<pad>` pads batches, `Ġ` covers any out-of-vocabulary character that slips through.
 

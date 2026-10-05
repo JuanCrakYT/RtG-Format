@@ -66,6 +66,8 @@ Historical experiments demonstrated that additional properties can be inserted i
 
 This does **not** mean that every property is understood or used by every object.
 
+> **Note:** Properties can contain complex nested structures (objects with `serializedType` and `data` fields, such as `CFrame`, `Color`, `EphemeralAttachments`, `PhotoData`, `Scale`, etc.). The internal fields of those structures are also part of the observable property set and should not be discarded simply because they are nested.
+
 ---
 
 ## 3. Property States

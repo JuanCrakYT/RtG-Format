@@ -139,124 +139,130 @@ The currently observed mappings should therefore be treated as empirical mapping
 
 The following LocalType values were observed across 100+ save files by the RtG-AI pipeline. See [`../old-files/rtg-ai-tokens.md`](../old-files/rtg-ai-tokens.md#3-localtype-mappings) for the complete table.
 
-| Object | LocalType(s) |
-|--------|-------------|
-| AltitudeSensor | ["2"] |
-| Anchor | ["1"] |
-| Arm | ["1"] |
-| BallSocket | ["1"] |
-| Balloon | ["1"] |
-| Base | ["3"] |
-| BeachBall | ["6"] |
-| BeachChair | ["1"] |
-| Bearing | ["1"] |
-| Board | ["15"] |
-| BouncyBall | ["6"] |
-| BowlingBall | ["6"] |
-| BrakeLight | ["1"] |
-| Bumper | ["1"] |
-| Button | ["1", "3"] |
-| Camera | ["1"] |
-| Canister | ["1"] |
-| Cannon | ["1"] |
-| CannonBall | ["1"] |
-| Carrot | ["1"] |
-| Cinderblock | ["1"] |
-| Clipboard | ["1"] |
-| Cone | ["3"] |
-| Connector | ["5"] |
-| ConnectorBall | ["6"] |
-| Delayer | ["2"] |
-| Detacher | ["1"] |
-| DoorA | ["1"] |
-| DoorB | ["1"] |
-| DoorC | ["1"] |
-| DoorD | ["1"] |
-| EntitySensor | ["7"] |
-| FishBowl | ["1"] |
-| FuelTank | ["2"] |
-| GasCap | ["1"] |
-| Gate-AND | ["4"] |
-| Gate-NOT | ["4"] |
-| Gate-OR | ["4"] |
-| GlassBase | ["3"] |
-| GoldPotatoEngine | ["1"] |
-| Googie | ["1"] |
-| Gramby | ["1"] |
-| Grenade | ["1"] |
-| Gun | ["2"] |
-| Gyro | ["1"] |
-| HalfConnectorBall | ["6"] |
-| Hood | ["1"] |
-| HulaDoll | ["1"] |
-| InputSensor | ["2"] |
-| Joint | ["1", "2"] |
-| Joust | ["1"] |
-| Leafblower | ["1"] |
-| Leg | ["1"] |
-| Light | ["1"] |
-| Lock | ["1"] |
-| LongStick | ["2"] |
-| Looper | ["1"] |
-| Mag | ["1"] |
-| MatchingGyro | ["2", "3"] |
-| MountedGun | ["1"] |
-| Note | ["1"] |
-| Part | ["1"] |
-| Pie | ["1"] |
-| Pipes | ["1"] |
-| Piston | ["2"] |
-| Plunger | ["1"] |
-| Poop | ["1"] |
-| PotatoEngine | ["1"] |
-| PressurePlate | ["1", "2"] |
-| Propeller | ["2"] |
-| RPG | ["1"] |
-| Radio | ["1"] |
-| Recorder | ["1"] |
-| RemoteButton | ["1", "3"] |
-| Rocket | ["1"] |
-| RockingChair | ["1"] |
-| Roof | ["1"] |
-| Rope | ["1", "2"] |
-| RubberBand | ["1", "2"] |
-| Seat | ["1"] |
-| Servo | ["1"] |
-| Servo_Physics | ["1"] |
-| ShortStick | ["2"] |
-| Shotgun | ["2"] |
-| Sledge | ["1"] |
-| Splitter | ["3"] |
-| Splitter_1 | ["3", "5"] |
-| Splitter_2 | ["3", "5", "9"] |
-| Splitter_3 | ["3", "5", "7", "9"] |
-| Splitter_4 | ["1", "3", "5", "7", "9"] |
-| Spoiler | ["2"] |
-| SprayPaint | ["1"] |
-| SpringJuice | ["1"] |
-| Sprite | ["1"] |
-| StaringGyro | ["1"] |
-| SteeringGyro | ["1"] |
-| SteeringWheel | ["1"] |
-| Stick | ["2"] |
-| Switch | ["1", "3"] |
-| Thruster | ["1"] |
-| Tire | ["1"] |
-| Toilet | ["1"] |
-| TripWire | ["1", "3"] |
-| Trunk | ["1"] |
-| Uzi | ["2"] |
-| VelocitySensor | ["2"] |
-| Wheel | ["1"] |
-| Wing | ["1"] |
-| Wire | ["1", "3"] |
-| WoodenChair | ["2"] |
-| YibYib | ["2"] |
+| Object            | LocalType(s)              |
+| ----------------- | ------------------------- |
+| AltitudeSensor    | ["2"]                     |
+| Anchor            | ["1"]                     |
+| Arm               | ["1"]                     |
+| BallSocket        | ["1"]                     |
+| Balloon           | ["1"]                     |
+| Base              | ["3"]                     |
+| BeachBall         | ["6"]                     |
+| BeachChair        | ["1"]                     |
+| Bearing           | ["1"]                     |
+| Board             | ["15"]                    |
+| BouncyBall        | ["6"]                     |
+| BowlingBall       | ["6"]                     |
+| BrakeLight        | ["1"]                     |
+| Bumper            | ["1"]                     |
+| Button            | ["1", "3"]                |
+| Camera            | ["1"]                     |
+| Canister          | ["1"]                     |
+| Cannon            | ["1"]                     |
+| CannonBall        | ["1"]                     |
+| Carrot            | ["1"]                     |
+| Cinderblock       | ["1"]                     |
+| Clipboard         | ["1"]                     |
+| Cone              | ["3"]                     |
+| Connector         | ["5"]                     |
+| ConnectorBall     | ["6"]                     |
+| Delayer           | ["2"]                     |
+| Detacher          | ["1"]                     |
+| DoorA             | ["1"]                     |
+| DoorB             | ["1"]                     |
+| DoorC             | ["1"]                     |
+| DoorD             | ["1"]                     |
+| EntitySensor      | ["7"]                     |
+| FishBowl          | ["1"]                     |
+| FuelTank          | ["2"]                     |
+| GasCap            | ["1"]                     |
+| Gate-AND          | ["4"]                     |
+| Gate-NOT          | ["4"]                     |
+| Gate-OR           | ["4"]                     |
+| GlassBase         | ["3"]                     |
+| GoldPotatoEngine  | ["1"]                     |
+| Googie            | ["1"]                     |
+| Gramby            | ["1"]                     |
+| Grenade           | ["1"]                     |
+| Gun               | ["2"]                     |
+| Gyro              | ["1"]                     |
+| HalfConnectorBall | ["6"]                     |
+| Hood              | ["1"]                     |
+| HulaDoll          | ["1"]                     |
+| InputSensor       | ["2"]                     |
+| Javelin           | ["1"]                     |
+| Joint             | ["1", "2"]                |
+| Joust             | ["1"]                     |
+| Leafblower        | ["1"]                     |
+| Leg               | ["1"]                     |
+| Light             | ["1"]                     |
+| Lock              | ["1"]                     |
+| LongStick         | ["2"]                     |
+| Looper            | ["1"]                     |
+| Mag               | ["1"]                     |
+| MatchingGyro      | ["2", "3"]                |
+| MountedGun        | ["1"]                     |
+| Note              | ["1"]                     |
+| Part              | ["1"]                     |
+| Pie               | ["1"]                     |
+| Pipes             | ["1"]                     |
+| Piston            | ["2"]                     |
+| Plunger           | ["1"]                     |
+| Poop              | ["1"]                     |
+| PotatoEngine      | ["1"]                     |
+| PressurePlate     | ["1", "2"]                |
+| Propeller         | ["2"]                     |
+| RPG               | ["1"]                     |
+| Radio             | ["1"]                     |
+| Recorder          | ["1"]                     |
+| RemoteButton      | ["1", "3"]                |
+| Rocket            | ["1"]                     |
+| RockingChair      | ["1"]                     |
+| Roof              | ["1"]                     |
+| Rope              | ["1", "2"]                |
+| RubberBand        | ["1", "2"]                |
+| Seat              | ["1"]                     |
+| Servo             | ["1"]                     |
+| Servo_Physics     | ["1"]                     |
+| ShortStick        | ["2"]                     |
+| Shotgun           | ["2"]                     |
+| Sledge            | ["1"]                     |
+| Splitter          | ["3"]                     |
+| Splitter_1        | ["3", "5"]                |
+| Splitter_2        | ["3", "5", "9"]           |
+| Splitter_3        | ["3", "5", "7", "9"]      |
+| Splitter_4        | ["1", "3", "5", "7", "9"] |
+| Spoiler           | ["2"]                     |
+| SprayPaint        | ["1"]                     |
+| SpringJuice       | ["1"]                     |
+| Sprite            | ["1"]                     |
+| StaringGyro       | ["1"]                     |
+| SteeringGyro      | ["1"]                     |
+| SteeringWheel     | ["1"]                     |
+| Stick             | ["2"]                     |
+| Switch            | ["1", "3"]                |
+| Thruster          | ["1"]                     |
+| Tire              | ["1"]                     |
+| Toilet            | ["1"]                     |
+| TripWire          | ["1", "3"]                |
+| Trunk             | ["1"]                     |
+| Uzi               | ["2"]                     |
+| VelocitySensor    | ["2"]                     |
+| Wheel             | ["1"]                     |
+| Wing              | ["1"]                     |
+| Wire              | ["1", "3"]                |
+| WoodenChair       | ["2"]                     |
+| YibYib            | ["2"]                     |
 
 ### Objects with NO LocalType
 ```
 Chassis, Fricklet, wad
 ```
+
+> **Important:** `noLocalType` is an **OBSERVATION OF THE DATASET**, not an absolute rule about the format.
+> It means: "This object has not been observed in the child position (with connections) within the analyzed JSON dataset."
+> It does **NOT** automatically mean: "This object can never have connections."
+> The documentation must distinguish clearly between what was observed in the available examples and what is known about the format.
 
 ---
 
@@ -494,77 +500,82 @@ The following connection point IDs (PrimaryID / PuntoPadre) were observed when e
 
 See [`../old-files/rtg-ai-tokens.md`](../old-files/rtg-ai-tokens.md#4-localids-connection-point-ids-per-object) for the complete table.
 
-| Object | LocalIDs |
-|--------|----------|
-| AltitudeSensor | ["1"] |
-| Anchor | ["2", "3", "4", "5"] |
-| BallSocket | ["2"] |
-| Base | ["1", "2", "4", "5", "6"] |
-| BeachBall | ["1", "3", "7", "8", "9", "10", "12", "14", "15", "17", "18"] |
-| Bearing | ["2"] |
-| Board | ["1", "2", "3", "7", "13", "14"] |
-| BouncyBall | ["1", "7", "8", "9", "11", "12", "13", "14", "18"] |
-| BowlingBall | ["1", "2", "3", "4", "5", "7", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18"] |
-| Briefcase | ["2", "3"] |
-| Bumper | ["2"] |
-| Button | ["2"] |
-| Cannon | ["2"] |
-| Chassis | ["1", "2", "3", "4", "5", "6", "7", "8", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "26", "27", "28", "29", "30", "31"] |
-| Cinderblock | ["2"] |
-| Cone | ["2"] |
-| Connector | ["1", "2", "3", "4", "6"] |
-| ConnectorBall | ["1", "2", "3", "4", "5", "7", "8", "9", "10", "11", "12", "13", "14", "16", "17", "18"] |
-| Delayer | ["1"] |
-| Detacher | ["2"] |
-| EntitySensor | ["1", "2", "3", "4", "5", "6"] |
-| FuelTank | ["1"] |
-| Gate-AND | ["1", "2", "3"] |
-| Gate-NOT | ["1", "2"] |
-| Gate-OR | ["1", "2", "3"] |
-| GlassBase | ["1", "2", "4"] |
-| Gun | ["1"] |
-| HalfConnectorBall | ["2", "3", "4", "5", "7", "10", "11", "13", "14", "15", "16", "17", "18"] |
-| Hood | ["2"] |
-| InputSensor | ["1"] |
-| LongStick | ["1"] |
-| Looper | ["2", "4", "5"] |
-| MatchingGyro | ["1", "4", "5", "6", "7", "8"] |
-| Part | ["2", "3", "4", "5", "6"] |
-| Pipes | ["2", "3", "4", "5"] |
-| Piston | ["1", "3", "4"] |
-| PressurePlate | ["3"] |
-| Propeller | ["1"] |
-| RPG | ["2"] |
-| RemoteButton | ["2"] |
-| Roof | ["7"] |
-| Servo | ["2", "3", "4"] |
-| Servo_Physics | ["2", "3", "4"] |
-| ShoppingCart | ["1", "2", "4", "6", "7", "9", "14"] |
-| ShortStick | ["1"] |
-| Shotgun | ["1"] |
-| Splitter | ["4"] |
-| Splitter_1 | ["4", "6"] |
-| Splitter_2 | ["4", "6", "10"] |
-| Splitter_3 | ["4", "6", "8", "10"] |
-| Splitter_4 | ["2", "4", "6", "8", "10"] |
-| Spoiler | ["2"] |
-| StaringGyro | ["2"] |
-| Stick | ["1"] |
-| Switch | ["2"] |
-| Tire | ["2"] |
-| TripWire | ["2"] |
-| Trunk | ["2"] |
-| Uzi | ["1"] |
-| VelocitySensor | ["1"] |
-| Wheel | ["2"] |
-| Wing | ["2"] |
-| Wire | ["2", "4"] |
-| YibYib | ["2"] |
+| Object            | LocalIDs                                                                                                                                                               |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| AltitudeSensor    | ["1"]                                                                                                                                                                  |
+| Anchor            | ["2", "3", "4", "5"]                                                                                                                                                   |
+| BallSocket        | ["2"]                                                                                                                                                                  |
+| Base              | ["1", "2", "4", "5", "6"]                                                                                                                                              |
+| BeachBall         | ["1", "3", "7", "8", "9", "10", "12", "14", "15", "17", "18"]                                                                                                          |
+| Bearing           | ["2"]                                                                                                                                                                  |
+| Board             | ["1", "2", "3", "7", "13", "14"]                                                                                                                                       |
+| BouncyBall        | ["1", "7", "8", "9", "11", "12", "13", "14", "18"]                                                                                                                     |
+| BowlingBall       | ["1", "2", "3", "4", "5", "7", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18"]                                                                              |
+| Briefcase         | ["2", "3"]                                                                                                                                                             |
+| Bumper            | ["2"]                                                                                                                                                                  |
+| Button            | ["2"]                                                                                                                                                                  |
+| Cannon            | ["2"]                                                                                                                                                                  |
+| Chassis           | ["1", "2", "3", "4", "5", "6", "7", "8", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "26", "27", "28", "29", "30", "31"] |
+| Cinderblock       | ["2"]                                                                                                                                                                  |
+| Cone              | ["2"]                                                                                                                                                                  |
+| Connector         | ["1", "2", "3", "4", "6"]                                                                                                                                              |
+| ConnectorBall     | ["1", "2", "3", "4", "5", "7", "8", "9", "10", "11", "12", "13", "14", "16", "17", "18"]                                                                               |
+| Delayer           | ["1"]                                                                                                                                                                  |
+| Detacher          | ["2"]                                                                                                                                                                  |
+| EntitySensor      | ["1", "2", "3", "4", "5", "6"]                                                                                                                                         |
+| FuelTank          | ["1"]                                                                                                                                                                  |
+| Gate-AND          | ["1", "2", "3"]                                                                                                                                                        |
+| Gate-NOT          | ["1", "2"]                                                                                                                                                             |
+| Gate-OR           | ["1", "2", "3"]                                                                                                                                                        |
+| GlassBase         | ["1", "2", "4"]                                                                                                                                                        |
+| Gun               | ["1"]                                                                                                                                                                  |
+| HalfConnectorBall | ["2", "3", "4", "5", "7", "10", "11", "13", "14", "15", "16", "17", "18"]                                                                                              |
+| Hood              | ["2"]                                                                                                                                                                  |
+| InputSensor       | ["1"]                                                                                                                                                                  |
+| LongStick         | ["1"]                                                                                                                                                                  |
+| Looper            | ["2", "4", "5"]                                                                                                                                                        |
+| MatchingGyro      | ["1", "4", "5", "6", "7", "8"]                                                                                                                                         |
+| Part              | ["2", "3", "4", "5", "6"]                                                                                                                                              |
+| Pipes             | ["2", "3", "4", "5"]                                                                                                                                                   |
+| Piston            | ["1", "3", "4"]                                                                                                                                                        |
+| PressurePlate     | ["3"]                                                                                                                                                                  |
+| Propeller         | ["1"]                                                                                                                                                                  |
+| RPG               | ["2"]                                                                                                                                                                  |
+| RemoteButton      | ["2"]                                                                                                                                                                  |
+| Roof              | ["7"]                                                                                                                                                                  |
+| Servo             | ["2", "3", "4"]                                                                                                                                                        |
+| Servo_Physics     | ["2", "3", "4"]                                                                                                                                                        |
+| ShoppingCart      | ["1", "2", "4", "6", "7", "9", "14"]                                                                                                                                   |
+| ShortStick        | ["1"]                                                                                                                                                                  |
+| Shotgun           | ["1"]                                                                                                                                                                  |
+| Splitter          | ["4"]                                                                                                                                                                  |
+| Splitter_1        | ["4", "6"]                                                                                                                                                             |
+| Splitter_2        | ["4", "6", "10"]                                                                                                                                                       |
+| Splitter_3        | ["4", "6", "8", "10"]                                                                                                                                                  |
+| Splitter_4        | ["2", "4", "6", "8", "10"]                                                                                                                                             |
+| Spoiler           | ["2"]                                                                                                                                                                  |
+| StaringGyro       | ["2"]                                                                                                                                                                  |
+| Stick             | ["1"]                                                                                                                                                                  |
+| Switch            | ["2"]                                                                                                                                                                  |
+| Tire              | ["2"]                                                                                                                                                                  |
+| TripWire          | ["2"]                                                                                                                                                                  |
+| Trunk             | ["2"]                                                                                                                                                                  |
+| Uzi               | ["1"]                                                                                                                                                                  |
+| VelocitySensor    | ["1"]                                                                                                                                                                  |
+| Wheel             | ["2"]                                                                                                                                                                  |
+| Wing              | ["2"]                                                                                                                                                                  |
+| Wire              | ["2", "4"]                                                                                                                                                             |
+| YibYib            | ["2"]                                                                                                                                                                  |
 
 ### Objects with NO LocalIDs
 ```
 wad, Fricklet
 ```
+
+> **Important:** `noLocalIds` is an **OBSERVATION OF THE DATASET**, not an absolute rule about the format.
+> It means: "This object has not been observed in the parent position (with connection points) within the analyzed JSON dataset."
+> It does **NOT** automatically mean: "This object can never be a connection parent."
+> The documentation must distinguish clearly between what was observed in the available examples and what is known about the format.
 
 These objects cannot be used as connection parents (no predefined connection points).
 

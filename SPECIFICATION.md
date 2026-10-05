@@ -136,8 +136,11 @@ These names are descriptive names used by this documentation.
 
 `LocalType` is a numeric identifier associated with the local object type of the connection.
 
-Object types that use LocalType-based connections have a `LocalType`.
-Examples:
+**Important:** `LocalType` is a **universal/global value** in the format. The same `LocalType` value retains its identity regardless of which object type uses it.
+
+Object types can use **multiple `LocalType` values** (not just one). The `LocalType` used depends on which connection is being made — it is determined by observing the CHILD objects that connect with that `LocalType`, not by the parent object type.
+
+Examples of observed `LocalType` values per object (from RtG-AI analysis of 100+ saves):
 
 ```js
 Part        = 1
@@ -145,6 +148,19 @@ Servo       = 1
 Connector   = 5
 InputSensor = 2
 Gate-AND    = 4
+Button      = 1, 3
+Switch      = 1, 3
+Wire        = 1, 3
+Splitter_4  = 1, 3, 5, 7, 9
+Joint       = 1, 2
+Rope        = 1, 2
+RubberBand  = 1, 2
+MatchingGyro = 2, 3
+```
+
+Objects without observed `LocalType` (noLocalType — not observed as children in connections within the analyzed dataset):
+```js
+Chassis, Fricklet, wad, ShoppingCart, SuperPowerClock, Successor, Trumpet, GasCap, YibYib, Head, Body, PolaroidCamera, PolaroidPhoto, ToolGun, Ramp, Tooth, Keyboard, RiotShield, TV, Guitar, Banjo, Drums, Trowel
 ```
 
 The game uses this value to identify/search for the corresponding object type when processing the connection.
@@ -155,6 +171,8 @@ Changing `LocalType` to an incompatible value has been observed to cause the loa
 ### 4.2 `PrimaryID`
 
 `PrimaryID` is the name used by this documentation for the second connection field.
+
+> **Note:** `PrimaryID` is a **working term** adopted because no better terminology has been found yet. It should not be assumed that all values in this field belong to the same conceptual system. Different forms of values appear in this field in real JSON, and the conceptual separation between those forms is not yet fully resolved.
 
 Its contents can take different forms depending on how the object is attached.
 
@@ -504,12 +522,11 @@ The third field of an object tuple is a JSON object containing its properties.
 }
 ```
 
-The property dictionary is open.
+The property dictionary is **open** — there is no closed list of valid properties.
 
 Additional keys can be stored without necessarily causing a loading error.
 
 Example:
-
 ```json
 {
     "RGB": [255, 0, 0],
@@ -519,6 +536,8 @@ Example:
 ```
 
 Historical experiments showed that unknown properties can be present without preventing the object from loading.
+
+Properties can contain complex nested structures (objects with `serializedType` and `data` fields). The internal fields of those structures are also part of the observable property set and should not be discarded simply because they are nested.
 
 ### 11.1 Property Categories
 
