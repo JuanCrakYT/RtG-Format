@@ -202,6 +202,11 @@ Observed LocalType (TipoLocal) values per object type:
 Chassis, Fricklet, wad
 ```
 
+> **Importante:** `noLocalType` es una **OBSERVACIÓN DEL CONJUNTO DE DATOS**, no una afirmación absoluta sobre el formato.
+> Significa: "No se ha observado este objeto en posición de hijo (con conexiones) dentro del conjunto de JSON analizados".
+> **NO significa automáticamente:** "Este objeto nunca puede tener conexiones".
+> La documentación debe distinguir claramente entre lo observado en los ejemplos disponibles y lo que conocemos del formato.
+
 ---
 
 ## 4. LocalIDs (Connection Point IDs per Object)
@@ -280,6 +285,11 @@ Observed connection point IDs (PrimaryID / PuntoPadre) per object type. These ar
 wad, Fricklet
 ```
 
+> **Importante:** `noLocalIds` es una **OBSERVACIÓN DEL CONJUNTO DE DATOS**, no una afirmación absoluta sobre el formato.
+> Significa: "No se ha observado este objeto en posición de padre (con puntos de conexión propios) dentro del conjunto de JSON analizados".
+> **NO significa automáticamente:** "Este objeto nunca puede ser padre de conexiones".
+> La documentación debe distinguir claramente entre lo observado en los ejemplos disponibles y lo que conocemos del formato.
+
 ---
 
 ## 5. Special Tokens (T5 Tokenizer)
@@ -344,7 +354,9 @@ a, b, c, d, e, f, A, B, C, D, E, F
 - Character vocabulary breakdown
 
 ### Discrepancies to Investigate
-- Some objects have multiple LocalTypes in RtG-AI but single TipoLocal in historical
-- LocalIDs provides connection point IDs not fully cataloged in historical research
-- Objects like `EntitySensor` have LocalType "7" in RtG-AI but "7" in historical (match)
-- `Board` has LocalType "15" in both (match)
+- **Multiple LocalTypes per object:** Several objects have multiple LocalType values in RtG-AI data but only a single TipoLocal in historical documentation (e.g., Button: ["1","3"], Switch: ["1","3"], Wire: ["1","3"], RemoteButton: ["1","3"], TripWire: ["1","3"], Splitter_1: ["3","5"], Splitter_2: ["3","5","9"], Splitter_3: ["3","5","7","9"], Splitter_4: ["1","3","5","7","9"], Joint: ["1","2"], Rope: ["1","2"], RubberBand: ["1","2"], MatchingGyro: ["2","3"], PressurePlate: ["1","2"]). Historical docs assumed one LocalType per object.
+- **LocalIDs provides connection point IDs** not fully cataloged in historical research.
+- **Objects without LocalType in historical but with LocalType in RtG-AI:** GasCap (historical: "—", RtG-AI: "1"), PressurePlate (not in historical table, RtG-AI: ["1","2"]), Javelin (not in historical table, RtG-AI: "1").
+- **Objects with LocalType in historical but in noLocalType in RtG-AI:** ShoppingCart (historical: "—", RtG-AI: noLocalType), SuperPowerClock (historical: "—", RtG-AI: noLocalType), Successor (historical: "2", RtG-AI: ["2"]), YibYib (historical: "—", RtG-AI: ["2"]).
+- **EntitySensor** has LocalType "7" in both (match).
+- **Board** has LocalType "15" in both (match).
