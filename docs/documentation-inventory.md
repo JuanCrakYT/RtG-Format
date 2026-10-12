@@ -4,7 +4,7 @@ This catalog is generated from the repository tree by [`scripts/generate_documen
 
 **Scope:** all repository Markdown files except `old-files/` (immutable historical archive) and vendored/generated `node_modules/`. Inclusion here does not imply that every technical claim has been independently re-verified.
 
-**Documents indexed:** 264
+**Documents indexed:** 263
 
 ## Directory summary
 
@@ -17,7 +17,7 @@ This catalog is generated from the repository tree by [`scripts/generate_documen
 | Encoding and compression | 4 |
 | Examples and experiments | 4 |
 | Format reference | 6 |
-| Guides, standards, and templates | 15 |
+| Guides, standards, and templates | 14 |
 | Localized RtG-CLI runtime content | 58 |
 | Part and connection-point catalogs | 18 |
 | Research | 4 |
@@ -194,7 +194,6 @@ This catalog is generated from the repository tree by [`scripts/generate_documen
 ### Guides, standards, and templates
 
 - [`docs/building-system.md`](../docs/building-system.md) — Cross-cutting guide or documentation standard
-- [`docs/documentation-inventory.md`](../docs/documentation-inventory.md) — Cross-cutting guide or documentation standard
 - [`docs/documentation-inventory.md`](../docs/documentation-inventory.md) — Cross-cutting guide or documentation standard
 - [`docs/documentation-standards.md`](../docs/documentation-standards.md) — Cross-cutting guide or documentation standard
 - [`docs/documentation-taxonomy.md`](../docs/documentation-taxonomy.md) — Cross-cutting guide or documentation standard
