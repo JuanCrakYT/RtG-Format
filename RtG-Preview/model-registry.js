@@ -197,14 +197,15 @@ class ModelRegistry {
         const localPoints = modelData.LocalPoints || {};
 
         // Use manifest branches when available, otherwise derive them from JSON
-        const manifestBranches = Array.isArray(info.branches)
-            ? info.branches
-            : Object.entries(branches).map(([pointId, obj]) => ({
+        const manifestBranches = Object.entries(branches).map(
+            ([pointId, obj]) => ({
                 pointId,
                 obj,
-                start: branchesStart[obj] || null,
-                connectionPoint: localPoints[pointId] || null
-            }));
+                start: branchesStart[obj] ?? null,
+                connectionPoint: localPoints[pointId] ?? null,
+                size: sizeMap[obj] ?? sizeMap.default ?? 1
+            })
+        );
 
         // Load and attach each branch
         for (const branch of manifestBranches) {
@@ -240,7 +241,7 @@ class ModelRegistry {
 
             if (!Number.isFinite(branchSize) || branchSize < 0) {
                 throw new Error(
-                    'Invalid size for branch "' + branch.obj + '" in ' + type
+                    `Invalid size for branch "${branch.obj}" in ${type}`
                 );
             }
 
