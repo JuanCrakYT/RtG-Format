@@ -18,12 +18,6 @@ function generateBlockDocs() {
   let skipped = 0;
 
   for (const folder of folders) {
-    // Skip Teeth (no JSON)
-    if (folder === 'Teeth') {
-      console.log(`Skipping ${folder} (no JSON)`);
-      skipped++;
-      continue;
-    }
 
     const jsonPath = path.join(MODELS_DIR, folder, `${folder}.json`);
     if (!fs.existsSync(jsonPath)) {
@@ -306,7 +300,6 @@ function getOverallConfidence(folder) {
   const confirmed = ['Base', 'Chassis', 'Part', 'Anchor', 'Wheel', 'Tire', 'Bumper', 'Hood', 'Trunk', 'Switch', 'Wire', 'Rope', 'Tooth', 'Servo', 'SpringJuice', 'Splitter', 'Splitter_1', 'Splitter_2', 'Splitter_3', 'Splitter_4', 'Connector', 'ConnectorBall', 'HalfConnectorBall', 'Gate-AND', 'Gate-OR', 'Gate-NOT', 'InputSensor', 'EntitySensor', 'VelocitySensor', 'AltitudeSensor', 'PressurePlate', 'Button', 'RemoteButton', 'Delayer', 'Detacher', 'Recorder', 'Thruster', 'Propeller', 'PotatoEngine', 'GoldPotatoEngine', 'Cannon', 'Gun', 'MountedGun', 'RPG', 'Shotgun', 'Uzi', 'Mag', 'Radio', 'Light', 'TV', 'RGB'];
   
   if (confirmed.includes(folder)) return 'CONFIRMED';
-  if (folder === 'Teeth') return 'UNKNOWN (no model JSON)';
   return 'PARTIALLY CONFIRMED (model exists, properties need verification)';
 }
 
@@ -323,10 +316,6 @@ function getNotes(folder, json) {
   
   if (['DoorA', 'DoorB', 'DoorC', 'DoorD'].includes(folder)) {
     notes.push('Hinged door with moving branch. Branch connection points and rotation axis need experimental verification.');
-  }
-  
-  if (folder === 'Teeth') {
-    notes.push('No model JSON available. Only OBJ model exists. Properties and connection points unknown.');
   }
   
   if (Object.keys(json.LocalPoints || {}).length === 0 && !['Part', 'Anchor', 'Tooth', 'Base'].includes(folder)) {

@@ -11,7 +11,6 @@ Centralized tracking of all work items across the repository.
 
 ### Documentation
 
-- [ ] **Documentación de bloques** - Individual block docs generated (120/121), Teeth pending (no JSON)
 - [ ] **Documentación de puntos de conexión** - Partially in `blocks/parts/`, needs completion for all blocks
 - [ ] **Documentación de propiedades** - In `format/properties.md`, needs expansion with block-specific props
 - [ ] **Validación de estructura** - Cross-reference SPECIFICATION.md with actual model JSONs
@@ -215,7 +214,6 @@ Centralized tracking of all work items across the repository.
 
 ### Low Priority / Unknown
 
-- [ ] **Teeth** - No JSON, only OBJ - needs investigation
 - [ ] **Spoiler** - Connection points unknown
 - [ ] **Suspension** - Not in models, may not exist
 - [ ] **Engine/Motor** - Not in models, may be Chassis sub-part
