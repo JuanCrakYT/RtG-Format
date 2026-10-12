@@ -14,6 +14,7 @@ Each block has its own documentation file with:
 ## Index by Category
 
 ### Building
+
 | Block | Identifier | Model | Connection Points | Properties | Confidence | Status |
 |-------|------------|-------|-------------------|------------|------------|--------|
 | Base | `Base` | ✅ | 0 | RGB | CONFIRMED | Documented |
@@ -37,6 +38,7 @@ Each block has its own documentation file with:
 | DoorD | `DoorD` | ✅ | ? | RGB | PARTIALLY CONFIRMED | TODO |
 
 ### Physics
+
 | Block | Identifier | Model | Connection Points | Properties | Confidence | Status |
 |-------|------------|-------|-------------------|------------|------------|--------|
 | Servo | `Servo` | ✅ | ? | Speed, Rotation, LimitAngle, LimitEnabled, Backwards, Rest, MaxForce, ActivationSpeed, ActivationHeight | CONFIRMED | TODO |
@@ -53,6 +55,7 @@ Each block has its own documentation file with:
 | Engine | `Engine` | ❓ | ? | | UNKNOWN | TODO |
 
 ### Tools
+
 | Block | Identifier | Model | Connection Points | Properties | Confidence | Status |
 |-------|------------|-------|-------------------|------------|------------|--------|
 | ToolGun | `ToolGun` | ✅ | ? | | CONFIRMED | TODO |
@@ -60,6 +63,7 @@ Each block has its own documentation file with:
 | PaintTool | `PaintTool` | ❓ | ? | | UNKNOWN | TODO |
 
 ### Wiring
+
 | Block | Identifier | Model | Connection Points | Properties | Confidence | Status |
 |-------|------------|-------|-------------------|------------|------------|--------|
 | Wire | `Wire` | ✅ | ? | Length, MinLength, MaxLength, MaxForce | CONFIRMED | TODO |
@@ -88,6 +92,7 @@ Each block has its own documentation file with:
 | Recorder | `Recorder` | ✅ | ? | | CONFIRMED | TODO |
 
 ### Miscellaneous
+
 | Block | Identifier | Model | Connection Points | Properties | Confidence | Status |
 |-------|------------|-------|-------------------|------------|------------|--------|
 | Part | `Part` | ✅ | 0 | RGB | CONFIRMED | Documented |
@@ -153,6 +158,7 @@ Each block has its own documentation file with:
 | wad | `wad` | ✅ | ? | | CONFIRMED | TODO |
 
 ### Other
+
 | Block | Identifier | Model | Connection Points | Properties | Confidence | Status |
 |-------|------------|-------|-------------------|------------|------------|--------|
 | Arm | `Arm` | ✅ | ? | RGB | CONFIRMED | TODO |
@@ -161,6 +167,7 @@ Each block has its own documentation file with:
 | Banjo | `Banjo` | ✅ | ? | RGB | CONFIRMED | TODO |
 
 ### Uncategorized / Unused
+
 | Block | Identifier | Model | Connection Points | Properties | Confidence | Status |
 |-------|------------|-------|-------------------|------------|------------|--------|
 | (various) | | | | | UNKNOWN | TODO |
