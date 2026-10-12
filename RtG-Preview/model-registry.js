@@ -118,78 +118,177 @@ class ModelRegistry {
         if (!info) {
             throw new Error('Model not found in manifest: ' + type);
         }
-        
+
         const baseUrl = this.basePath + info.folder + '/';
-        
-        // Load JSON metadata - try embedded first
+
+        // Load JSON metadata, preferring embedded data for local use
+        let embedded = this.embeddedModels.get(type);
+
+        if (!embedded) {
+            const lowerType = type.toLowerCase();
+
+            for (const [key, value] of this.embeddedModels.entries()) {
+                if (key.toLowerCase() === lowerType) {
+                    embedded = value;
+                    break;
+                }
+            }
+        }
+
         let modelData;
-        const embedded = this.embeddedModels.get(type);
+
         if (embedded && embedded.json) {
-            modelData = embedded.json;
+            modelData = Array.isArray(embedded.json)
+                ? embedded.json[0]
+                : embedded.json;
         } else {
-            const jsonUrl = baseUrl + info.json.replace('./', '');
+            const jsonUrl = baseUrl + info.json.replace(/^\.\//, '');
             modelData = await this._loadJSON(jsonUrl);
         }
-        
-        // Load main mesh - try embedded first
-        var defaultBranch = info.defaultBranch;
-        var mainObj = Array.isArray(defaultBranch) ? defaultBranch[0] : defaultBranch;
+
+        if (!modelData || typeof modelData !== 'object') {
+            throw new Error('Invalid model JSON data for ' + type);
+        }
+
+        // Read metadata from the current RtG JSON structure
+        const rtgFormat = modelData['RtG-Format'] || {};
+        const preview = rtgFormat['RtG-Preview'] || {};
+        const sizeMap = preview.Size || {};
+
+        // "Default Branch" belongs to the JSON root, not RtG-Preview
+        const defaultBranch =
+            modelData['Default Branch'] ??
+            info.defaultBranch ??
+            [`./${type}.obj`];
+
+        const mainObj = Array.isArray(defaultBranch)
+            ? defaultBranch[0]
+            : defaultBranch;
+
+        if (typeof mainObj !== 'string' || !mainObj) {
+            throw new Error('Invalid Default Branch for model ' + type);
+        }
+
+        // Resolve the default size
+        const mainSize = Number(sizeMap.default ?? info.size ?? 1);
+
+        if (!Number.isFinite(mainSize) || mainSize < 0) {
+            throw new Error('Invalid default model size for ' + type);
+        }
+
+        // Load the main OBJ
         let mainMesh;
-        
+
         if (embedded && embedded.obj) {
             mainMesh = this._parseOBJ(embedded.obj);
         } else {
-            const mainObjUrl = baseUrl + mainObj.replace('./', '');
+            const mainObjUrl = baseUrl + mainObj.replace(/^\.\//, '');
             mainMesh = await this._loadOBJ(mainObjUrl);
         }
-        
-        // Apply default material
+
         this._applyDefaultMaterial(mainMesh);
-        
-        // Load branches if any
-        if (info.hasBranches && info.branches) {
-            for (const branch of info.branches) {
-                let branchMesh;
-                const branchKey = branch.obj.replace('./', '');
-                
-                if (embedded && embedded.branchObjs && embedded.branchObjs[branchKey]) {
-                    branchMesh = this._parseOBJ(embedded.branchObjs[branchKey]);
-                } else {
-                    const branchUrl = baseUrl + branchKey;
-                    branchMesh = await this._loadOBJ(branchUrl);
-                }
-                
-                this._applyDefaultMaterial(branchMesh);
-                
-                // Position branch using Branches Start transform
-                if (branch.start) {
-                    const [pos, rot] = branch.start;
-                    branchMesh.position.set(pos[0], pos[1], pos[2]);
-                    branchMesh.rotation.set(
-                        THREE.MathUtils.degToRad(rot[0]),
-                        THREE.MathUtils.degToRad(rot[1]),
-                        THREE.MathUtils.degToRad(rot[2])
+
+        // Apply the main model scale exactly once
+        mainMesh.scale.setScalar(mainSize);
+
+        // Read branches and transforms from the root of the JSON
+        const branches = modelData.Branches || {};
+        const branchesStart = modelData['Branches Start'] || {};
+        const localPoints = modelData.LocalPoints || {};
+
+        // Use manifest branches when available, otherwise derive them from JSON
+        const manifestBranches = Array.isArray(info.branches)
+            ? info.branches
+            : Object.entries(branches).map(([pointId, obj]) => ({
+                pointId,
+                obj,
+                start: branchesStart[obj] || null,
+                connectionPoint: localPoints[pointId] || null
+            }));
+
+        // Load and attach each branch
+        for (const branch of manifestBranches) {
+            if (!branch || typeof branch.obj !== 'string') {
+                console.warn('Skipping invalid branch in model ' + type, branch);
+                continue;
+            }
+
+            const branchKey = branch.obj.replace(/^\.\//, '');
+            let branchMesh;
+
+            if (
+                embedded &&
+                embedded.branchObjs &&
+                embedded.branchObjs[branchKey]
+            ) {
+                branchMesh = this._parseOBJ(embedded.branchObjs[branchKey]);
+            } else {
+                branchMesh = await this._loadOBJ(baseUrl + branchKey);
+            }
+
+            this._applyDefaultMaterial(branchMesh);
+
+            // Prefer the size configured for this OBJ path.
+            // Fall back to the manifest branch size, then the default size.
+            const branchSize = Number(
+                sizeMap[branch.obj] ??
+                sizeMap['./' + branchKey] ??
+                branch.size ??
+                sizeMap.default ??
+                mainSize
+            );
+
+            if (!Number.isFinite(branchSize) || branchSize < 0) {
+                throw new Error(
+                    'Invalid size for branch "' + branch.obj + '" in ' + type
+                );
+            }
+
+            branchMesh.scale.setScalar(branchSize);
+
+            // Position and rotation come from "Branches Start"
+            const start = branch.start ?? branchesStart[branch.obj];
+
+            if (start) {
+                if (
+                    !Array.isArray(start) ||
+                    !Array.isArray(start[0]) ||
+                    !Array.isArray(start[1]) ||
+                    start[0].length < 3 ||
+                    start[1].length < 3
+                ) {
+                    throw new Error(
+                        'Invalid transform for branch "' + branch.obj + '" in ' + type
                     );
                 }
-                
-                // Attach to main mesh
-                mainMesh.add(branchMesh);
+
+                const [pos, rot] = start;
+
+                branchMesh.position.set(
+                    Number(pos[0]) || 0,
+                    Number(pos[1]) || 0,
+                    Number(pos[2]) || 0
+                );
+
+                branchMesh.rotation.set(
+                    THREE.MathUtils.degToRad(Number(rot[0]) || 0),
+                    THREE.MathUtils.degToRad(Number(rot[1]) || 0),
+                    THREE.MathUtils.degToRad(Number(rot[2]) || 0)
+                );
             }
+
+            mainMesh.add(branchMesh);
         }
-        
-        // Store connection points and metadata
+
+        // Preserve the original RtG metadata for the rest of the preview
         mainMesh.userData = {
             modelType: type,
-            modelData: modelData,
-            connectionPoints: modelData.LocalPoints || {},
-            branches: info.branches || [],
-            size: info.size || 1.0
+            modelData,
+            connectionPoints: localPoints,
+            branches: manifestBranches,
+            size: mainSize
         };
-        
-        // Apply model-specific scale
-        const scale = info.size || 1.0;
-        mainMesh.scale.setScalar(scale);
-        
+
         return mainMesh;
     }
 
