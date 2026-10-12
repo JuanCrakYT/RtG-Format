@@ -44,6 +44,7 @@ This directory contains introductory and cross-cutting guides. The canonical tec
 | [Documentation standards](documentation-standards.md) | Structure, evidence, examples, and review checklist |
 | [Documentation taxonomy](documentation-taxonomy.md) | Document types, ownership, naming, and migration rules |
 | [Local link checker](../scripts/check_markdown_links.py) | Repeatable validation of repository-local Markdown links |
+| [Maintained Markdown inventory](documentation-inventory.md) | Individually indexed maintained Markdown documents and their roles |
 | [Templates](templates/README.md) | Reusable structures for new reference, research, experiment, and tool documents |
 
 ## How to read technical claims

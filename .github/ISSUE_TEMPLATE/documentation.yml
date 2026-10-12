@@ -1,0 +1,38 @@
+name: Documentation improvement
+description: Propose a documentation structure, navigation, or clarity improvement.
+title: "[Docs]: "
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for documentation structure, navigation, terminology, or readability. Do not use it to present an unverified format hypothesis as a confirmed fact.
+  - type: input
+    id: location
+    attributes:
+      label: Document or directory
+      description: Link the current page or identify the path.
+      placeholder: docs/example.md
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Current problem
+      description: What is confusing, duplicated, difficult to find, or missing?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Describe the improvement without rewriting technical evidence.
+    validations:
+      required: true
+  - type: checkboxes
+    id: constraints
+    attributes:
+      label: Documentation constraints
+      options:
+        - label: I have not proposed modifying anything under old-files/.
+          required: true

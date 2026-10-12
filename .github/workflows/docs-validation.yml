@@ -49,6 +49,9 @@ jobs:
           git commit -m "docs: normalize maintained Markdown formatting"
           git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
 
+      - name: Verify documentation inventory
+        run: python scripts/generate_documentation_inventory.py --check
+
       - name: Check local Markdown links
         run: python scripts/check_markdown_links.py
 
