@@ -83,11 +83,11 @@ def main() -> int:
             changed += 1
             changed_paths.append(path.relative_to(ROOT).as_posix())
             if not args.check:
-                path.write_text(normalized, encoding="utf-8", newline="\\n")
+                path.write_text(normalized, encoding="utf-8", newline="\n")
     action = "would normalize" if args.check else "normalized"
     print(f"Scanned {scanned} maintained Markdown documents; {action} {changed}.")
     if args.check and changed_paths:
-        print("\\n".join(changed_paths))
+        print("\n".join(changed_paths))
         return 1
     return 0
 
