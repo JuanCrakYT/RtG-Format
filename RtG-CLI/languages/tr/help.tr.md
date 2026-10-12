@@ -1,11 +1,9 @@
-RtG-CLI — Yardım
-=================
+# RtG-CLI — Yardım
 
 RtG-CLI, RtG-Format ekosistemi için komut satırı arayüzüdür.
 Eklentilerin keşfi ve çalıştırılması, dillerin sorgulanması, kuralların ve sürümün görüntülenmesini sağlar.
 
-Kullanım
----------
+## Kullanım
 
   rtg [SEÇENEKLER] <KOMUT> [ARGÜMANLAR]
 
@@ -17,8 +15,7 @@ Kullanım
     rtg help image
 
 
-Sistem Komutları
------------------
+## Sistem Komutları
 
   -h, --help        Bu genel yardımı gösterir
   -v, --version     RtG-CLI sürümünü gösterir
@@ -31,8 +28,7 @@ Sistem Komutları
   --usage-<dil>     Belirli dilde kullanım gösterir (örn: --usage-es, --usage-en) (yeni)
   -language <dil>     Başlangıç metni (void) dilini ayarlar
 
-Komut: help
---------------
+## Komut: help
 
   rtg help                    # Genel yardım (bu ekran)
   rtg help <komut>            # Belirli bir komut/eklenti için yardım
@@ -53,8 +49,7 @@ Komut: help
     rtg help --usage-es
 
 
-Komut: version
------------------
+## Komut: version
 
   rtg -v
   rtg --version
@@ -62,8 +57,7 @@ Komut: version
   Sürümü ve tüm kullanılabilir dillerdeki sürüm içeriğini gösterir.
 
 
-Komut: rules
----------------
+## Komut: rules
 
   rtg -r
   rtg --rules
@@ -72,8 +66,7 @@ Komut: rules
   Varsayılan olarak 'rules' içinde tanımlanan ilk dil (İspanyolca) kullanılır.
 
 
-Komut: lang
---------------
+## Komut: lang
 
   rtg -l
   rtg --lang
@@ -82,8 +75,7 @@ Komut: lang
   Version, Rules, Help, Void, ve her eklenti için.
 
 
-Komut: commands
-------------------
+## Komut: commands
 
   rtg -c
   rtg --commands
@@ -92,8 +84,7 @@ Komut: commands
   Eklenti komutlarını içermez.
 
 
-Komut: addons
-----------------
+## Komut: addons
 
   rtg -a
   rtg --addons
@@ -102,8 +93,7 @@ Komut: addons
   Belgesi olmayan kayıtlı eklenti burada görünmez.
 
 
-Komut: usage
------------------
+## Komut: usage
 
   rtg -u
   rtg --usage
@@ -114,8 +104,7 @@ Komut: usage
   Dil, assets.json'daki 'void-language' içinde olmalıdır.
 
 
-Komut: language
-------------------
+## Komut: language
 
   rtg -language <dil>
 
@@ -126,16 +115,14 @@ Komut: language
     rtg -language en
 
 
-Kullanılabilir Eklentiler
---------------------------
+## Kullanılabilir Eklentiler
 
   image      | RtG Image        - Görüntü dönüştürücü
   preview    | RtG Preview      - RtG-Format yapıları için 3D görüntüleyici
   test-addon | RtG Test Addon   - CLI doğrulama için test eklentisi
 
 
-Diller
--------
+## Diller
 
 Diller tek bir tire ile belirtilir: -es, -en, -pt vb.
 Dil, dahili komut adını değiştirmez.
@@ -152,8 +139,7 @@ Dil, dahili komut adını değiştirmez.
     rtg image -lang     # Eklenti dilleri (eklenti sonrası)
 
 
-Eklenti Argümanları
---------------------
+## Eklenti Argümanları
 
 Bir eklenti tanımlandıktan sonra, argümanlar öneğe göre sınıflandırılır:
 
@@ -168,8 +154,7 @@ Bir eklenti tanımlandıktan sonra, argümanlar öneğe göre sınıflandırıl�
   rtg image -en                  # -en -> RtG-CLI (dil seçici)
 
 
-Boşluk İçeren Argümanlar
--------------------------
+## Boşluk İçeren Argümanlar
 
 Boşluk içeren argümanlar tırnak içine alınmalıdır:
 
@@ -178,8 +163,7 @@ Boşluk içeren argümanlar tırnak içine alınmalıdır:
 RtG-CLI argüman sırasını korur ve aynen eklentiye iletir.
 
 
-Daha Fazla Bilgi
--------------------
+## Daha Fazla Bilgi
 
   rtg help <komut>      # Bir eklenti için ayrıntılı yardım
   rtg help <komut> -lang  # O eklentinin dilleri

@@ -7,9 +7,9 @@ It separates confirmed observations, experiments, historical records, and unreso
 
 ## What is the current source of truth?
 
-Use [`../SPECIFICATION.md`](../SPECIFICATION.md) together with the relevant documents under [`../format/`](../format/) for the current consolidated technical reference.
+Use [`../SPECIFICATION.md`](../SPECIFICATION.md) together with the relevant documents under [`../format/`](../format) for the current consolidated technical reference.
 
-Historical files under [`../old-files/`](../old-files/) have priority as historical evidence when a discrepancy exists. They must be checked before changing or rejecting the current documentation.
+Historical files under [`../old-files/`](../old-files) have priority as historical evidence when a discrepancy exists. They must be checked before changing or rejecting the current documentation.
 
 In other words:
 
@@ -49,7 +49,7 @@ They provide evidence for how the format was discovered and documented.
 
 ## Where are the Part IDs?
 
-Start with [`../blocks/`](../blocks/).
+Start with [`../blocks/`](../blocks).
 
 The historical object ID research is preserved in [`../old-files/obj_ids-spanish.md`](../old-files/obj_ids-spanish.md).
 
@@ -57,7 +57,7 @@ The organized Part reference is [`../blocks/parts/parts-id.md`](../blocks/parts/
 
 ## Where are the experiments?
 
-Reproducible experiments are stored under [`../examples/experiments/`](../examples/experiments/).
+Reproducible experiments are stored under [`../examples/experiments/`](../examples/experiments).
 
 Failed or inconclusive experiments should be preserved rather than deleted. See the rules in [`../examples/README.md`](../examples/README.md).
 
@@ -73,17 +73,17 @@ See [`../examples/json-examples/README.md`](../examples/json-examples/README.md)
 No.
 
 Experiments are research records and should be preserved, including failed or inconclusive results.
-Failed experiments should be moved to [`../examples/trash/`](../examples/trash/) according to the rules for experiments.
+Failed experiments should be moved to [`../examples/trash/`](../examples/trash) according to the rules for experiments.
 
 ## Where is encoding and compression documented?
 
-See [`../compression/`](../compression/).
+See [`../compression/`](../compression).
 
 The main entry point is [`../compression/README.md`](../compression/README.md).
 
 ## Where are the tools?
 
-See [`../tools/`](../tools/).
+See [`../tools/`](../tools).
 The current tool structure and development status are documented in [`../tools/README.md`](../tools/README.md).
 
 ## Is the project affiliated with Road To Gramby's?

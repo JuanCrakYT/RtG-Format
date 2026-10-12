@@ -255,6 +255,7 @@ The following LocalType values were observed across 100+ save files by the RtG-A
 | YibYib            | ["2"]                     |
 
 ### Objects with NO LocalType
+
 ```
 Chassis, Fricklet, wad
 ```
@@ -568,6 +569,7 @@ See [`../old-files/rtg-ai-tokens.md`](../old-files/rtg-ai-tokens.md#4-localids-c
 | YibYib            | ["2"]                                                                                                                                                                  |
 
 ### Objects with NO LocalIDs
+
 ```
 wad, Fricklet
 ```
@@ -761,6 +763,6 @@ The identifier system currently has the following confidence levels:
 * [`json-structure.md`](json-structure.md) — JSON structure.
 * [`indexing.md`](indexing.md) — Object indexing and parent references.
 * [`properties.md`](properties.md) — Object properties.
-* [`../blocks/`](../blocks/) — Object and Part documentation.
-* [`../examples/experiments/`](../examples/experiments/) — Experimental saves and evidence.
+* [`../blocks/`](../blocks) — Object and Part documentation.
+* [`../examples/experiments/`](../examples/experiments) — Experimental saves and evidence.
 * [`../old-files/obj_ids-spanish.md`](../old-files/obj_ids-spanish.md) — Historical identifier research.

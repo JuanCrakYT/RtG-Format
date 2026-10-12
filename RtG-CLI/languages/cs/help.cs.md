@@ -1,11 +1,9 @@
-RtG-CLI — Nápověda
-===================
+# RtG-CLI — Nápověda
 
 RtG-CLI je rozhraní příkazového řádku ekosystému RtG-Format.
 Umožňuje objevovat a spouštět doplňky, dotazovat se na jazyky, zobrazovat pravidla a verze.
 
-Použití
---------
+## Použití
 
   rtg [VOLEBY] <PŘÍKAZ> [ARGUMENTY]
 
@@ -17,8 +15,7 @@ Použití
     rtg help image
 
 
-Systémové příkazy
-------------------
+## Systémové příkazy
 
   -h, --help        Zobrazí tuto obecnou nápovědu
   -v, --version     Zobrazí verzi RtG-CLI
@@ -31,8 +28,7 @@ Systémové příkazy
   --usage-<jazyk>   Zobrazí použití v konkrétním jazyce (např. --usage-es, --usage-en) (nové)
   -language <jazyk>   Nastaví jazyk úvodního textu (void)
 
-Příkaz: help
--------------
+## Příkaz: help
 
   rtg help                    # Obecná nápověda (tato obrazovka)
   rtg help <příkaz>           # Nápověda pro konkrétní příkaz/doplněk
@@ -53,8 +49,7 @@ Příkaz: help
     rtg help --usage-es
 
 
-Příkaz: version
-----------------
+## Příkaz: version
 
   rtg -v
   rtg --version
@@ -62,8 +57,7 @@ Příkaz: version
   Zobrazí verzi a obsah verze ve všech dostupných jazycích.
 
 
-Příkaz: rules
---------------
+## Příkaz: rules
 
   rtg -r
   rtg --rules
@@ -72,8 +66,7 @@ Příkaz: rules
   Ve výchozím nastavení používá první jazyk definovaný v 'rules' (španělština).
 
 
-Příkaz: lang
--------------
+## Příkaz: lang
 
   rtg -l
   rtg --lang
@@ -82,8 +75,7 @@ Příkaz: lang
   Version, Rules, Help, Void, a podle doplňku.
 
 
-Příkaz: commands
------------------
+## Příkaz: commands
 
   rtg -c
   rtg --commands
@@ -92,8 +84,7 @@ Příkaz: commands
   Neobsahuje příkazy doplňků.
 
 
-Příkaz: addons
----------------
+## Příkaz: addons
 
   rtg -a
   rtg --addons
@@ -102,8 +93,7 @@ Příkaz: addons
   Zaregistrovaný doplněk bez dokumentace se zde nezobrazí.
 
 
-Příkaz: usage
------------------
+## Příkaz: usage
 
   rtg -u
   rtg --usage
@@ -114,8 +104,7 @@ Příkaz: usage
   Jazyk musí existovat v 'void-language' v assets.json.
 
 
-Příkaz: language
------------------
+## Příkaz: language
 
   rtg -language <jazyk>
 
@@ -126,16 +115,14 @@ Příkaz: language
     rtg -language en
 
 
-Dostupné doplňky
------------------
+## Dostupné doplňky
 
   image      | RtG Image        - Obrázkový konvertor
   preview    | RtG Preview      - 3D prohlížeč sestav RtG-Format
   test-addon | RtG Test Addon   - Testovací doplněk pro validaci CLI
 
 
-Jazyky
--------
+## Jazyky
 
 Jazyky se označují jedním spojovníkem: -es, -en, -pt, atd.
 Jazyk nemění interní název příkazu.
@@ -152,8 +139,7 @@ Jazyk nemění interní název příkazu.
     rtg image -lang     # Jazyky doplňku (po doplňku)
 
 
-Argumenty doplňků
--------------------
+## Argumenty doplňků
 
 Po identifikaci doplňku jsou argumenty klasifikovány podle předpony:
 
@@ -168,8 +154,7 @@ Příklady:
   rtg image -en                    # -en -> RtG-CLI (výběr jazyku)
 
 
-Argumenty s mezerami
----------------------
+## Argumenty s mezerami
 
 Argumenty obsahující mezery musí být v uvozovkách:
 
@@ -178,8 +163,7 @@ Argumenty obsahující mezery musí být v uvozovkách:
 RtG-CLI zachovává pořadí argumentů a předává je tak, jak jsou, doplňku.
 
 
-Další informace
-------------------
+## Další informace
 
   rtg help <příkaz>      # Podrobná nápověda doplňku
   rtg help <příkaz> -lang  # Jazyky toho doplňku

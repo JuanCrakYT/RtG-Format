@@ -1,11 +1,9 @@
-RtG-CLI — Súgó
-================
+# RtG-CLI — Súgó
 
 RtG-CLI az RtG-Format ökoszisztéma parancssori felülete.
 Lehetővé teszi a kiegészítők felfedezését és futtatását, nyelvek lekérdezését, szabályok és verziók megtekintését.
 
-Használat
----------
+## Használat
 
   rtg [OPCIÓK] <PARANCS> [ARGUMENTUMOK]
 
@@ -17,8 +15,7 @@ Használat
     rtg help image
 
 
-Rendszerparancsok
-------------------
+## Rendszerparancsok
 
   -h, --help        Megjeleníti ezt az általános súgót
   -v, --version     Megjeleníti az RtG-CLI verzióját
@@ -31,8 +28,7 @@ Rendszerparancsok
   --usage-<nyelv>   Megjeleníti a használatot konkrét nyelven (pl. --usage-es, --usage-en) (új)
   -language <nyelv>   Beállítja a kezdőképernyő (void) nyelvét
 
-Parancs: help
---------------
+## Parancs: help
 
   rtg help                    # Általános súgó (ez a képernyő)
   rtg help <parancs>          # Egy adott parancs/kiegészítő súgója
@@ -53,8 +49,7 @@ Parancs: help
     rtg help --usage-es
 
 
-Parancs: version
------------------
+## Parancs: version
 
   rtg -v
   rtg --version
@@ -62,8 +57,7 @@ Parancs: version
   Megjeleníti a verziót és a verzió tartalmát minden elérhető nyelven.
 
 
-Parancs: rules
----------------
+## Parancs: rules
 
   rtg -r
   rtg --rules
@@ -72,8 +66,7 @@ Parancs: rules
   Alapértelmezetten az 'rules'-ban definiált első nyelvet használja (spanyol).
 
 
-Parancs: lang
---------------
+## Parancs: lang
 
   rtg -l
   rtg --lang
@@ -82,8 +75,7 @@ Parancs: lang
   Version, Rules, Help, Void, és kiegészítónként.
 
 
-Parancs: commands
-------------------
+## Parancs: commands
 
   rtg -c
   rtg --commands
@@ -92,8 +84,7 @@ Parancs: commands
   Nem tartalmazza a kiegészítők parancsait.
 
 
-Parancs: addons
-----------------
+## Parancs: addons
 
   rtg -a
   rtg --addons
@@ -102,8 +93,7 @@ Parancs: addons
   Dokumentáció nélküli regisztrált kiegészítő nem jelenik meg itt.
 
 
-Parancs: usage
------------------
+## Parancs: usage
 
   rtg -u
   rtg --usage
@@ -114,8 +104,7 @@ Parancs: usage
   A nyelvnek léteznie kell a 'void-language'-ben az assets.json-ban.
 
 
-Parancs: language
-------------------
+## Parancs: language
 
   rtg -language <nyelv>
 
@@ -126,16 +115,14 @@ Parancs: language
     rtg -language en
 
 
-Elérhető kiegészítők
----------------------
+## Elérhető kiegészítők
 
   image      | RtG Image        - Képkonverter
   preview    | RtG Preview      - 3D nézegető RtG-Format build-ekhez
   test-addon | RtG Test Addon   - Teszt kiegészítő a CLI validálásához
 
 
-Nyelvek
---------
+## Nyelvek
 
 A nyelveket egy kötőjellel jelöljük: -es, -en, -pt, stb.
 A nyelv nem változtatja a belső parancsnevet.
@@ -152,8 +139,7 @@ A nyelv nem változtatja a belső parancsnevet.
     rtg image -lang     # Kiegészítő nyelvek (kiegészítő után)
 
 
-Kiegészítő argumentumok
-------------------------
+## Kiegészítő argumentumok
 
 Egy kiegészítő azonosítása után az argumentumok az előtagjuk szerint vannak osztályozva:
 
@@ -168,8 +154,7 @@ Példák:
   rtg image -en                  # -en -> RtG-CLI (nyelvválasztó)
 
 
-Szóközzel rendelkező argumentumok
----------------------------------
+## Szóközzel rendelkező argumentumok
 
 Szóközt tartalmazó argumentumokat idézőjelek közé kell tenni:
 
@@ -177,8 +162,7 @@ Szóközt tartalmazó argumentumokat idézőjelek közé kell tenni:
 
 Az RtG-CLI megőrzi az argumentumok sorrendjét, és a kiegészítőnek átadja őket.
 
-További információk
---------------------
+## További információk
 
   rtg help <parancs>      # Egy kiegészítő részletes súgója
   rtg help <parancs> -lang  # Az adott kiegészítő nyelvei

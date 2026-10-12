@@ -58,6 +58,7 @@ rtg --lang
 ```
 
 Output categories:
+
 - Version (version-content)
 - Rules
 - Help

@@ -14,28 +14,30 @@ Thank you for helping improve RtG-Format. Contributions may include format resea
 
 Use consistent labels when documenting uncertain findings:
 
-- **Confirmed** — supported by repeatable tests or direct evidence.
-- **Partially confirmed** — observed, but important cases or details remain unverified.
-- **Unconfirmed** — plausible or reported, but not yet supported by enough evidence.
-- **Hypothesis** — an explanation proposed for testing, not an established fact.
+- **CONFIRMED** — supported by repeatable tests or direct evidence.
+- **PARTIALLY CONFIRMED** — observed, but important cases or details remain unverified.
+- **UNCONFIRMED** — plausible or reported, but not yet supported by enough evidence.
+- **HYPOTHESIS** — an explanation proposed for testing, not an established fact.
 
 When a finding changes, explain what new evidence caused the change. Do not silently erase contradictory observations.
+
+See the [documentation taxonomy](docs/documentation-taxonomy.md) for document types, ownership, naming, and migration rules.
 
 ## Where changes belong
 
 | Change | Preferred location |
 | --- | --- |
 | Main format overview and consolidated interpretation | [`SPECIFICATION.md`](SPECIFICATION.md) |
-| Specific JSON fields, identifiers, indexing, properties, and unknown fields | [`format/`](format/) |
-| Part IDs and categories | [`blocks/parts/`](blocks/parts/) |
-| Research procedure and unresolved questions | [`research/`](research/) |
-| Reproducible sample builds and experiments | [`examples/`](examples/) |
-| Encoding and compressed save representation | [`compression/`](compression/) |
-| Tools and utilities | [`tools/`](tools/) |
-| Browser-based 3D previewer | [`RtG-Preview/`](RtG-Preview/) |
-| RtG command-line tools | [`RtG-CLI/`](RtG-CLI/) |
-| RtG language implementation and examples | [`RtG Language/`](RtG%20Language/) |
-| Documentation website source | [`page/`](page/) |
+| Specific JSON fields, identifiers, indexing, properties, and unknown fields | [`format/`](format) |
+| Part IDs and categories | [`blocks/parts/`](blocks/parts) |
+| Research procedure and unresolved questions | [`research/`](research) |
+| Reproducible sample builds and experiments | [`examples/`](examples) |
+| Encoding and compressed save representation | [`compression/`](compression) |
+| Tools and utilities | [`tools/`](tools) |
+| Browser-based 3D previewer | [`RtG-Preview/`](RtG-Preview) |
+| RtG command-line tools | [`RtG-CLI/`](RtG-CLI) |
+| RtG language implementation and examples | [`RtG Language/`](RtG%20Language) |
+| Documentation website source | [`page/`](page) |
 
 Follow the README or contribution notes inside a component directory when they provide more specific instructions.
 

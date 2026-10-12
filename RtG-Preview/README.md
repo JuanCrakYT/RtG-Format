@@ -7,7 +7,7 @@ It allows RtG build data to be rendered interactively in a web browser without r
 ## Features
 
 * Render RtG builds as interactive 3D scenes.
-* Load 3D models from the repository's [`assets/models/`](../assets/models/) directory.
+* Load 3D models from the repository's [`assets/models/`](../assets/models) directory.
 * Support multiple objects in the same build.
 * Interactive mouse and touch camera controls.
 * Keyboard camera movement.
@@ -68,6 +68,7 @@ RtG-Preview works with the current RtG-Format JSON structure:
 ```
 
 Where:
+
 - **Type**: Object type name (e.g., "Part", "Servo", "Connector")
 - **Connections**: Array of `[LocalType, PrimaryID, PrimaryIndex]` tuples
   - `LocalType`: Numeric identifier for local connection type
@@ -273,7 +274,7 @@ RtG-Preview uses assets stored outside the renderer itself.
 
 Models are stored in:
 
-[`../assets/models/model/`](../assets/models/model/)
+[`../assets/models/model/`](../assets/models/model)
 
 The renderer currently uses Wavefront OBJ models with accompanying JSON metadata.
 
@@ -292,7 +293,7 @@ Models with branches (e.g., `Switch`, `Splitter_2`, `Gate-AND`, `DoorA-D`) inclu
 
 Interface sounds are stored in:
 
-[`../assets/sounds/`](../assets/sounds/)
+[`../assets/sounds/`](../assets/sounds)
 
 These include:
 
@@ -305,7 +306,7 @@ notification.mp3
 
 Interface graphics are stored in:
 
-[`../assets/svg/`](../assets/svg/)
+[`../assets/svg/`](../assets/svg)
 
 Current menu icons include:
 
@@ -435,5 +436,5 @@ Features that are not yet implemented should not be assumed to be represented vi
 * [`../assets/README.md`](../assets/README.md) — Documentation for repository assets.
 * [`../structure.md`](../structure.md) — Repository structure.
 * [`../SPECIFICATION.md`](../SPECIFICATION.md) — Current format specification.
-* [`../format/`](../format/) — Detailed format documentation.
-* [`../examples/`](../examples/) — Build examples.
+* [`../format/`](../format) — Detailed format documentation.
+* [`../examples/`](../examples) — Build examples.

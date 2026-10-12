@@ -1,11 +1,9 @@
-RtG-CLI — Hjälp
-================
+# RtG-CLI — Hjälp
 
 RtG-CLI är kommandoradsgränssnittet för RtG-Format-ekosystemet.
 Det gör det möjligt att upptäcka och köra tillägg, fråga efter språk, visa regler och versioner.
 
-Användning
------------
+## Användning
 
   rtg [ALTERNATIV] <KOMMANDO> [ARGUMENT]
 
@@ -17,8 +15,7 @@ Användning
     rtg help image
 
 
-Systemkommandon
-----------------
+## Systemkommandon
 
   -h, --help        Visar denna allmänna hjälp
   -v, --version     Visar RtG-CLI-versionen
@@ -31,8 +28,7 @@ Systemkommandon
   --usage-<språk>   Visar användning på specifikt språk (t.ex. --usage-es, --usage-en) (nytt)
   -language <språk>   Ställer in språket för starttexten (void)
 
-Kommando: help
----------------
+## Kommando: help
 
   rtg help                    # Allmän hjälp (den här skärmen)
   rtg help <kommando>         # Hjälp för ett specifikt kommando/tillägg
@@ -53,8 +49,7 @@ Kommando: help
     rtg help --usage-es
 
 
-Kommando: version
-------------------
+## Kommando: version
 
   rtg -v
   rtg --version
@@ -62,8 +57,7 @@ Kommando: version
   Visar version och versionsinnehåll på alla tillgängliga språk.
 
 
-Kommando: rules
-----------------
+## Kommando: rules
 
   rtg -r
   rtg --rules
@@ -72,8 +66,7 @@ Kommando: rules
   Som standard använder den det första språket definierat i 'rules' (spanska).
 
 
-Kommando: lang
----------------
+## Kommando: lang
 
   rtg -l
   rtg --lang
@@ -82,8 +75,7 @@ Kommando: lang
   Version, Rules, Help, Void, och per tillägg.
 
 
-Kommando: commands
---------------------
+## Kommando: commands
 
   rtg -c
   rtg --commands
@@ -92,8 +84,7 @@ Kommando: commands
   Inkluderar inte tilläggskommandon.
 
 
-Kommando: addons
------------------
+## Kommando: addons
 
   rtg -a
   rtg --addons
@@ -102,8 +93,7 @@ Kommando: addons
   Ett registrerat tillägg utan dokumentation visas inte här.
 
 
-Kommando: usage
------------------
+## Kommando: usage
 
   rtg -u
   rtg --usage
@@ -114,8 +104,7 @@ Kommando: usage
   Språket måste finnas i 'void-language' i assets.json.
 
 
-Kommando: language
---------------------
+## Kommando: language
 
   rtg -language <språk>
 
@@ -126,16 +115,14 @@ Kommando: language
     rtg -language en
 
 
-Tillgängliga tillägg
----------------------
+## Tillgängliga tillägg
 
   image      | RtG Image        - Bildkonverterare
   preview    | RtG Preview      - 3D-visare för RtG-Format-byggnader
   test-addon | RtG Test Addon   - Test-tillägg för CLI-validering
 
 
-Språk
-------
+## Språk
 
 Språk anges med ett enda bindestreck: -es, -en, -pt, etc.
 Språket ändrar inte det interna kommandonamnet.
@@ -152,8 +139,7 @@ Språket ändrar inte det interna kommandonamnet.
     rtg image -lang     # Tilläggsspråk (efter tillägget)
 
 
-Tilläggsargument
------------------
+## Tilläggsargument
 
 Efter att ett tillägg identifierats klassificeras argumenten efter prefix:
 
@@ -168,8 +154,7 @@ Exempel:
   rtg image -en                 # -en -> RtG-CLI (språkväljare)
 
 
-Argument med mellanslag
-------------------------
+## Argument med mellanslag
 
 Argument med mellanslag måste vara inom citattecken:
 
@@ -178,8 +163,7 @@ Argument med mellanslag måste vara inom citattecken:
 RtG-CLI bevahrar argumentordningen och skickar dem som de är till tillägget.
 
 
-Mer information
-----------------
+## Mer information
 
   rtg help <kommando>      # Detaljerad hjälp för ett tillägg
   rtg help <kommando> -lang  # Språk för det tillägget

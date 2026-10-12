@@ -1,11 +1,9 @@
-RtG-CLI — Hulp
-===============
+# RtG-CLI — Hulp
 
 RtG-CLI is de commandoregelinterface van het RtG-Format-ecosysteem.
 Het maakt het ontdekken en uitvoeren van addons, het opvragen van talen, en het bekijken van regels en versies mogelijk.
 
-Gebruik
---------
+## Gebruik
 
   rtg [OPTIES] <COMMANDO> [ARGUMENTEN]
 
@@ -17,8 +15,7 @@ Gebruik
     rtg help image
 
 
-Systeemcommando's
-------------------
+## Systeemcommando's
 
   -h, --help        Toont deze algemene hulp
   -v, --version     Toont de RtG-CLI-versie
@@ -31,8 +28,7 @@ Systeemcommando's
   --usage-<taal>    Toont gebruik in specifieke taal (bijv. --usage-es, --usage-en) (nieuw)
   -language <taal>   Stelt de taal van de opstarttekst (void) in
 
-Commando: help
----------------
+## Commando: help
 
   rtg help                    # Algemene hulp (dit scherm)
   rtg help <commando>         # Hulp voor een specifiek commando/addon
@@ -53,8 +49,7 @@ Commando: help
     rtg help --usage-es
 
 
-Commando: version
-------------------
+## Commando: version
 
   rtg -v
   rtg --version
@@ -62,8 +57,7 @@ Commando: version
   Toont de versie en versie-inhoud in alle beschikbare talen.
 
 
-Commando: rules
-----------------
+## Commando: rules
 
   rtg -r
   rtg --rules
@@ -72,8 +66,7 @@ Commando: rules
   Standaard gebruikt de eerste taal gedefinieerd in 'rules' (Spaans).
 
 
-Commando: lang
----------------
+## Commando: lang
 
   rtg -l
   rtg --lang
@@ -82,8 +75,7 @@ Commando: lang
   Version, Rules, Help, Void, en per addon.
 
 
-Commando: commands
---------------------
+## Commando: commands
 
   rtg -c
   rtg --commands
@@ -92,8 +84,7 @@ Commando: commands
   Bevat geen addon-commando's.
 
 
-Commando: addons
------------------
+## Commando: addons
 
   rtg -a
   rtg --addons
@@ -102,8 +93,7 @@ Commando: addons
   Een geregistreerde addon zonder documentatie verschijnt hier niet.
 
 
-Commando: usage
------------------
+## Commando: usage
 
   rtg -u
   rtg --usage
@@ -114,8 +104,7 @@ Commando: usage
   De taal moet bestaan in 'void-language' in assets.json.
 
 
-Commando: language
---------------------
+## Commando: language
 
   rtg -language <taal>
 
@@ -126,16 +115,14 @@ Commando: language
     rtg -language en
 
 
-Beschikbare addons
--------------------
+## Beschikbare addons
 
   image      | RtG Image        - Afbeeldingsconverter
   preview    | RtG Preview      - 3D-viewer voor RtG-Format builds
   test-addon | RtG Test Addon   - Test-addon voor CLI-validatie
 
 
-Talen
-------
+## Talen
 
 Talen worden aangeduid met een enkele koppelteken: -es, -en, -pt, etc.
 De taal verandert niet de interne commando-naam.
@@ -152,8 +139,7 @@ De taal verandert niet de interne commando-naam.
     rtg image -lang     # Addon-talen (na de addon)
 
 
-Addon-argumenten
------------------
+## Addon-argumenten
 
 Na identificatie van een addon worden argumenten geclassificeerd op voorvoegsel:
 
@@ -168,8 +154,7 @@ Voorbeelden:
   rtg image -en                     # -en -> RtG-CLI (taalselector)
 
 
-Argumenten met spaties
-------------------------
+## Argumenten met spaties
 
 Argumenten met spaties moeten tussen aanhalingstekens:
 
@@ -178,8 +163,7 @@ Argumenten met spaties moeten tussen aanhalingstekens:
 RtG-CLI behoudt de argumentvolgorde en geeft ze ongewijzigd door aan de addon.
 
 
-Meer informatie
-----------------
+## Meer informatie
 
   rtg help <commando>      # Gedetailleerde hulp voor een addon
   rtg help <commando> -lang  # Talen van die addon

@@ -1,176 +1,31 @@
 # Research
 
-This folder contains the research documentation produced during the reverse-engineering of the RtG save/build format.
-
-The documents here focus on **how the format was investigated, what has been discovered, and what is still unknown**.
-
-Research is based primarily on reproducible experiments using real RtG saves.
-
----
+This directory records the process and results of reverse-engineering the RtG save/build format. It is intended to answer three separate questions: **how was it investigated, what is supported by evidence, and what remains unresolved?**
 
 ## Documents
 
-### [`discoveries.md`](discoveries.md)
+| Document | Purpose |
+| --- | --- |
+| [`methodology.md`](methodology.md) | Experimental design, variable isolation, evidence recording, and evaluation |
+| [`discoveries.md`](discoveries.md) | Findings supported by the observations described in the research |
+| [`unknowns.md`](unknowns.md) | Open questions, partially understood behavior, and hypotheses still needing tests |
 
-Records the major discoveries made during the reverse-engineering process.
-It contains conclusions that are supported by experimental evidence, while avoiding implementation details that have not been confirmed.
+## Recommended workflow
 
-Use this file to see **what has been discovered**.
+1. State a specific question and the behavior that would distinguish possible explanations.
+2. Create a minimal test build and preserve the original sample.
+3. Change one relevant variable at a time.
+4. Compare the resulting data and record the exact observed differences.
+5. Repeat the experiment or test additional cases.
+6. State the conclusion, confidence level, limitations, and reproduction steps.
+7. Update the consolidated [specification](../SPECIFICATION.md) and relevant [format reference](../format/README.md) only when the evidence supports doing so.
 
----
+## Evidence discipline
 
-### [`unknowns.md`](unknowns.md)
+- Distinguish direct observations from interpretations.
+- Do not describe an untested explanation as confirmed behavior.
+- Preserve contradictory results and explain what remains uncertain.
+- Link experiments or sample files when available.
+- Keep historical material under [`old-files/`](../old-files) unchanged.
 
-Records questions and behaviors that are still unknown, partially understood, or under investigation.
-A subject should remain here until sufficient evidence exists to document it confidently elsewhere.
-
-Use this file to see **what is still unknown**.
-
----
-
-### [`methodology.md`](methodology.md)
-
-Documents the methodology used to perform the reverse-engineering experiments.
-It explains how experiments should be designed, how evidence should be recorded, how variables should be isolated, and how conclusions should be evaluated.
-
-Use this file to see **how discoveries are made and verified**.
-
----
-
-## Research Workflow
-
-The research process can be summarized as:
-
-```mermaid
-flowchart TD
-
-    QUESTION["❓ Question"] --> MINIMAL["🧪 Minimal Test Build"]
-    MINIMAL --> ORIGINAL["💾 Original Save"]
-    ORIGINAL --> MODIFICATION["🔧 Controlled Modification"]
-    MODIFICATION --> DIFF["🔍 Raw JSON Diff"]
-    DIFF --> LOAD["🎮 Load in RtG"]
-    LOAD --> OBSERVE["👁️ Observe Behavior"]
-    OBSERVE --> REPEAT["🔁 Repeat / Verify"]
-    REPEAT --> CONCLUSION["📋 Conclusion"]
-
-    CONCLUSION --> DECISION{"🔬 Evidence Sufficient?"}
-
-    DECISION -->|"Yes"| CONFIRMED["✅ Confirmed Discovery"]
-    CONFIRMED --> DISCOVERIES["📚 discoveries.md"]
-
-    DECISION -->|"No"| UNRESOLVED["❓ Still Unresolved"]
-    UNRESOLVED --> UNKNOWNS["❔ unknowns.md"]
-
-    classDef question fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
-    classDef experiment fill:#dd6b20,color:#fff,stroke:#9c4221,stroke-width:2px;
-    classDef evidence fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
-    classDef load fill:#38a169,color:#fff,stroke:#276749,stroke-width:2px;
-    classDef observation fill:#319795,color:#fff,stroke:#285e61,stroke-width:2px;
-    classDef conclusion fill:#d69e2e,color:#744210,stroke:#975a16,stroke-width:2px;
-    classDef decision fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
-    classDef confirmed fill:#38a169,color:#fff,stroke:#276749,stroke-width:3px;
-    classDef unresolved fill:#e53e3e,color:#fff,stroke:#9b2c2c,stroke-width:3px;
-    classDef docs fill:#edf2f7,color:#1a202c,stroke:#a0aec0,stroke-width:2px;
-
-    class QUESTION question;
-    class MINIMAL,MODIFICATION experiment;
-    class ORIGINAL,DIFF evidence;
-    class LOAD load;
-    class OBSERVE,REPEAT observation;
-    class CONCLUSION conclusion;
-    class DECISION decision;
-    class CONFIRMED confirmed;
-    class UNRESOLVED unresolved;
-    class DISCOVERIES,UNKNOWNS docs;
-```
-
-The detailed procedure is documented in [`methodology.md`](methodology.md).
-
----
-
-## Evidence
-
-Research should be based on evidence whenever possible.
-
-Relevant experimental evidence is stored under:
-
-```md
-examples/experiments/
-```
-
-Historical research is preserved under:
-
-```md
-old-files/
-```
-
-The historical files are important references, but current documentation should distinguish between:
-
-* historical observations;
-* reproducible experimental results;
-* confirmed conclusions;
-* hypotheses;
-* unresolved questions.
-
----
-
-## Relationship With Other Documentation
-
-The `research/` folder is not intended to replace the technical documentation.
-
-Instead, the project is organized approximately as:
-
-```mermaid
-flowchart TD
-
-    RESEARCH["🔬 research/"] --> METHODOLOGY["📋 methodology.md"]
-    RESEARCH --> DISCOVERIES["💡 discoveries.md"]
-    RESEARCH --> UNKNOWNS["❓ unknowns.md"]
-
-    METHODOLOGY --> EXPERIMENTAL["🧪 Experimental Research"]
-    DISCOVERIES --> EXPERIMENTAL
-    UNKNOWNS --> EXPERIMENTAL
-
-    EXPERIMENTAL --> FORMAT["📁 format/"]
-    FORMAT --> SPEC["📘 SPECIFICATION.md"]
-
-    classDef research fill:#805ad5,color:#fff,stroke:#553c9a,stroke-width:3px;
-    classDef researchFile fill:#2b6cb0,color:#fff,stroke:#2c5282,stroke-width:2px;
-    classDef experimental fill:#dd6b20,color:#fff,stroke:#9c4221,stroke-width:3px;
-    classDef format fill:#319795,color:#fff,stroke:#285e61,stroke-width:2px;
-    classDef spec fill:#38a169,color:#fff,stroke:#276749,stroke-width:3px;
-
-    class RESEARCH research;
-    class METHODOLOGY,DISCOVERIES,UNKNOWNS researchFile;
-    class EXPERIMENTAL experimental;
-    class FORMAT format;
-    class SPEC spec;
-```
-
-### `research/`
-
-Explains the **investigation and evidence**.
-
-### `format/`
-
-Explains the **current understanding of individual parts of the format**.
-
-### `SPECIFICATION.md`
-
-Provides the **consolidated technical specification**.
-
-### `examples/experiments/`
-
-Contains the **actual experimental saves and their results**.
-
-### `old-files/`
-
-Preserves the **historical reverse-engineering record**.
-
----
-
-## Important Rule
-
-> **Research documents should describe what the evidence supports, not what the format merely appears to mean.**
-
-When new evidence contradicts an existing conclusion, the documentation should be updated rather than forcing the new evidence to fit the old interpretation.
+Research is not complete merely because an explanation is plausible. The goal is a traceable, reproducible account of what the available evidence supports.

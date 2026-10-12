@@ -4,20 +4,20 @@ This directory reorganizes historical reverse-engineering data about Road to Gra
 
 Important:
 
-- Source of historical connection IDs: [`../old-files/obj_ids-spanish.md`](../old-files/obj_ids-spanish.md) (preserved intact).
+- Source of historical connection IDs: [`../../old-files/obj_ids-spanish.md`](../../old-files/obj_ids-spanish.md) (preserved intact).
 - Category classification is based on the Road to Gramby's public wiki and cross-checked against the historical file. When the wiki and historical evidence disagree, the historical evidence is preserved and noted.
 - See the category folders below for per-category tables and notes.
 
 Categories:
 
-- [`uncategorized/`](uncategorized/)
-- [`physics/`](physics/)
-- [`building/`](building/)
-- [`wiring/`](wiring/)
-- [`tools/`](tools/)
-- [`miscellaneous/`](miscellaneous/)
-- [`other/`](other/)
-- [`unused/`](unused/)
+- [`uncategorized/`](uncategorized)
+- [`physics/`](physics)
+- [`building/`](building)
+- [`wiring/`](wiring)
+- [`tools/`](tools)
+- [`miscellaneous/`](miscellaneous)
+- [`other/`](other)
+- [`unused/`](unused)
 
 Top-level consolidated extraction is preserved in [`parts-id.md`](parts-id.md).
 Images on: `blocks/parts/.../imgs/<blockname>.png`.

@@ -1,0 +1,51 @@
+name: Research observation or question
+description: Record a reproducible observation, conflicting evidence, or an open format question.
+title: "[Research]: "
+labels: ["research"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Separate what you observed from what you think it means. A plausible explanation is not confirmed until the evidence distinguishes it from alternatives.
+  - type: input
+    id: question
+    attributes:
+      label: Research question
+      placeholder: What behavior or field is being investigated?
+    validations:
+      required: true
+  - type: textarea
+    id: setup
+    attributes:
+      label: Sample and setup
+      description: Identify the save, build, tool version, or conditions used.
+    validations:
+      required: true
+  - type: textarea
+    id: procedure
+    attributes:
+      label: Reproduction steps
+      description: Record the controlled change and how another person can repeat it.
+    validations:
+      required: true
+  - type: textarea
+    id: observations
+    attributes:
+      label: Direct observations
+      description: Include before/after results or relevant evidence. Avoid interpretations in this field.
+    validations:
+      required: true
+  - type: textarea
+    id: interpretation
+    attributes:
+      label: Interpretation and confidence
+      description: State what the evidence supports, what remains uncertain, and competing explanations.
+    validations:
+      required: true
+  - type: checkboxes
+    id: archive
+    attributes:
+      label: Archive safety
+      options:
+        - label: I am not requesting changes to old-files/.
+          required: true

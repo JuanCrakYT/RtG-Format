@@ -343,8 +343,7 @@ The **logical object index stored in RtG references is 1-based**.
 | 3             | 4                 |
 | ...           | ...               |
 
-This distinction is critical when parsing or generating saves.
----
+## This distinction is critical when parsing or generating saves.
 
 ## 9. Properties
 
@@ -600,6 +599,6 @@ Those topics are documented separately.
 * [`indexing.md`](indexing.md) — Detailed indexing rules.
 * [`identifiers.md`](identifiers.md) — IDs, `LocalType`, `PrimaryID`, and UUIDs.
 * [`properties.md`](properties.md) — Property behavior.
-* [`../blocks/`](../blocks/) — Object and block documentation.
-* [`../examples/experiments/`](../examples/experiments/) — Experimental saves and evidence.
-* [`../old-files/`](../old-files/) — Historical reverse-engineering records.
+* [`../blocks/`](../blocks) — Object and block documentation.
+* [`../examples/experiments/`](../examples/experiments) — Experimental saves and evidence.
+* [`../old-files/`](../old-files) — Historical reverse-engineering records.
