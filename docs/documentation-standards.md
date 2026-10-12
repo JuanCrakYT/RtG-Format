@@ -57,3 +57,27 @@ Before merging a documentation change:
 - [ ] The change does not duplicate an existing canonical explanation.
 - [ ] Any generated content is identified and handled through its documented process.
 - [ ] `old-files/` is unchanged.
+
+
+## Standard templates
+
+Use the matching starter document when creating a new page:
+
+- [Reference or schema page](templates/reference.md)
+- [Research note](templates/research-note.md)
+- [Experiment or example](templates/experiment.md)
+- [Tool or component guide](templates/tool-guide.md)
+
+Templates are starting points, not mandatory boilerplate. Remove sections that do not apply and never fill gaps with invented technical claims.
+
+## Markdown style contract
+
+- Use a single descriptive H1 title, followed by H2 sections and H3 subsections.
+- Prefer ATX headings (for example, `## Structure`) over underline-style headings.
+- Add blank lines around headings and between separate paragraphs, lists, and tables.
+- Use language-tagged fenced code blocks where the language is known.
+- Keep source language for translated CLI help; do not translate identifiers, command flags, file paths, or serialized keys.
+- Preserve meaningful Markdown hard breaks and code-block whitespace.
+- End the file with a newline.
+- Check relative links after moving or renaming any document.
+- Do not edit, move, rename, or reformat `old-files/`; do not normalize third-party files in dependency directories.

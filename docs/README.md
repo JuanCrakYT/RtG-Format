@@ -37,7 +37,7 @@ This directory contains introductory and cross-cutting guides. The canonical tec
 | [Research](../research/README.md) | Methods, findings, and open questions |
 | [Examples](../examples/README.md) | Sample data and reproducible experiments |
 | [Assets](../assets/README.md) | Models, images, and supporting files |
-| [Repository structure](../structure.md) | Directory responsibilities and maintenance rules |
+| [Repository structure](repository-structure.md) | Directory responsibilities and maintenance rules |
 | [Documentation standards](documentation-standards.md) | Structure, evidence, examples, and review checklist |
 
 ## How to read technical claims

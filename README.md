@@ -25,7 +25,7 @@ The project investigates how RtG builds are represented, connected, serialized, 
 | If you want to… | Start with |
 | --- | --- |
 | Understand the currently documented format | [Specification](SPECIFICATION.md) |
-| Learn how the repository is organized | [Repository map](structure.md) |
+| Learn how the repository is organized | [Repository map](docs/repository-structure.md) |
 | Follow a beginner-friendly reading path | [Documentation index](docs/README.md) |
 | Explore field-level format details | [Format reference](format/README.md) |
 | Find object/part identifiers | [Parts ID reference](blocks/parts/parts-id.md) |
