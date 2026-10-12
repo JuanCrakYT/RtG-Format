@@ -1525,3 +1525,7 @@ RtG-Format
 ```
 
 El lenguaje debe hacer que escribir RtG-Format sea más fácil, sin alterar las reglas fundamentales del formato.
+
+## Detailed documentation
+
+The topic-specific language notes are indexed in [RtG-Language Documentation](docs/README.md).

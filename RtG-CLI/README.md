@@ -347,3 +347,8 @@ MIT License — Ver `LICENSE` en raíz del repo.
 ## Localized documentation
 
 The per-locale help, rules, and startup text is indexed in [Localized Documentation](languages/README.md). Preserve locale codes and filenames because these Markdown files may be consumed by the CLI.
+
+
+## Detailed documentation
+
+See [Component Documentation](docs/README.md) for the architecture and command references, and [Localized Documentation](languages/README.md) for per-locale help text.
