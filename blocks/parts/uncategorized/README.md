@@ -4,8 +4,10 @@ This directory contains historical items that could not be confidently assigned 
 See [`parts-id.md`](parts-id.md) for the consolidated Part ID reference.
 
 What this contains
+
 - Names and notes copied from `old-files/obj_ids-spanish.md` for items without a clear wiki category or where historical evidence conflicts with wiki classification.
 
 Notes
+
 - Preserve historical data exactly; do not modify `old-files/` documents.
 - New documentation explicitly states: RtG uses 1-based indexing for references.

@@ -1,11 +1,9 @@
-RtG-CLI — 説明
-=================
+# RtG-CLI — 説明
 
 RtG-CLI 是 RtG-Format 生態系統的命令列介面。
 它允許發現和執行外掛、查詢語言、查看規則和版本。
 
-用法
------
+## 用法
 
   rtg [選項] <指令> [參數]
 
@@ -17,8 +15,7 @@ RtG-CLI 是 RtG-Format 生態系統的命令列介面。
     rtg help image
 
 
-系統指令
-----------
+## 系統指令
 
   -h, --help        顯示此通用說明
   -v, --version     顯示 RtG-CLI 版本
@@ -28,8 +25,7 @@ RtG-CLI 是 RtG-Format 生態系統的命令列介面。
   -a, --addons      列出具有用戶可見文件的外掛
   -language <語言>    設定啟動文字 (void) 的語言
 
-指令: help
--------------
+## 指令: help
 
   rtg help                    # 通用說明 (此畫面)
   rtg help <指令>             # 特定指令/外掛的說明
@@ -42,8 +38,7 @@ RtG-CLI 是 RtG-Format 生態系統的命令列介面。
     rtg help image -lang
 
 
-指令: version
------------------
+## 指令: version
 
   rtg -v
   rtg --version
@@ -51,8 +46,7 @@ RtG-CLI 是 RtG-Format 生態系統的命令列介面。
   顯示版本以及所有可用語言的版本內容。
 
 
-指令: rules
---------------
+## 指令: rules
 
   rtg -r
   rtg --rules
@@ -61,8 +55,7 @@ RtG-CLI 是 RtG-Format 生態系統的命令列介面。
   預設使用 'rules' 中定義的第一種語言 (西班牙語)。
 
 
-指令: lang
--------------
+## 指令: lang
 
   rtg -l
   rtg --lang
@@ -71,8 +64,7 @@ RtG-CLI 是 RtG-Format 生態系統的命令列介面。
   Version, Rules, Help, Void, 以及每個外掛。
 
 
-指令: commands
-------------------
+## 指令: commands
 
   rtg -c
   rtg --commands
@@ -81,8 +73,7 @@ RtG-CLI 是 RtG-Format 生態系統的命令列介面。
   不包含外掛指令。
 
 
-指令: addons
----------------
+## 指令: addons
 
   rtg -a
   rtg --addons
@@ -91,8 +82,7 @@ RtG-CLI 是 RtG-Format 生態系統的命令列介面。
   沒有文件的已註冊外掛不會顯示在這裡。
 
 
-指令: language
------------------
+## 指令: language
 
   rtg -language <語言>
 
@@ -103,16 +93,14 @@ RtG-CLI 是 RtG-Format 生態系統的命令列介面。
     rtg -language en
 
 
-可用外掛
-------------
+## 可用外掛
 
   image      | RtG Image        - 影像轉換器
   preview    | RtG Preview      - RtG-Format 建構的 3D 檢視器
   test-addon | RtG Test Addon   - 用於 CLI 驗證的測試外掛
 
 
-語言
-------
+## 語言
 
 語言用單一連字符表示: -es, -en, -pt 等。
 語言不會更改內部指令名稱。
@@ -129,8 +117,7 @@ RtG-CLI 是 RtG-Format 生態系統的命令列介面。
     rtg image -lang     # 外掛語言 (外掛後)
 
 
-外掛參數
------------
+## 外掛參數
 
 識別外掛後, 參數按前綴分類:
 
@@ -145,8 +132,7 @@ RtG-CLI 是 RtG-Format 生態系統的命令列介面。
   rtg image -en                  # -en -> RtG-CLI (語言選擇器)
 
 
-帶空格的參數
----------------
+## 帶空格的參數
 
 包含空格的參數必須用引號括起:
 
@@ -155,8 +141,7 @@ RtG-CLI 是 RtG-Format 生態系統的命令列介面。
 RtG-CLI 保留參數順序並按原樣傳遞給外掛。
 
 
-更多資訊
-------------
+## 更多資訊
 
   rtg help <指令>      # 外掛的詳細說明
   rtg help <指令> -lang  # 該外掛的語言

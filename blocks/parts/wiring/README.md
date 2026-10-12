@@ -4,9 +4,11 @@ This directory contains wiring parts (gates, sensors, wires, splitters, etc.) or
 See [`parts-id.md`](parts-id.md) for the consolidated Part ID reference.
 
 What this contains
+
 - Per-part tables for wiring parts that have documented connection IDs in the historical file.
 - A category index summarizing wiring-related items and historical evidence.
 
 Notes
+
 - Wiki descriptions are organizational; connection IDs come from the historical reverse-engineering file.
 - New docs state: RtG uses 1-based indexing for references. Do not modify historical files.

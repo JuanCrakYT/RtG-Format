@@ -3,9 +3,11 @@
 This folder is intended to hold real save examples and curated minimal builds for tests and demonstrations.
 
 Rules
+
 - Do NOT create or add fabricated saves. Only include JSON files with provenance and evidence.
 - If an example can't be loaded, delete the example folder
 - All the examples need a folder on `examples/json-examples/` with this structure:
+
 ```tree
 <name>/
 │
@@ -17,6 +19,7 @@ Rules
 ```
 
 ## Undocumented Builds
+
 The undocumented builds are a collection of JSON files that have been extracted from Roblox games and are not officially documented. 
 These builds may contain unique features, structures, or configurations that are not commonly found in standard builds.
 

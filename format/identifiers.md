@@ -255,6 +255,7 @@ The following LocalType values were observed across 100+ save files by the RtG-A
 | YibYib            | ["2"]                     |
 
 ### Objects with NO LocalType
+
 ```
 Chassis, Fricklet, wad
 ```
@@ -568,6 +569,7 @@ See [`../old-files/rtg-ai-tokens.md`](../old-files/rtg-ai-tokens.md#4-localids-c
 | YibYib            | ["2"]                                                                                                                                                                  |
 
 ### Objects with NO LocalIDs
+
 ```
 wad, Fricklet
 ```

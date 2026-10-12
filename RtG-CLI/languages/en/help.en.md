@@ -1,11 +1,9 @@
-RtG-CLI — Help
-===============
+# RtG-CLI — Help
 
 RtG-CLI is the command-line interface for the RtG-Format ecosystem.
 It allows discovering and executing addons, querying languages, viewing rules and version.
 
-Usage
------
+## Usage
 
   rtg [OPTIONS] <COMMAND> [ARGUMENTS]
 
@@ -17,8 +15,7 @@ Usage
     rtg help image
 
 
-System Commands
-----------------
+## System Commands
 
   -h, --help        Show this general help
   -v, --version     Show RtG-CLI version
@@ -31,8 +28,7 @@ System Commands
   --usage-<lang>    Show usage in specific language (e.g. --usage-es, --usage-en) (new)
   -language <lang>  Set the startup (void) text language
 
-Command: help
---------------
+## Command: help
 
   rtg help                    # General help (this screen)
   rtg help <command>          # Help for a specific command/addon
@@ -53,8 +49,7 @@ Command: help
     rtg help --usage-es
 
 
-Command: version
------------------
+## Command: version
 
   rtg -v
   rtg --version
@@ -62,8 +57,7 @@ Command: version
   Shows version and version content in all available languages.
 
 
-Command: rules
----------------
+## Command: rules
 
   rtg -r
   rtg --rules
@@ -72,8 +66,7 @@ Command: rules
   Defaults to first language defined in 'rules' (Spanish).
 
 
-Command: lang
---------------
+## Command: lang
 
   rtg -l
   rtg --lang
@@ -82,8 +75,7 @@ Command: lang
   Version, Rules, Help, Void, and per addon.
 
 
-Command: commands
-------------------
+## Command: commands
 
   rtg -c
   rtg --commands
@@ -92,8 +84,7 @@ Command: commands
   Does not include addon commands.
 
 
-Command: addons
-----------------
+## Command: addons
 
   rtg -a
   rtg --addons
@@ -102,8 +93,7 @@ Command: addons
   A registered addon without documentation does not appear here.
 
 
-Command: usage
------------------
+## Command: usage
 
   rtg -u
   rtg --usage
@@ -114,8 +104,7 @@ Command: usage
   The language must exist in 'void-language' in assets.json.
 
 
-Command: language
-------------------
+## Command: language
 
   rtg -language <language>
 
@@ -126,16 +115,14 @@ Command: language
     rtg -language en
 
 
-Available Addons
------------------
+## Available Addons
 
   image      | RtG Image        - Image converter
   preview    | RtG Preview      - 3D viewer for RtG-Format builds
   test-addon | RtG Test Addon   - Test addon for CLI validation
 
 
-Languages
-----------
+## Languages
 
 Languages are indicated with a single hyphen: -es, -en, -pt, etc.
 The language does not change the internal command name.
@@ -152,8 +139,7 @@ The language does not change the internal command name.
     rtg image -lang     # Addon languages (after addon)
 
 
-Addon Arguments
-----------------
+## Addon Arguments
 
 After identifying an addon, arguments are classified by prefix:
 
@@ -168,8 +154,7 @@ Examples:
   rtg image -en                  # -en -> RtG-CLI (language selector)
 
 
-Arguments with Spaces
-----------------------
+## Arguments with Spaces
 
 Arguments containing spaces must be quoted:
 
@@ -178,8 +163,7 @@ Arguments containing spaces must be quoted:
 RtG-CLI preserves argument order and passes them as-is to the addon.
 
 
-More Information
------------------
+## More Information
 
   rtg help <command>      # Detailed help for an addon
   rtg help <command> -lang  # Languages for that addon

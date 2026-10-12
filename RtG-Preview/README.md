@@ -68,6 +68,7 @@ RtG-Preview works with the current RtG-Format JSON structure:
 ```
 
 Where:
+
 - **Type**: Object type name (e.g., "Part", "Servo", "Connector")
 - **Connections**: Array of `[LocalType, PrimaryID, PrimaryIndex]` tuples
   - `LocalType`: Numeric identifier for local connection type

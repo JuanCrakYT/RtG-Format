@@ -343,8 +343,7 @@ The **logical object index stored in RtG references is 1-based**.
 | 3             | 4                 |
 | ...           | ...               |
 
-This distinction is critical when parsing or generating saves.
----
+## This distinction is critical when parsing or generating saves.
 
 ## 9. Properties
 

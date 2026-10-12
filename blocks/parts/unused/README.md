@@ -4,5 +4,6 @@ This directory records parts listed as unused on the Road to Gramby's Wiki. Thes
 See [`parts-id.md`](parts-id.md) for the consolidated Part ID reference.
 
 Notes
+
 - Entries are marked `CONFIRMED` according to the updated Spanish source and may still be classified as unused by the wiki.
 - New documentation states RtG uses 1-based indexing for references.

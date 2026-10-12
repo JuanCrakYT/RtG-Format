@@ -9,4 +9,3 @@ This directory contains complete tree listings for tool directories that are too
 ## Listing rule
 
 Tool directories with more than 10 entries are represented by `...` in `structure.md` and documented here with a dedicated `.tree` file named after the directory. Smaller directories remain expanded in `structure.md`.
-

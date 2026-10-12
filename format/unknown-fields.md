@@ -494,21 +494,25 @@ These tokens are required by the T5 tokenizer architecture:
 The tokenizer's character-level vocabulary includes:
 
 #### Hex Characters
+
 ```
 a, b, c, d, e, f, A, B, C, D, E, F
 ```
 
 #### Numbers
+
 ```
 1, 2, 3, 4, 5, 6, 7, 8, 9, 0
 ```
 
 #### Symbols
+
 ```
 -, .
 ```
 
 #### JSON Structural Characters
+
 ```
 ", {, }, [, ], :, ,
 ```

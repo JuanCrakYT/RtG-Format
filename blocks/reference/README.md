@@ -3,6 +3,7 @@
 This directory contains structured documentation for all known RtG blocks (objects/parts).
 
 Each block has its own documentation file with:
+
 - Basic identification (name, identifier, model)
 - Connection points
 - Properties
