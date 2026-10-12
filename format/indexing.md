@@ -523,5 +523,5 @@ The most important rule is:
 * [`../SPECIFICATION.md`](../SPECIFICATION.md) — Complete format specification.
 * [`json-structure.md`](json-structure.md) — JSON structure.
 * [`identifiers.md`](identifiers.md) — Object identifiers and connection references.
-* [`../examples/experiments/`](../examples/experiments/) — Experimental saves and evidence.
-* [`../old-files/`](../old-files/) — Historical reverse-engineering records.
+* [`../examples/experiments/`](../examples/experiments) — Experimental saves and evidence.
+* [`../old-files/`](../old-files) — Historical reverse-engineering records.

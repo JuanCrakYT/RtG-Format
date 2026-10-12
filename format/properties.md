@@ -477,6 +477,6 @@ Do not infer a property's meaning solely from its name.
 * [`../SPECIFICATION.md`](../SPECIFICATION.md) — Complete format specification.
 * [`json-structure.md`](json-structure.md) — JSON object structure.
 * [`identifiers.md`](identifiers.md) — IDs, UUIDs, and references.
-* [`../examples/experiments/`](../examples/experiments/) — Reproducible experiments.
+* [`../examples/experiments/`](../examples/experiments) — Reproducible experiments.
 * [`../old-files/RtG_Save_Format_Specification-spanish.md`](../old-files/RtG_Save_Format_Specification-spanish.md) — Historical specification.
 * [`../old-files/obj_ids-spanish.md`](../old-files/obj_ids-spanish.md) — Historical object research.

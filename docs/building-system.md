@@ -21,7 +21,7 @@ These concepts are documented in more detail throughout the repository.
 
 ## Parts and Object IDs
 
-See [`../blocks/`](../blocks/) for the organized Part documentation and object ID references.
+See [`../blocks/`](../blocks) for the organized Part documentation and object ID references.
 
 The historical ID research is preserved in:
 

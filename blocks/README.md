@@ -11,7 +11,7 @@ This directory organizes block/part identifiers and related reference material f
 
 Categories are organizational aids. A category name does not prove how an object is serialized or behaves internally. IDs, connection points, properties, and other reverse-engineered details must be supported by observations or reproducible research.
 
-Historical material in [`old-files/`](../old-files/) is retained for provenance. It must not be edited, translated, renamed, moved, reformatted, or deleted as part of routine maintenance. Use it as historical context, and verify claims against the maintained references and available evidence.
+Historical material in [`old-files/`](../old-files) is retained for provenance. It must not be edited, translated, renamed, moved, reformatted, or deleted as part of routine maintenance. Use it as historical context, and verify claims against the maintained references and available evidence.
 
 ## Contributing a part finding
 

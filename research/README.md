@@ -26,6 +26,6 @@ This directory records the process and results of reverse-engineering the RtG sa
 - Do not describe an untested explanation as confirmed behavior.
 - Preserve contradictory results and explain what remains uncertain.
 - Link experiments or sample files when available.
-- Keep historical material under [`old-files/`](../old-files/) unchanged.
+- Keep historical material under [`old-files/`](../old-files) unchanged.
 
 Research is not complete merely because an explanation is plausible. The goal is a traceable, reproducible account of what the available evidence supports.

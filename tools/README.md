@@ -20,6 +20,6 @@ Repository-maintenance scripts and migration data. See [`agent/README.md`](agent
 
 ## Directory structure documentation
 
-Directories with more than 10 entries are abbreviated as `...` in the repository-level [`structure.md`](../structure.md). Their complete trees are stored in [`dedicated-structure/`](dedicated-structure/).
+Directories with more than 10 entries are abbreviated as `...` in the repository-level [`structure.md`](../structure.md). Their complete trees are stored in [`dedicated-structure/`](dedicated-structure).
 
 Directories with 10 or fewer entries may be expanded directly in `structure.md`.

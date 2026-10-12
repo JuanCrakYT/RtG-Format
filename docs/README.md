@@ -29,7 +29,7 @@ This directory contains introductory and cross-cutting guides. The canonical tec
 - [RtG-CLI](../RtG-CLI/README.md) — command-line interface and its component documentation.
 - [RtG-Preview](../RtG-Preview/README.md) — browser-based build previewer.
 - [RtG Language](../RtG%20Language/README.md) — language implementation and examples.
-- [Tools directory](../tools/) — utility and research tooling.
+- [Tools directory](../tools) — utility and research tooling.
 
 ## Reference areas
 
@@ -52,4 +52,4 @@ This directory contains introductory and cross-cutting guides. The canonical tec
 
 Reverse-engineering conclusions can have different levels of certainty. Check the evidence and confidence label attached to a claim, and follow links to the underlying experiment where available. A plausible interpretation is not a confirmed format rule.
 
-Historical material under [`old-files/`](../old-files/) is preserved for provenance. It is not part of the maintained documentation workflow and must not be edited as part of ordinary cleanup.
+Historical material under [`old-files/`](../old-files) is preserved for provenance. It is not part of the maintained documentation workflow and must not be edited as part of ordinary cleanup.

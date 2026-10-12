@@ -428,7 +428,7 @@ Relevant sources include:
 
 * [`../old-files/RtG_Save_Format_Specification-spanish.md`](../old-files/RtG_Save_Format_Specification-spanish.md)
 * [`../old-files/obj_ids-spanish.md`](../old-files/obj_ids-spanish.md)
-* [`../examples/experiments/`](../examples/experiments/)
+* [`../examples/experiments/`](../examples/experiments)
 
 Historical observations should be preserved even when their meaning remains unknown.
 
@@ -526,6 +526,6 @@ a, b, c, d, e, f, A, B, C, D, E, F
 * [`json-structure.md`](json-structure.md) — JSON structure.
 * [`indexing.md`](indexing.md) — Object indexing.
 * [`../SPECIFICATION.md`](../SPECIFICATION.md) — Complete format specification.
-* [`../examples/experiments/`](../examples/experiments/) — Experimental evidence.
-* [`../old-files/`](../old-files/) — Historical reverse-engineering records.
+* [`../examples/experiments/`](../examples/experiments) — Experimental evidence.
+* [`../old-files/`](../old-files) — Historical reverse-engineering records.
 * [`../old-files/rtg-ai-tokens.md`](../old-files/rtg-ai-tokens.md) — Complete RtG-AI token analysis data.

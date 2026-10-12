@@ -10,14 +10,14 @@ Important:
 
 Categories:
 
-- [`uncategorized/`](uncategorized/)
-- [`physics/`](physics/)
-- [`building/`](building/)
-- [`wiring/`](wiring/)
-- [`tools/`](tools/)
-- [`miscellaneous/`](miscellaneous/)
-- [`other/`](other/)
-- [`unused/`](unused/)
+- [`uncategorized/`](uncategorized)
+- [`physics/`](physics)
+- [`building/`](building)
+- [`wiring/`](wiring)
+- [`tools/`](tools)
+- [`miscellaneous/`](miscellaneous)
+- [`other/`](other)
+- [`unused/`](unused)
 
 Top-level consolidated extraction is preserved in [`parts-id.md`](parts-id.md).
 Images on: `blocks/parts/.../imgs/<blockname>.png`.

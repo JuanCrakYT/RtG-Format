@@ -19,6 +19,6 @@ Use the confidence labels consistently:
 - **UNCONFIRMED** — observed or suspected, but not adequately verified.
 - **HYPOTHESIS** — a proposed explanation that has not yet been demonstrated.
 
-Base64 is an encoding method, not the build format itself. Do not infer a compression algorithm merely from the appearance of encoded output. Describe the observed transformation and its limits, and link to reproducible experiments under [`examples/experiments/`](../examples/experiments/).
+Base64 is an encoding method, not the build format itself. Do not infer a compression algorithm merely from the appearance of encoded output. Describe the observed transformation and its limits, and link to reproducible experiments under [`examples/experiments/`](../examples/experiments).
 
 The structural representation and the final save representation should be documented separately so that changes in one layer do not create confusion about the other.

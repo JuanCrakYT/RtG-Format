@@ -199,20 +199,20 @@ This catalog is generated from the repository tree by [`scripts/generate_documen
 
 ### Guides, standards, and templates
 
-- [`docs/building-system.md`](../docs/building-system.md) — Cross-cutting guide or documentation standard
-- [`docs/documentation-inventory.md`](../docs/documentation-inventory.md) — Cross-cutting guide or documentation standard
-- [`docs/documentation-standards.md`](../docs/documentation-standards.md) — Cross-cutting guide or documentation standard
-- [`docs/documentation-taxonomy.md`](../docs/documentation-taxonomy.md) — Cross-cutting guide or documentation standard
-- [`docs/faq.md`](../docs/faq.md) — Cross-cutting guide or documentation standard
-- [`docs/getting-started.md`](../docs/getting-started.md) — Cross-cutting guide or documentation standard
-- [`docs/README.md`](../docs/README.md) — Directory index and maintenance guide
-- [`docs/repository-structure.md`](../docs/repository-structure.md) — Cross-cutting guide or documentation standard
-- [`docs/save-anatomy.md`](../docs/save-anatomy.md) — Cross-cutting guide or documentation standard
-- [`docs/templates/experiment.md`](../docs/templates/experiment.md) — Reusable documentation template
-- [`docs/templates/README.md`](../docs/templates/README.md) — Directory index and maintenance guide
-- [`docs/templates/reference.md`](../docs/templates/reference.md) — Reusable documentation template
-- [`docs/templates/research-note.md`](../docs/templates/research-note.md) — Reusable documentation template
-- [`docs/templates/tool-guide.md`](../docs/templates/tool-guide.md) — Reusable documentation template
+- [`docs/building-system.md`](building-system.md) — Cross-cutting guide or documentation standard
+- [`docs/documentation-inventory.md`](documentation-inventory.md) — Cross-cutting guide or documentation standard
+- [`docs/documentation-standards.md`](documentation-standards.md) — Cross-cutting guide or documentation standard
+- [`docs/documentation-taxonomy.md`](documentation-taxonomy.md) — Cross-cutting guide or documentation standard
+- [`docs/faq.md`](faq.md) — Cross-cutting guide or documentation standard
+- [`docs/getting-started.md`](getting-started.md) — Cross-cutting guide or documentation standard
+- [`docs/README.md`](README.md) — Directory index and maintenance guide
+- [`docs/repository-structure.md`](repository-structure.md) — Cross-cutting guide or documentation standard
+- [`docs/save-anatomy.md`](save-anatomy.md) — Cross-cutting guide or documentation standard
+- [`docs/templates/experiment.md`](templates/experiment.md) — Reusable documentation template
+- [`docs/templates/README.md`](templates/README.md) — Directory index and maintenance guide
+- [`docs/templates/reference.md`](templates/reference.md) — Reusable documentation template
+- [`docs/templates/research-note.md`](templates/research-note.md) — Reusable documentation template
+- [`docs/templates/tool-guide.md`](templates/tool-guide.md) — Reusable documentation template
 
 ### Localized RtG-CLI runtime content
 

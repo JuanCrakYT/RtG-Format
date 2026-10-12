@@ -48,11 +48,11 @@ Use the documents in this directory when you need more detailed information abou
 
 ## Related Documentation
 
-* [`../docs/`](../docs/) — Introductory and navigational documentation.
-* [`../blocks/`](../blocks/) — Object and Part IDs, categories, and connection-point references.
-* [`../compression/`](../compression/) — Encoding, compression, and final save representation.
-* [`../examples/`](../examples/) — Real examples and reproducible experiments.
-* [`../research/`](../research/) — Research methodology, discoveries, and unresolved questions.
+* [`../docs/`](../docs) — Introductory and navigational documentation.
+* [`../blocks/`](../blocks) — Object and Part IDs, categories, and connection-point references.
+* [`../compression/`](../compression) — Encoding, compression, and final save representation.
+* [`../examples/`](../examples) — Real examples and reproducible experiments.
+* [`../research/`](../research) — Research methodology, discoveries, and unresolved questions.
 * [`../SPECIFICATION.md`](../SPECIFICATION.md) — Main consolidated technical reference.
 
 ## Scope

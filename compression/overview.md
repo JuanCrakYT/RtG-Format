@@ -83,7 +83,7 @@ Experiments should include enough information to reproduce the observation and e
 
 Reproducible encoding and compression experiments are stored under:
 
-[`examples/experiments/`](../examples/experiments/)
+[`examples/experiments/`](../examples/experiments)
 
 The experiment documentation should contain the relevant input, output, observations, reproduction steps, and evidence.
 
@@ -100,8 +100,8 @@ Failed or inconclusive experiments are still valuable research records and shoul
 * [`../format/json-structure.md`](../format/json-structure.md) — Structure of the decoded JSON build data.
 * [`../format/indexing.md`](../format/indexing.md) — Indexing and references within the build data.
 * [`../SPECIFICATION.md`](../SPECIFICATION.md) — Current consolidated specification.
-* [`../examples/experiments/`](../examples/experiments/) — Repository of reproducible experiments and evidence.
-* [`../old-files/`](../old-files/) — Historical reverse-engineering records.
+* [`../examples/experiments/`](../examples/experiments) — Repository of reproducible experiments and evidence.
+* [`../old-files/`](../old-files) — Historical reverse-engineering records.
 
 ---
 
