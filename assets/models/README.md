@@ -144,31 +144,8 @@ A model with separate branch geometry can define entries like:
 - The main OBJ should contain the main model geometry; branch OBJ files should contain only their respective branch geometry.
 - Do not rely on Blender objects, empties, or export-time scene structure at preview runtime. RtG-Preview reads the exported OBJ geometry and JSON metadata directly.
 
-## RtG-Preview manifest
+## RtG-Preview model loading
 
-`scripts/generate-manifest.js` generates:
+RtG-Preview resolves a model from its type name and reads its metadata and OBJ files directly from `assets/models/model/<type>/`. There is no generated model index or manifest to maintain.
 
-- `RtG-Preview/models.json` for HTTP loading.
-- `RtG-Preview/models-manifest.js` for local `file://` use.
-
-The generator discovers model folders under `assets/models/model/` and reads the JSON metadata. The JSON's root-level `Default Branch`, `Branches`, `Branches Start`, and `LocalPoints` fields are authoritative. Preview sizes come from `RtG-Format.RtG-Preview.Size`.
-
-After adding or changing model assets, regenerate the manifest from the repository root:
-
-```sh
-node scripts/generate-manifest.js
-```
-
-Commit the generated manifest files when the project workflow expects the repository's preview manifests to stay in sync.
-
-## Rules checklist
-
-1. Store active models under `assets/models/model/<ModelName>/`.
-2. Keep `<ModelName>.json` and `<ModelName>.obj` in that model directory.
-3. Store branch OBJ files under `split/` and use matching relative paths in the JSON.
-4. Keep `Default Branch`, `LocalPoints`, `Branches`, and `Branches Start` at the JSON object's root level.
-5. Store preview scale values under `RtG-Format.RtG-Preview.Size`.
-6. Use `Size.default` as the default scale and path-specific keys for branch overrides.
-7. Keep each `Branches Start` key identical to the corresponding OBJ path in `Branches`.
-8. Do not move deprecated tools into active model directories.
-9. Do not document Blender scene hierarchy as a requirement of the current format.
+When adding a model, place its JSON metadata and default OBJ in a matching folder, and keep any branch OBJ files in the paths referenced by that model's JSON. Test the preview over HTTP so browsers can request the JSON and OBJ assets.
