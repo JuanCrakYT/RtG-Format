@@ -19,14 +19,12 @@
         "Tooltip": "",
         "LocalPoints": {},
         "Branches": {},
-        "Category": ""
-
-,
-            "Branches Start": {},
-            "AssetID": {
+        "Category": "",
+        "Branches Start": {},
+        "AssetID": {
             "ID": "",
             "CreatorLink": "",
             "RbxAssetID": ""
-            }
         }
+    }
 ]
