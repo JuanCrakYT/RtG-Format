@@ -1,6 +1,7 @@
 # Block: SpringJuice
 
 ## Identification
+
 - **Name**: SpringJuice
 - **Identifier**: `SpringJuice`
 - **Category**: Physics
@@ -10,14 +11,15 @@
 - **Default Scale**: 1
 
 ## Connection Points
+
 | Point ID | Name | Position | Rotation | Description | Status |
 |----------|------|----------|----------|-------------|--------|
 | (none) | | | | No predefined connection points | |
 
-
 *Source: `assets/models/model/SpringJuice/SpringJuice.json` → LocalPoints*
 
 ## Properties
+
 | Property | Type | Description | Known Values | Status |
 |----------|------|-------------|--------------|--------|
 | RGB | array[3] | Color (Red, Green, Blue) | [0-255, 0-255, 0-255] | CONFIRMED |
@@ -25,18 +27,21 @@
 | Speed | number | Spring speed | 0-1000 | CONFIRMED |
 | MaxForce | number | Maximum force | 0-10000 | CONFIRMED |
 
-
 ## Relationships
+
 Relationships not fully documented. See SPECIFICATION.md for general connection rules.
 
 ## Confidence Level
+
 - **Overall**: CONFIRMED
 
 ## Source Evidence
+
 - `assets/models/model/SpringJuice/SpringJuice.json`
 - `assets/models/model/SpringJuice/SpringJuice.obj`
 - `old-files/obj_ids-spanish.md` (historical connection point data)
 - Experimental saves in `examples/experiments/`
 
 ## Notes
+
 No predefined connection points (LocalPoints empty). May use UUID/EphemeralAttachments for connections.
