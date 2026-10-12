@@ -29,7 +29,7 @@ Each block has its own documentation file with:
 | [ShortStick](building/ShortStick.md) | `ShortStick` | ✅ | 1 | RGB | CONFIRMED | Documented |
 | [Stick](building/Stick.md) | `Stick` | ✅ | 1 | RGB | CONFIRMED | Documented |
 | [LongStick](building/LongStick.md) | `LongStick` | ✅ | 1 | RGB | CONFIRMED | Documented |
-| [Spoiler](building/Spoiler.md) | `Spoiler` | ❓ | 1 | RGB | CONFIRMED | Documented |
+| Spoiler | `Spoiler` | ❓ | 1 | RGB | CONFIRMED | Documented |
 | [FuelTank](building/FuelTank.md) | `FuelTank` | ✅ | 1 | RGB | CONFIRMED | Documented |
 | [GasCap](building/GasCap.md) | `GasCap` | ✅ | 0 | RGB | CONFIRMED | Documented |
 | [Roof](building/Roof.md) | `Roof` | ✅ | 0 | RGB | CONFIRMED | Documented |
@@ -45,23 +45,23 @@ Each block has its own documentation file with:
 | [Servo](physics/Servo.md) | `Servo` | ✅ | ? | Speed, Rotation, LimitAngle, LimitEnabled, Backwards, Rest, MaxForce, ActivationSpeed, ActivationHeight | CONFIRMED | TODO |
 | [Servo_Physics](physics/Servo_Physics.md) | `Servo_Physics` | ✅ | ? | | PARTIALLY CONFIRMED | TODO |
 | [SpringJuice](physics/SpringJuice.md) | `SpringJuice` | ✅ | ? | | CONFIRMED | TODO |
-| [Suspension](other/Suspension.md) | `Suspension` | ❓ | ? | | UNKNOWN | TODO |
+| Suspension | `Suspension` | ❓ | ? | | UNKNOWN | TODO |
 | [Gyro](physics/Gyro.md) | `Gyro` | ✅ | ? | | CONFIRMED | TODO |
 | [SteeringGyro](physics/SteeringGyro.md) | `SteeringGyro` | ✅ | ? | | CONFIRMED | TODO |
 | [StaringGyro](physics/StaringGyro.md) | `StaringGyro` | ✅ | ? | | CONFIRMED | TODO |
 | [MatchingGyro](physics/MatchingGyro.md) | `MatchingGyro` | ✅ | ? | | CONFIRMED | TODO |
 | [Thruster](physics/Thruster.md) | `Thruster` | ✅ | ? | Speed, MaxForce | CONFIRMED | TODO |
 | [Propeller](physics/Propeller.md) | `Propeller` | ✅ | ? | Speed | CONFIRMED | TODO |
-| [Motor](other/Motor.md) | `Motor` | ❓ | ? | | UNKNOWN | TODO |
-| [Engine](other/Engine.md) | `Engine` | ❓ | ? | | UNKNOWN | TODO |
+| Motor | `Motor` | ❓ | ? | | UNKNOWN | TODO |
+| Engine | `Engine` | ❓ | ? | | UNKNOWN | TODO |
 
 ### Tools
 
 | Block | Identifier | Model | Connection Points | Properties | Confidence | Status |
 |-------|------------|-------|-------------------|------------|------------|--------|
 | [ToolGun](tools/ToolGun.md) | `ToolGun` | ✅ | ? | | CONFIRMED | TODO |
-| [Wrench](other/Wrench.md) | `Wrench` | ❓ | ? | | UNKNOWN | TODO |
-| [PaintTool](other/PaintTool.md) | `PaintTool` | ❓ | ? | | UNKNOWN | TODO |
+| Wrench | `Wrench` | ❓ | ? | | UNKNOWN | TODO |
+| PaintTool | `PaintTool` | ❓ | ? | | UNKNOWN | TODO |
 
 ### Wiring
 
@@ -164,7 +164,7 @@ Each block has its own documentation file with:
 |-------|------------|-------|-------------------|------------|------------|--------|
 | [Arm](other/Arm.md) | `Arm` | ✅ | ? | RGB | CONFIRMED | TODO |
 | [Banjo](other/Banjo.md) | `Banjo` | ✅ | ? | RGB | CONFIRMED | TODO |
-| [Teeth](other/Teeth.md) | `Teeth` | ❓ | ? | | UNKNOWN | TODO |
+| Teeth | `Teeth` | ❓ | ? | | UNKNOWN | TODO |
 | [Banjo](other/Banjo.md) | `Banjo` | ✅ | ? | RGB | CONFIRMED | TODO |
 
 ### Uncategorized / Unused
