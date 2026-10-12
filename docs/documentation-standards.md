@@ -47,6 +47,10 @@ Not every page needs every section. Avoid boilerplate that adds no information.
 - Use consistent names for the same field or concept throughout the maintained documentation.
 - Explain specialized terms at first use when they are not obvious to the intended audience.
 
+## Automated validation
+
+Run `python scripts/check_markdown_links.py` from the repository root to check repository-local Markdown destinations. The checker scans maintained Markdown and excludes `old-files/` and vendored `node_modules/` content from its input; it does not rewrite files or validate remote URLs and heading anchors.
+
 ## Review checklist
 
 Before merging a documentation change:

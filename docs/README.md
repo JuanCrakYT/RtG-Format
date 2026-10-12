@@ -43,6 +43,7 @@ This directory contains introductory and cross-cutting guides. The canonical tec
 | [Repository structure](repository-structure.md) | Directory responsibilities and maintenance rules |
 | [Documentation standards](documentation-standards.md) | Structure, evidence, examples, and review checklist |
 | [Documentation taxonomy](documentation-taxonomy.md) | Document types, ownership, naming, and migration rules |
+| [Local link checker](../scripts/check_markdown_links.py) | Repeatable validation of repository-local Markdown links |
 | [Templates](templates/README.md) | Reusable structures for new reference, research, experiment, and tool documents |
 
 ## How to read technical claims
