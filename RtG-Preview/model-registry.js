@@ -153,7 +153,7 @@ class ModelRegistry {
                 if (xhr.status >= 200 && xhr.status < 300) {
                     try {
                         const loader = new THREE.OBJLoader();
-                        resolve(loader.parse(xhr.responseText.replace(/^mtllib\\s+.*$/m, '')));
+                        resolve(loader.parse(xhr.responseText.replace(/^mtllib\s+.*$/m, '')));
                     } catch (error) {
                         reject(new Error('Could not parse OBJ "' + url + '": ' + error.message));
                     }
