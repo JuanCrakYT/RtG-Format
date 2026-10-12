@@ -5,6 +5,7 @@ This directory contains introductory and cross-cutting guides. The canonical tec
 ## Recommended reading paths
 
 - [Getting started](getting-started.md) — choose a beginner, technical, or tooling path.
+- [Maintained Markdown inventory](documentation-inventory.md) — browse every maintained Markdown document individually.
 - [Documentation taxonomy](documentation-taxonomy.md) — document types, ownership, naming, and migration rules.
 
 ### New to RtG-Format
