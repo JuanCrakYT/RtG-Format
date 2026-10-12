@@ -4,24 +4,48 @@ on:
   pull_request:
     paths:
       - "**/*.md"
+      - ".markdownlint-cli2.jsonc"
       - "scripts/check_markdown_links.py"
       - ".github/workflows/docs-validation.yml"
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  markdown-links:
-    name: Validate local Markdown links
+  markdown:
+    name: Normalize and validate maintained Markdown
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
+      - name: Check out the pull request branch
         uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.ref }}
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
+
+      - name: Normalize Markdown structure
+        if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'formalize-repository-v2'
+        run: npx --yes markdownlint-cli2 --fix "**/*.md"
+
+      - name: Commit normalization to the formalization branch
+        if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'formalize-repository-v2'
+        run: |
+          if git diff --quiet; then
+            echo "Markdown formatting is already normalized."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "docs: normalize maintained Markdown formatting"
+          git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
+
       - name: Check local Markdown links
         run: python scripts/check_markdown_links.py
-      - name: Check Markdown structure and spacing
+
+      - name: Validate Markdown structure
         run: npx --yes markdownlint-cli2 "**/*.md"
