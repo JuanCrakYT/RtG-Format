@@ -2037,10 +2037,10 @@ function createPanel(mountRoot, onToggle, panelState, onBackgroundChange, onBack
     function bootstrap() {
         loadDependencies()
             .then(function() {
-                // Initialize model registry and load manifest
-                var modelsBaseUrl = resolvePreviewAssetUrl('assets/models/');
+                // Resolve each model directly from assets/models/model/<type>/.
+                // No generated model index or manifest is needed.
+                var modelsBaseUrl = resolvePreviewAssetUrl('assets/models/model/');
                 modelRegistry = new ModelRegistry(modelsBaseUrl);
-                return modelRegistry.loadManifest();
             })
             .then(function() {
                 resolveReady();

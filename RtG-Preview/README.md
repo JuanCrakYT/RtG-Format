@@ -18,7 +18,7 @@ It allows RtG build data to be rendered interactively in a web browser without r
 * SVG-based interface controls.
 * Can be loaded directly from a CDN such as jsDelivr.
 * Can be embedded into external HTML pages.
-* **Works locally via `file://` protocol** (no local server required).
+* Loads model metadata and OBJ geometry directly from each model folder; no generated model index is required.
 * **Supports current RtG-Format structure**: connections with `LocalType`, `PrimaryID`, `PrimaryIndex`, UUIDs, `EphemeralAttachments`, CFrames.
 
 ## How It Works
@@ -166,42 +166,15 @@ RtGPreview.render([
 ]);
 ```
 
-## Local Usage (file:// protocol)
+## Local testing
 
-RtG-Preview can be used directly from the local filesystem without running a web server.
+Browsers restrict `XMLHttpRequest` access to sibling files opened through `file://`. Run a small local HTTP server from the repository root instead:
 
-To use locally:
-
-1. Open `RtG-Preview/test-preview.html` directly in your browser, OR
-2. Create your own HTML file that includes the required scripts:
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>RtG Preview</title>
-</head>
-<body>
-  <!-- Load embedded manifest first (enables file:// support) -->
-  <script src="models-manifest.js"></script>
-  <!-- Load model registry and preview -->
-  <script src="model-registry.js"></script>
-  <script src="preview.js"></script>
-  <script>
-    RtGPreview.render([
-      ["Part", [], {}],
-      ["Anchor", [], {}],
-      ["Tooth", [], {}]
-    ]);
-  </script>
-</body>
-</html>
+```bash
+python -m http.server 8000
 ```
 
-**Note**: For local use, you must include `models-manifest.js` before `model-registry.js`. This file contains the embedded model manifest that allows loading models without HTTP requests.
-
-When served via HTTP/HTTPS (CDN, local server, etc.), the manifest is loaded automatically via XHR and `models-manifest.js` is not required.
+Then open `http://localhost:8000/RtG-Preview/test-preview.html`. The preview fetches each model's JSON and OBJ files directly from `assets/models/model/<type>/`; no manifest script or generated model index is needed.
 
 ## Controls
 
@@ -339,7 +312,7 @@ RtGPreview.render([
 
 This makes it possible for other websites, tools, applications, or services to provide RtG previews without copying the renderer into their own project.
 
-For external CDN usage, the model manifest is loaded automatically via HTTP. No additional setup required.
+For external CDN usage, each model is loaded directly from `assets/models/model/<type>/`. No manifest or generated index is required.
 
 ## Versioning
 
@@ -387,8 +360,7 @@ The main renderer is located at:
 RtG-Preview/
 ├── preview.js
 ├── model-registry.js
-├── models.json (HTTP manifest)
-├── models-manifest.js (embedded manifest for file://)
+├── README.md
 └── test-preview.html
 ```
 
@@ -409,18 +381,8 @@ RtG-Preview/
 └── test-preview.html
 ```
 
-**For local testing**: Open `test-preview.html` directly in your browser (file:// protocol supported).
-**For HTTP testing**: Serve the `RtG-Preview` directory and open the served URL.
+**For local testing**: Serve the repository root over HTTP (for example, `python -m http.server 8000`) and open `http://localhost:8000/RtG-Preview/test-preview.html`. Browsers block the preview's cross-file asset requests from `file://` pages.
 
-### Regenerating Model Manifest
-
-When adding or updating models, regenerate the manifest:
-
-```bash
-node ../scripts/generate-manifest.js
-```
-
-This updates both `models.json` (for HTTP) and `models-manifest.js` (for file://).
 
 ## Project Status
 

@@ -78,14 +78,13 @@ Centralized tracking of all work items across the repository.
 ### ✅ Completed (2026-09-21)
 
 - [x] **Formato nuevo** - Updated to work with current RtG-Format structure ([Type, Connections, Properties], LocalType/PrimaryID/PrimaryIndex, 1-based indexing, EphemeralAttachments, CFrames)
-- [x] **Carga local (file://)** - Embedded manifest (`models-manifest.js`) loaded via script tag, no HTTP server required
-- [x] **Modelos** - ModelRegistry loads from embedded manifest, falls back to HTTP, supports branches, connection points
+- [ ] **Carga local** - Serve over HTTP; browsers restrict local JSON/OBJ requests from `file://`
+- [x] **Modelos** - ModelRegistry resolves model JSON and OBJ files directly from each model folder; supports branches and connection points
 - [x] **Renderer** - Parses build JSON, positions objects via connections, uses model metadata
 - [x] **README actualizado** - Documents new format, local usage, external CDN usage
 
 ### 🔄 In Progress
 
-- [ ] Test preview.html locally (file://) with embedded manifest
 - [ ] Verify connection-based positioning works with UUID/EphemeralAttachments
 - [ ] Test branch rendering (Switch, Splitter, Doors)
 
@@ -100,8 +99,6 @@ Centralized tracking of all work items across the repository.
 
 ### ❓ Unknown/Blocked
 
-- [ ] File:// protocol: Some browsers may still block OBJ/JSON loads even with embedded manifest
-- [ ] Large model loading performance on file://
 
 ---
 
@@ -175,7 +172,6 @@ Centralized tracking of all work items across the repository.
 
 ### Tooling
 
-- [ ] `scripts/generate-manifest.js` - Done, generates models.json + models-manifest.js
 - [ ] `scripts/generate-block-docs.js` - Done, generates 120 block docs
 - [ ] `scripts/fix-json.js` - Verify works
 - [ ] Create `scripts/validate-build.js` - Validate build JSON against SPECIFICATION.md
