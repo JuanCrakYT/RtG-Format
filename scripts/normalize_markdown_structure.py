@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Normalize safe Markdown structure without rewriting prose or code examples."""
 from __future__ import annotations
+import argparse
 import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -62,7 +64,15 @@ def normalize(text: str) -> str:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="report files that would change without writing them",
+    )
+    args = parser.parse_args()
     changed = scanned = 0
+    changed_paths: list[str] = []
     for path in sorted(ROOT.rglob("*.md")):
         if should_skip(path):
             continue
@@ -70,9 +80,15 @@ def main() -> int:
         original = path.read_text(encoding="utf-8")
         normalized = normalize(original)
         if normalized != original:
-            path.write_text(normalized, encoding="utf-8", newline="\n")
             changed += 1
-    print(f"Scanned {scanned} maintained Markdown documents; normalized {changed}.")
+            changed_paths.append(path.relative_to(ROOT).as_posix())
+            if not args.check:
+                path.write_text(normalized, encoding="utf-8", newline="\\n")
+    action = "would normalize" if args.check else "normalized"
+    print(f"Scanned {scanned} maintained Markdown documents; {action} {changed}.")
+    if args.check and changed_paths:
+        print("\\n".join(changed_paths))
+        return 1
     return 0
 
 

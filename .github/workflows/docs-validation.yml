@@ -8,55 +8,26 @@ on:
       - "scripts/check_markdown_links.py"
       - "scripts/normalize_markdown_structure.py"
       - "scripts/generate_documentation_inventory.py"
-      - "scripts/migrate_block_reference_paths.py"
       - ".github/workflows/docs-validation.yml"
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   markdown:
-    name: Normalize and validate maintained Markdown
-    if: github.actor != 'github-actions[bot]'
+    name: Validate maintained Markdown
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the pull request branch
+      - name: Check out pull request
         uses: actions/checkout@v4
-        with:
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
-      - name: Migrate links for categorized block references
-        run: python scripts/migrate_block_reference_paths.py
-
-      - name: Normalize safe Markdown structure
-        if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'formalize-repository-v2'
-        run: python scripts/normalize_markdown_structure.py
-
-      - name: Apply Markdown spacing fixes
-        if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'formalize-repository-v2'
-        run: npx --yes markdownlint-cli2 --fix "**/*.md"
-
-      - name: Regenerate documentation inventory
-        run: python scripts/generate_documentation_inventory.py
-
-      - name: Commit normalization to the formalization branch
-        if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'formalize-repository-v2'
-        run: |
-          if git diff --quiet; then
-            echo "Markdown formatting is already normalized."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "docs: normalize maintained Markdown formatting"
-          git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
+      - name: Verify normalized heading structure
+        run: python scripts/normalize_markdown_structure.py --check
 
       - name: Verify documentation inventory
         run: python scripts/generate_documentation_inventory.py --check
@@ -64,5 +35,5 @@ jobs:
       - name: Check local Markdown links
         run: python scripts/check_markdown_links.py
 
-      - name: Validate Markdown structure
+      - name: Validate Markdown style
         run: npx --yes markdownlint-cli2 "**/*.md"
