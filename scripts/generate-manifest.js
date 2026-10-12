@@ -5,11 +5,28 @@ const MODELS_DIR = path.join(__dirname, '..', 'assets', 'models', 'model');
 const OUTPUT = path.join(__dirname, '..', 'RtG-Preview', 'models.json');
 const EMBEDDED_OUTPUT = path.join(__dirname, '..', 'RtG-Preview', 'models-manifest.js');
 
+function readModelJSON(jsonPath) {
+  let parsed;
+
+  try {
+    parsed = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+  } catch (error) {
+    throw new Error(`Invalid JSON: ${error.message}`);
+  }
+
+  if (!Array.isArray(parsed) || !parsed[0] || typeof parsed[0] !== 'object') {
+    throw new Error('Expected a non-empty JSON array whose first item is the model object');
+  }
+
+  return parsed[0];
+}
+
 function generateManifest() {
   const models = {};
   const folders = fs.readdirSync(MODELS_DIR, { withFileTypes: true })
     .filter(entry => entry.isDirectory())
-    .map(entry => entry.name);
+    .map(entry => entry.name)
+    .sort((a, b) => a.localeCompare(b));
 
   for (const folder of folders) {
     const modelDir = path.join(MODELS_DIR, folder);
@@ -22,61 +39,49 @@ function generateManifest() {
 
     let model;
     try {
-      const parsed = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
-
-      if (!Array.isArray(parsed) || !parsed[0] || typeof parsed[0] !== 'object') {
-        throw new Error('Expected an array containing a model object');
-      }
-
-      model = parsed[0];
+      model = readModelJSON(jsonPath);
     } catch (error) {
-      console.warn(`Failed to parse JSON for ${folder}: ${error.message}`);
+      console.warn(`Failed to read model ${folder}: ${error.message}`);
       continue;
     }
 
-    const format = model['RtG-Format'] || {};
-    const preview = format['RtG-Preview'] || {};
-    const sizeMap = preview.Size || {};
-    const branches = model.Branches || {};
-    const branchesStart = model['Branches Start'] || {};
-    const localPoints = model.LocalPoints || {};
-    const defaultBranch = model['Default Branch'];
+    const preview = model['RtG-Format']?.['RtG-Preview'] || {};
+    const rawSize = preview.Size ?? {};
+    const sizeMap = rawSize && typeof rawSize === 'object' && !Array.isArray(rawSize)
+      ? rawSize
+      : { default: rawSize };
 
-    if (!Array.isArray(defaultBranch) || defaultBranch.length === 0) {
-      console.warn(`Missing or invalid Default Branch for ${folder}, skipping`);
-      continue;
-    }
-
-    const mainObj = defaultBranch[0];
+    // These fields are at the model JSON root, not inside RtG-Preview.
+    const defaultBranch = model['Default Branch'] ?? [`./${folder}.obj`];
+    const mainObj = Array.isArray(defaultBranch) ? defaultBranch[0] : defaultBranch;
 
     if (typeof mainObj !== 'string' || !mainObj) {
-      console.warn(`Invalid main OBJ path for ${folder}, skipping`);
+      console.warn(`Invalid Default Branch for ${folder}, skipping`);
       continue;
     }
 
-    const branchEntries = Object.entries(branches).map(([pointId, obj]) => {
-      if (typeof obj !== 'string') {
-        console.warn(`Invalid branch path "${pointId}" in ${folder}`);
-        return null;
-      }
+    const branchMap = model.Branches && typeof model.Branches === 'object'
+      ? model.Branches
+      : {};
+    const branchesStart = model['Branches Start'] || {};
+    const localPoints = model.LocalPoints || {};
 
-      return {
-        pointId,
-        obj,
-        start: branchesStart[obj] || null,
-        connectionPoint: localPoints[pointId] || null,
-        size: sizeMap[obj] ?? sizeMap.default ?? 1
-      };
-    }).filter(Boolean);
+    const branches = Object.entries(branchMap).map(([pointId, obj]) => ({
+      pointId,
+      obj,
+      start: branchesStart[obj] ?? null,
+      connectionPoint: localPoints[pointId] ?? null,
+      size: sizeMap[obj] ?? sizeMap[`./${String(obj).replace(/^\.\//, '')}`] ?? sizeMap.default ?? 1
+    }));
 
     models[folder] = {
       folder,
-      json: `./${folder}.json`,
-      defaultBranch,
       obj: mainObj,
+      json: `./${folder}.json`,
+      hasBranches: branches.length > 0,
       size: sizeMap.default ?? 1,
-      hasBranches: branchEntries.length > 0,
-      branches: branchEntries
+      defaultBranch,
+      branches
     };
   }
 
@@ -86,19 +91,21 @@ function generateManifest() {
     models
   };
 
-  fs.writeFileSync(OUTPUT, JSON.stringify(manifest, null, 2));
+  fs.writeFileSync(OUTPUT, JSON.stringify(manifest, null, 2) + '\n');
   console.log(`Generated ${OUTPUT} with ${Object.keys(models).length} models`);
 
-  const embeddedContent = [
-    '// Embedded model manifest for RtG-Preview local (file://) use',
-    `// Generated: ${manifest.generated}`,
-    'window.RtGEmbeddedManifest = ',
-    JSON.stringify(manifest, null, 2),
-    ';',
-    ''
-  ].join('\n');
+  generateEmbeddedManifest(manifest);
+}
 
-  fs.writeFileSync(EMBEDDED_OUTPUT, embeddedContent);
+function generateEmbeddedManifest(manifest) {
+  const jsContent = `// Embedded model manifest for RtG-Preview local (file://) use
+// Generated: ${manifest.generated}
+// This file should be loaded via <script> before preview.js
+
+window.RtGEmbeddedManifest = ${JSON.stringify(manifest, null, 2)};
+`;
+
+  fs.writeFileSync(EMBEDDED_OUTPUT, jsContent);
   console.log(`Generated ${EMBEDDED_OUTPUT} for local use`);
 }
 
