@@ -10,8 +10,7 @@
             "RtG-Preview": {
                 "Size": {
                     "default": 1
-                },
-                "Default Branch": "./EntitySensor.obj"
+                }
             },
             "Page": {}
         },
@@ -24,6 +23,7 @@
             "ID": "",
             "CreatorLink": "",
             "RbxAssetID": ""
-        }
+        },
+        "Default Branch": "./EntitySensor.obj"
     }
 ]

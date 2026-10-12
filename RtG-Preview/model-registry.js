@@ -121,64 +121,74 @@ class ModelRegistry {
 
         const baseUrl = this.basePath + info.folder + '/';
 
-        // Load JSON metadata, preferring embedded data for local use
+        // Embedded model lookup is case-insensitive, just like getModelInfo().
         let embedded = this.embeddedModels.get(type);
-
         if (!embedded) {
-            const lowerType = type.toLowerCase();
-
+            const requestedType = type.toLowerCase();
             for (const [key, value] of this.embeddedModels.entries()) {
-                if (key.toLowerCase() === lowerType) {
+                if (key.toLowerCase() === requestedType) {
                     embedded = value;
                     break;
                 }
             }
         }
 
+        // Load the model JSON. It is the source of truth for model metadata.
         let modelData;
-
         if (embedded && embedded.json) {
-            modelData = Array.isArray(embedded.json)
-                ? embedded.json[0]
-                : embedded.json;
+            modelData = Array.isArray(embedded.json) ? embedded.json[0] : embedded.json;
         } else {
-            const jsonUrl = baseUrl + info.json.replace(/^\.\//, '');
+            const jsonUrl = baseUrl + String(info.json || ('./' + info.folder + '.json')).replace(/^\.\//, '');
             modelData = await this._loadJSON(jsonUrl);
         }
 
-        if (!modelData || typeof modelData !== 'object') {
+        if (!modelData || typeof modelData !== 'object' || Array.isArray(modelData)) {
             throw new Error('Invalid model JSON data for ' + type);
         }
 
-        // Read metadata from the current RtG JSON structure
-        const rtgFormat = modelData['RtG-Format'] || {};
-        const preview = rtgFormat['RtG-Preview'] || {};
-        const sizeMap = preview.Size || {};
+        const preview = modelData['RtG-Format']?.['RtG-Preview'] || {};
+        const rawSizeMap = preview.Size ?? {};
+        const sizeMap = rawSizeMap && typeof rawSizeMap === 'object' && !Array.isArray(rawSizeMap)
+            ? rawSizeMap
+            : { default: rawSizeMap };
 
-        // "Default Branch" belongs to the JSON root, not RtG-Preview
-        const defaultBranch =
-            modelData['Default Branch'] ??
-            info.defaultBranch ??
-            [`./${type}.obj`];
+        // Size values can be a scalar or a [x, y, z] scale vector.
+        const applyScale = (object, rawSize, label) => {
+            const size = rawSize ?? 1;
 
-        const mainObj = Array.isArray(defaultBranch)
-            ? defaultBranch[0]
-            : defaultBranch;
+            if (Array.isArray(size)) {
+                if (
+                    size.length !== 3 ||
+                    size.some(value => !Number.isFinite(Number(value)) || Number(value) < 0)
+                ) {
+                    throw new Error('Invalid scale for ' + label);
+                }
+
+                object.scale.set(
+                    Number(size[0]),
+                    Number(size[1]),
+                    Number(size[2])
+                );
+                return;
+            }
+
+            const scalar = Number(size);
+            if (!Number.isFinite(scalar) || scalar < 0) {
+                throw new Error('Invalid scale for ' + label);
+            }
+
+            object.scale.setScalar(scalar);
+        };
+
+        // Default Branch is a root-level field in the current RtG JSON schema.
+        const defaultBranch = modelData['Default Branch'] ?? info.defaultBranch ?? ['./' + info.folder + '.obj'];
+        const mainObj = Array.isArray(defaultBranch) ? defaultBranch[0] : defaultBranch;
 
         if (typeof mainObj !== 'string' || !mainObj) {
             throw new Error('Invalid Default Branch for model ' + type);
         }
 
-        // Resolve the default size
-        const mainSize = Number(sizeMap.default ?? info.size ?? 1);
-
-        if (!Number.isFinite(mainSize) || mainSize < 0) {
-            throw new Error('Invalid default model size for ' + type);
-        }
-
-        // Load the main OBJ
         let mainMesh;
-
         if (embedded && embedded.obj) {
             mainMesh = this._parseOBJ(embedded.obj);
         } else {
@@ -187,29 +197,26 @@ class ModelRegistry {
         }
 
         this._applyDefaultMaterial(mainMesh);
+        applyScale(mainMesh, sizeMap.default ?? info.size ?? 1, 'model ' + type);
 
-        // Apply the main model scale exactly once
-        mainMesh.scale.setScalar(mainSize);
-
-        // Read branches and transforms from the root of the JSON
-        const branches = modelData.Branches || {};
+        // Branches, Branches Start and LocalPoints are root-level JSON fields.
+        // Always derive them from the current JSON, not a potentially stale manifest.
+        const branchMap = modelData.Branches && typeof modelData.Branches === 'object'
+            ? modelData.Branches
+            : {};
         const branchesStart = modelData['Branches Start'] || {};
         const localPoints = modelData.LocalPoints || {};
 
-        // Use manifest branches when available, otherwise derive them from JSON
-        const manifestBranches = Object.entries(branches).map(
-            ([pointId, obj]) => ({
-                pointId,
-                obj,
-                start: branchesStart[obj] ?? null,
-                connectionPoint: localPoints[pointId] ?? null,
-                size: sizeMap[obj] ?? sizeMap.default ?? 1
-            })
-        );
+        const modelBranches = Object.entries(branchMap).map(([pointId, obj]) => ({
+            pointId,
+            obj,
+            start: branchesStart[obj] ?? null,
+            connectionPoint: localPoints[pointId] ?? null,
+            size: sizeMap[obj] ?? sizeMap['./' + String(obj).replace(/^\.\//, '')] ?? sizeMap.default ?? 1
+        }));
 
-        // Load and attach each branch
-        for (const branch of manifestBranches) {
-            if (!branch || typeof branch.obj !== 'string') {
+        for (const branch of modelBranches) {
+            if (typeof branch.obj !== 'string' || !branch.obj) {
                 console.warn('Skipping invalid branch in model ' + type, branch);
                 continue;
             }
@@ -217,11 +224,7 @@ class ModelRegistry {
             const branchKey = branch.obj.replace(/^\.\//, '');
             let branchMesh;
 
-            if (
-                embedded &&
-                embedded.branchObjs &&
-                embedded.branchObjs[branchKey]
-            ) {
+            if (embedded && embedded.branchObjs && embedded.branchObjs[branchKey]) {
                 branchMesh = this._parseOBJ(embedded.branchObjs[branchKey]);
             } else {
                 branchMesh = await this._loadOBJ(baseUrl + branchKey);
@@ -229,48 +232,29 @@ class ModelRegistry {
 
             this._applyDefaultMaterial(branchMesh);
 
-            // Prefer the size configured for this OBJ path.
-            // Fall back to the manifest branch size, then the default size.
-            const branchSize = Number(
+            const branchSize =
                 sizeMap[branch.obj] ??
                 sizeMap['./' + branchKey] ??
                 branch.size ??
                 sizeMap.default ??
-                mainSize
-            );
+                1;
+            applyScale(branchMesh, branchSize, 'branch "' + branch.obj + '" in ' + type);
 
-            if (!Number.isFinite(branchSize) || branchSize < 0) {
-                throw new Error(
-                    `Invalid size for branch "${branch.obj}" in ${type}`
-                );
-            }
+            if (branch.start) {
+                const [pos, rot] = branch.start;
 
-            branchMesh.scale.setScalar(branchSize);
-
-            // Position and rotation come from "Branches Start"
-            const start = branch.start ?? branchesStart[branch.obj];
-
-            if (start) {
                 if (
-                    !Array.isArray(start) ||
-                    !Array.isArray(start[0]) ||
-                    !Array.isArray(start[1]) ||
-                    start[0].length < 3 ||
-                    start[1].length < 3
+                    !Array.isArray(pos) || pos.length < 3 ||
+                    !Array.isArray(rot) || rot.length < 3
                 ) {
-                    throw new Error(
-                        'Invalid transform for branch "' + branch.obj + '" in ' + type
-                    );
+                    throw new Error('Invalid transform for branch "' + branch.obj + '" in ' + type);
                 }
-
-                const [pos, rot] = start;
 
                 branchMesh.position.set(
                     Number(pos[0]) || 0,
                     Number(pos[1]) || 0,
                     Number(pos[2]) || 0
                 );
-
                 branchMesh.rotation.set(
                     THREE.MathUtils.degToRad(Number(rot[0]) || 0),
                     THREE.MathUtils.degToRad(Number(rot[1]) || 0),
@@ -281,13 +265,12 @@ class ModelRegistry {
             mainMesh.add(branchMesh);
         }
 
-        // Preserve the original RtG metadata for the rest of the preview
         mainMesh.userData = {
             modelType: type,
             modelData,
             connectionPoints: localPoints,
-            branches: manifestBranches,
-            size: mainSize
+            branches: modelBranches,
+            size: sizeMap.default ?? info.size ?? 1
         };
 
         return mainMesh;

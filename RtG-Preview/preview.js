@@ -442,7 +442,7 @@
         return stats;
     }
 
-function createPanel(mountRoot, onToggle, panelState, onBackgroundChange, onBackgroundReset, onScroll) {
+function createPanel(mountRoot, onToggle, panelState, onBackgroundChange, onBackgroundReset, onScroll, onSaveBuild) {
         var isEmbedded = mountRoot !== document.body;
         var panel = document.createElement('div');
         panel.id = 'rtg-preview-panel';
@@ -480,6 +480,9 @@ function createPanel(mountRoot, onToggle, panelState, onBackgroundChange, onBack
         scrollContainer.id = 'rtg-preview-panel-scroll';
         scrollContainer.style.cssText = 'position:absolute;top:44px;left:0;width:100%;bottom:0;overflow-y:auto;overflow-x:hidden;padding-right:14px;box-sizing:border-box;';
         scrollContainer.innerHTML = '<div id="rtg-preview-stats" style="display:flex;flex-direction:column;gap:8px;"></div>' +
+            '<div style="margin-bottom:12px;"><div style="opacity:0.8;margin-bottom:4px;">Build file</div>' +
+            '<button id="rtg-preview-save-build" style="width:100%;padding:7px;background:rgba(70,130,220,0.3);color:white;border:1px solid rgba(120,170,255,0.45);border-radius:4px;cursor:pointer;font-size:12px;">Save build as JSON</button>' +
+            '<div style="opacity:0.65;margin-top:4px;font-size:10px;">Downloads the build data as a .json file.</div></div>' +
             '<div style="margin-bottom:12px;"><div style="opacity:0.8;margin-bottom:4px;">Background</div>' +
             '<input type="color" id="rtg-preview-bg-color" value="#1a1a2e" style="width:100%;height:28px;border:none;background:none;cursor:pointer;" />' +
             '<button id="rtg-preview-bg-reset" style="margin-top:4px;width:100%;padding:4px;background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);border-radius:4px;cursor:pointer;font-size:11px;">Reset</button></div>';
@@ -502,6 +505,15 @@ function createPanel(mountRoot, onToggle, panelState, onBackgroundChange, onBack
 
         var bgInput = scrollContainer.querySelector('#rtg-preview-bg-color');
         var bgReset = scrollContainer.querySelector('#rtg-preview-bg-reset');
+        var saveBuildButton = scrollContainer.querySelector('#rtg-preview-save-build');
+
+        saveBuildButton.addEventListener('click', function() {
+            if (onSaveBuild) {
+                onSaveBuild();
+            } else {
+                showAlert('Build data is not available to save.', 'error', { container: mountRoot });
+            }
+        });
 
         bgInput.addEventListener('input', function() {
             if (onBackgroundChange) onBackgroundChange(bgInput.value);
@@ -1746,7 +1758,40 @@ function createPanel(mountRoot, onToggle, panelState, onBackgroundChange, onBack
         }
     }
 
+    function saveBuildJSON(build, filename) {
+        if (!Array.isArray(build)) {
+            throw new Error('Build data must be an array before it can be saved.');
+        }
+
+        var safeName = String(filename || 'rtg-build.json')
+            .replace(/[\\/:*?"<>|]+/g, '-')
+            .replace(/^\.+/, '')
+            .trim();
+        if (!safeName) safeName = 'rtg-build.json';
+        if (!/\.json$/i.test(safeName)) safeName += '.json';
+
+        var blob = new Blob([JSON.stringify(build, null, 2) + '\\n'], {
+            type: 'application/json;charset=utf-8'
+        });
+        var url = URL.createObjectURL(blob);
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = safeName;
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.setTimeout(function() {
+            URL.revokeObjectURL(url);
+        }, 1000);
+    }
+
     window.RtGPreview = {
+        save: function(build, filename) {
+            saveBuildJSON(build, filename);
+            return true;
+        },
+
         ready: new Promise(function(resolve, reject) {
             resolveReady = resolve;
             rejectReady = reject;
@@ -1808,6 +1853,14 @@ function createPanel(mountRoot, onToggle, panelState, onBackgroundChange, onBack
                     }, function() {
                         if (checkDisposed()) return;
                         syncArtificialScrollbar(state);
+                    }, function() {
+                        if (checkDisposed()) return;
+                        try {
+                            saveBuildJSON(build, 'rtg-build.json');
+                            showAlert('Build saved as rtg-build.json.', 'notification', state);
+                        } catch (error) {
+                            showAlert('Failed to save build: ' + error.message, 'error', state);
+                        }
                     });
                     virtualCursor = createVirtualCursor(container);
 
