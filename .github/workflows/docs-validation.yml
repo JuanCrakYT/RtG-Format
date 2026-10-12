@@ -14,6 +14,7 @@ permissions:
 jobs:
   markdown:
     name: Normalize and validate maintained Markdown
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - name: Check out the pull request branch
