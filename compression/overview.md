@@ -83,7 +83,7 @@ Experiments should include enough information to reproduce the observation and e
 
 Reproducible encoding and compression experiments are stored under:
 
-[`examples/experiments/`](examples/experiments)
+[`examples/experiments/`](../examples/experiments/)
 
 The experiment documentation should contain the relevant input, output, observations, reproduction steps, and evidence.
 
