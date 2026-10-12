@@ -73,7 +73,7 @@ def main() -> int:
         in_fence = False
         fence_char = ""
         for line in lines:
-            fence = re.match(r"^\\s*(\x60{3,}|~{3,})", line)
+            fence = re.match(r"^\s*(\x60{3,}|~{3,})", line)
             if fence:
                 marker = fence.group(1)[0]
                 if not in_fence:
