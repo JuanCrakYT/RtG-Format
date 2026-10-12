@@ -77,7 +77,7 @@ RtG-Format is a reverse-engineering project, so documentation must distinguish o
 - Keep the consolidated specification aligned with detailed reference pages.
 - Historical research is retained in `old-files/`; it is an archive, not a target for cleanup or reformatting.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution rules and evidence labels, and [SECURITY.md](SECURITY.md) for vulnerability-reporting guidance.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution rules and evidence labels, [documentation standards](docs/documentation-standards.md) for writing and review conventions, [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for community expectations, and [SECURITY.md](SECURITY.md) for vulnerability-reporting guidance.
 
 ## Repository map
 
