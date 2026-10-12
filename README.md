@@ -10,6 +10,8 @@ Independent technical documentation of the save/build format used by **Road To G
     class="banner">
 </div>
 
+> **Official trailer:** In production. The permanent YouTube link will be added here when the trailer is published.
+
 ## What is RtG-Format?
 
 **RtG-Format** is an independent reverse-engineering project that documents how **Road To Gramby's (RtG)** represents, builds, serializes, and saves its constructions.
