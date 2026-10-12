@@ -4,6 +4,10 @@
 
 ### Documentation and repository architecture
 
+- Added an individually linked inventory for maintained Markdown documents, generated from the repository tree and checked in CI.
+- Added reusable pull-request and issue templates for documentation proposals and reproducible format research.
+- Added automated normalization, local-link checking, Markdown linting, and inventory freshness validation for maintained documentation.
+
 - Reworked the root README into a project landing page with a stable banner, direct navigation, status caveats, and a reserved official-trailer link location.
 - Replaced the documentation index with task-oriented reading paths and links to the canonical reference areas.
 - Replaced the oversized file-by-file tree with a maintainable repository architecture and safe-change policy.
