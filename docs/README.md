@@ -4,6 +4,9 @@ This directory contains introductory and cross-cutting guides. The canonical tec
 
 ## Recommended reading paths
 
+- [Getting started](getting-started.md) — choose a beginner, technical, or tooling path.
+- [Documentation taxonomy](documentation-taxonomy.md) — document types, ownership, naming, and migration rules.
+
 ### New to RtG-Format
 
 1. [Project overview](../README.md)
@@ -39,6 +42,8 @@ This directory contains introductory and cross-cutting guides. The canonical tec
 | [Assets](../assets/README.md) | Models, images, and supporting files |
 | [Repository structure](repository-structure.md) | Directory responsibilities and maintenance rules |
 | [Documentation standards](documentation-standards.md) | Structure, evidence, examples, and review checklist |
+| [Documentation taxonomy](documentation-taxonomy.md) | Document types, ownership, naming, and migration rules |
+| [Templates](templates/README.md) | Reusable structures for new reference, research, experiment, and tool documents |
 
 ## How to read technical claims
 
