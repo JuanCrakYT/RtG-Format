@@ -6,6 +6,7 @@ on:
       - "**/*.md"
       - ".markdownlint-cli2.jsonc"
       - "scripts/check_markdown_links.py"
+      - "scripts/generate_documentation_inventory.py"
       - ".github/workflows/docs-validation.yml"
 
 permissions:

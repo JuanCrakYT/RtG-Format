@@ -4,7 +4,7 @@ This catalog is generated from the repository tree by [`scripts/generate_documen
 
 **Scope:** all repository Markdown files except `old-files/` (immutable historical archive) and vendored/generated `node_modules/`. Inclusion here does not imply that every technical claim has been independently re-verified.
 
-**Documents indexed:** 262
+**Documents indexed:** 264
 
 ## Directory summary
 
@@ -13,10 +13,11 @@ This catalog is generated from the repository tree by [`scripts/generate_documen
 | Assets | 3 |
 | Block documentation | 1 |
 | Block reference pages | 122 |
+| Documentation: .github | 1 |
 | Encoding and compression | 4 |
 | Examples and experiments | 4 |
 | Format reference | 6 |
-| Guides, standards, and templates | 14 |
+| Guides, standards, and templates | 15 |
 | Localized RtG-CLI runtime content | 58 |
 | Part and connection-point catalogs | 18 |
 | Research | 4 |
@@ -127,17 +128,17 @@ This catalog is generated from the repository tree by [`scripts/generate_documen
 - [`blocks/reference/RPG.md`](../blocks/reference/RPG.md) — Individual block/object reference
 - [`blocks/reference/RubberBand.md`](../blocks/reference/RubberBand.md) — Individual block/object reference
 - [`blocks/reference/Seat.md`](../blocks/reference/Seat.md) — Individual block/object reference
-- [`blocks/reference/Servo_Physics.md`](../blocks/reference/Servo_Physics.md) — Individual block/object reference
 - [`blocks/reference/Servo.md`](../blocks/reference/Servo.md) — Individual block/object reference
+- [`blocks/reference/Servo_Physics.md`](../blocks/reference/Servo_Physics.md) — Individual block/object reference
 - [`blocks/reference/ShoppingCart.md`](../blocks/reference/ShoppingCart.md) — Individual block/object reference
 - [`blocks/reference/ShortStick.md`](../blocks/reference/ShortStick.md) — Individual block/object reference
 - [`blocks/reference/Shotgun.md`](../blocks/reference/Shotgun.md) — Individual block/object reference
 - [`blocks/reference/Sledge.md`](../blocks/reference/Sledge.md) — Individual block/object reference
+- [`blocks/reference/Splitter.md`](../blocks/reference/Splitter.md) — Individual block/object reference
 - [`blocks/reference/Splitter_1.md`](../blocks/reference/Splitter_1.md) — Individual block/object reference
 - [`blocks/reference/Splitter_2.md`](../blocks/reference/Splitter_2.md) — Individual block/object reference
 - [`blocks/reference/Splitter_3.md`](../blocks/reference/Splitter_3.md) — Individual block/object reference
 - [`blocks/reference/Splitter_4.md`](../blocks/reference/Splitter_4.md) — Individual block/object reference
-- [`blocks/reference/Splitter.md`](../blocks/reference/Splitter.md) — Individual block/object reference
 - [`blocks/reference/SprayPaint.md`](../blocks/reference/SprayPaint.md) — Individual block/object reference
 - [`blocks/reference/SpringJuice.md`](../blocks/reference/SpringJuice.md) — Individual block/object reference
 - [`blocks/reference/StaringGyro.md`](../blocks/reference/StaringGyro.md) — Individual block/object reference
@@ -162,6 +163,10 @@ This catalog is generated from the repository tree by [`scripts/generate_documen
 - [`blocks/reference/Wheel.md`](../blocks/reference/Wheel.md) — Individual block/object reference
 - [`blocks/reference/Wing.md`](../blocks/reference/Wing.md) — Individual block/object reference
 - [`blocks/reference/Wire.md`](../blocks/reference/Wire.md) — Individual block/object reference
+
+### Documentation: .github
+
+- [`.github/pull_request_template.md`](../.github/pull_request_template.md) — Component-specific or subject-specific documentation
 
 ### Encoding and compression
 
@@ -189,6 +194,7 @@ This catalog is generated from the repository tree by [`scripts/generate_documen
 ### Guides, standards, and templates
 
 - [`docs/building-system.md`](../docs/building-system.md) — Cross-cutting guide or documentation standard
+- [`docs/documentation-inventory.md`](../docs/documentation-inventory.md) — Cross-cutting guide or documentation standard
 - [`docs/documentation-inventory.md`](../docs/documentation-inventory.md) — Cross-cutting guide or documentation standard
 - [`docs/documentation-standards.md`](../docs/documentation-standards.md) — Cross-cutting guide or documentation standard
 - [`docs/documentation-taxonomy.md`](../docs/documentation-taxonomy.md) — Cross-cutting guide or documentation standard

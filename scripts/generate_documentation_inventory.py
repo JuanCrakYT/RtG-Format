@@ -20,7 +20,7 @@ def documents() -> list[str]:
         if rel.startswith(SKIP_PREFIXES) or any(part in SKIP_PARTS for part in path.relative_to(ROOT).parts):
             continue
         paths.append(rel)
-    return sorted(paths, key=str.casefold)
+    return sorted(paths, key=lambda value: value.lower())
 
 
 def group_for(path: str) -> str:
