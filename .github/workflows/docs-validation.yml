@@ -23,3 +23,5 @@ jobs:
           python-version: "3.x"
       - name: Check local Markdown links
         run: python scripts/check_markdown_links.py
+      - name: Check Markdown structure and spacing
+        run: npx --yes markdownlint-cli2 "**/*.md"

@@ -1,13 +1,11 @@
 {
   "config": {
-    "default": true,
-    "MD013": false,
-    "MD033": false,
-    "MD041": false,
-    "MD046": false,
-    "MD024": false,
-    "MD034": false,
-    "MD036": false
+    "default": false,
+    "MD001": true,
+    "MD003": { "style": "atx" },
+    "MD022": true,
+    "MD032": true,
+    "MD047": true
   },
   "ignores": [
     "old-files/**",
