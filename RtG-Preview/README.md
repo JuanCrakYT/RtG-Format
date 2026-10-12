@@ -383,15 +383,6 @@ RtG-Preview/
 
 **For local testing**: Serve the repository root over HTTP (for example, `python -m http.server 8000`) and open `http://localhost:8000/RtG-Preview/test-preview.html`. Browsers block the preview's cross-file asset requests from `file://` pages.
 
-### Regenerating Model Manifest
-
-When adding or updating models, regenerate the manifest:
-
-```bash
-node ../scripts/generate-manifest.js
-```
-
-This updates both `models.json` (for HTTP) and `models-manifest.js` (for file://).
 
 ## Project Status
 
