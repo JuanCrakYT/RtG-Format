@@ -1,11 +1,9 @@
-RtG-CLI — Pomoc
-================
+# RtG-CLI — Pomoc
 
 RtG-CLI to interfejs wiersza poleceń ekosystemu RtG-Format.
 Pozwala na odkrywanie i wykonywanie dodatków, zapytania o języki, przegląd reguł i wersji.
 
-Użycie
--------
+## Użycie
 
   rtg [OPCJE] <POLECENIE> [ARGUMENTY]
 
@@ -17,8 +15,7 @@ Użycie
     rtg help image
 
 
-Polecenia systemowe
---------------------
+## Polecenia systemowe
 
   -h, --help        Wyświetla tę ogólną pomoc
   -v, --version     Wyświetla wersję RtG-CLI
@@ -31,8 +28,7 @@ Polecenia systemowe
   --usage-<język>   Wyświetla użycie w konkretnym języku (np. --usage-es, --usage-en) (nowe)
   -language <język>   Ustawia język tekstu startowego (void)
 
-Polecenie: help
-----------------
+## Polecenie: help
 
   rtg help                    # Ogólna pomoc (ten ekran)
   rtg help <polecenie>        # Pomoc dla konkretnego polecenia/dodatku
@@ -53,8 +49,7 @@ Polecenie: help
     rtg help --usage-es
 
 
-Polecenie: version
---------------------
+## Polecenie: version
 
   rtg -v
   rtg --version
@@ -62,8 +57,7 @@ Polecenie: version
   Wyświetla wersję i treść wersji we wszystkich dostępnych językach.
 
 
-Polecenie: rules
------------------
+## Polecenie: rules
 
   rtg -r
   rtg --rules
@@ -72,8 +66,7 @@ Polecenie: rules
   Domyślnie używa pierwszego zdefiniowanego języka w 'rules' (hiszpański).
 
 
-Polecenie: lang
------------------
+## Polecenie: lang
 
   rtg -l
   rtg --lang
@@ -82,8 +75,7 @@ Polecenie: lang
   Version, Rules, Help, Void, oraz per dodatek.
 
 
-Polecenie: commands
----------------------
+## Polecenie: commands
 
   rtg -c
   rtg --commands
@@ -92,8 +84,7 @@ Polecenie: commands
   Nie zawiera poleceń dodatków.
 
 
-Polecenie: addons
-------------------
+## Polecenie: addons
 
   rtg -a
   rtg --addons
@@ -102,8 +93,7 @@ Polecenie: addons
   Zarejestrowany dodatek bez dokumentacji nie pojawia się tutaj.
 
 
-Polecenie: usage
------------------
+## Polecenie: usage
 
   rtg -u
   rtg --usage
@@ -114,8 +104,7 @@ Polecenie: usage
   Język musi istnieć w 'void-language' w assets.json.
 
 
-Polecenie: language
----------------------
+## Polecenie: language
 
   rtg -language <język>
 
@@ -126,16 +115,14 @@ Polecenie: language
     rtg -language en
 
 
-Dostępne dodatki
------------------
+## Dostępne dodatki
 
   image      | RtG Image        - Konwerter obrazów
   preview    | RtG Preview      - Przeglądarka 3D budowli RtG-Format
   test-addon | RtG Test Addon   - Dodatek testowy do walidacji CLI
 
 
-Języki
--------
+## Języki
 
 Języki oznaczane są pojedynczym myślnikiem: -es, -en, -pt itd.
 Język nie zmienia wewnętrznej nazwy polecenia.
@@ -152,8 +139,7 @@ Język nie zmienia wewnętrznej nazwy polecenia.
     rtg image -lang     # Języki dodatku (po dodatku)
 
 
-Argumenty dodatków
---------------------
+## Argumenty dodatków
 
 Po zidentyfikowaniu dodatku, argumenty klasyfikowane są według prefiksu:
 
@@ -168,8 +154,7 @@ Przykłady:
   rtg image -en                  # -en -> RtG-CLI (selektor języka)
 
 
-Argumenty ze spacjami
------------------------
+## Argumenty ze spacjami
 
 Argumenty zawierające spacje muszą być w cudzysłowie:
 
@@ -178,8 +163,7 @@ Argumenty zawierające spacje muszą być w cudzysłowie:
 RtG-CLI zachowuje kolejność argumentów i przekazuje je jak są do dodatku.
 
 
-Więcej informacji
--------------------
+## Więcej informacji
 
   rtg help <polecenie>      # Szczegółowa pomoc dodatku
   rtg help <polecenie> -lang  # Języki tego dodatku

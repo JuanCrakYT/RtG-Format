@@ -1,33 +1,18 @@
-# Blocks taxonomy
+# Block and Part Reference
 
-This folder contains per-part documentation and ID reference material.
+This directory organizes block/part identifiers and related reference material for Road To Gramby's (RtG).
 
-## Current categories
+## Contents
 
-```tree
-parts/
- ├── building/
- ├── miscellaneous/
- ├── other/
- ├── physics/
- ├── tools/
- ├── uncategorized/
- ├── unused/
- └── wiring/
-```
+- [Part ID reference](parts/parts-id.md) — consolidated identifier reference.
+- `parts/` — per-part documentation grouped into categories such as building, physics, tools, and wiring.
 
-## Classification
+## Classification and evidence
 
-Categories are based on the Road to Gramby's Wiki where applicable.
+Categories are organizational aids. A category name does not prove how an object is serialized or behaves internally. IDs, connection points, properties, and other reverse-engineered details must be supported by observations or reproducible research.
 
-The category itself does **not** constitute evidence for the internal RtG save/build format. IDs, connection points, and other reverse-engineered information must be supported by the project's research.
+Historical material in [`old-files/`](../old-files) is retained for provenance. It must not be edited, translated, renamed, moved, reformatted, or deleted as part of routine maintenance. Use it as historical context, and verify claims against the maintained references and available evidence.
 
-Use: [`../old-files/obj_ids-spanish.md`](../old-files/obj_ids-spanish.md) as the historical reference for object IDs and connection-point data.
-See: [`parts/parts-id.md`](parts/parts-id.md) for the consolidated Part ID reference.
+## Contributing a part finding
 
-Do not invent or silently modify historical information.
-
-## Language
-
-The historical reverse-engineering documentation in `old-files/` is written in Spanish because the project's original author, `JuanCrakYT`, documented the research in Spanish.
-The historical files are preserved in their original language and should not be translated or modified merely for consistency.
+When adding or correcting a part entry, include the observed identifier, evidence/confidence level, source or experiment where available, and any unresolved limitations. Update the relevant specification or format reference if the finding affects the documented format.

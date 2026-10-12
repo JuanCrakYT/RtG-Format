@@ -16,8 +16,8 @@ RtG uses normal JSON arrays, which programming languages generally access using 
 
 However, object references inside the RtG save/build format use **1-based logical indices**.
 
-These are not the same thing.
----
+## These are not the same thing.
+
 | JSON array position | RtG logical object index |
 | ------------------- | ------------------------ |
 | 0                   | 1                        |
@@ -523,5 +523,5 @@ The most important rule is:
 * [`../SPECIFICATION.md`](../SPECIFICATION.md) — Complete format specification.
 * [`json-structure.md`](json-structure.md) — JSON structure.
 * [`identifiers.md`](identifiers.md) — Object identifiers and connection references.
-* [`../examples/experiments/`](../examples/experiments/) — Experimental saves and evidence.
-* [`../old-files/`](../old-files/) — Historical reverse-engineering records.
+* [`../examples/experiments/`](../examples/experiments) — Experimental saves and evidence.
+* [`../old-files/`](../old-files) — Historical reverse-engineering records.

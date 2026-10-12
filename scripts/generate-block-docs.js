@@ -42,7 +42,9 @@ function generateBlockDocs() {
     }
 
     const doc = generateBlockDoc(folder, json);
-    const outputPath = path.join(OUTPUT_DIR, `${folder}.md`);
+    const categoryDir = getCategory(folder).toLowerCase();
+    const outputPath = path.join(OUTPUT_DIR, categoryDir, `${folder}.md`);
+    fs.mkdirSync(path.dirname(outputPath), { recursive: true });
     fs.writeFileSync(outputPath, doc);
     generated++;
   }

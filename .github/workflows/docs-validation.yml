@@ -1,0 +1,39 @@
+name: Documentation validation
+
+on:
+  pull_request:
+    paths:
+      - "**/*.md"
+      - ".markdownlint-cli2.jsonc"
+      - "scripts/check_markdown_links.py"
+      - "scripts/normalize_markdown_structure.py"
+      - "scripts/generate_documentation_inventory.py"
+      - ".github/workflows/docs-validation.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  markdown:
+    name: Validate maintained Markdown
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out pull request
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Verify normalized heading structure
+        run: python scripts/normalize_markdown_structure.py --check
+
+      - name: Verify documentation inventory
+        run: python scripts/generate_documentation_inventory.py --check
+
+      - name: Check local Markdown links
+        run: python scripts/check_markdown_links.py
+
+      - name: Validate Markdown style
+        run: npx --yes markdownlint-cli2 "**/*.md"

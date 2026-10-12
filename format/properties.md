@@ -255,12 +255,14 @@ Additional property type classifications from RtG-AI analysis (see `../old-files
 Properties observed across all analyzed saves, classified by their JSON value type:
 
 #### String Properties
+
 ```
 ActivationKey, MeshId, Mode, Name, Phrase, Text, TextureID, TextureId,
 className, objectId, partName, serializedType
 ```
 
 #### Number Properties
+
 ```
 ActivationHeight, ActivationSpeed, Channel, Delay, ItemTurn, Length,
 LimitAngle, MaxDistance, MaxForce, MaxLength, MinLength, OrientationX,
@@ -268,6 +270,7 @@ OrientationY, OrientationZ, Rotation, Speed, Transparency, Volume
 ```
 
 #### Boolean Properties
+
 ```
 Activated, Backwards, CanTargetAttached, Deactivated, DelayDeactivation,
 DisabledInput, Forwards, IgnoreAttached, LimitEnabled, On, Rest, Reverse,
@@ -275,16 +278,19 @@ Shooting, Visible
 ```
 
 #### Integer Properties
+
 ```
 Bullets, CustomTrack, ImageId, Quantity
 ```
 
 #### Array Properties
+
 ```
 RGB, cframe, children, data, sceneCullObjects, sceneUpdateObjects
 ```
 
 #### Object Properties
+
 ```
 CFrame, Color, EphemeralAttachments, Material, MeshType, Offset, PhotoData,
 Scale, Shape, Size, cameraCF, props, sceneNewObjects
@@ -471,6 +477,6 @@ Do not infer a property's meaning solely from its name.
 * [`../SPECIFICATION.md`](../SPECIFICATION.md) — Complete format specification.
 * [`json-structure.md`](json-structure.md) — JSON object structure.
 * [`identifiers.md`](identifiers.md) — IDs, UUIDs, and references.
-* [`../examples/experiments/`](../examples/experiments/) — Reproducible experiments.
+* [`../examples/experiments/`](../examples/experiments) — Reproducible experiments.
 * [`../old-files/RtG_Save_Format_Specification-spanish.md`](../old-files/RtG_Save_Format_Specification-spanish.md) — Historical specification.
 * [`../old-files/obj_ids-spanish.md`](../old-files/obj_ids-spanish.md) — Historical object research.

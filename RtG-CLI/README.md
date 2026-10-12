@@ -145,6 +145,7 @@ RtG-CLI/
 | `test-addon` | RtG Test Addon | Validación CLI | 2 (es, en) | Python (`test_addon/commands.py`) |
 
 ### Distinción clave
+
 - **Registered addon**: Existe en `assets.json` → 3 addons
 - **Documented/User-visible addon**: Tiene `lang` array o `internal.help` → 3 addons (todos documentados)
 
@@ -153,6 +154,7 @@ RtG-CLI/
 ## 6. Contrato de Program Commands
 
 ### Interface Python
+
 ```python
 def execute(args: list[str]) -> int:      # Requerido
 def get_commands() -> list[str]:          # Opcional
@@ -160,12 +162,14 @@ def get_help(command: str, lang: str) -> str | None:  # Opcional
 ```
 
 ### Interface JavaScript (Node.js)
+
 ```javascript
 // execute(args), get_commands(), get_help(command, lang)
 // Ejecutado via: node script.js [args]
 ```
 
 ### Flujo de ejecución
+
 ```
 rtg <addon> [args]
     ↓
@@ -178,6 +182,7 @@ stdout/stderr propagados
 ```
 
 ### Propiedades clave
+
 - Argumentos preservados en orden original
 - `--` y sin prefijo → addon
 - `-` → RtG-CLI (ej: `-lang`, `-en`)
@@ -188,6 +193,7 @@ stdout/stderr propagados
 ## 7. Sistema de Argumentos
 
 ### Ownership rules (después de identificar addon)
+
 | Prefijo | Dueño | Ejemplos |
 |---------|-------|----------|
 | (ninguno) | Addon | `convert`, `archivo.png` |
@@ -195,6 +201,7 @@ stdout/stderr propagados
 | `-` | RtG-CLI | `-lang`, `-en` |
 
 ### Opciones del sistema (antes del addon)
+
 - `-v, --version`
 - `-h, --help`
 - `-l, --lang`
@@ -207,6 +214,7 @@ stdout/stderr propagados
 - `-language <idioma>`
 
 ### Selectores de idioma
+
 - `-es`, `-en`, `-pt`, etc. (un solo guion)
 - `-language en` (solo antes del addon, para void text)
 
@@ -223,6 +231,7 @@ python -m unittest discover -s tests -v
 ```
 
 ### Cobertura
+
 - ✅ `tests/arguments/` - Parser de argumentos
 - ✅ `tests/commands/` - Comandos internos (help, version, rules, lang, commands, addons, language, usage)
 - ✅ `tests/addons/` - Registro y descubrimiento
@@ -301,6 +310,7 @@ rtg validate archivo.json # Futuro comando
 ```
 
 **No se implementa RtG-Language aquí** — solo la interfaz de integración:
+
 - `ProgramCommandInterface` abstracta
 - Addon registry con metadata de versión/compatibilidad
 - Configuración versionada en assets.json
@@ -311,6 +321,7 @@ rtg validate archivo.json # Futuro comando
 ## 12. RtG-Preview
 
 El addon `preview` usa **RtG-Preview legacy** (rama main de RtG-Format).
+
 - Estado: **Legacy/Deprecated** para rama moderna PolaroidPhoto/RtG
 - Interface: JavaScript via Node.js
 - No integrar en RtG-Language moderno
@@ -321,6 +332,7 @@ El addon `preview` usa **RtG-Preview legacy** (rama main de RtG-Format).
 ## 13. Estado de completación
 
 ✅ **Completado:**
+
 - Arquitectura modular (`rtg_cli/`)
 - Entry point delgado (`rtg.py`)
 - 19 idiomas con rules/help/void completos
@@ -335,6 +347,7 @@ El addon `preview` usa **RtG-Preview legacy** (rama main de RtG-Format).
 - Nuevos comandos `usage` / `-u` / `--usage` con soporte de idiomas
 
 📋 **Pendiente menor:**
+
 - CI/CD pipeline (GitHub Actions)
 - Más addons de producción (RtG Image commands.py real)
 
@@ -343,3 +356,12 @@ El addon `preview` usa **RtG-Preview legacy** (rama main de RtG-Format).
 ## 14. Licencia
 
 MIT License — Ver `LICENSE` en raíz del repo.
+
+## Localized documentation
+
+The per-locale help, rules, and startup text is indexed in [Localized Documentation](languages/README.md). Preserve locale codes and filenames because these Markdown files may be consumed by the CLI.
+
+
+## Detailed documentation
+
+See [Component Documentation](docs/README.md) for the architecture and command references, and [Localized Documentation](languages/README.md) for per-locale help text.

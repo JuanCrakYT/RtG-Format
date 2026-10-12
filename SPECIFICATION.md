@@ -6,7 +6,7 @@
 >
 > This document is the current consolidated specification of the observed RtG save/build format.
 >
-> Historical reverse-engineering material is preserved in [`old-files/`](old-files/) and has priority when investigating discrepancies.
+> Historical reverse-engineering material is preserved in [`old-files/`](old-files) and has priority when investigating discrepancies.
 
 ---
 
@@ -800,7 +800,7 @@ A proposed explanation that has not yet been sufficiently demonstrated.
 ### UNKNOWN
 
 The available evidence does not currently determine the behavior.
-Historical evidence is preserved in [`old-files/`](old-files/) and has priority when investigating discrepancies.
+Historical evidence is preserved in [`old-files/`](old-files) and has priority when investigating discrepancies.
 
 ---
 
@@ -811,10 +811,10 @@ Historical evidence is preserved in [`old-files/`](old-files/) and has priority 
 * [`format/indexing.md`](format/indexing.md) — Object indices and references.
 * [`format/identifiers.md`](format/identifiers.md) — Object identifiers, connection-point IDs and UUIDs.
 * [`format/properties.md`](format/properties.md) — Properties and observed behavior.
-* [`compression/`](compression/) — Encoding and compression research.
+* [`compression/`](compression) — Encoding and compression research.
 * [`research/discoveries.md`](research/discoveries.md) — Organized research discoveries.
 * [`research/unknowns.md`](research/unknowns.md) — Remaining unknowns and hypotheses.
-* [`examples/experiments/`](examples/experiments/) — Reproducible experiments.
+* [`examples/experiments/`](examples/experiments) — Reproducible experiments.
 
 ### Historical / Technical Reference
 

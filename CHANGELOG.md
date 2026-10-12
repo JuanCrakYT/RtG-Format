@@ -2,6 +2,24 @@
 
 ## Unreleased
 
+### Documentation and repository architecture
+
+- Added an individually linked inventory for maintained Markdown documents, generated from the repository tree and checked in CI.
+- Added reusable pull-request and issue templates for documentation proposals and reproducible format research.
+- Added automated normalization, local-link checking, Markdown linting, and inventory freshness validation for maintained documentation.
+
+- Reworked the root README into a project landing page with a stable banner, direct navigation, status caveats, and a reserved official-trailer link location.
+- Replaced the documentation index with task-oriented reading paths and links to the canonical reference areas.
+- Replaced the oversized file-by-file tree with a maintainable repository architecture and safe-change policy.
+- Corrected the duplicate `title` entry in `rtg-format.cff` and added citation metadata fields.
+- Added a documentation standard to reduce duplicated claims and keep uncertain research separate from confirmed reference material.
+
+### Documentation and repository governance
+
+* Added a dedicated `SECURITY.md` policy describing vulnerability-reporting expectations and scope.
+* Expanded `CONTRIBUTING.md` with repository navigation, evidence-confidence labels, reproducibility requirements, generated-file guidance, and a pull-request checklist.
+* Preserved the existing README banner and reserved a clearly marked location for the official YouTube trailer, to be linked when it is published.
+
 ### Added
 
 * Expanded and consolidated the current RtG save/build format specification.
@@ -54,4 +72,4 @@
 
 ## v0.406
 
-* Historical research documents preserved in [`old-files/`](old-files/) (original author metadata retained in files there).
+* Historical research documents preserved in [`old-files/`](old-files) (original author metadata retained in files there).

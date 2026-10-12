@@ -3,6 +3,7 @@
 This directory contains structured documentation for all known RtG blocks (objects/parts).
 
 Each block has its own documentation file with:
+
 - Basic identification (name, identifier, model)
 - Connection points
 - Properties
@@ -14,211 +15,178 @@ Each block has its own documentation file with:
 ## Index by Category
 
 ### Building
+
 | Block | Identifier | Model | Connection Points | Properties | Confidence | Status |
 |-------|------------|-------|-------------------|------------|------------|--------|
-| Base | `Base` | ✅ | 0 | RGB | CONFIRMED | Documented |
-| Chassis | `Chassis` | ✅ | 26 | RGB | CONFIRMED | Documented |
-| Hood | `Hood` | ✅ | 1 | RGB | CONFIRMED | Documented |
-| Trunk | `Trunk` | ✅ | 1 | RGB | CONFIRMED | Documented |
-| Wheel | `Wheel` | ✅ | 1 | RGB | CONFIRMED | Documented |
-| Tire | `Tire` | ✅ | 1 | RGB | CONFIRMED | Documented |
-| Bumper | `Bumper` | ✅ | 1 | RGB | CONFIRMED | Documented |
-| Wing | `Wing` | ✅ | 1 | RGB | CONFIRMED | Documented |
-| ShortStick | `ShortStick` | ✅ | 1 | RGB | CONFIRMED | Documented |
-| Stick | `Stick` | ✅ | 1 | RGB | CONFIRMED | Documented |
-| LongStick | `LongStick` | ✅ | 1 | RGB | CONFIRMED | Documented |
+| [Base](building/Base.md) | `Base` | ✅ | 0 | RGB | CONFIRMED | Documented |
+| [Chassis](building/Chassis.md) | `Chassis` | ✅ | 26 | RGB | CONFIRMED | Documented |
+| [Hood](building/Hood.md) | `Hood` | ✅ | 1 | RGB | CONFIRMED | Documented |
+| [Trunk](building/Trunk.md) | `Trunk` | ✅ | 1 | RGB | CONFIRMED | Documented |
+| [Wheel](building/Wheel.md) | `Wheel` | ✅ | 1 | RGB | CONFIRMED | Documented |
+| [Tire](building/Tire.md) | `Tire` | ✅ | 1 | RGB | CONFIRMED | Documented |
+| [Bumper](building/Bumper.md) | `Bumper` | ✅ | 1 | RGB | CONFIRMED | Documented |
+| [Wing](building/Wing.md) | `Wing` | ✅ | 1 | RGB | CONFIRMED | Documented |
+| [ShortStick](building/ShortStick.md) | `ShortStick` | ✅ | 1 | RGB | CONFIRMED | Documented |
+| [Stick](building/Stick.md) | `Stick` | ✅ | 1 | RGB | CONFIRMED | Documented |
+| [LongStick](building/LongStick.md) | `LongStick` | ✅ | 1 | RGB | CONFIRMED | Documented |
 | Spoiler | `Spoiler` | ❓ | 1 | RGB | CONFIRMED | Documented |
-| FuelTank | `FuelTank` | ✅ | 1 | RGB | CONFIRMED | Documented |
-| GasCap | `GasCap` | ✅ | 0 | RGB | CONFIRMED | Documented |
-| Roof | `Roof` | ✅ | 0 | RGB | CONFIRMED | Documented |
-| DoorA | `DoorA` | ✅ | ? | RGB | PARTIALLY CONFIRMED | TODO |
-| DoorB | `DoorB` | ✅ | ? | RGB | PARTIALLY CONFIRMED | TODO |
-| DoorC | `DoorC` | ✅ | ? | RGB | PARTIALLY CONFIRMED | TODO |
-| DoorD | `DoorD` | ✅ | ? | RGB | PARTIALLY CONFIRMED | TODO |
+| [FuelTank](building/FuelTank.md) | `FuelTank` | ✅ | 1 | RGB | CONFIRMED | Documented |
+| [GasCap](building/GasCap.md) | `GasCap` | ✅ | 0 | RGB | CONFIRMED | Documented |
+| [Roof](building/Roof.md) | `Roof` | ✅ | 0 | RGB | CONFIRMED | Documented |
+| [DoorA](building/DoorA.md) | `DoorA` | ✅ | ? | RGB | PARTIALLY CONFIRMED | TODO |
+| [DoorB](building/DoorB.md) | `DoorB` | ✅ | ? | RGB | PARTIALLY CONFIRMED | TODO |
+| [DoorC](building/DoorC.md) | `DoorC` | ✅ | ? | RGB | PARTIALLY CONFIRMED | TODO |
+| [DoorD](building/DoorD.md) | `DoorD` | ✅ | ? | RGB | PARTIALLY CONFIRMED | TODO |
 
 ### Physics
+
 | Block | Identifier | Model | Connection Points | Properties | Confidence | Status |
 |-------|------------|-------|-------------------|------------|------------|--------|
-| Servo | `Servo` | ✅ | ? | Speed, Rotation, LimitAngle, LimitEnabled, Backwards, Rest, MaxForce, ActivationSpeed, ActivationHeight | CONFIRMED | TODO |
-| Servo_Physics | `Servo_Physics` | ✅ | ? | | PARTIALLY CONFIRMED | TODO |
-| SpringJuice | `SpringJuice` | ✅ | ? | | CONFIRMED | TODO |
+| [Servo](physics/Servo.md) | `Servo` | ✅ | ? | Speed, Rotation, LimitAngle, LimitEnabled, Backwards, Rest, MaxForce, ActivationSpeed, ActivationHeight | CONFIRMED | TODO |
+| [Servo_Physics](physics/Servo_Physics.md) | `Servo_Physics` | ✅ | ? | | PARTIALLY CONFIRMED | TODO |
+| [SpringJuice](physics/SpringJuice.md) | `SpringJuice` | ✅ | ? | | CONFIRMED | TODO |
 | Suspension | `Suspension` | ❓ | ? | | UNKNOWN | TODO |
-| Gyro | `Gyro` | ✅ | ? | | CONFIRMED | TODO |
-| SteeringGyro | `SteeringGyro` | ✅ | ? | | CONFIRMED | TODO |
-| StaringGyro | `StaringGyro` | ✅ | ? | | CONFIRMED | TODO |
-| MatchingGyro | `MatchingGyro` | ✅ | ? | | CONFIRMED | TODO |
-| Thruster | `Thruster` | ✅ | ? | Speed, MaxForce | CONFIRMED | TODO |
-| Propeller | `Propeller` | ✅ | ? | Speed | CONFIRMED | TODO |
+| [Gyro](physics/Gyro.md) | `Gyro` | ✅ | ? | | CONFIRMED | TODO |
+| [SteeringGyro](physics/SteeringGyro.md) | `SteeringGyro` | ✅ | ? | | CONFIRMED | TODO |
+| [StaringGyro](physics/StaringGyro.md) | `StaringGyro` | ✅ | ? | | CONFIRMED | TODO |
+| [MatchingGyro](physics/MatchingGyro.md) | `MatchingGyro` | ✅ | ? | | CONFIRMED | TODO |
+| [Thruster](physics/Thruster.md) | `Thruster` | ✅ | ? | Speed, MaxForce | CONFIRMED | TODO |
+| [Propeller](physics/Propeller.md) | `Propeller` | ✅ | ? | Speed | CONFIRMED | TODO |
 | Motor | `Motor` | ❓ | ? | | UNKNOWN | TODO |
 | Engine | `Engine` | ❓ | ? | | UNKNOWN | TODO |
 
 ### Tools
+
 | Block | Identifier | Model | Connection Points | Properties | Confidence | Status |
 |-------|------------|-------|-------------------|------------|------------|--------|
-| ToolGun | `ToolGun` | ✅ | ? | | CONFIRMED | TODO |
+| [ToolGun](tools/ToolGun.md) | `ToolGun` | ✅ | ? | | CONFIRMED | TODO |
 | Wrench | `Wrench` | ❓ | ? | | UNKNOWN | TODO |
 | PaintTool | `PaintTool` | ❓ | ? | | UNKNOWN | TODO |
 
 ### Wiring
+
 | Block | Identifier | Model | Connection Points | Properties | Confidence | Status |
 |-------|------------|-------|-------------------|------------|------------|--------|
-| Wire | `Wire` | ✅ | ? | Length, MinLength, MaxLength, MaxForce | CONFIRMED | TODO |
-| Rope | `Rope` | ✅ | ? | Length, MinLength, MaxLength, MaxForce | CONFIRMED | TODO |
-| Splitter | `Splitter` | ✅ | ? | | CONFIRMED | TODO |
-| Splitter_1 | `Splitter_1` | ✅ | ? | | CONFIRMED | TODO |
-| Splitter_2 | `Splitter_2` | ✅ | ? | | CONFIRMED | TODO |
-| Splitter_3 | `Splitter_3` | ✅ | ? | | CONFIRMED | TODO |
-| Splitter_4 | `Splitter_4` | ✅ | ? | | CONFIRMED | TODO |
-| Connector | `Connector` | ✅ | ? | | CONFIRMED | TODO |
-| ConnectorBall | `ConnectorBall` | ✅ | ? | | CONFIRMED | TODO |
-| HalfConnectorBall | `HalfConnectorBall` | ✅ | ? | | CONFIRMED | TODO |
-| Switch | `Switch` | ✅ | 2 (input, output) | | CONFIRMED | Documented |
-| Gate-AND | `Gate-AND` | ✅ | ? | | CONFIRMED | TODO |
-| Gate-OR | `Gate-OR` | ✅ | ? | | CONFIRMED | TODO |
-| Gate-NOT | `Gate-NOT` | ✅ | ? | | CONFIRMED | TODO |
-| InputSensor | `InputSensor` | ✅ | ? | | CONFIRMED | TODO |
-| EntitySensor | `EntitySensor` | ✅ | ? | | CONFIRMED | TODO |
-| VelocitySensor | `VelocitySensor` | ✅ | ? | | CONFIRMED | TODO |
-| AltitudeSensor | `AltitudeSensor` | ✅ | ? | | CONFIRMED | TODO |
-| PressurePlate | `PressurePlate` | ✅ | ? | | CONFIRMED | TODO |
-| Button | `Button` | ✅ | ? | | CONFIRMED | TODO |
-| RemoteButton | `RemoteButton` | ✅ | ? | | CONFIRMED | TODO |
-| Delayer | `Delayer` | ✅ | ? | Delay, DelayDeactivation | CONFIRMED | TODO |
-| Detacher | `Detacher` | ✅ | ? | | CONFIRMED | TODO |
-| Recorder | `Recorder` | ✅ | ? | | CONFIRMED | TODO |
+| [Wire](wiring/Wire.md) | `Wire` | ✅ | ? | Length, MinLength, MaxLength, MaxForce | CONFIRMED | TODO |
+| [Rope](wiring/Rope.md) | `Rope` | ✅ | ? | Length, MinLength, MaxLength, MaxForce | CONFIRMED | TODO |
+| [Splitter](wiring/Splitter.md) | `Splitter` | ✅ | ? | | CONFIRMED | TODO |
+| [Splitter_1](wiring/Splitter_1.md) | `Splitter_1` | ✅ | ? | | CONFIRMED | TODO |
+| [Splitter_2](wiring/Splitter_2.md) | `Splitter_2` | ✅ | ? | | CONFIRMED | TODO |
+| [Splitter_3](wiring/Splitter_3.md) | `Splitter_3` | ✅ | ? | | CONFIRMED | TODO |
+| [Splitter_4](wiring/Splitter_4.md) | `Splitter_4` | ✅ | ? | | CONFIRMED | TODO |
+| [Connector](wiring/Connector.md) | `Connector` | ✅ | ? | | CONFIRMED | TODO |
+| [ConnectorBall](wiring/ConnectorBall.md) | `ConnectorBall` | ✅ | ? | | CONFIRMED | TODO |
+| [HalfConnectorBall](wiring/HalfConnectorBall.md) | `HalfConnectorBall` | ✅ | ? | | CONFIRMED | TODO |
+| [Switch](wiring/Switch.md) | `Switch` | ✅ | 2 (input, output) | | CONFIRMED | Documented |
+| [Gate-AND](wiring/Gate-AND.md) | `Gate-AND` | ✅ | ? | | CONFIRMED | TODO |
+| [Gate-OR](wiring/Gate-OR.md) | `Gate-OR` | ✅ | ? | | CONFIRMED | TODO |
+| [Gate-NOT](wiring/Gate-NOT.md) | `Gate-NOT` | ✅ | ? | | CONFIRMED | TODO |
+| [InputSensor](wiring/InputSensor.md) | `InputSensor` | ✅ | ? | | CONFIRMED | TODO |
+| [EntitySensor](wiring/EntitySensor.md) | `EntitySensor` | ✅ | ? | | CONFIRMED | TODO |
+| [VelocitySensor](wiring/VelocitySensor.md) | `VelocitySensor` | ✅ | ? | | CONFIRMED | TODO |
+| [AltitudeSensor](wiring/AltitudeSensor.md) | `AltitudeSensor` | ✅ | ? | | CONFIRMED | TODO |
+| [PressurePlate](wiring/PressurePlate.md) | `PressurePlate` | ✅ | ? | | CONFIRMED | TODO |
+| [Button](wiring/Button.md) | `Button` | ✅ | ? | | CONFIRMED | TODO |
+| [RemoteButton](wiring/RemoteButton.md) | `RemoteButton` | ✅ | ? | | CONFIRMED | TODO |
+| [Delayer](wiring/Delayer.md) | `Delayer` | ✅ | ? | Delay, DelayDeactivation | CONFIRMED | TODO |
+| [Detacher](wiring/Detacher.md) | `Detacher` | ✅ | ? | | CONFIRMED | TODO |
+| [Recorder](wiring/Recorder.md) | `Recorder` | ✅ | ? | | CONFIRMED | TODO |
 
 ### Miscellaneous
+
 | Block | Identifier | Model | Connection Points | Properties | Confidence | Status |
 |-------|------------|-------|-------------------|------------|------------|--------|
-| Part | `Part` | ✅ | 0 | RGB | CONFIRMED | Documented |
-| Anchor | `Anchor` | ✅ | 0 | RGB | CONFIRMED | Documented |
-| Balloon | `Balloon` | ✅ | ? | RGB | CONFIRMED | TODO |
-| BeachBall | `BeachBall` | ✅ | ? | RGB | CONFIRMED | TODO |
-| BouncyBall | `BouncyBall` | ✅ | ? | RGB | CONFIRMED | TODO |
-| BowlingBall | `BowlingBall` | ✅ | ? | RGB | CONFIRMED | TODO |
-| BallSocket | `BallSocket` | ✅ | ? | | CONFIRMED | TODO |
-| Bearing | `Bearing` | ✅ | ? | | CONFIRMED | TODO |
-| Board | `Board` | ✅ | ? | RGB | CONFIRMED | TODO |
-| Body | `Body` | ✅ | ? | RGB | CONFIRMED | TODO |
-| Briefcase | `Briefcase` | ✅ | ? | RGB | CONFIRMED | TODO |
-| Camera | `Camera` | ✅ | ? | | CONFIRMED | TODO |
-| Canister | `Canister` | ✅ | ? | RGB | CONFIRMED | TODO |
-| Cannon | `Cannon` | ✅ | ? | Shooting, Bullets, CanTargetAttached, IgnoreAttached, MaxDistance, ActivationSpeed, ActivationHeight | CONFIRMED | TODO |
-| CannonBall | `CannonBall` | ✅ | ? | | CONFIRMED | TODO |
-| Carrot | `Carrot` | ✅ | ? | RGB | CONFIRMED | TODO |
-| Cinderblock | `Cinderblock` | ✅ | ? | RGB | CONFIRMED | TODO |
-| Drumkit | `Drumkit` | ✅ | ? | | CONFIRMED | TODO |
-| FishBowl | `FishBowl` | ✅ | ? | RGB | CONFIRMED | TODO |
-| Fricklet | `Fricklet` | ✅ | ? | RGB | CONFIRMED | TODO |
-| GoldPotatoEngine | `GoldPotatoEngine` | ✅ | ? | | CONFIRMED | TODO |
-| Googie | `Googie` | ✅ | ? | RGB | CONFIRMED | TODO |
-| Gramby | `Gramby` | ✅ | ? | RGB | CONFIRMED | TODO |
-| Grenade | `Grenade` | ✅ | ? | | CONFIRMED | TODO |
-| Guitar | `Guitar` | ✅ | ? | | CONFIRMED | TODO |
-| Gun | `Gun` | ✅ | ? | Shooting, Bullets | CONFIRMED | TODO |
-| Head | `Head` | ✅ | ? | RGB | CONFIRMED | TODO |
-| Jug | `Jug` | ✅ | ? | RGB | CONFIRMED | TODO |
-| Keyboard | `Keyboard` | ✅ | ? | | CONFIRMED | TODO |
-| Leafblower | `Leafblower` | ✅ | ? | | CONFIRMED | TODO |
-| Leg | `Leg` | ✅ | ? | | CONFIRMED | TODO |
-| Light | `Light` | ✅ | ? | RGB, Volume | CONFIRMED | TODO |
-| Lock | `Lock` | ✅ | ? | | CONFIRMED | TODO |
-| Looper | `Looper` | ✅ | ? | | CONFIRMED | TODO |
-| Mag | `Mag` | ✅ | ? | Quantity, Bullets | CONFIRMED | TODO |
-| MountedGun | `MountedGun` | ✅ | ? | Shooting, Bullets | CONFIRMED | TODO |
-| Pipes | `Pipes` | ✅ | ? | RGB | CONFIRMED | TODO |
-| Piston | `Piston` | ✅ | ? | | CONFIRMED | TODO |
-| Plunger | `Plunger` | ✅ | ? | | CONFIRMED | TODO |
-| Poop | `Poop` | ✅ | ? | RGB | CONFIRMED | TODO |
-| PotatoEngine | `PotatoEngine` | ✅ | ? | Speed | CONFIRMED | TODO |
-| Radio | `Radio` | ✅ | ? | Volume, Channel, CustomTrack | CONFIRMED | TODO |
-| Ramp | `Ramp` | ✅ | ? | RGB | CONFIRMED | TODO |
-| RiotShield | `RiotShield` | ✅ | ? | RGB | CONFIRMED | TODO |
-| Rocket | `Rocket` | ✅ | ? | Speed | CONFIRMED | TODO |
-| RockingChair | `RockingChair` | ✅ | ? | RGB | CONFIRMED | TODO |
-| RPG | `RPG` | ✅ | ? | Shooting, Bullets | CONFIRMED | TODO |
-| RubberBand | `RubberBand` | ✅ | ? | Length, MinLength, MaxLength, MaxForce | CONFIRMED | TODO |
-| Seat | `Seat` | ✅ | ? | RGB | CONFIRMED | TODO |
-| ShoppingCart | `ShoppingCart` | ✅ | ? | RGB | CONFIRMED | TODO |
-| Shotgun | `Shotgun` | ✅ | ? | Shooting, Bullets | CONFIRMED | TODO |
-| Sledge | `Sledge` | ✅ | ? | RGB | CONFIRMED | TODO |
-| SprayPaint | `SprayPaint` | ✅ | ? | RGB | CONFIRMED | TODO |
-| SuperPowerClock | `SuperPowerClock` | ✅ | ? | | CONFIRMED | TODO |
-| Tooth | `Tooth` | ✅ | 0 | RGB | CONFIRMED | Documented |
-| TripWire | `TripWire` | ✅ | ? | | CONFIRMED | TODO |
-| Trowel | `Trowel` | ✅ | ? | RGB | CONFIRMED | TODO |
-| Trumpet | `Trumpet` | ✅ | ? | | CONFIRMED | TODO |
-| TV | `TV` | ✅ | ? | ImageId | CONFIRMED | TODO |
-| Uzi | `Uzi` | ✅ | ? | Shooting, Bullets | CONFIRMED | TODO |
-| wad | `wad` | ✅ | ? | | CONFIRMED | TODO |
+| [Part](miscellaneous/Part.md) | `Part` | ✅ | 0 | RGB | CONFIRMED | Documented |
+| [Anchor](miscellaneous/Anchor.md) | `Anchor` | ✅ | 0 | RGB | CONFIRMED | Documented |
+| [Balloon](miscellaneous/Balloon.md) | `Balloon` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [BeachBall](miscellaneous/BeachBall.md) | `BeachBall` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [BouncyBall](miscellaneous/BouncyBall.md) | `BouncyBall` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [BowlingBall](miscellaneous/BowlingBall.md) | `BowlingBall` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [BallSocket](miscellaneous/BallSocket.md) | `BallSocket` | ✅ | ? | | CONFIRMED | TODO |
+| [Bearing](miscellaneous/Bearing.md) | `Bearing` | ✅ | ? | | CONFIRMED | TODO |
+| [Board](miscellaneous/Board.md) | `Board` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [Body](miscellaneous/Body.md) | `Body` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [Briefcase](miscellaneous/Briefcase.md) | `Briefcase` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [Camera](miscellaneous/Camera.md) | `Camera` | ✅ | ? | | CONFIRMED | TODO |
+| [Canister](miscellaneous/Canister.md) | `Canister` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [Cannon](miscellaneous/Cannon.md) | `Cannon` | ✅ | ? | Shooting, Bullets, CanTargetAttached, IgnoreAttached, MaxDistance, ActivationSpeed, ActivationHeight | CONFIRMED | TODO |
+| [CannonBall](miscellaneous/CannonBall.md) | `CannonBall` | ✅ | ? | | CONFIRMED | TODO |
+| [Carrot](miscellaneous/Carrot.md) | `Carrot` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [Cinderblock](miscellaneous/Cinderblock.md) | `Cinderblock` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [Drumkit](miscellaneous/Drumkit.md) | `Drumkit` | ✅ | ? | | CONFIRMED | TODO |
+| [FishBowl](miscellaneous/FishBowl.md) | `FishBowl` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [Fricklet](miscellaneous/Fricklet.md) | `Fricklet` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [GoldPotatoEngine](physics/GoldPotatoEngine.md) | `GoldPotatoEngine` | ✅ | ? | | CONFIRMED | TODO |
+| [Googie](miscellaneous/Googie.md) | `Googie` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [Gramby](miscellaneous/Gramby.md) | `Gramby` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [Grenade](miscellaneous/Grenade.md) | `Grenade` | ✅ | ? | | CONFIRMED | TODO |
+| [Guitar](miscellaneous/Guitar.md) | `Guitar` | ✅ | ? | | CONFIRMED | TODO |
+| [Gun](miscellaneous/Gun.md) | `Gun` | ✅ | ? | Shooting, Bullets | CONFIRMED | TODO |
+| [Head](miscellaneous/Head.md) | `Head` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [Jug](miscellaneous/Jug.md) | `Jug` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [Keyboard](miscellaneous/Keyboard.md) | `Keyboard` | ✅ | ? | | CONFIRMED | TODO |
+| [Leafblower](miscellaneous/Leafblower.md) | `Leafblower` | ✅ | ? | | CONFIRMED | TODO |
+| [Leg](miscellaneous/Leg.md) | `Leg` | ✅ | ? | | CONFIRMED | TODO |
+| [Light](miscellaneous/Light.md) | `Light` | ✅ | ? | RGB, Volume | CONFIRMED | TODO |
+| [Lock](miscellaneous/Lock.md) | `Lock` | ✅ | ? | | CONFIRMED | TODO |
+| [Looper](miscellaneous/Looper.md) | `Looper` | ✅ | ? | | CONFIRMED | TODO |
+| [Mag](miscellaneous/Mag.md) | `Mag` | ✅ | ? | Quantity, Bullets | CONFIRMED | TODO |
+| [MountedGun](miscellaneous/MountedGun.md) | `MountedGun` | ✅ | ? | Shooting, Bullets | CONFIRMED | TODO |
+| [Pipes](miscellaneous/Pipes.md) | `Pipes` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [Piston](miscellaneous/Piston.md) | `Piston` | ✅ | ? | | CONFIRMED | TODO |
+| [Plunger](miscellaneous/Plunger.md) | `Plunger` | ✅ | ? | | CONFIRMED | TODO |
+| [Poop](miscellaneous/Poop.md) | `Poop` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [PotatoEngine](physics/PotatoEngine.md) | `PotatoEngine` | ✅ | ? | Speed | CONFIRMED | TODO |
+| [Radio](miscellaneous/Radio.md) | `Radio` | ✅ | ? | Volume, Channel, CustomTrack | CONFIRMED | TODO |
+| [Ramp](miscellaneous/Ramp.md) | `Ramp` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [RiotShield](miscellaneous/RiotShield.md) | `RiotShield` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [Rocket](miscellaneous/Rocket.md) | `Rocket` | ✅ | ? | Speed | CONFIRMED | TODO |
+| [RockingChair](miscellaneous/RockingChair.md) | `RockingChair` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [RPG](miscellaneous/RPG.md) | `RPG` | ✅ | ? | Shooting, Bullets | CONFIRMED | TODO |
+| [RubberBand](miscellaneous/RubberBand.md) | `RubberBand` | ✅ | ? | Length, MinLength, MaxLength, MaxForce | CONFIRMED | TODO |
+| [Seat](miscellaneous/Seat.md) | `Seat` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [ShoppingCart](miscellaneous/ShoppingCart.md) | `ShoppingCart` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [Shotgun](miscellaneous/Shotgun.md) | `Shotgun` | ✅ | ? | Shooting, Bullets | CONFIRMED | TODO |
+| [Sledge](miscellaneous/Sledge.md) | `Sledge` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [SprayPaint](miscellaneous/SprayPaint.md) | `SprayPaint` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [SuperPowerClock](miscellaneous/SuperPowerClock.md) | `SuperPowerClock` | ✅ | ? | | CONFIRMED | TODO |
+| [Tooth](miscellaneous/Tooth.md) | `Tooth` | ✅ | 0 | RGB | CONFIRMED | Documented |
+| [TripWire](miscellaneous/TripWire.md) | `TripWire` | ✅ | ? | | CONFIRMED | TODO |
+| [Trowel](miscellaneous/Trowel.md) | `Trowel` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [Trumpet](miscellaneous/Trumpet.md) | `Trumpet` | ✅ | ? | | CONFIRMED | TODO |
+| [TV](miscellaneous/TV.md) | `TV` | ✅ | ? | ImageId | CONFIRMED | TODO |
+| [Uzi](miscellaneous/Uzi.md) | `Uzi` | ✅ | ? | Shooting, Bullets | CONFIRMED | TODO |
+| [wad](miscellaneous/wad.md) | `wad` | ✅ | ? | | CONFIRMED | TODO |
 
 ### Other
+
 | Block | Identifier | Model | Connection Points | Properties | Confidence | Status |
 |-------|------------|-------|-------------------|------------|------------|--------|
-| Arm | `Arm` | ✅ | ? | RGB | CONFIRMED | TODO |
-| Banjo | `Banjo` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [Arm](other/Arm.md) | `Arm` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [Banjo](other/Banjo.md) | `Banjo` | ✅ | ? | RGB | CONFIRMED | TODO |
 | Teeth | `Teeth` | ❓ | ? | | UNKNOWN | TODO |
-| Banjo | `Banjo` | ✅ | ? | RGB | CONFIRMED | TODO |
+| [Banjo](other/Banjo.md) | `Banjo` | ✅ | ? | RGB | CONFIRMED | TODO |
 
 ### Uncategorized / Unused
+
 | Block | Identifier | Model | Connection Points | Properties | Confidence | Status |
 |-------|------------|-------|-------------------|------------|------------|--------|
 | (various) | | | | | UNKNOWN | TODO |
 
-## Documentation Template
+## Category directories
 
-Each block should have a file in `blocks/reference/` following this template:
+| Category | Purpose | Index |
+| --- | --- | --- |
+| Building | Vehicle and construction pieces | [Building](building/README.md) |
+| Physics | Motion and physics-related blocks | [Physics](physics/README.md) |
+| Tools | Tool blocks | [Tools](tools/README.md) |
+| Wiring | Signals, gates, and connection logic | [Wiring](wiring/README.md) |
+| Miscellaneous | Miscellaneous objects and props | [Miscellaneous](miscellaneous/README.md) |
+| Other | Objects not assigned to another category by the generator | [Other](other/README.md) |
 
-```markdown
-# Block: [Display Name]
+## Individual block pages
 
-## Identification
-- **Name**: [Display name]
-- **Identifier**: [Internal identifier used in JSON]
-- **Category**: [Building/Physics/Tools/Wiring/Miscellaneous/Other/Uncategorized]
-- **Model Available**: Yes/No
-- **Model Path**: `assets/models/model/[Name]/[Name].obj`
-
-## Connection Points
-| Point ID | Name | Position | Rotation | Description | Status |
-|----------|------|----------|----------|-------------|--------|
-| 1 | MountPoint | [x,y,z] | [rx,ry,rz] | Main connection point | CONFIRMED |
-
-*Source: `assets/models/model/[Name]/[Name].json` → LocalPoints*
-
-## Branches (if applicable)
-| Branch | Point ID | Model Path | Start Transform | Description |
-|--------|----------|------------|-----------------|-------------|
-| output | 2 | ./split/output.obj | [pos], [rot] | Output branch |
-
-*Source: `assets/models/model/[Name]/[Name].json` → Branches, Branches Start*
-
-## Properties
-| Property | Type | Description | Known Values | Status |
-|----------|------|-------------|--------------|--------|
-| RGB | array[3] | Color | [0-255, 0-255, 0-255] | CONFIRMED |
-| Speed | number | Movement speed | 0-1000 | CONFIRMED |
-
-## Relationships
-- **Connects to**: [List of block types this commonly connects to]
-- **Parent of**: [Blocks typically parented to this]
-- **Child of**: [Blocks typically parent to this]
-
-## Confidence Level
-- **CONFIRMED**: Directly observed, reproducible
-- **PARTIALLY CONFIRMED**: Some evidence, not fully verified
-- **UNCONFIRMED**: Reported but lacking evidence
-- **UNKNOWN**: No data available
-
-## Source Evidence
-- `assets/models/model/[Name]/[Name].json`
-- `assets/models/model/[Name]/[Name].obj`
-- `old-files/obj_ids-spanish.md`
-- Experimental saves in `examples/experiments/`
-
-## Notes
-[Any additional observations, hypotheses, or unresolved questions]
-```
+Each object page lives in the subdirectory matching its category and follows the [block reference template](template.md). The template is a structure guide, not evidence; include only values supported by the relevant model files, save samples, or reproducible experiments.
 
 ## Generating Documentation
 

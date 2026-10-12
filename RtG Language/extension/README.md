@@ -14,6 +14,7 @@ This extension provides language support for **RtG-Language 2.0** (.rtg files) i
 The extension supports the RtG-Language 2.0 syntax as defined in the [RtG Language Specification](https://github.com/JuanCrakYT/RtG-Format/tree/main/RtG%20Language/docs).
 
 ### Keywords
+
 - `rtg` - Version declaration
 - `schema` - Schema import
 - `object` - Object section

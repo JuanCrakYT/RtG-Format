@@ -13,7 +13,7 @@ Each discovery should include:
 - **Confidence** — Current confidence level.
 - **Notes** — Important limitations or unresolved details.
 
-Historical reverse-engineering material is preserved under [`../old-files/`](../old-files/).
+Historical reverse-engineering material is preserved under [`../old-files/`](../old-files).
 
 ---
 
@@ -611,5 +611,5 @@ Do not promote a hypothesis to `CONFIRMED` without new evidence.
 * [`../format/identifiers.md`](../format/identifiers.md) — Identifier systems.
 * [`../format/properties.md`](../format/properties.md) — Properties.
 * [`../format/unknown-fields.md`](../format/unknown-fields.md) — Unknown and unconfirmed fields.
-* [`../examples/experiments/`](../examples/experiments/) — Experimental saves and evidence.
-* [`../old-files/`](../old-files/) — Historical reverse-engineering records.
+* [`../examples/experiments/`](../examples/experiments) — Experimental saves and evidence.
+* [`../old-files/`](../old-files) — Historical reverse-engineering records.

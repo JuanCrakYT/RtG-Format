@@ -41,15 +41,18 @@ RtG-CLI is a modular command-line interface for the RtG-Format ecosystem. It pro
 ## Module Responsibilities
 
 ### `application.py`
+
 Main application class that orchestrates all subsystems. Entry point for the CLI.
 
 ### `configuration.py`
+
 - Loads and validates `assets.json`
 - Resolves relative paths to absolute paths
 - Provides typed configuration objects (`CliConfig`, `AddonConfig`, `AssetPaths`)
 - Validates required fields and structure
 
 ### `arguments.py`
+
 - Formal argument parser supporting:
   - Commands and subcommands
   - Short (`-x`) and long (`--option`) options
@@ -60,12 +63,14 @@ Main application class that orchestrates all subsystems. Entry point for the CLI
 - Returns structured `ParsedCommandLine` with diagnostics
 
 ### `languages.py`
+
 - Manages 19 languages (12 from RtG-AI + 7 additional)
 - Tracks availability per category: CLI, Help, Rules, Void, Version, Addons
 - Provides validation, default selection, and formatted listing
 - Language codes follow ISO/BCP-47
 
 ### `diagnostics.py`
+
 - Structured error system with categories and exit codes
 - `Diagnostic` dataclass with message, category, exit code, debug info
 - Pre-defined error factories for common cases
@@ -73,24 +78,28 @@ Main application class that orchestrates all subsystems. Entry point for the CLI
 - No tracebacks by default; debug mode available
 
 ### `addons.py`
+
 - `AddonRegistry`: Discovers, validates, and manages addons
 - Distinguishes registered vs documented addons
 - `ProgramCommandInterface` abstraction for Python/JS execution
 - Loads program command interfaces from configured paths
 
 ### `execution.py`
+
 - `AddonExecutor`: Executes addons via their program command interface
 - `InternalCommandExecutor`: Executes internal CLI commands
 - Handles argument separation after addon identification
 - Manages stdout/stderr/exit code propagation
 
 ### `help.py`
+
 - Loads help content from external Markdown files
 - Supports multiple languages
 - Separates help from rules content
 - Provides formatted output for commands, addons, languages
 
 ### `version.py`
+
 - Manages version information for CLI and addons
 - Multi-language version content support
 - Single source of truth for version data

@@ -34,9 +34,9 @@ Use this path if you want to understand the structure and behavior of the format
 Use this path if you are interested in how the format was discovered, tested, and documented.
 
 1. [`../research/methodology.md`](../research/methodology.md) — How reverse-engineering observations are investigated and recorded.
-2. [`../examples/`](../examples/) — Real examples and preserved experiments.
-3. [`../research/`](../research/) — Discoveries, methodology, and unresolved questions.
-4. [`../compression/`](../compression/) — Encoding and compression behavior and related experiments.
+2. [`../examples/`](../examples) — Real examples and preserved experiments.
+3. [`../research/`](../research) — Discoveries, methodology, and unresolved questions.
+4. [`../compression/`](../compression) — Encoding and compression behavior and related experiments.
 
 This path is intended for understanding the research process and evidence behind the documented format.
 
@@ -57,16 +57,16 @@ If you prefer a single gradual introduction instead of choosing a path, the foll
 
 Use these sections according to what you are investigating:
 
-* [`../format/`](../format/) — JSON structure, properties, identifiers, indexing, and unknown fields.
-* [`../blocks/`](../blocks/) — Parts, object IDs, categories, and connection-point references.
-* [`../examples/`](../examples/) — Real examples and preserved experiments.
-* [`../research/`](../research/) — Discoveries, methodology, and unresolved questions.
-* [`../compression/`](../compression/) — Encoding and compression behavior and related experiments.
-* [`../tools/`](../tools/) — Utilities and automation currently maintained in the repository.
-* [`../old-files/`](../old-files/) — Historical reverse-engineering material preserved for provenance.
+* [`../format/`](../format) — JSON structure, properties, identifiers, indexing, and unknown fields.
+* [`../blocks/`](../blocks) — Parts, object IDs, categories, and connection-point references.
+* [`../examples/`](../examples) — Real examples and preserved experiments.
+* [`../research/`](../research) — Discoveries, methodology, and unresolved questions.
+* [`../compression/`](../compression) — Encoding and compression behavior and related experiments.
+* [`../tools/`](../tools) — Utilities and automation currently maintained in the repository.
+* [`../old-files/`](../old-files) — Historical reverse-engineering material preserved for provenance.
 
 `old-files/` is not required for understanding the current format. It contains historical material that can be consulted when investigating previous findings or discrepancies with the current interpretation.
-For beginners: it's not recommended to go into [`../old-files/`](../old-files/) yet.
+For beginners: it's not recommended to go into [`../old-files/`](../old-files) yet.
 
 ## Contributing
 
@@ -74,13 +74,13 @@ Before changing the documentation or adding research:
 
 * Read [`../CONTRIBUTING.md`](../CONTRIBUTING.md).
 * Follow the evidence and confidence rules in [`../research/methodology.md`](../research/methodology.md).
-* Add reproducible experiments to [`../examples/experiments/`](../examples/experiments/), not to `research/`.
+* Add reproducible experiments to [`../examples/experiments/`](../examples/experiments), not to `research/`.
 * Update [`../SPECIFICATION.md`](../SPECIFICATION.md) and the relevant `format/` documents when a confirmed format behavior changes.
 
 ## Important Distinction
 
 `docs/` is an introductory and navigational layer. It explains where information belongs and provides conceptual explanations.
 
-The technical format itself is documented under [`../format/`](../format/) and [`../SPECIFICATION.md`](../SPECIFICATION.md).
+The technical format itself is documented under [`../format/`](../format) and [`../SPECIFICATION.md`](../SPECIFICATION.md).
 
-Historical evidence is preserved under [`../old-files/`](../old-files/).
+Historical evidence is preserved under [`../old-files/`](../old-files).

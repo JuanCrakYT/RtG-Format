@@ -171,7 +171,7 @@ assets/
 
 ## Images
 
-The [`images/`](images/) directory contains visual resources used throughout the repository.
+The [`images/`](images) directory contains visual resources used throughout the repository.
 
 ### Banners
 
@@ -183,7 +183,7 @@ The root-level banner files are general project banner assets:
 
 ### Current RtG-Format Logo
 
-The current project logo is maintained in [`images/logo/`](images/logo/).
+The current project logo is maintained in [`images/logo/`](images/logo).
 
 * [`RtG-Format.svg`](images/logo/RtG-Format.svg) — Main vector version of the RtG-Format logo.
 * [`RtG-Format.png`](images/logo/RtG-Format.png) — Raster version of the RtG-Format logo.
@@ -194,7 +194,7 @@ These files represent the current project branding.
 
 ### Official RtG Banners
 
-[`images/logo/official-banners/`](images/logo/official-banners/) contains Road To Gramby's banner images used as backgrounds or visual references for project presentation.
+[`images/logo/official-banners/`](images/logo/official-banners) contains Road To Gramby's banner images used as backgrounds or visual references for project presentation.
 
 The files are numbered for convenience:
 
@@ -208,9 +208,9 @@ The `RtG-#` naming scheme allows additional banner variations to be added withou
 
 ### Historical Logo Versions
 
-[`images/logo/versions/`](images/logo/versions/) contains older logo versions preserved for historical reference.
+[`images/logo/versions/`](images/logo/versions) contains older logo versions preserved for historical reference.
 
-The current historical version is stored under [`images/logo/versions/v1/`](images/logo/versions/v1/):
+The current historical version is stored under [`images/logo/versions/v1/`](images/logo/versions/v1):
 
 * [`RtG-Format-v1.svg`](images/logo/versions/v1/RtG-Format-v1.svg)
 * [`RtG-Format-v1.png`](images/logo/versions/v1/RtG-Format-v1.png)
@@ -225,13 +225,13 @@ These assets are separated by their purpose so that models, interface graphics, 
 
 ### Models
 
-The [`models/`](models/) directory contains the 3D models and their metadata used by **RtG-Preview**.
+The [`models/`](models) directory contains the 3D models and their metadata used by **RtG-Preview**.
 
 Additional details about model creation, Blender hierarchy, branches, `start` objects, `Point_#` objects, and JSON mdata are documented in [`models/README.md`](models/README.md).
 
 ### Sounds
 
-The [`sounds/`](sounds/) directory contains audio feedback used by RtG-Preview.
+The [`sounds/`](sounds) directory contains audio feedback used by RtG-Preview.
 
 * [`error.mp3`](sounds/error.mp3) — Played when an error or failure is reported by the preview interface.
 * [`notification.mp3`](sounds/notification.mp3) — Used for general interface notifications.
@@ -240,7 +240,7 @@ These sounds are optional interface feedback and are not part of the RtG build f
 
 ### SVG
 
-The [`svg/`](svg/) directory contains SVG graphics used by the RtG-Preview interface.
+The [`svg/`](svg) directory contains SVG graphics used by the RtG-Preview interface.
 
 * [`menu-closed.svg`](svg/menu-closed.svg) — Menu button icon used when the preview panel is open.
 * [`menu-opened.svg`](svg/menu-opened.svg) — Menu button icon used when the preview panel is closed.
@@ -251,13 +251,13 @@ These graphics are used by the preview's panel toggle control and are intended t
 
 When adding or modifying project assets:
 
-* Keep general visual assets inside [`images/`](images/).
-* Keep current RtG-Format branding inside [`images/logo/`](images/logo/).
-* Keep official Road To Gramby's banner references inside [`images/logo/official-banners/`](images/logo/official-banners/).
-* Keep obsolete logo versions inside [`images/logo/versions/`](images/logo/versions/).
-* Keep RtG-Preview 3D models inside [`models/`](models/).
-* Keep RtG-Preview audio inside [`sounds/`](sounds/).
-* Keep RtG-Preview interface SVGs inside [`svg/`](svg/).
+* Keep general visual assets inside [`images/`](images).
+* Keep current RtG-Format branding inside [`images/logo/`](images/logo).
+* Keep official Road To Gramby's banner references inside [`images/logo/official-banners/`](images/logo/official-banners).
+* Keep obsolete logo versions inside [`images/logo/versions/`](images/logo/versions).
+* Keep RtG-Preview 3D models inside [`models/`](models).
+* Keep RtG-Preview audio inside [`sounds/`](sounds).
+* Keep RtG-Preview interface SVGs inside [`svg/`](svg).
 * Do not use files under `versions/` as current branding.
 * Prefer SVG for logos and other graphics that need to scale cleanly.
 * Use PNG or JPEG when a raster format is specifically required.
@@ -270,7 +270,7 @@ When adding or modifying project assets:
 
 * [`../README.md`](../README.md) — Main project documentation.
 * [`../structure.md`](../structure.md) — Repository structure.
-* [`images/`](images/) — Image assets used throughout the repository.
-* [`models/`](models/) — 3D models used by RtG-Preview.
-* [`sounds/`](sounds/) — Audio feedback used by RtG-Preview.
-* [`svg/`](svg/) — Interface graphics used by RtG-Preview.
+* [`images/`](images) — Image assets used throughout the repository.
+* [`models/`](models) — 3D models used by RtG-Preview.
+* [`sounds/`](sounds) — Audio feedback used by RtG-Preview.
+* [`svg/`](svg) — Interface graphics used by RtG-Preview.

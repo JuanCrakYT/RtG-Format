@@ -68,5 +68,5 @@ An empty `missing_rows`, `extra_rows`, and `invented_rows` list indicates that t
 
 `migration_diff.json` is **verification data**, not a specification of the RtG save/build format.
 
-The historical source remains preserved under [`../../old-files/`](../../old-files/), while the current organized object references are maintained under [`../../blocks/`](../../blocks/).
+The historical source remains preserved under [`../../old-files/`](../../old-files), while the current organized object references are maintained under [`../../blocks/`](../../blocks).
 Because the associated agent tools are incomplete/postponed, this directory should not be treated as a primary entry point for understanding the format.

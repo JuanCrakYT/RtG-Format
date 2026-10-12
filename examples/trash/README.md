@@ -1,12 +1,12 @@
 # Trash
 
-This directory contains experiments that were removed from [`examples/experiments/`](../experiments/) but must be preserved according to the project's research and experiment preservation rules.
+This directory contains experiments that were removed from [`examples/experiments/`](../experiments) but must be preserved according to the project's research and experiment preservation rules.
 
 Experiments placed here are **not considered disposable files**. They are preserved for research provenance, even when they are incomplete, failed, invalid, or no longer useful as active examples.
 
 ## Purpose
 
-Use this directory when an experiment from [`../experiments/`](../experiments/) should no longer remain in the active experiment collection but **must not be deleted**.
+Use this directory when an experiment from [`../experiments/`](../experiments) should no longer remain in the active experiment collection but **must not be deleted**.
 
 Experiments moved here should retain their original files and documentation whenever possible.
 

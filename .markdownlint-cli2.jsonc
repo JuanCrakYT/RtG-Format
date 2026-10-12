@@ -1,0 +1,14 @@
+{
+  "config": {
+    "default": false,
+    "MD001": true,
+    "MD003": { "style": "atx" },
+    "MD022": true,
+    "MD032": true,
+    "MD047": true
+  },
+  "ignores": [
+    "old-files/**",
+    "**/node_modules/**"
+  ]
+}

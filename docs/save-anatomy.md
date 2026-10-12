@@ -55,7 +55,7 @@ Connector
 Wire
 ```
 
-The currently documented object and Part IDs are organized under [`../blocks/`](../blocks/).
+The currently documented object and Part IDs are organized under [`../blocks/`](../blocks).
 
 ### Connections
 
@@ -155,7 +155,7 @@ For the detailed behavior, see [`../format/identifiers.md`](../format/identifier
 
 The structured build data is separate from the final encoded save representation.
 
-The encoding research is documented under [`../compression/`](../compression/).
+The encoding research is documented under [`../compression/`](../compression).
 
 ## Where to Continue
 
@@ -164,5 +164,5 @@ The encoding research is documented under [`../compression/`](../compression/).
 * [`../format/indexing.md`](../format/indexing.md) — Indexing and references.
 * [`../format/properties.md`](../format/properties.md) — Properties.
 * [`../format/identifiers.md`](../format/identifiers.md) — Identifiers and UUIDs.
-* [`../blocks/`](../blocks/) — Object and Part IDs.
-* [`../compression/`](../compression/) — Encoding and compression.
+* [`../blocks/`](../blocks) — Object and Part IDs.
+* [`../compression/`](../compression) — Encoding and compression.

@@ -525,7 +525,7 @@ The remaining questions include:
 * whether additional serialization transformations occur;
 * whether metadata exists outside the JSON payload.
 
-See [`../compression/`](../compression/).
+See [`../compression/`](../compression).
 
 ---
 
@@ -635,6 +635,6 @@ When possible:
 * [`../format/identifiers.md`](../format/identifiers.md) — Identifier systems.
 * [`../format/properties.md`](../format/properties.md) — Properties.
 * [`../format/indexing.md`](../format/indexing.md) — Indexing.
-* [`../compression/`](../compression/) — Compression and serialization research.
-* [`../examples/experiments/`](../examples/experiments/) — Experimental evidence.
-* [`../old-files/`](../old-files/) — Historical reverse-engineering records.
+* [`../compression/`](../compression) — Compression and serialization research.
+* [`../examples/experiments/`](../examples/experiments) — Experimental evidence.
+* [`../old-files/`](../old-files) — Historical reverse-engineering records.
