@@ -14,12 +14,14 @@ Thank you for helping improve RtG-Format. Contributions may include format resea
 
 Use consistent labels when documenting uncertain findings:
 
-- **Confirmed** — supported by repeatable tests or direct evidence.
-- **Partially confirmed** — observed, but important cases or details remain unverified.
-- **Unconfirmed** — plausible or reported, but not yet supported by enough evidence.
-- **Hypothesis** — an explanation proposed for testing, not an established fact.
+- **CONFIRMED** — supported by repeatable tests or direct evidence.
+- **PARTIALLY CONFIRMED** — observed, but important cases or details remain unverified.
+- **UNCONFIRMED** — plausible or reported, but not yet supported by enough evidence.
+- **HYPOTHESIS** — an explanation proposed for testing, not an established fact.
 
 When a finding changes, explain what new evidence caused the change. Do not silently erase contradictory observations.
+
+See the [documentation taxonomy](docs/documentation-taxonomy.md) for document types, ownership, naming, and migration rules.
 
 ## Where changes belong
 
