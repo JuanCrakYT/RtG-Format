@@ -7,7 +7,7 @@ This directory contains utilities used to inspect, convert, generate, and mainta
 ### `RtG Image/`
 
 Desktop utility for creating pixel-art images and converting them to RtG Format data.
-Its complete directory tree is documented in [`dedicated-structure/RtG Image.tree`](dedicated-structure/RtG-Image.tree) because the directory contains more than 10 entries.
+Its complete directory tree is documented in [`dedicated-structure/RtG Image.tree`](dedicated-structure/RtG%20Image.tree) because the directory contains more than 10 entries.
 
 ### `RtG-AI/`
 

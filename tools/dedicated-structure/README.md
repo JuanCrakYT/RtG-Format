@@ -4,7 +4,7 @@ This directory contains complete tree listings for tool directories that are too
 
 ## Files
 
-- [`RtG-Image.tree`](RtG-Image.tree) - Complete tree for the `RtG Image/` tool directory.
+- [`RtG-Image.tree`](RtG%20Image.tree) - Complete tree for the `RtG Image/` tool directory.
 
 ## Listing rule
 
