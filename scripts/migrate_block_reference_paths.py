@@ -70,7 +70,21 @@ def main() -> int:
         original = path.read_text(encoding="utf-8", errors="replace")
         lines = original.splitlines(keepends=True)
         output = []
+        in_fence = False
+        fence_char = ""
         for line in lines:
+            fence = re.match(r"^\\s*(\x60{3,}|~{3,})", line)
+            if fence:
+                marker = fence.group(1)[0]
+                if not in_fence:
+                    in_fence, fence_char = True, marker
+                elif marker == fence_char:
+                    in_fence = False
+                output.append(line)
+                continue
+            if in_fence:
+                output.append(line)
+                continue
             line = LINK.sub(lambda m: m.group("start") + rewrite_destination(path, m.group("dest"), old_base, old_to_new) + m.group("tail"), line)
             match = REFERENCE.match(line.rstrip("\r\n"))
             if match:
