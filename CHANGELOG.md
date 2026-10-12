@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Documentation and repository governance
+
+* Added a dedicated `SECURITY.md` policy describing vulnerability-reporting expectations and scope.
+* Expanded `CONTRIBUTING.md` with repository navigation, evidence-confidence labels, reproducibility requirements, generated-file guidance, and a pull-request checklist.
+* Preserved the existing README banner and reserved a clearly marked location for the official YouTube trailer, to be linked when it is published.
+
 ### Added
 
 * Expanded and consolidated the current RtG save/build format specification.
