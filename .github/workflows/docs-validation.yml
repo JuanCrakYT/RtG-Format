@@ -27,7 +27,11 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: Normalize Markdown structure
+      - name: Normalize safe Markdown structure
+        if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'formalize-repository-v2'
+        run: python scripts/normalize_markdown_structure.py
+
+      - name: Apply Markdown spacing fixes
         if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'formalize-repository-v2'
         run: npx --yes markdownlint-cli2 --fix "**/*.md"
 

@@ -49,7 +49,7 @@ Not every page needs every section. Avoid boilerplate that adds no information.
 
 ## Automated validation
 
-Run `python scripts/check_markdown_links.py` from the repository root to check repository-local Markdown destinations. The checker scans maintained Markdown and excludes `old-files/` and vendored `node_modules/` content from its input; it does not rewrite files or validate remote URLs and heading anchors.
+Run `python scripts/normalize_markdown_structure.py` to standardize setext headings, line endings, and final newlines without changing prose or code fences. Then run `python scripts/check_markdown_links.py` from the repository root to check repository-local Markdown destinations. The checker scans maintained Markdown and excludes `old-files/` and vendored `node_modules/` content from its input; it does not rewrite files or validate remote URLs and heading anchors.
 
 ## Review checklist
 
