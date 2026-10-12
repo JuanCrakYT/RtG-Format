@@ -42,6 +42,9 @@ jobs:
         if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'formalize-repository-v2'
         run: npx --yes markdownlint-cli2 --fix "**/*.md"
 
+      - name: Regenerate documentation inventory
+        run: python scripts/generate_documentation_inventory.py
+
       - name: Commit normalization to the formalization branch
         if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'formalize-repository-v2'
         run: |
