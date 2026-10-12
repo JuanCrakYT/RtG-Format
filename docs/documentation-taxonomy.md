@@ -4,23 +4,23 @@ This document defines the role, location, and maintenance rules for each class o
 
 ## 1. Documentation layers
 
-| Layer | Canonical location | Purpose | Change policy |
-| --- | --- | --- | --- |
-| Project entry point | `README.md` | Explain the project and route readers to maintained references | Keep concise; link to detailed pages |
-| Consolidated specification | `SPECIFICATION.md` | Present the current consolidated interpretation of the format | Require evidence and references for technical claims |
-| Cross-cutting guides | `docs/` | Explain concepts, reading paths, repository organization, and contribution conventions | Avoid duplicating detailed reference content |
-| Format reference | `format/` | Describe structure, indexing, identifiers, properties, and unknown fields | Keep one canonical page per topic |
-| Object/block reference | `blocks/reference/<category>/<Identifier>.md` | Document one object's observed identifiers, properties, connections, and evidence under its category directory | Preserve identifier spelling; distinguish missing data from zero or none |
-| Part ID catalog | `blocks/parts/<category>/parts-id.md` | Organize observed point/part IDs by category | Keep source provenance and category scope visible |
-| Research synthesis | `research/` | Record methodology, supported findings, and unresolved questions | Preserve uncertainty and contradictory results |
-| Experiments and samples | `examples/` | Store source samples, reduced reproductions, and controlled experiments | Record provenance and whether data is observed or illustrative |
-| Encoding/compression | `compression/` | Describe transformations between structured data and stored output | Separate encoding, compression, and unknown steps |
-| Supporting assets | `assets/` | Index models and other files used by research or tools | Do not infer behavior from an asset's filename alone |
-| Component documentation | A component's own directory, e.g. `RtG-CLI/` | Explain that component's installation, usage, architecture, and limits | Keep instructions close to the component they describe |
-| Localized documentation | `RtG-CLI/languages/<locale>/` | Maintain locale-specific material | Preserve locale and meaning; do not overwrite translations with English |
-| Templates | `docs/templates/` | Provide starting structures for recurring document types | Templates must remain generic and must not assert format facts |
-| Historical archive | `old-files/` | Preserve earlier research and documentation as historical evidence | **Immutable: never edit, rename, move, reformat, or delete its contents** |
-| Third-party dependencies | `node_modules/` | Vendored/generated dependency material | Not project-authored documentation; exclude from documentation migrations and linting |
+| Layer                      | Canonical location                            | Purpose                                                                                                        | Change policy                                                                         |
+| -------------------------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Project entry point        | `README.md`                                   | Explain the project and route readers to maintained references                                                 | Keep concise; link to detailed pages                                                  |
+| Consolidated specification | `SPECIFICATION.md`                            | Present the current consolidated interpretation of the format                                                  | Require evidence and references for technical claims                                  |
+| Cross-cutting guides       | `docs/`                                       | Explain concepts, reading paths, repository organization, and contribution conventions                         | Avoid duplicating detailed reference content                                          |
+| Format reference           | `format/`                                     | Describe structure, indexing, identifiers, properties, and unknown fields                                      | Keep one canonical page per topic                                                     |
+| Object/block reference     | `blocks/reference/<category>/<Identifier>.md` | Document one object's observed identifiers, properties, connections, and evidence under its category directory | Preserve identifier spelling; distinguish missing data from zero or none              |
+| Part ID catalog            | `blocks/parts/<category>/parts-id.md`         | Organize observed point/part IDs by category                                                                   | Keep source provenance and category scope visible                                     |
+| Research synthesis         | `research/`                                   | Record methodology, supported findings, and unresolved questions                                               | Preserve uncertainty and contradictory results                                        |
+| Experiments and samples    | `examples/`                                   | Store source samples, reduced reproductions, and controlled experiments                                        | Record provenance and whether data is observed or illustrative                        |
+| Encoding/compression       | `compression/`                                | Describe transformations between structured data and stored output                                             | Separate encoding, compression, and unknown steps                                     |
+| Supporting assets          | `assets/`                                     | Index models and other files used by research or tools                                                         | Do not infer behavior from an asset's filename alone                                  |
+| Component documentation    | A component's own directory, e.g. `RtG-CLI/`  | Explain that component's installation, usage, architecture, and limits                                         | Keep instructions close to the component they describe                                |
+| Localized documentation    | `RtG-CLI/languages/<locale>/`                 | Maintain locale-specific material                                                                              | Preserve locale and meaning; do not overwrite translations with English               |
+| Templates                  | `docs/templates/`                             | Provide starting structures for recurring document types                                                       | Templates must remain generic and must not assert format facts                        |
+| Historical archive         | `old-files/`                                  | Preserve earlier research and documentation as historical evidence                                             | **Immutable: never edit, rename, move, reformat, or delete its contents**             |
+| Third-party dependencies   | `node_modules/`                               | Vendored/generated dependency material                                                                         | Not project-authored documentation; exclude from documentation migrations and linting |
 
 ## 2. Authority and evidence
 

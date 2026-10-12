@@ -4,11 +4,11 @@ This directory records the process and results of reverse-engineering the RtG sa
 
 ## Documents
 
-| Document | Purpose |
-| --- | --- |
-| [`methodology.md`](methodology.md) | Experimental design, variable isolation, evidence recording, and evaluation |
-| [`discoveries.md`](discoveries.md) | Findings supported by the observations described in the research |
-| [`unknowns.md`](unknowns.md) | Open questions, partially understood behavior, and hypotheses still needing tests |
+| Document                           | Purpose                                                                           |
+| ---------------------------------- | --------------------------------------------------------------------------------- |
+| [`methodology.md`](methodology.md) | Experimental design, variable isolation, evidence recording, and evaluation       |
+| [`discoveries.md`](discoveries.md) | Findings supported by the observations described in the research                  |
+| [`unknowns.md`](unknowns.md)       | Open questions, partially understood behavior, and hypotheses still needing tests |
 
 ## Recommended workflow
 

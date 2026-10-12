@@ -12,27 +12,27 @@
 
 ## Connection Points
 
-| Point ID | Name | Position | Rotation | Description | Status |
-|----------|------|----------|----------|-------------|--------|
-| 2 | Connection 2 | [0, 0.75, 0] | [0, 0, 130] | Branch attachment | CONFIRMED |
+| Point ID | Name         | Position     | Rotation    | Description       | Status    |
+| -------- | ------------ | ------------ | ----------- | ----------------- | --------- |
+| 2        | Connection 2 | [0, 0.75, 0] | [0, 0, 130] | Branch attachment | CONFIRMED |
 
 *Source: `assets/models/model/Switch/Switch.json` → LocalPoints*
 
 ## Branches
 
-| Branch | Point ID | Model Path | Start Position | Start Rotation | Description |
-|--------|----------|------------|----------------|----------------|-------------|
-| output | 2 | ./split/output.obj | [0, 0.75, 0] | [0, 0, 130] | Attached at point 2 |
-| input | NaN | ./split/input.obj | [0, 0.75, 0] | [0, 0, 130] | Free-floating branch |
+| Branch | Point ID | Model Path         | Start Position | Start Rotation | Description          |
+| ------ | -------- | ------------------ | -------------- | -------------- | -------------------- |
+| output | 2        | ./split/output.obj | [0, 0.75, 0]   | [0, 0, 130]    | Attached at point 2  |
+| input  | NaN      | ./split/input.obj  | [0, 0.75, 0]   | [0, 0, 130]    | Free-floating branch |
 
 *Source: `assets/models/model/Switch/Switch.json` → Branches, Branches Start*
 
 ## Properties
 
-| Property | Type | Description | Known Values | Status |
-|----------|------|-------------|--------------|--------|
-| RGB | array[3] | Color (Red, Green, Blue) | [0-255, 0-255, 0-255] | CONFIRMED |
-| EphemeralAttachments | object | Attachment points with CFrames | {UUID: {partName, cframe[12]}} | CONFIRMED |
+| Property             | Type     | Description                    | Known Values                   | Status    |
+| -------------------- | -------- | ------------------------------ | ------------------------------ | --------- |
+| RGB                  | array[3] | Color (Red, Green, Blue)       | [0-255, 0-255, 0-255]          | CONFIRMED |
+| EphemeralAttachments | object   | Attachment points with CFrames | {UUID: {partName, cframe[12]}} | CONFIRMED |
 
 ## Relationships
 

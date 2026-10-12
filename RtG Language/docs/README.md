@@ -4,13 +4,13 @@ This directory contains the detailed language and implementation notes for RtG-L
 
 ## Documents
 
-| Document | Scope |
-| --- | --- |
-| [Language overview](LANGUAGE.md) | Language goals, concepts, and overall model |
-| [Syntax](SYNTAX.md) | Source-level syntax conventions |
-| [Grammar](GRAMMAR.md) | Formal grammar and production rules |
-| [Compiler](COMPILER.md) | Compilation stages and output generation |
-| [Cache](CACHE.md) | Cache design and related behavior |
+| Document                          | Scope                                        |
+| --------------------------------- | -------------------------------------------- |
+| [Language overview](LANGUAGE.md)  | Language goals, concepts, and overall model  |
+| [Syntax](SYNTAX.md)               | Source-level syntax conventions              |
+| [Grammar](GRAMMAR.md)             | Formal grammar and production rules          |
+| [Compiler](COMPILER.md)           | Compilation stages and output generation     |
+| [Cache](CACHE.md)                 | Cache design and related behavior            |
 | [VS Code integration](VS-CODE.md) | Editor integration and its intended behavior |
 
 ## Reading and maintenance rules

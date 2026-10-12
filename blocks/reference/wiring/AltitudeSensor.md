@@ -12,18 +12,18 @@
 
 ## Connection Points
 
-| Point ID | Name | Position | Rotation | Description | Status |
-|----------|------|----------|----------|-------------|--------|
-| 1 | Connection 1 | [0, 2, 0] | [0, 0, 0] | Standard connection | CONFIRMED |
+| Point ID | Name         | Position  | Rotation  | Description         | Status    |
+| -------- | ------------ | --------- | --------- | ------------------- | --------- |
+| 1        | Connection 1 | [0, 2, 0] | [0, 0, 0] | Standard connection | CONFIRMED |
 
 *Source: `assets/models/model/AltitudeSensor/AltitudeSensor.json` → LocalPoints*
 
 ## Properties
 
-| Property | Type | Description | Known Values | Status |
-|----------|------|-------------|--------------|--------|
-| RGB | array[3] | Color (Red, Green, Blue) | [0-255, 0-255, 0-255] | CONFIRMED |
-| EphemeralAttachments | object | Attachment points with CFrames | {UUID: {partName, cframe[12]}} | CONFIRMED |
+| Property             | Type     | Description                    | Known Values                   | Status    |
+| -------------------- | -------- | ------------------------------ | ------------------------------ | --------- |
+| RGB                  | array[3] | Color (Red, Green, Blue)       | [0-255, 0-255, 0-255]          | CONFIRMED |
+| EphemeralAttachments | object   | Attachment points with CFrames | {UUID: {partName, cframe[12]}} | CONFIRMED |
 
 ## Relationships
 

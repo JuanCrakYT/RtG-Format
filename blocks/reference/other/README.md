@@ -4,14 +4,14 @@ Objects not assigned to another category by the current generator mapping docume
 
 ## Blocks
 
-| Block | Reference |
-| --- | --- |
-| `Arm` | [Arm](Arm.md) |
-| `Banjo` | [Banjo](Banjo.md) |
-| `BrakeLight` | [BrakeLight](BrakeLight.md) |
-| `Joint` | [Joint](Joint.md) |
-| `Joust` | [Joust](Joust.md) |
-| `Pie` | [Pie](Pie.md) |
+| Block           | Reference                         |
+| --------------- | --------------------------------- |
+| `Arm`           | [Arm](Arm.md)                     |
+| `Banjo`         | [Banjo](Banjo.md)                 |
+| `BrakeLight`    | [BrakeLight](BrakeLight.md)       |
+| `Joint`         | [Joint](Joint.md)                 |
+| `Joust`         | [Joust](Joust.md)                 |
+| `Pie`           | [Pie](Pie.md)                     |
 | `SteeringWheel` | [SteeringWheel](SteeringWheel.md) |
 
 ## Related documentation

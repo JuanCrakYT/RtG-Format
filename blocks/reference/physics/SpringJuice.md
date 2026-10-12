@@ -12,20 +12,20 @@
 
 ## Connection Points
 
-| Point ID | Name | Position | Rotation | Description | Status |
-|----------|------|----------|----------|-------------|--------|
-| (none) | | | | No predefined connection points | |
+| Point ID | Name | Position | Rotation | Description                     | Status |
+| -------- | ---- | -------- | -------- | ------------------------------- | ------ |
+| (none)   |      |          |          | No predefined connection points |        |
 
 *Source: `assets/models/model/SpringJuice/SpringJuice.json` → LocalPoints*
 
 ## Properties
 
-| Property | Type | Description | Known Values | Status |
-|----------|------|-------------|--------------|--------|
-| RGB | array[3] | Color (Red, Green, Blue) | [0-255, 0-255, 0-255] | CONFIRMED |
-| EphemeralAttachments | object | Attachment points with CFrames | {UUID: {partName, cframe[12]}} | CONFIRMED |
-| Speed | number | Spring speed | 0-1000 | CONFIRMED |
-| MaxForce | number | Maximum force | 0-10000 | CONFIRMED |
+| Property             | Type     | Description                    | Known Values                   | Status    |
+| -------------------- | -------- | ------------------------------ | ------------------------------ | --------- |
+| RGB                  | array[3] | Color (Red, Green, Blue)       | [0-255, 0-255, 0-255]          | CONFIRMED |
+| EphemeralAttachments | object   | Attachment points with CFrames | {UUID: {partName, cframe[12]}} | CONFIRMED |
+| Speed                | number   | Spring speed                   | 0-1000                         | CONFIRMED |
+| MaxForce             | number   | Maximum force                  | 0-10000                        | CONFIRMED |
 
 ## Relationships
 

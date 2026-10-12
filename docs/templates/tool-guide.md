@@ -16,9 +16,9 @@ Show verified commands and representative input/output.
 
 ## Inputs and outputs
 
-| Item | Description |
-| --- | --- |
-| Input | Describe the expected input |
+| Item   | Description                  |
+| ------ | ---------------------------- |
+| Input  | Describe the expected input  |
 | Output | Describe the produced output |
 
 ## Limitations and troubleshooting

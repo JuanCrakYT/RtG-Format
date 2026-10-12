@@ -35,12 +35,12 @@ The extension supports the RtG-Language 2.0 syntax as defined in the [RtG Langua
 
 ### Snippets
 
-| Prefix | Description |
-|--------|-------------|
-| `rtg` | Complete RtG-Language 2.0 file template |
-| `instance` | Instance declaration |
-| `connect` | Connection declaration |
-| `attachment` | Attachment declaration |
+| Prefix       | Description                             |
+| ------------ | --------------------------------------- |
+| `rtg`        | Complete RtG-Language 2.0 file template |
+| `instance`   | Instance declaration                    |
+| `connect`    | Connection declaration                  |
+| `attachment` | Attachment declaration                  |
 
 ## Installation
 

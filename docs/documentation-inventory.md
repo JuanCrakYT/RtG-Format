@@ -8,24 +8,24 @@ This catalog is generated from the repository tree by [`scripts/generate_documen
 
 ## Directory summary
 
-| Area | Documents |
-| --- | ---: |
-| Assets | 3 |
-| Block documentation | 1 |
-| Block reference pages | 128 |
-| Documentation: .github | 1 |
-| Encoding and compression | 4 |
-| Examples and experiments | 4 |
-| Format reference | 6 |
-| Guides, standards, and templates | 14 |
-| Localized RtG-CLI runtime content | 58 |
-| Part and connection-point catalogs | 18 |
-| Research | 4 |
-| Root documentation and project policies | 8 |
-| RtG Language documentation | 11 |
-| RtG-CLI documentation | 4 |
-| RtG-Preview documentation | 1 |
-| Tooling | 4 |
+| Area                                    | Documents |
+| --------------------------------------- | --------: |
+| Assets                                  |         3 |
+| Block documentation                     |         1 |
+| Block reference pages                   |       128 |
+| Documentation: .github                  |         1 |
+| Encoding and compression                |         4 |
+| Examples and experiments                |         4 |
+| Format reference                        |         6 |
+| Guides, standards, and templates        |        14 |
+| Localized RtG-CLI runtime content       |        58 |
+| Part and connection-point catalogs      |        18 |
+| Research                                |         4 |
+| Root documentation and project policies |         8 |
+| RtG Language documentation              |        11 |
+| RtG-CLI documentation                   |         4 |
+| RtG-Preview documentation               |         1 |
+| Tooling                                 |         4 |
 
 ## Individual documents
 

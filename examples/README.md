@@ -4,11 +4,11 @@ This directory contains example data and experimental material used to inspect, 
 
 ## Directory guide
 
-| Path | Purpose |
-| --- | --- |
-| [`experiments/`](experiments) | Controlled tests and reproducible investigations |
-| [`json-examples/`](json-examples) | JSON examples for studying the structured representation |
-| [`trash/`](trash) | Discarded or non-authoritative material retained separately |
+| Path                              | Purpose                                                     |
+| --------------------------------- | ----------------------------------------------------------- |
+| [`experiments/`](experiments)     | Controlled tests and reproducible investigations            |
+| [`json-examples/`](json-examples) | JSON examples for studying the structured representation    |
+| [`trash/`](trash)                 | Discarded or non-authoritative material retained separately |
 
 Material in `trash/` must not be treated as a current example or authoritative source.
 

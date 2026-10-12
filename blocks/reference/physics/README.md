@@ -4,19 +4,19 @@ Motion and physics-related blocks documented by RtG-Format. This directory is th
 
 ## Blocks
 
-| Block | Reference |
-| --- | --- |
+| Block              | Reference                               |
+| ------------------ | --------------------------------------- |
 | `GoldPotatoEngine` | [GoldPotatoEngine](GoldPotatoEngine.md) |
-| `Gyro` | [Gyro](Gyro.md) |
-| `MatchingGyro` | [MatchingGyro](MatchingGyro.md) |
-| `PotatoEngine` | [PotatoEngine](PotatoEngine.md) |
-| `Propeller` | [Propeller](Propeller.md) |
-| `Servo` | [Servo](Servo.md) |
-| `Servo_Physics` | [Servo_Physics](Servo_Physics.md) |
-| `SpringJuice` | [SpringJuice](SpringJuice.md) |
-| `StaringGyro` | [StaringGyro](StaringGyro.md) |
-| `SteeringGyro` | [SteeringGyro](SteeringGyro.md) |
-| `Thruster` | [Thruster](Thruster.md) |
+| `Gyro`             | [Gyro](Gyro.md)                         |
+| `MatchingGyro`     | [MatchingGyro](MatchingGyro.md)         |
+| `PotatoEngine`     | [PotatoEngine](PotatoEngine.md)         |
+| `Propeller`        | [Propeller](Propeller.md)               |
+| `Servo`            | [Servo](Servo.md)                       |
+| `Servo_Physics`    | [Servo_Physics](Servo_Physics.md)       |
+| `SpringJuice`      | [SpringJuice](SpringJuice.md)           |
+| `StaringGyro`      | [StaringGyro](StaringGyro.md)           |
+| `SteeringGyro`     | [SteeringGyro](SteeringGyro.md)         |
+| `Thruster`         | [Thruster](Thruster.md)                 |
 
 ## Related documentation
 

@@ -12,25 +12,25 @@
 
 ## Connection Points
 
-| Point ID | Name | Position | Rotation | Description | Status |
-|----------|------|----------|----------|-------------|--------|
-| (none) | | | | No predefined connection points | |
+| Point ID | Name | Position | Rotation | Description                     | Status |
+| -------- | ---- | -------- | -------- | ------------------------------- | ------ |
+| (none)   |      |          |          | No predefined connection points |        |
 
 *Source: `assets/models/model/Cannon/Cannon.json` → LocalPoints*
 
 ## Properties
 
-| Property | Type | Description | Known Values | Status |
-|----------|------|-------------|--------------|--------|
-| RGB | array[3] | Color (Red, Green, Blue) | [0-255, 0-255, 0-255] | CONFIRMED |
-| EphemeralAttachments | object | Attachment points with CFrames | {UUID: {partName, cframe[12]}} | CONFIRMED |
-| Shooting | boolean | Whether firing | true/false | CONFIRMED |
-| Bullets | number | Ammo count | 0-100 | CONFIRMED |
-| CanTargetAttached | boolean | Can target attached objects | true/false | CONFIRMED |
-| IgnoreAttached | boolean | Ignore attached objects | true/false | CONFIRMED |
-| MaxDistance | number | Maximum range | 0-1000 | CONFIRMED |
-| ActivationSpeed | number | Activation speed | 0-1000 | CONFIRMED |
-| ActivationHeight | number | Activation height | 0-1000 | CONFIRMED |
+| Property             | Type     | Description                    | Known Values                   | Status    |
+| -------------------- | -------- | ------------------------------ | ------------------------------ | --------- |
+| RGB                  | array[3] | Color (Red, Green, Blue)       | [0-255, 0-255, 0-255]          | CONFIRMED |
+| EphemeralAttachments | object   | Attachment points with CFrames | {UUID: {partName, cframe[12]}} | CONFIRMED |
+| Shooting             | boolean  | Whether firing                 | true/false                     | CONFIRMED |
+| Bullets              | number   | Ammo count                     | 0-100                          | CONFIRMED |
+| CanTargetAttached    | boolean  | Can target attached objects    | true/false                     | CONFIRMED |
+| IgnoreAttached       | boolean  | Ignore attached objects        | true/false                     | CONFIRMED |
+| MaxDistance          | number   | Maximum range                  | 0-1000                         | CONFIRMED |
+| ActivationSpeed      | number   | Activation speed               | 0-1000                         | CONFIRMED |
+| ActivationHeight     | number   | Activation height              | 0-1000                         | CONFIRMED |
 
 ## Relationships
 

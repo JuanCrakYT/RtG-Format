@@ -14,26 +14,26 @@ Use this template when adding or substantially restructuring a page in this dire
 
 ## Connection Points
 
-| Point ID | Name | Position | Rotation | Description | Status |
-|----------|------|----------|----------|-------------|--------|
-| 1 | MountPoint | [x,y,z] | [rx,ry,rz] | Main connection point | CONFIRMED |
+| Point ID | Name       | Position | Rotation   | Description           | Status    |
+| -------- | ---------- | -------- | ---------- | --------------------- | --------- |
+| 1        | MountPoint | [x,y,z]  | [rx,ry,rz] | Main connection point | CONFIRMED |
 
 *Source: `assets/models/model/[Name]/[Name].json` → LocalPoints*
 
 ## Branches (if applicable)
 
-| Branch | Point ID | Model Path | Start Transform | Description |
-|--------|----------|------------|-----------------|-------------|
-| output | 2 | ./split/output.obj | [pos], [rot] | Output branch |
+| Branch | Point ID | Model Path         | Start Transform | Description   |
+| ------ | -------- | ------------------ | --------------- | ------------- |
+| output | 2        | ./split/output.obj | [pos], [rot]    | Output branch |
 
 *Source: `assets/models/model/[Name]/[Name].json` → Branches, Branches Start*
 
 ## Properties
 
-| Property | Type | Description | Known Values | Status |
-|----------|------|-------------|--------------|--------|
-| RGB | array[3] | Color | [0-255, 0-255, 0-255] | CONFIRMED |
-| Speed | number | Movement speed | 0-1000 | CONFIRMED |
+| Property | Type     | Description    | Known Values          | Status    |
+| -------- | -------- | -------------- | --------------------- | --------- |
+| RGB      | array[3] | Color          | [0-255, 0-255, 0-255] | CONFIRMED |
+| Speed    | number   | Movement speed | 0-1000                | CONFIRMED |
 
 ## Relationships
 

@@ -12,20 +12,20 @@
 
 ## Connection Points
 
-| Point ID | Name | Position | Rotation | Description | Status |
-|----------|------|----------|----------|-------------|--------|
-| (none) | | | | No predefined connection points | |
+| Point ID | Name | Position | Rotation | Description                     | Status |
+| -------- | ---- | -------- | -------- | ------------------------------- | ------ |
+| (none)   |      |          |          | No predefined connection points |        |
 
 *Source: `assets/models/model/Mag/Mag.json` → LocalPoints*
 
 ## Properties
 
-| Property | Type | Description | Known Values | Status |
-|----------|------|-------------|--------------|--------|
-| RGB | array[3] | Color (Red, Green, Blue) | [0-255, 0-255, 0-255] | CONFIRMED |
-| EphemeralAttachments | object | Attachment points with CFrames | {UUID: {partName, cframe[12]}} | CONFIRMED |
-| Quantity | number | Ammo quantity | 0-100 | CONFIRMED |
-| Bullets | number | Bullet type | 0-100 | CONFIRMED |
+| Property             | Type     | Description                    | Known Values                   | Status    |
+| -------------------- | -------- | ------------------------------ | ------------------------------ | --------- |
+| RGB                  | array[3] | Color (Red, Green, Blue)       | [0-255, 0-255, 0-255]          | CONFIRMED |
+| EphemeralAttachments | object   | Attachment points with CFrames | {UUID: {partName, cframe[12]}} | CONFIRMED |
+| Quantity             | number   | Ammo quantity                  | 0-100                          | CONFIRMED |
+| Bullets              | number   | Bullet type                    | 0-100                          | CONFIRMED |
 
 ## Relationships
 

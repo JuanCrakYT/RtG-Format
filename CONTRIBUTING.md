@@ -25,19 +25,19 @@ See the [documentation taxonomy](docs/documentation-taxonomy.md) for document ty
 
 ## Where changes belong
 
-| Change | Preferred location |
-| --- | --- |
-| Main format overview and consolidated interpretation | [`SPECIFICATION.md`](SPECIFICATION.md) |
-| Specific JSON fields, identifiers, indexing, properties, and unknown fields | [`format/`](format) |
-| Part IDs and categories | [`blocks/parts/`](blocks/parts) |
-| Research procedure and unresolved questions | [`research/`](research) |
-| Reproducible sample builds and experiments | [`examples/`](examples) |
-| Encoding and compressed save representation | [`compression/`](compression) |
-| Tools and utilities | [`tools/`](tools) |
-| Browser-based 3D previewer | [`RtG-Preview/`](RtG-Preview) |
-| RtG command-line tools | [`RtG-CLI/`](RtG-CLI) |
-| RtG language implementation and examples | [`RtG Language/`](RtG%20Language) |
-| Documentation website source | [`page/`](page) |
+| Change                                                                      | Preferred location                     |
+| --------------------------------------------------------------------------- | -------------------------------------- |
+| Main format overview and consolidated interpretation                        | [`SPECIFICATION.md`](SPECIFICATION.md) |
+| Specific JSON fields, identifiers, indexing, properties, and unknown fields | [`format/`](format)                    |
+| Part IDs and categories                                                     | [`blocks/parts/`](blocks/parts)        |
+| Research procedure and unresolved questions                                 | [`research/`](research)                |
+| Reproducible sample builds and experiments                                  | [`examples/`](examples)                |
+| Encoding and compressed save representation                                 | [`compression/`](compression)          |
+| Tools and utilities                                                         | [`tools/`](tools)                      |
+| Browser-based 3D previewer                                                  | [`RtG-Preview/`](RtG-Preview)          |
+| RtG command-line tools                                                      | [`RtG-CLI/`](RtG-CLI)                  |
+| RtG language implementation and examples                                    | [`RtG Language/`](RtG%20Language)      |
+| Documentation website source                                                | [`page/`](page)                        |
 
 Follow the README or contribution notes inside a component directory when they provide more specific instructions.
 

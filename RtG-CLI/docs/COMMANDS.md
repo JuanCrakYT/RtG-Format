@@ -192,11 +192,11 @@ rtg help usage                 # Alternative syntax
 
 After an addon is identified, argument ownership is determined by prefix:
 
-| Prefix | Owner | Example |
-|--------|-------|---------|
-| (none) | Addon | `convert`, `file.png` |
-| `--`   | Addon | `--width`, `--output` |
-| `-`    | RtG-CLI | `-lang`, `-en` |
+| Prefix | Owner   | Example               |
+| ------ | ------- | --------------------- |
+| (none) | Addon   | `convert`, `file.png` |
+| `--`   | Addon   | `--width`, `--output` |
+| `-`    | RtG-CLI | `-lang`, `-en`        |
 
 **Examples:**
 ```bash

@@ -4,24 +4,24 @@ This document defines the responsibility of each maintained repository area. It 
 
 ## Top-level layout
 
-| Path | Responsibility | Maintenance guidance |
-| --- | --- | --- |
-| `README.md` | Public entry point, project status, and navigation | Keep concise; link to canonical detail pages |
-| `SPECIFICATION.md` | Consolidated interpretation of the save/build format | Change only when evidence and supporting references justify it |
-| `docs/` | Introductory and cross-cutting guides | Prefer links to canonical references over duplicated technical prose |
-| `format/` | Detailed format field and structure reference | Keep field names, examples, confidence, and limitations explicit |
-| `blocks/` | Block/part identifiers and related reference material | Distinguish observed IDs from inferred meanings |
-| `research/` | Methodology, discoveries, and unresolved questions | Preserve reproducibility and contradictory evidence |
-| `compression/` | Encoding and compression layer | Separate observed transformations from hypotheses |
-| `examples/` | Sample data and experiments | Document source, purpose, and reproduction steps |
-| `assets/` | Models, images, and other supporting assets | Keep asset provenance and intended use clear |
-| `tools/` | Supporting utilities and research scripts | Document usage, inputs, outputs, and limitations |
-| `RtG-CLI/` | Command-line tool | Keep its own README and component-specific docs current |
-| `RtG-Preview/` | Browser-based 3D previewer | Document supported input shape and known limitations |
-| `RtG Language/` | RtG language implementation and examples | Treat its local specification as component-specific |
-| `page/` | Documentation website source | Keep navigation aligned with maintained docs |
-| `dev/`, `scripts/` | Development and automation support | Identify generated files and repeatable commands |
-| `old-files/` | Historical archive | **Immutable for routine maintenance: do not edit, rename, move, reformat, or delete its contents** |
+| Path               | Responsibility                                        | Maintenance guidance                                                                               |
+| ------------------ | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `README.md`        | Public entry point, project status, and navigation    | Keep concise; link to canonical detail pages                                                       |
+| `SPECIFICATION.md` | Consolidated interpretation of the save/build format  | Change only when evidence and supporting references justify it                                     |
+| `docs/`            | Introductory and cross-cutting guides                 | Prefer links to canonical references over duplicated technical prose                               |
+| `format/`          | Detailed format field and structure reference         | Keep field names, examples, confidence, and limitations explicit                                   |
+| `blocks/`          | Block/part identifiers and related reference material | Distinguish observed IDs from inferred meanings                                                    |
+| `research/`        | Methodology, discoveries, and unresolved questions    | Preserve reproducibility and contradictory evidence                                                |
+| `compression/`     | Encoding and compression layer                        | Separate observed transformations from hypotheses                                                  |
+| `examples/`        | Sample data and experiments                           | Document source, purpose, and reproduction steps                                                   |
+| `assets/`          | Models, images, and other supporting assets           | Keep asset provenance and intended use clear                                                       |
+| `tools/`           | Supporting utilities and research scripts             | Document usage, inputs, outputs, and limitations                                                   |
+| `RtG-CLI/`         | Command-line tool                                     | Keep its own README and component-specific docs current                                            |
+| `RtG-Preview/`     | Browser-based 3D previewer                            | Document supported input shape and known limitations                                               |
+| `RtG Language/`    | RtG language implementation and examples              | Treat its local specification as component-specific                                                |
+| `page/`            | Documentation website source                          | Keep navigation aligned with maintained docs                                                       |
+| `dev/`, `scripts/` | Development and automation support                    | Identify generated files and repeatable commands                                                   |
+| `old-files/`       | Historical archive                                    | **Immutable for routine maintenance: do not edit, rename, move, reformat, or delete its contents** |
 
 ## Documentation authority
 

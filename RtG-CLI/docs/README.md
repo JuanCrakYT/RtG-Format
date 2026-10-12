@@ -4,10 +4,10 @@ This directory documents the CLI's architecture and command surface. For install
 
 ## Documents
 
-| Document | Purpose |
-| --- | --- |
+| Document                        | Purpose                                              |
+| ------------------------------- | ---------------------------------------------------- |
 | [Architecture](ARCHITECTURE.md) | Component responsibilities and internal organization |
-| [Commands](COMMANDS.md) | Command catalog, arguments, and behavior |
+| [Commands](COMMANDS.md)         | Command catalog, arguments, and behavior             |
 
 ## Maintenance rules
 

@@ -4,26 +4,26 @@ Vehicle and construction pieces documented by RtG-Format. This directory is the 
 
 ## Blocks
 
-| Block | Reference |
-| --- | --- |
-| `Base` | [Base](Base.md) |
-| `Bumper` | [Bumper](Bumper.md) |
-| `Chassis` | [Chassis](Chassis.md) |
-| `DoorA` | [DoorA](DoorA.md) |
-| `DoorB` | [DoorB](DoorB.md) |
-| `DoorC` | [DoorC](DoorC.md) |
-| `DoorD` | [DoorD](DoorD.md) |
-| `FuelTank` | [FuelTank](FuelTank.md) |
-| `GasCap` | [GasCap](GasCap.md) |
-| `Hood` | [Hood](Hood.md) |
-| `LongStick` | [LongStick](LongStick.md) |
-| `Roof` | [Roof](Roof.md) |
+| Block        | Reference                   |
+| ------------ | --------------------------- |
+| `Base`       | [Base](Base.md)             |
+| `Bumper`     | [Bumper](Bumper.md)         |
+| `Chassis`    | [Chassis](Chassis.md)       |
+| `DoorA`      | [DoorA](DoorA.md)           |
+| `DoorB`      | [DoorB](DoorB.md)           |
+| `DoorC`      | [DoorC](DoorC.md)           |
+| `DoorD`      | [DoorD](DoorD.md)           |
+| `FuelTank`   | [FuelTank](FuelTank.md)     |
+| `GasCap`     | [GasCap](GasCap.md)         |
+| `Hood`       | [Hood](Hood.md)             |
+| `LongStick`  | [LongStick](LongStick.md)   |
+| `Roof`       | [Roof](Roof.md)             |
 | `ShortStick` | [ShortStick](ShortStick.md) |
-| `Stick` | [Stick](Stick.md) |
-| `Tire` | [Tire](Tire.md) |
-| `Trunk` | [Trunk](Trunk.md) |
-| `Wheel` | [Wheel](Wheel.md) |
-| `Wing` | [Wing](Wing.md) |
+| `Stick`      | [Stick](Stick.md)           |
+| `Tire`       | [Tire](Tire.md)             |
+| `Trunk`      | [Trunk](Trunk.md)           |
+| `Wheel`      | [Wheel](Wheel.md)           |
+| `Wing`       | [Wing](Wing.md)             |
 
 ## Related documentation
 

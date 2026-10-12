@@ -4,10 +4,10 @@ This directory documents the representation of RtG build data in the final save 
 
 ## Documentation
 
-| Document | Purpose |
-| --- | --- |
-| [`overview.md`](overview.md) | Scope and current state of the investigation |
-| [`encoding.md`](encoding.md) | Observed encoding steps and final save representation |
+| Document                                       | Purpose                                                   |
+| ---------------------------------------------- | --------------------------------------------------------- |
+| [`overview.md`](overview.md)                   | Scope and current state of the investigation              |
+| [`encoding.md`](encoding.md)                   | Observed encoding steps and final save representation     |
 | [`examples-template.md`](examples-template.md) | Template for recording an encoding/compression experiment |
 
 ## Evidence and terminology

@@ -33,20 +33,20 @@ This directory contains introductory and cross-cutting guides. The canonical tec
 
 ## Reference areas
 
-| Area | Purpose |
-| --- | --- |
-| [Format reference](../format/README.md) | Field-level documentation and structure |
-| [Block/part reference](../blocks/README.md) | Identifiers and block-related information |
-| [Compression](../compression/README.md) | Encoding and final save representation |
-| [Research](../research/README.md) | Methods, findings, and open questions |
-| [Examples](../examples/README.md) | Sample data and reproducible experiments |
-| [Assets](../assets/README.md) | Models, images, and supporting files |
-| [Repository structure](repository-structure.md) | Directory responsibilities and maintenance rules |
-| [Documentation standards](documentation-standards.md) | Structure, evidence, examples, and review checklist |
-| [Documentation taxonomy](documentation-taxonomy.md) | Document types, ownership, naming, and migration rules |
-| [Local link checker](../scripts/check_markdown_links.py) | Repeatable validation of repository-local Markdown links |
-| [Maintained Markdown inventory](documentation-inventory.md) | Individually indexed maintained Markdown documents and their roles |
-| [Templates](templates/README.md) | Reusable structures for new reference, research, experiment, and tool documents |
+| Area                                                        | Purpose                                                                         |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| [Format reference](../format/README.md)                     | Field-level documentation and structure                                         |
+| [Block/part reference](../blocks/README.md)                 | Identifiers and block-related information                                       |
+| [Compression](../compression/README.md)                     | Encoding and final save representation                                          |
+| [Research](../research/README.md)                           | Methods, findings, and open questions                                           |
+| [Examples](../examples/README.md)                           | Sample data and reproducible experiments                                        |
+| [Assets](../assets/README.md)                               | Models, images, and supporting files                                            |
+| [Repository structure](repository-structure.md)             | Directory responsibilities and maintenance rules                                |
+| [Documentation standards](documentation-standards.md)       | Structure, evidence, examples, and review checklist                             |
+| [Documentation taxonomy](documentation-taxonomy.md)         | Document types, ownership, naming, and migration rules                          |
+| [Local link checker](../scripts/check_markdown_links.py)    | Repeatable validation of repository-local Markdown links                        |
+| [Maintained Markdown inventory](documentation-inventory.md) | Individually indexed maintained Markdown documents and their roles              |
+| [Templates](templates/README.md)                            | Reusable structures for new reference, research, experiment, and tool documents |
 
 ## How to read technical claims
 

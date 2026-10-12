@@ -4,8 +4,8 @@ Tool blocks documented by RtG-Format. This directory is the canonical location f
 
 ## Blocks
 
-| Block | Reference |
-| --- | --- |
+| Block     | Reference             |
+| --------- | --------------------- |
 | `ToolGun` | [ToolGun](ToolGun.md) |
 
 ## Related documentation

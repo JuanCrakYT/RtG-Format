@@ -110,27 +110,27 @@ RtG-CLI/
 
 ## 4. Idiomas soportados (19)
 
-| Código | Nombre | Origen |
-|--------|--------|--------|
-| es | Español | RtG-AI |
-| en | English | RtG-AI |
-| pt | Português | RtG-AI |
-| de | Deutsch | RtG-AI |
-| fr | Français | RtG-AI |
-| ru | Русский | RtG-AI |
-| zh | 中文 | RtG-AI |
-| ja | 日本語 | RtG-AI |
-| ko | 한국어 | RtG-AI |
-| it | Italiano | RtG-AI |
-| tr | Türkçe | RtG-AI |
-| pl | Polski | RtG-AI |
-| zh-TW | 繁體中文 | Adicional |
-| ar | العربية | Adicional |
-| hi | हिन्दी | Adicional |
-| nl | Nederlands | Adicional |
-| sv | Svenska | Adicional |
-| cs | Čeština | Adicional |
-| hu | Magyar | Adicional |
+| Código | Nombre     | Origen    |
+| ------ | ---------- | --------- |
+| es     | Español    | RtG-AI    |
+| en     | English    | RtG-AI    |
+| pt     | Português  | RtG-AI    |
+| de     | Deutsch    | RtG-AI    |
+| fr     | Français   | RtG-AI    |
+| ru     | Русский    | RtG-AI    |
+| zh     | 中文       | RtG-AI    |
+| ja     | 日本語     | RtG-AI    |
+| ko     | 한국어     | RtG-AI    |
+| it     | Italiano   | RtG-AI    |
+| tr     | Türkçe     | RtG-AI    |
+| pl     | Polski     | RtG-AI    |
+| zh-TW  | 繁體中文   | Adicional |
+| ar     | العربية    | Adicional |
+| hi     | हिन्दी        | Adicional |
+| nl     | Nederlands | Adicional |
+| sv     | Svenska    | Adicional |
+| cs     | Čeština    | Adicional |
+| hu     | Magyar     | Adicional |
 
 **12 idiomas de RtG-AI + 7 adicionales = 19 total**
 
@@ -138,11 +138,11 @@ RtG-CLI/
 
 ## 5. Addons disponibles
 
-| ID | Nombre | Descripción | Idiomas | Interface |
-|----|--------|-------------|---------|-----------|
-| `image` | RtG Image | Conversor de imágenes | 19 | Python (`../tools/RtG Image/commands.py`) |
-| `preview` | RtG Preview | Visor 3D builds RtG | 19 | JavaScript (`../RtG-Preview/commands.js`) |
-| `test-addon` | RtG Test Addon | Validación CLI | 2 (es, en) | Python (`test_addon/commands.py`) |
+| ID           | Nombre         | Descripción           | Idiomas    | Interface                                 |
+| ------------ | -------------- | --------------------- | ---------- | ----------------------------------------- |
+| `image`      | RtG Image      | Conversor de imágenes | 19         | Python (`../tools/RtG Image/commands.py`) |
+| `preview`    | RtG Preview    | Visor 3D builds RtG   | 19         | JavaScript (`../RtG-Preview/commands.js`) |
+| `test-addon` | RtG Test Addon | Validación CLI        | 2 (es, en) | Python (`test_addon/commands.py`)         |
 
 ### Distinción clave
 
@@ -194,11 +194,11 @@ stdout/stderr propagados
 
 ### Ownership rules (después de identificar addon)
 
-| Prefijo | Dueño | Ejemplos |
-|---------|-------|----------|
-| (ninguno) | Addon | `convert`, `archivo.png` |
-| `--` | Addon | `--width 128`, `--output` |
-| `-` | RtG-CLI | `-lang`, `-en` |
+| Prefijo   | Dueño   | Ejemplos                  |
+| --------- | ------- | ------------------------- |
+| (ninguno) | Addon   | `convert`, `archivo.png`  |
+| `--`      | Addon   | `--width 128`, `--output` |
+| `-`       | RtG-CLI | `-lang`, `-en`            |
 
 ### Opciones del sistema (antes del addon)
 
@@ -286,17 +286,17 @@ python rtg.py --invalid-option
 
 ## 10. Documentación
 
-| Archivo | Descripción |
-|---------|-------------|
-| `docs/ARCHITECTURE.md` | Arquitectura modular, diagrama componentes, flujo datos |
-| `docs/COMMANDS.md` | Referencia completa de comandos |
-| `docs/ADDONS.md` | Especificación formal de addons |
-| `docs/PROGRAM-COMMANDS.md` | Contrato de ejecución (Python/JS) |
-| `docs/ARGUMENTS.md` | Parser formal, ownership rules |
-| `docs/LANGUAGES.md` | 19 idiomas, códigos, nombres, fallback |
-| `docs/CONFIGURATION.md` | assets.json, schema, campos |
-| `docs/ERRORS.md` | Categorías error, exit codes |
-| `docs/INTEGRATION.md` | Integración RtG-Language, API externa |
+| Archivo                    | Descripción                                             |
+| -------------------------- | ------------------------------------------------------- |
+| `docs/ARCHITECTURE.md`     | Arquitectura modular, diagrama componentes, flujo datos |
+| `docs/COMMANDS.md`         | Referencia completa de comandos                         |
+| `docs/ADDONS.md`           | Especificación formal de addons                         |
+| `docs/PROGRAM-COMMANDS.md` | Contrato de ejecución (Python/JS)                       |
+| `docs/ARGUMENTS.md`        | Parser formal, ownership rules                          |
+| `docs/LANGUAGES.md`        | 19 idiomas, códigos, nombres, fallback                  |
+| `docs/CONFIGURATION.md`    | assets.json, schema, campos                             |
+| `docs/ERRORS.md`           | Categorías error, exit codes                            |
+| `docs/INTEGRATION.md`      | Integración RtG-Language, API externa                   |
 
 ---
 
