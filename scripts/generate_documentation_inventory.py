@@ -56,12 +56,12 @@ def description_for(path: str) -> str:
     parts = path.split("/")
     if len(parts) == 1:
         return "Project entry point, policy, specification, or planning document"
-    if parts[0] == "blocks" and len(parts) > 2 and parts[1] == "reference" and parts[2] not in {"README.md", "template.md"}:
-        return "Individual block/object reference"
     if parts[0] == "RtG-CLI" and len(parts) > 2 and parts[1] == "languages":
         return "Localized CLI text used by the application"
     if parts[-1].lower() == "readme.md":
         return "Directory index and maintenance guide"
+    if parts[0] == "blocks" and len(parts) > 2 and parts[1] == "reference" and parts[-1].lower() != "template.md":
+        return "Individual block/object reference"
     if parts[0] == "docs" and len(parts) > 1 and parts[1] == "templates":
         return "Reusable documentation template"
     if parts[0] == "docs":

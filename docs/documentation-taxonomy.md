@@ -10,7 +10,7 @@ This document defines the role, location, and maintenance rules for each class o
 | Consolidated specification | `SPECIFICATION.md` | Present the current consolidated interpretation of the format | Require evidence and references for technical claims |
 | Cross-cutting guides | `docs/` | Explain concepts, reading paths, repository organization, and contribution conventions | Avoid duplicating detailed reference content |
 | Format reference | `format/` | Describe structure, indexing, identifiers, properties, and unknown fields | Keep one canonical page per topic |
-| Object/block reference | `blocks/reference/<Identifier>.md` | Document one object's observed identifiers, properties, connections, and evidence | Preserve identifier spelling; distinguish missing data from zero or none |
+| Object/block reference | `blocks/reference/<category>/<Identifier>.md` | Document one object's observed identifiers, properties, connections, and evidence under its category directory | Preserve identifier spelling; distinguish missing data from zero or none |
 | Part ID catalog | `blocks/parts/<category>/parts-id.md` | Organize observed point/part IDs by category | Keep source provenance and category scope visible |
 | Research synthesis | `research/` | Record methodology, supported findings, and unresolved questions | Preserve uncertainty and contradictory results |
 | Experiments and samples | `examples/` | Store source samples, reduced reproductions, and controlled experiments | Record provenance and whether data is observed or illustrative |

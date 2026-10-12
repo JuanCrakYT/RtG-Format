@@ -6,7 +6,9 @@ on:
       - "**/*.md"
       - ".markdownlint-cli2.jsonc"
       - "scripts/check_markdown_links.py"
+      - "scripts/normalize_markdown_structure.py"
       - "scripts/generate_documentation_inventory.py"
+      - "scripts/migrate_block_reference_paths.py"
       - ".github/workflows/docs-validation.yml"
 
 permissions:
@@ -28,6 +30,9 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
+
+      - name: Migrate links for categorized block references
+        run: python scripts/migrate_block_reference_paths.py
 
       - name: Normalize safe Markdown structure
         if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'formalize-repository-v2'

@@ -4,7 +4,7 @@ This catalog is generated from the repository tree by [`scripts/generate_documen
 
 **Scope:** all repository Markdown files except `old-files/` (immutable historical archive) and vendored/generated `node_modules/`. Inclusion here does not imply that every technical claim has been independently re-verified.
 
-**Documents indexed:** 263
+**Documents indexed:** 269
 
 ## Directory summary
 
@@ -12,7 +12,7 @@ This catalog is generated from the repository tree by [`scripts/generate_documen
 | --- | ---: |
 | Assets | 3 |
 | Block documentation | 1 |
-| Block reference pages | 122 |
+| Block reference pages | 128 |
 | Documentation: .github | 1 |
 | Encoding and compression | 4 |
 | Examples and experiments | 4 |
@@ -41,128 +41,134 @@ This catalog is generated from the repository tree by [`scripts/generate_documen
 
 ### Block reference pages
 
-- [`blocks/reference/AltitudeSensor.md`](../blocks/reference/AltitudeSensor.md) — Individual block/object reference
-- [`blocks/reference/Anchor.md`](../blocks/reference/Anchor.md) — Individual block/object reference
-- [`blocks/reference/Arm.md`](../blocks/reference/Arm.md) — Individual block/object reference
-- [`blocks/reference/Balloon.md`](../blocks/reference/Balloon.md) — Individual block/object reference
-- [`blocks/reference/BallSocket.md`](../blocks/reference/BallSocket.md) — Individual block/object reference
-- [`blocks/reference/Banjo.md`](../blocks/reference/Banjo.md) — Individual block/object reference
-- [`blocks/reference/Base.md`](../blocks/reference/Base.md) — Individual block/object reference
-- [`blocks/reference/BeachBall.md`](../blocks/reference/BeachBall.md) — Individual block/object reference
-- [`blocks/reference/Bearing.md`](../blocks/reference/Bearing.md) — Individual block/object reference
-- [`blocks/reference/Board.md`](../blocks/reference/Board.md) — Individual block/object reference
-- [`blocks/reference/Body.md`](../blocks/reference/Body.md) — Individual block/object reference
-- [`blocks/reference/BouncyBall.md`](../blocks/reference/BouncyBall.md) — Individual block/object reference
-- [`blocks/reference/BowlingBall.md`](../blocks/reference/BowlingBall.md) — Individual block/object reference
-- [`blocks/reference/BrakeLight.md`](../blocks/reference/BrakeLight.md) — Individual block/object reference
-- [`blocks/reference/Briefcase.md`](../blocks/reference/Briefcase.md) — Individual block/object reference
-- [`blocks/reference/Bumper.md`](../blocks/reference/Bumper.md) — Individual block/object reference
-- [`blocks/reference/Button.md`](../blocks/reference/Button.md) — Individual block/object reference
-- [`blocks/reference/Camera.md`](../blocks/reference/Camera.md) — Individual block/object reference
-- [`blocks/reference/Canister.md`](../blocks/reference/Canister.md) — Individual block/object reference
-- [`blocks/reference/Cannon.md`](../blocks/reference/Cannon.md) — Individual block/object reference
-- [`blocks/reference/CannonBall.md`](../blocks/reference/CannonBall.md) — Individual block/object reference
-- [`blocks/reference/Carrot.md`](../blocks/reference/Carrot.md) — Individual block/object reference
-- [`blocks/reference/Chassis.md`](../blocks/reference/Chassis.md) — Individual block/object reference
-- [`blocks/reference/Cinderblock.md`](../blocks/reference/Cinderblock.md) — Individual block/object reference
-- [`blocks/reference/Connector.md`](../blocks/reference/Connector.md) — Individual block/object reference
-- [`blocks/reference/ConnectorBall.md`](../blocks/reference/ConnectorBall.md) — Individual block/object reference
-- [`blocks/reference/Delayer.md`](../blocks/reference/Delayer.md) — Individual block/object reference
-- [`blocks/reference/Detacher.md`](../blocks/reference/Detacher.md) — Individual block/object reference
-- [`blocks/reference/DoorA.md`](../blocks/reference/DoorA.md) — Individual block/object reference
-- [`blocks/reference/DoorB.md`](../blocks/reference/DoorB.md) — Individual block/object reference
-- [`blocks/reference/DoorC.md`](../blocks/reference/DoorC.md) — Individual block/object reference
-- [`blocks/reference/DoorD.md`](../blocks/reference/DoorD.md) — Individual block/object reference
-- [`blocks/reference/Drumkit.md`](../blocks/reference/Drumkit.md) — Individual block/object reference
-- [`blocks/reference/EntitySensor.md`](../blocks/reference/EntitySensor.md) — Individual block/object reference
-- [`blocks/reference/FishBowl.md`](../blocks/reference/FishBowl.md) — Individual block/object reference
-- [`blocks/reference/Fricklet.md`](../blocks/reference/Fricklet.md) — Individual block/object reference
-- [`blocks/reference/FuelTank.md`](../blocks/reference/FuelTank.md) — Individual block/object reference
-- [`blocks/reference/GasCap.md`](../blocks/reference/GasCap.md) — Individual block/object reference
-- [`blocks/reference/Gate-AND.md`](../blocks/reference/Gate-AND.md) — Individual block/object reference
-- [`blocks/reference/Gate-NOT.md`](../blocks/reference/Gate-NOT.md) — Individual block/object reference
-- [`blocks/reference/Gate-OR.md`](../blocks/reference/Gate-OR.md) — Individual block/object reference
-- [`blocks/reference/GoldPotatoEngine.md`](../blocks/reference/GoldPotatoEngine.md) — Individual block/object reference
-- [`blocks/reference/Googie.md`](../blocks/reference/Googie.md) — Individual block/object reference
-- [`blocks/reference/Gramby.md`](../blocks/reference/Gramby.md) — Individual block/object reference
-- [`blocks/reference/Grenade.md`](../blocks/reference/Grenade.md) — Individual block/object reference
-- [`blocks/reference/Guitar.md`](../blocks/reference/Guitar.md) — Individual block/object reference
-- [`blocks/reference/Gun.md`](../blocks/reference/Gun.md) — Individual block/object reference
-- [`blocks/reference/Gyro.md`](../blocks/reference/Gyro.md) — Individual block/object reference
-- [`blocks/reference/HalfConnectorBall.md`](../blocks/reference/HalfConnectorBall.md) — Individual block/object reference
-- [`blocks/reference/Head.md`](../blocks/reference/Head.md) — Individual block/object reference
-- [`blocks/reference/Hood.md`](../blocks/reference/Hood.md) — Individual block/object reference
-- [`blocks/reference/InputSensor.md`](../blocks/reference/InputSensor.md) — Individual block/object reference
-- [`blocks/reference/Joint.md`](../blocks/reference/Joint.md) — Individual block/object reference
-- [`blocks/reference/Joust.md`](../blocks/reference/Joust.md) — Individual block/object reference
-- [`blocks/reference/Jug.md`](../blocks/reference/Jug.md) — Individual block/object reference
-- [`blocks/reference/Keyboard.md`](../blocks/reference/Keyboard.md) — Individual block/object reference
-- [`blocks/reference/Leafblower.md`](../blocks/reference/Leafblower.md) — Individual block/object reference
-- [`blocks/reference/Leg.md`](../blocks/reference/Leg.md) — Individual block/object reference
-- [`blocks/reference/Light.md`](../blocks/reference/Light.md) — Individual block/object reference
-- [`blocks/reference/Lock.md`](../blocks/reference/Lock.md) — Individual block/object reference
-- [`blocks/reference/LongStick.md`](../blocks/reference/LongStick.md) — Individual block/object reference
-- [`blocks/reference/Looper.md`](../blocks/reference/Looper.md) — Individual block/object reference
-- [`blocks/reference/Mag.md`](../blocks/reference/Mag.md) — Individual block/object reference
-- [`blocks/reference/MatchingGyro.md`](../blocks/reference/MatchingGyro.md) — Individual block/object reference
-- [`blocks/reference/MountedGun.md`](../blocks/reference/MountedGun.md) — Individual block/object reference
-- [`blocks/reference/Part.md`](../blocks/reference/Part.md) — Individual block/object reference
-- [`blocks/reference/Pie.md`](../blocks/reference/Pie.md) — Individual block/object reference
-- [`blocks/reference/Pipes.md`](../blocks/reference/Pipes.md) — Individual block/object reference
-- [`blocks/reference/Piston.md`](../blocks/reference/Piston.md) — Individual block/object reference
-- [`blocks/reference/Plunger.md`](../blocks/reference/Plunger.md) — Individual block/object reference
-- [`blocks/reference/Poop.md`](../blocks/reference/Poop.md) — Individual block/object reference
-- [`blocks/reference/PotatoEngine.md`](../blocks/reference/PotatoEngine.md) — Individual block/object reference
-- [`blocks/reference/PressurePlate.md`](../blocks/reference/PressurePlate.md) — Individual block/object reference
-- [`blocks/reference/Propeller.md`](../blocks/reference/Propeller.md) — Individual block/object reference
-- [`blocks/reference/Radio.md`](../blocks/reference/Radio.md) — Individual block/object reference
-- [`blocks/reference/Ramp.md`](../blocks/reference/Ramp.md) — Individual block/object reference
+- [`blocks/reference/building/Base.md`](../blocks/reference/building/Base.md) — Individual block/object reference
+- [`blocks/reference/building/Bumper.md`](../blocks/reference/building/Bumper.md) — Individual block/object reference
+- [`blocks/reference/building/Chassis.md`](../blocks/reference/building/Chassis.md) — Individual block/object reference
+- [`blocks/reference/building/DoorA.md`](../blocks/reference/building/DoorA.md) — Individual block/object reference
+- [`blocks/reference/building/DoorB.md`](../blocks/reference/building/DoorB.md) — Individual block/object reference
+- [`blocks/reference/building/DoorC.md`](../blocks/reference/building/DoorC.md) — Individual block/object reference
+- [`blocks/reference/building/DoorD.md`](../blocks/reference/building/DoorD.md) — Individual block/object reference
+- [`blocks/reference/building/FuelTank.md`](../blocks/reference/building/FuelTank.md) — Individual block/object reference
+- [`blocks/reference/building/GasCap.md`](../blocks/reference/building/GasCap.md) — Individual block/object reference
+- [`blocks/reference/building/Hood.md`](../blocks/reference/building/Hood.md) — Individual block/object reference
+- [`blocks/reference/building/LongStick.md`](../blocks/reference/building/LongStick.md) — Individual block/object reference
+- [`blocks/reference/building/README.md`](../blocks/reference/building/README.md) — Directory index and maintenance guide
+- [`blocks/reference/building/Roof.md`](../blocks/reference/building/Roof.md) — Individual block/object reference
+- [`blocks/reference/building/ShortStick.md`](../blocks/reference/building/ShortStick.md) — Individual block/object reference
+- [`blocks/reference/building/Stick.md`](../blocks/reference/building/Stick.md) — Individual block/object reference
+- [`blocks/reference/building/Tire.md`](../blocks/reference/building/Tire.md) — Individual block/object reference
+- [`blocks/reference/building/Trunk.md`](../blocks/reference/building/Trunk.md) — Individual block/object reference
+- [`blocks/reference/building/Wheel.md`](../blocks/reference/building/Wheel.md) — Individual block/object reference
+- [`blocks/reference/building/Wing.md`](../blocks/reference/building/Wing.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Anchor.md`](../blocks/reference/miscellaneous/Anchor.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Balloon.md`](../blocks/reference/miscellaneous/Balloon.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/BallSocket.md`](../blocks/reference/miscellaneous/BallSocket.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/BeachBall.md`](../blocks/reference/miscellaneous/BeachBall.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Bearing.md`](../blocks/reference/miscellaneous/Bearing.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Board.md`](../blocks/reference/miscellaneous/Board.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Body.md`](../blocks/reference/miscellaneous/Body.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/BouncyBall.md`](../blocks/reference/miscellaneous/BouncyBall.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/BowlingBall.md`](../blocks/reference/miscellaneous/BowlingBall.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Briefcase.md`](../blocks/reference/miscellaneous/Briefcase.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Camera.md`](../blocks/reference/miscellaneous/Camera.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Canister.md`](../blocks/reference/miscellaneous/Canister.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Cannon.md`](../blocks/reference/miscellaneous/Cannon.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/CannonBall.md`](../blocks/reference/miscellaneous/CannonBall.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Carrot.md`](../blocks/reference/miscellaneous/Carrot.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Cinderblock.md`](../blocks/reference/miscellaneous/Cinderblock.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Drumkit.md`](../blocks/reference/miscellaneous/Drumkit.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/FishBowl.md`](../blocks/reference/miscellaneous/FishBowl.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Fricklet.md`](../blocks/reference/miscellaneous/Fricklet.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Googie.md`](../blocks/reference/miscellaneous/Googie.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Gramby.md`](../blocks/reference/miscellaneous/Gramby.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Grenade.md`](../blocks/reference/miscellaneous/Grenade.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Guitar.md`](../blocks/reference/miscellaneous/Guitar.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Gun.md`](../blocks/reference/miscellaneous/Gun.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Head.md`](../blocks/reference/miscellaneous/Head.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Jug.md`](../blocks/reference/miscellaneous/Jug.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Keyboard.md`](../blocks/reference/miscellaneous/Keyboard.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Leafblower.md`](../blocks/reference/miscellaneous/Leafblower.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Leg.md`](../blocks/reference/miscellaneous/Leg.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Light.md`](../blocks/reference/miscellaneous/Light.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Lock.md`](../blocks/reference/miscellaneous/Lock.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Looper.md`](../blocks/reference/miscellaneous/Looper.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Mag.md`](../blocks/reference/miscellaneous/Mag.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/MountedGun.md`](../blocks/reference/miscellaneous/MountedGun.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Part.md`](../blocks/reference/miscellaneous/Part.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Pipes.md`](../blocks/reference/miscellaneous/Pipes.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Piston.md`](../blocks/reference/miscellaneous/Piston.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Plunger.md`](../blocks/reference/miscellaneous/Plunger.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Poop.md`](../blocks/reference/miscellaneous/Poop.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Radio.md`](../blocks/reference/miscellaneous/Radio.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Ramp.md`](../blocks/reference/miscellaneous/Ramp.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/README.md`](../blocks/reference/miscellaneous/README.md) — Directory index and maintenance guide
+- [`blocks/reference/miscellaneous/RiotShield.md`](../blocks/reference/miscellaneous/RiotShield.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Rocket.md`](../blocks/reference/miscellaneous/Rocket.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/RockingChair.md`](../blocks/reference/miscellaneous/RockingChair.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/RPG.md`](../blocks/reference/miscellaneous/RPG.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/RubberBand.md`](../blocks/reference/miscellaneous/RubberBand.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Seat.md`](../blocks/reference/miscellaneous/Seat.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/ShoppingCart.md`](../blocks/reference/miscellaneous/ShoppingCart.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Shotgun.md`](../blocks/reference/miscellaneous/Shotgun.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Sledge.md`](../blocks/reference/miscellaneous/Sledge.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/SprayPaint.md`](../blocks/reference/miscellaneous/SprayPaint.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/SuperPowerClock.md`](../blocks/reference/miscellaneous/SuperPowerClock.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Tooth.md`](../blocks/reference/miscellaneous/Tooth.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/TripWire.md`](../blocks/reference/miscellaneous/TripWire.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Trowel.md`](../blocks/reference/miscellaneous/Trowel.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Trumpet.md`](../blocks/reference/miscellaneous/Trumpet.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/TV.md`](../blocks/reference/miscellaneous/TV.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/Uzi.md`](../blocks/reference/miscellaneous/Uzi.md) — Individual block/object reference
+- [`blocks/reference/miscellaneous/wad.md`](../blocks/reference/miscellaneous/wad.md) — Individual block/object reference
+- [`blocks/reference/other/Arm.md`](../blocks/reference/other/Arm.md) — Individual block/object reference
+- [`blocks/reference/other/Banjo.md`](../blocks/reference/other/Banjo.md) — Individual block/object reference
+- [`blocks/reference/other/BrakeLight.md`](../blocks/reference/other/BrakeLight.md) — Individual block/object reference
+- [`blocks/reference/other/Joint.md`](../blocks/reference/other/Joint.md) — Individual block/object reference
+- [`blocks/reference/other/Joust.md`](../blocks/reference/other/Joust.md) — Individual block/object reference
+- [`blocks/reference/other/Pie.md`](../blocks/reference/other/Pie.md) — Individual block/object reference
+- [`blocks/reference/other/README.md`](../blocks/reference/other/README.md) — Directory index and maintenance guide
+- [`blocks/reference/other/SteeringWheel.md`](../blocks/reference/other/SteeringWheel.md) — Individual block/object reference
+- [`blocks/reference/physics/GoldPotatoEngine.md`](../blocks/reference/physics/GoldPotatoEngine.md) — Individual block/object reference
+- [`blocks/reference/physics/Gyro.md`](../blocks/reference/physics/Gyro.md) — Individual block/object reference
+- [`blocks/reference/physics/MatchingGyro.md`](../blocks/reference/physics/MatchingGyro.md) — Individual block/object reference
+- [`blocks/reference/physics/PotatoEngine.md`](../blocks/reference/physics/PotatoEngine.md) — Individual block/object reference
+- [`blocks/reference/physics/Propeller.md`](../blocks/reference/physics/Propeller.md) — Individual block/object reference
+- [`blocks/reference/physics/README.md`](../blocks/reference/physics/README.md) — Directory index and maintenance guide
+- [`blocks/reference/physics/Servo.md`](../blocks/reference/physics/Servo.md) — Individual block/object reference
+- [`blocks/reference/physics/Servo_Physics.md`](../blocks/reference/physics/Servo_Physics.md) — Individual block/object reference
+- [`blocks/reference/physics/SpringJuice.md`](../blocks/reference/physics/SpringJuice.md) — Individual block/object reference
+- [`blocks/reference/physics/StaringGyro.md`](../blocks/reference/physics/StaringGyro.md) — Individual block/object reference
+- [`blocks/reference/physics/SteeringGyro.md`](../blocks/reference/physics/SteeringGyro.md) — Individual block/object reference
+- [`blocks/reference/physics/Thruster.md`](../blocks/reference/physics/Thruster.md) — Individual block/object reference
 - [`blocks/reference/README.md`](../blocks/reference/README.md) — Directory index and maintenance guide
-- [`blocks/reference/Recorder.md`](../blocks/reference/Recorder.md) — Individual block/object reference
-- [`blocks/reference/RemoteButton.md`](../blocks/reference/RemoteButton.md) — Individual block/object reference
-- [`blocks/reference/RiotShield.md`](../blocks/reference/RiotShield.md) — Individual block/object reference
-- [`blocks/reference/Rocket.md`](../blocks/reference/Rocket.md) — Individual block/object reference
-- [`blocks/reference/RockingChair.md`](../blocks/reference/RockingChair.md) — Individual block/object reference
-- [`blocks/reference/Roof.md`](../blocks/reference/Roof.md) — Individual block/object reference
-- [`blocks/reference/Rope.md`](../blocks/reference/Rope.md) — Individual block/object reference
-- [`blocks/reference/RPG.md`](../blocks/reference/RPG.md) — Individual block/object reference
-- [`blocks/reference/RubberBand.md`](../blocks/reference/RubberBand.md) — Individual block/object reference
-- [`blocks/reference/Seat.md`](../blocks/reference/Seat.md) — Individual block/object reference
-- [`blocks/reference/Servo.md`](../blocks/reference/Servo.md) — Individual block/object reference
-- [`blocks/reference/Servo_Physics.md`](../blocks/reference/Servo_Physics.md) — Individual block/object reference
-- [`blocks/reference/ShoppingCart.md`](../blocks/reference/ShoppingCart.md) — Individual block/object reference
-- [`blocks/reference/ShortStick.md`](../blocks/reference/ShortStick.md) — Individual block/object reference
-- [`blocks/reference/Shotgun.md`](../blocks/reference/Shotgun.md) — Individual block/object reference
-- [`blocks/reference/Sledge.md`](../blocks/reference/Sledge.md) — Individual block/object reference
-- [`blocks/reference/Splitter.md`](../blocks/reference/Splitter.md) — Individual block/object reference
-- [`blocks/reference/Splitter_1.md`](../blocks/reference/Splitter_1.md) — Individual block/object reference
-- [`blocks/reference/Splitter_2.md`](../blocks/reference/Splitter_2.md) — Individual block/object reference
-- [`blocks/reference/Splitter_3.md`](../blocks/reference/Splitter_3.md) — Individual block/object reference
-- [`blocks/reference/Splitter_4.md`](../blocks/reference/Splitter_4.md) — Individual block/object reference
-- [`blocks/reference/SprayPaint.md`](../blocks/reference/SprayPaint.md) — Individual block/object reference
-- [`blocks/reference/SpringJuice.md`](../blocks/reference/SpringJuice.md) — Individual block/object reference
-- [`blocks/reference/StaringGyro.md`](../blocks/reference/StaringGyro.md) — Individual block/object reference
-- [`blocks/reference/SteeringGyro.md`](../blocks/reference/SteeringGyro.md) — Individual block/object reference
-- [`blocks/reference/SteeringWheel.md`](../blocks/reference/SteeringWheel.md) — Individual block/object reference
-- [`blocks/reference/Stick.md`](../blocks/reference/Stick.md) — Individual block/object reference
-- [`blocks/reference/SuperPowerClock.md`](../blocks/reference/SuperPowerClock.md) — Individual block/object reference
-- [`blocks/reference/Switch.md`](../blocks/reference/Switch.md) — Individual block/object reference
 - [`blocks/reference/template.md`](../blocks/reference/template.md) — Component-specific or subject-specific documentation
-- [`blocks/reference/Thruster.md`](../blocks/reference/Thruster.md) — Individual block/object reference
-- [`blocks/reference/Tire.md`](../blocks/reference/Tire.md) — Individual block/object reference
-- [`blocks/reference/ToolGun.md`](../blocks/reference/ToolGun.md) — Individual block/object reference
-- [`blocks/reference/Tooth.md`](../blocks/reference/Tooth.md) — Individual block/object reference
-- [`blocks/reference/TripWire.md`](../blocks/reference/TripWire.md) — Individual block/object reference
-- [`blocks/reference/Trowel.md`](../blocks/reference/Trowel.md) — Individual block/object reference
-- [`blocks/reference/Trumpet.md`](../blocks/reference/Trumpet.md) — Individual block/object reference
-- [`blocks/reference/Trunk.md`](../blocks/reference/Trunk.md) — Individual block/object reference
-- [`blocks/reference/TV.md`](../blocks/reference/TV.md) — Individual block/object reference
-- [`blocks/reference/Uzi.md`](../blocks/reference/Uzi.md) — Individual block/object reference
-- [`blocks/reference/VelocitySensor.md`](../blocks/reference/VelocitySensor.md) — Individual block/object reference
-- [`blocks/reference/wad.md`](../blocks/reference/wad.md) — Individual block/object reference
-- [`blocks/reference/Wheel.md`](../blocks/reference/Wheel.md) — Individual block/object reference
-- [`blocks/reference/Wing.md`](../blocks/reference/Wing.md) — Individual block/object reference
-- [`blocks/reference/Wire.md`](../blocks/reference/Wire.md) — Individual block/object reference
+- [`blocks/reference/tools/README.md`](../blocks/reference/tools/README.md) — Directory index and maintenance guide
+- [`blocks/reference/tools/ToolGun.md`](../blocks/reference/tools/ToolGun.md) — Individual block/object reference
+- [`blocks/reference/wiring/AltitudeSensor.md`](../blocks/reference/wiring/AltitudeSensor.md) — Individual block/object reference
+- [`blocks/reference/wiring/Button.md`](../blocks/reference/wiring/Button.md) — Individual block/object reference
+- [`blocks/reference/wiring/Connector.md`](../blocks/reference/wiring/Connector.md) — Individual block/object reference
+- [`blocks/reference/wiring/ConnectorBall.md`](../blocks/reference/wiring/ConnectorBall.md) — Individual block/object reference
+- [`blocks/reference/wiring/Delayer.md`](../blocks/reference/wiring/Delayer.md) — Individual block/object reference
+- [`blocks/reference/wiring/Detacher.md`](../blocks/reference/wiring/Detacher.md) — Individual block/object reference
+- [`blocks/reference/wiring/EntitySensor.md`](../blocks/reference/wiring/EntitySensor.md) — Individual block/object reference
+- [`blocks/reference/wiring/Gate-AND.md`](../blocks/reference/wiring/Gate-AND.md) — Individual block/object reference
+- [`blocks/reference/wiring/Gate-NOT.md`](../blocks/reference/wiring/Gate-NOT.md) — Individual block/object reference
+- [`blocks/reference/wiring/Gate-OR.md`](../blocks/reference/wiring/Gate-OR.md) — Individual block/object reference
+- [`blocks/reference/wiring/HalfConnectorBall.md`](../blocks/reference/wiring/HalfConnectorBall.md) — Individual block/object reference
+- [`blocks/reference/wiring/InputSensor.md`](../blocks/reference/wiring/InputSensor.md) — Individual block/object reference
+- [`blocks/reference/wiring/PressurePlate.md`](../blocks/reference/wiring/PressurePlate.md) — Individual block/object reference
+- [`blocks/reference/wiring/README.md`](../blocks/reference/wiring/README.md) — Directory index and maintenance guide
+- [`blocks/reference/wiring/Recorder.md`](../blocks/reference/wiring/Recorder.md) — Individual block/object reference
+- [`blocks/reference/wiring/RemoteButton.md`](../blocks/reference/wiring/RemoteButton.md) — Individual block/object reference
+- [`blocks/reference/wiring/Rope.md`](../blocks/reference/wiring/Rope.md) — Individual block/object reference
+- [`blocks/reference/wiring/Splitter.md`](../blocks/reference/wiring/Splitter.md) — Individual block/object reference
+- [`blocks/reference/wiring/Splitter_1.md`](../blocks/reference/wiring/Splitter_1.md) — Individual block/object reference
+- [`blocks/reference/wiring/Splitter_2.md`](../blocks/reference/wiring/Splitter_2.md) — Individual block/object reference
+- [`blocks/reference/wiring/Splitter_3.md`](../blocks/reference/wiring/Splitter_3.md) — Individual block/object reference
+- [`blocks/reference/wiring/Splitter_4.md`](../blocks/reference/wiring/Splitter_4.md) — Individual block/object reference
+- [`blocks/reference/wiring/Switch.md`](../blocks/reference/wiring/Switch.md) — Individual block/object reference
+- [`blocks/reference/wiring/VelocitySensor.md`](../blocks/reference/wiring/VelocitySensor.md) — Individual block/object reference
+- [`blocks/reference/wiring/Wire.md`](../blocks/reference/wiring/Wire.md) — Individual block/object reference
 
 ### Documentation: .github
 
